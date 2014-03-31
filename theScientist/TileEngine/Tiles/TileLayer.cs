@@ -14,14 +14,6 @@ namespace TileEngine.Tiles
         
         List<Texture2D> tileTextures = new List<Texture2D>();
        
-        float alpha = 1f;
-
-        public float Alpha
-        {
-            get { return alpha; }
-            set { alpha = MathHelper.Clamp(value, 0f, 1f); }
-        }
-
 
         public int WidthInPixels{get { return Width * Engine.TileWidth; }}
         public int HeightInPixels{get { return Height * Engine.TileHeight;}}
@@ -43,7 +35,7 @@ namespace TileEngine.Tiles
         }
 
 
-        public int IsUsingTexture(Texture2D texture)
+        public override int IsUsingTexture(Texture2D texture)
         {
             if ( tileTextures.Contains(texture))
                 return tileTextures.IndexOf(texture);
@@ -221,7 +213,7 @@ namespace TileEngine.Tiles
         #endregion
 
 
-        public void AddTexture(Texture2D texture)
+        public override void AddTexture(Texture2D texture)
         {
             tileTextures.Add(texture);
         }
@@ -234,60 +226,6 @@ namespace TileEngine.Tiles
 
         
 
-        #region Get/set cellIndex
-
-        public int GetCellIndex(int x, int y)
-        {
-            return map[y, x];
-        }
-
-        public int GetCellIndex(Point point)
-        {
-            return map[point.Y, point.X];
-        }
-        
-        public void SetCellIndex(int x, int y, int cellIndex)
-        {
-            map[y, x] = cellIndex;
-        }
-
-        public void SetCellIndex(Point point, int cellIndex)
-        {
-            map[point.Y, point.Y] = cellIndex;
-        }
-
-
-        public void RemoveIndex(int existingIndex)
-        {
-            for (int x = 0; x < Width; x++)
-            {
-                for (int y = 0; y < Height; y++)
-                {
-                    if (map[y, x] == existingIndex)
-                        map[y, x] = -1;
-                    else if (map[y, x] > existingIndex)
-                        map[y, x]--;
-                }
-            }
-        
-        
-        }
-
-        public void ReplaceIndex(int existingIndex, int newIndex)
-        {
-            for (int x = 0; x < Width; x++)
-            {
-                for (int y = 0; y < Height; y++)
-                {
-                    if (map[y, x] == existingIndex)
-                        map[y, x] = newIndex;
-                }
-            }
-
-
-        }
-
-        #endregion
 
         public void Draw(SpriteBatch batch, Camera camera)
         {

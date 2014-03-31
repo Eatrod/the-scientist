@@ -66,12 +66,14 @@
       <Name>layerstone</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="Layers\Test.layer">
+    <None Include="Layers\Test.layer">
       <Name>Test</Name>
-    </Compile>
-    <Compile Include="Layers\TestCollision.layer">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Layers\TestCollision.layer">
       <Name>TestCollision</Name>
-    </Compile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Scripts\npc1.script">
       <Name>npc1</Name>
       <Importer>XmlImporter</Importer>
