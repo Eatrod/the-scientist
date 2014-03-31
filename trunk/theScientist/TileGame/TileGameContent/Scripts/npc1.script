@@ -1,0 +1,34 @@
+﻿<Converstaions>
+
+  <Conversation Name="Greeting">
+    <Text>Hello Friend</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Quest1" />
+    </Handlers>
+  </Conversation>
+
+  <Converstaion Name="Quest1">
+    <Text> There are some people up to no good</Text>
+    <Text> over at the park, want to help</Text>
+    <Handlers>
+      <Handler Caption="Yes" Action="StartConversation:ThankYou" />
+      <Handler Caption="No" Action ="StartConversation:OhWell" />
+    </Handlers>
+  </Converstaion>
+
+  <Conversation Name="ThankYou">
+    <Text> Thank you </Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="EndConversation" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="OhWell">
+    <Text> Ohwell </Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="EndConversation" />
+    </Handlers>
+  </Conversation>
+  
+  
+</Converstaions>
