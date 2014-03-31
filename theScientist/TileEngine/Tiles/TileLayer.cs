@@ -7,13 +7,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TileEngine
+namespace TileEngine.Tiles
 {
-    public class TileLayer
+    public class TileLayer : Layer
     {
         
         List<Texture2D> tileTextures = new List<Texture2D>();
-        int[,] map;
+       
         float alpha = 1f;
 
         public float Alpha
@@ -26,8 +26,7 @@ namespace TileEngine
         public int WidthInPixels{get { return Width * Engine.TileWidth; }}
         public int HeightInPixels{get { return Height * Engine.TileHeight;}}
 
-        public int Width { get { return map.GetLength(1); } }
-        public int Height { get { return map.GetLength(0); } }
+        
 
         public TileLayer(int width, int height)
         {

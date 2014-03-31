@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using TileEngine;
+using TileEngine.Tiles;
 
 
 namespace TileEditor
@@ -40,7 +41,7 @@ namespace TileEditor
 
         Dictionary<string, Texture2D> textureDict = new Dictionary<string, Texture2D>();
         Dictionary<string, Image> previewDict = new Dictionary<string, Image>();
-        Dictionary<string, TileLayer> layerDict = new Dictionary<string, TileLayer>();
+        Dictionary<string, Layer> layerDict = new Dictionary<string, Layer>();
 
        
        
@@ -125,8 +126,8 @@ namespace TileEditor
 
         private void Logic()
         {
-            camera.Position.X = hScrollBar1.Value * TileLayer.TileWidth;
-            camera.Position.Y = vScrollBar1.Value * TileLayer.TileHeight;
+            camera.Position.X = hScrollBar1.Value * Engine.TileWidth;
+            camera.Position.Y = vScrollBar1.Value * Engine.TileHeight;
 
             int mx = Mouse.GetState().X;
             int my = Mouse.GetState().Y;
@@ -137,8 +138,8 @@ namespace TileEditor
                 if (mx >= 0 && mx < tileDisplay1.Width &&
                     my >= 0 && my < tileDisplay1.Height)
                 {
-                    cellX = mx / TileLayer.TileWidth;
-                    cellY = my / TileLayer.TileHeight;
+                    cellX = mx / Engine.TileWidth;
+                    cellY = my / Engine.TileHeight;
 
                     cellX += hScrollBar1.Value;
                     cellY += vScrollBar1.Value;
@@ -193,7 +194,7 @@ namespace TileEditor
         {
             GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Black);
 
-            foreach (TileLayer layer in tileMap.Layers)
+            foreach (var layer in tileMap.Layers)
             {
                 layer.Draw(spriteBatch, camera);
 
@@ -207,10 +208,10 @@ namespace TileEditor
                             spriteBatch.Draw(
                                 emptyTile,
                                 new Rectangle(
-                                    x * TileLayer.TileWidth - (int)camera.Position.X,
-                                    y * TileLayer.TileHeight - (int)camera.Position.Y,
-                                    TileLayer.TileWidth,
-                                    TileLayer.TileHeight),
+                                    x * Engine.TileWidth - (int)camera.Position.X,
+                                    y * Engine.TileHeight - (int)camera.Position.Y,
+                                    Engine.TileWidth,
+                                    Engine.TileHeight),
                                 Color.White);
                         }
                     }
@@ -230,10 +231,10 @@ namespace TileEditor
                    spriteBatch.Draw(
                                 emptyTile,
                                 new Rectangle(
-                                    cellX * TileLayer.TileWidth - (int)camera.Position.X,
-                                    cellY * TileLayer.TileHeight - (int)camera.Position.Y,
-                                    TileLayer.TileWidth,
-                                    TileLayer.TileHeight),
+                                    cellX * Engine.TileWidth - (int)camera.Position.X,
+                                    cellY * Engine.TileHeight - (int)camera.Position.Y,
+                                    Engine.TileWidth,
+                                    Engine.TileHeight),
                                 Color.Red);    
 
                    spriteBatch.End();
@@ -334,34 +335,49 @@ namespace TileEditor
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (lstLayers.SelectedItem != null)
+            foreach (var item in lstLayers.Items)
             {
-                string filename = lstLayers.SelectedItem as string;
+                string filename = item as string;
                 saveFileDialog1.FileName = filename;
 
-                TileLayer tileLayer = layerDict[filename];
-
-                Dictionary<int, string> utilizedTextures = new Dictionary<int, string>();
-                foreach (string textureName in lstTexture.Items)
+                if (filename.Contains("Collision"))
                 {
-                    int index = tileLayer.IsUsingTexture(textureDict[textureName]);
+                    CollisionLayer collisionLayer = (CollisionLayer)layerDict[filename];
 
-                    if (index != -1)
+                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
-                        utilizedTextures.Add(index, textureName);
+                        collisionLayer.SaveLayerToFile(saveFileDialog1.FileName, null);
+                    }    
+                
+                }
+                else
+                {
+
+                    TileLayer tileLayer = (TileLayer)layerDict[filename];
+
+                    Dictionary<int, string> utilizedTextures = new Dictionary<int, string>();
+                    foreach (string textureName in lstTexture.Items)
+                    {
+                        int index = tileLayer.IsUsingTexture(textureDict[textureName]);
+
+                        if (index != -1)
+                        {
+                            utilizedTextures.Add(index, textureName);
+                        }
                     }
-                }
 
-                List<string> utilizedTextureList = new List<string>();
+                    List<string> utilizedTextureList = new List<string>();
 
-                for (int i = 0; i < utilizedTextures.Count; i++)
-                {
-                    utilizedTextureList.Add(utilizedTextures[i]);
-                }
+                    for (int i = 0; i < utilizedTextures.Count; i++)
+                    {
+                        utilizedTextureList.Add(utilizedTextures[i]);
+                    }
 
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    tileLayer.SaveLayerToFile(saveFileDialog1.FileName, utilizedTextureList.ToArray());
+                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        tileLayer.SaveLayerToFile(saveFileDialog1.FileName, utilizedTextureList.ToArray());
+                    }
+
                 }
             }
         }
@@ -382,7 +398,7 @@ namespace TileEditor
         private void lstLayers_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lstLayers.SelectedItem != null)
-                currentLayer = layerDict[lstLayers.SelectedItem as string];
+                currentLayer = (TileLayer)layerDict[lstLayers.SelectedItem as string];
                 trbAlphaSlider.Value = (int)currentLayer.Alpha * 100;
         }
 
@@ -393,15 +409,39 @@ namespace TileEditor
 
             if (newLayerForm.OKPressed)
             {
-                TileLayer tileLayer = new TileLayer(
-                    int.Parse(newLayerForm.txtLayerHeight.Text),
-                    int.Parse(newLayerForm.txtLayerWidth.Text));
+                if (lstLayers.Items.Count != 0)
+                {
+                    TileLayer tileLayer = new TileLayer(
+                       int.Parse(newLayerForm.txtLayerHeight.Text),
+                       int.Parse(newLayerForm.txtLayerWidth.Text));
 
-                layerDict.Add(newLayerForm.txtLayerName.Text, tileLayer);
-                tileMap.Layers.Add(tileLayer);
-                lstLayers.Items.Add(newLayerForm.txtLayerName.Text);
+                    layerDict.Add(newLayerForm.txtLayerName.Text, tileLayer);
+                    tileMap.Layers.Add(tileLayer);
+                    lstLayers.Items.Add(newLayerForm.txtLayerName.Text);
 
-                AdjustScrollBars();
+                    AdjustScrollBars();
+                }
+
+                else
+                {
+                    TileLayer tileLayer = new TileLayer(
+                       int.Parse(newLayerForm.txtLayerHeight.Text),
+                       int.Parse(newLayerForm.txtLayerWidth.Text));
+
+                    CollisionLayer collisionLayer = new CollisionLayer(
+                       int.Parse(newLayerForm.txtLayerHeight.Text),
+                       int.Parse(newLayerForm.txtLayerWidth.Text));
+                    
+                    layerDict.Add(newLayerForm.txtLayerName.Text, tileLayer);
+                    tileMap.Layers.Add(tileLayer);
+                    lstLayers.Items.Add(newLayerForm.txtLayerName.Text);
+
+                    layerDict.Add(newLayerForm.txtLayerName.Text + "Collision", collisionLayer);
+                    tileMap.CollisionLayer = collisionLayer;
+                    lstLayers.Items.Add(newLayerForm.txtLayerName.Text+"Collision");
+
+                    AdjustScrollBars();
+                }
             }
         }
 

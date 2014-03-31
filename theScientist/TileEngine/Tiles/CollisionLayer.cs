@@ -7,17 +7,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TileEngine
+namespace TileEngine.Tiles
 {
-    public class CollisionLayer
+    public class CollisionLayer : Layer
     {
         
-        
-        int[,] map;
-   
-
-        public int Width { get { return map.GetLength(1); } }
-        public int Height { get { return map.GetLength(0); } }
 
         public CollisionLayer(int width, int height)
         {

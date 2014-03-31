@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 using TileEngine;
+using TileEngine.Tiles;
 
 namespace TileGame
 {

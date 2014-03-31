@@ -67,6 +67,7 @@
     <Compile Include="Tiles\Engine.cs" />
     <Compile Include="Sprite\FrameAnimation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tiles\Layer.cs" />
     <Compile Include="Tiles\TileLayer.cs" />
     <Compile Include="Tiles\TileMap.cs" />
   </ItemGroup>
