@@ -31,7 +31,7 @@ namespace TileEditor
         int maxWidth = 0, maxHeight = 0;
         
         SpriteBatch spriteBatch;
-        TileLayer currentLayer;
+        Layer currentLayer;
         Texture2D emptyTile;
         Camera camera = new Camera();
         TileMap tileMap = new TileMap();
@@ -255,50 +255,62 @@ namespace TileEditor
             {
                 string filename = openFileDialog1.FileName;
 
-                string[] textureNames;
+                if (filename.Contains("Collision"))
+                {
+                    CollisionLayer layer = CollisionLayer.FromFile(filename);
+                    
+                    layerDict.Add(Path.GetFileName(filename), layer);
+                    tileMap.CollisionLayer = layer;
+                    lstLayers.Items.Add(Path.GetFileName(filename));
+                }
+                else
+                {
+                    string[] textureNames;
 
-                TileLayer layer = TileLayer.FromFile(filename, out textureNames);
+                    TileLayer layer = TileLayer.FromFile(filename, out textureNames);
 
                 
 
-                layerDict.Add(Path.GetFileName(filename), layer);
-                tileMap.Layers.Add(layer);
-                lstLayers.Items.Add(Path.GetFileName(filename));
+                    layerDict.Add(Path.GetFileName(filename), layer);
+                    tileMap.Layers.Add(layer);
+                    lstLayers.Items.Add(Path.GetFileName(filename));
 
-                foreach (string textureName in textureNames)
-                {                   
-                    if (textureDict.ContainsKey(textureName))
-                    {
-                        layer.AddTexture(textureDict[textureName]);
-                        continue;
-                    }
-
-                    string fullPath = txtContentPath.Text + "/" + textureName;
-
-                    foreach (string ext in imageExtensions)
-                    {
-                        if (File.Exists(fullPath + ext))
+                    foreach (string textureName in textureNames)
+                    {                   
+                        if (textureDict.ContainsKey(textureName))
                         {
-                            fullPath += ext;
-                            break;
+                            layer.AddTexture(textureDict[textureName]);
+                            continue;
                         }
-                    }
 
-                    Texture2D tex;
-                    using (FileStream fileStream = new FileStream(fullPath, FileMode.Open))
-                    {
-                        tex = Texture2D.FromStream(GraphicsDevice, fileStream);
-                    }
+                        string fullPath = txtContentPath.Text + "/" + textureName;
+
+                        foreach (string ext in imageExtensions)
+                        {
+                            if (File.Exists(fullPath + ext))
+                            {
+                                fullPath += ext;
+                                break;
+                            }
+                        }
+
+                        Texture2D tex;
+                        using (FileStream fileStream = new FileStream(fullPath, FileMode.Open))
+                        {
+                            tex = Texture2D.FromStream(GraphicsDevice, fileStream);
+                        }
                   
-                    Image image = Image.FromFile(fullPath);
-                    textureDict.Add(textureName, tex);
-                    previewDict.Add(textureName, image);
+                        Image image = Image.FromFile(fullPath);
+                        textureDict.Add(textureName, tex);
+                        previewDict.Add(textureName, image);
 
-                    lstTexture.Items.Add(textureName);
-                    layer.AddTexture(tex);
+                        lstTexture.Items.Add(textureName);
+                        layer.AddTexture(tex);
+                    }
                 }
 
                 AdjustScrollBars();
+
             }
         }
 
@@ -398,8 +410,17 @@ namespace TileEditor
         private void lstLayers_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lstLayers.SelectedItem != null)
-                currentLayer = (TileLayer)layerDict[lstLayers.SelectedItem as string];
-                trbAlphaSlider.Value = (int)currentLayer.Alpha * 100;
+            {
+                if (lstLayers.SelectedItem.ToString().Contains("Collision"))
+                {
+                    currentLayer = (CollisionLayer)layerDict[lstLayers.SelectedItem as string];
+                }
+                else
+                {
+                    currentLayer = (TileLayer)layerDict[lstLayers.SelectedItem as string];
+                    trbAlphaSlider.Value = (int)currentLayer.Alpha * 100;
+                }
+            }
         }
 
         private void btnAddLayer_Click(object sender, EventArgs e)
@@ -450,14 +471,17 @@ namespace TileEditor
             if (currentLayer != null)
             {
                 string filename = lstLayers.SelectedItem as string;
-                
-                tileMap.Layers.Remove(currentLayer);
-                layerDict.Remove(filename);
-                lstLayers.Items.Remove(lstLayers.SelectedItem);
 
-                currentLayer = null;
+                if (!filename.Contains("Collision"))
+                {
+                    tileMap.Layers.Remove((TileLayer)currentLayer);
+                    layerDict.Remove(filename);
+                    lstLayers.Items.Remove(lstLayers.SelectedItem);
 
-                AdjustScrollBars();
+                    currentLayer = null;
+
+                    AdjustScrollBars();
+                }
             }
         }
 
