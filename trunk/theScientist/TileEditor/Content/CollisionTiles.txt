@@ -1,0 +1,15 @@
+1;X.png
+2;SlowWalk.png
+11;Right.png
+12;Left.png
+13;Up.png
+14;Down.png
+15;UpRight.png
+16;DownRight.png
+17;UpLeft.png
+18;DownLeft.png
+21;DownArrow.png
+22;UpArrow.png
+23;RightArrow.png
+24;LeftArrow.png
+31;Death.png

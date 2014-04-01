@@ -23,8 +23,9 @@ namespace TileEngine.Tiles
         }
 
 
+
         #region Saving to file code
-        public void SaveLayerToFile(string filename, string[] textureNames)
+        public void SaveLayerToFile(string filename,Dictionary<string,int> collDict, List<string> collList)
         {
             using (StreamWriter writer = new StreamWriter(filename))
             {
@@ -37,7 +38,20 @@ namespace TileEngine.Tiles
                     string line = string.Empty;
                     for (int x = 0; x < Width; x++)
                     {
-                        line += map[y, x].ToString() + " ";
+                        int collisionNumber;
+                        if (map[y, x] == -1)
+                        {
+                            collisionNumber = map[y, x];
+                        }
+                        else
+                        {
+                            int index = map[y, x];
+                            string name = collList[index];
+                            name = name.Replace("CollisionTiles\\", "");
+                            collisionNumber = collDict[name + ".png"];
+                        }
+                        line += collisionNumber.ToString() + " ";
+                       
                     }
 
                     writer.WriteLine(line);
@@ -49,7 +63,32 @@ namespace TileEngine.Tiles
         #region Loading from File code
 
 
-        public static CollisionLayer FromFile(string filename)
+        //public static CollisionLayer FromFile(ContentManager content, string filename)
+        //{
+        //    CollisionLayer collisionLayer;
+        //    List<string> textureNames = new List<string>();
+
+        //    using (StreamReader reader = new StreamReader("../../../../TileEditor/Content/CollisionTiles.txt"))
+        //    {
+        //        while (!reader.EndOfStream)
+        //        {
+        //            string line = reader.ReadLine();
+
+        //            string[] items = line.Split(';');
+        //            int number = Convert.ToInt32(items[0]);
+        //            string name = items[1];
+
+        //            textureNames.Add(name);
+        //        }
+        //    }
+
+        //    collisionLayer = ProcessFile(filename, null, null);
+        //    collisionLayer.LoadTileTexture(content, textureNames.ToArray());
+
+        //    return collisionLayer;
+        //}
+
+        public static CollisionLayer ProcessFile(string filename, Dictionary<string, int> collDict, List<string> collList)
         {
             CollisionLayer CollisionLayer;
             List<List<int>> tempLayout = new List<List<int>>();
@@ -80,7 +119,34 @@ namespace TileEngine.Tiles
                         foreach (string c in cells)
                         {
                             if (!string.IsNullOrEmpty(c))
-                                row.Add(int.Parse(c));
+                            {
+                                int index = 0;
+                                if (c != "-1")
+                                {
+                                    string name = "";
+                                    foreach (var temp in collDict)
+                                    {
+                                        if (temp.Value == int.Parse(c))
+                                        {
+                                            name = temp.Key;
+                                            break;
+                                        }
+                                    }
+                                    name = name.Replace(".png", "");
+                                    name = "CollisionTiles\\" + name;
+                                    
+                                    foreach (string listName in collList)
+                                    {
+                                        if (listName == name)
+                                            break;
+                                        index++;
+                                    }
+
+                                }
+                                else
+                                    index = int.Parse(c); 
+                                row.Add(index);
+                            }
                         }
 
                         tempLayout.Add(row);
@@ -100,7 +166,13 @@ namespace TileEngine.Tiles
         }
 
 
-        
+        //public override int IsUsingTexture(Texture2D texture)
+        //{
+        //    if (tileTextures.Contains(texture))
+        //        return tileTextures.IndexOf(texture);
+        //    else
+        //        return -1;
+        //}
 
         #endregion
   

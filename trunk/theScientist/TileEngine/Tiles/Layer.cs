@@ -14,6 +14,8 @@ namespace TileEngine.Tiles
         public int Width { get { return map.GetLength(1); } }
         public int Height { get { return map.GetLength(0); } }
 
+        protected List<Texture2D> tileTextures = new List<Texture2D>();
+
         float alpha = 1f;
 
         public float Alpha
@@ -22,14 +24,64 @@ namespace TileEngine.Tiles
             set { alpha = MathHelper.Clamp(value, 0f, 1f); }
         }
 
-        public virtual int IsUsingTexture(Texture2D texture)
+        public  int IsUsingTexture(Texture2D texture)
         {
-            return 0;
+            if (tileTextures.Contains(texture))
+                return tileTextures.IndexOf(texture);
+            else
+                return -1;
         }
 
-        public virtual void AddTexture(Texture2D texture)
+        public  void AddTexture(Texture2D texture)
         {
-            
+            tileTextures.Add(texture);
+        }
+
+        public void LoadTileTexture(ContentManager content, params string[] textureNames)
+        {
+            Texture2D texture;
+
+            foreach (string textureName in textureNames)
+            {
+                texture = content.Load<Texture2D>(textureName);
+                tileTextures.Add(texture);
+            }
+
+        }
+
+        public void Draw(SpriteBatch batch, Camera camera)
+        {
+            batch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend,
+                null, null, null, null, camera.TransforMatrix);
+
+
+            for (int x = 0; x < Width; x++)
+            {
+                for (int y = 0; y < Height; y++)
+                {
+                    int textureIndex = map[y, x];
+
+                    if (textureIndex == -1)
+                        continue;
+
+                    else
+                    {
+                        Texture2D texture = tileTextures[textureIndex];
+
+                        batch.Draw(
+                            texture,
+                            new Rectangle(
+                                x * Engine.TileWidth,
+                                y * Engine.TileHeight,
+                                Engine.TileWidth,
+                                Engine.TileHeight),
+                            new Color(new Vector4(1f, 1f, 1f, Alpha)));
+                    }
+                }
+            }
+
+            batch.End();
+
         }
 
         #region Get/set cellIndex

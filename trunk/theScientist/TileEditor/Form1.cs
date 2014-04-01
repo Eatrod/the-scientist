@@ -8,9 +8,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
+
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+
 
 using TileEngine;
 using TileEngine.Tiles;
@@ -42,8 +45,12 @@ namespace TileEditor
         Dictionary<string, Texture2D> textureDict = new Dictionary<string, Texture2D>();
         Dictionary<string, Image> previewDict = new Dictionary<string, Image>();
         Dictionary<string, Layer> layerDict = new Dictionary<string, Layer>();
+        Dictionary<string, int> collisionDict = new Dictionary<string, int>();
 
-       
+        List<string> listTextureWorldTiles = new List<string>();
+        List<string> listTextureCollisionTiles = new List<string>();
+
+        bool lastUsedIndexWasCollisionInListlayer = false;
        
         public GraphicsDevice GraphicsDevice
         {
@@ -64,16 +71,40 @@ namespace TileEditor
             saveFileDialog1.Filter = "Layout File | *.layer";
 
             Mouse.WindowHandle = tileDisplay1.Handle;
+            //txtContentPath.Text = "M:\\Spel\\TileGame\\TileGame\\TileGameContent" as Path;
+            txtContentPath.Text = Path.GetFullPath("..\\..\\..\\TileGame\\TileGameContent");
 
-            while (string.IsNullOrEmpty(txtContentPath.Text))
+            using (StreamReader reader = new StreamReader("Content/CollisionTiles.txt"))
             {
-                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                while (!reader.EndOfStream)
                 {
-                    txtContentPath.Text = folderBrowserDialog1.SelectedPath;
+                    string line = reader.ReadLine();
+
+                    string[] items = line.Split(';');
+                    int number = Convert.ToInt32(items[0]);
+                    string name = items[1];
+
+                    collisionDict.Add(name, number);
+
+                    name = name.Replace(".png", "");
+                    name = "CollisionTiles\\" + name;
+                    listTextureCollisionTiles.Add(name);
                 }
-                else
-                    MessageBox.Show("Please Chose a Content  directory");
+
+
             }
+
+            
+            
+            //while (string.IsNullOrEmpty(txtContentPath.Text))
+            //{
+            //    if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            //    {
+            //        txtContentPath.Text = folderBrowserDialog1.SelectedPath;
+            //    }
+            //    else
+            //        MessageBox.Show("Please Chose a Content  directory");
+            //}
 
         }
 
@@ -196,30 +227,15 @@ namespace TileEditor
 
             foreach (var layer in tileMap.Layers)
             {
-                layer.Draw(spriteBatch, camera);
-
-                spriteBatch.Begin();
-                for (int y = 0; y < layer.Height; y++)
-                {
-                    for (int x = 0; x < layer.Width; x++)
-                    {
-                        if (layer.GetCellIndex(x, y) == -1)
-                        {
-                            spriteBatch.Draw(
-                                emptyTile,
-                                new Rectangle(
-                                    x * Engine.TileWidth - (int)camera.Position.X,
-                                    y * Engine.TileHeight - (int)camera.Position.Y,
-                                    Engine.TileWidth,
-                                    Engine.TileHeight),
-                                Color.White);
-                        }
-                    }
-                }
-                spriteBatch.End();
+                DrawLayer(layer);
 
                 if (layer == currentLayer)
                     break;
+            }
+
+            if (tileMap.CollisionLayer != null && lstLayers.SelectedItem.ToString().Contains("Collision"))
+            {
+                DrawLayer(tileMap.CollisionLayer);
             }
 
             if (currentLayer != null)
@@ -240,6 +256,33 @@ namespace TileEditor
                    spriteBatch.End();
                 }
             }
+
+
+        }
+
+        private void DrawLayer(Layer layer)
+        {
+            layer.Draw(spriteBatch, camera);
+
+            spriteBatch.Begin();
+            for (int y = 0; y < layer.Height; y++)
+            {
+                for (int x = 0; x < layer.Width; x++)
+                {
+                    if (layer.GetCellIndex(x, y) == -1)
+                    {
+                        spriteBatch.Draw(
+                            emptyTile,
+                            new Rectangle(
+                                x * Engine.TileWidth - (int)camera.Position.X,
+                                y * Engine.TileHeight - (int)camera.Position.Y,
+                                Engine.TileWidth,
+                                Engine.TileHeight),
+                            Color.White);
+                    }
+                }
+            }
+            spriteBatch.End();
         }
 
 
@@ -251,17 +294,68 @@ namespace TileEditor
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "Layout File | *.layer";
+            openFileDialog1.InitialDirectory = txtContentPath.Text + "\\Layers";
+            openFileDialog1.Multiselect = false;
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string filename = openFileDialog1.FileName;
 
                 if (filename.Contains("Collision"))
                 {
-                    CollisionLayer layer = CollisionLayer.FromFile(filename);
-                    
+                    CollisionLayer layer = CollisionLayer.ProcessFile(filename, collisionDict,listTextureCollisionTiles);
+                    int helpvar = 0;
                     layerDict.Add(Path.GetFileName(filename), layer);
                     tileMap.CollisionLayer = layer;
                     lstLayers.Items.Add(Path.GetFileName(filename));
+
+                    foreach (var items in lstLayers.Items)
+                    {
+                        if (items.ToString().Contains("Collision"))
+                        {
+                            break;
+                        }
+                        helpvar++;
+                    }
+
+                    lstLayers.SelectedIndex = helpvar;
+
+                    foreach (var collision in collisionDict)
+                    {   
+                        string textureName = collision.Key.ToString();
+                        if (textureDict.ContainsKey(textureName))
+                        {
+                            layer.AddTexture(textureDict[textureName]);
+                            continue;
+                        }
+
+                        string fullPath = "Content/" + textureName;
+
+                        foreach (string ext in imageExtensions)
+                        {
+                            if (File.Exists(fullPath + ext))
+                            {
+                                fullPath += ext;
+                                break;
+                            }
+                        }
+
+                        Texture2D tex;
+                        using (FileStream fileStream = new FileStream(fullPath, FileMode.Open))
+                        {
+                            tex = Texture2D.FromStream(GraphicsDevice, fileStream);
+                        }
+                        string[] texName = textureName.Split('.');
+                        textureName = "CollisionTiles\\" + texName[0];
+                        Image image = Image.FromFile(fullPath);
+                        textureDict.Add(textureName, tex);
+                        previewDict.Add(textureName, image);
+
+                        //lstTexture.Items.Add(textureName);
+                        layer.AddTexture(tex);
+                    }
+                    
+                
                 }
                 else
                 {
@@ -347,9 +441,21 @@ namespace TileEditor
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!lstLayers.SelectedItem.ToString().Contains("Collision"))
+            {
+                listTextureWorldTiles.Clear();
+                foreach (string texture in lstTexture.Items)
+                {
+                    listTextureWorldTiles.Add(texture);
+                }
+            }
+
+   
             foreach (var item in lstLayers.Items)
             {
+                
                 string filename = item as string;
+                saveFileDialog1.InitialDirectory = txtContentPath.Text + "\\Layers";
                 saveFileDialog1.FileName = filename;
 
                 if (filename.Contains("Collision"))
@@ -358,7 +464,7 @@ namespace TileEditor
 
                     if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
-                        collisionLayer.SaveLayerToFile(saveFileDialog1.FileName, null);
+                        collisionLayer.SaveLayerToFile(saveFileDialog1.FileName, collisionDict,listTextureCollisionTiles);
                     }    
                 
                 }
@@ -368,7 +474,7 @@ namespace TileEditor
                     TileLayer tileLayer = (TileLayer)layerDict[filename];
 
                     Dictionary<int, string> utilizedTextures = new Dictionary<int, string>();
-                    foreach (string textureName in lstTexture.Items)
+                    foreach (string textureName in listTextureWorldTiles)
                     {
                         int index = tileLayer.IsUsingTexture(textureDict[textureName]);
 
@@ -391,7 +497,10 @@ namespace TileEditor
                     }
 
                 }
+                
             }
+
+            
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -414,11 +523,40 @@ namespace TileEditor
                 if (lstLayers.SelectedItem.ToString().Contains("Collision"))
                 {
                     currentLayer = (CollisionLayer)layerDict[lstLayers.SelectedItem as string];
+                    listTextureWorldTiles.Clear();
+                    foreach (string texture in lstTexture.Items)
+                    {
+                        listTextureWorldTiles.Add(texture);
+                    }
+                    lstTexture.Items.Clear();
+                    foreach (string collisionTexture in listTextureCollisionTiles)
+                    {
+                        lstTexture.Items.Add(collisionTexture);
+                    }
+                    lastUsedIndexWasCollisionInListlayer = true;
+                }
+                else if (lastUsedIndexWasCollisionInListlayer)
+                {
+                    currentLayer = (TileLayer)layerDict[lstLayers.SelectedItem as string];
+                    trbAlphaSlider.Value = (int)currentLayer.Alpha * 100;
+
+                    listTextureCollisionTiles.Clear();
+                    foreach (string collisionTexture in lstTexture.Items)
+                    {
+                        listTextureCollisionTiles.Add(collisionTexture);
+                    }
+                    lstTexture.Items.Clear();
+                    foreach (string texture in listTextureWorldTiles)
+                    {
+                        lstTexture.Items.Add(texture);
+                    }
+                    lastUsedIndexWasCollisionInListlayer = false;
                 }
                 else
                 {
                     currentLayer = (TileLayer)layerDict[lstLayers.SelectedItem as string];
                     trbAlphaSlider.Value = (int)currentLayer.Alpha * 100;
+                    lastUsedIndexWasCollisionInListlayer = false;
                 }
             }
         }
@@ -445,6 +583,7 @@ namespace TileEditor
 
                 else
                 {
+                    int helpvar = 0;
                     TileLayer tileLayer = new TileLayer(
                        int.Parse(newLayerForm.txtLayerHeight.Text),
                        int.Parse(newLayerForm.txtLayerWidth.Text));
@@ -460,6 +599,61 @@ namespace TileEditor
                     layerDict.Add(newLayerForm.txtLayerName.Text + "Collision", collisionLayer);
                     tileMap.CollisionLayer = collisionLayer;
                     lstLayers.Items.Add(newLayerForm.txtLayerName.Text+"Collision");
+
+                    foreach (var items in lstLayers.Items)
+                    {
+                        if (items.ToString().Contains("Collision"))
+                        {
+                            break;
+                        }
+                        helpvar++;
+                    }
+
+                    lstLayers.SelectedIndex = helpvar;
+
+                    foreach (var collision in collisionDict)
+                    {
+                        string textureName = collision.Key.ToString();
+                        if (textureDict.ContainsKey(textureName))
+                        {
+                            collisionLayer.AddTexture(textureDict[textureName]);
+                            continue;
+                        }
+
+                        string fullPath = "Content/" + textureName ;
+
+                        foreach (string ext in imageExtensions)
+                        {
+                            if (File.Exists(fullPath + ext))
+                            {
+                                fullPath += ext;
+                                break;
+                            }
+                        }
+
+                        Texture2D tex;
+                        using (FileStream fileStream = new FileStream(fullPath, FileMode.Open))
+                        {
+                            tex = Texture2D.FromStream(GraphicsDevice, fileStream);
+                        }
+                        string[] texName = textureName.Split('.');
+                        textureName = "CollisionTiles\\" + texName[0];
+                       
+
+                        Image image = Image.FromFile(fullPath);
+                        textureDict.Add(textureName, tex);
+                        previewDict.Add(textureName, image);
+
+                        //lstTexture.Items.Add(textureName);
+                        collisionLayer.AddTexture(tex);
+                        
+                    }
+
+                    //listTextureCollisionTiles.Clear();
+                    //foreach (var item in lstTexture.Items)
+                    //{
+                    //    listTextureCollisionTiles.Add(item.ToString());
+                    //}
 
                     AdjustScrollBars();
                 }
@@ -487,25 +681,29 @@ namespace TileEditor
 
         private void btnAddTexture_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "JPG Image| *.jpg|PNG Image| *.png|TGA Image| *.tga";
-            openFileDialog1.InitialDirectory = txtContentPath.Text;
+            openFileDialog1.Filter = "PNG Image| *.png|JPG Image| *.jpg|TGA Image| *.tga";
+            openFileDialog1.InitialDirectory = txtContentPath.Text + "\\Tiles";
+            openFileDialog1.Multiselect = true;
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                string filename = openFileDialog1.FileName;
-
-                using (FileStream fileStream = new FileStream(filename, FileMode.Open))
+                foreach (string filename in openFileDialog1.FileNames)
                 {
-                    Texture2D texture = Texture2D.FromStream(GraphicsDevice, fileStream);
+                    string filenametemp = filename;
 
-                    Image image = Image.FromStream(fileStream);
+                    using (FileStream fileStream = new FileStream(filenametemp, FileMode.Open))
+                    {
+                        Texture2D texture = Texture2D.FromStream(GraphicsDevice, fileStream);
 
-                    filename = filename.Replace(txtContentPath.Text + "\\", "");
-                    filename = filename.Remove(filename.LastIndexOf("."));
+                        Image image = Image.FromStream(fileStream);
 
-                    lstTexture.Items.Add(filename);
-                    textureDict.Add(filename, texture);
-                    previewDict.Add(filename, image);
+                        filenametemp = filenametemp.Replace(txtContentPath.Text + "\\", "");
+                        filenametemp = filenametemp.Remove(filenametemp.LastIndexOf("."));
+
+                        lstTexture.Items.Add(filenametemp);
+                        textureDict.Add(filenametemp, texture);
+                        previewDict.Add(filenametemp, image);
+                    }
                 }
 
             }
@@ -532,6 +730,11 @@ namespace TileEditor
 
                 }
             }
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
         }
 
        
