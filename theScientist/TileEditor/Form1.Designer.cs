@@ -52,8 +52,8 @@
             this.lblTexture = new System.Windows.Forms.Label();
             this.picbTexturePreviev = new System.Windows.Forms.PictureBox();
             this.chbFill = new System.Windows.Forms.CheckBox();
-            this.tileDisplay1 = new TileEditor.TileDisplay();
             this.trbAlphaSlider = new System.Windows.Forms.TrackBar();
+            this.tileDisplay1 = new TileEditor.TileDisplay();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picbTexturePreviev)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbAlphaSlider)).BeginInit();
@@ -99,34 +99,36 @@
             // newTileMapToolStripMenuItem
             // 
             this.newTileMapToolStripMenuItem.Name = "newTileMapToolStripMenuItem";
-            this.newTileMapToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.newTileMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newTileMapToolStripMenuItem.Text = "New Tile Map";
             this.newTileMapToolStripMenuItem.Click += new System.EventHandler(this.newTileMapToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Multiselect = true;
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // txtContentPath
             // 
@@ -256,16 +258,6 @@
             this.chbFill.Text = "Fill";
             this.chbFill.UseVisualStyleBackColor = true;
             // 
-            // tileDisplay1
-            // 
-            this.tileDisplay1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.tileDisplay1.Location = new System.Drawing.Point(0, 24);
-            this.tileDisplay1.Name = "tileDisplay1";
-            this.tileDisplay1.Size = new System.Drawing.Size(754, 588);
-            this.tileDisplay1.TabIndex = 0;
-            this.tileDisplay1.Text = "tileDisplay1";
-            // 
             // trbAlphaSlider
             // 
             this.trbAlphaSlider.Location = new System.Drawing.Point(776, 119);
@@ -276,6 +268,16 @@
             this.trbAlphaSlider.TickFrequency = 5;
             this.trbAlphaSlider.Value = 100;
             this.trbAlphaSlider.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // tileDisplay1
+            // 
+            this.tileDisplay1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tileDisplay1.Location = new System.Drawing.Point(0, 24);
+            this.tileDisplay1.Name = "tileDisplay1";
+            this.tileDisplay1.Size = new System.Drawing.Size(754, 588);
+            this.tileDisplay1.TabIndex = 0;
+            this.tileDisplay1.Text = "tileDisplay1";
             // 
             // Form1
             // 

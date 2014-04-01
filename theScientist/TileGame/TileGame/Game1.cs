@@ -136,7 +136,7 @@ namespace TileGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/Layer1.layer"));
-            tileMap.CollisionLayer = CollisionLayer.FromFile("Content/Layers/Collision.layer");
+            tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/Collision.layer");
             
             sprite = new AnimatedSprite(Content.Load<Texture2D>("Sprite/Human"));
             sprite.Origionoffset = new Vector2(25, 80);

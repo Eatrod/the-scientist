@@ -12,7 +12,7 @@ namespace TileEngine.Tiles
     public class TileLayer : Layer
     {
         
-        List<Texture2D> tileTextures = new List<Texture2D>();
+        //List<Texture2D> tileTextures = new List<Texture2D>();
        
 
         public int WidthInPixels{get { return Width * Engine.TileWidth; }}
@@ -35,13 +35,13 @@ namespace TileEngine.Tiles
         }
 
 
-        public override int IsUsingTexture(Texture2D texture)
-        {
-            if ( tileTextures.Contains(texture))
-                return tileTextures.IndexOf(texture);
-            else
-                return -1;
-        }
+        //public override int IsUsingTexture(Texture2D texture)
+        //{
+        //    if ( tileTextures.Contains(texture))
+        //        return tileTextures.IndexOf(texture);
+        //    else
+        //        return -1;
+        //}
 
         #region Saving to file code
         public void SaveLayerToFile(string filename, string[] textureNames)
@@ -198,25 +198,13 @@ namespace TileEngine.Tiles
         }
 
 
-        public void LoadTileTexture(ContentManager content, params string[] textureNames)
-        {
-            Texture2D texture;
-
-            foreach (string textureName in textureNames)
-            {
-                texture = content.Load<Texture2D>(textureName);
-                tileTextures.Add(texture);
-            }
-
-        }
-
         #endregion
 
 
-        public override void AddTexture(Texture2D texture)
-        {
-            tileTextures.Add(texture);
-        }
+        //public override void AddTexture(Texture2D texture)
+        //{
+        //    tileTextures.Add(texture);
+        //}
 
         public void RemoveTexture(Texture2D texture)
         {
@@ -227,40 +215,40 @@ namespace TileEngine.Tiles
         
 
 
-        public void Draw(SpriteBatch batch, Camera camera)
-        {
-            batch.Begin(SpriteSortMode.Texture,BlendState.AlphaBlend,
-                null,null,null,null,camera.TransforMatrix);
+        //public void Draw(SpriteBatch batch, Camera camera)
+        //{
+        //    batch.Begin(SpriteSortMode.Texture,BlendState.AlphaBlend,
+        //        null,null,null,null,camera.TransforMatrix);
 
             
-            for (int x = 0; x < Width; x++)
-            {
-                for (int y = 0; y < Height; y++)
-                {
-                    int textureIndex = map[y, x];
+        //    for (int x = 0; x < Width; x++)
+        //    {
+        //        for (int y = 0; y < Height; y++)
+        //        {
+        //            int textureIndex = map[y, x];
 
-                    if (textureIndex == -1)
-                        continue;
+        //            if (textureIndex == -1)
+        //                continue;
 
-                    else
-                    {
-                        Texture2D texture = tileTextures[textureIndex];
+        //            else
+        //            {
+        //                Texture2D texture = tileTextures[textureIndex];
 
-                        batch.Draw(
-                            texture,
-                            new Rectangle(
-                                x * Engine.TileWidth,
-                                y * Engine.TileHeight,
-                                Engine.TileWidth,
-                                Engine.TileHeight),
-                            new Color(new Vector4(1f,1f,1f, Alpha)));
-                    }
-                }
-            }
+        //                batch.Draw(
+        //                    texture,
+        //                    new Rectangle(
+        //                        x * Engine.TileWidth,
+        //                        y * Engine.TileHeight,
+        //                        Engine.TileWidth,
+        //                        Engine.TileHeight),
+        //                    new Color(new Vector4(1f,1f,1f, Alpha)));
+        //            }
+        //        }
+        //    }
 
-            batch.End();
+        //    batch.End();
 
-        }
+        //}
 
         public void Draw(SpriteBatch batch, Camera camera, Point min, Point max)
         {
