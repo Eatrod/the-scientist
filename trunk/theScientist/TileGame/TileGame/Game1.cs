@@ -58,72 +58,74 @@ namespace TileGame
         {
             base.Initialize();
 
-            FrameAnimation down = new FrameAnimation(2, 50, 80, 50, 0);
-            sprite.Animations.Add("Down", down);
+              FrameAnimation down = new FrameAnimation(1,32,32,0,0);
+              sprite.Animations.Add("Down", down);
+        //    FrameAnimation down = new FrameAnimation(2, 50, 80, 50, 0);
+        //    sprite.Animations.Add("Down", down);
 
-            FrameAnimation left = new FrameAnimation(2, 50, 80, 50, 80);
-            sprite.Animations.Add("Left", left);
-
-
-            FrameAnimation right = new FrameAnimation(2, 50, 80, 50, 160);
-            sprite.Animations.Add("Right", right);
+        //    FrameAnimation left = new FrameAnimation(2, 50, 80, 50, 80);
+        //    sprite.Animations.Add("Left", left);
 
 
-            FrameAnimation up = new FrameAnimation(2, 50, 80, 50, 240);
-            sprite.Animations.Add("Up", up);
-
-            FrameAnimation idledown = new FrameAnimation(1, 50, 80, 150, 0);
-            sprite.Animations.Add("IdleDown", idledown);
-
-            FrameAnimation idleleft = new FrameAnimation(1, 50, 80, 150, 80);
-            sprite.Animations.Add("IdleLeft", idleleft);
+        //    FrameAnimation right = new FrameAnimation(2, 50, 80, 50, 160);
+        //    sprite.Animations.Add("Right", right);
 
 
-            FrameAnimation idleright = new FrameAnimation(1, 50, 80, 150, 160);
-            sprite.Animations.Add("IdleRight", idleright);
+        //    FrameAnimation up = new FrameAnimation(2, 50, 80, 50, 240);
+        //    sprite.Animations.Add("Up", up);
+
+        //    FrameAnimation idledown = new FrameAnimation(1, 50, 80, 150, 0);
+        //    sprite.Animations.Add("IdleDown", idledown);
+
+        //    FrameAnimation idleleft = new FrameAnimation(1, 50, 80, 150, 80);
+        //    sprite.Animations.Add("IdleLeft", idleleft);
 
 
-            FrameAnimation idleup = new FrameAnimation(1, 50, 80, 150, 240);
-            sprite.Animations.Add("IdleUp", idleup);
+        //    FrameAnimation idleright = new FrameAnimation(1, 50, 80, 150, 160);
+        //    sprite.Animations.Add("IdleRight", idleright);
 
 
-            Random rand = new Random();
+        //    FrameAnimation idleup = new FrameAnimation(1, 50, 80, 150, 240);
+        //    sprite.Animations.Add("IdleUp", idleup);
 
-            foreach (AnimatedSprite s in npcs)
-            {
-                s.Origionoffset = new Vector2(25, 80);
 
-                s.Animations.Add("IdleUp", (FrameAnimation)idleup.Clone());
-                s.Animations.Add("IdleDown", (FrameAnimation)idledown.Clone());
-                s.Animations.Add("IdleLeft", (FrameAnimation)idleleft.Clone());
-                s.Animations.Add("IdleRight", (FrameAnimation)idleright.Clone());
+        //    Random rand = new Random();
 
-                int animation = rand.Next(3);
+        //    foreach (AnimatedSprite s in npcs)
+        //    {
+        //        s.Origionoffset = new Vector2(25, 80);
 
-                switch (animation)
-                { 
-                    case 0:
-                        s.CurrentAnimationName = "IdleUp";
-                        break;
-                    case 1:
-                        s.CurrentAnimationName = "IdleDown";
-                        break;
-                    case 2:
-                        s.CurrentAnimationName = "IdleLeft";
-                        break;
-                    case 3:
-                        s.CurrentAnimationName = "IdleRight";
-                        break;
-                }
+        //        s.Animations.Add("IdleUp", (FrameAnimation)idleup.Clone());
+        //        s.Animations.Add("IdleDown", (FrameAnimation)idledown.Clone());
+        //        s.Animations.Add("IdleLeft", (FrameAnimation)idleleft.Clone());
+        //        s.Animations.Add("IdleRight", (FrameAnimation)idleright.Clone());
 
-                s.Position = new Vector2(
-                    rand.Next(600),rand.Next(400));
-            }
+        //        int animation = rand.Next(3);
+
+        //        switch (animation)
+        //        { 
+        //            case 0:
+        //                s.CurrentAnimationName = "IdleUp";
+        //                break;
+        //            case 1:
+        //                s.CurrentAnimationName = "IdleDown";
+        //                break;
+        //            case 2:
+        //                s.CurrentAnimationName = "IdleLeft";
+        //                break;
+        //            case 3:
+        //                s.CurrentAnimationName = "IdleRight";
+        //                break;
+        //        }
+
+        //        s.Position = new Vector2(
+        //            rand.Next(600),rand.Next(400));
+        //    }
 
             sprite.CurrentAnimationName = "Down";
 
             renderList.Add(sprite);
-            renderList.AddRange(npcs);
+        //    renderList.AddRange(npcs);
         }
 
         /// <summary>
@@ -135,16 +137,16 @@ namespace TileGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/Layer1.layer"));
-            tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/Collision.layer");
+            tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testlayer.layer"));
+            tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/testlayerCollision.layer");
             
-            sprite = new AnimatedSprite(Content.Load<Texture2D>("Sprite/Human"));
-            sprite.Origionoffset = new Vector2(25, 80);
+            sprite = new AnimatedSprite(Content.Load<Texture2D>("Sprite/playerbox"));
+            sprite.Origionoffset = new Vector2(15, 15);
 
-            npcs.Add(new AnimatedSprite(Content.Load<Texture2D>("Sprite/human")));
-            npcs.Add(new AnimatedSprite(Content.Load<Texture2D>("Sprite/human")));
-            npcs.Add(new AnimatedSprite(Content.Load<Texture2D>("Sprite/human")));
-            npcs.Add(new AnimatedSprite(Content.Load<Texture2D>("Sprite/human")));
+            //npcs.Add(new AnimatedSprite(Content.Load<Texture2D>("Sprite/human")));
+            //npcs.Add(new AnimatedSprite(Content.Load<Texture2D>("Sprite/human")));
+            //npcs.Add(new AnimatedSprite(Content.Load<Texture2D>("Sprite/human")));
+            //npcs.Add(new AnimatedSprite(Content.Load<Texture2D>("Sprite/human")));
         }
 
 
@@ -174,13 +176,13 @@ namespace TileGame
             //GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
             //motion = new Vector2(gamePadState.ThumbSticks.Left.X, -gamePadState.ThumbSticks.Left.Y);
 
-            if (keyState.IsKeyDown(Keys.W))
+            if (keyState.IsKeyDown(Keys.Up))
                 motion.Y--;
-            if (keyState.IsKeyDown(Keys.S))
+            if (keyState.IsKeyDown(Keys.Down))
                 motion.Y++;
-            if (keyState.IsKeyDown(Keys.A))
+            if (keyState.IsKeyDown(Keys.Left))
                 motion.X--;
-            if (keyState.IsKeyDown(Keys.D))
+            if (keyState.IsKeyDown(Keys.Right))
                 motion.X++;
 
             if (motion != Vector2.Zero)
@@ -189,22 +191,28 @@ namespace TileGame
                 motion.Normalize();                 //Comment out to use gamePad
 
                 motion = CheckCollisionForMotion(motion,sprite);
-
-                sprite.Position += motion * sprite.Speed;
-                UpdateSpriteAnimation(motion);
+                
+                //sprite.Position += motion * sprite.Speed;
+                //UpdateSpriteAnimation(motion);
                 sprite.isAnimating = true;
 
-                CheckForUnwalkebleTile(sprite);
+                CheckForUnwalkebleTile(sprite,motion);
+                
 
             }
 
             else
             {
-                UpdateSpriteIdleAnimation(sprite);
+                //UpdateSpriteIdleAnimation(sprite);
                 sprite.isAnimating = false;
                 motion = new Vector2(0, 0);
                 
             }
+            
+            
+            motion = CheckCollisionAutomaticMotion(motion, sprite);
+            UpdateSpriteAnimation(motion);
+            sprite.Position += motion * sprite.Speed;
 
             sprite.ClampToArea(tileMap.GetWidthInPixels(), tileMap.GetHeightInPixels());
             
@@ -236,14 +244,16 @@ namespace TileGame
         #region Sprite Animation Code
         private void UpdateSpriteIdleAnimation(AnimatedSprite sprite)
         {
-            if (sprite.CurrentAnimationName == "Up")
-                sprite.CurrentAnimationName = "IdleUp";
+            //if (sprite.CurrentAnimationName == "Up")
+            //    sprite.CurrentAnimationName = "IdleUp";
+            //if (sprite.CurrentAnimationName == "Down")
+            //    sprite.CurrentAnimationName = "IdleDown";
+            //if (sprite.CurrentAnimationName == "Right")
+            //    sprite.CurrentAnimationName = "IdleRight";
+            //if (sprite.CurrentAnimationName == "Left")
+            //    sprite.CurrentAnimationName = "IdleLeft";
             if (sprite.CurrentAnimationName == "Down")
-                sprite.CurrentAnimationName = "IdleDown";
-            if (sprite.CurrentAnimationName == "Right")
-                sprite.CurrentAnimationName = "IdleRight";
-            if (sprite.CurrentAnimationName == "Left")
-                sprite.CurrentAnimationName = "IdleLeft";
+                sprite.CurrentAnimationName = "Down";
 
         }
 
@@ -254,22 +264,22 @@ namespace TileGame
 
             if (motionAngle >= -MathHelper.PiOver4 && motionAngle <= MathHelper.PiOver4)
             {
-                sprite.CurrentAnimationName = "Right";
+                sprite.CurrentAnimationName = "Down"; //Right
                 //motion = new Vector2(1f, 0f);
             }
             else if (motionAngle >= MathHelper.PiOver4 && motionAngle <= 3f * MathHelper.PiOver4)
             {
-                sprite.CurrentAnimationName = "Down";
+                sprite.CurrentAnimationName = "Down"; //Down
                 //motion = new Vector2(0f, 1f);
             }
             else if (motionAngle <= -MathHelper.PiOver4 && motionAngle >= -3f * MathHelper.PiOver4)
             {
-                sprite.CurrentAnimationName = "Up";
+                sprite.CurrentAnimationName = "Down"; // Up
                 //motion = new Vector2(0f, -1f);
             }
             else
             {
-                sprite.CurrentAnimationName = "Left";
+                sprite.CurrentAnimationName = "Down"; //Left
                 //motion = new Vector2(-1f, 0f);
             }
 
@@ -279,7 +289,7 @@ namespace TileGame
         #region Code for Collision with terrain
 
         #region Code for Unwalkeble Terrain
-        private void CheckForUnwalkebleTile(AnimatedSprite sprite)
+        private void CheckForUnwalkebleTile(AnimatedSprite sprite, Vector2 motion)
         {
             Point spriteCell = Engine.ConvertPostionToCell(sprite.Origin);
 
@@ -311,23 +321,26 @@ namespace TileGame
             if (spriteCell.X < tileMap.CollisionLayer.Width - 1 &&
                 spriteCell.Y < tileMap.CollisionLayer.Height - 1)
                 downRight = new Point(spriteCell.X + 1, spriteCell.Y + 1);
-                
-            
-            
-            if (up !=null && tileMap.CollisionLayer.GetCellIndex(up.Value) == 1)
+
+
+
+            CheckNoneWalkebleArea(sprite, ref motion, ref spriteCell, upLeft, up, upRight, left, right, downLeft, down, downRight);
+            CheckWalkebleAreaFromOneDirection(sprite, ref motion, ref spriteCell, upLeft, up, upRight, left, right, downLeft, down, downRight);
+            CheckWalkableDamageAreaCollision(sprite, ref motion, ref spriteCell, upLeft, up, upRight, left, right, downLeft, down, downRight);
+        }
+
+        private void CheckNoneWalkebleArea(AnimatedSprite sprite, ref Vector2 motion, ref Point spriteCell, Point? upLeft, Point? up,
+            Point? upRight, Point? left, Point? right, Point? downLeft, Point? down, Point? downRight)
+        {
+            if (up != null && tileMap.CollisionLayer.GetCellIndex(up.Value) == 1)
             {
-                
                 Rectangle cellRect = Engine.CreateRectForCell(up.Value);
                 Rectangle spriteRect = sprite.Bounds;
 
                 if (cellRect.Intersects(spriteRect))
                 {
-
-
-                    sprite.Position.Y = up.Value.Y * Engine.TileHeight + sprite.Bounds.Height ;
-                
+                    sprite.Position.Y = up.Value.Y * Engine.TileHeight + sprite.Bounds.Height;
                 }
-
             }
             if (down != null && tileMap.CollisionLayer.GetCellIndex(down.Value) == 1)
             {
@@ -337,20 +350,16 @@ namespace TileGame
                 if (cellRect.Intersects(spriteRect))
                 {
                     sprite.Position.Y = down.Value.Y * Engine.TileHeight - sprite.Bounds.Height;
-
                 }
-            
             }
-            if (left != null && tileMap.CollisionLayer.GetCellIndex(left.Value) == 1)
+            if (left != null && tileMap.CollisionLayer.GetCellIndex(left.Value) == 1 )
             {
                 Rectangle cellRect = Engine.CreateRectForCell(left.Value);
                 Rectangle spriteRect = sprite.Bounds;
 
                 if (cellRect.Intersects(spriteRect))
                 {
-                    sprite.Position.X = left.Value.X * Engine.TileWidth  ;
-                    
-
+                        sprite.Position.X = left.Value.X * Engine.TileWidth + sprite.Bounds.Width;
                 }
 
             }
@@ -361,9 +370,7 @@ namespace TileGame
 
                 if (cellRect.Intersects(spriteRect))
                 {
-                    sprite.Position.X = right.Value.X * Engine.TileWidth - sprite.Bounds.Width ;
-
-
+                    sprite.Position.X = right.Value.X * Engine.TileWidth - sprite.Bounds.Width;
                 }
 
             }
@@ -375,8 +382,10 @@ namespace TileGame
 
                 if (cellRect.Intersects(spriteRect))
                 {
-                    sprite.Position.X = spriteCell.X * Engine.TileWidth ;
-                    sprite.Position.Y = spriteCell.Y * Engine.TileHeight - sprite.Bounds.Height;
+                    if (motion.X != 0)
+                        sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                    if (motion.Y != 0)
+                        sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
                 }
             }
 
@@ -387,8 +396,10 @@ namespace TileGame
 
                 if (cellRect.Intersects(spriteRect))
                 {
-                    sprite.Position.X = spriteCell.X * Engine.TileWidth;
-                    sprite.Position.Y = spriteCell.Y * Engine.TileHeight - sprite.Bounds.Height ;
+                    if (motion.X != 0)
+                        sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                    if (motion.Y != 0)
+                        sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
                 }
             }
 
@@ -399,8 +410,10 @@ namespace TileGame
 
                 if (cellRect.Intersects(spriteRect))
                 {
-                    sprite.Position.X = left.Value.X * Engine.TileWidth + sprite.Bounds.Width ;
-                    sprite.Position.Y = down.Value.Y * Engine.TileHeight + sprite.Bounds.Height ;
+                    if (motion.X != 0)
+                        sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                    if (motion.Y != 0)
+                        sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
                 }
             }
 
@@ -411,13 +424,123 @@ namespace TileGame
 
                 if (cellRect.Intersects(spriteRect))
                 {
-                    sprite.Position.X = right.Value.X * Engine.TileWidth - sprite.Bounds.Width;
-                    sprite.Position.Y = down.Value.Y * Engine.TileHeight - sprite.Bounds.Height;
+                    if (motion.X != 0)
+                        sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                    if (motion.Y != 0)
+                        sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
                 }
             }
         }
-        #endregion
 
+        private void CheckWalkebleAreaFromOneDirection(AnimatedSprite sprite, ref Vector2 motion, ref Point spriteCell, Point? upLeft, Point? up,
+            Point? upRight, Point? left, Point? right, Point? downLeft, Point? down, Point? downRight)
+        {
+            if (up != null && (tileMap.CollisionLayer.GetCellIndex(up.Value) == 14 || tileMap.CollisionLayer.GetCellIndex(up.Value) == 16 || tileMap.CollisionLayer.GetCellIndex(up.Value) == 18))
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(up.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {   
+                    if(!(motion.Y >= 0))
+                        sprite.Position.Y = up.Value.Y * Engine.TileHeight + sprite.Bounds.Height;
+                }
+            }
+            if (down != null && (tileMap.CollisionLayer.GetCellIndex(down.Value) == 13 || tileMap.CollisionLayer.GetCellIndex(down.Value) == 17 || tileMap.CollisionLayer.GetCellIndex(down.Value) == 15))
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(down.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    if(!(motion.Y <= 0))
+                        sprite.Position.Y = down.Value.Y * Engine.TileHeight - sprite.Bounds.Height;
+                }
+            }
+            if (left != null && (tileMap.CollisionLayer.GetCellIndex(left.Value) == 11 || tileMap.CollisionLayer.GetCellIndex(left.Value) == 15 || tileMap.CollisionLayer.GetCellIndex(left.Value) == 16))
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(left.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    if (!(motion.X >= 0 ))
+                        sprite.Position.X = left.Value.X * Engine.TileWidth + sprite.Bounds.Width;
+                }
+
+            }
+            if (right != null && (tileMap.CollisionLayer.GetCellIndex(right.Value) == 12 || tileMap.CollisionLayer.GetCellIndex(right.Value) == 17 || tileMap.CollisionLayer.GetCellIndex(right.Value) == 18))
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(right.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    if(!(motion.X <= 0))
+                        sprite.Position.X = right.Value.X * Engine.TileWidth - sprite.Bounds.Width;
+                }
+
+            }
+
+            if (upLeft != null && tileMap.CollisionLayer.GetCellIndex(upLeft.Value) == 16)
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(upLeft.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    if (!(motion.X >= 0))
+                        sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                    if (!(motion.Y <= 0))
+                        sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                }
+            }
+
+            if (upRight != null && tileMap.CollisionLayer.GetCellIndex(upRight.Value) == 18)
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(upRight.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    if (!(motion.X <= 0))
+                        sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                    if (!(motion.Y >= 0))
+                        sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                }
+            }
+
+            if (downLeft != null && tileMap.CollisionLayer.GetCellIndex(downLeft.Value) == 15)
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(downLeft.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    if (!(motion.X >= 0))
+                        sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                    if (!(motion.Y <= 0))
+                        sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                }
+            }
+
+            if (downRight != null && tileMap.CollisionLayer.GetCellIndex(downRight.Value) == 17)
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(downRight.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    if (!(motion.X <= 0))
+                        sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                    if (!(motion.Y <= 0))
+                        sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                }
+            }
+        }
+        #endregion //UnwalkebleTerrainRegionEnd
+
+        #region Code for Motion Collision
         private Vector2 CheckCollisionForMotion(Vector2 motion, AnimatedSprite sprite)
         {
             Point cell = Engine.ConvertPostionToCell(sprite.Origin);
@@ -430,13 +553,160 @@ namespace TileGame
             return motion;
         }
 
+        private Vector2 CheckCollisionAutomaticMotion(Vector2 motion, AnimatedSprite sprite)
+        {
+            Point cell = Engine.ConvertPostionToCell(sprite.Origin);
+
+            int colIndex = tileMap.CollisionLayer.GetCellIndex(cell);
+
+            if (colIndex == 21)
+            {
+                motion.X = 0;
+                motion.Y = 1;
+                motion *= 2;
+            }
+            if (colIndex == 22)
+            {
+                motion.X = 0;
+                motion.Y = -1;
+                motion *= 2;
+            }
+            if (colIndex == 23)
+            {
+                motion.X = 1;
+                motion.Y = 0;
+                motion *= 2;
+            }
+            if (colIndex == 24)
+            {
+                motion.X = -1;
+                motion.Y = 0;
+                motion *= 2;
+            }
+
+            return motion;
+        }
+        #endregion //EndforMotionCollisionRegion
+
+        #region Code for Damage Collision
+
+        private void CheckWalkableDamageAreaCollision(AnimatedSprite sprite, ref Vector2 motion, ref Point spriteCell, Point? upLeft, Point? up,
+            Point? upRight, Point? left, Point? right, Point? downLeft, Point? down, Point? downRight)
+        {
+            if (up != null && tileMap.CollisionLayer.GetCellIndex(up.Value) == 31)
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(up.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    sprite.areTakingDamage = true ;
+                    return;
+                }
+            }
+            if (down != null && tileMap.CollisionLayer.GetCellIndex(down.Value) == 31)
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(down.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    sprite.areTakingDamage = true;
+                    return;
+                }
+            }
+            if (left != null && tileMap.CollisionLayer.GetCellIndex(left.Value) == 31)
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(left.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    sprite.areTakingDamage = true;
+                    return;
+                }
+
+            }
+            if (right != null && tileMap.CollisionLayer.GetCellIndex(right.Value) == 31)
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(right.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    sprite.areTakingDamage = true;
+                    return;
+                }
+
+            }
+
+            if (upLeft != null && tileMap.CollisionLayer.GetCellIndex(upLeft.Value) == 31)
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(upLeft.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    sprite.areTakingDamage = true;
+                    return;
+                }
+            }
+
+            if (upRight != null && tileMap.CollisionLayer.GetCellIndex(upRight.Value) == 31)
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(upRight.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    sprite.areTakingDamage = true;
+                    return;
+                }
+            }
+
+            if (downLeft != null && tileMap.CollisionLayer.GetCellIndex(downLeft.Value) == 31)
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(downLeft.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    sprite.areTakingDamage = true;
+                    return;
+                }
+            }
+
+            if (downRight != null && tileMap.CollisionLayer.GetCellIndex(downRight.Value) == 31)
+            {
+                Rectangle cellRect = Engine.CreateRectForCell(downRight.Value);
+                Rectangle spriteRect = sprite.Bounds;
+
+                if (cellRect.Intersects(spriteRect))
+                {
+                    sprite.areTakingDamage = true;
+                    return;
+                }
+            }
+
+            Point cell = Engine.ConvertPostionToCell(sprite.Origin);
+
+            int colIndex = tileMap.CollisionLayer.GetCellIndex(cell);
+
+            if (colIndex == 31)
+            {
+                sprite.areTakingDamage = true;
+                return;
+            }
+            
+
+            sprite.areTakingDamage = false;
+        }
+        #endregion //EndForDamageCollisionRegion
+        #endregion //EndforCollisionWithTerrainRegion
 
 
-        #endregion
 
-        
 
-        
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
