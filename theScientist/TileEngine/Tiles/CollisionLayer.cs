@@ -165,6 +165,57 @@ namespace TileEngine.Tiles
             return CollisionLayer;
         }
 
+        public static CollisionLayer ProcessFile(string filename)
+        {
+            CollisionLayer CollisionLayer;
+            List<List<int>> tempLayout = new List<List<int>>();
+
+            using (StreamReader reader = new StreamReader(filename))
+            {
+                bool readingLayout = false;
+
+
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine().Trim();
+
+                    if (string.IsNullOrEmpty(line))
+                        continue;
+
+                    if (line.Contains("[Layout]"))
+                    {
+                        readingLayout = true;
+                    }
+
+                    else if (readingLayout)
+                    {
+                        List<int> row = new List<int>();
+
+                        string[] cells = line.Split(' ');
+
+                        foreach (string c in cells)
+                        {
+                            if (!string.IsNullOrEmpty(c))
+                            {
+                                row.Add(int.Parse(c));
+                            }
+                        }
+
+                        tempLayout.Add(row);
+                    }
+                }
+            }
+
+            int width = tempLayout[0].Count;
+            int height = tempLayout.Count;
+
+            CollisionLayer = new CollisionLayer(width, height);
+
+            for (int y = 0; y < height; y++)
+                for (int x = 0; x < width; x++)
+                    CollisionLayer.SetCellIndex(x, y, tempLayout[y][x]);
+            return CollisionLayer;
+        }
 
         //public override int IsUsingTexture(Texture2D texture)
         //{

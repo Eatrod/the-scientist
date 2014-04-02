@@ -52,12 +52,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Layers\Town1.layer">
-      <Name>Town1</Name>
+    <None Include="Layers\testlayer.layer">
+      <Name>testlayer</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Layers\Town1Collision.layer">
-      <Name>Town1Collision</Name>
+    <None Include="Layers\testlayerCollision.layer">
+      <Name>testlayerCollision</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Scripts\npc1.script">
@@ -178,7 +178,14 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Sprite\playerbox.png">
+      <Name>playerbox</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

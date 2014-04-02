@@ -14,7 +14,11 @@ namespace TileEngine
 
         string currentAnimation = null;
         bool animating = true;
+        bool takingDamage = false;
         Texture2D texture;
+
+        double oldTime = 0;
+        
 
         public Vector2 Position = Vector2.Zero;
         public Vector2 Origionoffset = Vector2.Zero;
@@ -45,10 +49,12 @@ namespace TileEngine
             }
         }
 
-
+        float Alpha = 255.0f;
         float radius = 10f;
-
         float speed = 2f;
+
+        bool faded = false;
+
         public float Speed
         {
             get { return speed; }
@@ -65,6 +71,12 @@ namespace TileEngine
         {
             get { return animating; }
             set { animating = value; }
+        }
+
+        public bool areTakingDamage
+        {
+            get { return takingDamage; }
+            set { takingDamage = value; }
         }
 
         public FrameAnimation CurrentAnimation
@@ -133,8 +145,29 @@ namespace TileEngine
                 else
                     return;
             }
+            if ((gameTime.TotalGameTime.TotalMilliseconds - oldTime) > 150)
+            {
+                if (takingDamage == true)
+                {
+                    if (faded == true)
+                    {
+                        Alpha = 255.0f;
+                        faded = false;
+                    }
+                    else
+                    {
+                        Alpha = 0.0f;
+                        faded = true;
+                    }
+                }
+                else
+                {
+                    Alpha = 255.0f;
+                    faded = false;
+                }
+                oldTime = gameTime.TotalGameTime.TotalMilliseconds;
+            }
             
-
             animation.Update(gameTime);
         }
 
@@ -143,11 +176,13 @@ namespace TileEngine
             FrameAnimation animation = CurrentAnimation;
 
             if (animation != null)
-                spritBatch.Draw(
-                    texture,
-                    Position,
-                    animation.CurrentRectangle,
-                    Color.White);
+                {
+                    spritBatch.Draw(
+                        texture,
+                        Position,
+                        animation.CurrentRectangle,
+                        new Color(255, 255, 255, (byte)MathHelper.Clamp(Alpha, 0, 255)));
+                }
 
         }
     }
