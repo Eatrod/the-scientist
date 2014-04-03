@@ -59,11 +59,13 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sprite\CharacterSprite.cs" />
     <Compile Include="Sprite\Npc\NPC.cs" />
     <Compile Include="Sprite\Npc\Script.cs" />
     <Compile Include="Sprite\AnimatedSprite.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Sprite\BaseSprite.cs" />
+    <Compile Include="Sprite\PlayerCharacter.cs" />
     <Compile Include="Sprite\Sprite.cs" />
     <Compile Include="Tiles\CollisionLayer.cs" />
     <Compile Include="Tiles\Engine.cs" />

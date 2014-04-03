@@ -8,13 +8,14 @@ using TileEngine.Sprite;
 
 namespace TileEngine.Sprite.Npc
 {
-    public class NPC : AnimatedSprite
+    public class NPC : CharacterSprite
     {
-        Script scipt;
+        Script script;
 
         public NPC(Texture2D texture, Script script)
             : base(texture)
-        { 
+        {
+            this.script = script;
         }
 
         public void StartConversation(string conversationName)

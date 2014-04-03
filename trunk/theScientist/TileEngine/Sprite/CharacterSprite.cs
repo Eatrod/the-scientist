@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace TileEngine.Sprite
+{
+    public class CharacterSprite : AnimatedSprite
+    {
+        
+
+        public CharacterSprite(Texture2D texture) : base(texture)
+        {
+            //this.texture = texture;
+        }
+    }
+}

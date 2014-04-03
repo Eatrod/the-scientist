@@ -15,7 +15,10 @@ namespace TileEngine.Sprite
         string currentAnimation = null;
         bool animating = true;
         bool takingDamage = false;      //kanske flyttas till bas sprite 
-        
+
+        protected float damage = 0;
+        protected float life = 0;
+
         double oldTime = 0;  //taking damage see kommentar.
 
         public override Vector2 Center
@@ -50,6 +53,17 @@ namespace TileEngine.Sprite
             get { return takingDamage; }
             set { takingDamage = value; }
         }  //kanske flyttas
+
+        public float Damage
+        {
+            get { return damage; }
+            set { damage = value; }
+        }
+        public float Life
+        {
+            get { return life; }
+            set { life = value; }
+        }
 
         public FrameAnimation CurrentAnimation
         {
@@ -105,16 +119,27 @@ namespace TileEngine.Sprite
                     return;
             }
             SettingSpriteBlink(gameTime);
+            ReducingHealth();
             animation.Update(gameTime);
+        }
+
+        private void ReducingHealth()
+        {
+            if (takingDamage)
+            {
+                life -= damage;
+                if (life < 0)
+                    life = 0;
+            }
         }
 
         private void SettingSpriteBlink(GameTime gameTime)
         {
             if ((gameTime.TotalGameTime.TotalMilliseconds - oldTime) > 150)
             {
-                if (takingDamage == true)
+                if (takingDamage)
                 {
-                    if (faded == true)
+                    if (faded)
                     {
                         Alpha = 255.0f;
                         faded = false;
@@ -133,7 +158,7 @@ namespace TileEngine.Sprite
                 oldTime = gameTime.TotalGameTime.TotalMilliseconds;
             }
 
-        } // Kanske flyttas
+        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -147,11 +172,11 @@ namespace TileEngine.Sprite
                     animation.CurrentRectangle,
                     new Color(255, 255, 255, (byte)MathHelper.Clamp(Alpha, 0, 255)));
             }
-        } 
+        }
 
-        public AnimatedSprite(Texture2D texture)
+        public AnimatedSprite(Texture2D texture) : base(texture)
         {
-            this.texture = texture;
+            //this.texture = texture;
         }  //konstruktor 
     }
 }
