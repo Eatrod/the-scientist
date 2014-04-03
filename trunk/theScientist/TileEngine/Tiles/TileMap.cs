@@ -9,8 +9,6 @@ namespace TileEngine.Tiles
 {
     public class TileMap
     {
-
-
         public List<TileLayer> Layers = new List<TileLayer>();
         public CollisionLayer CollisionLayer;
 

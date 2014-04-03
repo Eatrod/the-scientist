@@ -106,7 +106,6 @@ namespace TileEngine.Tiles
             map[point.Y, point.Y] = cellIndex;
         }
 
-
         public void RemoveIndex(int existingIndex)
         {
             for (int x = 0; x < Width; x++)
