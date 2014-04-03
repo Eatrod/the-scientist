@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TileEngine
+using TileEngine.Sprite;
+
+namespace TileEngine.Npc
 {
     public class NPC : AnimatedSprite
     {
