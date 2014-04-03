@@ -11,7 +11,6 @@ namespace TileEngine.Tiles
 {
     public class CollisionLayer : Layer
     {
-        
 
         public CollisionLayer(int width, int height)
         {
@@ -22,9 +21,6 @@ namespace TileEngine.Tiles
                     map[y, x] = -1;
         }
 
-
-
-        #region Saving to file code
         public void SaveLayerToFile(string filename,Dictionary<string,int> collDict, List<string> collList)
         {
             using (StreamWriter writer = new StreamWriter(filename))
@@ -58,35 +54,8 @@ namespace TileEngine.Tiles
                 }
             }
         }
-        #endregion
 
         #region Loading from File code
-
-
-        //public static CollisionLayer FromFile(ContentManager content, string filename)
-        //{
-        //    CollisionLayer collisionLayer;
-        //    List<string> textureNames = new List<string>();
-
-        //    using (StreamReader reader = new StreamReader("../../../../TileEditor/Content/CollisionTiles.txt"))
-        //    {
-        //        while (!reader.EndOfStream)
-        //        {
-        //            string line = reader.ReadLine();
-
-        //            string[] items = line.Split(';');
-        //            int number = Convert.ToInt32(items[0]);
-        //            string name = items[1];
-
-        //            textureNames.Add(name);
-        //        }
-        //    }
-
-        //    collisionLayer = ProcessFile(filename, null, null);
-        //    collisionLayer.LoadTileTexture(content, textureNames.ToArray());
-
-        //    return collisionLayer;
-        //}
 
         public static CollisionLayer ProcessFile(string filename, Dictionary<string, int> collDict, List<string> collList)
         {
@@ -217,73 +186,7 @@ namespace TileEngine.Tiles
             return CollisionLayer;
         }
 
-        //public override int IsUsingTexture(Texture2D texture)
-        //{
-        //    if (tileTextures.Contains(texture))
-        //        return tileTextures.IndexOf(texture);
-        //    else
-        //        return -1;
-        //}
-
         #endregion
   
-        //#region Get/set cellIndex
-
-        //public int GetCellIndex(int x, int y)
-        //{
-        //    return map[y, x];
-        //}
-
-        //public int GetCellIndex(Point point)
-        //{
-        //    return map[point.Y, point.X];
-        //}
-        
-        
-        //public void SetCellIndex(int x, int y, int cellIndex)
-        //{
-        //    map[y, x] = cellIndex;
-        //}
-
-        //public void SetCellIndex(Point point, int cellIndex)
-        //{
-        //    map[point.Y,point.Y] = cellIndex;
-        //}
-
-
-        //public void RemoveIndex(int existingIndex)
-        //{
-        //    for (int x = 0; x < Width; x++)
-        //    {
-        //        for (int y = 0; y < Height; y++)
-        //        {
-        //            if (map[y, x] == existingIndex)
-        //                map[y, x] = -1;
-        //            else if (map[y, x] > existingIndex)
-        //                map[y, x]--;
-        //        }
-        //    }
-        
-        
-        //}
-
-        //public void ReplaceIndex(int existingIndex, int newIndex)
-        //{
-        //    for (int x = 0; x < Width; x++)
-        //    {
-        //        for (int y = 0; y < Height; y++)
-        //        {
-        //            if (map[y, x] == existingIndex)
-        //                map[y, x] = newIndex;
-        //        }
-        //    }
-
-
-        //}
-
-        //#endregion
-
-
-
     }
 }
