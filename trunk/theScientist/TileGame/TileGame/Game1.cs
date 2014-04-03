@@ -31,6 +31,7 @@ namespace TileGame
         List<AnimatedSprite> renderList = new List<AnimatedSprite>();
 
         Comparison<AnimatedSprite> renderSort = new Comparison<AnimatedSprite>(renderSpriteCompare);
+        
         static int renderSpriteCompare(AnimatedSprite a, AnimatedSprite b)
         {
             return a.Origin.Y.CompareTo(b.Origin.Y);

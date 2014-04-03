@@ -8,12 +8,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
 
 using TileEngine;
 using TileEngine.Tiles;
@@ -40,6 +37,8 @@ namespace TileEditor
         TileMap tileMap = new TileMap();
 
         int cellX, cellY;
+        int tempCellX ;  //Help-var to not draw outside current layer
+        int tempCellY; 
         int fillCounter = 1000;
 
         Dictionary<string, Texture2D> textureDict = new Dictionary<string, Texture2D>();
@@ -51,6 +50,7 @@ namespace TileEditor
         List<string> listTextureCollisionTiles = new List<string>();
 
         bool lastUsedIndexWasCollisionInListlayer = false;
+        bool AreUsingMenu = false;
        
         public GraphicsDevice GraphicsDevice
         {
@@ -71,7 +71,6 @@ namespace TileEditor
             saveFileDialog1.Filter = "Layout File | *.layer";
 
             Mouse.WindowHandle = tileDisplay1.Handle;
-            //txtContentPath.Text = "M:\\Spel\\TileGame\\TileGame\\TileGameContent" as Path;
             txtContentPath.Text = Path.GetFullPath("..\\..\\..\\TileGame\\TileGameContent");
 
             using (StreamReader reader = new StreamReader("Content/CollisionTiles.txt"))
@@ -90,25 +89,8 @@ namespace TileEditor
                     name = "CollisionTiles\\" + name;
                     listTextureCollisionTiles.Add(name);
                 }
-
-
-            }
-
-            
-            
-            //while (string.IsNullOrEmpty(txtContentPath.Text))
-            //{
-            //    if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            //    {
-            //        txtContentPath.Text = folderBrowserDialog1.SelectedPath;
-            //    }
-            //    else
-            //        MessageBox.Show("Please Chose a Content  directory");
-            //}
-
+            } 
         }
-
-       
 
         void tileDisplay1_OnInitialize(object sender, EventArgs e)
         {
@@ -118,17 +100,15 @@ namespace TileEditor
             {
                 emptyTile = Texture2D.FromStream(GraphicsDevice,fileStream);
             }
-
         } 
         
         void tileDisplay1_OnDraw(object sender, EventArgs e)
         {
             Logic();
-            Render();
-            
+            Render();  
         }
 
-        public void FillCell(int x, int y, int desiredIndex)
+        public void FillCell(int x, int y, int desiredIndex)  //Code for FillTool in Editor
         {
             int oldIndex = currentLayer.GetCellIndex(x, y);
 
@@ -165,7 +145,6 @@ namespace TileEditor
 
             if (currentLayer != null)
             {
-
                 if (mx >= 0 && mx < tileDisplay1.Width &&
                     my >= 0 && my < tileDisplay1.Height)
                 {
@@ -175,41 +154,46 @@ namespace TileEditor
                     cellX += hScrollBar1.Value;
                     cellY += vScrollBar1.Value;
 
+                    tempCellX = cellX;
+                    tempCellY = cellY;
+
                     cellX = (int)MathHelper.Clamp(cellX, 0, currentLayer.Width -1);
                     cellY = (int)MathHelper.Clamp(cellY, 0, currentLayer.Height -1);
-
-                    if (Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
+                    if (!AreUsingMenu)
                     {
-                        if (rdbDraw.Checked && lstTexture.SelectedItem != null)
+                        if (Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && (tempCellX <= cellX && tempCellY <= cellY))
                         {
-                            Texture2D texture = textureDict[lstTexture.SelectedItem as string];
-
-                            int index = currentLayer.IsUsingTexture(texture);
-
-                            if (index == -1)
+                            if (rdbDraw.Checked && lstTexture.SelectedItem != null)
                             {
-                                currentLayer.AddTexture(texture);
-                                index = currentLayer.IsUsingTexture(texture);
+                                Texture2D texture = textureDict[lstTexture.SelectedItem as string];
+
+                                int index = currentLayer.IsUsingTexture(texture);
+
+                                if (index == -1)
+                                {
+                                    currentLayer.AddTexture(texture);
+                                    index = currentLayer.IsUsingTexture(texture);
+                                }
+
+                                if (chbFill.Checked)
+                                {
+                                    fillCounter = 1000;
+                                    FillCell(cellX, cellY, index);
+                                }
+                                else
+                                    currentLayer.SetCellIndex(cellX, cellY, index);
                             }
 
-                            if (chbFill.Checked)
+                            else if (rdbErase.Checked)
                             {
-                                fillCounter = 1000;
-                                FillCell(cellX, cellY, index);
+                                if (chbFill.Checked)
+                                {
+                                    fillCounter = 1000;
+                                    FillCell(cellX, cellY, -1);
+                                }
+                                else
+                                    currentLayer.SetCellIndex(cellX, cellY, -1);
                             }
-                            else
-                                currentLayer.SetCellIndex(cellX, cellY, index);
-                        }
-
-                        else if (rdbErase.Checked)
-                        {
-                            if (chbFill.Checked)
-                            {
-                                fillCounter = 1000;
-                                FillCell(cellX, cellY, -1);
-                            }
-                            else
-                                currentLayer.SetCellIndex(cellX, cellY, -1);
                         }
                     }
                 }
@@ -240,8 +224,7 @@ namespace TileEditor
 
             if (currentLayer != null)
             {
-
-                if (cellX != -1 && cellY != -1)
+                if (cellX != -1 && cellY != -1 && (tempCellX <= cellX && tempCellY <= cellY))
                 {
                    spriteBatch.Begin();
                    spriteBatch.Draw(
@@ -256,8 +239,6 @@ namespace TileEditor
                    spriteBatch.End();
                 }
             }
-
-
         }
 
         private void DrawLayer(Layer layer)
@@ -285,12 +266,11 @@ namespace TileEditor
             spriteBatch.End();
         }
 
-
         private void newTileMapToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            
         }
-
+       
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "Layout File | *.layer";
@@ -331,39 +311,22 @@ namespace TileEditor
 
                         string fullPath = "Content/" + textureName;
 
-                        foreach (string ext in imageExtensions)
-                        {
-                            if (File.Exists(fullPath + ext))
-                            {
-                                fullPath += ext;
-                                break;
-                            }
-                        }
+                        fullPath = AddExtensionToPath(fullPath);
 
-                        Texture2D tex;
-                        using (FileStream fileStream = new FileStream(fullPath, FileMode.Open))
-                        {
-                            tex = Texture2D.FromStream(GraphicsDevice, fileStream);
-                        }
+                        Texture2D tex = LoadTextureFromFile(fullPath);
                         string[] texName = textureName.Split('.');
                         textureName = "CollisionTiles\\" + texName[0];
                         Image image = Image.FromFile(fullPath);
                         textureDict.Add(textureName, tex);
                         previewDict.Add(textureName, image);
-
-                        //lstTexture.Items.Add(textureName);
                         layer.AddTexture(tex);
-                    }
-                    
-                
+                    }    
                 }
                 else
                 {
                     string[] textureNames;
 
                     TileLayer layer = TileLayer.FromFile(filename, out textureNames);
-
-                
 
                     layerDict.Add(Path.GetFileName(filename), layer);
                     tileMap.Layers.Add(layer);
@@ -379,20 +342,9 @@ namespace TileEditor
 
                         string fullPath = txtContentPath.Text + "/" + textureName;
 
-                        foreach (string ext in imageExtensions)
-                        {
-                            if (File.Exists(fullPath + ext))
-                            {
-                                fullPath += ext;
-                                break;
-                            }
-                        }
+                        fullPath = AddExtensionToPath(fullPath);
 
-                        Texture2D tex;
-                        using (FileStream fileStream = new FileStream(fullPath, FileMode.Open))
-                        {
-                            tex = Texture2D.FromStream(GraphicsDevice, fileStream);
-                        }
+                        Texture2D tex = LoadTextureFromFile(fullPath);
                   
                         Image image = Image.FromFile(fullPath);
                         textureDict.Add(textureName, tex);
@@ -404,9 +356,31 @@ namespace TileEditor
                 }
 
                 AdjustScrollBars();
-
-            }
+            }  
         }
+
+        private string AddExtensionToPath(string fullPath)
+        {
+            foreach (string ext in imageExtensions)
+            {
+                if (File.Exists(fullPath + ext))
+                {
+                    fullPath += ext;
+                    break;
+                }
+            }
+            return fullPath;
+        }
+
+        private Texture2D LoadTextureFromFile(string fullPath)
+        {
+            Texture2D tex;
+            using (FileStream fileStream = new FileStream(fullPath, FileMode.Open))
+            {
+                tex = Texture2D.FromStream(GraphicsDevice, fileStream);
+            }
+            return tex;
+        }     
 
         private void AdjustScrollBars()
         {
@@ -450,10 +424,8 @@ namespace TileEditor
                 }
             }
 
-   
             foreach (var item in lstLayers.Items)
-            {
-                
+            {              
                 string filename = item as string;
                 saveFileDialog1.InitialDirectory = txtContentPath.Text + "\\Layers";
                 saveFileDialog1.FileName = filename;
@@ -465,12 +437,10 @@ namespace TileEditor
                     if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
                         collisionLayer.SaveLayerToFile(saveFileDialog1.FileName, collisionDict,listTextureCollisionTiles);
-                    }    
-                
+                    }                   
                 }
                 else
                 {
-
                     TileLayer tileLayer = (TileLayer)layerDict[filename];
 
                     Dictionary<int, string> utilizedTextures = new Dictionary<int, string>();
@@ -495,12 +465,8 @@ namespace TileEditor
                     {
                         tileLayer.SaveLayerToFile(saveFileDialog1.FileName, utilizedTextureList.ToArray());
                     }
-
-                }
-                
+                }               
             }
-
-            
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -570,37 +536,17 @@ namespace TileEditor
             {
                 if (lstLayers.Items.Count != 0)
                 {
-                    TileLayer tileLayer = new TileLayer(
-                       int.Parse(newLayerForm.txtLayerHeight.Text),
-                       int.Parse(newLayerForm.txtLayerWidth.Text));
-
-                    layerDict.Add(newLayerForm.txtLayerName.Text, tileLayer);
-                    tileMap.Layers.Add(tileLayer);
-                    lstLayers.Items.Add(newLayerForm.txtLayerName.Text);
-
+                    AddNewWorldTileLayer(newLayerForm);
                     AdjustScrollBars();
                 }
 
                 else
                 {
                     int helpvar = 0;
-                    TileLayer tileLayer = new TileLayer(
-                       int.Parse(newLayerForm.txtLayerHeight.Text),
-                       int.Parse(newLayerForm.txtLayerWidth.Text));
-
-                    CollisionLayer collisionLayer = new CollisionLayer(
-                       int.Parse(newLayerForm.txtLayerHeight.Text),
-                       int.Parse(newLayerForm.txtLayerWidth.Text));
-                    
-                    layerDict.Add(newLayerForm.txtLayerName.Text, tileLayer);
-                    tileMap.Layers.Add(tileLayer);
-                    lstLayers.Items.Add(newLayerForm.txtLayerName.Text);
-
-                    layerDict.Add(newLayerForm.txtLayerName.Text + "Collision", collisionLayer);
-                    tileMap.CollisionLayer = collisionLayer;
-                    lstLayers.Items.Add(newLayerForm.txtLayerName.Text+"Collision");
-
-                    foreach (var items in lstLayers.Items)
+                    AddNewWorldTileLayer(newLayerForm);
+                    CollisionLayer collisionLayer = AddNewCollisionTileLayer(newLayerForm);
+                   
+                    foreach (var items in lstLayers.Items)  //Finding Index for Collision Layer and selecting the layer.
                     {
                         if (items.ToString().Contains("Collision"))
                         {
@@ -608,7 +554,6 @@ namespace TileEditor
                         }
                         helpvar++;
                     }
-
                     lstLayers.SelectedIndex = helpvar;
 
                     foreach (var collision in collisionDict)
@@ -630,34 +575,40 @@ namespace TileEditor
                                 break;
                             }
                         }
-
-                        Texture2D tex;
-                        using (FileStream fileStream = new FileStream(fullPath, FileMode.Open))
-                        {
-                            tex = Texture2D.FromStream(GraphicsDevice, fileStream);
-                        }
+                        Texture2D tex = LoadTextureFromFile(fullPath);                     
                         string[] texName = textureName.Split('.');
                         textureName = "CollisionTiles\\" + texName[0];
-                       
-
                         Image image = Image.FromFile(fullPath);
                         textureDict.Add(textureName, tex);
-                        previewDict.Add(textureName, image);
-
-                        //lstTexture.Items.Add(textureName);
-                        collisionLayer.AddTexture(tex);
-                        
+                        previewDict.Add(textureName, image);                       
+                        collisionLayer.AddTexture(tex);      
                     }
-
-                    //listTextureCollisionTiles.Clear();
-                    //foreach (var item in lstTexture.Items)
-                    //{
-                    //    listTextureCollisionTiles.Add(item.ToString());
-                    //}
-
                     AdjustScrollBars();
                 }
             }
+        }
+
+        private CollisionLayer AddNewCollisionTileLayer(frmNewLayer newLayerForm)
+        {
+            CollisionLayer collisionLayer = new CollisionLayer(
+               int.Parse(newLayerForm.txtLayerHeight.Text),
+               int.Parse(newLayerForm.txtLayerWidth.Text));
+
+            layerDict.Add(newLayerForm.txtLayerName.Text + "Collision", collisionLayer);
+            tileMap.CollisionLayer = collisionLayer;
+            lstLayers.Items.Add(newLayerForm.txtLayerName.Text + "Collision");
+            return collisionLayer;
+        }
+
+        private void AddNewWorldTileLayer(frmNewLayer newLayerForm)
+        {
+            TileLayer tileLayer = new TileLayer(
+               int.Parse(newLayerForm.txtLayerHeight.Text),
+               int.Parse(newLayerForm.txtLayerWidth.Text));
+
+            layerDict.Add(newLayerForm.txtLayerName.Text, tileLayer);
+            tileMap.Layers.Add(tileLayer);
+            lstLayers.Items.Add(newLayerForm.txtLayerName.Text);
         }
 
         private void btnRemoveLayer_Click(object sender, EventArgs e)
@@ -677,7 +628,7 @@ namespace TileEditor
                     AdjustScrollBars();
                 }
             }
-        }
+        }  //Check to solve collision layer remove function
 
         private void btnAddTexture_Click(object sender, EventArgs e)
         {
@@ -737,7 +688,15 @@ namespace TileEditor
 
         }
 
-       
-      
-    }
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AreUsingMenu = true;
+        }
+
+        private void fileToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
+        {
+            AreUsingMenu = false;
+        }
+    
+    }     
 }
