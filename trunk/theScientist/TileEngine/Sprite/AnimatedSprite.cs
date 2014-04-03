@@ -18,7 +18,6 @@ namespace TileEngine
         Texture2D texture;
 
         double oldTime = 0;
-        
 
         public Vector2 Position = Vector2.Zero;
         public Vector2 Origionoffset = Vector2.Zero;
@@ -127,7 +126,6 @@ namespace TileEngine
                 Position.Y = height - CurrentAnimation.CurrentRectangle.Height;
         }
 
-
         public void Update(GameTime gameTime)
         {
             FrameAnimation animation = CurrentAnimation;
@@ -145,6 +143,12 @@ namespace TileEngine
                 else
                     return;
             }
+            SettingSpriteBlink(gameTime);
+            animation.Update(gameTime);
+        }
+
+        private void SettingSpriteBlink(GameTime gameTime)
+        {
             if ((gameTime.TotalGameTime.TotalMilliseconds - oldTime) > 150)
             {
                 if (takingDamage == true)
@@ -167,8 +171,7 @@ namespace TileEngine
                 }
                 oldTime = gameTime.TotalGameTime.TotalMilliseconds;
             }
-            
-            animation.Update(gameTime);
+
         }
 
         public void Draw(SpriteBatch spritBatch)
@@ -176,14 +179,13 @@ namespace TileEngine
             FrameAnimation animation = CurrentAnimation;
 
             if (animation != null)
-                {
-                    spritBatch.Draw(
-                        texture,
-                        Position,
-                        animation.CurrentRectangle,
-                        new Color(255, 255, 255, (byte)MathHelper.Clamp(Alpha, 0, 255)));
-                }
-
+            {
+                spritBatch.Draw(
+                    texture,
+                    Position,
+                    animation.CurrentRectangle,
+                    new Color(255, 255, 255, (byte)MathHelper.Clamp(Alpha, 0, 255)));
+            }
         }
     }
 }
