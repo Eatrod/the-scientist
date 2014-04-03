@@ -74,5 +74,10 @@ namespace TileEngine.Sprite
         {           
         }
 
+        public BaseSprite(Texture2D texture)
+        {
+            this.texture = texture;
+        }
+
     }
 }

@@ -28,7 +28,7 @@ namespace TileGame
         Camera camera = new Camera();
 
         Sprite sprite;
-        AnimatedSprite animatedSprite;
+        PlayerCharacter player;
 
         List<AnimatedSprite> npcs = new List<AnimatedSprite>();
         List<BaseSprite> renderList = new List<BaseSprite>();
@@ -65,16 +65,16 @@ namespace TileGame
         //    sprite.Animations.Add("Down", down);
 
               FrameAnimation down = new FrameAnimation(1, 32, 32, 0, 0);
-              animatedSprite.Animations.Add("Down", down);
+              player.Animations.Add("Down", down);
 
               FrameAnimation right = new FrameAnimation(1, 32, 32, 32, 0);
-              animatedSprite.Animations.Add("Right", right);
+              player.Animations.Add("Right", right);
 
               FrameAnimation up = new FrameAnimation(1, 32, 32, 64, 0);
-              animatedSprite.Animations.Add("Up", up);
+              player.Animations.Add("Up", up);
 
               FrameAnimation left = new FrameAnimation(1, 32, 32, 96, 0);
-              animatedSprite.Animations.Add("Left", left);
+              player.Animations.Add("Left", left);
 
         //    FrameAnimation left = new FrameAnimation(2, 50, 80, 50, 80);
         //    sprite.Animations.Add("Left", left);
@@ -135,8 +135,8 @@ namespace TileGame
         //            rand.Next(600),rand.Next(400));
         //    }
 
-            animatedSprite.CurrentAnimationName = "Down";
-            renderList.Add(animatedSprite);
+            player.CurrentAnimationName = "Down";
+            renderList.Add(player);
             renderList.Add(sprite);
         //  renderList.AddRange(npcs);
         }
@@ -153,9 +153,10 @@ namespace TileGame
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testlayer.layer"));
             tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/testlayerCollision.layer");
             
-            animatedSprite = new AnimatedSprite(Content.Load<Texture2D>("Sprite/playerboxAnimation"));
-            animatedSprite.Origionoffset = new Vector2(15, 15);
-            animatedSprite.SetSpritePositionInGameWorld(new Vector2(10,5));
+            player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/playerboxAnimation"));
+            player.Origionoffset = new Vector2(15, 15);
+            player.SetSpritePositionInGameWorld(new Vector2(10,5));
+            player.Life = 100;
 
             sprite = new Sprite(Content.Load<Texture2D>("Sprite/playerbox"));
             sprite.Origionoffset = new Vector2(15, 15);
@@ -206,24 +207,24 @@ namespace TileGame
             if (motion != Vector2.Zero)
             {
                 motion.Normalize();                 //Comment out to use gamePad
-                motion = CheckCollisionForMotion(motion,animatedSprite);
+                motion = CheckCollisionForMotion(motion,player);
                 
                 //sprite.Position += motion * sprite.Speed;
                 //UpdateSpriteAnimation(motion);
-                animatedSprite.isAnimating = true;
-                CheckForCollisionAroundSprite(animatedSprite,motion);                
+                player.isAnimating = true;
+                CheckForCollisionAroundSprite(player,motion);                
             }
             else
             {
                 //UpdateSpriteIdleAnimation(sprite);
-                animatedSprite.isAnimating = false;
+                player.isAnimating = false;
                 motion = new Vector2(0, 0);               
             }          
-            motion = CheckCollisionAutomaticMotion(motion, animatedSprite);
+            motion = CheckCollisionAutomaticMotion(motion, player);
             UpdateSpriteAnimation(motion);
-            animatedSprite.Position += motion * animatedSprite.Speed;
-            animatedSprite.ClampToArea(tileMap.GetWidthInPixels(), tileMap.GetHeightInPixels());            
-            animatedSprite.Update(gameTime);
+            player.Position += motion * player.Speed;
+            player.ClampToArea(tileMap.GetWidthInPixels(), tileMap.GetHeightInPixels());            
+            player.Update(gameTime);
 
             //foreach (AnimatedSprite s in npcs)
             //{
@@ -240,11 +241,17 @@ namespace TileGame
             int screenWidth = GraphicsDevice.Viewport.Width;
             int screenHeight = GraphicsDevice.Viewport.Height;
 
-            camera.LockToTarget(animatedSprite, screenWidth, screenHeight);            
+            camera.LockToTarget(player, screenWidth, screenHeight);            
             camera.ClampToArea(
                 tileMap.GetWidthInPixels() - screenWidth, 
                 tileMap.GetHeightInPixels() - screenHeight);
 
+            if (player.Life == 0)
+            { 
+                player.SetSpritePositionInGameWorld(new Vector2(0,0));
+                player.Life = 100;
+                player.areTakingDamage = false;
+            }
             base.Update(gameTime);
         }
         #region Sprite Animation Code
@@ -274,22 +281,22 @@ namespace TileGame
 
             if (motionAngle >= -MathHelper.PiOver4 && motionAngle <= MathHelper.PiOver4)
             {
-                animatedSprite.CurrentAnimationName = "Right"; //Right
+                player.CurrentAnimationName = "Right"; //Right
                 //motion = new Vector2(1f, 0f);
             }
             else if (motionAngle >= MathHelper.PiOver4 && motionAngle <= 3f * MathHelper.PiOver4)
             {
-                animatedSprite.CurrentAnimationName = "Down"; //Down
+                player.CurrentAnimationName = "Down"; //Down
                 //motion = new Vector2(0f, 1f);
             }
             else if (motionAngle <= -MathHelper.PiOver4 && motionAngle >= -3f * MathHelper.PiOver4)
             {
-                animatedSprite.CurrentAnimationName = "Up"; // Up
+                player.CurrentAnimationName = "Up"; // Up
                 //motion = new Vector2(0f, -1f);
             }
             else
             {
-                animatedSprite.CurrentAnimationName = "Left"; //Left
+                player.CurrentAnimationName = "Left"; //Left
                 //motion = new Vector2(-1f, 0f);
             }
         }
@@ -558,6 +565,7 @@ namespace TileGame
                 if (cellRect.Intersects(spriteRect))
                 {
                     sprite.areTakingDamage = true;
+                    sprite.Damage = 0.1f;
                     return;
                 }
             }
@@ -569,6 +577,7 @@ namespace TileGame
                 if (cellRect.Intersects(spriteRect))
                 {
                     sprite.areTakingDamage = true;
+                    sprite.Damage = 0.1f;
                     return;
                 }
             }
@@ -580,6 +589,7 @@ namespace TileGame
                 if (cellRect.Intersects(spriteRect))
                 {
                     sprite.areTakingDamage = true;
+                    sprite.Damage = 0.1f;
                     return;
                 }
 
@@ -592,6 +602,7 @@ namespace TileGame
                 if (cellRect.Intersects(spriteRect))
                 {
                     sprite.areTakingDamage = true;
+                    sprite.Damage = 0.1f;
                     return;
                 }
 
@@ -605,6 +616,7 @@ namespace TileGame
                 if (cellRect.Intersects(spriteRect))
                 {
                     sprite.areTakingDamage = true;
+                    sprite.Damage = 0.1f;
                     return;
                 }
             }
@@ -617,6 +629,7 @@ namespace TileGame
                 if (cellRect.Intersects(spriteRect))
                 {
                     sprite.areTakingDamage = true;
+                    sprite.Damage = 0.1f;
                     return;
                 }
             }
@@ -629,6 +642,7 @@ namespace TileGame
                 if (cellRect.Intersects(spriteRect))
                 {
                     sprite.areTakingDamage = true;
+                    sprite.Damage = 0.1f;
                     return;
                 }
             }
@@ -641,6 +655,7 @@ namespace TileGame
                 if (cellRect.Intersects(spriteRect))
                 {
                     sprite.areTakingDamage = true;
+                    sprite.Damage = 0.1f;
                     return;
                 }
             }
@@ -652,6 +667,7 @@ namespace TileGame
             if (colIndex == 31)
             {
                 sprite.areTakingDamage = true;
+                sprite.Damage = 0.1f;
                 return;
             }
 

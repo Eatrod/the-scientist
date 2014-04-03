@@ -10,9 +10,9 @@ namespace TileEngine.Sprite
 {
     public class Sprite : BaseSprite
     {
-        public Sprite(Texture2D texture)
+        public Sprite(Texture2D texture) : base(texture)
         {
-            this.texture = texture;
+            //this.texture = texture;
         }
 
         public override Vector2 Center
