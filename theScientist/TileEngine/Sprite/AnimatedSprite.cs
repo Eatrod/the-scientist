@@ -5,29 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TileEngine
+namespace TileEngine.Sprite
 {
-    public class AnimatedSprite
+    public class AnimatedSprite : BaseSprite
     {
         public Dictionary<string, FrameAnimation> Animations =
             new Dictionary<string, FrameAnimation>();
 
         string currentAnimation = null;
         bool animating = true;
-        bool takingDamage = false;
-        Texture2D texture;
+        bool takingDamage = false;      //kanske flyttas till bas sprite 
+        
+        double oldTime = 0;  //taking damage see kommentar.
 
-        double oldTime = 0;
-
-        public Vector2 Position = Vector2.Zero;
-        public Vector2 Origionoffset = Vector2.Zero;
-
-        public Vector2 Origin
-        {
-            get { return Position + Origionoffset; }
-        }
-
-        public Vector2 Center
+        public override Vector2 Center
         {
             get 
             {
@@ -35,9 +26,9 @@ namespace TileEngine
                     CurrentAnimation.CurrentRectangle.Width /2 ,
                     CurrentAnimation.CurrentRectangle.Height /2 );
             }
-        }
+        } 
 
-        public Rectangle Bounds
+        public override Rectangle Bounds
         {
             get
             {
@@ -46,25 +37,7 @@ namespace TileEngine
                 rect.Y = (int)Position.Y;
                 return rect;
             }
-        }
-
-        float Alpha = 255.0f;
-        float radius = 10f;
-        float speed = 2f;
-
-        bool faded = false;
-
-        public float Speed
-        {
-            get { return speed; }
-            set { speed = (float)Math.Max(value, .1f); }
-        }
-
-        public float CollisionRadius
-        {
-            get { return radius; }
-            set { radius = (float)Math.Max(value,1f);}
-        }
+        } 
 
         public bool isAnimating
         {
@@ -76,7 +49,7 @@ namespace TileEngine
         {
             get { return takingDamage; }
             set { takingDamage = value; }
-        }
+        }  //kanske flyttas
 
         public FrameAnimation CurrentAnimation
         {
@@ -99,19 +72,7 @@ namespace TileEngine
             }
         }
 
-        public AnimatedSprite(Texture2D texture)
-        {
-            this.texture = texture;
-        }
-
-        public static bool AreColliding(AnimatedSprite a, AnimatedSprite b)
-        {
-            Vector2 d = b.Origin - a.Origin;
-
-            return (d.Length() < b.CollisionRadius + a.CollisionRadius);
-        }
-
-        public void ClampToArea(int width, int height)
+        public override void ClampToArea(int width, int height)
         {
             if (Position.X < 0)
                 Position.X = 0;
@@ -124,9 +85,9 @@ namespace TileEngine
 
             if (Position.Y > height - CurrentAnimation.CurrentRectangle.Height)
                 Position.Y = height - CurrentAnimation.CurrentRectangle.Height;
-        }
+        }  
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             FrameAnimation animation = CurrentAnimation;
 
@@ -172,20 +133,25 @@ namespace TileEngine
                 oldTime = gameTime.TotalGameTime.TotalMilliseconds;
             }
 
-        }
+        } // Kanske flyttas
 
-        public void Draw(SpriteBatch spritBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             FrameAnimation animation = CurrentAnimation;
 
             if (animation != null)
             {
-                spritBatch.Draw(
+                spriteBatch.Draw(
                     texture,
                     Position,
                     animation.CurrentRectangle,
                     new Color(255, 255, 255, (byte)MathHelper.Clamp(Alpha, 0, 255)));
             }
-        }
+        } 
+
+        public AnimatedSprite(Texture2D texture)
+        {
+            this.texture = texture;
+        }  //konstruktor 
     }
 }

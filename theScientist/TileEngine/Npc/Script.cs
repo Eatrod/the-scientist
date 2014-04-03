@@ -5,7 +5,9 @@ using System.Text;
 using System.Reflection;
 using System.Collections.ObjectModel;
 
-namespace TileEngine
+
+
+namespace TileEngine.Npc
 {
     public class Script
     {

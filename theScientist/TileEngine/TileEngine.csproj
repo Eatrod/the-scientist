@@ -63,6 +63,8 @@
     <Compile Include="Npc\Script.cs" />
     <Compile Include="Sprite\AnimatedSprite.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="Sprite\BaseSprite.cs" />
+    <Compile Include="Sprite\Sprite.cs" />
     <Compile Include="Tiles\CollisionLayer.cs" />
     <Compile Include="Tiles\Engine.cs" />
     <Compile Include="Sprite\FrameAnimation.cs" />
