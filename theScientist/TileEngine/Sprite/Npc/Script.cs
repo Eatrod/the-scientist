@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 
 
-namespace TileEngine.Npc
+namespace TileEngine.Sprite.Npc
 {
     public class Script
     {
