@@ -6,7 +6,7 @@ using System.Text;
 
 using TileEngine.Sprite;
 
-namespace TileEngine.Npc
+namespace TileEngine.Sprite.Npc
 {
     public class NPC : AnimatedSprite
     {

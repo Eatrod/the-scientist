@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 using TileEngine;
 using TileEngine.Tiles;
 using TileEngine.Sprite;
-using TileEngine.Npc;
+using TileEngine.Sprite.Npc;
 
 namespace TileGame
 {
