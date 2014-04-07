@@ -19,6 +19,7 @@ namespace TileEngine.Sprite.Npc_Fighting
         {
             
         }
+
     }
 }
 #endregion
