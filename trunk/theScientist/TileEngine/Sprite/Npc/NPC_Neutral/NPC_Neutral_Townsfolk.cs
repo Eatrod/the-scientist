@@ -1,5 +1,4 @@
-﻿
-#region Using fält
+﻿#region Using fält
 
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 #endregion
 
 #region Klass fält
-namespace TileEngine.Sprite.Npc.Neutral_NPC
+namespace TileEngine.Sprite.Npc.Npc_Neutral
 {
     class NPC_Neutral_Townsfolk : NPC_Neutral
     {

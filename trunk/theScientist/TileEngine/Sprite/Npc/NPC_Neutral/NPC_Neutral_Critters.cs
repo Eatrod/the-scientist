@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 #endregion
 
-namespace TileEngine.Sprite.Npc.Neutral_NPC
+namespace TileEngine.Sprite.Npc.Npc_Neutral
 {
     class NPC_Neutral_Critters : NPC_Neutral
     {
