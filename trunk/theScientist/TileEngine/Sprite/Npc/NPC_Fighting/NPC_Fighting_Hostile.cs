@@ -12,7 +12,6 @@ using Microsoft.Xna.Framework.Graphics;
 #region Klass fält
 namespace TileEngine.Sprite.Npc.Npc_Fighting
 {
-    //TODO: Konstruktor parameter
     public class NPC_Fighting_Hostile : NPC_Fighting
     {
         #region Medlemsvariabler
