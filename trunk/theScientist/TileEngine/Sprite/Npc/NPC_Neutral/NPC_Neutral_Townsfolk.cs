@@ -13,7 +13,7 @@ namespace TileEngine.Sprite.Npc.Npc_Neutral
 {
     class NPC_Neutral_Townsfolk : NPC_Neutral
     {
-        NPC_Neutral_Townsfolk(Texture2D texture, Script script) : base(texture, script)
+        protected NPC_Neutral_Townsfolk(Texture2D texture, Script script) : base(texture, script)
         {
         }
 
