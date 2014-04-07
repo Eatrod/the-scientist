@@ -12,7 +12,7 @@ using TileEngine.Sprite.Npc;
 #region Klass fält
 namespace TileEngine.Sprite.Npc.Npc_Fighting.Npc_Fighting_Hostiles
 {
-    class NPC_Fighting_Hostile_ZombieWalker : NPC_Fighting_Hostile
+    public class NPC_Fighting_Hostile_ZombieWalker : NPC_Fighting_Hostile
     {
         NPC_Fighting_Hostile_ZombieWalker(Texture2D texture, Script script) : base(texture, script)
         {

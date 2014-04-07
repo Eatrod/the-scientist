@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 #region Klass fält
 namespace TileEngine.Sprite.Npc.Npc_Neutral
 {
-    class NPC_Neutral_Townsfolk : NPC_Neutral
+    public class NPC_Neutral_Townsfolk : NPC_Neutral
     {
         protected NPC_Neutral_Townsfolk(Texture2D texture, Script script) : base(texture, script)
         {

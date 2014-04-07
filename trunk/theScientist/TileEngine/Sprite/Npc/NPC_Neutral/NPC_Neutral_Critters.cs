@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TileEngine.Sprite.Npc.Npc_Neutral
 {
-    class NPC_Neutral_Critters : NPC_Neutral
+    public class NPC_Neutral_Critters : NPC_Neutral
     {
         NPC_Neutral_Critters(Texture2D texture, Script script) : base(texture, script)
         {
