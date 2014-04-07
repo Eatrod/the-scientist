@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 #endregion
 
 #region Klass fält
-namespace TileEngine.Sprite.Npc_Fighting
+namespace TileEngine.Sprite.Npc.Npc_Fighting
 {
     //TODO: Konstruktor parameter
     class NPC_Fighting_Hostile : NPC_Fighting
