@@ -38,7 +38,8 @@ namespace TileGame.GameScreens
         protected Camera camera = new Camera();
 
         //Sprite sprite;
-        protected PlayerCharacter player;
+        static protected PlayerCharacter player;
+       
 
         //List<AnimatedSprite> npcs = new List<AnimatedSprite>();
         protected List<BaseSprite> renderList = new List<BaseSprite>();
@@ -99,11 +100,13 @@ namespace TileGame.GameScreens
             
             //tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testlayer.layer"));
             //tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/testlayerCollision.layer");
-
-            player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/playerboxAnimation"));
-            player.Origionoffset = new Vector2(15, 15);
-            player.SetSpritePositionInGameWorld(new Vector2(4, 3));
-            player.Life = 100;
+            if(player == null)
+            {
+                player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/playerboxAnimation"));
+                player.Origionoffset = new Vector2(15, 15);
+                player.SetSpritePositionInGameWorld(new Vector2(4, 3));
+                player.Life = 100;
+            }
 
             //sprite = new Sprite(Content.Load<Texture2D>("Sprite/playerbox"));
             //sprite.Origionoffset = new Vector2(15, 15);

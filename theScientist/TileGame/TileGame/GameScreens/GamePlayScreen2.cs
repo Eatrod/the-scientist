@@ -167,7 +167,7 @@ namespace TileGame.GameScreens
                 GameRef.GamePlayScreen.SetPlayerPosition(4, 3);
                 GameRef.GamePlayScreen.Gate1Locked = true;
                 StateManager.ChangeState(GameRef.GamePlayScreen);
-                
+
             }
             if (cell.X != 28 || cell.Y != 28)
                 gate2Locked = false;
@@ -177,7 +177,7 @@ namespace TileGame.GameScreens
                 GameRef.GamePlayScreen.SetPlayerPosition(17, 14);
                 GameRef.GamePlayScreen.Gate2Locked = true;
                 StateManager.ChangeState(GameRef.GamePlayScreen);
-                
+
             }
             if (cell.X != 1 || cell.Y != 2)
                 gate1Locked = false;
