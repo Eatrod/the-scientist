@@ -14,7 +14,7 @@ namespace TileEngine.Sprite.Npc
 
         protected NPC_Story(Texture2D texture, Script script) : base(texture,script)
         {
-            Immortal = true;
+            this.Immortal = true;
         }
 
         public void StartConversation(string conversationName)

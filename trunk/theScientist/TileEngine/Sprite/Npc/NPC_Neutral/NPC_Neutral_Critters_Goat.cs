@@ -12,5 +12,14 @@ namespace TileEngine.Sprite.Npc.Npc_Neutral
         {
             
         }
+
+        /// <summary>
+        /// Får geten att göra ett get läte
+        /// </summary>
+        /// <param name="Sound">Vilket läte</param>
+        public void RandomRelevantGoatSound(String Sound)
+        {
+
+        }
     }
 }

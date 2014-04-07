@@ -21,6 +21,7 @@ namespace TileEngine.Sprite.Npc
         protected int Hitpoints { get; set; }
         protected int AttackDamage { get; set; }
         protected List<NPC_Fighting> NpcEnemies { get; set; }
+        protected int BattleStance { get; set; }
         //private List<Tiles> PatrolRoute { get; set; } 
 
         #endregion
