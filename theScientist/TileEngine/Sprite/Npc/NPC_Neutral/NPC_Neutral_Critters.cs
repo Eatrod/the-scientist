@@ -15,5 +15,6 @@ namespace TileEngine.Sprite.Npc.Npc_Neutral
         {
             
         }
+
     }
 }
