@@ -33,7 +33,7 @@ namespace TileGame
         public StartMenuScreen StartMenuScreen;
         public GamePlayScreen GamePlayScreen;
         public BaseGamePlayScreen BaseGamePlayScreen;
-        //public GamePlayScreen2 GamePlayScreen2;
+        public GamePlayScreen2 GamePlayScreen2;
         
 
         #endregion
@@ -67,8 +67,9 @@ namespace TileGame
 
             TitleScreen = new TitleScreen(this, stateManager);
             StartMenuScreen = new StartMenuScreen(this, stateManager);
-            GamePlayScreen = new GamePlayScreen(this, stateManager);
-            //GamePlayScreen2 = new GamePlayScreen2(this, stateManager);
+            GamePlayScreen = new GamePlayScreen(this, stateManager, "Screen1");
+            GamePlayScreen2 = new GamePlayScreen2(this, stateManager, "Screen2");
+            BaseGamePlayScreen = new BaseGamePlayScreen(this, stateManager);
             stateManager.ChangeState(TitleScreen);
         }
 

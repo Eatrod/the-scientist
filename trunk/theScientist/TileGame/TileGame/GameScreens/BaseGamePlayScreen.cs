@@ -26,6 +26,7 @@ namespace TileGame.GameScreens
 
         //bool gate1Locked = true;
         //bool gate2Locked = true;
+        BaseGamePlayScreen screen;
 
         #endregion
         #region Property Region
@@ -33,11 +34,11 @@ namespace TileGame.GameScreens
         //GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        //TileMap tileMap = new TileMap();
+        protected TileMap tileMap = new TileMap();
         protected Camera camera = new Camera();
 
         //Sprite sprite;
-        PlayerCharacter player;
+        protected PlayerCharacter player;
 
         //List<AnimatedSprite> npcs = new List<AnimatedSprite>();
         protected List<BaseSprite> renderList = new List<BaseSprite>();
@@ -138,11 +139,14 @@ namespace TileGame.GameScreens
                 player.isAnimating = false;
                 motion = new Vector2(0, 0);
             }
+
+            screen = (BaseGamePlayScreen)StateManager.CurrentState;
+
             
             motion = CheckCollisionAutomaticMotion(motion, player);
             UpdateSpriteAnimation(motion);
             player.Position += motion * player.Speed;
-            player.ClampToArea(    tileMap.GetWidthInPixels(), tileMap.GetHeightInPixels());  //Funktion för att hämta nuvarande tilemap state.
+            player.ClampToArea(screen.tileMap.GetWidthInPixels(), screen.tileMap.GetHeightInPixels());  //Funktion för att hämta nuvarande tilemap state.
             player.Update(gameTime);
 
             int screenWidth = GraphicsDevice.Viewport.Width;
@@ -150,8 +154,8 @@ namespace TileGame.GameScreens
 
             camera.LockToTarget(player, screenWidth, screenHeight);
             camera.ClampToArea(
-                tileMap.GetWidthInPixels() - screenWidth,   //Funktion för att hämta nuvarande tilemap state.
-                tileMap.GetHeightInPixels() - screenHeight);
+                screen.tileMap.GetWidthInPixels() - screenWidth,   //Funktion för att hämta nuvarande tilemap state.
+                screen.tileMap.GetHeightInPixels() - screenHeight);
 
             if (player.Life == 0)
             {
@@ -183,13 +187,12 @@ namespace TileGame.GameScreens
 
 
 
-            base.Update(gameTime);
 
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            //GraphicsDevice.Clear(Color.CornflowerBlue);
 
             //tileMap.Draw(spriteBatch, camera); 
 
@@ -274,26 +277,26 @@ namespace TileGame.GameScreens
             if (spriteCell.Y > 0)
                 up = new Point(spriteCell.X, spriteCell.Y - 1);
 
-            if (spriteCell.Y < tileMap.CollisionLayer.Height - 1) //Hämta från nuvarande collisionslager
+            if (spriteCell.Y < screen.tileMap.CollisionLayer.Height - 1) //Hämta från nuvarande collisionslager
                 down = new Point(spriteCell.X, spriteCell.Y + 1);
 
             if (spriteCell.X > 0)
                 left = new Point(spriteCell.X - 1, spriteCell.Y);
 
-            if (spriteCell.X < tileMap.CollisionLayer.Width - 1)
+            if (spriteCell.X < screen.tileMap.CollisionLayer.Width - 1)
                 right = new Point(spriteCell.X + 1, spriteCell.Y);
 
             if (spriteCell.X > 0 && spriteCell.Y > 0)
                 upLeft = new Point(spriteCell.X - 1, spriteCell.Y - 1);
 
-            if (spriteCell.X < tileMap.CollisionLayer.Width - 1 && spriteCell.Y > 0)
+            if (spriteCell.X < screen.tileMap.CollisionLayer.Width - 1 && spriteCell.Y > 0)
                 upRight = new Point(spriteCell.X + 1, spriteCell.Y - 1);
 
-            if (spriteCell.X > 0 && spriteCell.Y < tileMap.CollisionLayer.Height - 1)
+            if (spriteCell.X > 0 && spriteCell.Y < screen.tileMap.CollisionLayer.Height - 1)
                 downLeft = new Point(spriteCell.X - 1, spriteCell.Y + 1);
 
-            if (spriteCell.X < tileMap.CollisionLayer.Width - 1 &&
-                spriteCell.Y < tileMap.CollisionLayer.Height - 1)
+            if (spriteCell.X < screen.tileMap.CollisionLayer.Width - 1 &&
+                spriteCell.Y < screen.tileMap.CollisionLayer.Height - 1)
                 downRight = new Point(spriteCell.X + 1, spriteCell.Y + 1);
 
             CheckNoneWalkebleArea(sprite, ref motion, ref spriteCell, upLeft, up, upRight, left, right, downLeft, down, downRight);
@@ -304,7 +307,7 @@ namespace TileGame.GameScreens
         private void CheckNoneWalkebleArea(AnimatedSprite sprite, ref Vector2 motion, ref Point spriteCell, Point? upLeft, Point? up,
             Point? upRight, Point? left, Point? right, Point? downLeft, Point? down, Point? downRight)
         {
-            if (up != null && tileMap.CollisionLayer.GetCellIndex(up.Value) == 1)
+            if (up != null && screen.tileMap.CollisionLayer.GetCellIndex(up.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(up.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -314,7 +317,7 @@ namespace TileGame.GameScreens
                     sprite.Position.Y = up.Value.Y * Engine.TileHeight + sprite.Bounds.Height;
                 }
             }
-            if (down != null && tileMap.CollisionLayer.GetCellIndex(down.Value) == 1)
+            if (down != null && screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(down.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -324,7 +327,7 @@ namespace TileGame.GameScreens
                     sprite.Position.Y = down.Value.Y * Engine.TileHeight - sprite.Bounds.Height;
                 }
             }
-            if (left != null && tileMap.CollisionLayer.GetCellIndex(left.Value) == 1)
+            if (left != null && screen.tileMap.CollisionLayer.GetCellIndex(left.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(left.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -335,7 +338,7 @@ namespace TileGame.GameScreens
                 }
 
             }
-            if (right != null && tileMap.CollisionLayer.GetCellIndex(right.Value) == 1)
+            if (right != null && screen.tileMap.CollisionLayer.GetCellIndex(right.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(right.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -347,7 +350,7 @@ namespace TileGame.GameScreens
 
             }
 
-            if (upLeft != null && tileMap.CollisionLayer.GetCellIndex(upLeft.Value) == 1)
+            if (upLeft != null && screen.tileMap.CollisionLayer.GetCellIndex(upLeft.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(upLeft.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -361,7 +364,7 @@ namespace TileGame.GameScreens
                 }
             }
 
-            if (upRight != null && tileMap.CollisionLayer.GetCellIndex(upRight.Value) == 1)
+            if (upRight != null && screen.tileMap.CollisionLayer.GetCellIndex(upRight.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(upRight.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -375,7 +378,7 @@ namespace TileGame.GameScreens
                 }
             }
 
-            if (downLeft != null && tileMap.CollisionLayer.GetCellIndex(downLeft.Value) == 1)
+            if (downLeft != null && screen.tileMap.CollisionLayer.GetCellIndex(downLeft.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(downLeft.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -389,7 +392,7 @@ namespace TileGame.GameScreens
                 }
             }
 
-            if (downRight != null && tileMap.CollisionLayer.GetCellIndex(downRight.Value) == 1)
+            if (downRight != null && screen.tileMap.CollisionLayer.GetCellIndex(downRight.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(downRight.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -407,7 +410,7 @@ namespace TileGame.GameScreens
         private void CheckWalkebleAreaFromOneDirection(AnimatedSprite sprite, ref Vector2 motion, ref Point spriteCell, Point? upLeft, Point? up,
             Point? upRight, Point? left, Point? right, Point? downLeft, Point? down, Point? downRight)
         {
-            if (up != null && (tileMap.CollisionLayer.GetCellIndex(up.Value) == 14 || tileMap.CollisionLayer.GetCellIndex(up.Value) == 16 || tileMap.CollisionLayer.GetCellIndex(up.Value) == 18))
+            if (up != null && (screen.tileMap.CollisionLayer.GetCellIndex(up.Value) == 14 || screen.tileMap.CollisionLayer.GetCellIndex(up.Value) == 16 || screen.tileMap.CollisionLayer.GetCellIndex(up.Value) == 18))
             {
                 Rectangle cellRect = Engine.CreateRectForCell(up.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -418,7 +421,7 @@ namespace TileGame.GameScreens
                         sprite.Position.Y = up.Value.Y * Engine.TileHeight + sprite.Bounds.Height;
                 }
             }
-            if (down != null && (tileMap.CollisionLayer.GetCellIndex(down.Value) == 13 || tileMap.CollisionLayer.GetCellIndex(down.Value) == 17 || tileMap.CollisionLayer.GetCellIndex(down.Value) == 15))
+            if (down != null && (screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 13 || screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 17 || screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 15))
             {
                 Rectangle cellRect = Engine.CreateRectForCell(down.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -429,7 +432,7 @@ namespace TileGame.GameScreens
                         sprite.Position.Y = down.Value.Y * Engine.TileHeight - sprite.Bounds.Height;
                 }
             }
-            if (left != null && (tileMap.CollisionLayer.GetCellIndex(left.Value) == 11 || tileMap.CollisionLayer.GetCellIndex(left.Value) == 15 || tileMap.CollisionLayer.GetCellIndex(left.Value) == 16))
+            if (left != null && (screen.tileMap.CollisionLayer.GetCellIndex(left.Value) == 11 || screen.tileMap.CollisionLayer.GetCellIndex(left.Value) == 15 || screen.tileMap.CollisionLayer.GetCellIndex(left.Value) == 16))
             {
                 Rectangle cellRect = Engine.CreateRectForCell(left.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -441,7 +444,7 @@ namespace TileGame.GameScreens
                 }
 
             }
-            if (right != null && (tileMap.CollisionLayer.GetCellIndex(right.Value) == 12 || tileMap.CollisionLayer.GetCellIndex(right.Value) == 17 || tileMap.CollisionLayer.GetCellIndex(right.Value) == 18))
+            if (right != null && (screen.tileMap.CollisionLayer.GetCellIndex(right.Value) == 12 || screen.tileMap.CollisionLayer.GetCellIndex(right.Value) == 17 || screen.tileMap.CollisionLayer.GetCellIndex(right.Value) == 18))
             {
                 Rectangle cellRect = Engine.CreateRectForCell(right.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -454,7 +457,7 @@ namespace TileGame.GameScreens
 
             }
 
-            if (upLeft != null && tileMap.CollisionLayer.GetCellIndex(upLeft.Value) == 16)
+            if (upLeft != null && screen.tileMap.CollisionLayer.GetCellIndex(upLeft.Value) == 16)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(upLeft.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -468,7 +471,7 @@ namespace TileGame.GameScreens
                 }
             }
 
-            if (upRight != null && tileMap.CollisionLayer.GetCellIndex(upRight.Value) == 18)
+            if (upRight != null && screen.tileMap.CollisionLayer.GetCellIndex(upRight.Value) == 18)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(upRight.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -482,7 +485,7 @@ namespace TileGame.GameScreens
                 }
             }
 
-            if (downLeft != null && tileMap.CollisionLayer.GetCellIndex(downLeft.Value) == 15)
+            if (downLeft != null && screen.tileMap.CollisionLayer.GetCellIndex(downLeft.Value) == 15)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(downLeft.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -496,7 +499,7 @@ namespace TileGame.GameScreens
                 }
             }
 
-            if (downRight != null && tileMap.CollisionLayer.GetCellIndex(downRight.Value) == 17)
+            if (downRight != null && screen.tileMap.CollisionLayer.GetCellIndex(downRight.Value) == 17)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(downRight.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -514,7 +517,7 @@ namespace TileGame.GameScreens
         private void CheckWalkableDamageAreaCollision(AnimatedSprite sprite, ref Vector2 motion, ref Point spriteCell, Point? upLeft, Point? up,
             Point? upRight, Point? left, Point? right, Point? downLeft, Point? down, Point? downRight)
         {
-            if (up != null && tileMap.CollisionLayer.GetCellIndex(up.Value) == 31)
+            if (up != null && screen.tileMap.CollisionLayer.GetCellIndex(up.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(up.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -526,7 +529,7 @@ namespace TileGame.GameScreens
                     return;
                 }
             }
-            if (down != null && tileMap.CollisionLayer.GetCellIndex(down.Value) == 31)
+            if (down != null && screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(down.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -538,7 +541,7 @@ namespace TileGame.GameScreens
                     return;
                 }
             }
-            if (left != null && tileMap.CollisionLayer.GetCellIndex(left.Value) == 31)
+            if (left != null && screen.tileMap.CollisionLayer.GetCellIndex(left.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(left.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -551,7 +554,7 @@ namespace TileGame.GameScreens
                 }
 
             }
-            if (right != null && tileMap.CollisionLayer.GetCellIndex(right.Value) == 31)
+            if (right != null && screen.tileMap.CollisionLayer.GetCellIndex(right.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(right.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -565,7 +568,7 @@ namespace TileGame.GameScreens
 
             }
 
-            if (upLeft != null && tileMap.CollisionLayer.GetCellIndex(upLeft.Value) == 31)
+            if (upLeft != null && screen.tileMap.CollisionLayer.GetCellIndex(upLeft.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(upLeft.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -578,7 +581,7 @@ namespace TileGame.GameScreens
                 }
             }
 
-            if (upRight != null && tileMap.CollisionLayer.GetCellIndex(upRight.Value) == 31)
+            if (upRight != null && screen.tileMap.CollisionLayer.GetCellIndex(upRight.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(upRight.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -591,7 +594,7 @@ namespace TileGame.GameScreens
                 }
             }
 
-            if (downLeft != null && tileMap.CollisionLayer.GetCellIndex(downLeft.Value) == 31)
+            if (downLeft != null && screen.tileMap.CollisionLayer.GetCellIndex(downLeft.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(downLeft.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -604,7 +607,7 @@ namespace TileGame.GameScreens
                 }
             }
 
-            if (downRight != null && tileMap.CollisionLayer.GetCellIndex(downRight.Value) == 31)
+            if (downRight != null && screen.tileMap.CollisionLayer.GetCellIndex(downRight.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(downRight.Value);
                 Rectangle spriteRect = sprite.Bounds;
@@ -619,7 +622,7 @@ namespace TileGame.GameScreens
 
             Point cell = Engine.ConvertPostionToCell(sprite.Origin);
 
-            int colIndex = tileMap.CollisionLayer.GetCellIndex(cell);
+            int colIndex = screen.tileMap.CollisionLayer.GetCellIndex(cell);
 
             if (colIndex == 31)
             {
@@ -639,8 +642,8 @@ namespace TileGame.GameScreens
         private Vector2 CheckCollisionForMotion(Vector2 motion, AnimatedSprite sprite)
         {
             Point cell = Engine.ConvertPostionToCell(sprite.Origin);
-
-            int colIndex = tileMap.CollisionLayer.GetCellIndex(cell);
+            screen = (BaseGamePlayScreen)StateManager.CurrentState;
+            int colIndex = screen.tileMap.CollisionLayer.GetCellIndex(cell);
 
             if (colIndex == 2)
                 return motion * .2f;
@@ -652,7 +655,7 @@ namespace TileGame.GameScreens
         {
             Point cell = Engine.ConvertPostionToCell(sprite.Origin);
 
-            int colIndex = tileMap.CollisionLayer.GetCellIndex(cell);
+            int colIndex = screen.tileMap.CollisionLayer.GetCellIndex(cell);
 
             if (colIndex == 21)
             {

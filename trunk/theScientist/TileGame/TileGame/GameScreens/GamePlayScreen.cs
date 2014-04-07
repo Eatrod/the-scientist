@@ -24,6 +24,7 @@ namespace TileGame.GameScreens
         
         #region Field Region
 
+        string name;
         bool gate1Locked = true;
         bool gate2Locked = true;
 
@@ -33,7 +34,7 @@ namespace TileGame.GameScreens
         //GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public TileMap tileMap = new TileMap();
+        //public TileMap tileMap = new TileMap();
         //Camera camera = new Camera();
 
         Sprite sprite;
@@ -43,6 +44,8 @@ namespace TileGame.GameScreens
         //List<BaseSprite> renderList = new List<BaseSprite>();
 
         //Comparison<BaseSprite> renderSort = new Comparison<BaseSprite>(renderSpriteCompare);
+
+        public string Name { get { return name; } }
 
         public bool Gate1Locked { get { return gate1Locked; } set { this.gate1Locked = value; } }
         public bool Gate2Locked { get { return gate2Locked; } set { this.gate2Locked = value; } }
@@ -55,13 +58,13 @@ namespace TileGame.GameScreens
         //}
 
         #region Constructor Region
-        public GamePlayScreen(Game game, GameStateManager manager)
+        public GamePlayScreen(Game game, GameStateManager manager, string name)
             : base(game, manager)
         {
             
             //graphics = new GraphicsDeviceManager(this);
             //Microsoft.Xna.Framework.Content.RootDirectory = "Content";
-            
+            this.name = name;
         }
 
         #endregion 
@@ -159,24 +162,26 @@ namespace TileGame.GameScreens
             //    player.areTakingDamage = false;
             //}
 
-            //Point cell = Engine.ConvertPostionToCell(player.Origin);
-            //if ((cell.X == 17 && cell.Y == 14) && !gate2Locked)
-            //{
-            //    StateManager.ChangeState(GameRef.GamePlayScreen2);
-            //    GameRef.GamePlayScreen2.SetPlayerPosition(1, 2);
-            //    GameRef.GamePlayScreen2.Gate1Locked = true;
-            //}
-            //if (cell.X != 17 || cell.Y != 14)
-            //    gate2Locked = false;
+            Point cell = Engine.ConvertPostionToCell(player.Origin);
+            if ((cell.X == 17 && cell.Y == 14) && !gate2Locked)
+            {
+                GameRef.BaseGamePlayScreen.SetPlayerPosition(1, 2);
+                GameRef.GamePlayScreen2.Gate1Locked = true;
+                StateManager.ChangeState(GameRef.GamePlayScreen2);
+                
+            }
+            if (cell.X != 17 || cell.Y != 14)
+                gate2Locked = false;
 
-            //if ((cell.X == 4 && cell.Y == 3) && !gate1Locked)
-            //{
-            //    StateManager.ChangeState(GameRef.GamePlayScreen2);
-            //    GameRef.GamePlayScreen2.SetPlayerPosition(28, 28);
-            //    GameRef.GamePlayScreen2.Gate2Locked = true;
-            //}
-            //if (cell.X != 4 || cell.Y != 3)
-            //    gate1Locked = false;
+            if ((cell.X == 4 && cell.Y == 3) && !gate1Locked)
+            {
+                GameRef.BaseGamePlayScreen.SetPlayerPosition(28, 28);
+                GameRef.GamePlayScreen2.Gate2Locked = true;
+                StateManager.ChangeState(GameRef.GamePlayScreen2);
+                
+            }
+            if (cell.X != 4 || cell.Y != 3)
+                gate1Locked = false;
 
 
 
@@ -683,9 +688,9 @@ namespace TileGame.GameScreens
 
         //#endregion //EndforCollisionWithTerrainRegion
 
-        public void SetPlayerPosition(int x, int y)
-        {
-            //player.SetSpritePositionInGameWorld(new Vector2(x, y));
-        }
+        //public void SetPlayerPosition(int x, int y)
+        //{
+        //    //player.SetSpritePositionInGameWorld(new Vector2(x, y));
+        //}
     }
 }
