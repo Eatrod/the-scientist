@@ -14,7 +14,7 @@ namespace TileEngine.Sprite.Npc.Npc_Fighting.Npc_Fighting_Hostiles
 {
     public class NPC_Fighting_Hostile_ZombieWalker : NPC_Fighting_Hostile
     {
-        NPC_Fighting_Hostile_ZombieWalker(Texture2D texture, Script script) : base(texture, script)
+        public NPC_Fighting_Hostile_ZombieWalker(Texture2D texture, Script script) : base(texture, script)
         {
             
         }

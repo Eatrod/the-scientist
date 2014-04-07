@@ -16,7 +16,7 @@ namespace TileEngine.Sprite.Npc.Npc_Fighting
     {
         protected int AggresionLevel { get; set; }
             
-        NPC_Fighting_Allied(Texture2D texture, Script script) : base(texture,script)
+        protected NPC_Fighting_Allied(Texture2D texture, Script script) : base(texture,script)
         {
             
         }
