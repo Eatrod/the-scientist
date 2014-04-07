@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameScreens\BaseGameState.cs" />
+    <Compile Include="GameScreens\BaseGamePlayScreen.cs" />
     <Compile Include="GameScreens\GamePlayScreen2.cs" />
     <Compile Include="GameScreens\GamePlayScreen.cs" />
     <Compile Include="GameScreens\StartMenuScreen.cs" />

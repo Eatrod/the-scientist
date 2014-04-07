@@ -23,21 +23,23 @@ namespace TileGame
 
         GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
-        
+
         #endregion
 
         #region Game State Region
 
-        GameStateManager stateManager;
+        public GameStateManager stateManager;
         public TitleScreen TitleScreen;
         public StartMenuScreen StartMenuScreen;
         public GamePlayScreen GamePlayScreen;
-        public GamePlayScreen2 GamePlayScreen2;
+        public BaseGamePlayScreen BaseGamePlayScreen;
+        //public GamePlayScreen2 GamePlayScreen2;
+        
 
         #endregion
-
+        
         #region Screen Field Region
-
+       
         const int screenWidth = 1024;
         const int screenHeight = 768;
         public readonly Rectangle ScreenRectangle;
@@ -66,7 +68,7 @@ namespace TileGame
             TitleScreen = new TitleScreen(this, stateManager);
             StartMenuScreen = new StartMenuScreen(this, stateManager);
             GamePlayScreen = new GamePlayScreen(this, stateManager);
-            GamePlayScreen2 = new GamePlayScreen2(this, stateManager);
+            //GamePlayScreen2 = new GamePlayScreen2(this, stateManager);
             stateManager.ChangeState(TitleScreen);
         }
 
