@@ -10,6 +10,10 @@ namespace TileEngine.Sprite.Npc
 {
     public class NPC : CharacterSprite
     {
+        private String NPCName { get; set; }
+        private String Location { get; set; }
+        private int PositionX { get; set; }
+        private int PositionY { get; set; }
         Script script;
 
         public NPC(Texture2D texture, Script script)
@@ -18,6 +22,7 @@ namespace TileEngine.Sprite.Npc
             this.script = script;
         }
 
+        /*Flyttad till NPC_Story.cs
         public void StartConversation(string conversationName)
         { 
         }
@@ -25,5 +30,6 @@ namespace TileEngine.Sprite.Npc
         public void EndConversation()
         { 
         }
+         */
     }
 }
