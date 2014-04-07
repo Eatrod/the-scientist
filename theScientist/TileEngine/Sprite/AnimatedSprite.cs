@@ -18,6 +18,7 @@ namespace TileEngine.Sprite
 
         protected float damage = 0;
         protected float life = 0;
+        protected float stamina = 0;
 
         double oldTime = 0;  //taking damage see kommentar.
 
@@ -63,6 +64,12 @@ namespace TileEngine.Sprite
         {
             get { return life; }
             set { life = value; }
+        }
+
+        public float Stamina
+        {
+            get { return stamina; }
+            set { stamina = value; }
         }
 
         public FrameAnimation CurrentAnimation

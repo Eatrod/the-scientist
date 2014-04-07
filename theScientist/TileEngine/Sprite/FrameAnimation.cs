@@ -29,6 +29,7 @@ namespace TileEngine
         public Rectangle CurrentRectangle
         {
             get { return frames[currentFrame]; }
+            set { frames[currentFrame] = value; }
         }
 
         public int CurrentFrame
