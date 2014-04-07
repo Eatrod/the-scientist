@@ -18,8 +18,9 @@ namespace TileEngine.Sprite.Npc
 
         //TODO: Komma på hur synfältet ska defineras (Cirkelsektor är en place holder idé)
         //private Math.circlesector VisionRange{ get; set;}
-        private int Hitpoints { get; set; }
-        private List<NPC_Fighting> NpcEnemies { get; set; }
+        protected int Hitpoints { get; set; }
+        protected int AttackDamage { get; set; }
+        protected List<NPC_Fighting> NpcEnemies { get; set; }
         //private List<Tiles> PatrolRoute { get; set; } 
 
         #endregion

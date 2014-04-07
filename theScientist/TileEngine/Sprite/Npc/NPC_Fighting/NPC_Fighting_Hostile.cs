@@ -17,8 +17,8 @@ namespace TileEngine.Sprite.Npc_Fighting
     {
         #region Medlemsvariabler
 
-        private int AlertedStatus { get; set; }
-        private bool ChasingPlayer { get; set; }
+        protected int AlertedStatus { get; set; }
+        protected bool ChasingPlayer { get; set; }
 
         #endregion
 

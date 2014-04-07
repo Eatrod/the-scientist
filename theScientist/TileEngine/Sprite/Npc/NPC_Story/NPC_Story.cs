@@ -10,7 +10,7 @@ namespace TileEngine.Sprite.Npc
 {
     class NPC_Story : NPC
     {
-        private bool Immortal { get; set; }
+        protected bool Immortal { get; set; }
 
         NPC_Story(Texture2D texture, Script script) : base(texture,script)
         {
