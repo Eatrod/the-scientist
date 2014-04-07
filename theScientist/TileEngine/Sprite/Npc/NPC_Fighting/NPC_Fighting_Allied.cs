@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 #region Klass fält
 namespace TileEngine.Sprite.Npc.Npc_Fighting
 {
-    class NPC_Fighting_Allied : NPC_Fighting
+    public class NPC_Fighting_Allied : NPC_Fighting
     {
         protected int AggresionLevel { get; set; }
             

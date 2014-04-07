@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TileEngine.Sprite.Npc
 {
-    class NPC_Story : NPC
+    public class NPC_Story : NPC
     {
         protected bool Immortal { get; set; }
 

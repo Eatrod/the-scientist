@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 #region Klass fält
 namespace TileEngine.Sprite.Npc
 {
-    class NPC_Fighting : NPC
+    public class NPC_Fighting : NPC
     {
         #region Medlemsvariabler
 

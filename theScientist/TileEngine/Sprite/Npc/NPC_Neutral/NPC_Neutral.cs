@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 #region Klass fält
 namespace TileEngine.Sprite.Npc
 {
-    class NPC_Neutral : NPC
+    public class NPC_Neutral : NPC
     {
         protected NPC_Neutral(Texture2D texture, Script script) : base(texture,script)
         {
