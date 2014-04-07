@@ -175,6 +175,7 @@ namespace TileGame.GameScreens
 
             if ((cell.X == 4 && cell.Y == 3) && !gate1Locked)
             {
+                //player.SetSpritePositionInGameWorld(new Vector2(28, 28));
                 GameRef.BaseGamePlayScreen.SetPlayerPosition(28, 28);
                 GameRef.GamePlayScreen2.Gate2Locked = true;
                 StateManager.ChangeState(GameRef.GamePlayScreen2);

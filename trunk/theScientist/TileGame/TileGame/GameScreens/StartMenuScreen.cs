@@ -109,7 +109,10 @@ namespace TileGame.GameScreens
         {
             if (sender == startGame)
             {
+
+                
                 StateManager.PushState(GameRef.GamePlayScreen);
+
             }
             if (sender == loadGame)
             {
