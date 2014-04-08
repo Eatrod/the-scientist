@@ -8,7 +8,7 @@ namespace TileEngine.Sprite.Npc.Npc_Story
 {
     class NPC_Story_DonPotato : NPC_Story
     {
-        protected NPC_Story_DonPotato(Texture2D texture, Script script) : base(texture, script)
+        protected NPC_Story_DonPotato(Texture2D texture, Dialog dialog, Script script) : base(texture, dialog, script)
         {
         }
     }
