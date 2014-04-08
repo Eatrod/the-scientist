@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>fishleft.png</Source>
+      <Name>fishleft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\bin\x86\Debug\Content\fishleft.xnb</Output>
+      <Time>2014-04-07T14:42:20.4382366+02:00</Time>
+    </Item>
+    <Item>
+      <Source>fishright.png</Source>
+      <Name>fishright</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\bin\x86\Debug\Content\fishright.xnb</Output>
+      <Time>2014-04-07T14:42:10.8360449+02:00</Time>
+    </Item>
+    <Item>
+      <Source>boat.png</Source>
+      <Name>boat</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\bin\x86\Debug\Content\boat.xnb</Output>
+      <Time>2014-04-04T17:06:29.8660655+02:00</Time>
+    </Item>
+    <Item>
+      <Source>background.png</Source>
+      <Name>background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\bin\x86\Debug\Content\background.xnb</Output>
+      <Time>2014-04-04T17:27:18.3006664+02:00</Time>
+    </Item>
+    <Item>
+      <Source>hook.png</Source>
+      <Name>hook</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\bin\x86\Debug\Content\hook.xnb</Output>
+      <Time>2014-04-06T22:45:09.4198192+02:00</Time>
+    </Item>
+    <Item>
+      <Source>line.png</Source>
+      <Name>line</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\bin\x86\Debug\Content\line.xnb</Output>
+      <Time>2014-04-06T22:22:36.2384793+02:00</Time>
+    </Item>
+    <Item>
+      <Source>SpriteFont1.spritefont</Source>
+      <Name>SpriteFont1</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\bin\x86\Debug\Content\SpriteFont1.xnb</Output>
+      <Time>2014-04-06T23:03:05.1536013+02:00</Time>
+    </Item>
+    <Item>
+      <Source>capturedfish.png</Source>
+      <Name>capturedfish</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\bin\x86\Debug\Content\capturedfish.xnb</Output>
+      <Time>2014-04-07T14:42:54.9581858+02:00</Time>
+    </Item>
+    <Item>
+      <Source>sharkleft.png</Source>
+      <Name>sharkleft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\bin\x86\Debug\Content\sharkleft.xnb</Output>
+      <Time>2014-04-07T14:32:18.707254+02:00</Time>
+    </Item>
+    <Item>
+      <Source>sharkright.png</Source>
+      <Name>sharkright</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\bin\x86\Debug\Content\sharkright.xnb</Output>
+      <Time>2014-04-07T14:32:32.6438093+02:00</Time>
+    </Item>
+    <Item>
+      <Source>specialfishcaptured.png</Source>
+      <Name>specialfishcaptured</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\bin\x86\Debug\Content\specialfishcaptured.xnb</Output>
+      <Time>2014-04-07T14:50:38.5849164+02:00</Time>
+    </Item>
+    <Item>
+      <Source>specialfishleft.png</Source>
+      <Name>specialfishleft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\bin\x86\Debug\Content\specialfishleft.xnb</Output>
+      <Time>2014-04-07T14:50:14.0371519+02:00</Time>
+    </Item>
+    <Item>
+      <Source>specialfishright.png</Source>
+      <Name>specialfishright</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\bin\x86\Debug\Content\specialfishright.xnb</Output>
+      <Time>2014-04-07T14:50:00.7853483+02:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>HiDef</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGameContent\</RootDirectory>
+      <LoggerRootDirectory>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\</LoggerRootDirectory>
+      <IntermediateDirectory>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGameContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGame\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2010-08-23T13:41:18+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2010-08-23T13:41:18+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2010-08-23T13:41:18+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2010-08-23T13:41:18+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2010-08-23T13:41:18+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2010-08-23T13:41:18+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2014-02-06T23:26:30.3317437+01:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>

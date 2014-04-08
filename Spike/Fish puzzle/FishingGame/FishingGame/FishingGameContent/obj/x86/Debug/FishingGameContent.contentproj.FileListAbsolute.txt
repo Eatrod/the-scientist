@@ -1,0 +1,1 @@
+c:\users\björn\documents\visual studio 2010\Projects\FishingGame\FishingGame\FishingGameContent\obj\x86\Debug\FishingGameContent.contentprojResolveAssemblyReference.cache
