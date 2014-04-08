@@ -162,6 +162,9 @@ namespace TileGame.GameScreens
         }
         public override void Update(GameTime gameTime)
         {
+            
+            screen = (BaseGamePlayScreen)StateManager.CurrentState;
+
             player.Stamina += 0.1f;
             if (player.Stamina >= 100)
                 player.Stamina = 100;
@@ -178,9 +181,11 @@ namespace TileGame.GameScreens
                 motion.X--;
             if (InputHandler.KeyDown(Keys.Right))
                 motion.X++;
-            if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >=0))
+            if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >= 0))
                 player.Stamina -= 20f;
-            
+            if (InputHandler.KeyReleased(Keys.Escape))
+                StateManager.PushState(GameRef.StartMenuScreen);
+
 
             if (motion != Vector2.Zero)
             {
@@ -198,16 +203,16 @@ namespace TileGame.GameScreens
                 player.isAnimating = false;
                 motion = new Vector2(0, 0);
             }
-            
-            screen = (BaseGamePlayScreen)StateManager.CurrentState;
 
-            
+                
+
+
             motion = CheckCollisionAutomaticMotion(motion, player);
             UpdateSpriteAnimation(motion);
             player.Position += motion * player.Speed;
             player.ClampToArea(screen.tileMap.GetWidthInPixels(), screen.tileMap.GetHeightInPixels());  //Funktion för att hämta nuvarande tilemap state.
             player.Update(gameTime);
-            
+
 
             int screenWidth = GraphicsDevice.Viewport.Width;
             int screenHeight = GraphicsDevice.Viewport.Height;
@@ -249,9 +254,10 @@ namespace TileGame.GameScreens
             //    gate1Locked = false;
 
 
-
-
             base.Update(gameTime);
+
+                
+            
         }
 
         private void UpdateHealthBarAnimation()
