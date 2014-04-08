@@ -12,8 +12,6 @@ namespace TileEngine.Sprite.Npc
     {
         private String NPCName { get; set; }
         private String Location { get; set; }
-        private int PositionX { get; set; }
-        private int PositionY { get; set; }
         Script script;
 
         public NPC(Texture2D texture, Script script)
