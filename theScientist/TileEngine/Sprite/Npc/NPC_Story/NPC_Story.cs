@@ -19,7 +19,7 @@ namespace TileEngine.Sprite.Npc
 
         public void StartConversation(string conversationName)
         {
-
+            
         }
 
         public void EndConversation()

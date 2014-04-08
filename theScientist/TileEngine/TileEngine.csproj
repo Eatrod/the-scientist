@@ -73,7 +73,9 @@
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile.cs" />
     <Compile Include="Sprite\Npc\NPC_Neutral\NPC_Neutral.cs" />
     <Compile Include="Sprite\Npc\NPC_Neutral\NPC_Neutral_Townsfolk_Farmer.cs" />
+    <Compile Include="Sprite\Npc\NPC_Neutral\NPC_Neutral_Townsfolk_Peasant.cs" />
     <Compile Include="Sprite\Npc\NPC_Story\NPC_Story_Asterix.cs" />
+    <Compile Include="Sprite\Npc\NPC_Story\NPC_Story_DonPotato.cs" />
     <Compile Include="Sprite\Npc\Script.cs" />
     <Compile Include="Sprite\AnimatedSprite.cs" />
     <Compile Include="Camera.cs" />
