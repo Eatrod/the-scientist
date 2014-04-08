@@ -48,7 +48,6 @@ namespace TileEngine
                 
             }
             lastState = newState;
-            base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
@@ -59,7 +58,7 @@ namespace TileEngine
                                            area.Height);
             spriteBatch.Draw(background,dest, new Color(0,0,0,100));
             spriteBatch.End();
-           base.Draw(gameTime);
+            spriteBatch.DrawString(spriteFont,conversation.Text, new Vector2(dest.X, dest.Y), Color.White );
         }
     }
 }
