@@ -10,9 +10,9 @@ namespace TileEngine.Sprite.Npc
 {
     public class NPC : CharacterSprite
     {
-        private String NPCName { get; set; }
-        private String Location { get; set; }
-        Script script;
+        protected String NPCName { get; set; }
+        protected String Location { get; set; }
+        protected Script script;
 
         public NPC(Texture2D texture, Script script)
             : base(texture)
