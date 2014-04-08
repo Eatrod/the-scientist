@@ -21,6 +21,7 @@ namespace TileGame.GameScreens
         PictureBox arrowImage;
         LinkLabel startGame;
         LinkLabel loadGame;
+        LinkLabel saveGame;
         LinkLabel exitGame;
         float maxItemWidth = 0f;
 
@@ -76,6 +77,12 @@ namespace TileGame.GameScreens
             loadGame.Selected += menuItem_Selected;
             ControlManager.Add(loadGame);
 
+            saveGame = new LinkLabel();
+            saveGame.Text = "The story saves";
+            saveGame.Size = saveGame.SpriteFont.MeasureString(saveGame.Text);
+            saveGame.Selected += menuItem_Selected;
+            ControlManager.Add(saveGame);
+
             exitGame = new LinkLabel();
             exitGame.Text = "The story ends";
             exitGame.Size = exitGame.SpriteFont.MeasureString(exitGame.Text);
@@ -109,14 +116,16 @@ namespace TileGame.GameScreens
         {
             if (sender == startGame)
             {
-
-                
-                StateManager.PushState(GameRef.GamePlayScreen);
-
+                //StateManager.PopState();
+                StateManager.ChangeState(GameRef.GamePlayScreen);
             }
             if (sender == loadGame)
             {
-                StateManager.PushState(GameRef.GamePlayScreen);
+                StateManager.ChangeState(GameRef.GamePlayScreen);
+            }
+            if (sender == saveGame)
+            {
+                GameRef.SaveGameToFile();
             }
             if (sender == exitGame)
             {

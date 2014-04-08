@@ -126,5 +126,10 @@ namespace TileGame
 
             base.Draw(gameTime);
         }
+
+        public void SaveGameToFile()
+        {
+
+        }
     }
 }
