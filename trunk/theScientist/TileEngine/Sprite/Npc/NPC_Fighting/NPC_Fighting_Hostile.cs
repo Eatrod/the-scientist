@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TileEngine.Sprite.Npc;
 using Microsoft.Xna.Framework.Graphics;
 
 #endregion
