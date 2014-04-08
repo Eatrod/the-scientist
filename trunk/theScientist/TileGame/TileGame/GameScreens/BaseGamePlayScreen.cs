@@ -39,7 +39,13 @@ namespace TileGame.GameScreens
 
         //Sprite sprite;
         static protected PlayerCharacter player;
-       
+
+        //Stamina & Healthbar
+        static protected AnimatedSprite lifemeteranimation;
+        static protected AnimatedSprite staminaanimation;
+        Rectangle lifeRect, staminaRect;
+        float life, stamina;
+
 
         //List<AnimatedSprite> npcs = new List<AnimatedSprite>();
         protected List<BaseSprite> renderList = new List<BaseSprite>();
@@ -73,6 +79,10 @@ namespace TileGame.GameScreens
         {
             base.Initialize();
 
+
+            lifeRect = new Rectangle(0, 0, 100, 20);//lifebarRectangle
+            staminaRect = new Rectangle(0, 0, 100, 20);//staminabarRectangle
+
             FrameAnimation down = new FrameAnimation(1, 32, 32, 0, 0);
             if(!player.Animations.ContainsKey("Down"))
                 player.Animations.Add("Down", down);
@@ -86,12 +96,36 @@ namespace TileGame.GameScreens
                 player.Animations.Add("Up", up);
 
             FrameAnimation left = new FrameAnimation(1, 32, 32, 96, 0);
-            if(player.Animations.ContainsKey("Left"))
+            if(!player.Animations.ContainsKey("Left"))
                 player.Animations.Add("Left", left);
 
             player.CurrentAnimationName = "Down";
             renderList.Add(player);
             //renderList.Add(sprite);
+
+            //LifeMeter Animation Code load
+            FrameAnimation fullHp = new FrameAnimation(1, 100, 20, 0, 0);
+            if(!lifemeteranimation.Animations.ContainsKey("FullHp"))
+                lifemeteranimation.Animations.Add("FullHp", fullHp);
+
+            FrameAnimation seventyfivehp = new FrameAnimation(1, 100, 20, 0, 20);
+            if (!lifemeteranimation.Animations.ContainsKey("SeventtyFiveHp"))
+                lifemeteranimation.Animations.Add("SeventtyFiveHp", seventyfivehp);
+
+            FrameAnimation fiftyhp = new FrameAnimation(1, 100, 20, 0, 40);
+            if (!lifemeteranimation.Animations.ContainsKey("FiftyHp"))
+                lifemeteranimation.Animations.Add("FiftyHp", fiftyhp);
+
+            FrameAnimation twentyfivehp = new FrameAnimation(1, 100, 20, 0, 60);
+            if (!lifemeteranimation.Animations.ContainsKey("TwentyFiveHp"))
+                lifemeteranimation.Animations.Add("TwentyFiveHp", twentyfivehp);
+
+            //StaminaMeter Animation Code load
+            FrameAnimation staminafull = new FrameAnimation(1, 100, 20, 0, 0);
+            if (!staminaanimation.Animations.ContainsKey("StaminaFull"))
+                staminaanimation.Animations.Add("StaminaFull", staminafull);
+            
+            staminaanimation.CurrentAnimationName = "StaminaFull";
         }
         protected override void LoadContent()
         {
@@ -102,10 +136,23 @@ namespace TileGame.GameScreens
             //tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/testlayerCollision.layer");
             if(player == null)
             {
-                player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/playerboxAnimation"));
-                player.Origionoffset = new Vector2(15, 15);
-                player.SetSpritePositionInGameWorld(new Vector2(4, 3));
-                player.Life = 100;
+            player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/playerboxAnimation"));
+            player.Origionoffset = new Vector2(15, 15);
+            player.SetSpritePositionInGameWorld(new Vector2(4, 3));
+            player.Life = 100;
+            player.Stamina = 100;
+            }
+
+            if (lifemeteranimation == null)
+            {
+                lifemeteranimation = new AnimatedSprite(Content.Load<Texture2D>("Sprite/HealthBar"));
+                lifemeteranimation.SetSpritePositionInGameWorld(new Vector2(0, 0));
+            }
+
+            if (staminaanimation == null)
+            {
+                staminaanimation = new AnimatedSprite(Content.Load<Texture2D>("Sprite/StaminaBar"));
+                staminaanimation.SetSpritePositionInGameWorld(new Vector2(0, 0.7f));
             }
 
             //sprite = new Sprite(Content.Load<Texture2D>("Sprite/playerbox"));
@@ -115,6 +162,12 @@ namespace TileGame.GameScreens
         }
         public override void Update(GameTime gameTime)
         {
+            player.Stamina += 0.1f;
+            if (player.Stamina >= 100)
+                player.Stamina = 100;
+            UpdateHealthBarAnimation();
+            UpdateStaminaBarAnimation();
+            life = player.Life;
             Vector2 motion = Vector2.Zero;
 
             if (InputHandler.KeyDown(Keys.Up))
@@ -125,6 +178,9 @@ namespace TileGame.GameScreens
                 motion.X--;
             if (InputHandler.KeyDown(Keys.Right))
                 motion.X++;
+            if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >=0))
+                player.Stamina -= 20f;
+            
 
             if (motion != Vector2.Zero)
             {
@@ -142,7 +198,7 @@ namespace TileGame.GameScreens
                 player.isAnimating = false;
                 motion = new Vector2(0, 0);
             }
-
+            
             screen = (BaseGamePlayScreen)StateManager.CurrentState;
 
             
@@ -151,6 +207,7 @@ namespace TileGame.GameScreens
             player.Position += motion * player.Speed;
             player.ClampToArea(screen.tileMap.GetWidthInPixels(), screen.tileMap.GetHeightInPixels());  //Funktion för att hämta nuvarande tilemap state.
             player.Update(gameTime);
+            
 
             int screenWidth = GraphicsDevice.Viewport.Width;
             int screenHeight = GraphicsDevice.Viewport.Height;
@@ -165,6 +222,9 @@ namespace TileGame.GameScreens
                 player.SetSpritePositionInGameWorld(new Vector2(0, 0));
                 player.Life = 100;
                 player.areTakingDamage = false;
+                lifeRect = new Rectangle(0, 0, 100, 20);
+                staminaRect = new Rectangle(0, 0, 100, 20);
+
             }
 
             // lägg tillbaka hop mellan tilemaps.
@@ -193,6 +253,43 @@ namespace TileGame.GameScreens
 
             base.Update(gameTime);
         }
+
+        private void UpdateHealthBarAnimation()
+        {
+            life = player.Life;
+
+            if (lifeRect.Width > (int)life)
+                lifeRect.Width -= 1;
+
+            if (life >= 75f)
+                lifemeteranimation.CurrentAnimationName = "FullHp";
+            if (life < 75f)
+                lifemeteranimation.CurrentAnimationName = "SeventtyFiveHp";
+            if (life < 50f)
+                lifemeteranimation.CurrentAnimationName = "FiftyHp";
+            if (life < 25f)
+                lifemeteranimation.CurrentAnimationName = "TwentyFiveHp";
+
+            lifeRect = new Rectangle(lifemeteranimation.CurrentAnimation.CurrentRectangle.Location.X, lifemeteranimation.CurrentAnimation.CurrentRectangle.Location.Y, lifeRect.Width, lifeRect.Height);
+            lifemeteranimation.CurrentAnimation.CurrentRectangle = lifeRect;
+        } //Code for healthbar
+
+        private void UpdateStaminaBarAnimation() //Code for Staminabar
+        {
+            stamina = player.Stamina;
+
+            if (staminaRect.Width > (int)stamina)
+                staminaRect.Width = (int)stamina;
+            if (staminaRect.Width < (int)stamina)
+                staminaRect.Width = (int)stamina;
+
+            staminaRect = new Rectangle(
+                staminaanimation.CurrentAnimation.CurrentRectangle.Location.X, 
+                staminaanimation.CurrentAnimation.CurrentRectangle.Location.Y, 
+                staminaRect.Width, staminaRect.Height);
+            staminaanimation.CurrentAnimation.CurrentRectangle = staminaRect;
+        }
+
         public override void Draw(GameTime gameTime)
         {
             //GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -207,6 +304,11 @@ namespace TileGame.GameScreens
             foreach (BaseSprite sprite in renderList)
                 sprite.Draw(spriteBatch);
 
+            spriteBatch.End();
+
+            spriteBatch.Begin();
+            lifemeteranimation.Draw(spriteBatch);
+            staminaanimation.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
