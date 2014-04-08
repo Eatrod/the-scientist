@@ -10,7 +10,7 @@ namespace TileEngine.Sprite.Npc.Npc_Story
     {
         NPC_Story_Asterix(Texture2D texture, Script script) : base(texture, script)
         {
-            
+
         }
     }
 }

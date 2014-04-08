@@ -62,6 +62,7 @@
     <Compile Include="Sprite\CharacterSprite.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Allied_TownGuard.cs" />
+    <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile_Bandit.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile_Wolf.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile_ZombieWalker.cs" />
     <Compile Include="Sprite\Npc\NPC_Neutral\NPC_Neutral_Critters.cs" />
@@ -88,7 +89,9 @@
     <Compile Include="Tiles\TileLayer.cs" />
     <Compile Include="Tiles\TileMap.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--
