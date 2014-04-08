@@ -40,7 +40,7 @@ namespace TileGame.GameScreens
         Sprite sprite;
         //PlayerCharacter player;
 
-        List<AnimatedSprite> npcs = new List<AnimatedSprite>();
+        List<BaseSprite> SpriteObject = new List<BaseSprite>();
         //List<BaseSprite> renderList = new List<BaseSprite>();
 
         //Comparison<BaseSprite> renderSort = new Comparison<BaseSprite>(renderSpriteCompare);
@@ -110,6 +110,7 @@ namespace TileGame.GameScreens
             sprite = new Sprite(Content.Load<Texture2D>("Sprite/playerbox"));
             sprite.Origionoffset = new Vector2(15, 15);
             sprite.SetSpritePositionInGameWorld(new Vector2(5, 5));
+            SpriteObject.Add(sprite);
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
@@ -161,6 +162,18 @@ namespace TileGame.GameScreens
             //    player.Life = 100;
             //    player.areTakingDamage = false;
             //}
+
+            foreach (BaseSprite s in SpriteObject)
+            {
+                s.Update(gameTime);
+
+                if (BaseSprite.AreColliding(player, s))
+                {
+                    Vector2 d = Vector2.Normalize(s.Origin - player.Origin);
+                    player.Position =
+                        s.Position - (d * (player.CollisionRadius + s.CollisionRadius));
+                }
+            }
 
             Point cell = Engine.ConvertPostionToCell(player.Origin);
             if ((cell.X == 17 && cell.Y == 14) && !gate2Locked)
