@@ -13,12 +13,12 @@ namespace TileEngine.Sprite.Npc
     {
         protected bool Immortal { get; set; }
         protected float speakingRadius = 20f;
-        Dialog Dialog;
+        Dialog dialog;
 
         public NPC_Story(Texture2D texture, Dialog dialog, Script script) : base(texture,script)
         {
             this.Immortal = true;
-            this.Dialog = dialog;
+            this.dialog = dialog;
         }
 
         public float SpeakingRadius
@@ -36,11 +36,20 @@ namespace TileEngine.Sprite.Npc
 
         public void StartConversation(string conversationName)
         {
-            
+            if (script == null || dialog == null)
+                return;
+            dialog.Enabled = true;
+            dialog.Visible = true;
+            dialog.Npc = this;
+            dialog.conversation = script[conversationName];
         }
 
         public void EndConversation()
         {
+            if (script == null || dialog == null)
+                return;
+            dialog.Enabled = false;
+            dialog.Visible = false;
         }
     }
 }
