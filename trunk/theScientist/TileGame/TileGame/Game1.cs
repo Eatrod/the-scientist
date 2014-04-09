@@ -156,33 +156,47 @@ namespace TileGame
             using (StreamReader file = new StreamReader(@"savedgame.txt"))
             {
                 string crap = file.ReadLine();
-                lastGameScreen = file.ReadLine();
+                if (crap.Equals("[State]"))
+                    lastGameScreen = file.ReadLine();
+
                 crap = file.ReadLine();
-                string pos = file.ReadLine();
-                string[] positions = pos.Split(' ');
-                string xPos = positions[0].Substring(3);
-                string yPos = positions[1].Substring(2);
-                int index = xPos.IndexOf(',');
-                if(index >= 0)
-                    xPos = xPos.Remove(index);
-                yPos = yPos.Replace("}", "");
-                index = yPos.IndexOf(',');
-                if (index >= 0)
-                    yPos = yPos.Remove(index);
-                float x = (float)Convert.ToInt32(xPos);
-                float y = (float)Convert.ToInt32(yPos);
-                playerPosition = new Vector2(x,y);
-                string life = file.ReadLine();
-                index = life.IndexOf(',');
-                if (index >= 0)
-                    life = life.Remove(index);
-                playerLife = Convert.ToInt32(life);
-                string stamina = file.ReadLine();
-                index = stamina.IndexOf(',');
-                if (index >= 0)
-                    stamina = stamina.Remove(index);
-                playerStamina = Convert.ToInt32(stamina);
+                if (crap.Equals("[Player]"))
+                {
+                    string pos = file.ReadLine();
+                    string[] positions = pos.Split(' ');
+                    SetPlayerPosition(positions);
+
+                    string life = file.ReadLine();
+                    life = CleanString(life);
+                    playerLife = Convert.ToInt32(life);
+
+                    string stamina = file.ReadLine();
+                    stamina = CleanString(stamina);
+                    playerStamina = Convert.ToInt32(stamina);
+                }
             }
+        }
+
+        public string CleanString(string text)
+        {
+            text = text.Trim('{','}',':','X','Y');
+            int index = text.IndexOf(',');
+            if (index >= 0)
+                text = text.Remove(index);
+
+            return text;
+        }
+
+        public void SetPlayerPosition(string[] positions)
+        {
+            string xPos = positions[0].Substring(3);
+            string yPos = positions[1].Substring(2);
+
+            xPos = CleanString(xPos);
+            yPos = CleanString(yPos);
+            float x = (float)Convert.ToInt32(xPos);
+            float y = (float)Convert.ToInt32(yPos);
+            playerPosition = new Vector2(x, y);
         }
     }
 }
