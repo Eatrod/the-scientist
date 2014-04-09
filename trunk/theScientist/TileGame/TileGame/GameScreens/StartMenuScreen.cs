@@ -20,8 +20,9 @@ namespace TileGame.GameScreens
         PictureBox backgroundImage;
         PictureBox arrowImage;
         LinkLabel startGame;
-        LinkLabel loadGame;
+        LinkLabel contGame;
         LinkLabel saveGame;
+        LinkLabel loadGame;
         LinkLabel exitGame;
         float maxItemWidth = 0f;
 
@@ -71,17 +72,23 @@ namespace TileGame.GameScreens
             startGame.Selected += new EventHandler(menuItem_Selected);
             ControlManager.Add(startGame);
 
-            loadGame = new LinkLabel();
-            loadGame.Text = "The story continues";
-            loadGame.Size = loadGame.SpriteFont.MeasureString(loadGame.Text);
-            loadGame.Selected += menuItem_Selected;
-            ControlManager.Add(loadGame);
+            contGame = new LinkLabel();
+            contGame.Text = "The story continues";
+            contGame.Size = contGame.SpriteFont.MeasureString(contGame.Text);
+            contGame.Selected += menuItem_Selected;
+            ControlManager.Add(contGame);
 
             saveGame = new LinkLabel();
             saveGame.Text = "The story saves";
             saveGame.Size = saveGame.SpriteFont.MeasureString(saveGame.Text);
             saveGame.Selected += menuItem_Selected;
             ControlManager.Add(saveGame);
+
+            loadGame = new LinkLabel();
+            loadGame.Text = "The story loads";
+            loadGame.Size = loadGame.SpriteFont.MeasureString(loadGame.Text);
+            loadGame.Selected += menuItem_Selected;
+            ControlManager.Add(loadGame);
 
             exitGame = new LinkLabel();
             exitGame.Text = "The story ends";
@@ -116,16 +123,28 @@ namespace TileGame.GameScreens
         {
             if (sender == startGame)
             {
-                //StateManager.PopState();
                 StateManager.ChangeState(GameRef.GamePlayScreen);
+                BaseGamePlayScreen.player.Life = 100;
+                GameRef.GamePlayScreen.Gate1Locked = true;
+                BaseGamePlayScreen.player.SetSpritePositionInGameWorld(new Vector2(4, 3));
             }
-            if (sender == loadGame)
+            if (sender == contGame)
             {
                 StateManager.ChangeState(GameRef.GamePlayScreen);
             }
             if (sender == saveGame)
             {
                 GameRef.SaveGameToFile();
+            }
+            if (sender == loadGame)
+            {
+                GameRef.LoadGameFromFile();
+                GameState gs = GetState(GameRef.lastGameScreen);
+                StateManager.ChangeState(gs);
+                BaseGamePlayScreen.player.Life = GameRef.playerLife;
+                BaseGamePlayScreen.player.Stamina = GameRef.playerStamina;
+                BaseGamePlayScreen.player.SetSpritePositionInGameWorld(GameRef.playerPosition.X,
+                    GameRef.playerPosition.Y);
             }
             if (sender == exitGame)
             {
@@ -146,6 +165,16 @@ namespace TileGame.GameScreens
             ControlManager.Draw(GameRef.spriteBatch);
 
             GameRef.spriteBatch.End();
+        }
+
+        private GameState GetState(string stateName)
+        {
+            foreach(GameState gs in GameRef.gamePlayScreens)
+            {
+                if (stateName.CompareTo(gs.Tag.ToString()) == 0)
+                    return gs;
+            }
+            return null;
         }
 
         #endregion
