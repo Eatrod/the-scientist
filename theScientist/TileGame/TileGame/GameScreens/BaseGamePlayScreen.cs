@@ -38,7 +38,7 @@ namespace TileGame.GameScreens
         protected Camera camera = new Camera();
 
         //Sprite sprite;
-        static protected PlayerCharacter player;
+        static public PlayerCharacter player;
 
         //Stamina & Healthbar
         static protected AnimatedSprite lifemeteranimation;
@@ -184,7 +184,13 @@ namespace TileGame.GameScreens
             if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >= 0))
                 player.Stamina -= 20f;
             if (InputHandler.KeyReleased(Keys.Escape))
+            {
+                GameRef.lastGameScreen = GameRef.stateManager.CurrentState.Tag.ToString();
+                GameRef.playerPosition = player.Position;
+                GameRef.playerLife = player.Life;
+                GameRef.playerStamina = player.Stamina;
                 StateManager.PushState(GameRef.StartMenuScreen);
+            }
 
 
             if (motion != Vector2.Zero)

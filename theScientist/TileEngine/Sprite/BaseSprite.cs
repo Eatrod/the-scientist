@@ -56,10 +56,16 @@ namespace TileEngine.Sprite
             return (d.Length() < b.CollisionRadius + a.CollisionRadius);
         }
 
-        public void SetSpritePositionInGameWorld(Vector2 position)
+        public void SetSpritePositionInGameWorld(Vector2 positionInTiles)
         {
-            this.Position.X = position.X * TileEngine.Engine.TileWidth;
-            this.Position.Y = position.Y * TileEngine.Engine.TileHeight;
+            this.Position.X = positionInTiles.X * TileEngine.Engine.TileWidth;
+            this.Position.Y = positionInTiles.Y * TileEngine.Engine.TileHeight;
+        }
+
+        public void SetSpritePositionInGameWorld(float posXInPixel, float posYInPixel)
+        {
+            this.Position.X = posXInPixel;
+            this.Position.Y = posYInPixel;
         }
 
         public virtual void ClampToArea(int width, int height)

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -23,6 +25,7 @@ namespace TileGame
 
         GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
+        public List<GameState> gamePlayScreens;
 
         #endregion
 
@@ -34,6 +37,11 @@ namespace TileGame
         public GamePlayScreen GamePlayScreen;
         public BaseGamePlayScreen BaseGamePlayScreen;
         public GamePlayScreen2 GamePlayScreen2;
+
+        public string lastGameScreen;
+        public Vector2 playerPosition;
+        public float playerLife;
+        public float playerStamina;
         
 
         #endregion
@@ -65,12 +73,15 @@ namespace TileGame
             stateManager = new GameStateManager(this);
             Components.Add(stateManager);
 
+            gamePlayScreens = new List<GameState>();
             TitleScreen = new TitleScreen(this, stateManager);
             StartMenuScreen = new StartMenuScreen(this, stateManager);
             GamePlayScreen = new GamePlayScreen(this, stateManager, "Screen1");
             GamePlayScreen2 = new GamePlayScreen2(this, stateManager, "Screen2");
             BaseGamePlayScreen = new BaseGamePlayScreen(this, stateManager);
             stateManager.ChangeState(TitleScreen);
+            gamePlayScreens.Add(GamePlayScreen);
+            gamePlayScreens.Add(GamePlayScreen2);
         }
 
         /// <summary>
@@ -129,7 +140,49 @@ namespace TileGame
 
         public void SaveGameToFile()
         {
+            using (StreamWriter file = new StreamWriter(@"savedgame.txt"))
+            {
+                file.WriteLine("[State]");
+                file.WriteLine(lastGameScreen);
+                file.WriteLine("[Player]");
+                file.WriteLine(playerPosition.ToString());
+                file.WriteLine(playerLife);
+                file.WriteLine(playerStamina);
+            }
+        }
 
+        public void LoadGameFromFile()
+        {
+            using (StreamReader file = new StreamReader(@"savedgame.txt"))
+            {
+                string crap = file.ReadLine();
+                lastGameScreen = file.ReadLine();
+                crap = file.ReadLine();
+                string pos = file.ReadLine();
+                string[] positions = pos.Split(' ');
+                string xPos = positions[0].Substring(3);
+                string yPos = positions[1].Substring(2);
+                int index = xPos.IndexOf(',');
+                if(index >= 0)
+                    xPos = xPos.Remove(index);
+                yPos = yPos.Replace("}", "");
+                index = yPos.IndexOf(',');
+                if (index >= 0)
+                    yPos = yPos.Remove(index);
+                float x = (float)Convert.ToInt32(xPos);
+                float y = (float)Convert.ToInt32(yPos);
+                playerPosition = new Vector2(x,y);
+                string life = file.ReadLine();
+                index = life.IndexOf(',');
+                if (index >= 0)
+                    life = life.Remove(index);
+                playerLife = Convert.ToInt32(life);
+                string stamina = file.ReadLine();
+                index = stamina.IndexOf(',');
+                if (index >= 0)
+                    stamina = stamina.Remove(index);
+                playerStamina = Convert.ToInt32(stamina);
+            }
         }
     }
 }

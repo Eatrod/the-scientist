@@ -109,6 +109,7 @@ namespace XtheSmithLibrary
             if (OnStateChange != null)
                 OnStateChange(this, null);
         }
+        
         #endregion
 
     }
