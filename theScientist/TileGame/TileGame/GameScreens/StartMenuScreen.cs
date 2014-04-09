@@ -123,10 +123,7 @@ namespace TileGame.GameScreens
         {
             if (sender == startGame)
             {
-                StateManager.ChangeState(GameRef.GamePlayScreen);
-                BaseGamePlayScreen.player.Life = 100;
-                GameRef.GamePlayScreen.Gate1Locked = true;
-                BaseGamePlayScreen.player.SetSpritePositionInGameWorld(new Vector2(4, 3));
+                StartGame();
             }
             if (sender == contGame)
             {
@@ -138,13 +135,7 @@ namespace TileGame.GameScreens
             }
             if (sender == loadGame)
             {
-                GameRef.LoadGameFromFile();
-                GameState gs = GetState(GameRef.lastGameScreen);
-                StateManager.ChangeState(gs);
-                BaseGamePlayScreen.player.Life = GameRef.playerLife;
-                BaseGamePlayScreen.player.Stamina = GameRef.playerStamina;
-                BaseGamePlayScreen.player.SetSpritePositionInGameWorld(GameRef.playerPosition.X,
-                    GameRef.playerPosition.Y);
+                LoadGame();
             }
             if (sender == exitGame)
             {
@@ -167,20 +158,36 @@ namespace TileGame.GameScreens
             GameRef.spriteBatch.End();
         }
 
+        #endregion
+
+        #region Game State Method Region
+        private void StartGame()
+        {
+            StateManager.ChangeState(GameRef.GamePlayScreen);
+            BaseGamePlayScreen.player.Life = 100;
+            GameRef.GamePlayScreen.Gate1Locked = true;
+            BaseGamePlayScreen.player.SetSpritePositionInGameWorld(new Vector2(4, 3));
+        }
+        private void LoadGame()
+        {
+            GameRef.LoadGameFromFile();
+            GameState gs = GetState(GameRef.lastGameScreen);
+            StateManager.ChangeState(gs);
+            BaseGamePlayScreen.player.Life = GameRef.playerLife;
+            BaseGamePlayScreen.player.Stamina = GameRef.playerStamina;
+            BaseGamePlayScreen.player.SetSpritePositionInGameWorld(GameRef.playerPosition.X,
+                GameRef.playerPosition.Y);
+        }
         private GameState GetState(string stateName)
         {
-            foreach(GameState gs in GameRef.gamePlayScreens)
+            foreach (GameState gs in GameRef.gamePlayScreens)
             {
                 if (stateName.CompareTo(gs.Tag.ToString()) == 0)
                     return gs;
             }
             return null;
         }
-
         #endregion
-
-        #region Game State Method Region
-        #endregion
-
+        
     }
 }
