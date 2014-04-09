@@ -33,7 +33,7 @@ namespace TileGame.GameScreens
         protected override void LoadContent()
         {
             ContentManager Content = GameRef.Content;
-            backgroundImage = Content.Load<Texture2D>(@"Backgrounds\titlescreen");
+            backgroundImage = Content.Load<Texture2D>(@"Backgrounds\Blacksmith");
             base.LoadContent();
 
             startLabel = new LinkLabel();
