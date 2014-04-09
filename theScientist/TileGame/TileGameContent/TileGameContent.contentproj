@@ -62,9 +62,11 @@
       <Name>testlayerCollision</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="Scripts\AsterixDialog.script">
+    <Content Include="Scripts\AsterixDialog.script">
       <Name>AsterixDialog</Name>
-    </Compile>
+      <Importer>ScriptImporter</Importer>
+      <Processor>ScriptProcessor1</Processor>
+    </Content>
     <None Include="Scripts\npc1.script">
       <Name>npc1</Name>
       <Importer>XmlImporter</Importer>
