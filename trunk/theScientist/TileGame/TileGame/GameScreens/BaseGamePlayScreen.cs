@@ -342,7 +342,9 @@ namespace TileGame.GameScreens
                 GameRef.playerStamina = player.Stamina;
                 StateManager.PushState(GameRef.StartMenuScreen);
             }
-            
+            if (InputHandler.KeyReleased(Keys.N))
+                StateManager.PushState(GameRef.NotebookScreen);
+
 
             if (motion != Vector2.Zero)
             {
@@ -360,16 +362,16 @@ namespace TileGame.GameScreens
                 player.isAnimating = false;
                 motion = new Vector2(0, 0);
             }
-            
+
                 
 
-            
+
             motion = CheckCollisionAutomaticMotion(motion, player);
             UpdateSpriteAnimation(motion);
             player.Position += motion * player.Speed;
             player.ClampToArea(screen.tileMap.GetWidthInPixels(), screen.tileMap.GetHeightInPixels());  //Funktion för att hämta nuvarande tilemap state.
             player.Update(gameTime);
-            
+
 
             int screenWidth = GraphicsDevice.Viewport.Width;
             int screenHeight = GraphicsDevice.Viewport.Height;
@@ -414,8 +416,8 @@ namespace TileGame.GameScreens
 
             base.Update(gameTime);
 
-
-
+                
+            
         }
 
       
