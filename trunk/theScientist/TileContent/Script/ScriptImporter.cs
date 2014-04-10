@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
 using System.Xml;
 
 
-namespace TileContent.Script
+namespace TileContent
 {
     
     [ContentImporter(".script", DisplayName = "NPC script Importer", DefaultProcessor = "SciptProcessor")]
