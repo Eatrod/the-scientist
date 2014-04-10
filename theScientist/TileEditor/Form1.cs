@@ -543,7 +543,9 @@ namespace TileEditor
                 else
                 {
                     int helpvar = 0;
+                    AddNewWorldTileLayerBack(newLayerForm);
                     AddNewWorldTileLayer(newLayerForm);
+                    AddNewWorldTileLayerFront(newLayerForm);
                     CollisionLayer collisionLayer = AddNewCollisionTileLayer(newLayerForm);
                    
                     foreach (var items in lstLayers.Items)  //Finding Index for Collision Layer and selecting the layer.
@@ -598,6 +600,28 @@ namespace TileEditor
             tileMap.CollisionLayer = collisionLayer;
             lstLayers.Items.Add(newLayerForm.txtLayerName.Text + "Collision");
             return collisionLayer;
+        }
+
+        private void AddNewWorldTileLayerBack(frmNewLayer newLayerForm)
+        {
+            TileLayer tileLayer = new TileLayer(
+               int.Parse(newLayerForm.txtLayerHeight.Text),
+               int.Parse(newLayerForm.txtLayerWidth.Text));
+
+            layerDict.Add(newLayerForm.txtLayerName.Text +"Back", tileLayer);
+            tileMap.Layers.Add(tileLayer);
+            lstLayers.Items.Add(newLayerForm.txtLayerName.Text + "Back");
+        }
+
+        private void AddNewWorldTileLayerFront(frmNewLayer newLayerForm)
+        {
+            TileLayer tileLayer = new TileLayer(
+               int.Parse(newLayerForm.txtLayerHeight.Text),
+               int.Parse(newLayerForm.txtLayerWidth.Text));
+
+            layerDict.Add(newLayerForm.txtLayerName.Text + "Front", tileLayer);
+            tileMap.Layers.Add(tileLayer);
+            lstLayers.Items.Add(newLayerForm.txtLayerName.Text + "Front");
         }
 
         private void AddNewWorldTileLayer(frmNewLayer newLayerForm)
