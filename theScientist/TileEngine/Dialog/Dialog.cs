@@ -16,7 +16,7 @@ namespace TileEngine
         public Conversation conversation = null;
         public NPC_Story Npc;
 
-        public Rectangle area = new Rectangle(0,0,300,200);
+        public Rectangle area = new Rectangle(0,0,500,500);
 
         private SpriteFont spriteFont;
         private SpriteBatch spriteBatch;
@@ -44,7 +44,7 @@ namespace TileEngine
         {
             KeyboardState newState = Keyboard.GetState();
 
-            if (conversation != null || Npc != null)
+            if (conversation == null || Npc == null)
                 return;
 
             if (newState.IsKeyDown(Keys.Up) && lastState.IsKeyUp(Keys.Up))
