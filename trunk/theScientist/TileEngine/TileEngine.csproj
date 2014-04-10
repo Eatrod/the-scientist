@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dialog\Dialog.cs" />
+    <Compile Include="Sprite\Npc\ScriptReader.cs" />
     <Compile Include="Sprite\CharacterSprite.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Allied_TownGuard.cs" />
