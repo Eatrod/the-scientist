@@ -11,7 +11,7 @@ using System.Xml;
 namespace TileContent
 {
     
-    [ContentImporter(".script", DisplayName = "NPC script Importer", DefaultProcessor = "ScriptProcessor")]
+    [ContentImporter(".dialog", DisplayName = "NPC script Importer", DefaultProcessor = "ScriptProcessor")]
     public class ScriptImporter : ContentImporter<XmlDocument>
     {
         public override XmlDocument Import(string filename, ContentImporterContext context)
