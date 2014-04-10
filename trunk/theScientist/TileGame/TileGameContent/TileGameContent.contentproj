@@ -138,11 +138,11 @@
       <Name>testlayerCollision</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="Scripts\AsterixDialog.script">
+    <Compile Include="Scripts\AsterixDialog.dialog">
       <Name>AsterixDialog</Name>
       <Importer>ScriptImporter</Importer>
-      <Processor>ScriptProcessor1</Processor>
-    </Content>
+      <Processor>ScriptProcessor</Processor>
+    </Compile>
     <None Include="Layers\testMiddle.layer">
       <Name>testMiddle</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
