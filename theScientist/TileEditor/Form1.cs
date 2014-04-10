@@ -611,7 +611,7 @@ namespace TileEditor
 
             layerDict.Add(newLayerForm.txtLayerName.Text + "Ground", tileLayer);
             tileMap.Layers.Add(tileLayer);
-            lstLayers.Items.Add(newLayerForm.txtLayerName.Text + "Grund");
+            lstLayers.Items.Add(newLayerForm.txtLayerName.Text + "Ground");
         }
 
         private void AddNewWorldTileLayerBack(frmNewLayer newLayerForm)
@@ -620,7 +620,7 @@ namespace TileEditor
                int.Parse(newLayerForm.txtLayerHeight.Text),
                int.Parse(newLayerForm.txtLayerWidth.Text));
 
-            layerDict.Add(newLayerForm.txtLayerName.Text +"Back", tileLayer);
+            layerDict.Add(newLayerForm.txtLayerName.Text + "Back", tileLayer);
             tileMap.Layers.Add(tileLayer);
             lstLayers.Items.Add(newLayerForm.txtLayerName.Text + "Back");
         }
