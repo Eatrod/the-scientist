@@ -27,7 +27,7 @@ namespace TileContent
             foreach (XmlNode node in conversations)
             {
                 ConversationContent c = new ConversationContent();
-                c.name = node.Attributes["Name"].Value;
+                c.Name = node.Attributes["Name"].Value;
                 c.Text = node.FirstChild.InnerText;
 
                 foreach (XmlNode handlerNode in node.LastChild.ChildNodes)
@@ -53,7 +53,7 @@ namespace TileContent
                     
                 }
 
-                
+                script.Conversations.Add(c);
 
                 
             }

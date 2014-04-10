@@ -41,7 +41,7 @@ namespace TileContent
     {
         protected override void Write(ContentWriter output, ConversationContent value)
         {
-            output.Write(value.name);
+            output.Write(value.Name);
             output.Write(value.Text);
 
             output.Write(value.Handlers.Count);
