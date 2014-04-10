@@ -15,7 +15,7 @@ namespace TileContent
 
     public class ConversationContent
     {
-        public string name;
+        public string Name;
         public string Text;
         public Collection<ConversationHandlerContent> Handlers = new Collection<ConversationHandlerContent>();
       
