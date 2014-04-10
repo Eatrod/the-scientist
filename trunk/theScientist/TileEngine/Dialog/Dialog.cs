@@ -36,7 +36,7 @@ namespace TileEngine
             spriteBatch = new SpriteBatch(GraphicsDevice);
             spriteFont = content.Load<SpriteFont>("Fonts/ControlFont");
 
-            //background = new Texture2D(GraphicsDevice, 1, 1, 1, TextureUsage.None);
+            background = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
         }
 
         public override void Update(GameTime gameTime)
