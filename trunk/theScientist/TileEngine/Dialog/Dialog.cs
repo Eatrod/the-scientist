@@ -69,9 +69,6 @@ namespace TileEngine
 
         public override void Draw(GameTime gameTime)
         {
-            if (conversation == null)
-                return;
-
             Rectangle dest = new Rectangle(GraphicsDevice.Viewport.Width / 2 - area.Width / 2, 
                                            GraphicsDevice.Viewport.Height / 2 - area.Height / 2,
                                            area.Width,
@@ -79,6 +76,9 @@ namespace TileEngine
             spriteBatch.Begin();
             spriteBatch.Draw(background,dest, new Color(0,0,0,100));
             spriteBatch.End();
+
+            if (conversation == null)
+                return;
 
             spriteBatch.Begin();
             spriteBatch.DrawString(spriteFont,conversation.Text, new Vector2(dest.X, dest.Y), Color.White );
