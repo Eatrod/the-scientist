@@ -14,7 +14,7 @@ namespace TileContent
 {
  
     [ContentProcessor(DisplayName = "NPC Script Processor")]
-    public class ScriptProcessor1 : ContentProcessor<XmlDocument, ScriptContent>
+    public class ScriptProcessor : ContentProcessor<XmlDocument, ScriptContent>
     {
         public override ScriptContent Process(
             XmlDocument input,
