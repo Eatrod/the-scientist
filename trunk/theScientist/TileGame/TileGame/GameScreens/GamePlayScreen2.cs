@@ -40,7 +40,8 @@ namespace TileGame.GameScreens
         Sprite sprite;
         //PlayerCharacter player;
 
-        List<AnimatedSprite> npcs = new List<AnimatedSprite>();
+        List<BaseSprite> SpriteObjects = new List<BaseSprite>();
+        List<BaseSprite> SpriteObjectInGameWorld = new List<BaseSprite>();
         //List<BaseSprite> renderList = new List<BaseSprite>();
 
         //Comparison<BaseSprite> renderSort = new Comparison<BaseSprite>(renderSpriteCompare);
@@ -91,7 +92,16 @@ namespace TileGame.GameScreens
 
             //player.CurrentAnimationName = "Down";
             //renderList.Add(player);
-            renderList.Add(sprite);
+            
+            SpriteObjectInGameWorld.Clear();
+            renderList.Clear();
+            renderList.Add(player);
+            SpriteObjectInGameWorld.AddRange(SpriteObjects);
+            renderList.AddRange(SpriteObjects);
+            
+            
+            
+            
         }
         protected override void LoadContent()
         {
@@ -101,14 +111,19 @@ namespace TileGame.GameScreens
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/SecondLand.layer"));
             tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/SecondLandCollision.layer");
 
+            sprite = new Sprite(Content.Load<Texture2D>("Sprite/playerbox"));
+            sprite.Origionoffset = new Vector2(15, 15);
+            sprite.SetSpritePositionInGameWorld(new Vector2(10, 10));
+            SpriteObjects.Add(sprite);
+            
+
             //player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/playerboxAnimation"));
             //player.Origionoffset = new Vector2(15, 15);
             //player.SetSpritePositionInGameWorld(new Vector2(1, 2));
             //player.Life = 100;
 
-            sprite = new Sprite(Content.Load<Texture2D>("Sprite/playerbox"));
-            sprite.Origionoffset = new Vector2(15, 15);
-            sprite.SetSpritePositionInGameWorld(new Vector2(10, 10));
+            
+
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
@@ -160,6 +175,33 @@ namespace TileGame.GameScreens
             //    player.Life = 100;
             //    player.areTakingDamage = false;
             //}
+
+            foreach (BaseSprite s in SpriteObjectInGameWorld)
+            {
+                s.Update(gameTime);
+
+                if (BaseSprite.AreColliding(player, s))
+                {
+                    Vector2 d = Vector2.Normalize(s.Origin - player.Origin);
+                    player.Position =
+                        s.Position - (d * (player.CollisionRadius + s.CollisionRadius));
+                }
+            }
+
+
+            for (int Sprite = 0; Sprite < SpriteObjectInGameWorld.Count(); Sprite++)
+            {
+                for (int Projectile = 0; Projectile < playerprojectiles.Count(); Projectile++)
+                {
+                    if (BaseSprite.AreColliding(playerprojectiles[Projectile], SpriteObjectInGameWorld[Sprite]))
+                    {
+                        renderList.Remove(SpriteObjectInGameWorld[Sprite]);
+                        SpriteObjectInGameWorld.RemoveAt(Sprite);
+                        playerprojectiles.RemoveAt(Projectile);
+
+                    }
+                }
+            }
 
             Point cell = Engine.ConvertPostionToCell(player.Origin);
             if ((cell.X == 28 && cell.Y == 28) && !gate2Locked)

@@ -33,17 +33,15 @@ namespace TileGame.GameScreens
 
         //GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
-        //public TileMap tileMap = new TileMap();
-        //Camera camera = new Camera();
-
-        Sprite sprite;
-        //PlayerCharacter player;
+                
+        Sprite sprite, sprite1;
+        AnimatedSprite NPC1, NPC2;
+        
 
         List<BaseSprite> SpriteObject = new List<BaseSprite>();
-        //List<BaseSprite> renderList = new List<BaseSprite>();
-
-        //Comparison<BaseSprite> renderSort = new Comparison<BaseSprite>(renderSpriteCompare);
+        List<BaseSprite> AnimatedSpriteObject = new List<BaseSprite>();
+        List<BaseSprite> SpriteObjectInGameWorld = new List<BaseSprite>();
+        
 
         public string Name { get { return name; } }
 
@@ -52,10 +50,6 @@ namespace TileGame.GameScreens
 
         #endregion
 
-        //static int renderSpriteCompare(BaseSprite a, BaseSprite b)
-        //{
-        //    return a.Origin.Y.CompareTo(b.Origin.Y);
-        //}
 
         #region Constructor Region
         public GamePlayScreen(Game game, GameStateManager manager, string name)
@@ -74,96 +68,74 @@ namespace TileGame.GameScreens
         {
             base.Initialize();
 
-            //FrameAnimation down = new FrameAnimation(1, 32, 32, 0, 0);
-            //if(!player.Animations.ContainsKey("Down"))
-            //    player.Animations.Add("Down", down);
+            FrameAnimation down = new FrameAnimation(1, 32, 32, 0, 0);
+            FrameAnimation right = new FrameAnimation(1, 32, 32, 32, 0);
+            FrameAnimation up = new FrameAnimation(1, 32, 32, 64, 0);
+            FrameAnimation left = new FrameAnimation(1, 32, 32, 96, 0);
+            
+            foreach(AnimatedSprite s in AnimatedSpriteObject)
+            {
+                if (!s.Animations.ContainsKey("Up"))
+                    s.Animations.Add("Up", (FrameAnimation)up.Clone());
+                if (!s.Animations.ContainsKey("Down"))
+                    s.Animations.Add("Down", (FrameAnimation)down.Clone());
+                if (!s.Animations.ContainsKey("Left"))
+                    s.Animations.Add("Left", (FrameAnimation)left.Clone());
+                if (!s.Animations.ContainsKey("Right"))
+                    s.Animations.Add("Right", (FrameAnimation)right.Clone());
+            }
+            
+            SpriteObjectInGameWorld.Clear();
+            renderList.Clear();
+            renderList.Add(player);
+            SpriteObjectInGameWorld.AddRange(AnimatedSpriteObject);
+            SpriteObjectInGameWorld.AddRange(SpriteObject);            
+            renderList.AddRange(SpriteObject);
+            renderList.AddRange(AnimatedSpriteObject);
 
-            //FrameAnimation right = new FrameAnimation(1, 32, 32, 32, 0);
-            //if(!player.Animations.ContainsKey("Right"))
-            //    player.Animations.Add("Right", right);
-
-            //FrameAnimation up = new FrameAnimation(1, 32, 32, 64, 0);
-            //if(!player.Animations.ContainsKey("Up"))
-            //    player.Animations.Add("Up", up);
-
-            //FrameAnimation left = new FrameAnimation(1, 32, 32, 96, 0);
-            //if(player.Animations.ContainsKey("Left"))
-            //    player.Animations.Add("Left", left);
-
-            //player.CurrentAnimationName = "Down";
-            //renderList.Add(player);
-            renderList.Add(sprite);
+            
+            
         }
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ContentManager Content = Game.Content;
             
+            
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testlayer.layer"));
             tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/testlayerCollision.layer");
 
-            //player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/playerboxAnimation"));
-            //player.Origionoffset = new Vector2(15, 15);
-            //player.SetSpritePositionInGameWorld(new Vector2(4, 3));
-            //player.Life = 100;
-
+            //En Sprite i världen som återskapas vid entry.
             sprite = new Sprite(Content.Load<Texture2D>("Sprite/playerbox"));
             sprite.Origionoffset = new Vector2(15, 15);
             sprite.SetSpritePositionInGameWorld(new Vector2(5, 5));
             SpriteObject.Add(sprite);
+            
+            sprite1 = new Sprite(Content.Load<Texture2D>("Sprite/playerbox"));
+            sprite1.Origionoffset = new Vector2(15, 15);
+            sprite1.SetSpritePositionInGameWorld(new Vector2(10, 10));
+            SpriteObject.Add(sprite1);
+
+            NPC1 = new AnimatedSprite(Content.Load<Texture2D>("Sprite/playerboxAnimation"));           
+            NPC1.Origionoffset = new Vector2(15,15);
+            NPC1.SetSpritePositionInGameWorld(new Vector2(9,9));
+            NPC1.Life = 30;
+            NPC1.FullHp = 30;
+            AnimatedSpriteObject.Add(NPC1);
+
+            NPC2 = new AnimatedSprite(Content.Load<Texture2D>("Sprite/playerboxAnimation"));
+            NPC2.Origionoffset = new Vector2(15, 15);
+            NPC2.SetSpritePositionInGameWorld(new Vector2(12, 12));
+            NPC2.Life = 5;
+            NPC2.FullHp = 5;
+            AnimatedSpriteObject.Add(NPC2);
+            
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
-        {
-            //Vector2 motion = Vector2.Zero;
+        {            
 
-            //if (InputHandler.KeyDown(Keys.Up))
-            //    motion.Y--;
-            //if (InputHandler.KeyDown(Keys.Down))
-            //    motion.Y++;
-            //if (InputHandler.KeyDown(Keys.Left))
-            //    motion.X--;
-            //if (InputHandler.KeyDown(Keys.Right))
-            //    motion.X++;
-
-            //if (motion != Vector2.Zero)
-            //{
-            //    motion.Normalize();                 //Comment out to use gamePad
-            //    motion = CheckCollisionForMotion(motion, player);
-
-            //    //sprite.Position += motion * sprite.Speed;
-            //    //UpdateSpriteAnimation(motion);
-            //    player.isAnimating = true;
-            //    CheckForCollisionAroundSprite(player, motion);
-            //}
-            //else
-            //{
-            //    //UpdateSpriteIdleAnimation(sprite);
-            //    player.isAnimating = false;
-            //    motion = new Vector2(0, 0);
-            //}
-            //motion = CheckCollisionAutomaticMotion(motion, player);
-            //UpdateSpriteAnimation(motion);
-            //player.Position += motion * player.Speed;
-            //player.ClampToArea(tileMap.GetWidthInPixels(), tileMap.GetHeightInPixels());
-            //player.Update(gameTime);
-
-            //int screenWidth = GraphicsDevice.Viewport.Width;
-            //int screenHeight = GraphicsDevice.Viewport.Height;
-
-            //camera.LockToTarget(player, screenWidth, screenHeight);
-            //camera.ClampToArea(
-            //    tileMap.GetWidthInPixels() - screenWidth,
-            //    tileMap.GetHeightInPixels() - screenHeight);
-
-            //if (player.Life == 0)
-            //{
-            //    player.SetSpritePositionInGameWorld(new Vector2(0, 0));
-            //    player.Life = 100;
-            //    player.areTakingDamage = false;
-            //}
-
-            foreach (BaseSprite s in SpriteObject)
+            foreach (BaseSprite s in SpriteObjectInGameWorld)
             {
                 s.Update(gameTime);
 
@@ -174,6 +146,41 @@ namespace TileGame.GameScreens
                         s.Position - (d * (player.CollisionRadius + s.CollisionRadius));
                 }
             }
+
+                    
+            foreach (Sprite sprite in SpriteObject)
+            {
+                for (int Projectile = 0; Projectile < playerprojectiles.Count(); Projectile++)
+                {
+                    if (BaseSprite.AreColliding(playerprojectiles[Projectile], sprite) && SpriteObjectInGameWorld.Contains(sprite))
+                    {
+                        
+                        playerprojectiles.RemoveAt(Projectile);                      
+                        SpriteObjectInGameWorld.Remove(sprite);
+                        renderList.Remove(sprite);
+                     }
+                 }
+            }
+           
+            foreach (AnimatedSprite sprite in AnimatedSpriteObject)
+            { 
+                for (int Projectile = 0; Projectile < playerprojectiles.Count(); Projectile++)
+                {
+                    if( BaseSprite.AreColliding(playerprojectiles[Projectile], sprite) && SpriteObjectInGameWorld.Contains(sprite))
+                    {
+                        sprite.Life -= playerprojectiles[Projectile].damageofprojectile;
+                        playerprojectiles.RemoveAt(Projectile);
+
+                        if (sprite.Life <= 0)
+                        {
+                            SpriteObjectInGameWorld.Remove(sprite);
+                            renderList.Remove(sprite);
+                            sprite.Life = sprite.FullHp;
+                        }
+                    }
+                }
+            }
+
 
             Point cell = Engine.ConvertPostionToCell(player.Origin);
             if ((cell.X == 17 && cell.Y == 14) && !gate2Locked)
@@ -198,9 +205,6 @@ namespace TileGame.GameScreens
                 gate1Locked = false;
 
 
-
-            //base.Update(gameTime);
-
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
@@ -208,16 +212,6 @@ namespace TileGame.GameScreens
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             tileMap.Draw(spriteBatch, camera);
-
-            //spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
-            //    null, null, null, null, camera.TransforMatrix);
-
-            //renderList.Sort(renderSort);
-
-            //foreach (BaseSprite sprite in renderList)
-            //    sprite.Draw(spriteBatch);
-
-            //spriteBatch.End();
 
             base.Draw(gameTime);
         }
