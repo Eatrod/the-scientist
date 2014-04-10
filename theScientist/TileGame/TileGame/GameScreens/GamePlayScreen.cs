@@ -102,8 +102,11 @@ namespace TileGame.GameScreens
             ContentManager Content = Game.Content;
             
             
-            tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testlayer.layer"));
-            tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/testlayerCollision.layer");
+            tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testGround.layer"));
+            tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testBack.layer"));
+            tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testMiddle.layer"));
+            tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testFront.layer"));
+            tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/testCollision.layer");
 
             //En Sprite i världen som återskapas vid entry.
             sprite = new Sprite(Content.Load<Texture2D>("Sprite/playerbox"));
