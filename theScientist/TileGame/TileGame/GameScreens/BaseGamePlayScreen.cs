@@ -16,6 +16,7 @@ using TileEngine;
 using TileEngine.Tiles;
 using TileEngine.Sprite;
 using TileEngine.Sprite.Npc;
+using TileEngine.Sprite.Projectiles;
 
 namespace TileGame.GameScreens
 {
@@ -43,9 +44,14 @@ namespace TileGame.GameScreens
         //Stamina & Healthbar
         static protected AnimatedSprite lifemeteranimation;
         static protected AnimatedSprite staminaanimation;
-        Rectangle lifeRect, staminaRect;
-        float life, stamina;
+        static protected AnimatedSprite chargeanimation;
+        Rectangle lifeRect, staminaRect, chargeRect;
+        float life, stamina, charge;
 
+
+        //Player Projectiles code
+        static protected AnimatedSprite arrowprojectile;
+        protected List<AnimatedProjectile> playerprojectiles = new List<AnimatedProjectile>();
 
         //List<AnimatedSprite> npcs = new List<AnimatedSprite>();
         protected List<BaseSprite> renderList = new List<BaseSprite>();
@@ -82,6 +88,7 @@ namespace TileGame.GameScreens
 
             lifeRect = new Rectangle(0, 0, 100, 20);//lifebarRectangle
             staminaRect = new Rectangle(0, 0, 100, 20);//staminabarRectangle
+            chargeRect = new Rectangle(0, 0, 100, 20); //chargeRectangle
 
             FrameAnimation down = new FrameAnimation(1, 32, 32, 0, 0);
             if(!player.Animations.ContainsKey("Down"))
@@ -126,6 +133,16 @@ namespace TileGame.GameScreens
                 staminaanimation.Animations.Add("StaminaFull", staminafull);
             
             staminaanimation.CurrentAnimationName = "StaminaFull";
+
+            //ChargeMeter Animation Code.
+            FrameAnimation chargebar = new FrameAnimation(1, 100, 20, 0, 0);
+            if (!chargeanimation.Animations.ContainsKey("ChargeBar"))
+                chargeanimation.Animations.Add("ChargeBar", chargebar);
+
+            chargeanimation.CurrentAnimationName = "ChargeBar";
+
+
+            
         }
         protected override void LoadContent()
         {
@@ -155,6 +172,14 @@ namespace TileGame.GameScreens
                 staminaanimation.SetSpritePositionInGameWorld(new Vector2(0, 0.7f));
             }
 
+            if (chargeanimation == null)
+            {
+                chargeanimation = new AnimatedSprite(Content.Load<Texture2D>("Sprite/ChargeBar"));
+                chargeanimation.SetSpritePositionInGameWorld(new Vector2(0, 1.4f));
+            }
+
+            
+
             //sprite = new Sprite(Content.Load<Texture2D>("Sprite/playerbox"));
             //sprite.Origionoffset = new Vector2(15, 15);
             //sprite.SetSpritePositionInGameWorld(new Vector2(5, 5));
@@ -165,11 +190,28 @@ namespace TileGame.GameScreens
             
             screen = (BaseGamePlayScreen)StateManager.CurrentState;
 
+            ContentManager Content = Game.Content;
+
+            foreach (AnimatedProjectile sprite in playerprojectiles)
+            {
+                sprite.updateprojectileposition();            
+            }
+
+            for (int i = 0; i < playerprojectiles.Count; i++ )
+            {
+                if (playerprojectiles[i].Life <= 0)
+                {
+                    playerprojectiles.RemoveAt(i);
+                }
+            }
+            
+
             player.Stamina += 0.1f;
             if (player.Stamina >= 100)
                 player.Stamina = 100;
             UpdateHealthBarAnimation();
             UpdateStaminaBarAnimation();
+            UpdateChargeBarAnimation();
             life = player.Life;
             Vector2 motion = Vector2.Zero;
 
@@ -181,8 +223,117 @@ namespace TileGame.GameScreens
                 motion.X--;
             if (InputHandler.KeyDown(Keys.Right))
                 motion.X++;
-            if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >= 0))
+            if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >=0))
+            {
+
+                NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
+                temparrow.UpdatecurrentAnimation(motion);        
+                playerprojectiles.Add(temparrow);
                 player.Stamina -= 20f;
+            }
+
+            if (InputHandler.KeyReleased(Keys.W) && (player.Stamina - 50 > 0))
+            {
+
+                FlamingArrowProjectile temparrow = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FlamingArrow"), 10f, 0.1f, 3f, player.Position);
+                temparrow.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow);
+                player.Stamina -= 50;                                    
+            }
+
+            if (InputHandler.KeyReleased(Keys.E) && (player.Stamina - 40 > 0)) //delay. fixas.
+            {
+                NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);               
+                NormalArrowProjectile temparrow1 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);                
+                NormalArrowProjectile temparrow2 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
+
+
+
+                if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "Down")
+                {
+                    temparrow1.Position.X += 10 ;                   
+                    temparrow2.Position.X -= 10 ;
+
+
+
+
+                    if (player.CurrentAnimationName == "Up")
+                    {
+                        temparrow1.Position.Y += 5;
+                        temparrow2.Position.Y += 5;
+                    }
+                    else
+                    {
+                        temparrow1.Position.Y -= 5;
+                        temparrow2.Position.Y -= 5;
+                    }
+                    
+                }                
+                else
+                {
+                    temparrow1.Position.Y += 10;
+                    temparrow2.Position.Y -= 10;
+
+                    if (player.CurrentAnimationName == "Left")
+                    {
+                        temparrow1.Position.X += 5;
+                        temparrow2.Position.X += 5;
+                    }
+                    else 
+                    {
+                        temparrow1.Position.X -= 5;
+                        temparrow2.Position.X -= 5;
+                    }
+                    
+                
+                }
+                temparrow.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow);
+                temparrow1.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow1);
+                temparrow2.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow2);
+                player.Stamina -= 40f;
+            
+            }
+
+            if (InputHandler.KeyDown(Keys.R))
+            {
+                player.Charge += 0.5f;
+                if(player.Charge >= 100)
+                    player.Charge = 100;           
+            }
+
+            if (InputHandler.KeyReleased(Keys.R))
+            {
+                if (player.Charge == 100 && (player.Stamina - 30) > 0)
+                {
+                    FlamingArrowProjectile temparrow = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FlamingArrow"), 10f, 0.1f, 3f, player.Position);
+                    temparrow.UpdatecurrentAnimation(motion);
+                    playerprojectiles.Add(temparrow);
+                    player.Stamina -= 30;
+                }
+
+                else if ((player.Stamina - 20) > 0)
+                {
+                    NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
+                    temparrow.UpdatecurrentAnimation(motion);
+                    playerprojectiles.Add(temparrow);
+                player.Stamina -= 20f;
+                }
+
+                else
+                {
+                    
+                    player.Stamina = 10;
+                }
+
+                player.Charge = 0;
+            }
+
+            if (InputHandler.KeyReleased(Keys.Tab))
+                player.Stamina = 100;
+
             if (InputHandler.KeyReleased(Keys.Escape))
             {
                 GameRef.lastGameScreen = GameRef.stateManager.CurrentState.Tag.ToString();
@@ -191,7 +342,7 @@ namespace TileGame.GameScreens
                 GameRef.playerStamina = player.Stamina;
                 StateManager.PushState(GameRef.StartMenuScreen);
             }
-
+            
 
             if (motion != Vector2.Zero)
             {
@@ -209,16 +360,16 @@ namespace TileGame.GameScreens
                 player.isAnimating = false;
                 motion = new Vector2(0, 0);
             }
-
+            
                 
 
-
+            
             motion = CheckCollisionAutomaticMotion(motion, player);
             UpdateSpriteAnimation(motion);
             player.Position += motion * player.Speed;
             player.ClampToArea(screen.tileMap.GetWidthInPixels(), screen.tileMap.GetHeightInPixels());  //Funktion för att hämta nuvarande tilemap state.
             player.Update(gameTime);
-
+            
 
             int screenWidth = GraphicsDevice.Viewport.Width;
             int screenHeight = GraphicsDevice.Viewport.Height;
@@ -235,6 +386,7 @@ namespace TileGame.GameScreens
                 player.areTakingDamage = false;
                 lifeRect = new Rectangle(0, 0, 100, 20);
                 staminaRect = new Rectangle(0, 0, 100, 20);
+                chargeRect = new Rectangle(0, 0, 100, 20);
 
             }
 
@@ -262,10 +414,13 @@ namespace TileGame.GameScreens
 
             base.Update(gameTime);
 
-                
-            
+
+
         }
 
+      
+
+      
         private void UpdateHealthBarAnimation()
         {
             life = player.Life;
@@ -302,6 +457,22 @@ namespace TileGame.GameScreens
             staminaanimation.CurrentAnimation.CurrentRectangle = staminaRect;
         }
 
+        private void UpdateChargeBarAnimation() //Code for Staminabar
+        {
+            charge = player.Charge;
+
+            if (chargeRect.Width > (int)charge)
+                chargeRect.Width = (int)charge;
+            if (chargeRect.Width < (int)charge)
+                chargeRect.Width = (int)charge;
+
+            chargeRect = new Rectangle(
+                chargeanimation.CurrentAnimation.CurrentRectangle.Location.X,
+                chargeanimation.CurrentAnimation.CurrentRectangle.Location.Y,
+                chargeRect.Width, chargeRect.Height);
+            chargeanimation.CurrentAnimation.CurrentRectangle = chargeRect;
+        }
+
         public override void Draw(GameTime gameTime)
         {
             //GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -316,13 +487,20 @@ namespace TileGame.GameScreens
             foreach (BaseSprite sprite in renderList)
                 sprite.Draw(spriteBatch);
 
+            foreach (AnimatedSprite sprite in playerprojectiles)
+            {
+                sprite.Draw(spriteBatch);
+            }
+
             spriteBatch.End();
 
             spriteBatch.Begin();
+         
             lifemeteranimation.Draw(spriteBatch);
             staminaanimation.Draw(spriteBatch);
+            chargeanimation.Draw(spriteBatch);
+            
             spriteBatch.End();
-
             base.Draw(gameTime);
         }
 
@@ -377,6 +555,8 @@ namespace TileGame.GameScreens
                 //motion = new Vector2(-1f, 0f);
             }
         }
+
+        
         #endregion
 
         #region Code for Collision with terrain

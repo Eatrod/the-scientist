@@ -69,6 +69,7 @@
     <Compile Include="Sprite\Npc\NPC_Neutral\NPC_Neutral_Critters.cs" />
     <Compile Include="Sprite\Npc\NPC_Neutral\NPC_Neutral_Critters_Goat.cs" />
     <Compile Include="Sprite\Npc\NPC_Neutral\NPC_Neutral_Townsfolk.cs" />
+    <Compile Include="Sprite\AnimatedProjectile.cs" />
     <Compile Include="Sprite\Npc\NPC.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Allied.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile.cs" />
@@ -83,6 +84,8 @@
     <Compile Include="Sprite\BaseSprite.cs" />
     <Compile Include="Sprite\Npc\NPC_Story\NPC_Story.cs" />
     <Compile Include="Sprite\PlayerCharacter.cs" />
+    <Compile Include="Sprite\Projectiles\FlamingArrowProjectile.cs" />
+    <Compile Include="Sprite\Projectiles\NormalArrowProjectile.cs" />
     <Compile Include="Sprite\Sprite.cs" />
     <Compile Include="Tiles\CollisionLayer.cs" />
     <Compile Include="Tiles\Engine.cs" />

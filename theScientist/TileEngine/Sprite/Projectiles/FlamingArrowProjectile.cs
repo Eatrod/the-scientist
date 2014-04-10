@@ -5,25 +5,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TileEngine.Sprite
+
+
+
+namespace TileEngine.Sprite.Projectiles
 {
-    public class AnimatedSprite : BaseSprite
+    public class FlamingArrowProjectile : AnimatedProjectile
     {
-        public Dictionary<string, FrameAnimation> Animations =
-            new Dictionary<string, FrameAnimation>();
+
+        //float damageofprojectile = 30;
 
         string currentAnimation = null;
-        bool animating = true;
-        bool takingDamage = false; //kanske flyttas till bas sprite 
+       
+        bool takingDamage = false;      //kanske flyttas till bas sprite 
 
-        protected float fullhp;
-
-        protected float damage = 0;
-        protected float life = 0;
-        protected float stamina = 0;
-        protected float charge = 0;
+        
 
         double oldTime = 0;  //taking damage see kommentar.
+
+        public float DamageOfProjectile
+        { 
+            get{return damageofprojectile;}
+        }
 
         public override Vector2 Center
         {
@@ -46,67 +49,8 @@ namespace TileEngine.Sprite
             }
         } 
 
-        public bool isAnimating
-        {
-            get { return animating; }
-            set { animating = value; }
-        }
-
-        public bool areTakingDamage
-        {
-            get { return takingDamage; }
-            set { takingDamage = value; }
-        }  //kanske flyttas
-
-        public float Damage
-        {
-            get { return damage; }
-            set { damage = value; }
-        }
-        public float Life
-        {
-            get { return life; }
-            set { life = value; }
-        }
-
-        public float FullHp
-        {
-            get { return fullhp; }
-            set { fullhp = value; }
-        }
-
-        public float Stamina
-        {
-            get { return stamina; }
-            set { stamina = value; }
-        }
-
-        public float Charge
-        {
-            get { return charge; }
-            set { charge = value; }
-        }
-
-        public FrameAnimation CurrentAnimation
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(currentAnimation))
-                    return Animations[currentAnimation];
-                else
-                    return null;
-            }
-        }
-
-        public string CurrentAnimationName
-        {
-            get { return currentAnimation; }
-            set 
-            {
-                if (Animations.ContainsKey(value))
-                    currentAnimation = value;
-            }
-        }
+        
+       
 
         public override void ClampToArea(int width, int height)
         {
@@ -196,9 +140,23 @@ namespace TileEngine.Sprite
             }
         }
 
-        public AnimatedSprite(Texture2D texture) : base(texture)
+
+        public FlamingArrowProjectile(Texture2D texture, float life, float timetolive, float speed, Vector2 position)
+            : base(texture) 
         {
-            //this.texture = texture;
+            this.damageofprojectile = 30;
+            this.life = life;
+            this.timetolive = timetolive;
+            this.speed = speed;
+            this.Position = position;
+            FrameAnimation right = new FrameAnimation(1, 25, 25, 0, 0);
+            this.Animations.Add("right", right);
+            FrameAnimation left = new FrameAnimation(1, 25, 25, 25, 0);
+            this.Animations.Add("left", left);
+            FrameAnimation down = new FrameAnimation(1, 25, 25, 50, 0);
+            this.Animations.Add("down", down);
+            FrameAnimation up = new FrameAnimation(1, 25, 25, 75, 0);
+            this.Animations.Add("up", up);
         }  //konstruktor 
     }
 }

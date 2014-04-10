@@ -7,21 +7,16 @@ using System.Text;
 
 namespace TileEngine.Sprite
 {
-    public class AnimatedSprite : BaseSprite
+    public class AnimatedProjectile : AnimatedSprite
     {
-        public Dictionary<string, FrameAnimation> Animations =
-            new Dictionary<string, FrameAnimation>();
 
+        public float damageofprojectile;
+        
         string currentAnimation = null;
-        bool animating = true;
-        bool takingDamage = false; //kanske flyttas till bas sprite 
+       
+        bool takingDamage = false;      //kanske flyttas till bas sprite 
 
-        protected float fullhp;
-
-        protected float damage = 0;
-        protected float life = 0;
-        protected float stamina = 0;
-        protected float charge = 0;
+        protected float timetolive = 0;
 
         double oldTime = 0;  //taking damage see kommentar.
 
@@ -46,67 +41,8 @@ namespace TileEngine.Sprite
             }
         } 
 
-        public bool isAnimating
-        {
-            get { return animating; }
-            set { animating = value; }
-        }
-
-        public bool areTakingDamage
-        {
-            get { return takingDamage; }
-            set { takingDamage = value; }
-        }  //kanske flyttas
-
-        public float Damage
-        {
-            get { return damage; }
-            set { damage = value; }
-        }
-        public float Life
-        {
-            get { return life; }
-            set { life = value; }
-        }
-
-        public float FullHp
-        {
-            get { return fullhp; }
-            set { fullhp = value; }
-        }
-
-        public float Stamina
-        {
-            get { return stamina; }
-            set { stamina = value; }
-        }
-
-        public float Charge
-        {
-            get { return charge; }
-            set { charge = value; }
-        }
-
-        public FrameAnimation CurrentAnimation
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(currentAnimation))
-                    return Animations[currentAnimation];
-                else
-                    return null;
-            }
-        }
-
-        public string CurrentAnimationName
-        {
-            get { return currentAnimation; }
-            set 
-            {
-                if (Animations.ContainsKey(value))
-                    currentAnimation = value;
-            }
-        }
+      
+       
 
         public override void ClampToArea(int width, int height)
         {
@@ -196,9 +132,51 @@ namespace TileEngine.Sprite
             }
         }
 
-        public AnimatedSprite(Texture2D texture) : base(texture)
+        public void updateprojectileposition()
         {
-            //this.texture = texture;
+            this.Life -= this.timetolive;
+            if (this.CurrentAnimationName == "right")
+                this.Position.X += 1 * this.Speed;
+            if (this.CurrentAnimationName == "left")
+                this.Position.X -= 1 * this.Speed;
+            if (this.CurrentAnimationName == "down")
+                this.Position.Y += 1 * this.Speed;
+            if (this.CurrentAnimationName == "up")
+                this.Position.Y -= 1 * this.Speed;
+        }
+
+        public void UpdatecurrentAnimation(Vector2 motion)
+        {
+            float motionAngle = (float)Math.Atan2(motion.Y, motion.X);
+
+            if (motionAngle >= -MathHelper.PiOver4 && motionAngle <= MathHelper.PiOver4)
+            {
+                this.CurrentAnimationName = "right"; //Right
+
+            }
+            else if (motionAngle >= MathHelper.PiOver4 && motionAngle <= 3f * MathHelper.PiOver4)
+            {
+                this.CurrentAnimationName = "down"; //Down
+
+            }
+            else if (motionAngle <= -MathHelper.PiOver4 && motionAngle >= -3f * MathHelper.PiOver4)
+            {
+                this.CurrentAnimationName = "up"; // Up
+
+            }
+            else
+            {
+                this.CurrentAnimationName = "left"; //Left
+
+            }
+        }
+        
+
+        public AnimatedProjectile(Texture2D texture) : base(texture)
+        {
+
         }  //konstruktor 
+
+       
     }
 }
