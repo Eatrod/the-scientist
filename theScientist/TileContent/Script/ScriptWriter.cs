@@ -8,9 +8,6 @@ using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
 using Microsoft.Xna.Framework.Content.Pipeline.Processors;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
-// TODO: replace this with the type you want to write out.
-using TWrite = System.String;
-
 namespace TileContent
 {
     /// <summary>
@@ -24,8 +21,9 @@ namespace TileContent
     {
         protected override void Write(ContentWriter output, ScriptContent value)
         {
-            output.Write(value.Conversation.Count);
-            foreach (ConversationContent c in value.Conversation)
+            output.Write(value.Conversations.Count);
+            //var ska enligt Nick vara ConversaionContent med det gav error så får försöka lita på att c# hanterar det
+            foreach (var c in value.Conversations)
             {
                 output.WriteObject(c);
             }
@@ -35,7 +33,7 @@ namespace TileContent
         {
             // TODO: change this to the name of your ContentTypeReader
             // class which will be used to load this data.
-            return "TileEngine.SpriteReader, TileEngine";
+            return "TileEngine.ScriptReader, TileEngine";
         }
     }
 
