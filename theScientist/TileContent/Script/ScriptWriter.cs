@@ -22,7 +22,6 @@ namespace TileContent
         protected override void Write(ContentWriter output, ScriptContent value)
         {
             output.Write(value.Conversations.Count);
-            //var ska enligt Nick vara ConversaionContent med det gav error så får försöka lita på att c# hanterar det
             foreach (ConversationContent c in value.Conversations)
             {
                 output.WriteObject(c);
@@ -56,7 +55,7 @@ namespace TileContent
         {
             // TODO: change this to the name of your ContentTypeReader
             // class which will be used to load this data.
-            return "TileEngine.ConversationReader, TileEngine";
+            return "TileEngine.Sprite.Npc.ConversationReader, TileEngine";
         }
     }
 
@@ -74,7 +73,7 @@ namespace TileContent
         {
             // TODO: change this to the name of your ContentTypeReader
             // class which will be used to load this data.
-            return "TileEngine.Sprite.Npc.ScriptReader, TileEngine";
+            return "TileEngine.Sprite.Npc.ConversationHandlerReader, TileEngine";
         }
     }
 }
