@@ -543,6 +543,7 @@ namespace TileEditor
                 else
                 {
                     int helpvar = 0;
+                    AddNewWorldTileLayerGroundTiles(newLayerForm);
                     AddNewWorldTileLayerBack(newLayerForm);
                     AddNewWorldTileLayer(newLayerForm);
                     AddNewWorldTileLayerFront(newLayerForm);
@@ -602,6 +603,17 @@ namespace TileEditor
             return collisionLayer;
         }
 
+        private void AddNewWorldTileLayerGroundTiles(frmNewLayer newLayerForm)
+        {
+            TileLayer tileLayer = new TileLayer(
+               int.Parse(newLayerForm.txtLayerHeight.Text),
+               int.Parse(newLayerForm.txtLayerWidth.Text));
+
+            layerDict.Add(newLayerForm.txtLayerName.Text + "Ground", tileLayer);
+            tileMap.Layers.Add(tileLayer);
+            lstLayers.Items.Add(newLayerForm.txtLayerName.Text + "Grund");
+        }
+
         private void AddNewWorldTileLayerBack(frmNewLayer newLayerForm)
         {
             TileLayer tileLayer = new TileLayer(
@@ -630,9 +642,9 @@ namespace TileEditor
                int.Parse(newLayerForm.txtLayerHeight.Text),
                int.Parse(newLayerForm.txtLayerWidth.Text));
 
-            layerDict.Add(newLayerForm.txtLayerName.Text, tileLayer);
+            layerDict.Add(newLayerForm.txtLayerName.Text + "Middle", tileLayer);
             tileMap.Layers.Add(tileLayer);
-            lstLayers.Items.Add(newLayerForm.txtLayerName.Text);
+            lstLayers.Items.Add(newLayerForm.txtLayerName.Text +"Middle");
         }
 
         private void btnRemoveLayer_Click(object sender, EventArgs e)
