@@ -9,8 +9,8 @@ namespace TileContent
 {
     public class ScriptContent
     {
-        public Collection<ConversationHandlerContent> Conversation =
-            new Collection<ConversationHandlerContent>();
+        public Collection<ConversationContent> Conversations =
+            new Collection<ConversationContent>();
     }
 
     public class ConversationContent
@@ -18,7 +18,6 @@ namespace TileContent
         public string name;
         public string Text;
         public Collection<ConversationHandlerContent> Handlers = new Collection<ConversationHandlerContent>();
-
       
     }
 
@@ -27,8 +26,7 @@ namespace TileContent
         public string caption;
         public string action;
         public object[] actionParameters;
-
-        
+     
     }
 
 }
