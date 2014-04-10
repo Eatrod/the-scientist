@@ -37,6 +37,7 @@ namespace TileEngine
             spriteFont = content.Load<SpriteFont>("Fonts/ControlFont");
 
             background = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+            background.SetData<Color>(new Color[] { Color.White });
         }
 
         public override void Update(GameTime gameTime)
@@ -44,9 +45,25 @@ namespace TileEngine
             KeyboardState newState = Keyboard.GetState();
 
             if (conversation != null || Npc != null)
+                return;
+
+            if (newState.IsKeyDown(Keys.Up) && lastState.IsKeyUp(Keys.Up))
             {
-                
+                currentHandler--;
+                if(currentHandler < 0)
+                    currentHandler = conversation.Handlers.Count - 1;
             }
+
+            if (newState.IsKeyDown(Keys.Down) && lastState.IsKeyUp(Keys.Down))
+            {
+                currentHandler = (currentHandler - 1) % conversation.Handlers.Count;
+            }
+
+            if (newState.IsKeyDown(Keys.Space) && lastState.IsKeyUp(Keys.Space))
+            {
+                conversation.Handlers[currentHandler].Invoke(Npc);
+            }
+
             lastState = newState;
         }
 
@@ -56,9 +73,13 @@ namespace TileEngine
                                            GraphicsDevice.Viewport.Height / 2 - area.Height / 2,
                                            area.Width,
                                            area.Height);
+            spriteBatch.Begin();
             spriteBatch.Draw(background,dest, new Color(0,0,0,100));
             spriteBatch.End();
+
+            spriteBatch.Begin();
             spriteBatch.DrawString(spriteFont,conversation.Text, new Vector2(dest.X, dest.Y), Color.White );
+            spriteBatch.End();
         }
     }
 }
