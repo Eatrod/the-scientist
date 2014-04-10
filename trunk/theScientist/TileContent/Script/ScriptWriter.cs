@@ -23,7 +23,7 @@ namespace TileContent
         {
             output.Write(value.Conversations.Count);
             //var ska enligt Nick vara ConversaionContent med det gav error så får försöka lita på att c# hanterar det
-            foreach (var c in value.Conversations)
+            foreach (ConversationContent c in value.Conversations)
             {
                 output.WriteObject(c);
             }
@@ -33,7 +33,7 @@ namespace TileContent
         {
             // TODO: change this to the name of your ContentTypeReader
             // class which will be used to load this data.
-            return "TileEngine.ScriptReader, TileEngine";
+            return "TileEngine.Sprite.Npc.ScriptReader, TileEngine";
         }
     }
 
@@ -74,7 +74,7 @@ namespace TileContent
         {
             // TODO: change this to the name of your ContentTypeReader
             // class which will be used to load this data.
-            return "MyNamespace.MyContentReader, MyGameAssembly";
+            return "TileEngine.Sprite.Npc.ScriptReader, TileEngine";
         }
     }
 }
