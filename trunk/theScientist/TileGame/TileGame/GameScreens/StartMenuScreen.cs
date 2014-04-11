@@ -166,7 +166,7 @@ namespace TileGame.GameScreens
             StateManager.ChangeState(GameRef.GamePlayScreen);
             PlayerScreen.player.Life = 100;
             GameRef.GamePlayScreen.Gate1Locked = true;
-            PlayerScreen.player.SetSpritePositionInGameWorld(new Vector2(4, 3));
+            PlayerScreen.player.SetSpritePositionInGameWorld(new Vector2(16, 6));
         }
         private void LoadGame()
         {

@@ -210,14 +210,16 @@ namespace TileGame.GameScreens
             life = player.Life;
             Vector2 motion = Vector2.Zero;
 
+
             if (InputHandler.KeyDown(Keys.Up))
-                motion.Y--;
+                motion.Y-=2;
             if (InputHandler.KeyDown(Keys.Down))
-                motion.Y++;
+                motion.Y+=2;
             if (InputHandler.KeyDown(Keys.Left))
-                motion.X--;
+                motion.X-=2;
             if (InputHandler.KeyDown(Keys.Right))
-                motion.X++;
+                motion.X+=2;
+            
             if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >=0))
             {
 
