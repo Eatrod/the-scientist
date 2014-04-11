@@ -6,7 +6,7 @@ using System.Text;
 using TileEngine.Sprite;
 using TileEngine;
 
-namespace TileEngine.Collision
+namespace TileGame.Collision
 {
     public class CollisionWithCharacter
     {

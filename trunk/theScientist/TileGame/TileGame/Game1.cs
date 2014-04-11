@@ -35,8 +35,8 @@ namespace TileGame
         public TitleScreen TitleScreen;
         public StartMenuScreen StartMenuScreen;
         public NotebookScreen NotebookScreen;
-        public GamePlayScreen GamePlayScreen;
-        public BaseGamePlayScreen BaseGamePlayScreen;
+        public PotatoTown GamePlayScreen;
+        public PlayerScreen BaseGamePlayScreen;
         public GamePlayScreen2 GamePlayScreen2;
 
         public string lastGameScreen;
@@ -78,9 +78,9 @@ namespace TileGame
             TitleScreen = new TitleScreen(this, stateManager);
             StartMenuScreen = new StartMenuScreen(this, stateManager);
             NotebookScreen = new NotebookScreen(this, stateManager);
-            GamePlayScreen = new GamePlayScreen(this, stateManager, "Screen1");
+            GamePlayScreen = new PotatoTown(this, stateManager, "Screen1");
             GamePlayScreen2 = new GamePlayScreen2(this, stateManager, "Screen2");
-            BaseGamePlayScreen = new BaseGamePlayScreen(this, stateManager);
+            BaseGamePlayScreen = new PlayerScreen(this, stateManager);
             stateManager.ChangeState(TitleScreen);
             gamePlayScreens.Add(GamePlayScreen);
             gamePlayScreens.Add(GamePlayScreen2);
