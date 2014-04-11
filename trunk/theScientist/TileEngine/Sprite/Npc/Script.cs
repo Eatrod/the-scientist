@@ -61,14 +61,14 @@ namespace TileEngine.Sprite.Npc
         public ConversationHandler(string caption, string methodName, object[] parameters)
         {
             this.caption = caption;
-            action = typeof(NPC).GetMethod(methodName);
+            action = typeof(NPC_Story.NPC_Story).GetMethod(methodName);
 
             if(parameters != null)
                 actionParameters = (object[])parameters.Clone();
             
         }
 
-        public void Invoke(NPC npc)
+        public void Invoke(NPC_Story.NPC_Story npc)
         {
             action.Invoke(npc, actionParameters);
         }
