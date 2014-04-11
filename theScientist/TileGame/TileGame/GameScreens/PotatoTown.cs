@@ -18,6 +18,7 @@ using XtheSmithLibrary;
 using TileEngine;
 using TileEngine.Tiles;
 using TileGame.Collision;
+using XtheSmithLibrary.Controls;
 
 namespace TileGame.GameScreens
 {
@@ -29,6 +30,7 @@ namespace TileGame.GameScreens
         string name;
         bool gate1Locked = true;
         bool gate2Locked = true;
+        private ContentManager Content;
 
         #endregion
         #region Property Region
@@ -105,7 +107,7 @@ namespace TileGame.GameScreens
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            ContentManager Content = Game.Content;
+            Content = Game.Content;
             
             
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testGround.layer"));
@@ -155,6 +157,10 @@ namespace TileGame.GameScreens
             {
                 if (npc.canTalk == false)
                 {
+                    Rectangle rectangle = new Rectangle(0, 1000, 1920, 100);
+                    dialogBox = new DialogBox(Content.Load<Texture2D>("BackGrounds/book"), rectangle, "TEST TEXT");
+                    ControlManager.Add(dialogBox);
+
                     npc.StartConversation("AsterixGreeting");
                     dialogBox.Text = npc.text.Text;
                     npc.canTalk = true;
