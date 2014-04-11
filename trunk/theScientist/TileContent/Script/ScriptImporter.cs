@@ -10,7 +10,10 @@ using System.Xml;
 
 namespace TileContent
 {
-    
+    /// <summary>
+    /// Läser in en .dialog fil och sparar den som en XML fil
+    /// Sedan skickas filen till ScriptProcessor klassen
+    /// </summary>
     [ContentImporter(".dialog", DisplayName = "NPC script Importer", DefaultProcessor = "ScriptProcessor")]
     public class ScriptImporter : ContentImporter<XmlDocument>
     {
