@@ -1,14 +1,11 @@
 ﻿#region Using fält
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+
 #endregion
 
 #region Klass fält
-namespace TileEngine.Sprite.Npc
+namespace TileEngine.Sprite.Npc.NPC_Neutral
 {
     public class NPC_Neutral : NPC
     {

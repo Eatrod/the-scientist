@@ -1,13 +1,10 @@
 ﻿#region Using fält
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using Microsoft.Xna.Framework.Graphics;
 
 #endregion
 
-namespace TileEngine.Sprite.Npc.Npc_Neutral
+namespace TileEngine.Sprite.Npc.NPC_Neutral
 {
     public class NPC_Neutral_Critters : NPC_Neutral
     {

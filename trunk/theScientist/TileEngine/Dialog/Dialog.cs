@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using TileEngine.Sprite.Npc;
+using TileEngine.Sprite.Npc.NPC_Story;
 
-namespace TileEngine
+namespace TileEngine.Dialog
 {
-    public class Dialog : DrawableGameComponent
+    public class Dialog
     {
-        //All kod för att göra dialog ruta med karaktärs ansiktena här
         public Conversation conversation = null;
         public NPC_Story Npc;
 
@@ -26,21 +22,14 @@ namespace TileEngine
         private int currentHandler = 0;
         private KeyboardState lastState;
 
-        public Dialog(Game game, ContentManager content) : base(game)
+        public void NextText(NPC_Story npc, Conversation conversation)
         {
-            this.content = content;
+            this.Npc = npc;
+            this.conversation = conversation;
+            conversation.Handlers[currentHandler].Invoke(Npc);
         }
 
-        protected override void LoadContent()
-        {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            spriteFont = content.Load<SpriteFont>("Fonts/ControlFont");
-
-            background = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
-            background.SetData<Color>(new Color[] { Color.White });
-        }
-
-        public override void Update(GameTime gameTime)
+        public void Update()
         {
             KeyboardState newState = Keyboard.GetState();
 
@@ -65,24 +54,6 @@ namespace TileEngine
             }
 
             lastState = newState;
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            Rectangle dest = new Rectangle(GraphicsDevice.Viewport.Width / 2 - area.Width / 2, 
-                                           GraphicsDevice.Viewport.Height / 2 - area.Height / 2,
-                                           area.Width,
-                                           area.Height);
-            spriteBatch.Begin();
-            spriteBatch.Draw(background,dest, new Color(0,0,0,100));
-            spriteBatch.End();
-
-            if (conversation == null)
-                return;
-
-            spriteBatch.Begin();
-            spriteBatch.DrawString(spriteFont,conversation.Text, new Vector2(dest.X, dest.Y), Color.White );
-            spriteBatch.End();
         }
     }
 }

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mime;
-using System.Text;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace TileEngine.Sprite.Npc.Npc_Story
+namespace TileEngine.Sprite.Npc.NPC_Story
 {
     class NPC_Story_Asterix : NPC_Story
     {
-        NPC_Story_Asterix(Texture2D texture, Dialog dialog, Script script) : base(texture, dialog, script)
+        NPC_Story_Asterix(Texture2D texture, Dialog.Dialog dialog, Script script) : base(texture, script)
         {
 
         }
