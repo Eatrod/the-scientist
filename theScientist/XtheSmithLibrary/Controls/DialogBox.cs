@@ -49,7 +49,7 @@ namespace XtheSmithLibrary.Controls
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            spriteBatch.DrawString(SpriteFont, Text, Position, Color.Black);
+            spriteBatch.DrawString(SpriteFont, Text, new Vector2(0,1000), Color.Black);
         }
 
         public override void HandleInput(PlayerIndex playerIndex)
