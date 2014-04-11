@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TileEngine.Sprite;
 using TileEngine;
+using TileEngine.Sprite;
 
 namespace TileGame.Collision
 {

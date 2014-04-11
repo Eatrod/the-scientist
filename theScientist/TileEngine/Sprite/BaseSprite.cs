@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TileEngine.Tiles;
 
 namespace TileEngine.Sprite
 {
@@ -58,8 +55,8 @@ namespace TileEngine.Sprite
 
         public void SetSpritePositionInGameWorld(Vector2 positionInTiles)
         {
-            this.Position.X = positionInTiles.X * TileEngine.Engine.TileWidth;
-            this.Position.Y = positionInTiles.Y * TileEngine.Engine.TileHeight;
+            this.Position.X = positionInTiles.X * Engine.TileWidth;
+            this.Position.Y = positionInTiles.Y * Engine.TileHeight;
         }
 
         public void SetSpritePositionInGameWorld(float posXInPixel, float posYInPixel)

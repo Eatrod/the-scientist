@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace TileEngine
+namespace TileEngine.Sprite
 {
     public class FrameAnimation : ICloneable
     {

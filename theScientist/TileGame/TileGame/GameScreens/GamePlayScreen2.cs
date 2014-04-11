@@ -10,12 +10,10 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Media;
-
+using TileEngine.Sprite;
 using XtheSmithLibrary;
 using TileEngine;
 using TileEngine.Tiles;
-using TileEngine.Sprite;
-using TileEngine.Sprite.Npc;
 
 namespace TileGame.GameScreens
 {

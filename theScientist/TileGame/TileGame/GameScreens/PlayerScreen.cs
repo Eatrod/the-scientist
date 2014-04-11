@@ -10,14 +10,14 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Media;
-
+using TileEngine.Dialog;
+using TileEngine.Sprite;
+using TileEngine.Sprite.Projectiles;
 using XtheSmithLibrary;
 using TileEngine;
 using TileEngine.Tiles;
-using TileEngine.Sprite;
-using TileEngine.Sprite.Npc;
-using TileEngine.Sprite.Projectiles;
 using TileGame.Collision;
+using XtheSmithLibrary.Controls;
 
 namespace TileGame.GameScreens
 {
@@ -29,6 +29,8 @@ namespace TileGame.GameScreens
         //bool gate1Locked = true;
         //bool gate2Locked = true;
         PlayerScreen screen;
+        protected DialogBox dialogBox;
+        
 
         #endregion
         #region Property Region
@@ -38,6 +40,7 @@ namespace TileGame.GameScreens
 
         public TileMap tileMap = new TileMap();
         protected Camera camera = new Camera();
+        private Dialog dialog;
 
         //Sprite sprite;
         static public PlayerCharacter player;
@@ -150,6 +153,8 @@ namespace TileGame.GameScreens
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ContentManager Content = Game.Content;
+
+            base.LoadContent();
                        
             if(player == null)
             {
@@ -177,8 +182,12 @@ namespace TileGame.GameScreens
                 chargeanimation = new AnimatedSprite(Content.Load<Texture2D>("Sprite/ChargeBar"));
                 chargeanimation.SetSpritePositionInGameWorld(new Vector2(0, 1.4f));
             }
+            Rectangle rectangle = new Rectangle(0,0,300,100);
+            dialog = new Dialog();
+            dialogBox = new DialogBox(Content.Load<Texture2D>("BackGrounds/book"),rectangle, "TEST TEXT");
+            ControlManager.Add(dialogBox);
 
-            base.LoadContent();
+            
         }
         public override void Update(GameTime gameTime)
         {
@@ -342,6 +351,8 @@ namespace TileGame.GameScreens
             if (InputHandler.KeyReleased(Keys.N))
                 StateManager.PushState(GameRef.NotebookScreen);
 
+            /*if(InputHandler.KeyReleased(Keys.Space))
+                dialog.NextText(GameRef.GamePlayScreen.npc,GameRef.GamePlayScreen.npc.text);*/
 
             if (motion != Vector2.Zero)
             {
@@ -498,6 +509,8 @@ namespace TileGame.GameScreens
             lifemeteranimation.Draw(spriteBatch);
             staminaanimation.Draw(spriteBatch);
             chargeanimation.Draw(spriteBatch);
+
+            ControlManager.Draw(spriteBatch);
             
             spriteBatch.End();
             base.Draw(gameTime);

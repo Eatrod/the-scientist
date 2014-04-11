@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace TileEngine.Sprite.Npc.Npc_Fighting.Npc_Fighting_Hostiles
+namespace TileEngine.Sprite.Npc.NPC_Fighting
 {
     class NPC_Fighting_Hostile_Wolf : NPC_Fighting_Hostile
     {

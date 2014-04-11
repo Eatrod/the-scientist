@@ -7,6 +7,9 @@ using System.Collections.ObjectModel;
 
 namespace TileContent
 {
+    /// <summary>
+    /// Hjälp klasser för hantering av konversationer och konversationsblock.
+    /// </summary>
     public class ScriptContent
     {
         public Collection<ConversationContent> Conversations =

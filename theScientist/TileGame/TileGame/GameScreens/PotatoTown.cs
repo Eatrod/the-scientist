@@ -10,12 +10,13 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Media;
-
+using TileEngine.Dialog;
+using TileEngine.Sprite;
+using TileEngine.Sprite.Npc;
+using TileEngine.Sprite.Npc.NPC_Story;
 using XtheSmithLibrary;
 using TileEngine;
 using TileEngine.Tiles;
-using TileEngine.Sprite;
-using TileEngine.Sprite.Npc;
 using TileGame.Collision;
 
 namespace TileGame.GameScreens
@@ -37,6 +38,9 @@ namespace TileGame.GameScreens
                 
         Sprite sprite, sprite1;
         AnimatedSprite NPC1, NPC2;
+        public NPC_Story npc;
+        protected Dialog dialog ;
+        private GraphicsDeviceManager graphics;
 
         CollisionWithCharacter CollisionWithCharacter = new CollisionWithCharacter();
        
@@ -59,8 +63,7 @@ namespace TileGame.GameScreens
         public PotatoTown(Game game, GameStateManager manager, string name)
             : base(game, manager)
         {
-            
-            //graphics = new GraphicsDeviceManager(this);
+            //graphics = new GraphicsDeviceManager(Game);
             //Microsoft.Xna.Framework.Content.RootDirectory = "Content";
             this.name = name;
         }
@@ -71,7 +74,7 @@ namespace TileGame.GameScreens
         public override void Initialize()
         {
             base.Initialize();
-
+            
             FrameAnimation down = new FrameAnimation(1, 32, 32, 0, 0);
             FrameAnimation right = new FrameAnimation(1, 32, 32, 32, 0);
             FrameAnimation up = new FrameAnimation(1, 32, 32, 64, 0);
@@ -136,6 +139,11 @@ namespace TileGame.GameScreens
             NPC2.Life = 5;
             NPC2.FullHp = 5;
             AnimatedSpriteObject.Add(NPC2);
+
+            npc = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/AsterixDialog"));
+            npc.Origionoffset = new Vector2(15, 15);
+            npc.SetSpritePositionInGameWorld(new Vector2(15, 15));
+            AnimatedSpriteObject.Add(npc);
             
             base.LoadContent();
         }
@@ -143,8 +151,12 @@ namespace TileGame.GameScreens
         {
 
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
-            
-            
+
+            if (npc.InSpeakingRange(player))
+            {
+                npc.StartConversation("AsterixGreeting");
+                dialogBox.Text = npc.text.Text;
+            }               
 
             //Point cell = Engine.ConvertPostionToCell(player.Origin);
             //if ((cell.X == 17 && cell.Y == 14) && !gate2Locked)
@@ -178,6 +190,7 @@ namespace TileGame.GameScreens
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             tileMap.Draw(spriteBatch, camera);
+
 
             base.Draw(gameTime);
         }
