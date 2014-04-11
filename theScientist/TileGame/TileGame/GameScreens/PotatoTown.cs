@@ -16,11 +16,11 @@ using TileEngine;
 using TileEngine.Tiles;
 using TileEngine.Sprite;
 using TileEngine.Sprite.Npc;
-using TileEngine.Collision;
+using TileGame.Collision;
 
 namespace TileGame.GameScreens
 {
-    public class GamePlayScreen : BaseGamePlayScreen
+    public class PotatoTown : PlayerScreen
     {
         
         #region Field Region
@@ -38,7 +38,7 @@ namespace TileGame.GameScreens
         Sprite sprite, sprite1;
         AnimatedSprite NPC1, NPC2;
 
-        CollisionWithCharacter Collision = new CollisionWithCharacter();
+        CollisionWithCharacter CollisionWithCharacter = new CollisionWithCharacter();
        
 
         List<BaseSprite> SpriteObject = new List<BaseSprite>();
@@ -56,7 +56,7 @@ namespace TileGame.GameScreens
 
 
         #region Constructor Region
-        public GamePlayScreen(Game game, GameStateManager manager, string name)
+        public PotatoTown(Game game, GameStateManager manager, string name)
             : base(game, manager)
         {
             
@@ -142,31 +142,31 @@ namespace TileGame.GameScreens
         public override void Update(GameTime gameTime)
         {
 
-            Collision.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
+            CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
             
             
 
-            Point cell = Engine.ConvertPostionToCell(player.Origin);
-            if ((cell.X == 17 && cell.Y == 14) && !gate2Locked)
-            {
-                GameRef.BaseGamePlayScreen.SetPlayerPosition(1, 2);
-                GameRef.GamePlayScreen2.Gate1Locked = true;
-                StateManager.ChangeState(GameRef.GamePlayScreen2);
+            //Point cell = Engine.ConvertPostionToCell(player.Origin);
+            //if ((cell.X == 17 && cell.Y == 14) && !gate2Locked)
+            //{
+            //    GameRef.BaseGamePlayScreen.SetPlayerPosition(1, 2);
+            //    GameRef.GamePlayScreen2.Gate1Locked = true;
+            //    StateManager.ChangeState(GameRef.GamePlayScreen2);
                 
-            }
-            if (cell.X != 17 || cell.Y != 14)
-                gate2Locked = false;
+            //}
+            //if (cell.X != 17 || cell.Y != 14)
+            //    gate2Locked = false;
 
-            if ((cell.X == 4 && cell.Y == 3) && !gate1Locked)
-            {
-                //player.SetSpritePositionInGameWorld(new Vector2(28, 28));
-                GameRef.BaseGamePlayScreen.SetPlayerPosition(28, 28);
-                GameRef.GamePlayScreen2.Gate2Locked = true;
-                StateManager.ChangeState(GameRef.GamePlayScreen2);
+            //if ((cell.X == 4 && cell.Y == 3) && !gate1Locked)
+            //{
+            //    //player.SetSpritePositionInGameWorld(new Vector2(28, 28));
+            //    GameRef.BaseGamePlayScreen.SetPlayerPosition(28, 28);
+            //    GameRef.GamePlayScreen2.Gate2Locked = true;
+            //    StateManager.ChangeState(GameRef.GamePlayScreen2);
                 
-            }
-            if (cell.X != 4 || cell.Y != 3)
-                gate1Locked = false;
+            //}
+            //if (cell.X != 4 || cell.Y != 3)
+            //    gate1Locked = false;
 
 
             base.Update(gameTime);

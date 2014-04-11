@@ -72,10 +72,12 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collision\CollisionWithCharacter.cs" />
+    <Compile Include="Collision\CollisionWithTerrain.cs" />
     <Compile Include="GameScreens\BaseGameState.cs" />
-    <Compile Include="GameScreens\BaseGamePlayScreen.cs" />
+    <Compile Include="GameScreens\PlayerScreen.cs" />
     <Compile Include="GameScreens\GamePlayScreen2.cs" />
-    <Compile Include="GameScreens\GamePlayScreen.cs" />
+    <Compile Include="GameScreens\PotatoTown.cs" />
     <Compile Include="GameScreens\NotebookScreen.cs" />
     <Compile Include="GameScreens\StartMenuScreen.cs" />
     <Compile Include="GameScreens\TitleScreen.cs" />
