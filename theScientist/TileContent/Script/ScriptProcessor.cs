@@ -12,7 +12,11 @@ using System.Collections;
 
 namespace TileContent
 {
- 
+ /// <summary>
+ /// Läser in en XML fil och går igenom den. Noderna sorteras därefter beroende på vilken typ dom är.
+ /// När ett "konversationsblock" lästs in sparas det som ett konversations objekt sen läses nästa block in.
+ /// Retunerar ett skript som skickas till ScriptReader i tileEngine via ScriptWriter klassen
+ /// </summary>
     [ContentProcessor(DisplayName = "NPC Script Processor")]
     public class ScriptProcessor : ContentProcessor<XmlDocument, ScriptContent>
     {
