@@ -110,7 +110,8 @@ namespace XtheSmithLibrary.Controls
         {
             Color = Color.White;
             Enabled = true;
-            Visible = true; SpriteFont = ControlManager.SpriteFont;
+            Visible = true; 
+            SpriteFont = ControlManager.SpriteFont;
         }
 
         #endregion

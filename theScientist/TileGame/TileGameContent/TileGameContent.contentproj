@@ -128,6 +128,12 @@
     <Fakes Include="Fakes\TileContent.fakes">
       <Name>TileContent</Name>
     </Fakes>
+    <Compile Include="Fonts\AGothiqueTime.spritefont">
+      <Name>AGothiqueTime</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <SubType>Designer</SubType>
+    </Compile>
     <None Include="Layers\Demo1.layer">
       <Name>Demo1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -140,6 +146,7 @@
       <Name>ControlFont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
+      <SubType>Designer</SubType>
     </Compile>
     <None Include="Layers\SecondLand.layer">
       <Name>SecondLand</Name>

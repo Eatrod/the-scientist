@@ -60,13 +60,13 @@ namespace TileGame.GameScreens
             leftText = new Label();
             leftText.Position = new Vector2(100, 100);
             leftText.Text = "";
-            leftText.Color = Color.BlueViolet;
+            leftText.Color = Color.DarkBlue;
             ControlManager.Add(leftText);
 
             rightText = new Label();
             rightText.Position = new Vector2(GraphicsDevice.Viewport.Width/ 2 + 67, 100);
             rightText.Text = "";
-            rightText.Color = Color.BlueViolet;
+            rightText.Color = Color.DarkBlue;
             ControlManager.Add(rightText);
 
             InsertTextToMessageDictionary(0, "");
