@@ -99,7 +99,6 @@ namespace TileGame.GameScreens
             SpriteObjectInGameWorld.AddRange(SpriteObject);            
             renderList.AddRange(SpriteObject);
             renderList.AddRange(AnimatedSpriteObject);
-
             
             
         }
@@ -142,7 +141,7 @@ namespace TileGame.GameScreens
 
             npc = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/AsterixDialog"));
             npc.Origionoffset = new Vector2(15, 15);
-            npc.SetSpritePositionInGameWorld(new Vector2(15, 15));
+            npc.SetSpritePositionInGameWorld(new Vector2(16, 16));
             AnimatedSpriteObject.Add(npc);
             
             base.LoadContent();
@@ -154,9 +153,13 @@ namespace TileGame.GameScreens
 
             if (npc.InSpeakingRange(player))
             {
-                npc.StartConversation("AsterixGreeting");
-                dialogBox.Text = npc.text.Text;
-            }               
+                if (npc.canTalk == false)
+                {
+                    npc.StartConversation("AsterixGreeting");
+                    dialogBox.Text = npc.text.Text;
+                    npc.canTalk = true;
+                }
+            }
 
             //Point cell = Engine.ConvertPostionToCell(player.Origin);
             //if ((cell.X == 17 && cell.Y == 14) && !gate2Locked)

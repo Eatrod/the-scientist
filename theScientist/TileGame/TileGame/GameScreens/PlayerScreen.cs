@@ -351,8 +351,11 @@ namespace TileGame.GameScreens
             if (InputHandler.KeyReleased(Keys.N))
                 StateManager.PushState(GameRef.NotebookScreen);
 
-            /*if(InputHandler.KeyReleased(Keys.Space))
-                dialog.NextText(GameRef.GamePlayScreen.npc,GameRef.GamePlayScreen.npc.text);*/
+            if (InputHandler.KeyReleased(Keys.Space))
+            {
+                dialog.NextText(GameRef.GamePlayScreen.npc, GameRef.GamePlayScreen.npc.text);
+                dialogBox.Text = dialog.conversation.Text;
+            }
 
             if (motion != Vector2.Zero)
             {
