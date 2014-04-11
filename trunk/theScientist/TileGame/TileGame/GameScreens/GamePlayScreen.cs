@@ -16,6 +16,7 @@ using TileEngine;
 using TileEngine.Tiles;
 using TileEngine.Sprite;
 using TileEngine.Sprite.Npc;
+using TileEngine.Collision;
 
 namespace TileGame.GameScreens
 {
@@ -36,11 +37,14 @@ namespace TileGame.GameScreens
                 
         Sprite sprite, sprite1;
         AnimatedSprite NPC1, NPC2;
-        
+
+        CollisionWithCharacter Collision = new CollisionWithCharacter();
+       
 
         List<BaseSprite> SpriteObject = new List<BaseSprite>();
         List<BaseSprite> AnimatedSpriteObject = new List<BaseSprite>();
         List<BaseSprite> SpriteObjectInGameWorld = new List<BaseSprite>();
+        List<AnimatedProjectile> NPCProjectile = new List<AnimatedProjectile>();
         
 
         public string Name { get { return name; } }
@@ -136,54 +140,11 @@ namespace TileGame.GameScreens
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
-        {            
+        {
 
-            foreach (BaseSprite s in SpriteObjectInGameWorld)
-            {
-                s.Update(gameTime);
-
-                if (BaseSprite.AreColliding(player, s))
-                {
-                    Vector2 d = Vector2.Normalize(s.Origin - player.Origin);
-                    player.Position =
-                        s.Position - (d * (player.CollisionRadius + s.CollisionRadius));
-                }
-            }
-
-                    
-            foreach (Sprite sprite in SpriteObject)
-            {
-                for (int Projectile = 0; Projectile < playerprojectiles.Count(); Projectile++)
-                {
-                    if (BaseSprite.AreColliding(playerprojectiles[Projectile], sprite) && SpriteObjectInGameWorld.Contains(sprite))
-                    {
-                        
-                        playerprojectiles.RemoveAt(Projectile);                      
-                        SpriteObjectInGameWorld.Remove(sprite);
-                        renderList.Remove(sprite);
-                     }
-                 }
-            }
-           
-            foreach (AnimatedSprite sprite in AnimatedSpriteObject)
-            { 
-                for (int Projectile = 0; Projectile < playerprojectiles.Count(); Projectile++)
-                {
-                    if( BaseSprite.AreColliding(playerprojectiles[Projectile], sprite) && SpriteObjectInGameWorld.Contains(sprite))
-                    {
-                        sprite.Life -= playerprojectiles[Projectile].damageofprojectile;
-                        playerprojectiles.RemoveAt(Projectile);
-
-                        if (sprite.Life <= 0)
-                        {
-                            SpriteObjectInGameWorld.Remove(sprite);
-                            renderList.Remove(sprite);
-                            sprite.Life = sprite.FullHp;
-                        }
-                    }
-                }
-            }
-
+            Collision.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
+            
+            
 
             Point cell = Engine.ConvertPostionToCell(player.Origin);
             if ((cell.X == 17 && cell.Y == 14) && !gate2Locked)
@@ -210,6 +171,8 @@ namespace TileGame.GameScreens
 
             base.Update(gameTime);
         }
+
+        
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
