@@ -184,8 +184,6 @@ namespace TileGame.GameScreens
             }
             Rectangle rectangle = new Rectangle(0,0,300,100);
             dialog = new Dialog();
-            dialogBox = new DialogBox(Content.Load<Texture2D>("BackGrounds/book"),rectangle, "TEST TEXT");
-            ControlManager.Add(dialogBox);
 
             
         }
