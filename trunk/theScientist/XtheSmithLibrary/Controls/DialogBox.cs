@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TileEngine.Sprite.Npc;
+using TileEngine.Sprite.Npc.NPC_Story;
 
 namespace XtheSmithLibrary.Controls
 {
@@ -12,6 +14,8 @@ namespace XtheSmithLibrary.Controls
         #region Field Region
 
         private string text;
+        private NPC_Story npc;
+        private Conversation conversation;
 
         #endregion
 
@@ -39,6 +43,7 @@ namespace XtheSmithLibrary.Controls
 
         public override void Update(GameTime gameTime)
         {
+            //conversation.Handlers[0].Invoke(npc);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
