@@ -41,7 +41,7 @@ namespace TileGame.GameScreens
         protected override void LoadContent()
         {
             ContentManager Content = Game.Content;
-            SpriteFont menuFont = Content.Load<SpriteFont>(@"Fonts\AGothiqueTime");
+            SpriteFont menuFont = Content.Load<SpriteFont>(@"Fonts\ControlFont");
             ControlManager = new ControlManager(menuFont);
             base.LoadContent();
         }
