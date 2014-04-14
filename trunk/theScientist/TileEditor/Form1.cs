@@ -169,11 +169,150 @@ namespace TileEditor
 
                                 int index = currentLayer.IsUsingTexture(texture);
 
-                                if (index == -1)
+                                if (index == -1 && !chbEntity.Checked)
                                 {
                                     currentLayer.AddTexture(texture);
                                     index = currentLayer.IsUsingTexture(texture);
                                 }
+
+
+                                if (chbEntity.Checked)
+                                {
+                                    if (cellX + 3 > currentLayer.Width || cellY + 4 > currentLayer.Height)
+                                    {
+                                        MessageBox.Show("Cant place a Entity there, please try again");
+                                        
+                                    }
+                                    else
+                                    {
+                                        int indexhelper = lstTexture.SelectedIndex;
+
+                                        for (int i = 0; i < 3; i++)
+                                        {
+                                            Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
+                                            int indextemp = currentLayer.IsUsingTexture(texturetemp);
+
+                                            if (indextemp == -1)
+                                            {
+                                                currentLayer.AddTexture(texturetemp);
+                                                indextemp = currentLayer.IsUsingTexture(texturetemp);
+                                            }
+
+                                            currentLayer.SetCellIndex(cellX + i, cellY, indextemp);
+                                           
+                                            lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
+
+
+                                        }
+
+                                        for (int i = 0; i < 3; i++)
+                                        {
+                                            Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
+                                            int indextemp = currentLayer.IsUsingTexture(texturetemp);
+
+                                            if (indextemp == -1)
+                                            {
+                                                currentLayer.AddTexture(texturetemp);
+                                                indextemp = currentLayer.IsUsingTexture(texturetemp);
+                                            }
+
+                                            currentLayer.SetCellIndex(cellX + i, cellY +1, indextemp);
+                                            
+                                            lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
+
+
+                                        }
+
+                                        for (int i = 0; i < 3; i++)
+                                        {
+                                            Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
+                                            int indextemp = currentLayer.IsUsingTexture(texturetemp);
+
+                                            if (indextemp == -1)
+                                            {
+                                                currentLayer.AddTexture(texturetemp);
+                                                indextemp = currentLayer.IsUsingTexture(texturetemp);
+                                            }
+
+                                            currentLayer.SetCellIndex(cellX + i, cellY+ 2, indextemp);
+                                            
+                                            lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
+
+
+                                        }
+
+                                        for (int i = 0; i < 3; i++)
+                                        {
+                                            Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
+                                            int indextemp = currentLayer.IsUsingTexture(texturetemp);
+
+                                            if (indextemp == -1)
+                                            {
+                                                currentLayer.AddTexture(texturetemp);
+                                                indextemp = currentLayer.IsUsingTexture(texturetemp);
+                                            }
+
+                                            currentLayer.SetCellIndex(cellX + i, cellY +3, indextemp);
+                                            if (i == 2)
+                                                break;
+                                            lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
+
+
+                                        }
+
+                                        //for (int i = 0; i < 3; i++)
+                                        //{
+                                        //    Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
+                                        //    int indextemp = currentLayer.IsUsingTexture(texturetemp);
+                                        //    if (indextemp == -1)
+                                        //    {
+                                        //        currentLayer.AddTexture(texturetemp);
+                                        //        indextemp = currentLayer.IsUsingTexture(texturetemp);
+                                        //    }
+                                        //    currentLayer.SetCellIndex(cellX + i, cellY + 1, indextemp);
+                                        //    if (i == 2)
+                                        //        break;
+                                        //    lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
+
+                                        //}
+
+                                        //for (int i = 0; i < 3; i++)
+                                        //{
+                                        //    Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
+                                        //    int indextemp = currentLayer.IsUsingTexture(texturetemp);
+                                        //    if (indextemp == -1)
+                                        //    {
+                                        //        currentLayer.AddTexture(texturetemp);
+                                        //        indextemp = currentLayer.IsUsingTexture(texturetemp);
+                                        //    }
+                                        //    currentLayer.SetCellIndex(cellX + i, cellY + 2, indextemp);
+                                        //    if (i == 2)
+                                        //        break;
+                                        //    lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
+
+                                        //}
+
+                                        //for (int i = 0; i < 3; i++)
+                                        //{
+                                        //    Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
+                                        //    int indextemp = currentLayer.IsUsingTexture(texturetemp);
+                                        //    if (indextemp == -1)
+                                        //    {
+                                        //        currentLayer.AddTexture(texturetemp);
+                                        //        indextemp = currentLayer.IsUsingTexture(texturetemp);
+                                        //    }
+                                        //    currentLayer.SetCellIndex(cellX + i, cellY + 3, indextemp);
+                                        //    if (i == 2)
+                                        //        break;
+
+                                        //    lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
+
+                                        //}
+
+                                        lstTexture.SelectedIndex = indexhelper;
+                                    }
+                                }
+
 
                                 if (chbFill.Checked)
                                 {
@@ -181,7 +320,8 @@ namespace TileEditor
                                     FillCell(cellX, cellY, index);
                                 }
                                 else
-                                    currentLayer.SetCellIndex(cellX, cellY, index);
+                                    if(!chbEntity.Checked)
+                                        currentLayer.SetCellIndex(cellX, cellY, index);
                             }
 
                             else if (rdbErase.Checked)
@@ -732,6 +872,18 @@ namespace TileEditor
         private void fileToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
         {
             AreUsingMenu = false;
+        }
+
+        private void chbEntity_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chbEntity.Checked == true)
+                chbFill.Checked = false;
+        }
+
+        private void chbFill_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chbFill.Checked == true)
+                chbEntity.Checked = false;
         }
     
     }     
