@@ -139,6 +139,16 @@
     <Content Include="Content\EmptyTile.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\G0.png" />
+    <Content Include="Content\G1.png" />
+    <Content Include="Content\G2.png" />
+    <Content Include="Content\G3.png" />
+    <Content Include="Content\G4.png" />
+    <Content Include="Content\G5.png" />
+    <Content Include="Content\G6.png" />
+    <Content Include="Content\G7.png" />
+    <Content Include="Content\G8.png" />
+    <Content Include="Content\G9.png" />
     <Content Include="Content\Left.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
