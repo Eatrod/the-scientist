@@ -128,12 +128,12 @@
     <Fakes Include="Fakes\TileContent.fakes">
       <Name>TileContent</Name>
     </Fakes>
-    <Compile Include="Fonts\AGothiqueTime.spritefont">
+    <None Include="Fonts\AGothiqueTime.spritefont">
       <Name>AGothiqueTime</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <SubType>Designer</SubType>
-    </Compile>
+    </None>
     <None Include="Layers\Demo1.layer">
       <Name>Demo1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -502,6 +502,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sounds\Music\ending_gameMusic.mp3">
+      <Name>ending_gameMusic</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="Sounds\Music\Eruption_gameMusic.mp3">
+      <Name>Eruption_gameMusic</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="Sounds\Music\Night_vision_gameMusic.mp3">
+      <Name>Night_vision_gameMusic</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="CollisionTiles\G0.png">
       <Name>G0</Name>
       <Importer>TextureImporter</Importer>
@@ -549,6 +566,148 @@
     </Compile>
     <Compile Include="CollisionTiles\G9.png">
       <Name>G9</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Sounds\Effects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tiles\Church.png">
+      <Name>Church</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchCross.png">
+      <Name>ChurchCross</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchCrossRight.png">
+      <Name>ChurchCrossRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchDoorLeftLower.png">
+      <Name>ChurchDoorLeftLower</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchDoorLeftMiddle.png">
+      <Name>ChurchDoorLeftMiddle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchDoorLeftUpper.png">
+      <Name>ChurchDoorLeftUpper</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchDoorRightLower.png">
+      <Name>ChurchDoorRightLower</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchDoorRightMiddle.png">
+      <Name>ChurchDoorRightMiddle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchDoorRightUpper.png">
+      <Name>ChurchDoorRightUpper</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchRoof.png">
+      <Name>ChurchRoof</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchRoofLower.png">
+      <Name>ChurchRoofLower</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchStoneWall.png">
+      <Name>ChurchStoneWall</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchTowerLeft.png">
+      <Name>ChurchTowerLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchTowerRight.png">
+      <Name>ChurchTowerRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchWall.png">
+      <Name>ChurchWall</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchWindowCrossLeft.png">
+      <Name>ChurchWindowCrossLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchWindowCrossRight.png">
+      <Name>ChurchWindowCrossRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchWindowLeftLower.png">
+      <Name>ChurchWindowLeftLower</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchWindowLeftUpper.png">
+      <Name>ChurchWindowLeftUpper</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchWindowRightLower.png">
+      <Name>ChurchWindowRightLower</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\ChurchWindowRightUpper.png">
+      <Name>ChurchWindowRightUpper</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tiles\FencePostDown.png">
+      <Name>FencePostDown</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\FencePostDownLeft.png">
+      <Name>FencePostDownLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\FencePostDownRight.png">
+      <Name>FencePostDownRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\FencePostDownRightLeft.png">
+      <Name>FencePostDownRightLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\FencePostLeft.png">
+      <Name>FencePostLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\FencePostRight.png">
+      <Name>FencePostRight</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
