@@ -178,138 +178,69 @@ namespace TileEditor
 
                                 if (chbEntity.Checked)
                                 {
-                                    if (cellX + 3 > currentLayer.Width || cellY + 4 > currentLayer.Height)
+                                    int parsedValue;
+                                    int startIndex = lstTexture.SelectedIndex;
+                                    
+
+                                    if ((String.IsNullOrEmpty(txtEntityHeight.Text)) || (String.IsNullOrEmpty(txtEntityWidth.Text)))
                                     {
-                                        MessageBox.Show("Cant place a Entity there, please try again");
-                                        
+                                        MessageBox.Show("Please provide dimensions for the entity you would like to draw.");
+                                    }
+
+                                    else if (!int.TryParse(txtEntityHeight.Text, out parsedValue) || !int.TryParse(txtEntityWidth.Text, out parsedValue))
+                                    {
+                                        MessageBox.Show("Incorrect input in entity boxes. Please use integers.");
                                     }
                                     else
                                     {
-                                        int indexhelper = lstTexture.SelectedIndex;
 
-                                        for (int i = 0; i < 3; i++)
+                                        int entityWidth = Convert.ToInt16(txtEntityWidth.Text);
+                                        int entityHeight = Convert.ToInt16(txtEntityHeight.Text);
+                                        int lastIndex = entityWidth * entityHeight - 1;
+
+                                        if (startIndex + lastIndex > lstTexture.Items.Count)
                                         {
-                                            Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
-                                            int indextemp = currentLayer.IsUsingTexture(texturetemp);
-
-                                            if (indextemp == -1)
-                                            {
-                                                currentLayer.AddTexture(texturetemp);
-                                                indextemp = currentLayer.IsUsingTexture(texturetemp);
-                                            }
-
-                                            currentLayer.SetCellIndex(cellX + i, cellY, indextemp);
-                                           
-                                            lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
-
-
+                                            MessageBox.Show("Cant make a entity of that size with provided texture");
                                         }
-
-                                        for (int i = 0; i < 3; i++)
+                                        else
                                         {
-                                            Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
-                                            int indextemp = currentLayer.IsUsingTexture(texturetemp);
-
-                                            if (indextemp == -1)
+                                            if (cellX + entityWidth > currentLayer.Width || cellY + entityHeight > currentLayer.Height)
                                             {
-                                                currentLayer.AddTexture(texturetemp);
-                                                indextemp = currentLayer.IsUsingTexture(texturetemp);
+                                                MessageBox.Show("Can't place an entity there, please try again.");
+
                                             }
-
-                                            currentLayer.SetCellIndex(cellX + i, cellY +1, indextemp);
-                                            
-                                            lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
-
-
-                                        }
-
-                                        for (int i = 0; i < 3; i++)
-                                        {
-                                            Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
-                                            int indextemp = currentLayer.IsUsingTexture(texturetemp);
-
-                                            if (indextemp == -1)
+                                            else
                                             {
-                                                currentLayer.AddTexture(texturetemp);
-                                                indextemp = currentLayer.IsUsingTexture(texturetemp);
+                                                int indexhelper = lstTexture.SelectedIndex;
+
+
+                                                for (int y = 0; y < entityHeight; y++)
+                                                {
+                                                    for (int x = 0; x < entityWidth; x++)
+                                                    {
+                                                        Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
+                                                        int indextemp = currentLayer.IsUsingTexture(texturetemp);
+
+                                                        if (indextemp == -1)
+                                                        {
+                                                            currentLayer.AddTexture(texturetemp);
+                                                            indextemp = currentLayer.IsUsingTexture(texturetemp);
+                                                        }
+
+                                                        currentLayer.SetCellIndex(cellX + x, cellY + y, indextemp);
+
+                                                        if (y == entityHeight - 1 && x == entityWidth - 1)
+                                                            break;
+
+                                                        lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
+
+
+                                                    }
+                                                }
+
+                                                lstTexture.SelectedIndex = indexhelper;
                                             }
-
-                                            currentLayer.SetCellIndex(cellX + i, cellY+ 2, indextemp);
-                                            
-                                            lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
-
-
                                         }
-
-                                        for (int i = 0; i < 3; i++)
-                                        {
-                                            Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
-                                            int indextemp = currentLayer.IsUsingTexture(texturetemp);
-
-                                            if (indextemp == -1)
-                                            {
-                                                currentLayer.AddTexture(texturetemp);
-                                                indextemp = currentLayer.IsUsingTexture(texturetemp);
-                                            }
-
-                                            currentLayer.SetCellIndex(cellX + i, cellY +3, indextemp);
-                                            if (i == 2)
-                                                break;
-                                            lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
-
-
-                                        }
-
-                                        //for (int i = 0; i < 3; i++)
-                                        //{
-                                        //    Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
-                                        //    int indextemp = currentLayer.IsUsingTexture(texturetemp);
-                                        //    if (indextemp == -1)
-                                        //    {
-                                        //        currentLayer.AddTexture(texturetemp);
-                                        //        indextemp = currentLayer.IsUsingTexture(texturetemp);
-                                        //    }
-                                        //    currentLayer.SetCellIndex(cellX + i, cellY + 1, indextemp);
-                                        //    if (i == 2)
-                                        //        break;
-                                        //    lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
-
-                                        //}
-
-                                        //for (int i = 0; i < 3; i++)
-                                        //{
-                                        //    Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
-                                        //    int indextemp = currentLayer.IsUsingTexture(texturetemp);
-                                        //    if (indextemp == -1)
-                                        //    {
-                                        //        currentLayer.AddTexture(texturetemp);
-                                        //        indextemp = currentLayer.IsUsingTexture(texturetemp);
-                                        //    }
-                                        //    currentLayer.SetCellIndex(cellX + i, cellY + 2, indextemp);
-                                        //    if (i == 2)
-                                        //        break;
-                                        //    lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
-
-                                        //}
-
-                                        //for (int i = 0; i < 3; i++)
-                                        //{
-                                        //    Texture2D texturetemp = textureDict[lstTexture.SelectedItem as string];
-                                        //    int indextemp = currentLayer.IsUsingTexture(texturetemp);
-                                        //    if (indextemp == -1)
-                                        //    {
-                                        //        currentLayer.AddTexture(texturetemp);
-                                        //        indextemp = currentLayer.IsUsingTexture(texturetemp);
-                                        //    }
-                                        //    currentLayer.SetCellIndex(cellX + i, cellY + 3, indextemp);
-                                        //    if (i == 2)
-                                        //        break;
-
-                                        //    lstTexture.SelectedIndex = lstTexture.SelectedIndex + 1;
-
-                                        //}
-
-                                        lstTexture.SelectedIndex = indexhelper;
                                     }
                                 }
 
