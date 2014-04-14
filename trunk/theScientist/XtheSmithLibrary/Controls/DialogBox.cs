@@ -20,7 +20,7 @@ namespace XtheSmithLibrary.Controls
         private string text;
         public NPC_Story npc;
         public PlayerCharacter player;
-        private Conversation conversation;
+        public Conversation conversation;
         public static char[] NewLine = { '\r', '\n' };
         private Rectangle rectangle;
         private StringBuilder stringBuilder;
@@ -54,10 +54,10 @@ namespace XtheSmithLibrary.Controls
 
         public override void Update(GameTime gameTime)
         {
-            
-           /* KeyboardState newState = Keyboard.GetState();
+            /*
+            KeyboardState newState = Keyboard.GetState();
 
-            if (conversation == null || npc == null)
+            if (npc == null)
                 return;
 
             if (newState.IsKeyDown(Keys.Up) && lastState.IsKeyUp(Keys.Up))
@@ -88,7 +88,7 @@ namespace XtheSmithLibrary.Controls
             Text = stringBuilder.ToString();
             spriteBatch.DrawString(SpriteFont, Text, new Vector2(200,1000), Color.Black);
 
-           /* for (int i = 0; i < npc.text.Handlers.Count; ++i)
+            /*for (int i = 0; i < npc.text.Handlers.Count; ++i)
             {
                 string handler = npc.text.Handlers[i].Caption;
 
