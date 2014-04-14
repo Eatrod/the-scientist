@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using TileEngine.Sprite;
 using TileEngine.Sprite.Npc;
 using TileEngine.Sprite.Npc.NPC_Story;
 
@@ -15,10 +18,12 @@ namespace XtheSmithLibrary.Controls
 
         private string text;
         public NPC_Story npc;
+        public PlayerCharacter player;
         private Conversation conversation;
         public static char[] NewLine = { '\r', '\n' };
         private Rectangle rectangle;
         private StringBuilder stringBuilder;
+        private ContentManager content;
 
         #endregion
 
@@ -59,12 +64,22 @@ namespace XtheSmithLibrary.Controls
             spriteBatch.DrawString(SpriteFont, Text, new Vector2(200,1000), Color.Black);
 
             Rectangle pictureRectangle = new Rectangle(0, rectangle.Y, 200, 100);
-            if (npc.picture != null)
+            if (npc.picture != null && "Asterix" == whoSaid(Text))
                 spriteBatch.Draw(npc.picture,pictureRectangle, Color.White);
+            else
+            {
+                spriteBatch.Draw(player.portrait, pictureRectangle, Color.White);
+            }
         }
 
         public override void HandleInput(PlayerIndex playerIndex)
         {
+        }
+
+        public string whoSaid(string text)
+        {
+            string[] talker = text.Split(':');
+            return talker[0];
         }
 
         public static void WrapWord(StringBuilder original, StringBuilder target, SpriteFont font, Rectangle bounds)
