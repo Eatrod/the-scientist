@@ -249,12 +249,12 @@
       <Name>testMiddle</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Scripts\npc1.script">
+    <Compile Include="Scripts\npc1.dialog">
       <Name>npc1</Name>
-      <Importer>XmlImporter</Importer>
-      <Processor>PassThroughProcessor</Processor>
+      <Importer>ScriptImporter</Importer>
+      <Processor>ScriptProcessor</Processor>
       <SubType>Designer</SubType>
-    </None>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tiles\Stonewall0000.png">

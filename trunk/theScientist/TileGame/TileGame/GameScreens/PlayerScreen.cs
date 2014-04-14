@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Media;
 using TileEngine.Dialog;
 using TileEngine.Sprite;
+using TileEngine.Sprite.Npc.NPC_Story;
 using TileEngine.Sprite.Projectiles;
 using XtheSmithLibrary;
 using TileEngine;
@@ -355,10 +356,11 @@ namespace TileGame.GameScreens
             if (InputHandler.KeyReleased(Keys.N))
                 StateManager.PushState(GameRef.NotebookScreen);
 
+            dialogBox.Update(gameTime);
             if (InputHandler.KeyReleased(Keys.Space))
             {
                 if (ActiveConversation == true)
-                {
+                {                  
                     dialog.NextText(GameRef.GamePlayScreen.npc, GameRef.GamePlayScreen.npc.text);
                     dialogBox.Text = dialog.conversation.Text;
                 }
@@ -581,7 +583,27 @@ namespace TileGame.GameScreens
         
         #endregion
 
-       
+        public void PlayerStartConversation(NPC_Story npc)
+        {
+            dialogBox.player = player;
+            dialogBox.npc = npc;
+            ActiveConversation = true;
+            dialogBox.Enabled = true;
+            dialogBox.Visible = true;
+            ControlManager.Add(dialogBox);
+            npc.StartConversation("AsterixGreeting");
+            dialogBox.Text = npc.text.Text;
+        }
+
+        public void PlayerEndConversation(NPC_Story npc)
+        {
+            dialogBox.Visible = false;
+            dialogBox.Enabled = false;
+            dialogBox.npc = null;
+            ControlManager.Remove(dialogBox);
+            npc.canTalk = true;
+            ActiveConversation = false;
+        }
 
         public void SetPlayerPosition(int x, int y)
         {
