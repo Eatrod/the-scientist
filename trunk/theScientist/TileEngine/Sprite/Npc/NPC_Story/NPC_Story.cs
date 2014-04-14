@@ -3,6 +3,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 #endregion
 
@@ -11,13 +12,15 @@ namespace TileEngine.Sprite.Npc.NPC_Story
     public class NPC_Story : NPC
     {
         protected bool Immortal { get; set; }
-        protected float speakingRadius = 20f;
-        public bool canTalk = false;
+        protected float speakingRadius = 25f;
+        public bool canTalk = true;
         public Conversation text;
+        public Texture2D picture;
 
-        public NPC_Story(Texture2D texture, Script script) : base(texture,script)
+        public NPC_Story(Texture2D texture, Script script, Texture2D picture) : base(texture,script)
         {
             this.Immortal = true;
+            this.picture = picture;
         }
 
         public float SpeakingRadius
@@ -35,7 +38,7 @@ namespace TileEngine.Sprite.Npc.NPC_Story
 
         public void StartConversation(string conversationName)
         {
-            if (script == null)
+            if (script == null || canTalk == false)
                 return;
             text = script[conversationName];
             
@@ -43,10 +46,9 @@ namespace TileEngine.Sprite.Npc.NPC_Story
 
         public void EndConversation()
         {
-            /*if (script == null || dialog == null)
+            if (script == null)
                 return;
-            dialog.Enabled = false;
-            dialog.Visible = false;*/
+            canTalk = false;
         }
     }
 }
