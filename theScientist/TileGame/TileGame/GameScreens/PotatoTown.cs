@@ -166,7 +166,7 @@ namespace TileGame.GameScreens
                     npc.canTalk = true;
                 }
             }
-
+            
             //Point cell = Engine.ConvertPostionToCell(player.Origin);
             //if ((cell.X == 17 && cell.Y == 14) && !gate2Locked)
             //{
