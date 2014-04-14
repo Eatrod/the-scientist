@@ -55,9 +55,15 @@
             this.trbAlphaSlider = new System.Windows.Forms.TrackBar();
             this.chbEntity = new System.Windows.Forms.CheckBox();
             this.tileDisplay1 = new TileEditor.TileDisplay();
+            this.grpEntity = new System.Windows.Forms.GroupBox();
+            this.lblEntityWidth = new System.Windows.Forms.Label();
+            this.lblEntityHeight = new System.Windows.Forms.Label();
+            this.txtEntityWidth = new System.Windows.Forms.TextBox();
+            this.txtEntityHeight = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picbTexturePreviev)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbAlphaSlider)).BeginInit();
+            this.grpEntity.SuspendLayout();
             this.SuspendLayout();
             // 
             // hScrollBar1
@@ -276,7 +282,7 @@
             // chbEntity
             // 
             this.chbEntity.AutoSize = true;
-            this.chbEntity.Location = new System.Drawing.Point(903, 98);
+            this.chbEntity.Location = new System.Drawing.Point(903, 99);
             this.chbEntity.Name = "chbEntity";
             this.chbEntity.Size = new System.Drawing.Size(52, 17);
             this.chbEntity.TabIndex = 13;
@@ -293,6 +299,51 @@
             this.tileDisplay1.Size = new System.Drawing.Size(754, 588);
             this.tileDisplay1.TabIndex = 0;
             this.tileDisplay1.Text = "tileDisplay1";
+            // 
+            // grpEntity
+            // 
+            this.grpEntity.Controls.Add(this.txtEntityHeight);
+            this.grpEntity.Controls.Add(this.txtEntityWidth);
+            this.grpEntity.Controls.Add(this.lblEntityHeight);
+            this.grpEntity.Controls.Add(this.lblEntityWidth);
+            this.grpEntity.Location = new System.Drawing.Point(961, 72);
+            this.grpEntity.Name = "grpEntity";
+            this.grpEntity.Size = new System.Drawing.Size(199, 44);
+            this.grpEntity.TabIndex = 14;
+            this.grpEntity.TabStop = false;
+            this.grpEntity.Text = "Entity";
+            // 
+            // lblEntityWidth
+            // 
+            this.lblEntityWidth.AutoSize = true;
+            this.lblEntityWidth.Location = new System.Drawing.Point(11, 20);
+            this.lblEntityWidth.Name = "lblEntityWidth";
+            this.lblEntityWidth.Size = new System.Drawing.Size(35, 13);
+            this.lblEntityWidth.TabIndex = 0;
+            this.lblEntityWidth.Text = "Width";
+            // 
+            // lblEntityHeight
+            // 
+            this.lblEntityHeight.AutoSize = true;
+            this.lblEntityHeight.Location = new System.Drawing.Point(99, 20);
+            this.lblEntityHeight.Name = "lblEntityHeight";
+            this.lblEntityHeight.Size = new System.Drawing.Size(38, 13);
+            this.lblEntityHeight.TabIndex = 1;
+            this.lblEntityHeight.Text = "Height";
+            // 
+            // txtEntityWidth
+            // 
+            this.txtEntityWidth.Location = new System.Drawing.Point(50, 16);
+            this.txtEntityWidth.Name = "txtEntityWidth";
+            this.txtEntityWidth.Size = new System.Drawing.Size(40, 20);
+            this.txtEntityWidth.TabIndex = 2;
+            // 
+            // txtEntityHeight
+            // 
+            this.txtEntityHeight.Location = new System.Drawing.Point(141, 16);
+            this.txtEntityHeight.Name = "txtEntityHeight";
+            this.txtEntityHeight.Size = new System.Drawing.Size(40, 20);
+            this.txtEntityHeight.TabIndex = 3;
             // 
             // Form1
             // 
@@ -319,6 +370,7 @@
             this.Controls.Add(this.hScrollBar1);
             this.Controls.Add(this.tileDisplay1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.grpEntity);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Tile Editor";
@@ -326,6 +378,8 @@
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picbTexturePreviev)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbAlphaSlider)).EndInit();
+            this.grpEntity.ResumeLayout(false);
+            this.grpEntity.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -360,6 +414,11 @@
         private System.Windows.Forms.CheckBox chbFill;
         private System.Windows.Forms.TrackBar trbAlphaSlider;
         private System.Windows.Forms.CheckBox chbEntity;
+        private System.Windows.Forms.GroupBox grpEntity;
+        private System.Windows.Forms.TextBox txtEntityHeight;
+        private System.Windows.Forms.TextBox txtEntityWidth;
+        private System.Windows.Forms.Label lblEntityHeight;
+        private System.Windows.Forms.Label lblEntityWidth;
     }
 }
 
