@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Configuration;
 using System.Text;
 
 using Microsoft.Xna.Framework;
@@ -41,6 +42,7 @@ namespace TileGame.GameScreens
         Sprite sprite, sprite1;
         AnimatedSprite NPC1, NPC2;
         public NPC_Story npc;
+        public List<NPC_Story> NpcStoryList = new List<NPC_Story>(); 
         protected Rectangle rectangle;
         protected Dialog dialog ;
         private GraphicsDeviceManager graphics;
@@ -146,6 +148,7 @@ namespace TileGame.GameScreens
             npc.Origionoffset = new Vector2(15, 15);
             npc.SetSpritePositionInGameWorld(new Vector2(16, 16));
             AnimatedSpriteObject.Add(npc);
+            NpcStoryList.Add(npc);
 
             base.LoadContent();
         }
@@ -154,39 +157,30 @@ namespace TileGame.GameScreens
 
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
 
-            if (npc.InSpeakingRange(player))
+            foreach (var npc in NpcStoryList)
             {
-                if (npc.canTalk == true)
+                if (npc.InSpeakingRange(player))
                 {
-                    if (InputHandler.KeyReleased(Keys.Space))
+                    if (npc.canTalk == true)
                     {
-                        if (ActiveConversation == false)
+                        if (InputHandler.KeyReleased(Keys.Space))
                         {
-                            dialogBox.player = player;
-                            dialogBox.npc = npc;
-                            ActiveConversation = true;
-                            dialogBox.Enabled = true;
-                            dialogBox.Visible = true;
-                            ControlManager.Add(dialogBox);
-                            npc.StartConversation("AsterixGreeting");
-                            dialogBox.Text = npc.text.Text;
+                            if (ActiveConversation == false)
+                            {
+                                PlayerStartConversation(npc);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (InputHandler.KeyReleased(Keys.Space))
+                        {
+                            PlayerEndConversation(npc);
                         }
                     }
                 }
-                else
-                {
-                    if (InputHandler.KeyReleased(Keys.Space))
-                    {
-                        dialogBox.Visible = false;
-                        dialogBox.Enabled = false;
-                        dialogBox.npc = null;
-                        ControlManager.Remove(dialogBox);
-                        npc.canTalk = true;
-                        ActiveConversation = false;
-                    }
-                }
             }
-            
+
             //Point cell = Engine.ConvertPostionToCell(player.Origin);
             //if ((cell.X == 17 && cell.Y == 14) && !gate2Locked)
             //{
