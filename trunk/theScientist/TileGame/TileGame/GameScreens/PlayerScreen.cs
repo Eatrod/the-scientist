@@ -41,6 +41,8 @@ namespace TileGame.GameScreens
         public TileMap tileMap = new TileMap();
         protected Camera camera = new Camera();
         private Dialog dialog;
+        protected bool ActiveConversation = false;
+        private Rectangle rectangle;
 
         //Sprite sprite;
         static public PlayerCharacter player;
@@ -158,7 +160,7 @@ namespace TileGame.GameScreens
                        
             if(player == null)
             {
-            player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/playerboxAnimation"));
+                player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Texture2D>("CharacterPotraits/Assassins-Creed-4"));
             player.Origionoffset = new Vector2(15, 15);
             player.SetSpritePositionInGameWorld(new Vector2(4, 3));
             player.Life = 100;
@@ -182,8 +184,9 @@ namespace TileGame.GameScreens
                 chargeanimation = new AnimatedSprite(Content.Load<Texture2D>("Sprite/ChargeBar"));
                 chargeanimation.SetSpritePositionInGameWorld(new Vector2(0, 1.4f));
             }
-            Rectangle rectangle = new Rectangle(0,0,300,100);
             dialog = new Dialog();
+            rectangle = new Rectangle(0, GraphicsDevice.Viewport.Height - 100, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            dialogBox = new DialogBox(Content.Load<Texture2D>("GUI/DialogPlaceholder"), rectangle, "");
 
             
         }
@@ -217,16 +220,19 @@ namespace TileGame.GameScreens
             life = player.Life;
             Vector2 motion = Vector2.Zero;
 
+            if (!ActiveConversation)
+            {
+                if (InputHandler.KeyDown(Keys.Up))
+                    motion.Y -= 2;
+                if (InputHandler.KeyDown(Keys.Down))
+                    motion.Y += 2;
+                if (InputHandler.KeyDown(Keys.Left))
+                    motion.X -= 2;
+                if (InputHandler.KeyDown(Keys.Right))
+                    motion.X += 2;
+            }
 
-            if (InputHandler.KeyDown(Keys.Up))
-                motion.Y-=2;
-            if (InputHandler.KeyDown(Keys.Down))
-                motion.Y+=2;
-            if (InputHandler.KeyDown(Keys.Left))
-                motion.X-=2;
-            if (InputHandler.KeyDown(Keys.Right))
-                motion.X+=2;
-            
+
             if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >=0))
             {
 
@@ -351,8 +357,11 @@ namespace TileGame.GameScreens
 
             if (InputHandler.KeyReleased(Keys.Space))
             {
-                dialog.NextText(GameRef.GamePlayScreen.npc, GameRef.GamePlayScreen.npc.text);
-                dialogBox.Text = dialog.conversation.Text;
+                if (ActiveConversation == true)
+                {
+                    dialog.NextText(GameRef.GamePlayScreen.npc, GameRef.GamePlayScreen.npc.text);
+                    dialogBox.Text = dialog.conversation.Text;
+                }
             }
 
             if (motion != Vector2.Zero)

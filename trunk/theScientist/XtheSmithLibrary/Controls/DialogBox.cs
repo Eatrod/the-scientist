@@ -23,7 +23,6 @@ namespace XtheSmithLibrary.Controls
         public static char[] NewLine = { '\r', '\n' };
         private Rectangle rectangle;
         private StringBuilder stringBuilder;
-        private ContentManager content;
 
         #endregion
 
@@ -74,7 +73,11 @@ namespace XtheSmithLibrary.Controls
 
         public override void HandleInput(PlayerIndex playerIndex)
         {
-        }
+        }   
+
+        #endregion
+
+        #region Methods
 
         public string whoSaid(string text)
         {
@@ -102,11 +105,6 @@ namespace XtheSmithLibrary.Controls
                 }
             }
         } 
-
-        #endregion
-
-        #region Methods
-
         
         #endregion
     }

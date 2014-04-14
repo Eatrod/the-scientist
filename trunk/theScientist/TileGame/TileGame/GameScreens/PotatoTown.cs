@@ -41,6 +41,7 @@ namespace TileGame.GameScreens
         Sprite sprite, sprite1;
         AnimatedSprite NPC1, NPC2;
         public NPC_Story npc;
+        protected Rectangle rectangle;
         protected Dialog dialog ;
         private GraphicsDeviceManager graphics;
 
@@ -141,11 +142,11 @@ namespace TileGame.GameScreens
             NPC2.FullHp = 5;
             AnimatedSpriteObject.Add(NPC2);
 
-            npc = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/AsterixDialog"));
+            npc = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"));
             npc.Origionoffset = new Vector2(15, 15);
             npc.SetSpritePositionInGameWorld(new Vector2(16, 16));
             AnimatedSpriteObject.Add(npc);
-            
+
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
@@ -155,15 +156,34 @@ namespace TileGame.GameScreens
 
             if (npc.InSpeakingRange(player))
             {
-                if (npc.canTalk == false)
+                if (npc.canTalk == true)
                 {
-                    Rectangle rectangle = new Rectangle(0, 1000, 1920, 100);
-                    dialogBox = new DialogBox(Content.Load<Texture2D>("BackGrounds/book"), rectangle, "TEST TEXT");
-                    ControlManager.Add(dialogBox);
-
-                    npc.StartConversation("AsterixGreeting");
-                    dialogBox.Text = npc.text.Text;
-                    npc.canTalk = true;
+                    if (InputHandler.KeyReleased(Keys.Space))
+                    {
+                        if (ActiveConversation == false)
+                        {
+                            dialogBox.player = player;
+                            dialogBox.npc = npc;
+                            ActiveConversation = true;
+                            dialogBox.Enabled = true;
+                            dialogBox.Visible = true;
+                            ControlManager.Add(dialogBox);
+                            npc.StartConversation("AsterixGreeting");
+                            dialogBox.Text = npc.text.Text;
+                        }
+                    }
+                }
+                else
+                {
+                    if (InputHandler.KeyReleased(Keys.Space))
+                    {
+                        dialogBox.Visible = false;
+                        dialogBox.Enabled = false;
+                        dialogBox.npc = null;
+                        ControlManager.Remove(dialogBox);
+                        npc.canTalk = true;
+                        ActiveConversation = false;
+                    }
                 }
             }
             
