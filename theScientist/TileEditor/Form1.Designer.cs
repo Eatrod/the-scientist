@@ -53,6 +53,7 @@
             this.picbTexturePreviev = new System.Windows.Forms.PictureBox();
             this.chbFill = new System.Windows.Forms.CheckBox();
             this.trbAlphaSlider = new System.Windows.Forms.TrackBar();
+            this.chbEntity = new System.Windows.Forms.CheckBox();
             this.tileDisplay1 = new TileEditor.TileDisplay();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picbTexturePreviev)).BeginInit();
@@ -101,28 +102,28 @@
             // newTileMapToolStripMenuItem
             // 
             this.newTileMapToolStripMenuItem.Name = "newTileMapToolStripMenuItem";
-            this.newTileMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newTileMapToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.newTileMapToolStripMenuItem.Text = "New Tile Map";
             this.newTileMapToolStripMenuItem.Click += new System.EventHandler(this.newTileMapToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -253,12 +254,13 @@
             // chbFill
             // 
             this.chbFill.AutoSize = true;
-            this.chbFill.Location = new System.Drawing.Point(903, 85);
+            this.chbFill.Location = new System.Drawing.Point(903, 75);
             this.chbFill.Name = "chbFill";
             this.chbFill.Size = new System.Drawing.Size(38, 17);
             this.chbFill.TabIndex = 11;
             this.chbFill.Text = "Fill";
             this.chbFill.UseVisualStyleBackColor = true;
+            this.chbFill.CheckedChanged += new System.EventHandler(this.chbFill_CheckedChanged);
             // 
             // trbAlphaSlider
             // 
@@ -270,6 +272,17 @@
             this.trbAlphaSlider.TickFrequency = 5;
             this.trbAlphaSlider.Value = 100;
             this.trbAlphaSlider.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // chbEntity
+            // 
+            this.chbEntity.AutoSize = true;
+            this.chbEntity.Location = new System.Drawing.Point(903, 98);
+            this.chbEntity.Name = "chbEntity";
+            this.chbEntity.Size = new System.Drawing.Size(52, 17);
+            this.chbEntity.TabIndex = 13;
+            this.chbEntity.Text = "Entity";
+            this.chbEntity.UseVisualStyleBackColor = true;
+            this.chbEntity.CheckedChanged += new System.EventHandler(this.chbEntity_CheckedChanged);
             // 
             // tileDisplay1
             // 
@@ -287,6 +300,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1311, 631);
+            this.Controls.Add(this.chbEntity);
             this.Controls.Add(this.trbAlphaSlider);
             this.Controls.Add(this.chbFill);
             this.Controls.Add(this.picbTexturePreviev);
@@ -345,6 +359,7 @@
         private System.Windows.Forms.PictureBox picbTexturePreviev;
         private System.Windows.Forms.CheckBox chbFill;
         private System.Windows.Forms.TrackBar trbAlphaSlider;
+        private System.Windows.Forms.CheckBox chbEntity;
     }
 }
 
