@@ -151,22 +151,6 @@ namespace TileGame
                 //musicStates[oldState].SongStart = false;
             }
 
-
-            //if (!titleMusic.SongStart)
-            //{
-            //    MediaPlayer.Play(titleMusic.Song);
-            //    titleMusic.SongStart = true;
-            //}
-
-            //if (stateManager.CurrentState == GamePlayScreen)
-            //{
-            //    if (!potatotownMusic.SongStart)
-            //    {
-            //        MediaPlayer.Play(potatotownMusic.Song);
-            //        potatotownMusic.SongStart = true;
-            //    }
-            //}
-
             base.Update(gameTime);
         }
 
