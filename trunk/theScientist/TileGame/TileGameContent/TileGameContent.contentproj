@@ -45,6 +45,66 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickHouse1.png">
+      <Name>BrickHouse1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickHouse2.png">
+      <Name>BrickHouse2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickHouse3.png">
+      <Name>BrickHouse3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickRoofBot1.png">
+      <Name>BrickRoofBot1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickRoofBot2.png">
+      <Name>BrickRoofBot2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickRoofBot3.png">
+      <Name>BrickRoofBot3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickRoofMid1.png">
+      <Name>BrickRoofMid1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickRoofMid2.png">
+      <Name>BrickRoofMid2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickRoofMid3.png">
+      <Name>BrickRoofMid3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickRoofTop1.png">
+      <Name>BrickRoofTop1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickRoofTop2.png">
+      <Name>BrickRoofTop2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickRoofTop3.png">
+      <Name>BrickRoofTop3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Tiles\HouseBrick.png">
       <Name>HouseBrick</Name>
       <Importer>TextureImporter</Importer>
@@ -720,6 +780,28 @@
     </Compile>
     <Compile Include="CharacterPotraits\asterix.png">
       <Name>asterix</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tiles\RoadBotH1.png">
+      <Name>RoadBotH1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\RoadBotH2.png">
+      <Name>RoadBotH2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\RoadTopH1.png">
+      <Name>RoadTopH1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\RoadTopH2.png">
+      <Name>RoadTopH2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
