@@ -31,7 +31,7 @@ namespace TileEngine.Dialog
 
         public void Update()
         {
-            KeyboardState newState = Keyboard.GetState();
+           /* KeyboardState newState = Keyboard.GetState();
 
             if (conversation == null || Npc == null)
                 return;
@@ -53,7 +53,7 @@ namespace TileEngine.Dialog
                 conversation.Handlers[currentHandler].Invoke(Npc);
             }
 
-            lastState = newState;
+            lastState = newState;*/
         }
     }
 }
