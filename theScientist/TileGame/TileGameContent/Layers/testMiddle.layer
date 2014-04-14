@@ -14,6 +14,14 @@ Tiles\Tree_4_1
 Tiles\Tree_4_2
 Tiles\Tree_4_3
 Tiles\Grass
+Tiles\FarmerDoorLowerLeft
+Tiles\FarmerDoorLowerRight
+Tiles\FarmerDoorUpperLeft
+Tiles\FarmerDoorUpperRight
+Tiles\FarmerGroundWall
+Tiles\FarmerRoofWall
+Tiles\FarmerRoof
+Tiles\FarmerWallWindow
 
 [Properties]
 Alpha = 1

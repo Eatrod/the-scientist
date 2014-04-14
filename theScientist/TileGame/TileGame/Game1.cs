@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Media;
 
 using XtheSmithLibrary;
 using TileGame.GameScreens;
+using TileGame.Music;
 
 namespace TileGame
 {
@@ -26,6 +27,10 @@ namespace TileGame
         GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
         public List<GameState> gamePlayScreens;
+        BackgroundMusic titleMusic;
+        BackgroundMusic potatotownMusic;
+
+        
 
         #endregion
 
@@ -104,6 +109,10 @@ namespace TileGame
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            titleMusic =  new BackgroundMusic(Content.Load<Song>("Sounds/Music/Night_vision_gameMusic"));
+            potatotownMusic = new BackgroundMusic(Content.Load<Song>("Sounds/Music/Eruption_gameMusic"));
+
+            MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
@@ -125,6 +134,21 @@ namespace TileGame
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+
+            if (!titleMusic.SongStart)
+            {
+                MediaPlayer.Play(titleMusic.Song);
+                titleMusic.SongStart = true;
+            }
+
+            if (stateManager.CurrentState == GamePlayScreen)
+            {
+                if (!potatotownMusic.SongStart)
+                {
+                    MediaPlayer.Play(potatotownMusic.Song);
+                    potatotownMusic.SongStart = true;
+                }
+            }
 
             base.Update(gameTime);
         }
