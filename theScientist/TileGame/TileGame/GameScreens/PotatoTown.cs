@@ -150,6 +150,12 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npc);
             NpcStoryList.Add(npc);
 
+            //--
+            lockedGateDict = new Dictionary<int,bool>();
+            lockedGateDict[40] = true;
+            lockedGateDict[41] = true;
+            //--
+
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
@@ -159,49 +165,37 @@ namespace TileGame.GameScreens
 
             foreach (var npc in NpcStoryList)
             {
-                if (npc.InSpeakingRange(player))
+            if (npc.InSpeakingRange(player))
+            {
+                if (npc.canTalk == true)
                 {
-                    if (npc.canTalk == true)
+                    if (InputHandler.KeyReleased(Keys.Space))
                     {
-                        if (InputHandler.KeyReleased(Keys.Space))
+                        if (ActiveConversation == false)
                         {
-                            if (ActiveConversation == false)
-                            {
                                 PlayerStartConversation(npc);
-                            }
                         }
                     }
-                    else
+                }
+                else
+                {
+                    if (InputHandler.KeyReleased(Keys.Space))
                     {
-                        if (InputHandler.KeyReleased(Keys.Space))
-                        {
                             PlayerEndConversation(npc);
                         }
                     }
                 }
             }
-
-            //Point cell = Engine.ConvertPostionToCell(player.Origin);
-            //if ((cell.X == 17 && cell.Y == 14) && !gate2Locked)
-            //{
-            //    GameRef.BaseGamePlayScreen.SetPlayerPosition(1, 2);
-            //    GameRef.GamePlayScreen2.Gate1Locked = true;
-            //    StateManager.ChangeState(GameRef.GamePlayScreen2);
+            
+            Point cell = Engine.ConvertPostionToCell(player.Origin);
+            int cellIndex = tileMap.CollisionLayer.GetCellIndex(cell);
+            if (cellIndex >= 40 && cellIndex < 50)
+            {
+                GateToNextScreen(cellIndex, GameRef.GamePlayScreen2, "G0");
                 
-            //}
-            //if (cell.X != 17 || cell.Y != 14)
-            //    gate2Locked = false;
-
-            //if ((cell.X == 4 && cell.Y == 3) && !gate1Locked)
-            //{
-            //    //player.SetSpritePositionInGameWorld(new Vector2(28, 28));
-            //    GameRef.BaseGamePlayScreen.SetPlayerPosition(28, 28);
-            //    GameRef.GamePlayScreen2.Gate2Locked = true;
-            //    StateManager.ChangeState(GameRef.GamePlayScreen2);
-                
-            //}
-            //if (cell.X != 4 || cell.Y != 3)
-            //    gate1Locked = false;
+                GateToNextScreen(cellIndex, GameRef.GamePlayScreen2, "G1");  
+            }
+            UnlockGate(cellIndex);
 
 
             base.Update(gameTime);
