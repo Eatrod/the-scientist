@@ -13,3 +13,13 @@
 23;RightArrow.png
 24;LeftArrow.png
 31;Death.png
+40;G0.png
+41;G1.png
+42;G2.png
+43;G3.png
+44;G4.png
+45;G5.png
+46;G6.png
+47;G7.png
+48;G8.png
+49;G9.png
