@@ -29,6 +29,7 @@ namespace TileGame
         public List<GameState> gamePlayScreens;
         BackgroundMusic titleMusic;
         BackgroundMusic potatotownMusic;
+        Dictionary<GameState, BackgroundMusic> musicStates = new Dictionary<GameState,BackgroundMusic>();
 
         
 
@@ -113,6 +114,10 @@ namespace TileGame
             potatotownMusic = new BackgroundMusic(Content.Load<Song>("Sounds/Music/Eruption_gameMusic"));
 
             MediaPlayer.IsRepeating = true;
+
+            musicStates.Add(TitleScreen, titleMusic);
+            musicStates.Add(StartMenuScreen, titleMusic);
+            musicStates.Add(GamePlayScreen, potatotownMusic);
         }
 
         /// <summary>
@@ -135,20 +140,32 @@ namespace TileGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            if (!titleMusic.SongStart)
+
+            GameState currentState = stateManager.CurrentState;
+            //GameState oldState;
+            if (!musicStates[currentState].SongStart)
             {
-                MediaPlayer.Play(titleMusic.Song);
-                titleMusic.SongStart = true;
+                MediaPlayer.Play(musicStates[currentState].Song);
+                musicStates[currentState].SongStart = true;
+                //oldState = currentState;
+                //musicStates[oldState].SongStart = false;
             }
 
-            if (stateManager.CurrentState == GamePlayScreen)
-            {
-                if (!potatotownMusic.SongStart)
-                {
-                    MediaPlayer.Play(potatotownMusic.Song);
-                    potatotownMusic.SongStart = true;
-                }
-            }
+
+            //if (!titleMusic.SongStart)
+            //{
+            //    MediaPlayer.Play(titleMusic.Song);
+            //    titleMusic.SongStart = true;
+            //}
+
+            //if (stateManager.CurrentState == GamePlayScreen)
+            //{
+            //    if (!potatotownMusic.SongStart)
+            //    {
+            //        MediaPlayer.Play(potatotownMusic.Song);
+            //        potatotownMusic.SongStart = true;
+            //    }
+            //}
 
             base.Update(gameTime);
         }
