@@ -29,9 +29,11 @@ namespace TileGame.GameScreens
 
         //bool gate1Locked = true;
         //bool gate2Locked = true;
-        PlayerScreen screen;
+        protected PlayerScreen screen;
         protected DialogBox dialogBox;
         
+        public Dictionary<int, bool> lockedGateDict;
+        protected Dictionary<string, int> gateDict;
 
         #endregion
         #region Property Region
@@ -189,6 +191,11 @@ namespace TileGame.GameScreens
             rectangle = new Rectangle(0, GraphicsDevice.Viewport.Height - 100, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             dialogBox = new DialogBox(Content.Load<Texture2D>("GUI/DialogPlaceholder"), rectangle, "");
 
+            gateDict = new Dictionary<string, int>();
+            for (int i = 0; i < 10; i++)
+            {
+                gateDict["G" + i.ToString()] = 40 + i;
+            }
             
         }
         public override void Update(GameTime gameTime)
@@ -360,7 +367,7 @@ namespace TileGame.GameScreens
             if (InputHandler.KeyReleased(Keys.Space))
             {
                 if (ActiveConversation == true)
-                {                  
+                {
                     dialog.NextText(GameRef.GamePlayScreen.npc, GameRef.GamePlayScreen.npc.text);
                     dialogBox.Text = dialog.conversation.Text;
                 }
@@ -382,8 +389,6 @@ namespace TileGame.GameScreens
                 player.isAnimating = false;
                 motion = new Vector2(0, 0);
             }
-
-
 
 
             motion = CollisionWithTerrain.CheckCollisionAutomaticMotion(motion, player,screen);
@@ -412,35 +417,9 @@ namespace TileGame.GameScreens
 
             }
 
-            // lägg tillbaka hop mellan tilemaps.
-
-            //Point cell = Engine.ConvertPostionToCell(player.Origin);
-            //if ((cell.X == 17 && cell.Y == 14) && !gate2Locked)
-            //{
-            //    StateManager.ChangeState(GameRef.GamePlayScreen2);
-            //    GameRef.GamePlayScreen2.SetPlayerPosition(1, 2);
-            //    GameRef.GamePlayScreen2.Gate1Locked = true;
-            //}
-            //if (cell.X != 17 || cell.Y != 14)
-            //    gate2Locked = false;
-
-            //if ((cell.X == 4 && cell.Y == 3) && !gate1Locked)
-            //{
-            //    StateManager.ChangeState(GameRef.GamePlayScreen2);
-            //    GameRef.GamePlayScreen2.SetPlayerPosition(28, 28);
-            //    GameRef.GamePlayScreen2.Gate2Locked = true;
-            //}
-            //if (cell.X != 4 || cell.Y != 3)
-            //    gate1Locked = false;
-
-
             base.Update(gameTime);
 
-                
-            
         }
-
-      
 
       
         private void UpdateHealthBarAnimation()
@@ -594,7 +573,38 @@ namespace TileGame.GameScreens
             npc.StartConversation("AsterixGreeting");
             dialogBox.Text = npc.text.Text;
         }
-
+        #region Method Region
+        public void SetPlayerPosition(int x, int y)
+        {
+            player.SetSpritePositionInGameWorld(new Vector2(x, y));
+        }
+       
+        protected void GateToNextScreen(int CellIndex, PlayerScreen screen, string GateName)
+        {
+            int GateNumber = gateDict[GateName];
+            if (CellIndex == GateNumber && !lockedGateDict[GateNumber])
+            {
+                StateManager.ChangeState(screen);
+                Point next_position;
+                next_position.X = 0;
+                next_position.Y = 0;
+                for (int i = 0; i < screen.tileMap.CollisionLayer.Width; i++)
+                {
+                    for (int j = 0; j < screen.tileMap.CollisionLayer.Height; j++)
+                    {
+                        Point temp = new Point(i, j);
+                        if (screen.tileMap.CollisionLayer.GetCellIndex(temp) == GateNumber)
+                        {
+                            next_position.X = i;
+                            next_position.Y = j;
+                            break;
+                        }
+                    }
+                }
+                screen.SetPlayerPosition(next_position.X, next_position.Y);
+                screen.lockedGateDict[CellIndex] = true;
+            }
+        }
         public void PlayerEndConversation(NPC_Story npc)
         {
             dialogBox.Visible = false;
@@ -605,9 +615,17 @@ namespace TileGame.GameScreens
             ActiveConversation = false;
         }
 
-        public void SetPlayerPosition(int x, int y)
+        protected void UnlockGate(int cellIndex)
         {
-            player.SetSpritePositionInGameWorld(new Vector2(x, y));
+            for (int i = 40; i <= 49; i++)
+            {
+                if (cellIndex != i)
+        {
+                    if (lockedGateDict.ContainsKey(i))
+                        lockedGateDict[i] = false;
+                }
+            }
         }
+        #endregion
     }
 }

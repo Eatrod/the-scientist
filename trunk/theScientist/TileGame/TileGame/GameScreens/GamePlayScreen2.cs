@@ -19,7 +19,7 @@ namespace TileGame.GameScreens
 {
     public class GamePlayScreen2 : PlayerScreen
     {
-        
+
         #region Field Region
 
         string name;
@@ -120,7 +120,11 @@ namespace TileGame.GameScreens
             //player.SetSpritePositionInGameWorld(new Vector2(1, 2));
             //player.Life = 100;
 
-            
+            //--
+            lockedGateDict = new Dictionary<int,bool>();
+            lockedGateDict[40] = true;
+            lockedGateDict[41] = true;
+            //--
 
             base.LoadContent();
         }
@@ -155,31 +159,22 @@ namespace TileGame.GameScreens
                 }
             }
 
+            
             Point cell = Engine.ConvertPostionToCell(player.Origin);
-            if ((cell.X == 28 && cell.Y == 28) && !gate2Locked)
+            int cellIndex = tileMap.CollisionLayer.GetCellIndex(cell);
+            if (cellIndex >= 40 && cellIndex < 50)
             {
-                GameRef.GamePlayScreen.SetPlayerPosition(4, 3);
-                GameRef.GamePlayScreen.Gate1Locked = true;
-                StateManager.ChangeState(GameRef.GamePlayScreen);
+                GateToNextScreen(cellIndex, GameRef.GamePlayScreen, "G0");
 
+                GateToNextScreen(cellIndex, GameRef.GamePlayScreen, "G1");
+                
             }
-            if (cell.X != 28 || cell.Y != 28)
-                gate2Locked = false;
-
-            if ((cell.X == 1 && cell.Y == 2) && !gate1Locked)
-            {
-                GameRef.GamePlayScreen.SetPlayerPosition(17, 14);
-                GameRef.GamePlayScreen.Gate2Locked = true;
-                StateManager.ChangeState(GameRef.GamePlayScreen);
-
-            }
-            if (cell.X != 1 || cell.Y != 2)
-                gate1Locked = false;
-
-            //base.Update(gameTime);
+            UnlockGate(cellIndex);
 
             base.Update(gameTime);
         }
+ 
+
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
