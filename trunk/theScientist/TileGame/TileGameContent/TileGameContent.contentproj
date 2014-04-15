@@ -785,23 +785,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tiles\RoadBotH1.png">
-      <Name>RoadBotH1</Name>
+    <Compile Include="Tiles\RoadHBot1.png">
+      <Name>RoadHBot1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Tiles\RoadBotH2.png">
-      <Name>RoadBotH2</Name>
+    <Compile Include="Tiles\RoadHBot2.png">
+      <Name>RoadHBot2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Tiles\RoadTopH1.png">
-      <Name>RoadTopH1</Name>
+    <Compile Include="Tiles\RoadHTop1.png">
+      <Name>RoadHTop1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Tiles\RoadTopH2.png">
-      <Name>RoadTopH2</Name>
+    <Compile Include="Tiles\RoadHTop2.png">
+      <Name>RoadHTop2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -816,6 +816,50 @@
   <ItemGroup>
     <Compile Include="Tiles\FencePostRightLeft.png">
       <Name>FencePostRightLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tiles\RoadVBot1.png">
+      <Name>RoadVBot1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\RoadVBot2.png">
+      <Name>RoadVBot2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\RoadVTop1.png">
+      <Name>RoadVTop1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\RoadVTop2.png">
+      <Name>RoadVTop2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tiles\RoadHMid1.png">
+      <Name>RoadHMid1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\RoadHMid2.png">
+      <Name>RoadHMid2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\RoadVMid1.png">
+      <Name>RoadVMid1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\RoadVMid2.png">
+      <Name>RoadVMid2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
