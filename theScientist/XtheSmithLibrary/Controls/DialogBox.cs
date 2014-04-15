@@ -86,7 +86,11 @@ namespace XtheSmithLibrary.Controls
             StringBuilder stringBuilder = new StringBuilder();
             WrapWord(new StringBuilder(text), stringBuilder, SpriteFont, rectangle);
             Text = stringBuilder.ToString();
-            spriteBatch.DrawString(SpriteFont, Text, new Vector2(200,1000), Color.Black);
+            if (rectangle.Y < 800 && rectangle.X < 1025)
+            {
+                SpriteFont.LineSpacing = 25;
+            }
+            spriteBatch.DrawString(SpriteFont, Text, new Vector2(200, rectangle.Y - 5), Color.Black);
 
             /*for (int i = 0; i < npc.text.Handlers.Count; ++i)
             {
