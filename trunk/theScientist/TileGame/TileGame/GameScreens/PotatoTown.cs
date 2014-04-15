@@ -147,13 +147,16 @@ namespace TileGame.GameScreens
             NPC2.FullHp = 5;
             AnimatedSpriteObject.Add(NPC2);
 
-            NPC_Farmer_1 = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/playerboxAnimation"), null, GameRef.random);
-            NPC_Farmer_1.Origionoffset = new Vector2(15, 15);
-            NPC_Farmer_1.SetSpritePositionInGameWorld(new Vector2(8, 22));
-            NPC_Farmer_1.Life = 5;
-            NPC_Farmer_1.FullHp = 5;
-            AnimatedSpriteObject.Add(NPC_Farmer_1);
-            NPCFightingFarmer.Add(NPC_Farmer_1);
+            for (int i = 0; i < 10; i++)
+            {
+                NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/playerboxAnimation"), null, GameRef.random);
+                NPC_Farmer.Origionoffset = new Vector2(15, 15);
+                NPC_Farmer.SetSpritePositionInGameWorld(new Vector2(6 + i, 22));
+                NPC_Farmer.Life = 5;
+                NPC_Farmer.FullHp = 5;
+                AnimatedSpriteObject.Add(NPC_Farmer);
+                NPCFightingFarmer.Add(NPC_Farmer);
+            }
 
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/npc1"), Content.Load<Texture2D>("CharacterPotraits/pimp-bender"));
             npcstory.Origionoffset = new Vector2(15, 15);
@@ -180,6 +183,9 @@ namespace TileGame.GameScreens
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
             foreach(NPC_Fighting_Farmer npc in NPCFightingFarmer)
             {
+                //CollisionWithCharacter.UpdateCollisionForCharacters(
+                //    gameTime, SpriteObjectInGameWorld, npc,
+                //    SpriteObject, playerprojectiles, renderList, AnimatedSpriteObject);
                 if(npc.Motion != Vector2.Zero)
                 {
                     npc.Motion.Normalize();
@@ -187,11 +193,13 @@ namespace TileGame.GameScreens
 
                 }
                 //Aggro range
-                if (Vector2.Distance(npc.Position, player.Position) < 50 && !npc.Aggro && !npc.Running && !npc.HitWall)
+                if (Vector2.Distance(npc.Position, player.Position) < 100 && !npc.Aggro && !npc.Running && !npc.HitWall)
                 {
                     npc.Aggro = true;
                     npc.AttackDirection = player.Position - npc.Position; 
                 }
+                if(npc.Running)
+                    npc.CheckForCollisionWithOtherNPCs(NPCFightingFarmer,player);
                 
             }
             foreach (var npc in NpcStoryList)

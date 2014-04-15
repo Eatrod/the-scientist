@@ -72,21 +72,44 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.aggro = false;
             this.collided = false;
             this.random = random;
-            this.speed = 3.0f;
+            this.speed = 0.5f;
             this.direction = 0;
             this.cellPosition = Engine.ConvertPostionToCell(Position);
             this.delayDirection = 5000f;
             this.motion = Vector2.Zero;
+        }
+        public void CheckForCollisionWithOtherNPCs(List<AnimatedSprite> Npcs, AnimatedSprite player)
+        {
+            foreach (NPC_Fighting_Farmer npc in Npcs)
+            {
+                if(npc.Bounds.Intersects(this.Bounds) && npc.Bounds != this.Bounds && !npc.Running && !npc.Aggro)
+                {
+                    this.running = false;
+                    this.aggro = false;
+                    this.hitwall = true;
+                    npc.AttackDirection = -this.AttackDirection;
+                    npc.HitWall = true;
+                    this.elapsedAggro = 0;
+                }
+                if (player.Bounds.Intersects(this.Bounds))
+                {
+                    this.running = false;
+                    this.aggro = false;
+                    this.hitwall = true;
+                    player.Life -= 5;
+                    player.Position += this.attackDirection * this.speed;
+                    this.elapsedAggro = 0;
+                }
+                
+            }
         }
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
             cellPosition = Engine.ConvertPostionToCell(Position);
             if (cellPosition.X >= 20)
             {
-                running = false;
-                Position.X -= 10f;
-                direction += 180;
-                direction = direction % 360;
+                Position.X -= 5f;
+                collided = true;
             }
             elapsedDirection += (float)gameTime.ElapsedGameTime.TotalMilliseconds; 
             if(collided && !hitwall)
@@ -98,7 +121,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 }
                 direction += 180;
                 direction = direction % 360;
-                elapsedDirection = 0.0f;
                 running = false;
                 aggro = false;
                 collided = false;
@@ -126,22 +148,24 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             else if (running)
             {
                 attackDirection.Normalize();
-                speed = 3.0f;
+                speed = 5.0f;
                 Position += attackDirection * speed;
             }
             else if(hitwall)
             {
+                attackDirection.Normalize();
                 elapsedHitWall += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                speed = 0.5f;
+                speed = 1.0f;
                 Position -= attackDirection * speed;
                 if (elapsedHitWall > delayHitWall)
                 {
-                    hitwall = false;          
+                    hitwall = false;
+                    elapsedHitWall = 0;
                 }
             }
             else
             {
-                speed = 3.0f;
+                speed = 0.5f;
                 running = false;
                 aggro = false;
                 Position += speed * motion;
