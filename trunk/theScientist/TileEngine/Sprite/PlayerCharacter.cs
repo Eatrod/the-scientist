@@ -13,9 +13,14 @@ namespace TileEngine.Sprite
              this.portrait = portrait;
          }
 
-         public void UpdateAxeStatus(bool status)
+         public void UpdateAxeStatus(string status)
          {
-             this.hasAxe = status;
+             if (status == "true")
+                this.hasAxe = true;
+             else
+             {
+                 this.hasAxe = false;
+             }
          }
     }
 }

@@ -12,7 +12,7 @@
     <Handlers>
       <Handler Caption="Yes" Action="StartConversation:ThankYou"/>
       <Handler Caption="No" Action ="StartConversation:OhWell" />
-      <Handler Caption="Perhaps" Action ="StartConversation:Huh;EndConversation" />
+      <Handler Caption="Perhaps" Action ="StartConversation:Huh;UpdateAxeStatus:true" />
     </Handlers>
   </Conversation>
 
@@ -31,7 +31,7 @@
   </Conversation>
 
   <Conversation Name="Huh">
-    <Text>(Perhaps) What </Text>
+    <Text>(Perhaps) Axe status should now be true in player </Text>
     <Handlers>
       <Handler Caption="Continue" Action="EndConversation" />
     </Handlers>
