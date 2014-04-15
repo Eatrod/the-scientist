@@ -872,6 +872,248 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tiles\CityHall\CityHall_1_1.png">
+      <Name>CityHall_1_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_1_2.png">
+      <Name>CityHall_1_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_1_3.png">
+      <Name>CityHall_1_3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_1_4.png">
+      <Name>CityHall_1_4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_1_5.png">
+      <Name>CityHall_1_5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_1_6.png">
+      <Name>CityHall_1_6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_1_7.png">
+      <Name>CityHall_1_7</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_1_8.png">
+      <Name>CityHall_1_8</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_2_1.png">
+      <Name>CityHall_2_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_2_2.png">
+      <Name>CityHall_2_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_2_3.png">
+      <Name>CityHall_2_3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_2_4.png">
+      <Name>CityHall_2_4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_2_5.png">
+      <Name>CityHall_2_5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_2_6.png">
+      <Name>CityHall_2_6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_2_7.png">
+      <Name>CityHall_2_7</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_2_8.png">
+      <Name>CityHall_2_8</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_3_1.png">
+      <Name>CityHall_3_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_3_2.png">
+      <Name>CityHall_3_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_3_3.png">
+      <Name>CityHall_3_3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_3_4.png">
+      <Name>CityHall_3_4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_3_5.png">
+      <Name>CityHall_3_5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_3_6.png">
+      <Name>CityHall_3_6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_3_7.png">
+      <Name>CityHall_3_7</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_3_8.png">
+      <Name>CityHall_3_8</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_4_1.png">
+      <Name>CityHall_4_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_4_2.png">
+      <Name>CityHall_4_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_4_3.png">
+      <Name>CityHall_4_3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_4_4.png">
+      <Name>CityHall_4_4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_4_5.png">
+      <Name>CityHall_4_5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_4_6.png">
+      <Name>CityHall_4_6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_4_7.png">
+      <Name>CityHall_4_7</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_4_8.png">
+      <Name>CityHall_4_8</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_5_1.png">
+      <Name>CityHall_5_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_5_2.png">
+      <Name>CityHall_5_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_5_3.png">
+      <Name>CityHall_5_3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_5_4.png">
+      <Name>CityHall_5_4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_5_5.png">
+      <Name>CityHall_5_5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_5_6.png">
+      <Name>CityHall_5_6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_5_7.png">
+      <Name>CityHall_5_7</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_5_8.png">
+      <Name>CityHall_5_8</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_6_1.png">
+      <Name>CityHall_6_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_6_2.png">
+      <Name>CityHall_6_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_6_3.png">
+      <Name>CityHall_6_3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_6_4.png">
+      <Name>CityHall_6_4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_6_5.png">
+      <Name>CityHall_6_5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_6_6.png">
+      <Name>CityHall_6_6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_6_7.png">
+      <Name>CityHall_6_7</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\CityHall\CityHall_6_8.png">
+      <Name>CityHall_6_8</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="CharacterPotraits\pimp-bender.jpg">
       <Name>pimp-bender</Name>
       <Importer>TextureImporter</Importer>
