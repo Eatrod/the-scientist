@@ -35,6 +35,10 @@ namespace TileGame
 
         #endregion
 
+        #region Field Region
+        public Random random;
+        #endregion
+
         #region Game State Region
 
         public GameStateManager stateManager;
@@ -104,6 +108,7 @@ namespace TileGame
         {
             this.IsMouseVisible = true;
 
+            random = new Random();
             base.Initialize();
         }
 

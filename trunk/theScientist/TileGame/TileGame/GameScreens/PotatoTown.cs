@@ -15,6 +15,7 @@ using TileEngine.Dialog;
 using TileEngine.Sprite;
 using TileEngine.Sprite.Npc;
 using TileEngine.Sprite.Npc.NPC_Story;
+using TileEngine.Sprite.Npc.NPC_Fighting;
 using XtheSmithLibrary;
 using TileEngine;
 using TileEngine.Tiles;
@@ -41,6 +42,7 @@ namespace TileGame.GameScreens
                 
         Sprite sprite, sprite1;
         AnimatedSprite NPC1, NPC2;
+        AnimatedSprite NPC_Farmer_1;
         public NPC_Story npc;
         public List<NPC_Story> NpcStoryList = new List<NPC_Story>(); 
         protected Rectangle rectangle;
@@ -54,6 +56,7 @@ namespace TileGame.GameScreens
         List<BaseSprite> AnimatedSpriteObject = new List<BaseSprite>();
         List<BaseSprite> SpriteObjectInGameWorld = new List<BaseSprite>();
         List<AnimatedProjectile> NPCProjectile = new List<AnimatedProjectile>();
+        List<AnimatedSprite> NPCFightingFarmer = new List<AnimatedSprite>();
         
 
         public string Name { get { return name; } }
@@ -145,6 +148,15 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(NPC2);
 
             npc = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/npc1"), Content.Load<Texture2D>("CharacterPotraits/asterix"));
+            NPC_Farmer_1 = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/playerboxAnimation"), null, GameRef.random);
+            NPC_Farmer_1.Origionoffset = new Vector2(15, 15);
+            NPC_Farmer_1.SetSpritePositionInGameWorld(new Vector2(8, 22));
+            NPC_Farmer_1.Life = 5;
+            NPC_Farmer_1.FullHp = 5;
+            AnimatedSpriteObject.Add(NPC_Farmer_1);
+            NPCFightingFarmer.Add(NPC_Farmer_1);
+
+            npc = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"));
             npc.Origionoffset = new Vector2(15, 15);
             npc.SetSpritePositionInGameWorld(new Vector2(16, 16));
             AnimatedSpriteObject.Add(npc);
@@ -160,9 +172,16 @@ namespace TileGame.GameScreens
         }
         public override void Update(GameTime gameTime)
         {
-
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
+            foreach(NPC_Fighting_Farmer npc in NPCFightingFarmer)
+            {
+                if(npc.Motion != Vector2.Zero)
+                {
+                    npc.Motion.Normalize();
+                    CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
 
+                }
+            }
             foreach (var npc in NpcStoryList)
             {
             if (npc.InSpeakingRange(player))
