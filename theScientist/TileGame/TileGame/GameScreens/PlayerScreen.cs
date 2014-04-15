@@ -31,6 +31,7 @@ namespace TileGame.GameScreens
         //bool gate2Locked = true;
         protected PlayerScreen screen;
         protected DialogBox dialogBox;
+        protected NPC_Story talksTo;
         
         public Dictionary<int, bool> lockedGateDict;
         protected Dictionary<string, int> gateDict;
@@ -374,7 +375,7 @@ namespace TileGame.GameScreens
             {
                 if (ActiveConversation == true)
                 {
-                    dialog.NextText(GameRef.GamePlayScreen.npc, GameRef.GamePlayScreen.npc.text,player);
+                    dialog.NextText(this.talksTo, this.talksTo.text,player);
                     dialogBox.Text = dialog.conversation.Text;
                     dialogBox.conversation = dialog.conversation;
                 }
@@ -573,6 +574,7 @@ namespace TileGame.GameScreens
         #region Method Region
         public void PlayerStartConversation(NPC_Story npc)
         {
+            this.talksTo = npc;
             dialogBox.player = player;
             dialogBox.npc = npc;
             ActiveConversation = true;
