@@ -202,7 +202,7 @@ namespace TileGame.GameScreens
         {
             
             screen = (PlayerScreen)StateManager.CurrentState;
-
+           
             ContentManager Content = Game.Content;
 
             foreach (AnimatedProjectile sprite in playerprojectiles)
