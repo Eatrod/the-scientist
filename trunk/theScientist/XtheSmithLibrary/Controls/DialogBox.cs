@@ -103,7 +103,7 @@ namespace XtheSmithLibrary.Controls
             }
 
             Rectangle pictureRectangle = new Rectangle(0, rectangle.Y, 200, 100);
-            if (npc.picture != null && "Asterix" == whoSaid(Text))
+            if (npc.picture != null && "Ignazio" != whoSaid(Text))
                 spriteBatch.Draw(npc.picture,pictureRectangle, Color.White);
             else
             {

@@ -1,6 +1,6 @@
 ﻿<Conversations>
 
-  <Conversation Name="AsterixGreeting">
+  <Conversation Name="Greeting">
     <Text>Asterix: Howdy what do you want signore?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:IgnazioResponse" />
