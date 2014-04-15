@@ -34,6 +34,7 @@ namespace TileGame.GameScreens
         
         public Dictionary<int, bool> lockedGateDict;
         protected Dictionary<string, int> gateDict;
+        protected Dictionary<string, bool> inventoryDict;
 
         #endregion
         #region Property Region
@@ -196,7 +197,9 @@ namespace TileGame.GameScreens
             {
                 gateDict["G" + i.ToString()] = 40 + i;
             }
-            
+
+            inventoryDict = new Dictionary<string, bool>();
+            inventoryDict["Axe"] = false;
         }
         public override void Update(GameTime gameTime)
         {
@@ -362,6 +365,9 @@ namespace TileGame.GameScreens
             }
             if (InputHandler.KeyReleased(Keys.N))
                 StateManager.PushState(GameRef.NotebookScreen);
+
+            if (InputHandler.KeyReleased(Keys.I))
+                StateManager.PushState(GameRef.InventoryScreen);
 
             dialogBox.Update(gameTime);
             if (InputHandler.KeyReleased(Keys.Space))
