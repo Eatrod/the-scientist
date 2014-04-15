@@ -52,7 +52,6 @@ namespace TileGame.GameScreens
 
         CollisionWithCharacter CollisionWithCharacter = new CollisionWithCharacter();
        
-
         List<BaseSprite> SpriteObject = new List<BaseSprite>();
         List<BaseSprite> AnimatedSpriteObject = new List<BaseSprite>();
         List<BaseSprite> SpriteObjectInGameWorld = new List<BaseSprite>();
