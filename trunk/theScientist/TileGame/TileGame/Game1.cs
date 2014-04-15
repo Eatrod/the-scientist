@@ -44,6 +44,7 @@ namespace TileGame
         public PotatoTown GamePlayScreen;
         public PlayerScreen BaseGamePlayScreen;
         public GamePlayScreen2 GamePlayScreen2;
+        public InventoryScreen InventoryScreen;
 
         public string lastGameScreen;
         public Vector2 playerPosition;
@@ -87,6 +88,7 @@ namespace TileGame
             GamePlayScreen = new PotatoTown(this, stateManager, "Screen1");
             GamePlayScreen2 = new GamePlayScreen2(this, stateManager, "Screen2");
             BaseGamePlayScreen = new PlayerScreen(this, stateManager);
+            InventoryScreen = new InventoryScreen(this, stateManager);
             stateManager.ChangeState(TitleScreen);
             gamePlayScreens.Add(GamePlayScreen);
             gamePlayScreens.Add(GamePlayScreen2);
@@ -100,6 +102,8 @@ namespace TileGame
         /// </summary>
         protected override void Initialize()
         {
+            this.IsMouseVisible = true;
+
             base.Initialize();
         }
 
