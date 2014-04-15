@@ -183,9 +183,16 @@ namespace TileGame.GameScreens
                 if(npc.Motion != Vector2.Zero)
                 {
                     npc.Motion.Normalize();
-                    CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
+                    npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
 
                 }
+                //Aggro range
+                if (Vector2.Distance(npc.Position, player.Position) < 50 && !npc.Aggro && !npc.Running && !npc.HitWall)
+                {
+                    npc.Aggro = true;
+                    npc.AttackDirection = player.Position - npc.Position; 
+                }
+                
             }
             foreach (var npc in NpcStoryList)
             {
