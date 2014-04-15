@@ -50,27 +50,43 @@ namespace TileEngine.Sprite.Npc
     public class ConversationHandler
     {
         string caption;
-        MethodInfo action;
-        object[] actionParameters;
+        private ConversationHandlerAction[] actions;
 
         public string Caption
         {
             get { return caption; }
         }
 
-        public ConversationHandler(string caption, string methodName, object[] parameters)
+        public ConversationHandler(string caption, params ConversationHandlerAction[] actions)
         {
             this.caption = caption;
-            action = typeof(NPC_Story.NPC_Story).GetMethod(methodName);
-
-            if(parameters != null)
-                actionParameters = (object[])parameters.Clone();
+            this.actions = actions;
             
         }
 
         public void Invoke(NPC_Story.NPC_Story npc)
         {
-            action.Invoke(npc, actionParameters);
+            foreach (var action in actions)
+            {
+                action.Invoke(npc);
+            }
+        }
+    }
+
+    public class ConversationHandlerAction
+    {
+        private MethodInfo method;
+        private object[] parameters;
+
+        public ConversationHandlerAction(string methodName, object[] parameters)
+        {
+            method = typeof (NPC_Story.NPC_Story).GetMethod(methodName);
+            this.parameters = parameters;
+        }
+
+        public void Invoke(NPC_Story.NPC_Story npc)
+        {
+            method.Invoke(npc, parameters);
         }
     }
 

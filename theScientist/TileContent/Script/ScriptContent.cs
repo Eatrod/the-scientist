@@ -27,9 +27,15 @@ namespace TileContent
     public class ConversationHandlerContent
     {
         public string caption;
-        public string action;
-        public object[] actionParameters;
+        public List<ConversationHandlerActionContent> Actions = new List<ConversationHandlerActionContent>(); 
      
+    }
+
+    public class ConversationHandlerActionContent
+    {
+        public string MethodName;
+        public string Invoker;
+        public object[] Parameters;
     }
 
 }

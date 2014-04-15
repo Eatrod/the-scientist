@@ -376,6 +376,7 @@ namespace TileGame.GameScreens
                 {
                     dialog.NextText(GameRef.GamePlayScreen.npc, GameRef.GamePlayScreen.npc.text);
                     dialogBox.Text = dialog.conversation.Text;
+                    dialogBox.conversation = dialog.conversation;
                 }
             }
 
@@ -578,7 +579,8 @@ namespace TileGame.GameScreens
             dialogBox.Enabled = true;
             dialogBox.Visible = true;
             ControlManager.Add(dialogBox);
-            npc.StartConversation("AsterixGreeting");
+            npc.StartConversation("Greeting");
+            dialogBox.conversation = npc.text;
             dialogBox.Text = npc.text.Text;
         }
 
