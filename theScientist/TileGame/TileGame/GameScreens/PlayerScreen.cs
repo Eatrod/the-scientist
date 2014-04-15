@@ -374,7 +374,7 @@ namespace TileGame.GameScreens
             {
                 if (ActiveConversation == true)
                 {
-                    dialog.NextText(GameRef.GamePlayScreen.npc, GameRef.GamePlayScreen.npc.text);
+                    dialog.NextText(GameRef.GamePlayScreen.npc, GameRef.GamePlayScreen.npc.text,player);
                     dialogBox.Text = dialog.conversation.Text;
                     dialogBox.conversation = dialog.conversation;
                 }

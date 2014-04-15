@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reflection;
 
@@ -64,11 +65,15 @@ namespace TileEngine.Sprite.Npc
             
         }
 
-        public void Invoke(NPC_Story.NPC_Story npc)
+        public void Invoke(NPC_Story.NPC_Story npc, PlayerCharacter player)
         {
             foreach (var action in actions)
             {
-                action.Invoke(npc);
+                if(action.GetInvoker() == "NPC")
+                    action.InvokeNPC(npc);
+                else if(action.GetInvoker() == "Player")
+                    action.InvokePlayer(player);
+
             }
         }
     }
@@ -77,17 +82,38 @@ namespace TileEngine.Sprite.Npc
     {
         private MethodInfo method;
         private object[] parameters;
+        private string invoker { get; set; }
+
+        public string GetInvoker()
+        { 
+            return this.invoker;
+        }
 
         public ConversationHandlerAction(string methodName, object[] parameters)
         {
-            method = typeof (NPC_Story.NPC_Story).GetMethod(methodName);
+            if (typeof (NPC_Story.NPC_Story).GetMethod(methodName) != null)
+            {
+                method = typeof (NPC_Story.NPC_Story).GetMethod(methodName);
+                this.invoker = "NPC";
+            }
+            else if (typeof (PlayerCharacter).GetMethod(methodName) != null)
+            {
+                method = typeof (PlayerCharacter).GetMethod(methodName);
+                this.invoker = "Player";
+            }
             this.parameters = parameters;
         }
 
-        public void Invoke(NPC_Story.NPC_Story npc)
+        public void InvokeNPC(NPC_Story.NPC_Story npc)
         {
             method.Invoke(npc, parameters);
         }
+
+        public void InvokePlayer(PlayerCharacter player)
+        {
+            method.Invoke(player, parameters);
+        }
+
     }
 
 }

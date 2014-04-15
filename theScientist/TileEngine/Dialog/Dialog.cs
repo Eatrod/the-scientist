@@ -12,6 +12,7 @@ namespace TileEngine.Dialog
     {
         public Conversation conversation = null;
         public NPC_Story Npc;
+        public PlayerCharacter player;
 
         public Rectangle area = new Rectangle(0,0,500,500);
 
@@ -23,11 +24,11 @@ namespace TileEngine.Dialog
         private int currentHandler = 0;
         private KeyboardState lastState;
 
-        public void NextText(NPC_Story npc, Conversation conversation)
+        public void NextText(NPC_Story npc, Conversation conversation, PlayerCharacter player)
         {
             this.Npc = npc;
             this.conversation = conversation;
-            conversation.Handlers[currentHandler].Invoke(Npc);
+            conversation.Handlers[currentHandler].Invoke(Npc,player);
         }
 
         public void Update()

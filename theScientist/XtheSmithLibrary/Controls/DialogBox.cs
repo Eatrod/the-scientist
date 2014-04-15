@@ -74,7 +74,7 @@ namespace XtheSmithLibrary.Controls
 
             if (newState.IsKeyDown(Keys.Space) && lastState.IsKeyUp(Keys.Space))
             {
-                conversation.Handlers[currentHandler].Invoke(npc);
+                conversation.Handlers[currentHandler].Invoke(npc,player);
                 currentHandler = 0;
             }
 
