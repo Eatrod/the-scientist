@@ -42,6 +42,7 @@ namespace TileGame.GameScreens
                 
         Sprite sprite, sprite1;
         AnimatedSprite NPC1, NPC2;
+        public NPC_Story npcstory, npcstory2;
         AnimatedSprite NPC_Farmer_1;
         public NPC_Story npc;
         public List<NPC_Story> NpcStoryList = new List<NPC_Story>(); 
@@ -147,7 +148,6 @@ namespace TileGame.GameScreens
             NPC2.FullHp = 5;
             AnimatedSpriteObject.Add(NPC2);
 
-            npc = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/npc1"), Content.Load<Texture2D>("CharacterPotraits/asterix"));
             NPC_Farmer_1 = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/playerboxAnimation"), null, GameRef.random);
             NPC_Farmer_1.Origionoffset = new Vector2(15, 15);
             NPC_Farmer_1.SetSpritePositionInGameWorld(new Vector2(8, 22));
@@ -156,11 +156,17 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(NPC_Farmer_1);
             NPCFightingFarmer.Add(NPC_Farmer_1);
 
-            npc = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"));
-            npc.Origionoffset = new Vector2(15, 15);
-            npc.SetSpritePositionInGameWorld(new Vector2(16, 16));
-            AnimatedSpriteObject.Add(npc);
-            NpcStoryList.Add(npc);
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/npc1"), Content.Load<Texture2D>("CharacterPotraits/pimp-bender"));
+            npcstory.Origionoffset = new Vector2(15, 15);
+            npcstory.SetSpritePositionInGameWorld(new Vector2(16, 16));
+            AnimatedSpriteObject.Add(npcstory);
+            NpcStoryList.Add(npcstory);
+
+            npcstory2 = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"));
+            npcstory2.Origionoffset = new Vector2(15, 15);
+            npcstory2.SetSpritePositionInGameWorld(new Vector2(20, 17));
+            AnimatedSpriteObject.Add(npcstory2);
+            NpcStoryList.Add(npcstory2);
 
             //--
             lockedGateDict = new Dictionary<int,bool>();
@@ -184,25 +190,25 @@ namespace TileGame.GameScreens
             }
             foreach (var npc in NpcStoryList)
             {
-            if (npc.InSpeakingRange(player))
-            {
-                if (npc.canTalk == true)
+                if (npc.InSpeakingRange(player))
                 {
-                    if (InputHandler.KeyReleased(Keys.Space))
+                    if (npc.canTalk == true)
                     {
-                        if (ActiveConversation == false)
+                        if (InputHandler.KeyReleased(Keys.Space))
                         {
+                            if (ActiveConversation == false)
+                            {
                                 PlayerStartConversation(npc);
+                            }
                         }
                     }
-                }
-                else
-                {
-                    if (InputHandler.KeyReleased(Keys.Space))
+                    else
                     {
-                            PlayerEndConversation(npc);
+                        if (InputHandler.KeyReleased(Keys.Space))
+                        {
+                                PlayerEndConversation(npc);
+                            }
                         }
-                    }
                 }
             }
             
