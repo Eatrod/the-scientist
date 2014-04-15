@@ -52,7 +52,7 @@
   <Conversation Name="AsterixShout">
     <Text>Asterix: God speed, ragazzo</Text>
     <Handlers>
-      <Handler Caption="Continue" Action="EndConversation" />
+      <Handler Caption="Continue" Action="EndConversation;UpdateBowStatus:true" />
     </Handlers>
   </Conversation>
 
