@@ -562,6 +562,8 @@ namespace TileGame.GameScreens
         
         #endregion
 
+        
+        #region Method Region
         public void PlayerStartConversation(NPC_Story npc)
         {
             dialogBox.player = player;
@@ -573,7 +575,17 @@ namespace TileGame.GameScreens
             npc.StartConversation("AsterixGreeting");
             dialogBox.Text = npc.text.Text;
         }
-        #region Method Region
+
+        public void PlayerEndConversation(NPC_Story npc)
+        {
+            dialogBox.Visible = false;
+            dialogBox.Enabled = false;
+            dialogBox.npc = null;
+            ControlManager.Remove(dialogBox);
+            npc.canTalk = true;
+            ActiveConversation = false;
+        }
+
         public void SetPlayerPosition(int x, int y)
         {
             player.SetSpritePositionInGameWorld(new Vector2(x, y));
@@ -604,15 +616,6 @@ namespace TileGame.GameScreens
                 screen.SetPlayerPosition(next_position.X, next_position.Y);
                 screen.lockedGateDict[CellIndex] = true;
             }
-        }
-        public void PlayerEndConversation(NPC_Story npc)
-        {
-            dialogBox.Visible = false;
-            dialogBox.Enabled = false;
-            dialogBox.npc = null;
-            ControlManager.Remove(dialogBox);
-            npc.canTalk = true;
-            ActiveConversation = false;
         }
 
         protected void UnlockGate(int cellIndex)
