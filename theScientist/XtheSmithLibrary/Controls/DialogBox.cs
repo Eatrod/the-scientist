@@ -54,30 +54,31 @@ namespace XtheSmithLibrary.Controls
 
         public override void Update(GameTime gameTime)
         {
-            /*
+            
             KeyboardState newState = Keyboard.GetState();
 
-            if (npc == null)
+            if (npc == null || conversation == null)
                 return;
 
-            if (newState.IsKeyDown(Keys.Up) && lastState.IsKeyUp(Keys.Up))
+            if (newState.IsKeyDown(Keys.Left) && lastState.IsKeyUp(Keys.Left))
             {
                 currentHandler--;
                 if (currentHandler < 0)
                     currentHandler = conversation.Handlers.Count - 1;
             }
 
-            if (newState.IsKeyDown(Keys.Down) && lastState.IsKeyUp(Keys.Down))
+            if (newState.IsKeyDown(Keys.Right) && lastState.IsKeyUp(Keys.Right))
             {
-                currentHandler = (currentHandler - 1) % conversation.Handlers.Count;
+                currentHandler = (currentHandler + 1) % conversation.Handlers.Count;
             }
 
             if (newState.IsKeyDown(Keys.Space) && lastState.IsKeyUp(Keys.Space))
             {
                 conversation.Handlers[currentHandler].Invoke(npc);
+                currentHandler = 0;
             }
 
-            lastState = newState;*/
+            lastState = newState;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -92,14 +93,14 @@ namespace XtheSmithLibrary.Controls
             }
             spriteBatch.DrawString(SpriteFont, Text, new Vector2(200, rectangle.Y - 5), Color.Black);
 
-            /*for (int i = 0; i < npc.text.Handlers.Count; ++i)
+            for (int i = 0; i < conversation.Handlers.Count; ++i)
             {
-                string handler = npc.text.Handlers[i].Caption;
+                string handler = conversation.Handlers[i].Caption;
 
                 Color color = (i == currentHandler) ? Color.Orange : Color.Black;
 
-                spriteBatch.DrawString(SpriteFont,handler, new Vector2(200, 1000+i*20), color);
-            }*/
+                spriteBatch.DrawString(SpriteFont, handler, new Vector2(rectangle.X+1200 + (i+1) * 100, rectangle.Y + 50), color);
+            }
 
             Rectangle pictureRectangle = new Rectangle(0, rectangle.Y, 200, 100);
             if (npc.picture != null && "Asterix" == whoSaid(Text))
