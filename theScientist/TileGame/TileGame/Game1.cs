@@ -55,8 +55,8 @@ namespace TileGame
         
         #region Screen Field Region
        
-        const int screenWidth = 1680; //1024
-        const int screenHeight = 1080; //768
+        const int screenWidth = 1024; //1024
+        const int screenHeight = 768; //768
         public readonly Rectangle ScreenRectangle;
 
         #endregion
@@ -143,12 +143,15 @@ namespace TileGame
 
             GameState currentState = stateManager.CurrentState;
             //GameState oldState;
-            if (!musicStates[currentState].SongStart)
+            if (musicStates.ContainsKey(currentState))
             {
-                MediaPlayer.Play(musicStates[currentState].Song);
-                musicStates[currentState].SongStart = true;
-                //oldState = currentState;
-                //musicStates[oldState].SongStart = false;
+                if (!musicStates[currentState].SongStart)
+                {
+                    MediaPlayer.Play(musicStates[currentState].Song);
+                    musicStates[currentState].SongStart = true;
+                    //oldState = currentState;
+                    //musicStates[oldState].SongStart = false;
+                }
             }
 
             base.Update(gameTime);
