@@ -70,6 +70,7 @@
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Allied.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Allied_TownGuard.cs" />
+    <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Farmer.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile_Bandit.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile_Wolf.cs" />
