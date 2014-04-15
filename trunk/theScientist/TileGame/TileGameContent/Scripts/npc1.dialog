@@ -8,22 +8,30 @@
   </Conversation>
 
   <Conversation Name="Quest1">
-    <Text> You should be seeing Yes or no to this</Text>
+    <Text>You should be seeing Yes or No to this (and perhaps)</Text>
     <Handlers>
-      <Handler Caption="Yes" Action="StartConversation:ThankYou" />
+      <Handler Caption="Yes" Action="StartConversation:ThankYou"/>
       <Handler Caption="No" Action ="StartConversation:OhWell" />
+      <Handler Caption="Perhaps" Action ="StartConversation:Huh;EndConversation" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="ThankYou">
-    <Text> Thank you </Text>
+    <Text>(Yes) Thank you </Text>
     <Handlers>
       <Handler Caption="Continue" Action="EndConversation" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="OhWell">
-    <Text> Ohwell </Text>
+    <Text>(No) Ohwell </Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="EndConversation" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Huh">
+    <Text>(Perhaps) What </Text>
     <Handlers>
       <Handler Caption="Continue" Action="EndConversation" />
     </Handlers>

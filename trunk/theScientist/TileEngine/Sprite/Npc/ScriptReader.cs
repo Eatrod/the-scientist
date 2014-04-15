@@ -38,10 +38,25 @@ namespace TileEngine.Sprite.Npc
         protected override ConversationHandler Read(ContentReader input, ConversationHandler existingInstance)
         {
             string caption = input.ReadString();
-            string actionName = input.ReadString();
+            int actionCount = input.ReadInt32();
+            ConversationHandlerAction[] actions = new ConversationHandlerAction[actionCount];
+            for (int i = 0; i < actionCount; i++)
+            {
+                actions[i] = input.ReadObject<ConversationHandlerAction>();
+            }
+
+            return new ConversationHandler(caption, actions);
+        }
+    }
+
+    public class ConversationHandlerActionReader : ContentTypeReader<ConversationHandlerAction>
+    {
+        protected override ConversationHandlerAction Read(ContentReader input, ConversationHandlerAction existingInstance)
+        {
+            string methodName = input.ReadString();
             object[] parameters = input.ReadObject<object[]>();
 
-            return new ConversationHandler(caption, actionName, parameters);
+            return new ConversationHandlerAction(methodName, parameters);
         }
     }
 }

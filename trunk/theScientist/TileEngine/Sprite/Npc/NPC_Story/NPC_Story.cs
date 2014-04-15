@@ -50,5 +50,6 @@ namespace TileEngine.Sprite.Npc.NPC_Story
                 return;
             canTalk = false;
         }
+
     }
 }

@@ -41,16 +41,25 @@ namespace TileContent
 
                     string action = handlerNode.Attributes["Action"].Value;
 
-                    if (action.Contains(":"))
+                    string[] methods = action.Split(';');
+
+                    foreach (var m in methods)
                     {
-                        string[] actionSplit = action.Split(':');
-                        h.action = actionSplit[0];
-                        h.actionParameters = (object[])actionSplit[1].Split(',');
-                    }
-                    else
-                    {
-                        h.action = action;
-                        h.actionParameters = null;
+                        ConversationHandlerActionContent a = new ConversationHandlerActionContent();
+
+                        if (m.Contains(":"))
+                        {
+                            string[] actionSplit = m.Split(':');
+                            a.MethodName = actionSplit[0];
+                            a.Parameters = (object[]) actionSplit[1].Split(',');
+                        }
+                        else
+                        {
+                            a.MethodName = m;
+                            a.Parameters = null;
+                        }
+
+                        h.Actions.Add(a);
                     }
 
                     c.Handlers.Add(h);

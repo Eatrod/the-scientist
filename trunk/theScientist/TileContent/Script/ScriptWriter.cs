@@ -65,8 +65,11 @@ namespace TileContent
         protected override void Write(ContentWriter output, ConversationHandlerContent value)
         {
             output.Write(value.caption);
-            output.Write(value.action);
-            output.WriteObject(value.actionParameters);
+            output.Write(value.Actions.Count);
+            foreach (ConversationHandlerActionContent a in value.Actions)
+            {
+                output.WriteObject(a);
+            }
         }
 
         public override string GetRuntimeReader(TargetPlatform targetPlatform)
@@ -74,6 +77,23 @@ namespace TileContent
             // TODO: change this to the name of your ContentTypeReader
             // class which will be used to load this data.
             return "TileEngine.Sprite.Npc.ConversationHandlerReader, TileEngine";
+        }
+    }
+
+    [ContentTypeWriter]
+    public class ConversationHandlerActionWriter : ContentTypeWriter<ConversationHandlerActionContent>
+    {
+        protected override void Write(ContentWriter output, ConversationHandlerActionContent value)
+        {
+            output.Write(value.MethodName);
+            output.WriteObject(value.Parameters);
+        }
+
+        public override string GetRuntimeReader(TargetPlatform targetPlatform)
+        {
+            // TODO: change this to the name of your ContentTypeReader
+            // class which will be used to load this data.
+            return "TileEngine.Sprite.Npc.ConversationHandlerActionReader, TileEngine";
         }
     }
 }
