@@ -13,8 +13,9 @@ namespace TileGame.Collision
 {
     public class CollisionWithTerrain
     {
-        public void CheckForCollisionAroundSprite(AnimatedSprite sprite, Vector2 motion, PlayerScreen screen)
+        public bool CheckForCollisionAroundSprite(AnimatedSprite sprite, Vector2 motion, PlayerScreen screen)
         {
+            bool collided = false;
             Point spriteCell = Engine.ConvertPostionToCell(sprite.Origin);
 
             Point? upLeft = null, up = null, upRight = null,
@@ -46,14 +47,17 @@ namespace TileGame.Collision
                 spriteCell.Y < screen.tileMap.CollisionLayer.Height - 1)
                 downRight = new Point(spriteCell.X + 1, spriteCell.Y + 1);
 
-            CheckNoneWalkebleArea(sprite, ref motion, ref spriteCell, upLeft, up, upRight, left, right, downLeft, down, downRight, screen);
+            collided = CheckNoneWalkebleArea(sprite, ref motion, ref spriteCell, upLeft, up, upRight, left, right, downLeft, down, downRight, screen);
             CheckWalkebleAreaFromOneDirection(sprite, ref motion, ref spriteCell, upLeft, up, upRight, left, right, downLeft, down, downRight,screen);
             CheckWalkableDamageAreaCollision(sprite, ref motion, ref spriteCell, upLeft, up, upRight, left, right, downLeft, down, downRight,screen);
+
+            return collided;
         }
 
-        public void CheckNoneWalkebleArea(AnimatedSprite sprite, ref Vector2 motion, ref Point spriteCell, Point? upLeft, Point? up,
+        public bool CheckNoneWalkebleArea(AnimatedSprite sprite, ref Vector2 motion, ref Point spriteCell, Point? upLeft, Point? up,
             Point? upRight, Point? left, Point? right, Point? downLeft, Point? down, Point? downRight, PlayerScreen screen)
         {
+            bool collided = false;
             if (up != null && screen.tileMap.CollisionLayer.GetCellIndex(up.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(up.Value);
@@ -62,6 +66,7 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     sprite.Position.Y = up.Value.Y * Engine.TileHeight + sprite.Bounds.Height;
+                    collided = true;
                 }
             }
             if (down != null && screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 1)
@@ -72,6 +77,7 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     sprite.Position.Y = down.Value.Y * Engine.TileHeight - sprite.Bounds.Height;
+                    collided = true;
                 }
             }
             if (left != null && screen.tileMap.CollisionLayer.GetCellIndex(left.Value) == 1)
@@ -82,6 +88,7 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     sprite.Position.X = left.Value.X * Engine.TileWidth + sprite.Bounds.Width;
+                    collided = true;
                 }
 
             }
@@ -93,6 +100,7 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     sprite.Position.X = right.Value.X * Engine.TileWidth - sprite.Bounds.Width;
+                    collided = true;
                 }
 
             }
@@ -108,6 +116,7 @@ namespace TileGame.Collision
                         sprite.Position.X = spriteCell.X * Engine.TileWidth;
                     if (motion.Y != 0)
                         sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                    collided = true;
                 }
             }
 
@@ -122,6 +131,7 @@ namespace TileGame.Collision
                         sprite.Position.X = spriteCell.X * Engine.TileWidth;
                     if (motion.Y != 0)
                         sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                    collided = true;
                 }
             }
 
@@ -136,6 +146,7 @@ namespace TileGame.Collision
                         sprite.Position.X = spriteCell.X * Engine.TileWidth;
                     if (motion.Y != 0)
                         sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                    collided = true;
                 }
             }
 
@@ -150,8 +161,10 @@ namespace TileGame.Collision
                         sprite.Position.X = spriteCell.X * Engine.TileWidth;
                     if (motion.Y != 0)
                         sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                    collided = true;
                 }
             }
+            return collided;
         }
 
         public void CheckWalkebleAreaFromOneDirection(AnimatedSprite sprite, ref Vector2 motion, ref Point spriteCell, Point? upLeft, Point? up,
