@@ -79,33 +79,11 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             {
                 Aggro = true;
             }
-            else if(startingPosition == Position)
+            else if(Vector2.Distance(startingPosition,Position) < 10 && goingHome)
             {
                 goingHome = false;
             }
-            //if (Vector2.Distance(player.Position, this.Position) < 100 &&
-            //    Vector2.Distance(Position, StartingPosition) < 1000 &&
-            //    !goingHome)
-            //{
-            //    Aggro = true;
-            //    if (Aggro && Vector2.Distance(player.Position, Position) > 200)
-            //    {
-            //        Aggro = false;
-            //        goingHome = true;
-            //    }
-            //    if (Vector2.Distance(Position, StartingPosition) > 1000)
-            //    {
-            //        goingHome = true;
-            //        Aggro = false;
-            //    }
-            //}
-            //else
-            //{
-            //    if(Aggro)
-            //        goingHome = true;
-            //}
-            //if (Position == startingPosition)
-            //    goingHome = false;
+            
 
         }
         public override void Update(GameTime gameTime)
@@ -116,7 +94,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 startingFlag = false;
             }
             vectorTowardsStart = startingPosition - Position;
-            if(Aggro)
+            if (Aggro)
             {
                 Position += VectorTowardsTarget * speed;
             }
@@ -124,6 +102,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             {
                 Position += VectorTowardsStart * speed;
             }
+            else
+                Position = startingPosition;
             base.Update(gameTime);
         }
     }
