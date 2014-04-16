@@ -16,11 +16,6 @@ namespace TileEngine.Dialog
 
         public Rectangle area = new Rectangle(0,0,500,500);
 
-        private SpriteFont spriteFont;
-        private SpriteBatch spriteBatch;
-        private ContentManager content;
-        private Texture2D background;
-
         private int currentHandler = 0;
         private KeyboardState lastState;
 
