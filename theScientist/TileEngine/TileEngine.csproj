@@ -79,6 +79,7 @@
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile_Bandit.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile_Wolf.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile_ZombieWalker.cs" />
+    <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Guard.cs" />
     <Compile Include="Sprite\Npc\NPC_Neutral\NPC_Neutral.cs" />
     <Compile Include="Sprite\Npc\NPC_Neutral\NPC_Neutral_Critters.cs" />
     <Compile Include="Sprite\Npc\NPC_Neutral\NPC_Neutral_Critters_Goat.cs" />
