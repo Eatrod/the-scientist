@@ -99,7 +99,7 @@ namespace XtheSmithLibrary.Controls
 
                 Color color = (i == currentHandler) ? Color.Orange : Color.Black;
 
-                spriteBatch.DrawString(SpriteFont, handler, new Vector2(rectangle.X+1200 + (i+1) * 100, rectangle.Y + 50), color);
+                spriteBatch.DrawString(SpriteFont, handler, new Vector2(600+80*i, rectangle.Y + 60), color);
             }
 
             Rectangle pictureRectangle = new Rectangle(0, rectangle.Y, 200, 100);
