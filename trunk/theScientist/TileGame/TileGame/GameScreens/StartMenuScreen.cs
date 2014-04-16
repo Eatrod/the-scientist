@@ -164,6 +164,9 @@ namespace TileGame.GameScreens
         private void StartGame()
         {
             StateManager.ChangeState(GameRef.GamePlayScreen);
+            GameRef.BaseGamePlayScreen.FindCellWithIndexInCurrentTilemap(
+                50,
+                GameRef.GamePlayScreen);
             PlayerScreen.player.Life = 100;
             GameRef.GamePlayScreen.Gate1Locked = true;
             PlayerScreen.player.SetSpritePositionInGameWorld(new Vector2(16, 6));
@@ -173,6 +176,9 @@ namespace TileGame.GameScreens
             GameRef.LoadGameFromFile();
             GameState gs = GetState(GameRef.lastGameScreen);
             StateManager.ChangeState(gs);
+            GameRef.BaseGamePlayScreen.FindCellWithIndexInCurrentTilemap(
+                50,
+                (PlayerScreen)gs);
             PlayerScreen.player.Life = GameRef.playerLife;
             PlayerScreen.player.Stamina = GameRef.playerStamina;
             PlayerScreen.player.SetSpritePositionInGameWorld(GameRef.playerPosition.X,
