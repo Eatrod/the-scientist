@@ -1121,6 +1121,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Scripts\LumberJacksDialog.dialog">
+      <Name>LumberJacksDialog</Name>
+      <Importer>ScriptImporter</Importer>
+      <Processor>ScriptProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="CollisionTiles\S.png">
       <Name>S</Name>
       <Importer>TextureImporter</Importer>
