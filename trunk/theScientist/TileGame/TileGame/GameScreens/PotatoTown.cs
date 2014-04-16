@@ -43,7 +43,7 @@ namespace TileGame.GameScreens
         Sprite sprite, sprite1;
         AnimatedSprite NPC1, NPC2;
         public NPC_Story npcstory, npcstory2;
-        AnimatedSprite NPC_Farmer_1;
+        NPC_Fighting_Guard NPC_Patroller_1;
         public NPC_Story npc;
         public List<NPC_Story> NpcStoryList = new List<NPC_Story>(); 
         protected Rectangle rectangle;
@@ -151,6 +151,13 @@ namespace TileGame.GameScreens
             NPC2.FullHp = 5;
             AnimatedSpriteObject.Add(NPC2);
 
+            NPC_Patroller_1 = new NPC_Fighting_Guard(Content.Load<Texture2D>("Sprite/playerboxAnimation"), null);
+            NPC_Patroller_1.Origionoffset = new Vector2(15, 15);
+            NPC_Patroller_1.SetSpritePositionInGameWorld(new Vector2(10, 10));
+            NPC_Patroller_1.Life = 5;
+            NPC_Patroller_1.FullHp = 5;
+            AnimatedSpriteObject.Add(NPC_Patroller_1);
+
             for (int i = 0; i < 15; i++)
             {
                 NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null, GameRef.random);
@@ -186,6 +193,7 @@ namespace TileGame.GameScreens
         public override void Update(GameTime gameTime)
         {
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
+            NPC_Patroller_1.SetVectorTowardsTargetAndStartAndCheckAggro(player);
             foreach(NPC_Fighting_Farmer npc in NPCFightingFarmer)
             {
                 //CollisionWithCharacter.UpdateCollisionForCharacters(
