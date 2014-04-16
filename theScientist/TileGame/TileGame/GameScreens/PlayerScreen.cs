@@ -639,6 +639,28 @@ namespace TileGame.GameScreens
                 }
             }
         }
+
+        public Point FindCellWithIndexInCurrentTilemap(int index, PlayerScreen screen)
+        {
+            //StateManager.ChangeState(screen);
+            Point next_position;
+            next_position.X = 0;
+            next_position.Y = 0;
+            for (int i = 0; i < screen.tileMap.CollisionLayer.Width; i++)
+            {
+                for (int j = 0; j < screen.tileMap.CollisionLayer.Height; j++)
+                {
+                    Point temp = new Point(i, j);
+                    if (screen.tileMap.CollisionLayer.GetCellIndex(temp) == index)
+                    {
+                        next_position.X = i;
+                        next_position.Y = j;
+                        break;
+                    }
+                }
+            }
+            return next_position;
+        }
         #endregion
     }
 }

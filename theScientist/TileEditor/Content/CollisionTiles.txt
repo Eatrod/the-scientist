@@ -23,3 +23,4 @@
 47;G7.png
 48;G8.png
 49;G9.png
+50;S.png
