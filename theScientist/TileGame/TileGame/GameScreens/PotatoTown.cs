@@ -104,9 +104,11 @@ namespace TileGame.GameScreens
             renderList.Clear();
             renderList.Add(player);
             SpriteObjectInGameWorld.AddRange(AnimatedSpriteObject);
-            SpriteObjectInGameWorld.AddRange(SpriteObject);            
+            SpriteObjectInGameWorld.AddRange(SpriteObject);
+            SpriteObjectInGameWorld.AddRange(NPCFightingFarmer);
             renderList.AddRange(SpriteObject);
             renderList.AddRange(AnimatedSpriteObject);
+            renderList.AddRange(NPCFightingFarmer);
             
             
         }
@@ -147,15 +149,16 @@ namespace TileGame.GameScreens
             NPC2.FullHp = 5;
             AnimatedSpriteObject.Add(NPC2);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 15; i++)
             {
                 NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/playerboxAnimation"), null, GameRef.random);
                 NPC_Farmer.Origionoffset = new Vector2(15, 15);
-                NPC_Farmer.SetSpritePositionInGameWorld(new Vector2(6 + i, 22));
+                NPC_Farmer.SetSpritePositionInGameWorld(new Vector2(5 + i, 22));
                 NPC_Farmer.Life = 5;
                 NPC_Farmer.FullHp = 5;
                 AnimatedSpriteObject.Add(NPC_Farmer);
                 NPCFightingFarmer.Add(NPC_Farmer);
+
             }
 
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/npc1"), Content.Load<Texture2D>("CharacterPotraits/pimp-bender"));
@@ -193,10 +196,10 @@ namespace TileGame.GameScreens
 
                 }
                 //Aggro range
-                if (Vector2.Distance(npc.Position, player.Position) < 100 && !npc.Aggro && !npc.Running && !npc.HitWall)
+                if (Vector2.Distance(npc.Position, player.Position) < 100 && !npc.Aggro && !npc.Running && !npc.HitFlag)
                 {
                     npc.Aggro = true;
-                    npc.AttackDirection = player.Position - npc.Position; 
+                    npc.AttackersDirection = player.Position - npc.Position; 
                 }
                 if(npc.Running)
                     npc.CheckForCollisionWithOtherNPCs(NPCFightingFarmer,player);
