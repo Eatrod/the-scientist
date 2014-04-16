@@ -30,32 +30,5 @@ namespace TileEngine.Dialog
             this.conversation = conversation;
             conversation.Handlers[currentHandler].Invoke(Npc,player);
         }
-
-        public void Update()
-        {
-           /* KeyboardState newState = Keyboard.GetState();
-
-            if (conversation == null || Npc == null)
-                return;
-
-            if (newState.IsKeyDown(Keys.Up) && lastState.IsKeyUp(Keys.Up))
-            {
-                currentHandler--;
-                if(currentHandler < 0)
-                    currentHandler = conversation.Handlers.Count - 1;
-            }
-
-            if (newState.IsKeyDown(Keys.Down) && lastState.IsKeyUp(Keys.Down))
-            {
-                currentHandler = (currentHandler - 1) % conversation.Handlers.Count;
-            }
-
-            if (newState.IsKeyDown(Keys.Space) && lastState.IsKeyUp(Keys.Space))
-            {
-                conversation.Handlers[currentHandler].Invoke(Npc);
-            }
-
-            lastState = newState;*/
-        }
     }
 }
