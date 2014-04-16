@@ -1,0 +1,90 @@
+﻿<Conversations>
+
+  <Conversation Name="Greeting">
+    <Text>Jack: What do you think you're doin?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:John1" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="John1">
+    <Text>John: You can axe if you want to borrow it</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Johnny1" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Johnny1">
+    <Text>Johnny: Potato!</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Ignazio1" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Ignazio1">
+    <Text>Ignazio: How about i take your axe</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Jack2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Jack2">
+    <Text>Jack: How about i kick your ass!</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:John2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="John2">
+    <Text>John: How about a competition?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Johnny2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Johnny2">
+    <Text>Johnny: Potato?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Ignazio2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Ignazio2">
+    <Text>Ignazio: Fine. What type of competition?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Jack3" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Jack3">
+    <Text>Jack: Arm wrestling!</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:John3" />
+    </Handlers>
+  </Conversation>
+  
+  <Conversation Name="John3">
+    <Text>John: A riddle!</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Johnny3" />
+    </Handlers>
+  </Conversation>
+  
+  <Conversation Name="Johnny3">
+    <Text>Johnny: Potato..</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Competitions" />
+    </Handlers>
+  </Conversation>
+  
+  <Conversation Name="Competitions">
+    <Text>Ignazio: Fine i start with..</Text>
+    <Handlers>
+      <Handler Caption="Arm wrestling" Action="EndConversation" />
+      <Handler Caption="Riddle" Action="EndConversation" />
+      <Handler Caption="Potato!?" Action="EndConversation" />
+      <Handler Caption="Leave" Action="EndConversation" />
+    </Handlers>
+  </Conversation>
+
+</Conversations>
