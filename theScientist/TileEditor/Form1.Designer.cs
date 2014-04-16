@@ -56,10 +56,10 @@
             this.chbEntity = new System.Windows.Forms.CheckBox();
             this.tileDisplay1 = new TileEditor.TileDisplay();
             this.grpEntity = new System.Windows.Forms.GroupBox();
-            this.lblEntityWidth = new System.Windows.Forms.Label();
-            this.lblEntityHeight = new System.Windows.Forms.Label();
-            this.txtEntityWidth = new System.Windows.Forms.TextBox();
             this.txtEntityHeight = new System.Windows.Forms.TextBox();
+            this.txtEntityWidth = new System.Windows.Forms.TextBox();
+            this.lblEntityHeight = new System.Windows.Forms.Label();
+            this.lblEntityWidth = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picbTexturePreviev)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbAlphaSlider)).BeginInit();
@@ -76,7 +76,7 @@
             // 
             // vScrollBar1
             // 
-            this.vScrollBar1.Location = new System.Drawing.Point(757, 24);
+            this.vScrollBar1.Location = new System.Drawing.Point(755, 24);
             this.vScrollBar1.Name = "vScrollBar1";
             this.vScrollBar1.Size = new System.Drawing.Size(18, 588);
             this.vScrollBar1.TabIndex = 2;
@@ -313,14 +313,19 @@
             this.grpEntity.TabStop = false;
             this.grpEntity.Text = "Entity";
             // 
-            // lblEntityWidth
+            // txtEntityHeight
             // 
-            this.lblEntityWidth.AutoSize = true;
-            this.lblEntityWidth.Location = new System.Drawing.Point(11, 20);
-            this.lblEntityWidth.Name = "lblEntityWidth";
-            this.lblEntityWidth.Size = new System.Drawing.Size(35, 13);
-            this.lblEntityWidth.TabIndex = 0;
-            this.lblEntityWidth.Text = "Width";
+            this.txtEntityHeight.Location = new System.Drawing.Point(141, 16);
+            this.txtEntityHeight.Name = "txtEntityHeight";
+            this.txtEntityHeight.Size = new System.Drawing.Size(40, 20);
+            this.txtEntityHeight.TabIndex = 3;
+            // 
+            // txtEntityWidth
+            // 
+            this.txtEntityWidth.Location = new System.Drawing.Point(50, 16);
+            this.txtEntityWidth.Name = "txtEntityWidth";
+            this.txtEntityWidth.Size = new System.Drawing.Size(40, 20);
+            this.txtEntityWidth.TabIndex = 2;
             // 
             // lblEntityHeight
             // 
@@ -331,19 +336,14 @@
             this.lblEntityHeight.TabIndex = 1;
             this.lblEntityHeight.Text = "Height";
             // 
-            // txtEntityWidth
+            // lblEntityWidth
             // 
-            this.txtEntityWidth.Location = new System.Drawing.Point(50, 16);
-            this.txtEntityWidth.Name = "txtEntityWidth";
-            this.txtEntityWidth.Size = new System.Drawing.Size(40, 20);
-            this.txtEntityWidth.TabIndex = 2;
-            // 
-            // txtEntityHeight
-            // 
-            this.txtEntityHeight.Location = new System.Drawing.Point(141, 16);
-            this.txtEntityHeight.Name = "txtEntityHeight";
-            this.txtEntityHeight.Size = new System.Drawing.Size(40, 20);
-            this.txtEntityHeight.TabIndex = 3;
+            this.lblEntityWidth.AutoSize = true;
+            this.lblEntityWidth.Location = new System.Drawing.Point(11, 20);
+            this.lblEntityWidth.Name = "lblEntityWidth";
+            this.lblEntityWidth.Size = new System.Drawing.Size(35, 13);
+            this.lblEntityWidth.TabIndex = 0;
+            this.lblEntityWidth.Text = "Width";
             // 
             // Form1
             // 

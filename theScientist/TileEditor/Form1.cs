@@ -29,7 +29,8 @@ namespace TileEditor
         };
 
         int maxWidth = 0, maxHeight = 0;
-        
+
+        bool inFocus;
         SpriteBatch spriteBatch;
         Layer currentLayer;
         Texture2D emptyTile;
@@ -64,6 +65,20 @@ namespace TileEditor
 
             tileDisplay1.OnInitialize += new EventHandler(tileDisplay1_OnInitialize);
             tileDisplay1.OnDraw += new EventHandler(tileDisplay1_OnDraw);
+            //tileDisplay1.GotFocus += new EventHandler(SetFocusTrue);
+            //tileDisplay1.LostFocus += new EventHandler(SetFocusFalse);
+
+            tileDisplay1.MouseEnter += new EventHandler(SetFocusTrue);
+            tileDisplay1.MouseLeave += new EventHandler(SetFocusFalse);
+            
+            
+            //Form1.ActiveForm.Activated += new EventHandler(SetFocusTrue);
+            //Form1.ActiveForm.Deactivate += new EventHandler(SetFocusFalse);
+
+            //Form1.ActiveForm.
+
+           
+            
 
             Application.Idle += delegate { tileDisplay1.Invalidate(); };
 
@@ -92,6 +107,17 @@ namespace TileEditor
             } 
         }
 
+
+        void SetFocusTrue(object sender, EventArgs e)
+        {
+            inFocus = true;        
+        }
+
+        void SetFocusFalse(object sender, EventArgs e)
+        {
+            inFocus = false;
+        }
+
         void tileDisplay1_OnInitialize(object sender, EventArgs e)
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -102,10 +128,17 @@ namespace TileEditor
             }
         } 
         
+
+
+
         void tileDisplay1_OnDraw(object sender, EventArgs e)
         {
-            Logic();
-            Render();  
+            if (inFocus)
+            {
+                Logic();
+            }
+
+            Render();
         }
 
         public void FillCell(int x, int y, int desiredIndex)  //Code for FillTool in Editor
