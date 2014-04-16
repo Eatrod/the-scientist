@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TileEngine.Camera" Collapsed="true">
+    <Position X="24.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAIAAgAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Camera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Dialog.Dialog" Collapsed="true">
+    <Position X="29.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwCAEAAAAAAAAAAACAAAAAAAgAAAAADAAAAQAAAMAE=</HashCode>
+      <FileName>Dialog\Dialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.AnimatedProjectile" Collapsed="true">
+    <Position X="15" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAAAAAAkAAAAAAAAAgAAAECEAAAAAAIABIAgo=</HashCode>
+      <FileName>Sprite\AnimatedProjectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.AnimatedSprite" Collapsed="true">
+    <Position X="17.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAUQBoCABAQAgkQAAAAACAAQAAAEAgQAAAAAIAAJAio=</HashCode>
+      <FileName>Sprite\AnimatedSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.BaseSprite" Collapsed="true">
+    <Position X="16.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAYAAAAACQAAAgAgAAAAAAABAAAAAxAAAAAAAEgIAig=</HashCode>
+      <FileName>Sprite\BaseSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.CharacterSprite" Collapsed="true">
+    <Position X="20" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\CharacterSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.FrameAnimation" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAgAgAAAAAAAABAAAAAAACAAAAAAAAAAAQAAABA=</HashCode>
+      <FileName>Sprite\FrameAnimation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TileEngine.Sprite.PlayerCharacter" Collapsed="true">
+    <Position X="18.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAQIAABA=</HashCode>
+      <FileName>Sprite\PlayerCharacter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Sprite" Collapsed="true">
+    <Position X="15" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAIAgA=</HashCode>
+      <FileName>Sprite\Sprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC" Collapsed="true">
+    <Position X="21.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Sprite\Npc\NPC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.Script" Collapsed="true">
+    <Position X="27.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\Script.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.Conversation" Collapsed="true">
+    <Position X="26" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAEAEAAAIAAAACAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\Script.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.ConversationHandler" Collapsed="true">
+    <Position X="27.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIACAAAAAAAAAAAAAAAAAACAAAAAgAAAA=</HashCode>
+      <FileName>Sprite\Npc\Script.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.ConversationHandlerAction" Collapsed="true">
+    <Position X="29.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAgCAAAAAAAAgAAAAAAAAAAAIAAACAAAA=</HashCode>
+      <FileName>Sprite\Npc\Script.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.ScriptReader" Collapsed="true">
+    <Position X="29.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\ScriptReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.ConversationReader" Collapsed="true">
+    <Position X="27.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\ScriptReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.ConversationHandlerReader" Collapsed="true">
+    <Position X="26" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\ScriptReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.ConversationHandlerActionReader" Collapsed="true">
+    <Position X="24.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\ScriptReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Fighting.NPC_Fighting" Collapsed="true">
+    <Position X="15.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAEAAAAAJAAAACAAQAAAAAIAAAEAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Fighting\NPC_Fighting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Fighting.NPC_Fighting_Allied" Collapsed="true">
+    <Position X="19.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Fighting\NPC_Fighting_Allied.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Fighting.NPC_Fighting_Allied_TownGuard" Collapsed="true">
+    <Position X="19.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Fighting\NPC_Fighting_Allied_TownGuard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Fighting.NPC_Fighting_Farmer" Collapsed="true">
+    <Position X="17.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAgAAxAAAIAQAASAAAEAAAEhAABAIAQQAAEAAgAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Fighting\NPC_Fighting_Farmer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Fighting.NPC_Fighting_Hostile" Collapsed="true">
+    <Position X="13" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAABACAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Fighting.NPC_Fighting_Hostile_Bandit" Collapsed="true">
+    <Position X="11.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile_Bandit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Fighting.NPC_Fighting_Hostile_Wolf" Collapsed="true">
+    <Position X="13.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile_Wolf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Fighting.NPC_Fighting_Hostile_ZombieWalker" Collapsed="true">
+    <Position X="15.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile_ZombieWalker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Neutral.NPC_Neutral" Collapsed="true">
+    <Position X="29" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Neutral\NPC_Neutral.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Neutral.NPC_Neutral_Critters" Collapsed="true">
+    <Position X="31.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Neutral\NPC_Neutral_Critters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Neutral.NPC_Neutral_Critters_Goat" Collapsed="true">
+    <Position X="31.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Neutral\NPC_Neutral_Critters_Goat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Neutral.NPC_Neutral_Townsfolk" Collapsed="true">
+    <Position X="28" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Neutral\NPC_Neutral_Townsfolk.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Neutral.NPC_Neutral_Townsfolk_Farmer" Collapsed="true">
+    <Position X="26.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Neutral\NPC_Neutral_Townsfolk_Farmer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Neutral.NPC_Neutral_Townsfolk_Peasant" Collapsed="true">
+    <Position X="29" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Neutral\NPC_Neutral_Townsfolk_Peasant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Story.NPC_Story" Collapsed="true">
+    <Position X="23.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAEAAAAAYAAAQAAAAAAAAAAAAAAAAAIAAACAAAgAAQ=</HashCode>
+      <FileName>Sprite\Npc\NPC_Story\NPC_Story.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Story.NPC_Story_Asterix" Collapsed="true">
+    <Position X="22.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Story\NPC_Story_Asterix.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Npc.NPC_Story.NPC_Story_DonPotato" Collapsed="true">
+    <Position X="24.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite\Npc\NPC_Story\NPC_Story_DonPotato.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Projectiles.FlamingArrowProjectile" Collapsed="true">
+    <Position X="13.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAAAAAAkAAAAAAAAAAAAAEAAAAAAAAIAAIAgo=</HashCode>
+      <FileName>Sprite\Projectiles\FlamingArrowProjectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Sprite.Projectiles.NormalArrowProjectile" Collapsed="true">
+    <Position X="16" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAAAAAAkAAAAAAAAAAAAAEAAAAAAAAIAAIAgo=</HashCode>
+      <FileName>Sprite\Projectiles\NormalArrowProjectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Tiles.CollisionLayer" Collapsed="true">
+    <Position X="10.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Tiles\CollisionLayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Tiles.Engine" Collapsed="true">
+    <Position X="24.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAJAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Tiles\Engine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Tiles.Layer" Collapsed="true">
+    <Position X="11.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAUBAAAAjAAAAAAAEAAQABAABAAAAQQCAAAAAA=</HashCode>
+      <FileName>Tiles\Layer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Tiles.TileLayer" Collapsed="true">
+    <Position X="12.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAASAAACAAAgAAAAAAAAAAAAIAAAAEAAAAQAAAAAA=</HashCode>
+      <FileName>Tiles\TileLayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileEngine.Tiles.TileMap" Collapsed="true">
+    <Position X="24.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAgAAAAAAAABBAAAAAIAEAAAAAEAAAAA=</HashCode>
+      <FileName>Tiles\TileMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
