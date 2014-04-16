@@ -21,7 +21,11 @@ namespace TileEngine.Sprite
         protected float charge = 0;
 
         double oldTime = 0;  //taking damage see kommentar.
-
+        public bool Animating
+        {
+            get { return animating; }
+            set { }
+        }
         public override Vector2 Center
         {
             get 
@@ -118,12 +122,11 @@ namespace TileEngine.Sprite
 
             if (Position.Y > height - CurrentAnimation.CurrentRectangle.Height)
                 Position.Y = height - CurrentAnimation.CurrentRectangle.Height;
-        }  
+        }
 
         public override void Update(GameTime gameTime)
         {
             FrameAnimation animation = CurrentAnimation;
-
             if (animation == null)
             {
                 if (Animations.Count > 0)
@@ -142,7 +145,7 @@ namespace TileEngine.Sprite
             animation.Update(gameTime);
         }
 
-        private void ReducingHealth()
+        public void ReducingHealth()
         {
             if (takingDamage)
             {
@@ -152,7 +155,7 @@ namespace TileEngine.Sprite
             }
         }
 
-        private void SettingSpriteBlink(GameTime gameTime)
+        public void SettingSpriteBlink(GameTime gameTime)
         {
             if ((gameTime.TotalGameTime.TotalMilliseconds - oldTime) > 150)
             {

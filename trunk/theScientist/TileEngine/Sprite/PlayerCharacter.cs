@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using TileEngine.Sprite;
 
 namespace TileEngine.Sprite
 {
@@ -33,6 +34,30 @@ namespace TileEngine.Sprite
              {
                  this.hasBow = false;
              }
+         }
+         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
+         {
+             FrameAnimation animation = CurrentAnimation;
+             if (animation == null)
+             {
+                 if (Animations.Count > 0)
+                 {
+                     string[] keys = new string[Animations.Count];
+                     Animations.Keys.CopyTo(keys, 0);
+
+                     CurrentAnimationName = keys[0];
+                     animation = CurrentAnimation;
+                 }
+                 else
+                     return;
+             }
+             SettingSpriteBlink(gameTime);
+             ReducingHealth();
+             if (HitFlag)
+                 MovementAfterBeingHit(gameTime);
+             animation.Update(gameTime);
+
+             //base.Update(gameTime);
          }
     }
 }
