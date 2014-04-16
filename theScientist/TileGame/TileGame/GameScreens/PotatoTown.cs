@@ -83,10 +83,10 @@ namespace TileGame.GameScreens
         {
             base.Initialize();
             
-            FrameAnimation down = new FrameAnimation(1, 32, 32, 0, 0);
-            FrameAnimation right = new FrameAnimation(1, 32, 32, 32, 0);
-            FrameAnimation up = new FrameAnimation(1, 32, 32, 64, 0);
-            FrameAnimation left = new FrameAnimation(1, 32, 32, 96, 0);
+            FrameAnimation down = new FrameAnimation(1, 50, 80, 0, 0);
+            FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);
+            FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
+            FrameAnimation left = new FrameAnimation(1, 50, 80, 0, 80);
             
             foreach(AnimatedSprite s in AnimatedSpriteObject)
             {
@@ -98,13 +98,15 @@ namespace TileGame.GameScreens
                     s.Animations.Add("Left", (FrameAnimation)left.Clone());
                 if (!s.Animations.ContainsKey("Right"))
                     s.Animations.Add("Right", (FrameAnimation)right.Clone());
+
+                s.CurrentAnimationName = "Down";
             }
             
             SpriteObjectInGameWorld.Clear();
             renderList.Clear();
             renderList.Add(player);
             SpriteObjectInGameWorld.AddRange(AnimatedSpriteObject);
-            SpriteObjectInGameWorld.AddRange(SpriteObject);
+            SpriteObjectInGameWorld.AddRange(SpriteObject);            
             SpriteObjectInGameWorld.AddRange(NPCFightingFarmer);
             renderList.AddRange(SpriteObject);
             renderList.AddRange(AnimatedSpriteObject);
@@ -135,15 +137,15 @@ namespace TileGame.GameScreens
             sprite1.SetSpritePositionInGameWorld(new Vector2(10, 10));
             SpriteObject.Add(sprite1);
 
-            NPC1 = new AnimatedSprite(Content.Load<Texture2D>("Sprite/playerboxAnimation"));           
-            NPC1.Origionoffset = new Vector2(15,15);
+            NPC1 = new AnimatedSprite(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"));           
+            NPC1.Origionoffset = new Vector2(25,65);
             NPC1.SetSpritePositionInGameWorld(new Vector2(9,9));
             NPC1.Life = 30;
             NPC1.FullHp = 30;
             AnimatedSpriteObject.Add(NPC1);
 
-            NPC2 = new AnimatedSprite(Content.Load<Texture2D>("Sprite/playerboxAnimation"));
-            NPC2.Origionoffset = new Vector2(15, 15);
+            NPC2 = new AnimatedSprite(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"));
+            NPC2.Origionoffset = new Vector2(25, 65);
             NPC2.SetSpritePositionInGameWorld(new Vector2(12, 12));
             NPC2.Life = 5;
             NPC2.FullHp = 5;
@@ -151,8 +153,8 @@ namespace TileGame.GameScreens
 
             for (int i = 0; i < 15; i++)
             {
-                NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/playerboxAnimation"), null, GameRef.random);
-                NPC_Farmer.Origionoffset = new Vector2(15, 15);
+                NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null, GameRef.random);
+                NPC_Farmer.Origionoffset = new Vector2(25, 65);
                 NPC_Farmer.SetSpritePositionInGameWorld(new Vector2(5 + i, 22));
                 NPC_Farmer.Life = 5;
                 NPC_Farmer.FullHp = 5;
@@ -161,14 +163,14 @@ namespace TileGame.GameScreens
 
             }
 
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/npc1"), Content.Load<Texture2D>("CharacterPotraits/pimp-bender"), "Jack");
-            npcstory.Origionoffset = new Vector2(15, 15);
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/npc1"), Content.Load<Texture2D>("CharacterPotraits/pimp-bender"), "Jack");
+            npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(16, 16));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory2 = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"), "Asterix");
-            npcstory2.Origionoffset = new Vector2(15, 15);
+            npcstory2 = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"), "Asterix");
+            npcstory2.Origionoffset = new Vector2(25, 65);
             npcstory2.SetSpritePositionInGameWorld(new Vector2(20, 17));
             AnimatedSpriteObject.Add(npcstory2);
             NpcStoryList.Add(npcstory2);
@@ -203,29 +205,29 @@ namespace TileGame.GameScreens
                 }
                 if(npc.Running)
                     npc.CheckForCollisionWithOtherNPCs(NPCFightingFarmer,player);
-                
+
             }
             foreach (var npc in NpcStoryList)
             {
-                if (npc.InSpeakingRange(player))
+            if (npc.InSpeakingRange(player))
+            {
+                if (npc.canTalk == true)
                 {
-                    if (npc.canTalk == true)
+                    if (InputHandler.KeyReleased(Keys.Space))
                     {
-                        if (InputHandler.KeyReleased(Keys.Space))
+                        if (ActiveConversation == false)
                         {
-                            if (ActiveConversation == false)
-                            {
                                 PlayerStartConversation(npc);
-                            }
                         }
                     }
-                    else
+                }
+                else
+                {
+                    if (InputHandler.KeyReleased(Keys.Space))
                     {
-                        if (InputHandler.KeyReleased(Keys.Space))
-                        {
-                                PlayerEndConversation(npc);
-                            }
+                            PlayerEndConversation(npc);
                         }
+                    }
                 }
             }
             
