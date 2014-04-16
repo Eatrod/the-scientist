@@ -70,8 +70,8 @@ namespace TileGame.GameScreens
             ControlManager.Add(rightText);
 
             InsertTextToMessageDictionary(0, "");
-            InsertTextToMessageDictionary(1, "Nu maste du hitta nyckeln, den ligger dar man minst anar");
-            InsertTextToMessageDictionary(2, "Du maste ta dig forbi vakterna, prata med folket");
+            InsertTextToMessageDictionary(1, "Find Asterix and talk to him!");
+            InsertTextToMessageDictionary(2, "Asterix told you to find potato The Belladonna. Check out the abandoned fields in the north west.");
             InsertTextToMessageDictionary(3, "Invanarna har talat om for mig att vakterna ar latta att supa ned");
             InsertTextToMessageDictionary(4, "Detta ska inte synas!");
             InsertTextToMessageDictionary(5, "Detta ska synas, men det kan vara en valdigt lang text, apiorgj aklfnb voahfg oahfgka jfogahr eogihaeg");
@@ -80,16 +80,15 @@ namespace TileGame.GameScreens
 
             messageDict[0].Unlocked = true;
             messageDict[1].Unlocked = true;
-            messageDict[2].Unlocked = true;
-            messageDict[3].Unlocked = true;
-            messageDict[5].Unlocked = true;
-            messageDict[7].Unlocked = true;
-            
         }
         public override void Update(GameTime gameTime)
         {
             ControlManager.Update(gameTime, PlayerIndex.One);
             base.Update(gameTime);
+
+            if (StoryProgress.asterixTalkedTo)
+                messageDict[2].Unlocked = true;
+
             GetKeysThatAreNotLocked();
 
             if (pageIndex < (ListOfUnlockedKeys.Count))
