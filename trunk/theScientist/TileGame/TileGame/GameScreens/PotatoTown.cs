@@ -151,9 +151,9 @@ namespace TileGame.GameScreens
             NPC2.FullHp = 5;
             AnimatedSpriteObject.Add(NPC2);
 
-            NPC_Patroller_1 = new NPC_Fighting_Guard(Content.Load<Texture2D>("Sprite/playerboxAnimation"), null);
-            NPC_Patroller_1.Origionoffset = new Vector2(15, 15);
-            NPC_Patroller_1.SetSpritePositionInGameWorld(new Vector2(10, 10));
+            NPC_Patroller_1 = new NPC_Fighting_Guard(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null);
+            NPC_Patroller_1.Origionoffset = new Vector2(25, 65);
+            NPC_Patroller_1.SetSpritePositionInGameWorld(new Vector2(20, 10));
             NPC_Patroller_1.Life = 5;
             NPC_Patroller_1.FullHp = 5;
             AnimatedSpriteObject.Add(NPC_Patroller_1);
