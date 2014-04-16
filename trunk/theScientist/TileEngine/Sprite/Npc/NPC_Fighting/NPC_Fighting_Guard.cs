@@ -17,9 +17,32 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         private Vector2 startingPosition;
         private Vector2 vectorTowardsTarget;
         private Vector2 vectorTowardsStart;
+        private Vector2 aggroStartingPosition;
         private bool aggro;
         private bool startingFlag;
         private bool goingHome;
+        private float aggroRange;
+        private float aggroCircle;
+        public Vector2 AggroStartingPosition
+        {
+            get { return aggroStartingPosition; }
+            set { aggroStartingPosition = value; }
+        }
+        public float AggroCircle
+        {
+            get { return aggroCircle; }
+            set { aggroCircle = value; }
+        }
+        public float AggroRange
+        {
+            get { return aggroRange; }
+            set { aggroRange = value; }
+        }
+        public bool StartingFlag
+        {
+            get { return startingFlag; }
+            set { startingFlag = value; }
+        }
         public bool GoingHome
         {
             get { return goingHome; }
@@ -60,28 +83,33 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         public NPC_Fighting_Guard(Texture2D texture, Script script):base(texture,script)
         {
             this.startingFlag = true;
-            //this.startingPosition = Position;
             this.vectorTowardsTarget = Vector2.Zero;
             this.vectorTowardsStart = Vector2.Zero;
+            this.aggroStartingPosition = Vector2.Zero;
             this.Aggro = false;
             this.GoingHome = false;
             this.speed = 1.0f;
+            this.aggroRange = 100;
+            this.aggroCircle = 500;
         }
         public void SetVectorTowardsTargetAndStartAndCheckAggro(AnimatedSprite player)
         {
-            vectorTowardsTarget = player.Position - Position; 
-            if (Vector2.Distance(player.Position, startingPosition) > 500)
+            vectorTowardsTarget = player.Position - Position;
+            vectorTowardsStart = startingPosition - Position;
+            if (Vector2.Distance(Position, AggroStartingPosition) > AggroCircle && AggroStartingPosition != Vector2.Zero)
             {
                 Aggro = false;
-                goingHome = true;
+                GoingHome = true;
+                AggroStartingPosition = Vector2.Zero;
             }
-            else if (Vector2.Distance(player.Position, Position) < 100)
+            else if (Vector2.Distance(player.Position, Position) < AggroRange && !GoingHome &&!Aggro)
             {
+                AggroStartingPosition = Position;
                 Aggro = true;
             }
-            else if(Vector2.Distance(startingPosition,Position) < 10 && goingHome)
+            else if(Vector2.Distance(startingPosition,Position) < 10 && GoingHome)
             {
-                goingHome = false;
+                GoingHome = false;
             }
             
 
@@ -93,7 +121,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 this.startingPosition = Position;
                 startingFlag = false;
             }
-            vectorTowardsStart = startingPosition - Position;
+            
             if (Aggro)
             {
                 Position += VectorTowardsTarget * speed;
