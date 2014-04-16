@@ -43,7 +43,7 @@ namespace TileGame.GameScreens
         Sprite sprite, sprite1;
         AnimatedSprite NPC1, NPC2;
         public NPC_Story npcstory, npcstory2;
-        NPC_Fighting_Guard NPC_Patroller_1;
+        NPC_Fighting_Guard NPC_Guard_1;
         public NPC_Story npc;
         public List<NPC_Story> NpcStoryList = new List<NPC_Story>(); 
         protected Rectangle rectangle;
@@ -56,7 +56,8 @@ namespace TileGame.GameScreens
         List<BaseSprite> AnimatedSpriteObject = new List<BaseSprite>();
         List<BaseSprite> SpriteObjectInGameWorld = new List<BaseSprite>();
         List<AnimatedProjectile> NPCProjectile = new List<AnimatedProjectile>();
-        List<AnimatedSprite> NPCFightingFarmer = new List<AnimatedSprite>();
+        List<AnimatedSprite> NPCFightingFarmers = new List<AnimatedSprite>();
+        List<AnimatedSprite> NPCPatrollingGuards = new List<AnimatedSprite>();
         
 
         public string Name { get { return name; } }
@@ -107,10 +108,12 @@ namespace TileGame.GameScreens
             renderList.Add(player);
             SpriteObjectInGameWorld.AddRange(AnimatedSpriteObject);
             SpriteObjectInGameWorld.AddRange(SpriteObject);            
-            SpriteObjectInGameWorld.AddRange(NPCFightingFarmer);
+            SpriteObjectInGameWorld.AddRange(NPCFightingFarmers);
+            SpriteObjectInGameWorld.AddRange(NPCPatrollingGuards);
             renderList.AddRange(SpriteObject);
             renderList.AddRange(AnimatedSpriteObject);
-            renderList.AddRange(NPCFightingFarmer);
+            renderList.AddRange(NPCFightingFarmers);
+            renderList.AddRange(NPCPatrollingGuards);
             
             
         }
@@ -151,13 +154,23 @@ namespace TileGame.GameScreens
             NPC2.FullHp = 5;
             AnimatedSpriteObject.Add(NPC2);
 
-            NPC_Patroller_1 = new NPC_Fighting_Guard(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null);
-            NPC_Patroller_1.Origionoffset = new Vector2(25, 65);
-            NPC_Patroller_1.SetSpritePositionInGameWorld(new Vector2(20, 10));
-            NPC_Patroller_1.Life = 5;
-            NPC_Patroller_1.FullHp = 5;
-            AnimatedSpriteObject.Add(NPC_Patroller_1);
+            NPC_Guard_1 = new NPC_Fighting_Guard(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null);
+            NPC_Guard_1.Origionoffset = new Vector2(25, 65);
+            NPC_Guard_1.SetSpritePositionInGameWorld(new Vector2(20, 10));
+            NPC_Guard_1.Life = 5;
+            NPC_Guard_1.FullHp = 5;
+            AnimatedSpriteObject.Add(NPC_Guard_1);
 
+            for (int i = 0; i < 15; i++ )
+            {
+                NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null, GameRef.random);
+                NPC_Patroller.Origionoffset = new Vector2(25, 65);
+                NPC_Patroller.SetSpritePositionInGameWorld(new Vector2(22 + i, 50));
+                NPC_Patroller.Life = 5;
+                NPC_Patroller.FullHp = 5;
+                AnimatedSpriteObject.Add(NPC_Patroller);
+                NPCPatrollingGuards.Add(NPC_Patroller);
+            }
             for (int i = 0; i < 15; i++)
             {
                 NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null, GameRef.random);
@@ -166,7 +179,7 @@ namespace TileGame.GameScreens
                 NPC_Farmer.Life = 5;
                 NPC_Farmer.FullHp = 5;
                 AnimatedSpriteObject.Add(NPC_Farmer);
-                NPCFightingFarmer.Add(NPC_Farmer);
+                NPCFightingFarmers.Add(NPC_Farmer);
 
             }
 
@@ -193,8 +206,14 @@ namespace TileGame.GameScreens
         public override void Update(GameTime gameTime)
         {
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
-            NPC_Patroller_1.SetVectorTowardsTargetAndStartAndCheckAggro(player);
-            foreach(NPC_Fighting_Farmer npc in NPCFightingFarmer)
+            NPC_Guard_1.SetVectorTowardsTargetAndStartAndCheckAggro(player);
+            foreach(NPC_Fighting_Patrolling npc in NPCPatrollingGuards)
+            {
+                npc.SetVectorTowardsTargetAndStartAndCheckAggro(player);
+            }
+            
+            //NPC_Patroller_1.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(NPC_Patroller_1, NPC_Patroller_1.Motion, this);
+            foreach(NPC_Fighting_Farmer npc in NPCFightingFarmers)
             {
                 //CollisionWithCharacter.UpdateCollisionForCharacters(
                 //    gameTime, SpriteObjectInGameWorld, npc,
@@ -212,7 +231,7 @@ namespace TileGame.GameScreens
                     npc.AttackersDirection = player.Position - npc.Position; 
                 }
                 if(npc.Running)
-                    npc.CheckForCollisionWithOtherNPCs(NPCFightingFarmer,player);
+                    npc.CheckForCollisionWithOtherNPCs(NPCFightingFarmers,player);
 
             }
             foreach (var npc in NpcStoryList)
