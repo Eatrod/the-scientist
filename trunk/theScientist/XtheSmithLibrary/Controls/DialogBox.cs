@@ -54,7 +54,6 @@ namespace XtheSmithLibrary.Controls
 
         public override void Update(GameTime gameTime)
         {
-            
             KeyboardState newState = Keyboard.GetState();
 
             if (npc == null || conversation == null)
