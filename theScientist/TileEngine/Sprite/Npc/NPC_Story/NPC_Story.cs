@@ -17,10 +17,11 @@ namespace TileEngine.Sprite.Npc.NPC_Story
         public Conversation text;
         public Texture2D picture;
 
-        public NPC_Story(Texture2D texture, Script script, Texture2D picture) : base(texture,script)
+        public NPC_Story(Texture2D texture, Script script, Texture2D picture, string NPCname) : base(texture,script)
         {
             this.Immortal = true;
             this.picture = picture;
+            this.NPCName = NPCname;
         }
 
         public float SpeakingRadius

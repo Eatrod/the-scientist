@@ -177,7 +177,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="TileEngine.Sprite.Npc.NPC_Fighting.NPC_Fighting_Hostile_ZombieWalker" Collapsed="true">
-    <Position X="15.75" Y="9" Width="1.5" />
+    <Position X="15.25" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Sprite\Npc\NPC_Fighting\NPC_Fighting_Hostile_ZombieWalker.cs</FileName>

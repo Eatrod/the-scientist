@@ -161,13 +161,13 @@ namespace TileGame.GameScreens
 
             }
 
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/npc1"), Content.Load<Texture2D>("CharacterPotraits/pimp-bender"));
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/pimp-bender"), "Jack");
             npcstory.Origionoffset = new Vector2(15, 15);
             npcstory.SetSpritePositionInGameWorld(new Vector2(16, 16));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory2 = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"));
+            npcstory2 = new NPC_Story(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"), "Asterix");
             npcstory2.Origionoffset = new Vector2(15, 15);
             npcstory2.SetSpritePositionInGameWorld(new Vector2(20, 17));
             AnimatedSpriteObject.Add(npcstory2);
