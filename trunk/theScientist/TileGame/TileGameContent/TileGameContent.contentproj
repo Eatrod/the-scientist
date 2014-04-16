@@ -1139,6 +1139,26 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tiles\Smedja\RoadCorner1.png">
+      <Name>RoadCorner1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Smedja\RoadCorner2.png">
+      <Name>RoadCorner2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Smedja\RoadCorner3.png">
+      <Name>RoadCorner3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Smedja\RoadCorner4.png">
+      <Name>RoadCorner4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Tiles\Smedja\SmithyHouseB1.png">
       <Name>SmithyHouseB1</Name>
       <Importer>TextureImporter</Importer>
