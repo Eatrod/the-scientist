@@ -16,6 +16,10 @@
     <XnaProfile>Reach</XnaProfile>
     <XnaCrossPlatformGroupID>76b0bb1d-e13b-44bf-b044-e4b0eff4d92b</XnaCrossPlatformGroupID>
     <XnaOutputType>Library</XnaOutputType>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
