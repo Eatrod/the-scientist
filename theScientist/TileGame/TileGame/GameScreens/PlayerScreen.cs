@@ -35,7 +35,19 @@ namespace TileGame.GameScreens
         
         public Dictionary<int, bool> lockedGateDict;
         protected Dictionary<string, int> gateDict;
-        protected Dictionary<string, bool> inventoryDict;
+
+        static public Dictionary<string, bool> inventoryDict;
+        
+        //--     
+        Texture2D activeItemBackground, abilityBackground, axeImage, swordImage, crossbowImage;
+        Texture2D[] activeItem_textures;
+        Color[] activeItemBackgroundColor;
+        Color[] abilityBackgroundColor;
+
+        bool[] flashing_abilityBackground, flashOn;
+        float[] flashTime, flashLength;
+        const float flashTimeTotal = 1.0f;
+        //--
 
         #endregion
         #region Property Region
@@ -153,8 +165,6 @@ namespace TileGame.GameScreens
                 chargeanimation.Animations.Add("ChargeBar", chargebar);
             chargeanimation.CurrentAnimationName = "ChargeBar";
 
-
-            
         }
         protected override void LoadContent()
         {
@@ -200,7 +210,44 @@ namespace TileGame.GameScreens
             }
 
             inventoryDict = new Dictionary<string, bool>();
-            inventoryDict["Axe"] = false;
+            inventoryDict["Axe"] = true;
+            inventoryDict["Sword"] = true;
+            inventoryDict["Crossbow"] = true;
+            inventoryDict["Spear"] = false;
+            inventoryDict["BOOM-erang"] = false;
+            inventoryDict["Hammer?"] = false;
+            inventoryDict["MetalBladeCrossbow?"] = true;
+            inventoryDict["Hookshot?"] = false;
+            //--
+            activeItemBackground = Content.Load<Texture2D>(@"Sprite\activeItemBackground test");
+            abilityBackground = Content.Load<Texture2D>(@"Sprite\abilityBackground test2");
+            axeImage = Content.Load<Texture2D>(@"Sprite\Inv Axe test");
+            swordImage = Content.Load<Texture2D>(@"Sprite\Inv Sword test");
+            crossbowImage = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
+            activeItem_textures = new Texture2D[5];
+            activeItemBackgroundColor = new Color[5];
+            for (int i = 0; i < activeItemBackgroundColor.Count(); i++)
+            {
+                activeItemBackgroundColor[i] = Color.LightSlateGray;
+            }
+            abilityBackgroundColor = new Color[5];
+            for (int i = 0; i < abilityBackgroundColor.Count(); i++)
+            {
+                abilityBackgroundColor[i] = Color.LightSlateGray;
+            }
+            flashing_abilityBackground = flashOn = new bool[5];//false;
+            for (int i = 0; i < flashing_abilityBackground.Count(); i++)
+            {
+                flashing_abilityBackground[i] = false;
+                flashOn[i] = false;
+            }
+            flashTime = flashLength = new float[5];
+            for (int i = 0; i < flashTime.Count(); i++)
+            {
+                flashTime[i] = 0f;
+                flashLength[i] = 0f;
+            }
+            //--
         }
         public override void Update(GameTime gameTime)
         {
@@ -346,7 +393,6 @@ namespace TileGame.GameScreens
 
                 else
                 {
-                    
                     player.Stamina = 10;
                 }
 
@@ -366,6 +412,7 @@ namespace TileGame.GameScreens
             }
             if (InputHandler.KeyReleased(Keys.N))
                 StateManager.PushState(GameRef.NotebookScreen);
+
 
             if (InputHandler.KeyReleased(Keys.I))
                 StateManager.PushState(GameRef.InventoryScreen);
@@ -425,6 +472,8 @@ namespace TileGame.GameScreens
 
             }
 
+            UpdateItemHUD(gameTime);
+
             base.Update(gameTime);
 
         }
@@ -482,6 +531,109 @@ namespace TileGame.GameScreens
             chargeanimation.CurrentAnimation.CurrentRectangle = chargeRect;
         }
 
+        private void UpdateItemHUD(GameTime gameTime)
+        {
+            if (InputHandler.KeyReleased(Keys.D1))
+            {
+                for (int i = 0; i < activeItemBackgroundColor.Count(); i++)
+                {
+                    activeItemBackgroundColor[i] = Color.LightSlateGray;
+                }
+                activeItemBackgroundColor[0] = Color.White;
+            }
+            if (InputHandler.KeyReleased(Keys.D2))
+            {
+                for (int i = 0; i < activeItemBackgroundColor.Count(); i++)
+                {
+                    activeItemBackgroundColor[i] = Color.LightSlateGray;
+                }
+                activeItemBackgroundColor[1] = Color.White;
+            }
+            if (InputHandler.KeyReleased(Keys.D3))
+            {
+                for (int i = 0; i < activeItemBackgroundColor.Count(); i++)
+                {
+                    activeItemBackgroundColor[i] = Color.LightSlateGray;
+                }
+                activeItemBackgroundColor[2] = Color.White;
+            }
+            if (InputHandler.KeyReleased(Keys.D4))
+            {
+                for (int i = 0; i < activeItemBackgroundColor.Count(); i++)
+                {
+                    activeItemBackgroundColor[i] = Color.LightSlateGray;
+                }
+                activeItemBackgroundColor[3] = Color.White;
+            }
+            if (InputHandler.KeyReleased(Keys.D5))
+            {
+                for (int i = 0; i < activeItemBackgroundColor.Count(); i++)
+                {
+                    activeItemBackgroundColor[i] = Color.LightSlateGray;
+                }
+                activeItemBackgroundColor[4] = Color.White;
+            }
+
+            if (InputHandler.KeyReleased(Keys.Q))
+            {
+                flashing_abilityBackground[0] = true;
+            }
+            if (InputHandler.KeyReleased(Keys.W))
+            {
+                flashing_abilityBackground[1] = true;
+            }
+            if (InputHandler.KeyReleased(Keys.E))
+            {
+                flashing_abilityBackground[2] = true;
+            }
+            if (InputHandler.KeyReleased(Keys.R))
+            {
+                flashing_abilityBackground[3] = true;
+            }
+            if (InputHandler.KeyReleased(Keys.T))
+            {
+                flashing_abilityBackground[4] = true;
+            }
+
+            for (int i = 0; i < flashing_abilityBackground.Count(); i++)
+            {
+                flashingUsedAbility(gameTime, i);
+            }
+
+        }
+
+        private void flashingUsedAbility(GameTime gameTime, int Index)
+        {
+            if (flashing_abilityBackground[Index])
+            {
+                const float flashTimeSlice = 1.0f / 2.0f;
+                float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                flashLength[Index] += elapsed;
+                flashTime[Index] += elapsed;
+                if (flashTime[Index] > flashTimeTotal)
+                {
+                    flashing_abilityBackground[Index] = false;
+                }
+                else
+                {
+                    if (flashLength[Index] > flashTimeSlice)
+                    {
+                        flashOn[Index] = !flashOn[Index];
+                        flashLength[Index] = 0f;
+                    }
+                }
+            }
+
+            if (!flashing_abilityBackground[Index] || (flashing_abilityBackground[Index] && !flashOn[Index]))
+            {
+                abilityBackgroundColor[Index] = Color.LightSlateGray;
+            }
+            else
+            {
+                abilityBackgroundColor[Index] = Color.White;
+            }
+        }
+
         public override void Draw(GameTime gameTime)
         {
             //GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -511,8 +663,106 @@ namespace TileGame.GameScreens
 
             ControlManager.Draw(spriteBatch);
             
+            DrawItemHUD();
+
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        private void DrawItemHUD()
+        {
+            //Weapon backgrounds
+            for (int i = 0; i < activeItem_textures.Count(); i++)
+            {
+                spriteBatch.Draw( 
+                abilityBackground, 
+                new Rectangle(110 + (50 * i), 0, 42, 42),
+                activeItemBackgroundColor[i]);
+            }         
+
+            //Weapon Ability backgrounds
+            for (int i = 0; i < activeItem_textures.Count(); i++)
+            {
+                spriteBatch.Draw(
+                abilityBackground,
+                new Rectangle(GameRef.ScreenRectangle.Width / 2 - (50 * 2 + 21) + (50 * i), GameRef.ScreenRectangle.Height - 50, 42, 42),
+                abilityBackgroundColor[i]);
+            }
+
+            //Weapon Ability pics
+            //for (int i = 0; i < activeItem_textures.Count(); i++)
+            //{
+            //    spriteBatch.Draw(
+            //    axeImage,
+            //    new Rectangle(GameRef.ScreenRectangle.Width / 2 - (50 * 2 + 16) + (50 * i), GameRef.ScreenRectangle.Height - 45, 32, 32),
+            //    Color.White);
+            //}
+            
+
+            try
+            {
+                string key_string = InventoryScreen.activeItemsDict["Axe"].ToString();
+                key_string = key_string.Replace('D',' ');
+                int key_number = Convert.ToInt32(key_string);
+                spriteBatch.Draw(axeImage, new Rectangle(115 + (50 * (key_number-1)), 5, 32, 32), Color.White);
+            }
+            catch { }
+            try
+            {
+                string key_string = InventoryScreen.activeItemsDict["Sword"].ToString();
+                key_string = key_string.Replace('D', ' ');
+                int key_number = Convert.ToInt32(key_string);
+                spriteBatch.Draw(swordImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+            }
+            catch { }
+            try
+            {
+                string key_string = InventoryScreen.activeItemsDict["Crossbow"].ToString();
+                key_string = key_string.Replace('D', ' ');
+                int key_number = Convert.ToInt32(key_string);
+                spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+            }
+            catch { }
+            try
+            {
+                string key_string = InventoryScreen.activeItemsDict["Spear"].ToString();
+                key_string = key_string.Replace('D', ' ');
+                int key_number = Convert.ToInt32(key_string);
+                spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+            }
+            catch { }
+            try
+            {
+                string key_string = InventoryScreen.activeItemsDict["BOOM-erang"].ToString();
+                key_string = key_string.Replace('D', ' ');
+                int key_number = Convert.ToInt32(key_string);
+                spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+            }
+            catch { }
+            try
+            {
+                string key_string = InventoryScreen.activeItemsDict["Hammer?"].ToString();
+                key_string = key_string.Replace('D', ' ');
+                int key_number = Convert.ToInt32(key_string);
+                spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+            }
+            catch { }
+            try
+            {
+                string key_string = InventoryScreen.activeItemsDict["MetalBladeCrossbow?"].ToString();
+                key_string = key_string.Replace('D', ' ');
+                int key_number = Convert.ToInt32(key_string);
+                spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+            }
+            catch { }
+            try
+            {
+                string key_string = InventoryScreen.activeItemsDict["Hookshot?"].ToString();
+                key_string = key_string.Replace('D', ' ');
+                int key_number = Convert.ToInt32(key_string);
+                spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+            }
+            catch { }
         }
 
         #endregion
@@ -661,6 +911,7 @@ namespace TileGame.GameScreens
             }
             return next_position;
         }
+
         #endregion
     }
 }
