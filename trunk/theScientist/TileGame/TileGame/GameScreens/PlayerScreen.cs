@@ -685,72 +685,74 @@ namespace TileGame.GameScreens
             //    new Rectangle(GameRef.ScreenRectangle.Width / 2 - (50 * 2 + 16) + (50 * i), GameRef.ScreenRectangle.Height - 45, 32, 32),
             //    Color.White);
             //}
-            
 
-            try
+            string key_string;
+            int key_number;
+
+            if (StoryProgress.activeItemsDict.ContainsKey("Axe"))
             {
-                string key_string = StoryProgress.activeItemsDict["Axe"].ToString();
-                key_string = key_string.Replace('D',' ');
-                int key_number = Convert.ToInt32(key_string);
-                spriteBatch.Draw(axeImage, new Rectangle(115 + (50 * (key_number-1)), 5, 32, 32), Color.White);
-            }
-            catch { }
-            try
-            {
-                string key_string = StoryProgress.activeItemsDict["Sword"].ToString();
+                key_string = StoryProgress.activeItemsDict["Axe"].ToString();
                 key_string = key_string.Replace('D', ' ');
-                int key_number = Convert.ToInt32(key_string);
+                key_number = Convert.ToInt32(key_string);
+                spriteBatch.Draw(axeImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+            }
+           
+            if (StoryProgress.activeItemsDict.ContainsKey("Sword"))
+            {
+                key_string = StoryProgress.activeItemsDict["Sword"].ToString();
+                key_string = key_string.Replace('D', ' ');
+                key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(swordImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
             }
-            catch { }
-            try
+            
+            if (StoryProgress.activeItemsDict.ContainsKey("Crossbow"))
             {
-                string key_string = StoryProgress.activeItemsDict["Crossbow"].ToString();
+                key_string = StoryProgress.activeItemsDict["Crossbow"].ToString();
                 key_string = key_string.Replace('D', ' ');
-                int key_number = Convert.ToInt32(key_string);
+                key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
             }
-            catch { }
-            try
+            
+            if (StoryProgress.activeItemsDict.ContainsKey("Spear"))
             {
-                string key_string = StoryProgress.activeItemsDict["Spear"].ToString();
+                key_string = StoryProgress.activeItemsDict["Spear"].ToString();
                 key_string = key_string.Replace('D', ' ');
-                int key_number = Convert.ToInt32(key_string);
+                key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
             }
-            catch { }
-            try
+            
+            if (StoryProgress.activeItemsDict.ContainsKey("DOOM-erang"))
             {
-                string key_string = StoryProgress.activeItemsDict["DOOM-erang"].ToString();
+                key_string = StoryProgress.activeItemsDict["DOOM-erang"].ToString();
                 key_string = key_string.Replace('D', ' ');
-                int key_number = Convert.ToInt32(key_string);
+                key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
             }
-            catch { }
-            try
+            
+            if (StoryProgress.activeItemsDict.ContainsKey("Hammer"))
             {
-                string key_string = StoryProgress.activeItemsDict["Hammer"].ToString();
+                key_string = StoryProgress.activeItemsDict["Hammer"].ToString();
                 key_string = key_string.Replace('D', ' ');
-                int key_number = Convert.ToInt32(key_string);
+                key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
             }
-            catch { }
-            try
+            
+            if (StoryProgress.activeItemsDict.ContainsKey("MetalBladeCrossbow"))
             {
-                string key_string = StoryProgress.activeItemsDict["MetalBladeCrossbow"].ToString();
+                key_string = StoryProgress.activeItemsDict["MetalBladeCrossbow"].ToString();
                 key_string = key_string.Replace('D', ' ');
-                int key_number = Convert.ToInt32(key_string);
+                key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
             }
-            catch { }
-            try
+            
+            if (StoryProgress.activeItemsDict.ContainsKey("Hookshot"))
             {
-                string key_string = StoryProgress.activeItemsDict["Hookshot"].ToString();
+                key_string = StoryProgress.activeItemsDict["Hookshot"].ToString();
                 key_string = key_string.Replace('D', ' ');
-                int key_number = Convert.ToInt32(key_string);
+                key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
             }
-            catch { }
+            
         }
 
         #endregion
