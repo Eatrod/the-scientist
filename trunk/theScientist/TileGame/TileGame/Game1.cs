@@ -30,7 +30,7 @@ namespace TileGame
         BackgroundMusic titleMusic;
         BackgroundMusic potatotownMusic;
         Dictionary<GameState, BackgroundMusic> musicStates = new Dictionary<GameState,BackgroundMusic>();
-
+        StoryProgress storyProgress = new StoryProgress();
         
 
         #endregion
@@ -66,6 +66,7 @@ namespace TileGame
 
         #endregion
 
+        #region Constructor Region
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -97,7 +98,9 @@ namespace TileGame
             gamePlayScreens.Add(GamePlayScreen);
             gamePlayScreens.Add(GamePlayScreen2);
         }
+        #endregion
 
+        #region XNA Methods Region
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -176,7 +179,9 @@ namespace TileGame
 
             base.Draw(gameTime);
         }
+        #endregion
 
+        #region Methods Region
         public void SaveGameToFile()
         {
             using (StreamWriter file = new StreamWriter(@"savedgame.txt"))
@@ -244,5 +249,6 @@ namespace TileGame
             float y = (float)Convert.ToInt32(yPos);
             playerPosition = new Vector2(x, y);
         }
+        #endregion
     }
 }
