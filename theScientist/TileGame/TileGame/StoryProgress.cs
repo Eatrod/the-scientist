@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
+using XtheSmithLibrary;
+using XtheSmithLibrary.Controls;
+using TileGame;
+
 namespace TileGame
 {
     public class StoryProgress
@@ -12,15 +21,16 @@ namespace TileGame
         #endregion
 
         public static Dictionary<string, bool> ProgressLine = new Dictionary<string, bool>();
-        
+        static public Dictionary<string, Keys> activeItemsDict = new Dictionary<string, Keys>();
+
         public StoryProgress()
         {
             ProgressLine.Add("asterixTalkedTo", false);
             ProgressLine.Add("lumberjacksTalkedTo", false);
             ProgressLine.Add("belladonnaHave", false);
-            ProgressLine.Add("Axe", false);
+            ProgressLine.Add("Axe", true);
             ProgressLine.Add("Sword", false);
-            ProgressLine.Add("Crossbow", false);
+            ProgressLine.Add("Crossbow", true);
             ProgressLine.Add("Spear", false);
             ProgressLine.Add("DOOM-erang", false);
             ProgressLine.Add("Hammer", false);

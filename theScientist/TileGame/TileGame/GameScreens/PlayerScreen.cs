@@ -36,8 +36,6 @@ namespace TileGame.GameScreens
         public Dictionary<int, bool> lockedGateDict;
         protected Dictionary<string, int> gateDict;
 
-        static public Dictionary<string, bool> inventoryDict;
-        
         //--     
         Texture2D activeItemBackground, abilityBackground, axeImage, swordImage, crossbowImage;
         Texture2D[] activeItem_textures;
@@ -209,21 +207,11 @@ namespace TileGame.GameScreens
                 gateDict["G" + i.ToString()] = 40 + i;
             }
 
-            inventoryDict = new Dictionary<string, bool>();
-            inventoryDict["Axe"] = true;
-            inventoryDict["Sword"] = true;
-            inventoryDict["Crossbow"] = true;
-            inventoryDict["Spear"] = false;
-            inventoryDict["BOOM-erang"] = false;
-            inventoryDict["Hammer?"] = false;
-            inventoryDict["MetalBladeCrossbow?"] = true;
-            inventoryDict["Hookshot?"] = false;
-            //--
             activeItemBackground = Content.Load<Texture2D>(@"Sprite\activeItemBackground test");
             abilityBackground = Content.Load<Texture2D>(@"Sprite\abilityBackground test2");
-            axeImage = Content.Load<Texture2D>(@"Sprite\Inv Axe test");
+            axeImage = Content.Load<Texture2D>(@"Sprite\Axe");
             swordImage = Content.Load<Texture2D>(@"Sprite\Inv Sword test");
-            crossbowImage = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
+            crossbowImage = Content.Load<Texture2D>(@"Sprite\Bow");
             activeItem_textures = new Texture2D[5];
             activeItemBackgroundColor = new Color[5];
             for (int i = 0; i < activeItemBackgroundColor.Count(); i++)
@@ -701,7 +689,7 @@ namespace TileGame.GameScreens
 
             try
             {
-                string key_string = InventoryScreen.activeItemsDict["Axe"].ToString();
+                string key_string = StoryProgress.activeItemsDict["Axe"].ToString();
                 key_string = key_string.Replace('D',' ');
                 int key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(axeImage, new Rectangle(115 + (50 * (key_number-1)), 5, 32, 32), Color.White);
@@ -709,7 +697,7 @@ namespace TileGame.GameScreens
             catch { }
             try
             {
-                string key_string = InventoryScreen.activeItemsDict["Sword"].ToString();
+                string key_string = StoryProgress.activeItemsDict["Sword"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 int key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(swordImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
@@ -717,7 +705,7 @@ namespace TileGame.GameScreens
             catch { }
             try
             {
-                string key_string = InventoryScreen.activeItemsDict["Crossbow"].ToString();
+                string key_string = StoryProgress.activeItemsDict["Crossbow"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 int key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
@@ -725,7 +713,7 @@ namespace TileGame.GameScreens
             catch { }
             try
             {
-                string key_string = InventoryScreen.activeItemsDict["Spear"].ToString();
+                string key_string = StoryProgress.activeItemsDict["Spear"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 int key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
@@ -733,7 +721,7 @@ namespace TileGame.GameScreens
             catch { }
             try
             {
-                string key_string = InventoryScreen.activeItemsDict["BOOM-erang"].ToString();
+                string key_string = StoryProgress.activeItemsDict["DOOM-erang"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 int key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
@@ -741,7 +729,7 @@ namespace TileGame.GameScreens
             catch { }
             try
             {
-                string key_string = InventoryScreen.activeItemsDict["Hammer?"].ToString();
+                string key_string = StoryProgress.activeItemsDict["Hammer"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 int key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
@@ -749,7 +737,7 @@ namespace TileGame.GameScreens
             catch { }
             try
             {
-                string key_string = InventoryScreen.activeItemsDict["MetalBladeCrossbow?"].ToString();
+                string key_string = StoryProgress.activeItemsDict["MetalBladeCrossbow"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 int key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
@@ -757,7 +745,7 @@ namespace TileGame.GameScreens
             catch { }
             try
             {
-                string key_string = InventoryScreen.activeItemsDict["Hookshot?"].ToString();
+                string key_string = StoryProgress.activeItemsDict["Hookshot"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 int key_number = Convert.ToInt32(key_string);
                 spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);

@@ -25,7 +25,6 @@ namespace TileGame.GameScreens
         int cursor_X, cursor_Y;
         int cursor_item_number;
         Texture2D[] activeItem_textures;
-        static public Dictionary<string, Keys> activeItemsDict;
 
         #endregion
 
@@ -54,9 +53,9 @@ namespace TileGame.GameScreens
             ContentManager Content = GameRef.Content;
 
             inventoryBackground = Content.Load<Texture2D>(@"Backgrounds\Inventory test");
-            axeImage = Content.Load<Texture2D>(@"Sprite\Inv Axe test");
+            axeImage = Content.Load<Texture2D>(@"Sprite\Axe");
             swordImage = Content.Load<Texture2D>(@"Sprite\Inv Sword test");
-            crossbowImage = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
+            crossbowImage = Content.Load<Texture2D>(@"Sprite\Bow");
             inventoryCursorImage = Content.Load<Texture2D>(@"Sprite\Inventory Cursor test");
             activeItem_textures = new Texture2D[5];
             for (int i = 0; i < activeItem_textures.Count(); i++)
@@ -64,8 +63,6 @@ namespace TileGame.GameScreens
                 activeItem_textures[i] = Content.Load<Texture2D>(@"Sprite\Inventory Empty test");
             }
             activeItems_helper = new string[5];
-
-            activeItemsDict = new Dictionary<string, Keys>();
 
             base.LoadContent();
         }
@@ -144,7 +141,7 @@ namespace TileGame.GameScreens
             //------
 
             //Inventory Weapons------
-            if( PlayerScreen.inventoryDict["Axe"] == true)
+            if(StoryProgress.ProgressLine["Axe"] == true)
             {
                 GameRef.spriteBatch.Draw(
                     axeImage,
@@ -152,7 +149,7 @@ namespace TileGame.GameScreens
                     Color.White);
             }
 
-            if (PlayerScreen.inventoryDict["Sword"] == true)
+            if (StoryProgress.ProgressLine["Sword"] == true)
             {
                 GameRef.spriteBatch.Draw(
                     swordImage,
@@ -160,7 +157,7 @@ namespace TileGame.GameScreens
                     Color.White);
             }
 
-            if (PlayerScreen.inventoryDict["Crossbow"] == true)
+            if (StoryProgress.ProgressLine["Crossbow"] == true)
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
@@ -168,7 +165,7 @@ namespace TileGame.GameScreens
                     Color.White);
             }
 
-            if (PlayerScreen.inventoryDict["Spear"] == true)
+            if (StoryProgress.ProgressLine["Spear"] == true)
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
@@ -176,7 +173,7 @@ namespace TileGame.GameScreens
                     Color.White);
             }
 
-            if (PlayerScreen.inventoryDict["BOOM-erang"] == true)
+            if (StoryProgress.ProgressLine["DOOM-erang"] == true)
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
@@ -184,7 +181,7 @@ namespace TileGame.GameScreens
                     Color.White);
             }
 
-            if (PlayerScreen.inventoryDict["Hammer?"] == true)
+            if (StoryProgress.ProgressLine["Hammer"] == true)
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
@@ -192,7 +189,7 @@ namespace TileGame.GameScreens
                     Color.White);
             }
 
-            if (PlayerScreen.inventoryDict["MetalBladeCrossbow?"] == true)
+            if (StoryProgress.ProgressLine["MetalBladeCrossbow"] == true)
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
@@ -200,7 +197,7 @@ namespace TileGame.GameScreens
                     Color.White);
             }
 
-            if (PlayerScreen.inventoryDict["Hookshot?"] == true)
+            if (StoryProgress.ProgressLine["Hookshot"] == true)
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
@@ -229,53 +226,53 @@ namespace TileGame.GameScreens
                 ResetKey(Keys.D1);
                 ResetSelectedActiveItemTextures();
 
-                if (cursor_item_number == 0 && PlayerScreen.inventoryDict["Axe"] == true)
+                if (cursor_item_number == 0 && StoryProgress.ProgressLine["Axe"] == true)
                 {
-                    activeItem_textures[0] = Content.Load<Texture2D>(@"Sprite\Inv Axe test");
+                    activeItem_textures[0] = Content.Load<Texture2D>(@"Sprite\Axe");
                     activeItems_helper[0] = "Axe";
-                    activeItemsDict["Axe"] = Keys.D1;
+                    StoryProgress.activeItemsDict["Axe"] = Keys.D1;
                 }
-                if (cursor_item_number == 1 && PlayerScreen.inventoryDict["Sword"] == true)
+                if (cursor_item_number == 1 && StoryProgress.ProgressLine["Sword"] == true)
                 {
                     activeItem_textures[0] = Content.Load<Texture2D>(@"Sprite\Inv Sword test");
                     activeItems_helper[0] = "Sword";
-                    activeItemsDict["Sword"] = Keys.D1;
+                    StoryProgress.activeItemsDict["Sword"] = Keys.D1;
                 }
-                if (cursor_item_number == 2 && PlayerScreen.inventoryDict["Crossbow"] == true)
+                if (cursor_item_number == 2 && StoryProgress.ProgressLine["Crossbow"] == true)
                 {
-                    activeItem_textures[0] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
+                    activeItem_textures[0] = Content.Load<Texture2D>(@"Sprite\Bow");
                     activeItems_helper[0] = "Crossbow";
-                    activeItemsDict["Crossbow"] = Keys.D1;
+                    StoryProgress.activeItemsDict["Crossbow"] = Keys.D1;
                 }
-                if (cursor_item_number == 3 && PlayerScreen.inventoryDict["Spear"] == true)
+                if (cursor_item_number == 3 && StoryProgress.ProgressLine["Spear"] == true)
                 {
                     activeItem_textures[0] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
                     activeItems_helper[0] = "Spear";
-                    activeItemsDict["Spear"] = Keys.D1;
+                    StoryProgress.activeItemsDict["Spear"] = Keys.D1;
                 }
-                if (cursor_item_number == 4 && PlayerScreen.inventoryDict["BOOM-erang"] == true)
+                if (cursor_item_number == 4 && StoryProgress.ProgressLine["DOOM-erang"] == true)
                 {
                     activeItem_textures[0] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[0] = "BOOM-erang";
-                    activeItemsDict["BOOM-erang"] = Keys.D1;
+                    activeItems_helper[0] = "DOOM-erang";
+                    StoryProgress.activeItemsDict["DOOM-erang"] = Keys.D1;
                 }
-                if (cursor_item_number == 5 && PlayerScreen.inventoryDict["Hammer?"] == true)
+                if (cursor_item_number == 5 && StoryProgress.ProgressLine["Hammer"] == true)
                 {
                     activeItem_textures[0] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[0] = "Hammer?";
-                    activeItemsDict["Hammer?"] = Keys.D1;
+                    activeItems_helper[0] = "Hammer";
+                    StoryProgress.activeItemsDict["Hammer"] = Keys.D1;
                 }
-                if (cursor_item_number == 6 && PlayerScreen.inventoryDict["MetalBladeCrossbow?"] == true)
+                if (cursor_item_number == 6 && StoryProgress.ProgressLine["MetalBladeCrossbow"] == true)
                 {
                     activeItem_textures[0] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[0] = "MetalBladeCrossbow?";
-                    activeItemsDict["MetalBladeCrossbow?"] = Keys.D1;
+                    activeItems_helper[0] = "MetalBladeCrossbow";
+                    StoryProgress.activeItemsDict["MetalBladeCrossbow"] = Keys.D1;
                 }
-                if (cursor_item_number == 7 && PlayerScreen.inventoryDict["Hookshot?"] == true)
+                if (cursor_item_number == 7 && StoryProgress.ProgressLine["Hookshot"] == true)
                 {
                     activeItem_textures[0] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[0] = "Hookshot?";
-                    activeItemsDict["Hookshot?"] = Keys.D1;
+                    activeItems_helper[0] = "Hookshot";
+                    StoryProgress.activeItemsDict["Hookshot"] = Keys.D1;
                 }
             }
 
@@ -284,53 +281,53 @@ namespace TileGame.GameScreens
                 ResetKey(Keys.D2);
                 ResetSelectedActiveItemTextures();
 
-                if (cursor_item_number == 0 && PlayerScreen.inventoryDict["Axe"] == true)
+                if (cursor_item_number == 0 && StoryProgress.ProgressLine["Axe"] == true)
                 {
-                    activeItem_textures[1] = Content.Load<Texture2D>(@"Sprite\Inv Axe test");
+                    activeItem_textures[1] = Content.Load<Texture2D>(@"Sprite\Axe");
                     activeItems_helper[1] = "Axe";
-                    activeItemsDict["Axe"] = Keys.D2;
+                    StoryProgress.activeItemsDict["Axe"] = Keys.D2;
                 }
-                if (cursor_item_number == 1 && PlayerScreen.inventoryDict["Sword"] == true)
+                if (cursor_item_number == 1 && StoryProgress.ProgressLine["Sword"] == true)
                 {
                     activeItem_textures[1] = Content.Load<Texture2D>(@"Sprite\Inv Sword test");
                     activeItems_helper[1] = "Sword";
-                    activeItemsDict["Sword"] = Keys.D2;
+                    StoryProgress.activeItemsDict["Sword"] = Keys.D2;
                 }
-                if (cursor_item_number == 2 && PlayerScreen.inventoryDict["Crossbow"] == true)
+                if (cursor_item_number == 2 && StoryProgress.ProgressLine["Crossbow"] == true)
                 {
-                    activeItem_textures[1] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
+                    activeItem_textures[1] = Content.Load<Texture2D>(@"Sprite\Bow");
                     activeItems_helper[1] = "Crossbow";
-                    activeItemsDict["Crossbow"] = Keys.D2;
+                    StoryProgress.activeItemsDict["Crossbow"] = Keys.D2;
                 }
-                if (cursor_item_number == 3 && PlayerScreen.inventoryDict["Spear"] == true)
+                if (cursor_item_number == 3 && StoryProgress.ProgressLine["Spear"] == true)
                 {
                     activeItem_textures[1] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
                     activeItems_helper[1] = "Spear";
-                    activeItemsDict["Spear"] = Keys.D2;
+                    StoryProgress.activeItemsDict["Spear"] = Keys.D2;
                 }
-                if (cursor_item_number == 4 && PlayerScreen.inventoryDict["BOOM-erang"] == true)
+                if (cursor_item_number == 4 && StoryProgress.ProgressLine["DOOM-erang"] == true)
                 {
                     activeItem_textures[1] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[1] = "BOOM-erang";
-                    activeItemsDict["BOOM-erang"] = Keys.D2;
+                    activeItems_helper[1] = "DOOM-erang";
+                    StoryProgress.activeItemsDict["DOOM-erang"] = Keys.D2;
                 }
-                if (cursor_item_number == 5 && PlayerScreen.inventoryDict["Hammer?"] == true)
+                if (cursor_item_number == 5 && StoryProgress.ProgressLine["Hammer"] == true)
                 {
                     activeItem_textures[1] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[1] = "Hammer?";
-                    activeItemsDict["Hammer?"] = Keys.D2;
+                    activeItems_helper[1] = "Hammer";
+                    StoryProgress.activeItemsDict["Hammer"] = Keys.D2;
                 }
-                if (cursor_item_number == 6 && PlayerScreen.inventoryDict["MetalBladeCrossbow?"] == true)
+                if (cursor_item_number == 6 && StoryProgress.ProgressLine["MetalBladeCrossbow"] == true)
                 {
                     activeItem_textures[1] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[1] = "MetalBladeCrossbow?";
-                    activeItemsDict["MetalBladeCrossbow?"] = Keys.D2;
+                    activeItems_helper[1] = "MetalBladeCrossbow";
+                    StoryProgress.activeItemsDict["MetalBladeCrossbow"] = Keys.D2;
                 }
-                if (cursor_item_number == 7 && PlayerScreen.inventoryDict["Hookshot?"] == true)
+                if (cursor_item_number == 7 && StoryProgress.ProgressLine["Hookshot"] == true)
                 {
                     activeItem_textures[1] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[1] = "Hookshot?";
-                    activeItemsDict["Hookshot?"] = Keys.D2;
+                    activeItems_helper[1] = "Hookshot";
+                    StoryProgress.activeItemsDict["Hookshot"] = Keys.D2;
                 }
             }
             if (InputHandler.KeyReleased(Keys.D3))
@@ -338,53 +335,53 @@ namespace TileGame.GameScreens
                 ResetKey(Keys.D3);
                 ResetSelectedActiveItemTextures();
 
-                if (cursor_item_number == 0 && PlayerScreen.inventoryDict["Axe"] == true)
+                if (cursor_item_number == 0 && StoryProgress.ProgressLine["Axe"] == true)
                 {
-                    activeItem_textures[2] = Content.Load<Texture2D>(@"Sprite\Inv Axe test"); 
+                    activeItem_textures[2] = Content.Load<Texture2D>(@"Sprite\Axe"); 
                     activeItems_helper[2] = "Axe";
-                    activeItemsDict["Axe"] = Keys.D3;
+                    StoryProgress.activeItemsDict["Axe"] = Keys.D3;
                 }
-                if (cursor_item_number == 1 && PlayerScreen.inventoryDict["Sword"] == true)
+                if (cursor_item_number == 1 && StoryProgress.ProgressLine["Sword"] == true)
                 {
                     activeItem_textures[2] = Content.Load<Texture2D>(@"Sprite\Inv Sword test");
                     activeItems_helper[2] = "Sword";
-                    activeItemsDict["Sword"] = Keys.D3;
+                    StoryProgress.activeItemsDict["Sword"] = Keys.D3;
                 }
-                if (cursor_item_number == 2 && PlayerScreen.inventoryDict["Crossbow"] == true)
+                if (cursor_item_number == 2 && StoryProgress.ProgressLine["Crossbow"] == true)
                 {
-                    activeItem_textures[2] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
+                    activeItem_textures[2] = Content.Load<Texture2D>(@"Sprite\Bow");
                     activeItems_helper[2] = "Crossbow";
-                    activeItemsDict["Crossbow"] = Keys.D3;
+                    StoryProgress.activeItemsDict["Crossbow"] = Keys.D3;
                 }
-                if (cursor_item_number == 3 && PlayerScreen.inventoryDict["Spear"] == true)
+                if (cursor_item_number == 3 && StoryProgress.ProgressLine["Spear"] == true)
                 {
                     activeItem_textures[2] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
                     activeItems_helper[2] = "Spear";
-                    activeItemsDict["Spear"] = Keys.D3;
+                    StoryProgress.activeItemsDict["Spear"] = Keys.D3;
                 }
-                if (cursor_item_number == 4 && PlayerScreen.inventoryDict["BOOM-erang"] == true)
+                if (cursor_item_number == 4 && StoryProgress.ProgressLine["DOOM-erang"] == true)
                 {
                     activeItem_textures[2] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[2] = "BOOM-erang";
-                    activeItemsDict["BOOM-erang"] = Keys.D3;
+                    activeItems_helper[2] = "DOOM-erang";
+                    StoryProgress.activeItemsDict["DOOM-erang"] = Keys.D3;
                 }
-                if (cursor_item_number == 5 && PlayerScreen.inventoryDict["Hammer?"] == true)
+                if (cursor_item_number == 5 && StoryProgress.ProgressLine["Hammer"] == true)
                 {
                     activeItem_textures[2] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[2] = "Hammer?";
-                    activeItemsDict["Hammer?"] = Keys.D3;
+                    activeItems_helper[2] = "Hammer";
+                    StoryProgress.activeItemsDict["Hammer"] = Keys.D3;
                 }
-                if (cursor_item_number == 6 && PlayerScreen.inventoryDict["MetalBladeCrossbow?"] == true)
+                if (cursor_item_number == 6 && StoryProgress.ProgressLine["MetalBladeCrossbow"] == true)
                 {
                     activeItem_textures[2] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[2] = "MetalBladeCrossbow?";
-                    activeItemsDict["MetalBladeCrossbow?"] = Keys.D3;
+                    activeItems_helper[2] = "MetalBladeCrossbow";
+                    StoryProgress.activeItemsDict["MetalBladeCrossbow"] = Keys.D3;
                 }
-                if (cursor_item_number == 7 && PlayerScreen.inventoryDict["Hookshot?"] == true)
+                if (cursor_item_number == 7 && StoryProgress.ProgressLine["Hookshot"] == true)
                 {
                     activeItem_textures[2] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[2] = "Hookshot?";
-                    activeItemsDict["Hookshot?"] = Keys.D3;
+                    activeItems_helper[2] = "Hookshot";
+                    StoryProgress.activeItemsDict["Hookshot"] = Keys.D3;
                 }
             }
             if (InputHandler.KeyReleased(Keys.D4))
@@ -392,53 +389,53 @@ namespace TileGame.GameScreens
                 ResetKey(Keys.D4);
                 ResetSelectedActiveItemTextures();
 
-                if (cursor_item_number == 0 && PlayerScreen.inventoryDict["Axe"] == true)
+                if (cursor_item_number == 0 && StoryProgress.ProgressLine["Axe"] == true)
                 {
-                    activeItem_textures[3] = Content.Load<Texture2D>(@"Sprite\Inv Axe test");
+                    activeItem_textures[3] = Content.Load<Texture2D>(@"Sprite\Axe");
                     activeItems_helper[3] = "Axe";
-                    activeItemsDict["Axe"] = Keys.D4;
+                    StoryProgress.activeItemsDict["Axe"] = Keys.D4;
                 }
-                if (cursor_item_number == 1 && PlayerScreen.inventoryDict["Sword"] == true)
+                if (cursor_item_number == 1 && StoryProgress.ProgressLine["Sword"] == true)
                 {
                     activeItem_textures[3] = Content.Load<Texture2D>(@"Sprite\Inv Sword test");
                     activeItems_helper[3] = "Sword";
-                    activeItemsDict["Sword"] = Keys.D4;
+                    StoryProgress.activeItemsDict["Sword"] = Keys.D4;
                 }
-                if (cursor_item_number == 2 && PlayerScreen.inventoryDict["Crossbow"] == true)
+                if (cursor_item_number == 2 && StoryProgress.ProgressLine["Crossbow"] == true)
                 {
-                    activeItem_textures[3] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
+                    activeItem_textures[3] = Content.Load<Texture2D>(@"Sprite\Bow");
                     activeItems_helper[3] = "Crossbow";
-                    activeItemsDict["Crossbow"] = Keys.D4;
+                    StoryProgress.activeItemsDict["Crossbow"] = Keys.D4;
                 }
-                if (cursor_item_number == 3 && PlayerScreen.inventoryDict["Spear"] == true)
+                if (cursor_item_number == 3 && StoryProgress.ProgressLine["Spear"] == true)
                 {
                     activeItem_textures[3] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
                     activeItems_helper[3] = "Spear";
-                    activeItemsDict["Spear"] = Keys.D4;
+                    StoryProgress.activeItemsDict["Spear"] = Keys.D4;
                 }
-                if (cursor_item_number == 4 && PlayerScreen.inventoryDict["BOOM-erang"] == true)
+                if (cursor_item_number == 4 && StoryProgress.ProgressLine["DOOM-erang"] == true)
                 {
                     activeItem_textures[3] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[3] = "BOOM-erang";
-                    activeItemsDict["BOOM-erang"] = Keys.D4;
+                    activeItems_helper[3] = "DOOM-erang";
+                    StoryProgress.activeItemsDict["DOOM-erang"] = Keys.D4;
                 }
-                if (cursor_item_number == 5 && PlayerScreen.inventoryDict["Hammer?"] == true)
+                if (cursor_item_number == 5 && StoryProgress.ProgressLine["Hammer"] == true)
                 {
                     activeItem_textures[3] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[3] = "Hammer?";
-                    activeItemsDict["Hammer?"] = Keys.D4;
+                    activeItems_helper[3] = "Hammer";
+                    StoryProgress.activeItemsDict["Hammer"] = Keys.D4;
                 }
-                if (cursor_item_number == 6 && PlayerScreen.inventoryDict["MetalBladeCrossbow?"] == true)
+                if (cursor_item_number == 6 && StoryProgress.ProgressLine["MetalBladeCrossbow"] == true)
                 {
                     activeItem_textures[3] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[3] = "MetalBladeCrossbow?";
-                    activeItemsDict["MetalBladeCrossbow?"] = Keys.D4;
+                    activeItems_helper[3] = "MetalBladeCrossbow";
+                    StoryProgress.activeItemsDict["MetalBladeCrossbow"] = Keys.D4;
                 }
-                if (cursor_item_number == 7 && PlayerScreen.inventoryDict["Hookshot?"] == true)
+                if (cursor_item_number == 7 && StoryProgress.ProgressLine["Hookshot"] == true)
                 {
                     activeItem_textures[3] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[3] = "Hookshot?";
-                    activeItemsDict["Hookshot?"] = Keys.D4;
+                    activeItems_helper[3] = "Hookshot";
+                    StoryProgress.activeItemsDict["Hookshot"] = Keys.D4;
                 }
             }
             if (InputHandler.KeyReleased(Keys.D5))
@@ -446,62 +443,62 @@ namespace TileGame.GameScreens
                 ResetKey(Keys.D5);
                 ResetSelectedActiveItemTextures();
 
-                if (cursor_item_number == 0 && PlayerScreen.inventoryDict["Axe"] == true)
+                if (cursor_item_number == 0 && StoryProgress.ProgressLine["Axe"] == true)
                 {
-                    activeItem_textures[4] = Content.Load<Texture2D>(@"Sprite\Inv Axe test");
+                    activeItem_textures[4] = Content.Load<Texture2D>(@"Sprite\Axe");
                     activeItems_helper[4] = "Axe";
-                    activeItemsDict["Axe"] = Keys.D5;
+                    StoryProgress.activeItemsDict["Axe"] = Keys.D5;
                 }
-                if (cursor_item_number == 1 && PlayerScreen.inventoryDict["Sword"] == true)
+                if (cursor_item_number == 1 && StoryProgress.ProgressLine["Sword"] == true)
                 {
                     activeItem_textures[4] = Content.Load<Texture2D>(@"Sprite\Inv Sword test");
                     activeItems_helper[4] = "Sword";
-                    activeItemsDict["Sword"] = Keys.D5;
+                    StoryProgress.activeItemsDict["Sword"] = Keys.D5;
                 }
-                if (cursor_item_number == 2 && PlayerScreen.inventoryDict["Crossbow"] == true)
+                if (cursor_item_number == 2 && StoryProgress.ProgressLine["Crossbow"] == true)
                 {
-                    activeItem_textures[4] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
+                    activeItem_textures[4] = Content.Load<Texture2D>(@"Sprite\Bow");
                     activeItems_helper[4] = "Crossbow";
-                    activeItemsDict["Crossbow"] = Keys.D5;
+                    StoryProgress.activeItemsDict["Crossbow"] = Keys.D5;
                 }
-                if (cursor_item_number == 3 && PlayerScreen.inventoryDict["Spear"] == true)
+                if (cursor_item_number == 3 && StoryProgress.ProgressLine["Spear"] == true)
                 {
                     activeItem_textures[4] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
                     activeItems_helper[4] = "Spear";
-                    activeItemsDict["Spear"] = Keys.D5;
+                    StoryProgress.activeItemsDict["Spear"] = Keys.D5;
                 }
-                if (cursor_item_number == 4 && PlayerScreen.inventoryDict["BOOM-erang"] == true)
+                if (cursor_item_number == 4 && StoryProgress.ProgressLine["DOOM-erang"] == true)
                 {
                     activeItem_textures[4] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[4] = "BOOM-erang";
-                    activeItemsDict["BOOM-erang"] = Keys.D5;
+                    activeItems_helper[4] = "DOOM-erang";
+                    StoryProgress.activeItemsDict["DOOM-erang"] = Keys.D5;
                 }
-                if (cursor_item_number == 5 && PlayerScreen.inventoryDict["Hammer?"] == true)
+                if (cursor_item_number == 5 && StoryProgress.ProgressLine["Hammer"] == true)
                 {
                     activeItem_textures[4] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[4] = "Hammer?";
-                    activeItemsDict["Hammer?"] = Keys.D5;
+                    activeItems_helper[4] = "Hammer";
+                    StoryProgress.activeItemsDict["Hammer"] = Keys.D5;
                 }
-                if (cursor_item_number == 6 && PlayerScreen.inventoryDict["MetalBladeCrossbow?"] == true)
+                if (cursor_item_number == 6 && StoryProgress.ProgressLine["MetalBladeCrossbow"] == true)
                 {
                     activeItem_textures[4] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[4] = "MetalBladeCrossbow?";
-                    activeItemsDict["MetalBladeCrossbow?"] = Keys.D5;
+                    activeItems_helper[4] = "MetalBladeCrossbow";
+                    StoryProgress.activeItemsDict["MetalBladeCrossbow"] = Keys.D5;
                 }
-                if (cursor_item_number == 7 && PlayerScreen.inventoryDict["Hookshot?"] == true)
+                if (cursor_item_number == 7 && StoryProgress.ProgressLine["Hookshot"] == true)
                 {
                     activeItem_textures[4] = Content.Load<Texture2D>(@"Sprite\Inv Crossbow test");
-                    activeItems_helper[4] = "Hookshot?";
-                    activeItemsDict["Hookshot?"] = Keys.D5;
+                    activeItems_helper[4] = "Hookshot";
+                    StoryProgress.activeItemsDict["Hookshot"] = Keys.D5;
                 }
             }
         }
 
         private void ResetKey(Keys Key)
         {
-            foreach (var item in activeItemsDict.Where(dictkey => dictkey.Value == Key).ToList())
+            foreach (var item in StoryProgress.activeItemsDict.Where(dictkey => dictkey.Value == Key).ToList())
             {
-                activeItemsDict.Remove(item.Key);
+                StoryProgress.activeItemsDict.Remove(item.Key);
             }
         }
 
@@ -553,7 +550,7 @@ namespace TileGame.GameScreens
             {
                 for (int i = 0; i < activeItems_helper.Count(); i++)
                 {
-                    if (activeItems_helper[i] == "BOOM-erang")
+                    if (activeItems_helper[i] == "DOOM-erang")
                     {
                         activeItem_textures[i] = Content.Load<Texture2D>(@"Sprite\Inventory Empty test");
                     }
@@ -563,7 +560,7 @@ namespace TileGame.GameScreens
             {
                 for (int i = 0; i < activeItems_helper.Count(); i++)
                 {
-                    if (activeItems_helper[i] == "Hammer?")
+                    if (activeItems_helper[i] == "Hammer")
                     {
                         activeItem_textures[i] = Content.Load<Texture2D>(@"Sprite\Inventory Empty test");
                     }
@@ -573,7 +570,7 @@ namespace TileGame.GameScreens
             {
                 for (int i = 0; i < activeItems_helper.Count(); i++)
                 {
-                    if (activeItems_helper[i] == "MetalBladeCrossbow?")
+                    if (activeItems_helper[i] == "MetalBladeCrossbow")
                     {
                         activeItem_textures[i] = Content.Load<Texture2D>(@"Sprite\Inventory Empty test");
                     }
@@ -583,7 +580,7 @@ namespace TileGame.GameScreens
             {
                 for (int i = 0; i < activeItems_helper.Count(); i++)
                 {
-                    if (activeItems_helper[i] == "Hookshot?")
+                    if (activeItems_helper[i] == "Hookshot")
                     {
                         activeItem_textures[i] = Content.Load<Texture2D>(@"Sprite\Inventory Empty test");
                     }
