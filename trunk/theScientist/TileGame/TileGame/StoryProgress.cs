@@ -18,7 +18,14 @@ namespace TileGame
             ProgressLine.Add("asterixTalkedTo", false);
             ProgressLine.Add("lumberjacksTalkedTo", false);
             ProgressLine.Add("belladonnaHave", false);
-            ProgressLine.Add("axeHave", false);
+            ProgressLine.Add("Axe", false);
+            ProgressLine.Add("Sword", false);
+            ProgressLine.Add("Crossbow", false);
+            ProgressLine.Add("Spear", false);
+            ProgressLine.Add("DOOM-erang", false);
+            ProgressLine.Add("Hammer", false);
+            ProgressLine.Add("MetalBladeCrossbow", false);
+            ProgressLine.Add("Hookshot", false);
             ProgressLine.Add("treeIsDown", false);
             ProgressLine.Add("contestAgainstJonnyFinnished", false);
             ProgressLine.Add("contestAgainstJackFinnished", false);
