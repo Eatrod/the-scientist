@@ -42,7 +42,7 @@ namespace TileGame.GameScreens
                 
         Sprite sprite, sprite1;
         AnimatedSprite NPC1, NPC2;
-        public NPC_Story npcstory, npcstory2;
+        public NPC_Story npcstory, npcStoryAsterix;//npcstory2;
         NPC_Fighting_Stationary NPC_Guard_1;
         public NPC_Story npc;
         public List<NPC_Story> NpcStoryList = new List<NPC_Story>(); 
@@ -189,11 +189,11 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory2 = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"), "Asterix");
-            npcstory2.Origionoffset = new Vector2(25, 65);
-            npcstory2.SetSpritePositionInGameWorld(new Vector2(20, 17));
-            AnimatedSpriteObject.Add(npcstory2);
-            NpcStoryList.Add(npcstory2);
+            npcStoryAsterix = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"), "Asterix");
+            npcStoryAsterix.Origionoffset = new Vector2(25, 65);
+            npcStoryAsterix.SetSpritePositionInGameWorld(new Vector2(64, 11));//(20, 17));
+            AnimatedSpriteObject.Add(npcStoryAsterix);
+            NpcStoryList.Add(npcStoryAsterix);
 
             //--
             lockedGateDict = new Dictionary<int,bool>();
