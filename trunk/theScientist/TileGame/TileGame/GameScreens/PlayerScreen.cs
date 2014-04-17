@@ -648,10 +648,9 @@ namespace TileGame.GameScreens
             lifemeteranimation.Draw(spriteBatch);
             staminaanimation.Draw(spriteBatch);
             chargeanimation.Draw(spriteBatch);
-
-            ControlManager.Draw(spriteBatch);
-            
             DrawItemHUD();
+            //Draws active conversation
+            ControlManager.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);
