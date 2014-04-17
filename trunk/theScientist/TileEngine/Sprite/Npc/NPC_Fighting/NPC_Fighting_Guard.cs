@@ -14,15 +14,15 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 {
     public class NPC_Fighting_Guard : NPC_Fighting
     {
-        private Vector2 startingPosition;
-        private Vector2 vectorTowardsTarget;
-        private Vector2 vectorTowardsStart;
-        private Vector2 aggroStartingPosition;
-        private bool aggro;
-        private bool startingFlag;
-        private bool goingHome;
-        private float aggroRange;
-        private float aggroCircle;
+        protected Vector2 startingPosition;
+        protected Vector2 vectorTowardsTarget;
+        protected Vector2 vectorTowardsStart;
+        protected Vector2 aggroStartingPosition;
+        protected bool aggro;
+        protected bool startingFlag;
+        protected bool goingHome;
+        protected float aggroRange;
+        protected float aggroCircle;
         public Vector2 AggroStartingPosition
         {
             get { return aggroStartingPosition; }
@@ -116,22 +116,22 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         }
         public override void Update(GameTime gameTime)
         {
-            if (startingFlag)
-            {
-                this.startingPosition = Position;
-                startingFlag = false;
-            }
+            //if (startingFlag)
+            //{
+            //    this.startingPosition = Position;
+            //    startingFlag = false;
+            //}
             
-            if (Aggro)
-            {
-                Position += VectorTowardsTarget * speed;
-            }
-            else if (goingHome)
-            {
-                Position += VectorTowardsStart * speed;
-            }
-            else
-                Position = startingPosition;
+            //if (Aggro)
+            //{
+            //    Position += VectorTowardsTarget * speed;
+            //}
+            //else if (goingHome)
+            //{
+            //    Position += VectorTowardsStart * speed;
+            //}
+            //else
+            //    Position = startingPosition;
             base.Update(gameTime);
         }
     }
