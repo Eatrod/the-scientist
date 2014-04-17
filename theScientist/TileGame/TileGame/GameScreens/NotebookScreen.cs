@@ -86,9 +86,9 @@ namespace TileGame.GameScreens
             ControlManager.Update(gameTime, PlayerIndex.One);
             base.Update(gameTime);
 
-            if (StoryProgress.asterixTalkedTo)
+            if (StoryProgress.ProgressLine["asterixTalkedTo"])
                 messageDict[2].Unlocked = true;
-            if (StoryProgress.belladonnaHave)
+            if (StoryProgress.ProgressLine["belladonnaHave"])
                 messageDict[3].Unlocked = true;
 
             GetKeysThatAreNotLocked();

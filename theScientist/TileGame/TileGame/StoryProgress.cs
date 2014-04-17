@@ -11,27 +11,38 @@ namespace TileGame
         public static string lastGameScreen;
         #endregion
 
-        #region Talk To Region
-        public static bool asterixTalkedTo = false;
-        #endregion
+        public static Dictionary<string, bool> ProgressLine = new Dictionary<string, bool>();
+        
+        public StoryProgress()
+        {
+            ProgressLine.Add("asterixTalkedTo", false);
+            ProgressLine.Add("lumberjacksTalkedTo", false);
+            ProgressLine.Add("belladonnaHave", false);
+            ProgressLine.Add("axeHave", false);
+            ProgressLine.Add("treeIsDown", false);
+            ProgressLine.Add("contestAgainstJonnyFinnished", false);
+            ProgressLine.Add("contestAgainstJackFinnished", false);
+            ProgressLine.Add("contestAgainstJohnFinnished", false);
+        }
 
-        #region
-        public static bool belladonnaHave = false;
-        #endregion
 
         #region Methods Region
-        public void SetAsterixTalkedTo()
+        public void SetToTrue(string key)
         {
-            asterixTalkedTo = true;
+            if(ProgressLine.ContainsKey(key))
+            ProgressLine[key] = true;
         }
+
         #endregion
 
         #region GetAll/SetAll Region
         public static string GetAll()
         {
             string text = "";
-            text += "asterixTalkedTo" + ":" + asterixTalkedTo.ToString() + ";";
-            text += "belladonnaHave" + ":" + belladonnaHave.ToString();
+            foreach (var item in ProgressLine)
+            {
+                text += item.Key + ":" + item.Value + ";";
+            }
             return text;
         }
 
@@ -43,20 +54,10 @@ namespace TileGame
             foreach (var row in rows)
             {
                 items = row.Split(':');
-                if (items[0].Equals("asterixTalkedTo"))
-                {
-                    if (items[1].Equals("True"))
-                        asterixTalkedTo = true;
-                    else
-                        asterixTalkedTo = false;
-                }
-                if (items[0].Equals("belladonnaHave"))
-                {
-                    if (items[1].Equals("True"))
-                        belladonnaHave = true;
-                    else
-                        belladonnaHave = false;
-                }
+                if (ProgressLine.ContainsKey(items[0]))
+                    ProgressLine[items[0]] = Convert.ToBoolean(items[1]);
+                else
+                    ProgressLine.Add(items[0], Convert.ToBoolean(items[1]));
             }
         }
         #endregion
