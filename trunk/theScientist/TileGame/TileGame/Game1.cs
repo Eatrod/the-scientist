@@ -152,8 +152,8 @@ namespace TileGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-
             GameState currentState = stateManager.CurrentState;
+
             //GameState oldState;
             if (musicStates.ContainsKey(currentState))
             {
