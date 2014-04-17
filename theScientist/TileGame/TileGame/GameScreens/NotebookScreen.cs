@@ -72,7 +72,7 @@ namespace TileGame.GameScreens
             InsertTextToMessageDictionary(0, "");
             InsertTextToMessageDictionary(1, "Find Asterix and talk to him!");
             InsertTextToMessageDictionary(2, "Asterix told you to find potato The Belladonna. Check out the abandoned fields in the north west.");
-            InsertTextToMessageDictionary(3, "Invanarna har talat om for mig att vakterna ar latta att supa ned");
+            InsertTextToMessageDictionary(3, "You have now the Belladonna potato and should move on to next town.");
             InsertTextToMessageDictionary(4, "Detta ska inte synas!");
             InsertTextToMessageDictionary(5, "Detta ska synas, men det kan vara en valdigt lang text, apiorgj aklfnb voahfg oahfgka jfogahr eogihaeg");
             InsertTextToMessageDictionary(6, "Detta ska inte synas!");
@@ -88,6 +88,8 @@ namespace TileGame.GameScreens
 
             if (StoryProgress.asterixTalkedTo)
                 messageDict[2].Unlocked = true;
+            if (StoryProgress.belladonnaHave)
+                messageDict[3].Unlocked = true;
 
             GetKeysThatAreNotLocked();
 
