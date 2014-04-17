@@ -187,6 +187,8 @@ namespace TileGame
                 file.WriteLine(playerPosition.ToString());
                 file.WriteLine(playerLife);
                 file.WriteLine(playerStamina);
+                file.WriteLine("[StoryLine]");
+                file.WriteLine(StoryProgress.GetAll());
             }
         }
 
@@ -212,6 +214,11 @@ namespace TileGame
                     string stamina = file.ReadLine();
                     stamina = CleanString(stamina);
                     playerStamina = Convert.ToInt32(stamina);
+                }
+                crap = file.ReadLine();
+                if(crap.Equals("[StoryLine]"))
+                {
+                    StoryProgress.SetAll(file.ReadLine());
                 }
             }
         }
