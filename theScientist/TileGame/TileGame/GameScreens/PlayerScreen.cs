@@ -677,13 +677,19 @@ namespace TileGame.GameScreens
             }
 
             //Weapon Ability pics
-            //for (int i = 0; i < activeItem_textures.Count(); i++)
-            //{
-            //    spriteBatch.Draw(
-            //    axeImage,
-            //    new Rectangle(GameRef.ScreenRectangle.Width / 2 - (50 * 2 + 16) + (50 * i), GameRef.ScreenRectangle.Height - 45, 32, 32),
-            //    Color.White);
-            //}
+            if (StoryProgress.activeItemsDict.ContainsKey("Axe"))
+            {
+                if (StoryProgress.activeItemsDict["Axe"] == Keys.D1 && activeItemBackgroundColor[0] == Color.White)
+                {
+                    for (int i = 0; i < activeItem_textures.Count(); i++)
+                    {
+                        spriteBatch.Draw(
+                        swordImage,
+                        new Rectangle(GameRef.ScreenRectangle.Width / 2 - (50 * 2 + 16) + (50 * i), GameRef.ScreenRectangle.Height - 45, 32, 32),
+                        Color.White);
+                    }
+                }
+            }
 
             string key_string;
             int key_number;
