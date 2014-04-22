@@ -22,7 +22,7 @@ namespace TileEngine.Sprite
 
         }
 
-        public LifePotatoSprite(Texture2D texture, Vector2 position, bool toInventory, bool increaseHealth) :
+        public LifePotatoSprite(Texture2D texture, Vector2 position) :
             base(texture)
         {
             SetSpritePositionInGameWorld(position);
