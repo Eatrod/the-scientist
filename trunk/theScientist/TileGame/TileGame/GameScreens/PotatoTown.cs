@@ -207,9 +207,9 @@ namespace TileGame.GameScreens
             NpcNeutralList.Add(npcNeutral);
 
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
-                new Vector2(90, 40), false, true));
+                new Vector2(90, 40)));
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
-                new Vector2(90, 43), false, true));
+                new Vector2(90, 43)));
 
             //--
             lockedGateDict = new Dictionary<int,bool>();
