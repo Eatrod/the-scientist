@@ -477,8 +477,7 @@ namespace TileGame.GameScreens
         {
             life = player.Life;
 
-            if (lifeRect.Width > (int)life)
-                lifeRect.Width -= 1;
+            lifeRect.Width = (int)life;
 
             if (life >= 75f)
                 lifemeteranimation.CurrentAnimationName = "FullHp";
@@ -497,10 +496,7 @@ namespace TileGame.GameScreens
         {
             stamina = player.Stamina;
 
-            if (staminaRect.Width > (int)stamina)
-                staminaRect.Width = (int)stamina;
-            if (staminaRect.Width < (int)stamina)
-                staminaRect.Width = (int)stamina;
+            staminaRect.Width = (int)stamina;
 
             staminaRect = new Rectangle(
                 staminaanimation.CurrentAnimation.CurrentRectangle.Location.X, 
@@ -513,10 +509,7 @@ namespace TileGame.GameScreens
         {
             charge = player.Charge;
 
-            if (chargeRect.Width > (int)charge)
-                chargeRect.Width = (int)charge;
-            if (chargeRect.Width < (int)charge)
-                chargeRect.Width = (int)charge;
+            chargeRect.Width = (int)charge;
 
             chargeRect = new Rectangle(
                 chargeanimation.CurrentAnimation.CurrentRectangle.Location.X,
