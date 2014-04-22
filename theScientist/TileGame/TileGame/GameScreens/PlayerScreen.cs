@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
@@ -12,6 +13,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Media;
 using TileEngine.Dialog;
 using TileEngine.Sprite;
+using TileEngine.Sprite.Npc.NPC_Neutral;
 using TileEngine.Sprite.Npc.NPC_Story;
 using TileEngine.Sprite.Projectiles;
 using XtheSmithLibrary;
@@ -31,6 +33,7 @@ namespace TileGame.GameScreens
         //bool gate2Locked = true;
         protected PlayerScreen screen;
         protected DialogBox dialogBox;
+        protected TextBubble textBubble;
         protected NPC_Story talksTo;
         
         public Dictionary<int, bool> lockedGateDict;
@@ -48,6 +51,7 @@ namespace TileGame.GameScreens
         //--
 
         #endregion
+
         #region Property Region
 
         //GraphicsDeviceManager graphics;
@@ -174,10 +178,10 @@ namespace TileGame.GameScreens
             if(player == null)
             {
                 player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Texture2D>("CharacterPotraits/Assassins-Creed-4"));
-            player.Origionoffset = new Vector2(15, 15);
-            player.SetSpritePositionInGameWorld(new Vector2(4, 3));
-            player.Life = 100;
-            player.Stamina = 100;
+                player.Origionoffset = new Vector2(15, 15);
+                player.SetSpritePositionInGameWorld(new Vector2(4, 3));
+                player.Life = 100;
+                player.Stamina = 100;
             }
 
             if (lifemeteranimation == null)
@@ -200,6 +204,8 @@ namespace TileGame.GameScreens
             dialog = new Dialog();
             rectangle = new Rectangle(0, GraphicsDevice.Viewport.Height - 100, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             dialogBox = new DialogBox(Content.Load<Texture2D>("GUI/DialogPlaceholder"), rectangle, "");
+
+            textBubble = new TextBubble(Content.Load<Texture2D>("GUI/SpeechBubble"), rectangle, "");
 
             gateDict = new Dictionary<string, int>();
             for (int i = 0; i < 10; i++)
@@ -817,6 +823,18 @@ namespace TileGame.GameScreens
 
         
         #region Method Region
+
+        public void PlayerShowTextBubble(NPC_Neutral_Townsfolk npc)
+        {
+            textBubble.npc = npc;
+            textBubble.Enabled = true;
+            textBubble.Visible = true;
+            npc.TextBubble();
+            textBubble.conversation = npc.text;
+            textBubble.Text = npc.text.Text;
+            ControlManager.Add(textBubble);
+        }
+
         public void PlayerStartConversation(NPC_Story npc)
         {
             this.talksTo = npc;

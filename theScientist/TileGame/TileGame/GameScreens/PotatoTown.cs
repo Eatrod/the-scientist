@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework.Media;
 using TileEngine.Dialog;
 using TileEngine.Sprite;
 using TileEngine.Sprite.Npc;
+using TileEngine.Sprite.Npc.NPC_Neutral;
 using TileEngine.Sprite.Npc.NPC_Story;
 using TileEngine.Sprite.Npc.NPC_Fighting;
 using XtheSmithLibrary;
@@ -35,6 +36,7 @@ namespace TileGame.GameScreens
         private ContentManager Content;
 
         #endregion
+
         #region Property Region
 
         //GraphicsDeviceManager graphics;
@@ -45,6 +47,9 @@ namespace TileGame.GameScreens
         public NPC_Story npcstory, npcStoryAsterix;//npcstory2;
         NPC_Fighting_Stationary NPC_Guard_1;
         public NPC_Story npc;
+        public NPC_Neutral_Townsfolk npcNeutral;
+
+        public List<NPC_Neutral_Townsfolk> NpcNeutralList = new List<NPC_Neutral_Townsfolk>(); 
         public List<NPC_Story> NpcStoryList = new List<NPC_Story>(); 
         protected Rectangle rectangle;
         protected Dialog dialog ;
@@ -195,6 +200,12 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcStoryAsterix);
             NpcStoryList.Add(npcStoryAsterix);
 
+            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+            npcNeutral.Origionoffset = new Vector2(25,65);
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(64, 20));
+            AnimatedSpriteObject.Add(npcNeutral);
+            NpcNeutralList.Add(npcNeutral);
+
             //--
             lockedGateDict = new Dictionary<int,bool>();
             lockedGateDict[40] = true;
@@ -255,6 +266,19 @@ namespace TileGame.GameScreens
                             PlayerEndConversation(npc);
                         }
                     }
+                }
+            }
+
+            foreach (var npc in NpcNeutralList)
+            {
+                if (npc.InHearingRange(player))
+                {
+                    PlayerShowTextBubble(npc);
+                }
+
+                else
+                {
+                    //PlayerEndConversation(npc);
                 }
             }
             

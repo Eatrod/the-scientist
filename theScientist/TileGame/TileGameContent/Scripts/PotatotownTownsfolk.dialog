@@ -1,0 +1,17 @@
+﻿<Conversations>
+  
+  <Conversation Name="Text1">
+    <Text>I wonder why none has done something about the bandits</Text>
+    <Handlers>
+      <Handler Caption="d" Action="EndBubble" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Text2">
+    <Text>That stupid Asterix is going to win the potato race</Text>
+    <Handlers>
+      <Handler Caption="d" Action="EndBubble" />
+    </Handlers>
+  </Conversation>
+  
+</Conversations>
