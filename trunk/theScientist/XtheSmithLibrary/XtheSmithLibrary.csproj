@@ -69,6 +69,7 @@
     <Compile Include="Controls\Label.cs" />
     <Compile Include="Controls\LinkLabel.cs" />
     <Compile Include="Controls\PictureBox.cs" />
+    <Compile Include="Controls\TextBubble.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="GameStateManager.cs" />
     <Compile Include="InputHandler.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reflection;
 
 namespace TileEngine.Sprite.Npc
@@ -11,8 +12,19 @@ namespace TileEngine.Sprite.Npc
             new Dictionary<string, Conversation>();
 
         public Conversation this[string name]
-        { 
-            get{return conversations[name];}
+        {
+            get
+            {
+                if (name == "random")
+                {
+                    Random rand = new Random((int)DateTime.Now.Ticks);
+                    return conversations.ElementAt(rand.Next(0, conversations.Count)).Value;
+                }
+                else
+                {
+                    return conversations[name];
+                }
+            }
         }
 
         public Script(params Conversation[] newConversations)
