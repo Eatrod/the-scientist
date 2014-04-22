@@ -53,19 +53,45 @@ namespace TileGame
         #endregion
 
         #region GetAll/SetAll Region
-        public static string GetAll()
+        public static string GetAllProperties()
         {
             string text = "";
             foreach (var item in ProgressLine)
             {
                 text += item.Key + ":" + item.Value + ";";
             }
+            text = RemoveLastCharacter(text);
             return text;
         }
 
-        public static void SetAll(string text)
+        public static string GetAllKeys()
+        {
+            string text = "";
+            foreach (var item in activeItemsDict)
+            {
+                text += item.Key + ":" + item.Value + ";";
+            }
+            text = RemoveLastCharacter(text);
+            return text;
+        }
+
+        public static string RemoveLastCharacter(string text)
+        {
+            try
+            {
+                text = text.Remove(text.Count() - 1);
+            }
+            catch
+            {
+
+            }
+            return text;
+        }
+
+        public static void SetAllProperties(string text)
         {
             string[] rows;
+            //text text.Count
             rows = text.Split(';');
             string[] items;
             foreach (var row in rows)
@@ -75,6 +101,32 @@ namespace TileGame
                     ProgressLine[items[0]] = Convert.ToBoolean(items[1]);
                 else
                     ProgressLine.Add(items[0], Convert.ToBoolean(items[1]));
+            }
+        }
+
+        //CompetitionType Event = (CompetitionType)Enum.Parse(typeof(CompetitionType), sdr["Event"].ToString());
+        public static void SetAllKeys(string text)
+        {
+            string[] rows;
+            rows = text.Split(';');
+            string[] items;
+            foreach (var row in rows)
+            {
+                items = row.Split(':');
+                if (activeItemsDict.ContainsKey(items[0]))
+                    activeItemsDict[items[0]] =
+                        (Keys)Enum.Parse(typeof(Keys), items[1]);
+                else
+                {
+                    try
+                    {
+                        activeItemsDict.Add(items[0], (Keys)Enum.Parse(typeof(Keys), items[1]));
+                    }
+                    catch
+                    {
+
+                    }
+                }
             }
         }
         #endregion
