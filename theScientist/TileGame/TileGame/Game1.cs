@@ -193,7 +193,10 @@ namespace TileGame
                 file.WriteLine(playerLife);
                 file.WriteLine(playerStamina);
                 file.WriteLine("[StoryLine]");
-                file.WriteLine(StoryProgress.GetAll());
+                file.WriteLine("[Properties]");
+                file.WriteLine(StoryProgress.GetAllProperties());
+                file.WriteLine("[Keys]");
+                file.WriteLine(StoryProgress.GetAllKeys());
             }
         }
 
@@ -221,9 +224,15 @@ namespace TileGame
                     playerStamina = Convert.ToInt32(stamina);
                 }
                 crap = file.ReadLine();
-                if(crap.Equals("[StoryLine]"))
+                crap = file.ReadLine();
+                if(crap.Equals("[Properties]"))
                 {
-                    StoryProgress.SetAll(file.ReadLine());
+                    StoryProgress.SetAllProperties(file.ReadLine());
+                }
+                crap = file.ReadLine();
+                if (crap.Equals("[Keys]"))
+                {
+                    StoryProgress.SetAllKeys(file.ReadLine());
                 }
             }
         }
