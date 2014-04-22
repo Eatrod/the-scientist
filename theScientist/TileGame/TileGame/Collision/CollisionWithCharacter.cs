@@ -29,6 +29,17 @@ namespace TileGame.Collision
                     Vector2 d = Vector2.Normalize(s.Origin - player.Origin);
                     player.Position =
                         s.Position - (d * (player.CollisionRadius + s.CollisionRadius));
+
+                    if(s.GetType() == typeof(PickUpSprite))
+                    {
+                        SpriteObjectInGameWorld.Remove(s);
+                        renderList.Remove(s);
+                        PickUpSprite pus = (PickUpSprite)s;
+                        if (pus.IncreaseHealth)
+                            player.Life += 10;
+                        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
+                        break;
+                    }
                 }
             }
 

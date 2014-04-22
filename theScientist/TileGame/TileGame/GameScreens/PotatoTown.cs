@@ -206,6 +206,11 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcNeutral);
             NpcNeutralList.Add(npcNeutral);
 
+            SpriteObject.Add(new PickUpSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(90, 40), false, true));
+            SpriteObject.Add(new PickUpSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(90, 43), false, true));
+
             //--
             lockedGateDict = new Dictionary<int,bool>();
             lockedGateDict[40] = true;
@@ -267,7 +272,7 @@ namespace TileGame.GameScreens
                         }
                     }
                 }
-            }
+                }
 
             foreach (var npc in NpcNeutralList)
             {
