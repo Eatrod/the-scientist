@@ -93,7 +93,7 @@
     <Compile Include="Sprite\Npc\NPC_Story\NPC_Story_DonPotato.cs" />
     <Compile Include="Sprite\Npc\Script.cs" />
     <Compile Include="Sprite\Npc\ScriptReader.cs" />
-    <Compile Include="Sprite\PickUpSprite.cs" />
+    <Compile Include="Sprite\LifePotatoSprite.cs" />
     <Compile Include="Sprite\PlayerCharacter.cs" />
     <Compile Include="Sprite\Projectiles\FlamingArrowProjectile.cs" />
     <Compile Include="Sprite\Projectiles\NormalArrowProjectile.cs" />
