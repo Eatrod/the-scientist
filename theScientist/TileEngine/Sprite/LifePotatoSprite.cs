@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TileEngine.Sprite
 {
-    public class PickUpSprite : Sprite
+    public class LifePotatoSprite : Sprite
     {
         #region Field Region
         private bool toInventory;
@@ -30,12 +30,12 @@ namespace TileEngine.Sprite
         #endregion
 
         #region Constructor region
-        public PickUpSprite(Texture2D texture) : base(texture)
+        public LifePotatoSprite(Texture2D texture) : base(texture)
         {
 
         }
 
-        public PickUpSprite(Texture2D texture, Vector2 position, bool toInventory, bool increaseHealth) :
+        public LifePotatoSprite(Texture2D texture, Vector2 position, bool toInventory, bool increaseHealth) :
             base(texture)
         {
             SetSpritePositionInGameWorld(position);
