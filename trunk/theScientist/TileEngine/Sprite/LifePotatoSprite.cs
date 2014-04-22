@@ -11,22 +11,9 @@ namespace TileEngine.Sprite
     public class LifePotatoSprite : Sprite
     {
         #region Field Region
-        private bool toInventory;
-        private bool increaseHealth;
         #endregion
 
         #region Property Region
-        public bool ToInventory
-        {
-            get { return toInventory; }
-            set { toInventory = value; }
-        }
-
-        public bool IncreaseHealth
-        {
-            get { return increaseHealth; }
-            set { increaseHealth = value; }
-        }
         #endregion
 
         #region Constructor region
@@ -39,8 +26,6 @@ namespace TileEngine.Sprite
             base(texture)
         {
             SetSpritePositionInGameWorld(position);
-            this.toInventory = toInventory;
-            this.increaseHealth = increaseHealth;
             Origionoffset.X = texture.Width / 2;
             Origionoffset.Y = texture.Height / 2;
         }
