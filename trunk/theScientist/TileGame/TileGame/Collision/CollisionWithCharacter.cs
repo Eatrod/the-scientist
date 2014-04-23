@@ -24,9 +24,12 @@ namespace TileGame.Collision
             {
                 s.Update(gameTime);
 
+
+
                 if (BaseSprite.AreColliding(player, s))
                 {
                     Vector2 d = Vector2.Normalize(s.Origin - player.Origin);
+
                     player.Position =
                         s.Position - (d * (player.CollisionRadius + s.CollisionRadius));
 
@@ -42,6 +45,20 @@ namespace TileGame.Collision
                         //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
                         break;
                     }
+                    if(s.GetType() == typeof(MultiIronSprite))
+                    {
+                        MultiIronSprite mis = (MultiIronSprite)s;
+                        if (mis.CurrentAnimationName == "all" )
+                            mis.CurrentAnimationName = "half";
+                        else
+                        {
+                            SpriteObjectInGameWorld.Remove(s);
+                            renderList.Remove(s);
+                            break;
+                        }
+                    }
+
+                    
                 }
             }
 

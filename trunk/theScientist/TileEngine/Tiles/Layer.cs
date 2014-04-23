@@ -87,6 +87,39 @@ namespace TileEngine.Tiles
 
         }
 
+        public void DrawToShadpwMap(SpriteBatch batch)
+        {
+            batch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend,
+                null, null, null, null, Matrix.Identity);
+
+
+            for (int x = 0; x < Width; x++)
+            {
+                for (int y = 0; y < Height; y++)
+                {
+                    int textureIndex = map[y, x];
+
+                    if (textureIndex == -1)
+                        continue;
+
+                    else
+                    {
+                        Texture2D texture = tileTextures[textureIndex];
+
+                        batch.Draw(
+                            texture,
+                            new Rectangle(
+                                x * Engine.TileWidth,
+                                y * Engine.TileHeight,
+                                Engine.TileWidth,
+                                Engine.TileHeight),
+                            new Color(new Vector4(1f, 1f, 1f, Alpha)));
+                    }
+                }
+            }
+            batch.End();
+        }
+
         #region Get/set cellIndex
 
         public int GetCellIndex(int x, int y)

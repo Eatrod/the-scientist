@@ -35,6 +35,8 @@ namespace TileGame.GameScreens
         bool gate2Locked = true;
         private ContentManager Content;
 
+        private MultiIronSprite multiIronOre;
+
         #endregion
 
         #region Property Region
@@ -91,7 +93,7 @@ namespace TileGame.GameScreens
         public override void Initialize()
         {
             base.Initialize();
-
+            
             FrameAnimation down = new FrameAnimation(1, 50, 80, 0, 0);
             FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);
             FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
@@ -111,6 +113,14 @@ namespace TileGame.GameScreens
                 s.CurrentAnimationName = "Down";
             }
             
+            FrameAnimation all = new FrameAnimation(1, 32, 32, 0, 0);
+            if (!multiIronOre.Animations.ContainsKey("all"))
+                multiIronOre.Animations.Add("all", all);
+            FrameAnimation half = new FrameAnimation(1, 32, 32, 32, 0);
+            if (!multiIronOre.Animations.ContainsKey("half"))
+                multiIronOre.Animations.Add("half", half);
+            multiIronOre.CurrentAnimationName = "all";
+            
             SpriteObjectInGameWorld.Clear();
             renderList.Clear();
             renderList.Add(player);
@@ -129,7 +139,6 @@ namespace TileGame.GameScreens
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Content = Game.Content;
-            
             
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testGround.layer"));
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testBack.layer"));
@@ -237,12 +246,22 @@ namespace TileGame.GameScreens
                 new Vector2(90, 40)));
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(90, 43)));
+            //SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/multi_iron_ore"),
+                //new Vector2(92, 43)));
+            if(multiIronOre == null)
+            {
+                multiIronOre = new MultiIronSprite(Content.Load<Texture2D>("Sprite/multi_iron_ore"));
+                multiIronOre.SetSpritePositionInGameWorld(new Vector2(92, 43));
+            }
+            AnimatedSpriteObject.Add(multiIronOre);
+
 
             //--
             lockedGateDict = new Dictionary<int,bool>();
             lockedGateDict[40] = true;
             lockedGateDict[41] = true;
             //--
+
 
             base.LoadContent();
         }
@@ -320,8 +339,8 @@ namespace TileGame.GameScreens
                 {
                     if (npc.ShowingBubble == false)
                     {
-                        PlayerShowTextBubble(npc);
-                    }
+                    PlayerShowTextBubble(npc);
+                }
                 }
 
                 else
@@ -350,6 +369,9 @@ namespace TileGame.GameScreens
         
         public override void Draw(GameTime gameTime)
         {
+            
+            
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             tileMap.Draw(spriteBatch, camera);
