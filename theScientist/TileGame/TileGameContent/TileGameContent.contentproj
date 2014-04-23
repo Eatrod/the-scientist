@@ -1827,6 +1827,388 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tiles\Roads\RoadCLeftDown1.png">
+      <Name>RoadCLeftDown1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCLeftDown2.png">
+      <Name>RoadCLeftDown2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCLeftDown3.png">
+      <Name>RoadCLeftDown3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCLeftDown4.png">
+      <Name>RoadCLeftDown4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCLeftUp1.png">
+      <Name>RoadCLeftUp1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCLeftUp2.png">
+      <Name>RoadCLeftUp2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCLeftUp3.png">
+      <Name>RoadCLeftUp3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCLeftUp4.png">
+      <Name>RoadCLeftUp4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCRightDown1.png">
+      <Name>RoadCRightDown1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCRightDown2.png">
+      <Name>RoadCRightDown2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCRightDown3.png">
+      <Name>RoadCRightDown3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCRightDown4.png">
+      <Name>RoadCRightDown4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCRightUp1.png">
+      <Name>RoadCRightUp1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCRightUp2.png">
+      <Name>RoadCRightUp2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCRightUp3.png">
+      <Name>RoadCRightUp3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadCRightUp4.png">
+      <Name>RoadCRightUp4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftDown1-2.png">
+      <Name>RoadDLeftDown1-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftDown3-1.png">
+      <Name>RoadDLeftDown3-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftDown3-2.png">
+      <Name>RoadDLeftDown3-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftDown3-3.png">
+      <Name>RoadDLeftDown3-3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftDown3-4.png">
+      <Name>RoadDLeftDown3-4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftDown4-1.png">
+      <Name>RoadDLeftDown4-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftDown4-2.png">
+      <Name>RoadDLeftDown4-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftDown4-3.png">
+      <Name>RoadDLeftDown4-3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftDown4-4.png">
+      <Name>RoadDLeftDown4-4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftDown5-1.png">
+      <Name>RoadDLeftDown5-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftDown5-2.png">
+      <Name>RoadDLeftDown5-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftDown5-3.png">
+      <Name>RoadDLeftDown5-3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLefttDown1-1.png">
+      <Name>RoadDLefttDown1-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLefttDown2-1.png">
+      <Name>RoadDLefttDown2-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLefttDown2-2.png">
+      <Name>RoadDLefttDown2-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftUp1-1.png">
+      <Name>RoadDLeftUp1-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftUp1-2.png">
+      <Name>RoadDLeftUp1-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftUp2-1.png">
+      <Name>RoadDLeftUp2-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftUp2-2.png">
+      <Name>RoadDLeftUp2-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftUp3X-1.png">
+      <Name>RoadDLeftUp3X-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftUp3X-2.png">
+      <Name>RoadDLeftUp3X-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftUp4X-1.png">
+      <Name>RoadDLeftUp4X-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftUp4X-2.png">
+      <Name>RoadDLeftUp4X-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftUp5-1.png">
+      <Name>RoadDLeftUp5-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDLeftUp5-2.png">
+      <Name>RoadDLeftUp5-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown1-1.png">
+      <Name>RoadDRightDown1-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown1-2.png">
+      <Name>RoadDRightDown1-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown2-1.png">
+      <Name>RoadDRightDown2-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown2-2.png">
+      <Name>RoadDRightDown2-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown3-1.png">
+      <Name>RoadDRightDown3-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown3-2.png">
+      <Name>RoadDRightDown3-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown3-3.png">
+      <Name>RoadDRightDown3-3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown3-4.png">
+      <Name>RoadDRightDown3-4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown4-1.png">
+      <Name>RoadDRightDown4-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown4-2.png">
+      <Name>RoadDRightDown4-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown4-3.png">
+      <Name>RoadDRightDown4-3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown4-4.png">
+      <Name>RoadDRightDown4-4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown5-1.png">
+      <Name>RoadDRightDown5-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown5-2.png">
+      <Name>RoadDRightDown5-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightDown5-3.png">
+      <Name>RoadDRightDown5-3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRighttUp3X-2.png">
+      <Name>RoadDRighttUp3X-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightUp1-1.png">
+      <Name>RoadDRightUp1-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightUp1-2.png">
+      <Name>RoadDRightUp1-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightUp2-1.png">
+      <Name>RoadDRightUp2-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightUp2-2.png">
+      <Name>RoadDRightUp2-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightUp3X-1.png">
+      <Name>RoadDRightUp3X-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightUp4X-1.png">
+      <Name>RoadDRightUp4X-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightUp4X-2.png">
+      <Name>RoadDRightUp4X-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightUp5-1.png">
+      <Name>RoadDRightUp5-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadDRightUp5-2.png">
+      <Name>RoadDRightUp5-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadHBot1.png">
+      <Name>RoadHBot1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadHBot2.png">
+      <Name>RoadHBot2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadHMid1.png">
+      <Name>RoadHMid1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadHTop1.png">
+      <Name>RoadHTop1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadHTop2.png">
+      <Name>RoadHTop2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadVLeft1.png">
+      <Name>RoadVLeft1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadVLeft2.png">
+      <Name>RoadVLeft2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadVMid1.png">
+      <Name>RoadVMid1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadVRight1.png">
+      <Name>RoadVRight1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\Roads\RoadVRight2.png">
+      <Name>RoadVRight2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
