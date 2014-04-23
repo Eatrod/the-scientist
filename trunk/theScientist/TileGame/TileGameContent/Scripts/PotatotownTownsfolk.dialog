@@ -14,4 +14,11 @@
     </Handlers>
   </Conversation>
   
+  <Conversation Name="Text3">
+    <Text>I don't even like potatos...</Text>
+    <Handlers>
+      <Handler Caption="d" Action="EndBubble" />
+    </Handlers>
+  </Conversation>
+  
 </Conversations>
