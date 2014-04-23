@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TileEngine.AI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -23,6 +24,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         protected bool goingHome;
         protected float aggroRange;
         protected float aggroCircle;
+        
         public Vector2 AggroStartingPosition
         {
             get { return aggroStartingPosition; }
@@ -133,6 +135,32 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             //else
             //    Position = startingPosition;
             base.Update(gameTime);
+        }
+        public void UpdateSpriteAnimation(Vector2 motion)
+        {
+
+            float motionAngle = (float)Math.Atan2(motion.Y, motion.X);
+
+            if (motionAngle >= -MathHelper.PiOver4 && motionAngle <= MathHelper.PiOver4)
+            {
+                CurrentAnimationName = "WalkRight"; //Right
+                //motion = new Vector2(1f, 0f);
+            }
+            else if (motionAngle >= MathHelper.PiOver4 && motionAngle <= 3f * MathHelper.PiOver4)
+            {
+                CurrentAnimationName = "WalkDown"; //Down
+                //motion = new Vector2(0f, 1f);
+            }
+            else if (motionAngle <= -MathHelper.PiOver4 && motionAngle >= -3f * MathHelper.PiOver4)
+            {
+                CurrentAnimationName = "WalkUp"; // Up
+                //motion = new Vector2(0f, -1f);
+            }
+            else
+            {
+                CurrentAnimationName = "WalkLeft"; //Left
+                //motion = new Vector2(-1f, 0f);
+            }
         }
     }
 }

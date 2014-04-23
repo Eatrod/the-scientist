@@ -20,6 +20,7 @@ using TileEngine.Sprite.Npc.NPC_Fighting;
 using XtheSmithLibrary;
 using TileEngine;
 using TileEngine.Tiles;
+using TileEngine.AI;
 using TileGame.Collision;
 using XtheSmithLibrary.Controls;
 
@@ -29,7 +30,6 @@ namespace TileGame.GameScreens
     {
         
         #region Field Region
-
         string name;
         bool gate1Locked = true;
         bool gate2Locked = true;
@@ -46,6 +46,8 @@ namespace TileGame.GameScreens
         AnimatedSprite NPC1, NPC2;
         public NPC_Story npcstory, npcStoryAsterix;//npcstory2;
         NPC_Fighting_Stationary NPC_Guard_1;
+        NPC_Fighting_Stationary NPC_Guard_2;
+   
         public NPC_Story npc;
         public NPC_Neutral_Townsfolk npcNeutral;
 
@@ -63,6 +65,7 @@ namespace TileGame.GameScreens
         List<AnimatedProjectile> NPCProjectile = new List<AnimatedProjectile>();
         List<AnimatedSprite> NPCFightingFarmers = new List<AnimatedSprite>();
         List<AnimatedSprite> NPCPatrollingGuards = new List<AnimatedSprite>();
+        List<AnimatedSprite> NPCStationaryGuards = new List<AnimatedSprite>();
         
 
         public string Name { get { return name; } }
@@ -88,7 +91,7 @@ namespace TileGame.GameScreens
         public override void Initialize()
         {
             base.Initialize();
-            
+
             FrameAnimation down = new FrameAnimation(1, 50, 80, 0, 0);
             FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);
             FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
@@ -159,12 +162,25 @@ namespace TileGame.GameScreens
             NPC2.FullHp = 5;
             AnimatedSpriteObject.Add(NPC2);
 
-            NPC_Guard_1 = new NPC_Fighting_Stationary(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null,GameRef.random);
+            NPC_Guard_1 = new NPC_Fighting_Stationary(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null,GameRef.random, this.tileMap.CollisionLayer.Map);
             NPC_Guard_1.Origionoffset = new Vector2(25, 65);
             NPC_Guard_1.SetSpritePositionInGameWorld(new Vector2(20, 10));
             NPC_Guard_1.Life = 5;
             NPC_Guard_1.FullHp = 5;
+            NPC_Guard_1.AI.GenerateTileNodes(new Vector2(20, 10));
+            NPC_Guard_1.AI.GenerateNeighboursForTileNodes();
             AnimatedSpriteObject.Add(NPC_Guard_1);
+
+            NPC_Guard_2 = new NPC_Fighting_Stationary(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null, GameRef.random, this.tileMap.CollisionLayer.Map);
+            NPC_Guard_2.Origionoffset = new Vector2(25, 65);
+            NPC_Guard_2.SetSpritePositionInGameWorld(new Vector2(30, 11));
+            NPC_Guard_2.Life = 5;
+            NPC_Guard_2.FullHp = 5;
+            NPC_Guard_2.AI.GenerateTileNodes(new Vector2(30, 11));
+            NPC_Guard_2.AI.GenerateNeighboursForTileNodes();
+            AnimatedSpriteObject.Add(NPC_Guard_2);
+
+
 
             for (int i = 0; i < 15; i++ )
             {
@@ -222,7 +238,20 @@ namespace TileGame.GameScreens
         public override void Update(GameTime gameTime)
         {
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
+            //NPC_Guard_2.ElapsedSearch += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            //NPC_Guard_1.ElapsedSearch += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            //try with AI
             NPC_Guard_1.SetVectorTowardsTargetAndStartAndCheckAggro(player);
+            NPC_Guard_2.SetVectorTowardsTargetAndStartAndCheckAggro(player);
+            if(NPC_Guard_1.Aggro)
+            {
+                NPC_Guard_1.PlayerPosition = player.Origin;           
+            }
+            if(NPC_Guard_2.Aggro)
+            {
+                NPC_Guard_2.PlayerPosition = player.Origin;
+            }
+
             foreach(NPC_Fighting_Patrolling npc in NPCPatrollingGuards)
             {
                 npc.SetVectorTowardsTargetAndStartAndCheckAggro(player);

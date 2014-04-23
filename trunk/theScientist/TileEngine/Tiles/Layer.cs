@@ -17,7 +17,10 @@ namespace TileEngine.Tiles
         protected List<Texture2D> tileTextures = new List<Texture2D>();
 
         float alpha = 1f;
-
+        public int[,] Map
+        {
+            get { return map; }
+        }
         public float Alpha
         {
             get { return alpha; }
