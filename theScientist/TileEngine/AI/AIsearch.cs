@@ -44,10 +44,10 @@ namespace TileEngine.AI
         }
         public void GenerateTileNodes(Vector2 Position)
         {
-            int topY = (int)Position.Y + 30;
-            int bottomY = (int)Position.Y - 30;
-            int topX = (int)Position.X + 30;
-            int bottomX = (int)Position.X - 30;
+            int topY = (int)Position.Y + 20;
+            int bottomY = (int)Position.Y - 20;
+            int topX = (int)Position.X + 20;
+            int bottomX = (int)Position.X - 20;
             if (bottomX < 0)
                 bottomX = 0;
             if (bottomY < 0)

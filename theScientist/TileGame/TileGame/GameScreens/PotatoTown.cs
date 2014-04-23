@@ -191,13 +191,15 @@ namespace TileGame.GameScreens
 
 
 
-            for (int i = 0; i < 15; i++ )
+            for (int i = 0; i < 5; i++ )
             {
-                NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null, GameRef.random);
+                NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/Bjorn_Try_Picture"), null, GameRef.random,this.tileMap.CollisionLayer.Map);
                 NPC_Patroller.Origionoffset = new Vector2(25, 65);
                 NPC_Patroller.SetSpritePositionInGameWorld(new Vector2(22 + i, 50));
                 NPC_Patroller.Life = 5;
                 NPC_Patroller.FullHp = 5;
+                NPC_Patroller.AI.GenerateTileNodes(new Vector2(22 + i, 50));
+                NPC_Patroller.AI.GenerateNeighboursForTileNodes();
                 AnimatedSpriteObject.Add(NPC_Patroller);
                 NPCPatrollingGuards.Add(NPC_Patroller);
             }
@@ -285,6 +287,8 @@ namespace TileGame.GameScreens
             foreach(NPC_Fighting_Patrolling npc in NPCPatrollingGuards)
             {
                 npc.SetVectorTowardsTargetAndStartAndCheckAggro(player);
+                if (npc.Aggro)
+                    npc.PlayerPosition = player.Origin;
             }
             
             //NPC_Patroller_1.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(NPC_Patroller_1, NPC_Patroller_1.Motion, this);
