@@ -826,12 +826,12 @@ namespace TileGame.GameScreens
 
         public void PlayerShowTextBubble(NPC_Neutral_Townsfolk npc)
         {
-            textBubble.npc = npc;
-            textBubble.Enabled = true;
-            textBubble.Visible = true;
             npc.TextBubble();
             textBubble.conversation = npc.text;
             textBubble.Text = npc.text.Text;
+            textBubble.npcList.Add(npc);
+            textBubble.Enabled = true;
+            textBubble.Visible = true;
             bubbleList.Add(textBubble);
             npc.ShowingBubble = true;
         }
@@ -840,7 +840,7 @@ namespace TileGame.GameScreens
         {
             textBubble.Visible = false;
             textBubble.Enabled = false;
-            textBubble.npc = null;
+            textBubble.npcList.Remove(npc);
             bubbleList.Remove(textBubble);
             npc.ShowingBubble = false;
         }

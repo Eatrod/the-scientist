@@ -17,7 +17,7 @@ namespace XtheSmithLibrary.Controls
         #region Field Region
 
         private string text;
-        public NPC_Neutral npc;
+        public List<NPC_Neutral> npcList;
         public PlayerCharacter player;
         public Conversation conversation;
         public static char[] NewLine = { '\r', '\n' };
@@ -40,6 +40,7 @@ namespace XtheSmithLibrary.Controls
         #region Constructor Region
         public TextBubble(Texture2D texture, Rectangle rectangle, string text, SpriteFont font) : base(texture, rectangle)
         {
+            npcList = new List<NPC_Neutral>();
             tabStop = false;
             this.text = text;
             this.rectangle = rectangle;
@@ -54,15 +55,18 @@ namespace XtheSmithLibrary.Controls
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            SetPosition(new Vector2(npc.Position.X+20,npc.Position.Y-35));
-            rectangle.Width = 150;
-            rectangle.Height = 150;
-            base.Draw(spriteBatch);
-            StringBuilder stringBuilder = new StringBuilder();
-            WrapWord(new StringBuilder(text), stringBuilder, SpriteFont, rectangle);
-            Text = stringBuilder.ToString();
-            //spriteBatch.Draw(texture, rectangle, Color.White);
-            spriteBatch.DrawString(SpriteFont, Text, new Vector2(npc.Position.X+24,npc.Position.Y-35), Color.Black);
+            foreach (var npc in npcList)
+            {
+                SetPosition(new Vector2(npc.Position.X+20,npc.Position.Y-35));
+                rectangle.Width = 150;
+                rectangle.Height = 150;
+                base.Draw(spriteBatch);
+                StringBuilder stringBuilder = new StringBuilder();
+                WrapWord(new StringBuilder(text), stringBuilder, SpriteFont, rectangle);
+                Text = stringBuilder.ToString();
+                //spriteBatch.Draw(texture, rectangle, Color.White);
+                spriteBatch.DrawString(SpriteFont, Text, new Vector2(npc.Position.X+24,npc.Position.Y-35), Color.Black);
+            }
         }
 
 
