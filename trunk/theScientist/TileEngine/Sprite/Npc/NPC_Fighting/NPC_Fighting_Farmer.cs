@@ -61,7 +61,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.chargeDamage = 5;
             this.elapsedAggro = 0;
             this.elapsedDirection = 0;
-            this.delayAggro = 2000f;
+            this.delayAggro = 1000f;
             this.aggro = false;
             this.collided = false;
             this.random = random;

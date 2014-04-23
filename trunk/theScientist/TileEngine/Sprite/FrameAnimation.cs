@@ -8,7 +8,7 @@ namespace TileEngine.Sprite
         Rectangle[] frames;
         int currentFrame = 0;
 
-        float frameLength = .5f;
+        float frameLength = .35f;
         float timer = 0;
 
         public int FramesPerSeconds

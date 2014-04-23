@@ -37,8 +37,14 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             set { motion = value; }
             
         }
-        public NPC_Fighting_Patrolling(Texture2D texture, Script script, Random random) :base(texture,script)
+        public NPC_Fighting_Patrolling(Texture2D texture, Script script, Random random, int[,] Map) :base(texture,script,Map)
         {
+            this.OldPosition = Vector2.Zero;
+            this.EndPosition = Vector2.Zero;
+            this.ElapsedSearch = 10001.0f;
+            this.DelaySearch = 1000f;
+            this.Time2 = 0.0f;
+
             this.collided = false;
             this.random = random;
             this.direction = 0;
@@ -80,7 +86,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
         }
         public override void Update(GameTime gameTime)
-        {         
+        {
+            this.ElapsedSearch += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (StartingFlag)
             {
                 this.StartingPosition = Position;
@@ -98,9 +105,24 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
             if (Aggro)
             {
-                this.speed = 0.7f;
-                Position += VectorTowardsTarget * speed;
-                UpdateSpriteAnimation(VectorTowardsTarget);
+                if (Vector2.Distance(this.Origin, this.EndPosition) < 10)
+                {
+                    this.ElapsedSearch = 10001f;
+                }
+                if (this.ElapsedSearch > this.DelaySearch)
+                {
+                    this.ElapsedSearch = 0.0f;
+                    this.UsingAIAndSearchForTarget();
+                }
+                this.Time2 += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                Vector3 tempPos = this.Curve.GetPointOnCurve(this.Time2);
+                this.Position = new Vector2(tempPos.X - 25, tempPos.Y - 65);
+
+                this.UpdateSpriteAnimation(this.Position - this.OldPosition);
+                this.OldPosition = this.Position;
+                //this.speed = 0.7f;
+                //Position += VectorTowardsTarget * speed;
+                //UpdateSpriteAnimation(VectorTowardsTarget);
             }
             else if (GoingHome)
             {
