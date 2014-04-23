@@ -38,6 +38,13 @@ Tiles\ChurchWall
 Tiles\ChurchWindowLeftLower
 Tiles\ChurchWindowLeftUpper
 Tiles\DirtPath
+Tiles\RoadHMid1
+Tiles\RoadHBot1
+Tiles\RoadHBot2
+Tiles\RoadVBot1
+Tiles\RoadVMid1
+Tiles\RoadHMid2
+Tiles\RoadVBot2
 
 [Properties]
 Alpha = 1
