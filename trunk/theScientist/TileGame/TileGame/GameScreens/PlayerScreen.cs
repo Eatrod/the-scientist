@@ -83,6 +83,7 @@ namespace TileGame.GameScreens
 
         //List<AnimatedSprite> npcs = new List<AnimatedSprite>();
         protected List<BaseSprite> renderList = new List<BaseSprite>();
+        protected List <TextBubble> bubbleList = new List<TextBubble>();
 
         Comparison<BaseSprite> renderSort = new Comparison<BaseSprite>(renderSpriteCompare);
 
@@ -205,7 +206,7 @@ namespace TileGame.GameScreens
             rectangle = new Rectangle(0, GraphicsDevice.Viewport.Height - 100, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             dialogBox = new DialogBox(Content.Load<Texture2D>("GUI/DialogPlaceholder"), rectangle, "");
 
-            textBubble = new TextBubble(Content.Load<Texture2D>("GUI/SpeechBubble"), rectangle, "");
+            textBubble = new TextBubble(Content.Load<Texture2D>("GUI/SpeechBubble"), rectangle, "", Content.Load<SpriteFont>("Fonts/BubbleFont"));
 
             gateDict = new Dictionary<string, int>();
             for (int i = 0; i < 10; i++)
@@ -636,6 +637,11 @@ namespace TileGame.GameScreens
             foreach (BaseSprite sprite in renderList)
                 sprite.Draw(spriteBatch);
 
+            foreach (var textBubble in bubbleList)
+            {
+                textBubble.Draw(spriteBatch);
+            }
+
             foreach (AnimatedSprite sprite in playerprojectiles)
             {
                 sprite.Draw(spriteBatch);
@@ -826,7 +832,17 @@ namespace TileGame.GameScreens
             npc.TextBubble();
             textBubble.conversation = npc.text;
             textBubble.Text = npc.text.Text;
-            ControlManager.Add(textBubble);
+            bubbleList.Add(textBubble);
+            npc.ShowingBubble = true;
+        }
+
+        public void PlayerHideTextBubble(NPC_Neutral_Townsfolk npc)
+        {
+            textBubble.Visible = false;
+            textBubble.Enabled = false;
+            textBubble.npc = null;
+            bubbleList.Remove(textBubble);
+            npc.ShowingBubble = false;
         }
 
         public void PlayerStartConversation(NPC_Story npc)

@@ -41,6 +41,11 @@ namespace XtheSmithLibrary.Controls
 
         #region Constructors
 
+        public PictureBox()
+        {
+            
+        }
+
         public PictureBox(Texture2D image, Rectangle destination)
         {
             Image = image;
@@ -64,6 +69,8 @@ namespace XtheSmithLibrary.Controls
         { }
         public override void Draw(SpriteBatch spriteBatch)
         {
+            if (this.image == null)
+                return;
             spriteBatch.Draw(image, destRect, sourceRect, Color);
         }
         public override void HandleInput(PlayerIndex playerIndex)

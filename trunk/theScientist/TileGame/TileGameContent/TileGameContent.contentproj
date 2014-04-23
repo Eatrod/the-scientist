@@ -198,6 +198,12 @@
       <Processor>FontDescriptionProcessor</Processor>
       <SubType>Designer</SubType>
     </None>
+    <Compile Include="Fonts\BubbleFont.spritefont">
+      <SubType>Designer</SubType>
+      <Name>BubbleFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="Layers\Demo1.layer">
       <Name>Demo1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
