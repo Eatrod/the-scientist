@@ -31,7 +31,7 @@ namespace TileGame
         BackgroundMusic titleMusic;
         BackgroundMusic potatotownMusic;
         Dictionary<GameState, BackgroundMusic> musicStates = new Dictionary<GameState,BackgroundMusic>();
-        //public StoryProgress storyProgress = new StoryProgress();
+        public StoryProgress storyProgress = new StoryProgress();
         
 
         #endregion

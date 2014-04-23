@@ -35,7 +35,6 @@ namespace TileGame.GameScreens
         protected DialogBox dialogBox;
         protected TextBubble textBubble;
         protected NPC_Story talksTo;
-        public StoryProgress storyProgress;
         
         public Dictionary<int, bool> lockedGateDict;
         protected Dictionary<string, int> gateDict;
@@ -213,7 +212,6 @@ namespace TileGame.GameScreens
             {
                 gateDict["G" + i.ToString()] = 40 + i;
             }
-            storyProgress = new StoryProgress();
             activeItemBackground = Content.Load<Texture2D>(@"Sprite\activeItemBackground test");
             abilityBackground = Content.Load<Texture2D>(@"Sprite\abilityBackground test2");
             axeImage = Content.Load<Texture2D>(@"Sprite\Axe");
@@ -417,7 +415,7 @@ namespace TileGame.GameScreens
             {
                 if (ActiveConversation == true)
                 {
-                    dialog.NextText(this.talksTo, this.talksTo.text,player, storyProgress);
+                    dialog.NextText(this.talksTo, this.talksTo.text,player, GameRef.storyProgress);
                     dialogBox.Text = dialog.conversation.Text;
                     dialogBox.conversation = dialog.conversation;
                 }
