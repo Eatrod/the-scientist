@@ -845,11 +845,12 @@ namespace TileGame.GameScreens
             npc.ShowingBubble = false;
         }
 
-        public void PlayerStartConversation(NPC_Story npc)
+        public void PlayerStartConversation(NPC_Story npc, List<NPC_Story> npclist)
         {
             this.talksTo = npc;
             dialogBox.player = player;
             dialogBox.npc = npc;
+            dialogBox.npcStoryList = npclist;
             ActiveConversation = true;
             dialogBox.Enabled = true;
             dialogBox.Visible = true;

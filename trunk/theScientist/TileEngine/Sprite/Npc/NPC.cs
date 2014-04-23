@@ -5,7 +5,7 @@ namespace TileEngine.Sprite.Npc
 {
     public class NPC : CharacterSprite
     {
-        protected String NPCName { get; set; }
+        public String NPCName { get; set; }
         protected String Location { get; set; }
         protected Script script;
 

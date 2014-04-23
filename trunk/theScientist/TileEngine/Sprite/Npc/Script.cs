@@ -113,6 +113,7 @@ namespace TileEngine.Sprite.Npc
                 method = typeof (PlayerCharacter).GetMethod(methodName);
                 this.invoker = "Player";
             }
+
             this.parameters = parameters;
         }
 

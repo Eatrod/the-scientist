@@ -203,24 +203,29 @@ namespace TileGame.GameScreens
                 NPCFightingFarmers.Add(NPC_Farmer);
 
             }
-
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/npc1"), Content.Load<Texture2D>("CharacterPotraits/pimp-bender"), "Jack");
-            npcstory.Origionoffset = new Vector2(25, 65);
-            npcstory.SetSpritePositionInGameWorld(new Vector2(16, 16));
-            AnimatedSpriteObject.Add(npcstory);
-            NpcStoryList.Add(npcstory);
-
             npcStoryAsterix = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"), "Asterix");
             npcStoryAsterix.Origionoffset = new Vector2(25, 65);
             npcStoryAsterix.SetSpritePositionInGameWorld(new Vector2(64, 11));//(20, 17));
             AnimatedSpriteObject.Add(npcStoryAsterix);
             NpcStoryList.Add(npcStoryAsterix);
 
-            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
-            npcNeutral.Origionoffset = new Vector2(25,65);
-            npcNeutral.SetSpritePositionInGameWorld(new Vector2(68, 30));
-            AnimatedSpriteObject.Add(npcNeutral);
-            NpcNeutralList.Add(npcNeutral);
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/Jackie"), "Jack");
+            npcstory.Origionoffset = new Vector2(25, 65);
+            npcstory.SetSpritePositionInGameWorld(new Vector2(75, 30));
+            AnimatedSpriteObject.Add(npcstory);
+            NpcStoryList.Add(npcstory);
+
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/HumanNPCDartagnan"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/john"), "John");
+            npcstory.Origionoffset = new Vector2(25,65);
+            npcstory.SetSpritePositionInGameWorld(new Vector2(77, 30));
+            AnimatedSpriteObject.Add(npcstory);
+            NpcStoryList.Add(npcstory);
+
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/HumanNPCDartagnan"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/johnny"), "Johnny");
+            npcstory.Origionoffset = new Vector2(25, 65);
+            npcstory.SetSpritePositionInGameWorld(new Vector2(79, 30));
+            AnimatedSpriteObject.Add(npcstory);
+            NpcStoryList.Add(npcstory);
 
             npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
             npcNeutral.Origionoffset = new Vector2(25, 65);
@@ -295,7 +300,7 @@ namespace TileGame.GameScreens
                     {
                         if (ActiveConversation == false)
                         {
-                                PlayerStartConversation(npc);
+                            PlayerStartConversation(npc, NpcStoryList);
                         }
                     }
                 }

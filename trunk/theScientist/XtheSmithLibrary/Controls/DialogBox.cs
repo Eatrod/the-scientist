@@ -19,6 +19,7 @@ namespace XtheSmithLibrary.Controls
 
         private string text;
         public NPC_Story npc;
+        public List<NPC_Story> npcStoryList;
         public PlayerCharacter player;
         public Conversation conversation;
         public static char[] NewLine = { '\r', '\n' };
@@ -102,11 +103,14 @@ namespace XtheSmithLibrary.Controls
             }
 
             Rectangle pictureRectangle = new Rectangle(0, rectangle.Y, 200, 100);
-            if (npc.picture != null && "Ignazio" != whoSaid(Text))
-                spriteBatch.Draw(npc.picture,pictureRectangle, Color.White);
-            else
+            foreach (var npc in npcStoryList)
             {
-                spriteBatch.Draw(player.portrait, pictureRectangle, Color.White);
+                if (whoSaid(Text) == npc.NPCName)
+                    spriteBatch.Draw(npc.picture, pictureRectangle, Color.White);
+                else if (whoSaid(Text) == "Ignazio")
+                {
+                    spriteBatch.Draw(player.portrait, pictureRectangle, Color.White);
+                }
             }
         }
 
@@ -143,8 +147,8 @@ namespace XtheSmithLibrary.Controls
                     target.Remove(lastWhiteSpace + NewLine.Length, 1);
                 }
             }
-        } 
-        
+        }
+
         #endregion
     }
 }
