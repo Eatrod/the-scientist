@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using TileEngine.Sprite;
 using TileEngine.Sprite.Npc;
@@ -21,6 +23,7 @@ namespace XtheSmithLibrary.Controls
         public static char[] NewLine = { '\r', '\n' };
         private Rectangle rectangle;
         private StringBuilder stringBuilder;
+        private Texture2D texture;
 
         #endregion
 
@@ -35,11 +38,13 @@ namespace XtheSmithLibrary.Controls
         #endregion
 
         #region Constructor Region
-        public TextBubble(Texture2D texture, Rectangle rectangle, string text) : base(texture, rectangle)
+        public TextBubble(Texture2D texture, Rectangle rectangle, string text, SpriteFont font) : base(texture, rectangle)
         {
             tabStop = false;
             this.text = text;
             this.rectangle = rectangle;
+            SpriteFont = font;
+            this.texture = texture;
         }
 
         #endregion
@@ -48,13 +53,15 @@ namespace XtheSmithLibrary.Controls
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //rectangle.X = npc.Position.X;
-            //rectangle.Y = npc.Position.Y;
+            SetPosition(new Vector2(npc.Position.X+30,npc.Position.Y-150));
+            rectangle.Width = 150;
+            rectangle.Height = 150;
             base.Draw(spriteBatch);
             StringBuilder stringBuilder = new StringBuilder();
             WrapWord(new StringBuilder(text), stringBuilder, SpriteFont, rectangle);
             Text = stringBuilder.ToString();
-            spriteBatch.DrawString(SpriteFont, Text, new Vector2(npc.Position.X, npc.Position.Y), Color.Black);
+            //spriteBatch.Draw(texture, rectangle, Color.White);
+            spriteBatch.DrawString(SpriteFont, Text, new Vector2(npc.Position.X+75,npc.Position.Y-140), Color.Black);
         }
 
 
@@ -75,7 +82,7 @@ namespace XtheSmithLibrary.Controls
                 }
                 target.Append(character);
                 currentTargetSize = font.MeasureString(target);
-                if (currentTargetSize.X > bounds.Width - 200)
+                if (currentTargetSize.X > bounds.Width - 50)
                 {
                     target.Insert(lastWhiteSpace, NewLine);
                     target.Remove(lastWhiteSpace + NewLine.Length, 1);

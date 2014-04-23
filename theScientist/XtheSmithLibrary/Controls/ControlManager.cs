@@ -69,7 +69,7 @@ namespace XtheSmithLibrary.Controls
                 NextControl();
         }
         public void Draw(SpriteBatch spriteBatch)
-        {
+        {          
             foreach (Control c in this)
             {
                 if (c.Visible)
