@@ -77,14 +77,16 @@ namespace TileEngine.Sprite.Npc
             
         }
 
-        public void Invoke(NPC_Story.NPC_Story npc, PlayerCharacter player)
+        public void Invoke(NPC_Story.NPC_Story npc, PlayerCharacter player, StoryProgress story)
         {
             foreach (var action in actions)
             {
-                if(action.GetInvoker() == "NPC")
+                if (action.GetInvoker() == "NPC")
                     action.InvokeNPC(npc);
-                else if(action.GetInvoker() == "Player")
+                else if (action.GetInvoker() == "Player")
                     action.InvokePlayer(player);
+                else if (action.GetInvoker() == "Story" && story != null)
+                    action.InvokeStory(story);
 
             }
         }
@@ -113,6 +115,11 @@ namespace TileEngine.Sprite.Npc
                 method = typeof (PlayerCharacter).GetMethod(methodName);
                 this.invoker = "Player";
             }
+            else if (typeof(StoryProgress).GetMethod(methodName) != null)
+            {
+                method = typeof (StoryProgress).GetMethod(methodName);
+                this.invoker = "Story";
+            }
 
             this.parameters = parameters;
         }
@@ -125,6 +132,11 @@ namespace TileEngine.Sprite.Npc
         public void InvokePlayer(PlayerCharacter player)
         {
             method.Invoke(player, parameters);
+        }
+
+        public void InvokeStory(StoryProgress progress)
+        {
+            method.Invoke(progress, parameters);
         }
 
     }

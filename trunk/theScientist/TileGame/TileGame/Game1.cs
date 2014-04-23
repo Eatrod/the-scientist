@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework.Media;
 using XtheSmithLibrary;
 using TileGame.GameScreens;
 using TileGame.Music;
+using TileEngine;
 
 namespace TileGame
 {
@@ -30,7 +31,7 @@ namespace TileGame
         BackgroundMusic titleMusic;
         BackgroundMusic potatotownMusic;
         Dictionary<GameState, BackgroundMusic> musicStates = new Dictionary<GameState,BackgroundMusic>();
-        StoryProgress storyProgress = new StoryProgress();
+        //public StoryProgress storyProgress = new StoryProgress();
         
 
         #endregion

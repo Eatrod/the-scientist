@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using XtheSmithLibrary;
 using XtheSmithLibrary.Controls;
 using TileGame;
+using TileEngine;
 
 namespace TileGame.GameScreens
 {
