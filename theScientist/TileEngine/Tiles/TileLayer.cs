@@ -220,5 +220,40 @@ namespace TileEngine.Tiles
             }
             batch.End();
         }
+
+        public void DrawToShadowMap(SpriteBatch batch, Point min, Point max, Vector2 place)
+        {
+            batch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend,
+                null, null, null, null, Matrix.CreateTranslation(new Vector3(-place.X,-place.Y,0)));
+
+            min.X = (int)Math.Max(min.X, 0);
+            min.Y = (int)Math.Max(min.Y, 0);
+            max.X = (int)Math.Min(max.X, Width);
+            max.Y = (int)Math.Min(max.Y, Height);
+
+            for (int x = min.X; x < max.X; x++)
+            {
+                for (int y = min.Y; y < max.Y; y++)
+                {
+                    int textureIndex = map[y, x];
+
+                    if (textureIndex == -1)
+                        continue;
+                    else
+                    {
+                        Texture2D texture = tileTextures[textureIndex];
+                        batch.Draw(
+                            texture,
+                            new Rectangle(
+                                x * Engine.TileWidth,
+                                y * Engine.TileHeight,
+                                Engine.TileWidth,
+                                Engine.TileHeight),
+                            new Color(new Vector4(1f, 1f, 1f, Alpha)));
+                    }
+                }
+            }
+            batch.End();
+        }
     }
 }

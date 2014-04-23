@@ -56,5 +56,18 @@ namespace TileEngine.Tiles
                 layer.Draw(spriteBatch, camera, min,max);
             }
         }
+
+        public void DrawToShadowMap(SpriteBatch spriteBatch, Vector2 place)
+        {
+
+            Point min = Engine.ConvertPostionToCell(place);
+            Point max = new Point(0,0);
+
+            foreach (TileLayer layer in Layers)
+            {
+                max = Engine.ConvertPostionToCell(place + new Vector2(2024, 2024));
+                layer.DrawToShadowMap(spriteBatch, min, max, place);
+            }
+        }
     }
 }

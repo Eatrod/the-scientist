@@ -29,6 +29,13 @@ namespace TileGame.GameScreens
         
         #region Field Region
 
+        //BF
+        protected Texture2D shadowMap;
+        PictureBox miniMap;
+        PictureBox backgroundToMinimap;
+        RenderTarget2D renderTarget;
+        //BF
+
         //bool gate1Locked = true;
         //bool gate2Locked = true;
         protected PlayerScreen screen;
@@ -174,7 +181,9 @@ namespace TileGame.GameScreens
             ContentManager Content = Game.Content;
 
             base.LoadContent();
-                       
+
+            
+       
             if(player == null)
             {
                 player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/playerboxAnimation"), Content.Load<Texture2D>("CharacterPotraits/Assassins-Creed-4"));
@@ -241,6 +250,35 @@ namespace TileGame.GameScreens
                 flashLength[i] = 0f;
             }
             //--
+
+            //BF
+            PresentationParameters pp = GraphicsDevice.PresentationParameters;
+            renderTarget = new RenderTarget2D(GraphicsDevice,
+                2048, 2048, false,
+                GraphicsDevice.DisplayMode.Format, DepthFormat.Depth24);
+            //BF
+            //BF
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer,
+                Color.DarkSlateBlue, 1.0f, 0);
+            tileMap.DrawToShadowMap(spriteBatch, player.Position);
+            GraphicsDevice.SetRenderTarget(null);
+            shadowMap = (Texture2D)renderTarget;
+            //BF
+            miniMap = new PictureBox(shadowMap, new Rectangle(
+                GraphicsDevice.Viewport.Width - 205, GraphicsDevice.Viewport.Height - 205,
+                200, 200));
+            backgroundToMinimap = new PictureBox(Content.Load<Texture2D>(@"Sprite\backgroundToMinimap"),
+                new Rectangle( GraphicsDevice.Viewport.Width - 210, GraphicsDevice.Viewport.Height - 210,
+                    210, 210));
+            miniMap.Visible = false;
+            backgroundToMinimap.Visible = false;
+            ControlManager.Add(backgroundToMinimap);
+            ControlManager.Add(miniMap);
+            
+            //BF
+            //BF
+            
         }
         public override void Update(GameTime gameTime)
         {
@@ -283,6 +321,44 @@ namespace TileGame.GameScreens
                 if (InputHandler.KeyDown(Keys.Right))
                     motion.X += 2;
             }
+
+            //BF, draw the tilescene to a shadowmap for minimap
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer,
+                Color.Black, 1.0f, 0);
+            tileMap.DrawToShadowMap(spriteBatch, player.Position - new Vector2(1024, 1024));
+            GraphicsDevice.SetRenderTarget(null);
+            shadowMap = (Texture2D)renderTarget;
+            //BF
+            miniMap.Image = shadowMap;
+
+            //BF
+            if(InputHandler.KeyReleased(Keys.M))
+            {
+                //BF
+                //GraphicsDevice.SetRenderTarget(renderTarget);
+                //GraphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer,
+                //    Color.Black, 1.0f, 0);
+                //tileMap.DrawToShadowMap(spriteBatch, player.Position - new Vector2(1024,1024));
+                //GraphicsDevice.SetRenderTarget(null);
+                //shadowMap = (Texture2D)renderTarget;
+                ////BF
+                //miniMap.Image = shadowMap;
+                //ControlManager.Add(miniMap);
+                //BF
+                //BF
+                if (miniMap.Visible == false)
+                {
+                    miniMap.Visible = true;
+                    backgroundToMinimap.Visible = true;
+                }
+                else
+                {
+                    miniMap.Visible = false;
+                    backgroundToMinimap.Visible = false;
+                }
+            }
+            //BF
 
 
             if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >=0))
@@ -655,6 +731,7 @@ namespace TileGame.GameScreens
             DrawItemHUD();
             //Draws active conversation
             ControlManager.Draw(spriteBatch);
+
 
             spriteBatch.End();
             base.Draw(gameTime);
