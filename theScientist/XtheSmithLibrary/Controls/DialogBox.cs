@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using TileEngine;
 using TileEngine.Sprite;
 using TileEngine.Sprite.Npc;
 using TileEngine.Sprite.Npc.NPC_Story;
@@ -19,6 +20,7 @@ namespace XtheSmithLibrary.Controls
 
         private string text;
         public NPC_Story npc;
+        public StoryProgress story;
         public List<NPC_Story> npcStoryList;
         public PlayerCharacter player;
         public Conversation conversation;
@@ -74,7 +76,7 @@ namespace XtheSmithLibrary.Controls
 
             if (newState.IsKeyDown(Keys.Space) && lastState.IsKeyUp(Keys.Space))
             {
-                conversation.Handlers[currentHandler].Invoke(npc,player);
+                conversation.Handlers[currentHandler].Invoke(npc,player, story);
                 currentHandler = 0;
             }
 
