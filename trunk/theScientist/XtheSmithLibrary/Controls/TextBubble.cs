@@ -44,6 +44,7 @@ namespace XtheSmithLibrary.Controls
             this.text = text;
             this.rectangle = rectangle;
             SpriteFont = font;
+            font.LineSpacing = 12;
             this.texture = texture;
         }
 
@@ -53,7 +54,7 @@ namespace XtheSmithLibrary.Controls
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            SetPosition(new Vector2(npc.Position.X+30,npc.Position.Y-150));
+            SetPosition(new Vector2(npc.Position.X+20,npc.Position.Y-35));
             rectangle.Width = 150;
             rectangle.Height = 150;
             base.Draw(spriteBatch);
@@ -61,7 +62,7 @@ namespace XtheSmithLibrary.Controls
             WrapWord(new StringBuilder(text), stringBuilder, SpriteFont, rectangle);
             Text = stringBuilder.ToString();
             //spriteBatch.Draw(texture, rectangle, Color.White);
-            spriteBatch.DrawString(SpriteFont, Text, new Vector2(npc.Position.X+75,npc.Position.Y-140), Color.Black);
+            spriteBatch.DrawString(SpriteFont, Text, new Vector2(npc.Position.X+24,npc.Position.Y-35), Color.Black);
         }
 
 
@@ -82,7 +83,7 @@ namespace XtheSmithLibrary.Controls
                 }
                 target.Append(character);
                 currentTargetSize = font.MeasureString(target);
-                if (currentTargetSize.X > bounds.Width - 50)
+                if (currentTargetSize.X > bounds.Width - 40)
                 {
                     target.Insert(lastWhiteSpace, NewLine);
                     target.Remove(lastWhiteSpace + NewLine.Length, 1);
