@@ -171,7 +171,7 @@ namespace TileGame.GameScreens
             NPC2.FullHp = 5;
             AnimatedSpriteObject.Add(NPC2);
 
-            NPC_Guard_1 = new NPC_Fighting_Stationary(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null,GameRef.random, this.tileMap.CollisionLayer.Map);
+            NPC_Guard_1 = new NPC_Fighting_Stationary(Content.Load<Texture2D>("Sprite/Bjorn_Try_Farmer"), null,GameRef.random, this.tileMap.CollisionLayer.Map);
             NPC_Guard_1.Origionoffset = new Vector2(25, 65);
             NPC_Guard_1.SetSpritePositionInGameWorld(new Vector2(20, 10));
             NPC_Guard_1.Life = 5;
@@ -180,7 +180,7 @@ namespace TileGame.GameScreens
             NPC_Guard_1.AI.GenerateNeighboursForTileNodes();
             AnimatedSpriteObject.Add(NPC_Guard_1);
 
-            NPC_Guard_2 = new NPC_Fighting_Stationary(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null, GameRef.random, this.tileMap.CollisionLayer.Map);
+            NPC_Guard_2 = new NPC_Fighting_Stationary(Content.Load<Texture2D>("Sprite/Bjorn_Try_Farmer"), null, GameRef.random, this.tileMap.CollisionLayer.Map);
             NPC_Guard_2.Origionoffset = new Vector2(25, 65);
             NPC_Guard_2.SetSpritePositionInGameWorld(new Vector2(30, 11));
             NPC_Guard_2.Life = 5;
