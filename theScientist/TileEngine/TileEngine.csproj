@@ -63,6 +63,9 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\AIsearch.cs" />
+    <Compile Include="AI\Curve2D.cs" />
+    <Compile Include="AI\TileNode.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Dialog\Dialog.cs" />
     <Compile Include="Sprite\AnimatedProjectile.cs" />

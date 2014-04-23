@@ -53,6 +53,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.GoingHome = false;
             this.elapsedDirection = 0.0f;
             this.delayDirection = 3000f;
+            
 
             FrameAnimation down = new FrameAnimation(1, 50, 80, 0, 0);
             FrameAnimation left = new FrameAnimation(1, 50, 80, 0, 80);
@@ -74,6 +75,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.Animations.Add("WalkLeft", walkLeft);
             this.Animations.Add("WalkUp", walkUp);
             this.Animations.Add("WalkDown", walkDown);
+            
 
 
         }
@@ -141,31 +143,31 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
         }
 
-        private void UpdateSpriteAnimation(Vector2 motion)
-        {
+        //private void UpdateSpriteAnimation(Vector2 motion)
+        //{
 
-            float motionAngle = (float)Math.Atan2(motion.Y, motion.X);
+        //    float motionAngle = (float)Math.Atan2(motion.Y, motion.X);
 
-            if (motionAngle >= -MathHelper.PiOver4 && motionAngle <= MathHelper.PiOver4)
-            {
-                CurrentAnimationName = "WalkRight"; //Right
-                //motion = new Vector2(1f, 0f);
-            }
-            else if (motionAngle >= MathHelper.PiOver4 && motionAngle <= 3f * MathHelper.PiOver4)
-            {
-                CurrentAnimationName = "WalkDown"; //Down
-                //motion = new Vector2(0f, 1f);
-            }
-            else if (motionAngle <= -MathHelper.PiOver4 && motionAngle >= -3f * MathHelper.PiOver4)
-            {
-                CurrentAnimationName = "WalkUp"; // Up
-                //motion = new Vector2(0f, -1f);
-            }
-            else
-            {
-                CurrentAnimationName = "WalkLeft"; //Left
-                //motion = new Vector2(-1f, 0f);
-            }
-        }
+        //    if (motionAngle >= -MathHelper.PiOver4 && motionAngle <= MathHelper.PiOver4)
+        //    {
+        //        CurrentAnimationName = "WalkRight"; //Right
+        //        //motion = new Vector2(1f, 0f);
+        //    }
+        //    else if (motionAngle >= MathHelper.PiOver4 && motionAngle <= 3f * MathHelper.PiOver4)
+        //    {
+        //        CurrentAnimationName = "WalkDown"; //Down
+        //        //motion = new Vector2(0f, 1f);
+        //    }
+        //    else if (motionAngle <= -MathHelper.PiOver4 && motionAngle >= -3f * MathHelper.PiOver4)
+        //    {
+        //        CurrentAnimationName = "WalkUp"; // Up
+        //        //motion = new Vector2(0f, -1f);
+        //    }
+        //    else
+        //    {
+        //        CurrentAnimationName = "WalkLeft"; //Left
+        //        //motion = new Vector2(-1f, 0f);
+        //    }
+        //}
     }
 }
