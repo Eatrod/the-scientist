@@ -60,9 +60,9 @@ namespace TileGame
         #endregion
         
         #region Screen Field Region
-       
-        const int screenWidth = 1248; //1024
-        const int screenHeight = 768; //768
+
+        const int screenWidth = 1920; //1024 //1248 //1920
+        const int screenHeight = 1080; //768 //1080
         public readonly Rectangle ScreenRectangle;
 
         #endregion

@@ -93,7 +93,7 @@ namespace TileGame.GameScreens
         public override void Initialize()
         {
             base.Initialize();
-            
+
             FrameAnimation down = new FrameAnimation(1, 50, 80, 0, 0);
             FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);
             FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
@@ -248,9 +248,16 @@ namespace TileGame.GameScreens
                 new Vector2(90, 40)));
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(90, 43)));
+            SpriteObject.Add(new BelladonnaSprite(Content.Load<Texture2D>("Sprite/Belladonna"),
+                new Vector2(85, 43))); //new Vector2(7, 33)));
+            SpriteObject.Add(new ImmortuiSprite(Content.Load<Texture2D>("Sprite/Immortui"),
+                new Vector2(87, 45))); //just testing the immortui mushroom
+            SpriteObject.Add(new ImmortuiSprite(Content.Load<Texture2D>("Sprite/Immortui big"),
+                new Vector2(85, 45))); //just testing the big immortui mushroom
+
             //SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/multi_iron_ore"),
-                //new Vector2(92, 43)));
-            if(multiIronOre == null)
+            //    new Vector2(92, 43)));
+            if (multiIronOre == null)
             {
                 multiIronOre = new MultiIronSprite(Content.Load<Texture2D>("Sprite/multi_iron_ore"));
                 multiIronOre.SetSpritePositionInGameWorld(new Vector2(92, 43));
@@ -343,8 +350,8 @@ namespace TileGame.GameScreens
                 {
                     if (npc.ShowingBubble == false)
                     {
-                    PlayerShowTextBubble(npc);
-                }
+                        PlayerShowTextBubble(npc);
+                    }
                 }
 
                 else

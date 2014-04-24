@@ -45,6 +45,26 @@ namespace TileGame.Collision
                         //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
                         break;
                     }
+
+                    if (s.GetType() == typeof(BelladonnaSprite))
+                    {
+                        SpriteObjectInGameWorld.Remove(s);
+                        renderList.Remove(s);
+                        StoryProgress.ProgressLine["belladonnaHave"] = true;
+                        
+                        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
+                        break;
+                    }
+
+                    if (s.GetType() == typeof(ImmortuiSprite))
+                    {
+                        SpriteObjectInGameWorld.Remove(s);
+                        renderList.Remove(s);
+                        StoryProgress.ProgressLine["immortuiHave"] = true;
+
+                        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
+                        break;
+                    }
                     if(s.GetType() == typeof(MultiIronSprite))
                     {
                         MultiIronSprite mis = (MultiIronSprite)s;
