@@ -16,14 +16,12 @@ namespace TileEngine.Dialog
 
         public Rectangle area = new Rectangle(0,0,500,500);
 
-        private int currentHandler = 0;
         private KeyboardState lastState;
 
         public void NextText(NPC_Story npc, Conversation conversation, PlayerCharacter player, StoryProgress story)
         {
             this.Npc = npc;
             this.conversation = conversation;
-            conversation.Handlers[currentHandler].Invoke(Npc,player, story);
         }
     }
 }

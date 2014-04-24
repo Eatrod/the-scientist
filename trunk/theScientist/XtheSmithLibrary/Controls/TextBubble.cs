@@ -72,7 +72,7 @@ namespace XtheSmithLibrary.Controls
 
         #endregion
 
-        #region Methods        
+        #region Methods
 
         public static void WrapWord(StringBuilder original, StringBuilder target, SpriteFont font, Rectangle bounds)
         {
