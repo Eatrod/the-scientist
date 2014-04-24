@@ -180,7 +180,7 @@ namespace TileGame.GameScreens
             NPC_Guard_1.AI.GenerateNeighboursForTileNodes();
             AnimatedSpriteObject.Add(NPC_Guard_1);
 
-            NPC_Guard_2 = new NPC_Fighting_Stationary(Content.Load<Texture2D>("Sprite/Bjorn_Try_Farmer"), null, GameRef.random, this.tileMap.CollisionLayer.Map);
+            NPC_Guard_2 = new NPC_Fighting_Stationary(Content.Load<Texture2D>("Sprite/Bjorn_Try_Picture"), null, GameRef.random, this.tileMap.CollisionLayer.Map);
             NPC_Guard_2.Origionoffset = new Vector2(25, 65);
             NPC_Guard_2.SetSpritePositionInGameWorld(new Vector2(30, 11));
             NPC_Guard_2.Life = 5;
@@ -193,7 +193,7 @@ namespace TileGame.GameScreens
 
             for (int i = 0; i < 5; i++ )
             {
-                NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/Bjorn_Try_Picture"), null, GameRef.random,this.tileMap.CollisionLayer.Map);
+                NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/Bjorn_Try_WitchDoctor"), null, GameRef.random,this.tileMap.CollisionLayer.Map);
                 NPC_Patroller.Origionoffset = new Vector2(25, 65);
                 NPC_Patroller.SetSpritePositionInGameWorld(new Vector2(22 + i, 50));
                 NPC_Patroller.Life = 5;
