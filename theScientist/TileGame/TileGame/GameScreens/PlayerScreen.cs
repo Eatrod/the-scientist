@@ -924,6 +924,7 @@ namespace TileGame.GameScreens
         {
             this.talksTo = npc;
             dialogBox.player = player;
+            dialogBox.story = GameRef.storyProgress;
             dialogBox.npc = npc;
             dialogBox.npcStoryList = npclist;
             ActiveConversation = true;

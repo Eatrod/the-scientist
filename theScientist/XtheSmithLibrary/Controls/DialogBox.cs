@@ -44,7 +44,7 @@ namespace XtheSmithLibrary.Controls
 
         #region Constructor Region
         public DialogBox(Texture2D texture, Rectangle rectangle, string text) : base(texture, rectangle)
-        { 
+        {
             tabStop = false;
             this.text = text;
             this.rectangle = rectangle;
