@@ -115,6 +115,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                     this.UsingAIAndSearchForTarget();
                 }
                 this.Time2 += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (this.Curve == null)
+                    return;
                 Vector3 tempPos = this.Curve.GetPointOnCurve(this.Time2);
                 this.Position = new Vector2(tempPos.X - 25, tempPos.Y - 65);
 
