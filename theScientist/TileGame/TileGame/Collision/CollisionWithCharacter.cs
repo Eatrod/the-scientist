@@ -67,6 +67,7 @@ namespace TileGame.Collision
                     }
                     if(s.GetType() == typeof(MultiIronSprite))
                     {
+                        StoryProgress.collectedAmountDict["IronOre"] += 100;
                         MultiIronSprite mis = (MultiIronSprite)s;
                         if (mis.CurrentAnimationName == "all" )
                             mis.CurrentAnimationName = "half";

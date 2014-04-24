@@ -20,11 +20,12 @@ namespace TileGame.GameScreens
         #region Field region
 
         Texture2D inventoryBackground;
-        Texture2D axeImage, swordImage, crossbowImage, BelladonnaImage, ImmortuiImage, lifePotatoImage;
+        Texture2D axeImage, swordImage, crossbowImage, BelladonnaImage, ImmortuiImage, ironOreImage;
         Texture2D inventoryCursorImage;
         int cursor_X, cursor_Y;
         int cursor_item_number;
-        Label numberOfLifePotatoes;
+        Label belladonnaLabel, immortuiLabel, ironOreLabel;
+        Label amountOfIronLabel;
         Label[] activeWeaponNumbers;
 
         #endregion
@@ -61,15 +62,32 @@ namespace TileGame.GameScreens
             inventoryCursorImage = Content.Load<Texture2D>(@"Sprite\Inventory Cursor test");
             BelladonnaImage = Content.Load<Texture2D>(@"Sprite\Belladonna");
             ImmortuiImage = Content.Load<Texture2D>(@"Sprite\Immortui big");
-            lifePotatoImage = Content.Load<Texture2D>(@"Sprite\LifePotato");
+            ironOreImage = Content.Load<Texture2D>(@"Sprite\Iron ore inv");
 
-            numberOfLifePotatoes = new Label();
+            amountOfIronLabel = new Label();
             //GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6
-            numberOfLifePotatoes.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3) + (GameRef.ScreenRectangle.Height / 6) / 3); //new Vector2(860, 200 + (140 * 3)); //1110 //860
-            numberOfLifePotatoes.Text = "";
-            numberOfLifePotatoes.Color = Color.Black;
-        
-            ControlManager.Add(numberOfLifePotatoes);
+            amountOfIronLabel.Text = "";
+            amountOfIronLabel.Color = Color.Black;
+            amountOfIronLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3) + (GameRef.ScreenRectangle.Height / 6) / 3); //new Vector2(860, 200 + (140 * 3)); //1110 //860
+            ControlManager.Add(amountOfIronLabel);
+
+            belladonnaLabel = new Label();
+            belladonnaLabel.Text = "";
+            belladonnaLabel.Color = Color.Black;
+            belladonnaLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 0, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0) + GameRef.ScreenRectangle.Height / 6);
+            ControlManager.Add(belladonnaLabel);
+
+            immortuiLabel = new Label();
+            immortuiLabel.Text = "";
+            immortuiLabel.Color = Color.Black;
+            immortuiLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0) + GameRef.ScreenRectangle.Height / 6);
+            ControlManager.Add(immortuiLabel);
+
+            ironOreLabel = new Label();
+            ironOreLabel.Text = "Iron Ore";
+            ironOreLabel.Color = Color.Black;
+            ironOreLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3) + GameRef.ScreenRectangle.Height / 6);
+            ControlManager.Add(ironOreLabel);
 
             activeWeaponNumbers = new Label[5];
             for (int i = 0; i < 5; i++)
@@ -318,18 +336,21 @@ namespace TileGame.GameScreens
                         BelladonnaImage,
                         new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2)/10, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),  //new Rectangle(750, 180 + (140 * 0), 100, 90),
                         Color.White);
+
+                belladonnaLabel.Text = "Belladonna";
             }
 
             if (StoryProgress.ProgressLine["immortuiHave"] == true)
             {
                 GameRef.spriteBatch.Draw(
                             ImmortuiImage,
-                            new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1  /*- GameRef.ScreenRectangle.Width / 15 - (GameRef.ScreenRectangle.Width / 6) / 6 - (GameRef.ScreenRectangle.Width / 6 - (GameRef.ScreenRectangle.Width / 6) / 5) * 1*/, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                            new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
                             Color.White);
+                immortuiLabel.Text = "Immortui";
             }
 
             GameRef.spriteBatch.Draw(
-                    lifePotatoImage,
+                    ironOreImage,
                     new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
                     Color.White);
 
@@ -380,7 +401,7 @@ namespace TileGame.GameScreens
                 AssignKeyToItem(Keys.D5);
             }
 
-            numberOfLifePotatoes.Text = "x " + StoryProgress.numberOfItemsDict["LifePotato"].ToString();
+            amountOfIronLabel.Text = "x " + StoryProgress.collectedAmountDict["IronOre"].ToString();
         }
 
         private void ResetKey(Keys Key)

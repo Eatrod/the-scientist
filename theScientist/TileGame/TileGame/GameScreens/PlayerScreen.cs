@@ -364,7 +364,7 @@ namespace TileGame.GameScreens
             if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >=0))
             {
 
-                NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
+                NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 3f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
                 temparrow.UpdatecurrentAnimation(motion);        
                 playerprojectiles.Add(temparrow);
                 player.Stamina -= 20f;
@@ -381,9 +381,9 @@ namespace TileGame.GameScreens
 
             if (InputHandler.KeyReleased(Keys.E) && (player.Stamina - 40 > 0)) //delay. fixas.
             {
-                NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);               
-                NormalArrowProjectile temparrow1 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);                
-                NormalArrowProjectile temparrow2 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
+                NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 3f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);               
+                NormalArrowProjectile temparrow1 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 3f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);                
+                NormalArrowProjectile temparrow2 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 3f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
 
 
 
@@ -454,7 +454,7 @@ namespace TileGame.GameScreens
 
                 else if ((player.Stamina - 20) > 0)
                 {
-                    NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
+                    NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 3f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
                     temparrow.UpdatecurrentAnimation(motion);
                     playerprojectiles.Add(temparrow);
                 player.Stamina -= 20f;
