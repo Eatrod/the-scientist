@@ -13,6 +13,8 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
         public Conversation text;
         private const int SpeakingRadius = 40;
         public bool ShowingBubble { get; set; }
+        protected float ElapsedSearch;
+        protected bool startingFlag;
 
         protected NPC_Neutral(Texture2D texture, Script script) : base(texture,script)
         {

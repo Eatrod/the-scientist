@@ -13,10 +13,18 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
     {
         public Conversation text;
         private const int SpeakingRadius = 40;
+        protected Curve curve;
 
         public NPC_Neutral_Townsfolk(Texture2D texture, Script script) : base(texture, script)
         {
+            this.ElapsedSearch = 10001.0f;
         }
+
+        public override void Update(GameTime gameTime)
+        {
+
+        }
+
 
         public bool InHearingRange(AnimatedSprite sprite)
         {

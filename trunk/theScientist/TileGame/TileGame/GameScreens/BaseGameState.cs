@@ -25,6 +25,7 @@ namespace TileGame.GameScreens
 
         #region Properties region
         #endregion
+
         #region Constructor Region
 
         public BaseGameState(Game game, GameStateManager manager)
