@@ -20,10 +20,12 @@ namespace TileGame.GameScreens
         #region Field region
 
         Texture2D inventoryBackground;
-        Texture2D axeImage, swordImage, crossbowImage;
+        Texture2D axeImage, swordImage, crossbowImage, BelladonnaImage, ImmortuiImage, lifePotatoImage;
         Texture2D inventoryCursorImage;
         int cursor_X, cursor_Y;
         int cursor_item_number;
+        Label numberOfLifePotatoes;
+        Label[] activeWeaponNumbers;
 
         #endregion
 
@@ -41,8 +43,8 @@ namespace TileGame.GameScreens
         #region XNA Method Region
         public override void Initialize()
         {
-            cursor_X = 75; 
-            cursor_Y = 175;
+            cursor_X = GameRef.ScreenRectangle.Width / 15; //GameRef.ScreenRectangle.Width / 7, GameRef.ScreenRectangle.Height / 3,
+            cursor_Y = GameRef.ScreenRectangle.Height / 5;
             cursor_item_number = 0;
 
             base.Initialize();
@@ -50,14 +52,35 @@ namespace TileGame.GameScreens
         protected override void LoadContent()
         {
             ContentManager Content = GameRef.Content;
+            base.LoadContent();
 
             inventoryBackground = Content.Load<Texture2D>(@"Backgrounds\Inventory test");
             axeImage = Content.Load<Texture2D>(@"Sprite\Axe");
             swordImage = Content.Load<Texture2D>(@"Sprite\Inv Sword test");
             crossbowImage = Content.Load<Texture2D>(@"Sprite\Bow");
             inventoryCursorImage = Content.Load<Texture2D>(@"Sprite\Inventory Cursor test");
+            BelladonnaImage = Content.Load<Texture2D>(@"Sprite\Belladonna");
+            ImmortuiImage = Content.Load<Texture2D>(@"Sprite\Immortui big");
+            lifePotatoImage = Content.Load<Texture2D>(@"Sprite\LifePotato");
 
-            base.LoadContent();
+            numberOfLifePotatoes = new Label();
+            //GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6
+            numberOfLifePotatoes.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3) + (GameRef.ScreenRectangle.Height / 6) / 3); //new Vector2(860, 200 + (140 * 3)); //1110 //860
+            numberOfLifePotatoes.Text = "";
+            numberOfLifePotatoes.Color = Color.Black;
+        
+            ControlManager.Add(numberOfLifePotatoes);
+
+            activeWeaponNumbers = new Label[5];
+            for (int i = 0; i < 5; i++)
+            {
+                activeWeaponNumbers[i] = new Label();
+                activeWeaponNumbers[i].Position = new Vector2(GameRef.ScreenRectangle.Width / 15 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * i) - (GameRef.ScreenRectangle.Width / 15)/4, GameRef.ScreenRectangle.Height / 12);
+                activeWeaponNumbers[i].Text = (i + 1).ToString();
+                activeWeaponNumbers[i].Color = Color.Black;
+                ControlManager.Add(activeWeaponNumbers[i]);
+            }
+            
         }
         public override void Update(GameTime gameTime)
         {
@@ -69,36 +92,36 @@ namespace TileGame.GameScreens
 
             if (InputHandler.KeyReleased(Keys.Right))
             {
-                if (cursor_X != 275)
+                if (cursor_X != GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5)
                 {
-                    cursor_X += 200;
+                    cursor_X += GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6)/5;//200;
                     cursor_item_number += 1;
                 }
             }
 
             if (InputHandler.KeyReleased(Keys.Left))
             {
-                if (cursor_X != 75)
+                if (cursor_X != GameRef.ScreenRectangle.Width / 15)
                 {
-                    cursor_X -= 200;
+                    cursor_X -= GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5;//200;
                     cursor_item_number -= 1;
                 }
             }
 
             if (InputHandler.KeyReleased(Keys.Up))
             {
-                if (cursor_Y != 175)
+                if (cursor_Y != GameRef.ScreenRectangle.Height / 5)
                 {
-                    cursor_Y -= 140;
+                    cursor_Y -= GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10;//140;
                     cursor_item_number -= 2;
                 }
             }
 
             if (InputHandler.KeyReleased(Keys.Down))
             {
-                if (cursor_Y != 175 + (140 * 3))
+                if (cursor_Y != GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3))
                 {
-                    cursor_Y += 140;
+                    cursor_Y += GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6)/10;//140;
                     cursor_item_number += 2;
                 }
             }
@@ -119,7 +142,7 @@ namespace TileGame.GameScreens
             //Cursor
             GameRef.spriteBatch.Draw(
                 inventoryCursorImage,
-                new Rectangle(cursor_X, cursor_Y, 150, 100),
+                new Rectangle(cursor_X, cursor_Y, GameRef.ScreenRectangle.Width / 6, GameRef.ScreenRectangle.Height / 6), //150, 100),
                 Color.White);
             //------
 
@@ -128,7 +151,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     axeImage,
-                    new Rectangle(100, 180, 100, 90),
+                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 0, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
                     Color.White);
             }
 
@@ -136,7 +159,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     swordImage,
-                    new Rectangle(300, 180, 100, 90),
+                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6), 
                     Color.White);
             }
 
@@ -144,7 +167,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle(100, 180 + (140 * 1), 100, 90),
+                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 0, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 1), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
                     Color.White);
             }
 
@@ -152,7 +175,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle(300, 180 + (140 * 1), 100, 90),
+                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 1), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
                     Color.White);
             }
 
@@ -160,15 +183,14 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle(100, 180 + (140 * 2), 100, 90),
+                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 0, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 2), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
                     Color.White);
             }
 
             if (StoryProgress.ProgressLine["Hammer"] == true)
             {
-                GameRef.spriteBatch.Draw(
-                    crossbowImage,
-                    new Rectangle(300, 180 + (140 * 2), 100, 90),
+                GameRef.spriteBatch.Draw(crossbowImage,
+                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 2), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
                     Color.White);
             }
 
@@ -176,7 +198,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle(100, 180 + (140 * 3), 100, 90),
+                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 0, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
                     Color.White);
             }
 
@@ -184,10 +206,20 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle(300, 180 + (140 * 3), 100, 90),
+                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
                     Color.White);
             }
             //-------
+
+            //Active item slots
+            for (int i = 0; i < 5; i++)
+            {
+                GameRef.spriteBatch.Draw(
+                    inventoryCursorImage,
+                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * i), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / 15, GameRef.ScreenRectangle.Height / 15), //90, 50), //new Rectangle(95 + (160 * i), 65, 90, 50), GameRef.ScreenRectangle.Width
+                    Color.White);
+            }
+            //--
 
             //Active items ------------------------
             string key_string;
@@ -197,7 +229,10 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["Axe"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                GameRef.spriteBatch.Draw(axeImage, new Rectangle(95 + (160 * (key_number - 1)), 70, 50, 45), Color.White);
+                GameRef.spriteBatch.Draw(
+                    axeImage,
+                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    Color.White); //new Rectangle(110 + (160 * (key_number - 1))
             }
 
             if (StoryProgress.activeItemsDict.ContainsKey("Sword"))
@@ -205,7 +240,10 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["Sword"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                GameRef.spriteBatch.Draw(swordImage, new Rectangle(95 + (160 * (key_number - 1)), 70, 50, 45), Color.White);
+                GameRef.spriteBatch.Draw(
+                    swordImage,
+                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    Color.White);
             }
 
             if (StoryProgress.activeItemsDict.ContainsKey("Crossbow"))
@@ -213,7 +251,10 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["Crossbow"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                GameRef.spriteBatch.Draw(crossbowImage, new Rectangle(95 + (160 * (key_number - 1)), 70, 50, 45), Color.White);
+                GameRef.spriteBatch.Draw(
+                    crossbowImage,
+                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    Color.White);
             }
 
             if (StoryProgress.activeItemsDict.ContainsKey("Spear"))
@@ -221,7 +262,10 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["Spear"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                GameRef.spriteBatch.Draw(crossbowImage, new Rectangle(95 + (160 * (key_number - 1)), 70, 50, 45), Color.White);
+                GameRef.spriteBatch.Draw(
+                    crossbowImage,
+                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    Color.White);
             }
 
             if (StoryProgress.activeItemsDict.ContainsKey("DOOM-erang"))
@@ -229,7 +273,10 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["DOOM-erang"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                GameRef.spriteBatch.Draw(crossbowImage, new Rectangle(95 + (160 * (key_number - 1)), 70, 50, 45), Color.White);
+                GameRef.spriteBatch.Draw(
+                    crossbowImage,
+                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    Color.White);
             }
 
             if (StoryProgress.activeItemsDict.ContainsKey("Hammer"))
@@ -237,7 +284,10 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["Hammer"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                GameRef.spriteBatch.Draw(crossbowImage, new Rectangle(95 + (160 * (key_number - 1)), 70, 50, 45), Color.White);
+                GameRef.spriteBatch.Draw(
+                    crossbowImage,
+                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    Color.White);
             }
 
             if (StoryProgress.activeItemsDict.ContainsKey("MetalBladeCrossbow"))
@@ -245,7 +295,10 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["MetalBladeCrossbow"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                GameRef.spriteBatch.Draw(crossbowImage, new Rectangle(95 + (160 * (key_number - 1)), 70, 50, 45), Color.White);
+                GameRef.spriteBatch.Draw(
+                    crossbowImage,
+                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    Color.White);
             }
 
             if (StoryProgress.activeItemsDict.ContainsKey("Hookshot"))
@@ -253,9 +306,34 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["Hookshot"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                GameRef.spriteBatch.Draw(crossbowImage, new Rectangle(95 + (160 * (key_number - 1)), 70, 50, 45), Color.White);
+                GameRef.spriteBatch.Draw(
+                    crossbowImage,
+                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    Color.White);
             }
             //-------------------------
+            if (StoryProgress.ProgressLine["belladonnaHave"] == true)
+            {
+                GameRef.spriteBatch.Draw(
+                        BelladonnaImage,
+                        new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2)/10, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),  //new Rectangle(750, 180 + (140 * 0), 100, 90),
+                        Color.White);
+            }
+
+            if (StoryProgress.ProgressLine["immortuiHave"] == true)
+            {
+                GameRef.spriteBatch.Draw(
+                            ImmortuiImage,
+                            new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1  /*- GameRef.ScreenRectangle.Width / 15 - (GameRef.ScreenRectangle.Width / 6) / 6 - (GameRef.ScreenRectangle.Width / 6 - (GameRef.ScreenRectangle.Width / 6) / 5) * 1*/, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                            Color.White);
+            }
+
+            GameRef.spriteBatch.Draw(
+                    lifePotatoImage,
+                    new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                    Color.White);
+
+
 
             ControlManager.Draw(GameRef.spriteBatch);
 
@@ -301,6 +379,8 @@ namespace TileGame.GameScreens
                 ResetKey(Keys.D5);
                 AssignKeyToItem(Keys.D5);
             }
+
+            numberOfLifePotatoes.Text = "x " + StoryProgress.numberOfItemsDict["LifePotato"].ToString();
         }
 
         private void ResetKey(Keys Key)

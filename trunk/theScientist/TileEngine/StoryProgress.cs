@@ -18,6 +18,7 @@ namespace TileEngine
 
         public static Dictionary<string, bool> ProgressLine = new Dictionary<string, bool>();
         static public Dictionary<string, Keys> activeItemsDict = new Dictionary<string, Keys>();
+        static public Dictionary<string, int> numberOfItemsDict = new Dictionary<string, int>();
 
         public StoryProgress()
         {
@@ -36,6 +37,9 @@ namespace TileEngine
             ProgressLine.Add("contestAgainstJonnyFinnished", false);
             ProgressLine.Add("contestAgainstJackFinnished", false);
             ProgressLine.Add("contestAgainstJohnFinnished", false);
+            ProgressLine.Add("immortuiHave", false);
+
+            numberOfItemsDict.Add("LifePotato", 0);
         }
 
 
