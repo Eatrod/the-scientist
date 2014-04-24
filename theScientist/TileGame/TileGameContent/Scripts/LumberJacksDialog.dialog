@@ -80,7 +80,7 @@
   <Conversation Name="Competitions">
     <Text>Ignazio: Fine i start with..</Text>
     <Handlers>
-      <Handler Caption="Arm wrestling" Action="StartConversation:Riddle" />
+      <Handler Caption="Arm wrestling" Action="EndConversation" />
       <Handler Caption="Riddle" Action="StartConversation:Riddle" />
       <Handler Caption="Potato!?" Action="EndConversation" />
       <Handler Caption="Leave" Action="EndConversation" />
