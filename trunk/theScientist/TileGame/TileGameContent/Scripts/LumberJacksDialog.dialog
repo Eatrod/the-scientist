@@ -80,9 +80,33 @@
   <Conversation Name="Competitions">
     <Text>Ignazio: Fine i start with..</Text>
     <Handlers>
-      <Handler Caption="Arm wrestling" Action="EndConversation" />
-      <Handler Caption="Riddle" Action="EndConversation" />
+      <Handler Caption="Arm wrestling" Action="StartConversation:Riddle" />
+      <Handler Caption="Riddle" Action="StartConversation:Riddle" />
       <Handler Caption="Potato!?" Action="EndConversation" />
+      <Handler Caption="Leave" Action="EndConversation" />
+    </Handlers>
+  </Conversation>
+  
+    <Conversation Name="Riddle">
+    <Text>John: A mother has 6 children and 5 potatoes. How can she feed each on equal amount of potatoes?</Text>
+    <Handlers>
+      <Handler Caption="Arm wrestling" Action="StartConversation:RiddleWrong" />
+      <Handler Caption="Kill the children" Action="StartConversation:RiddleWrong" />
+      <Handler Caption="Mashed Potatoes" Action="StartConversation:RiddleCorrect" />
+      <Handler Caption="Eat one potato" Action="StartConversation:RiddleWrong" />
+    </Handlers>
+  </Conversation>
+  
+    <Conversation Name="RiddleWrong">
+    <Text>John: Wrong! Is it to hard for you?</Text>
+    <Handlers>
+      <Handler Caption="Leave" Action="EndConversation" />
+    </Handlers>
+  </Conversation>
+
+    <Conversation Name="RiddleCorrect">
+    <Text>John: How did you figure it out?!</Text>
+    <Handlers>
       <Handler Caption="Leave" Action="EndConversation" />
     </Handlers>
   </Conversation>
