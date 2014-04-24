@@ -95,13 +95,14 @@ namespace XtheSmithLibrary.Controls
             }
             spriteBatch.DrawString(SpriteFont, Text, new Vector2(200, rectangle.Y - 5), Color.Black);
 
-            for (int i = 0; i < conversation.Handlers.Count; ++i)
+            for (int i = 1; i < conversation.Handlers.Count+1; ++i)
             {
-                string handler = conversation.Handlers[i].Caption;
+                string handler = conversation.Handlers[i-1].Caption;
 
-                Color color = (i == currentHandler) ? Color.Orange : Color.Black;
+                Color color = (i-1 == currentHandler) ? Color.Orange : Color.Black;
+                SpriteFont.Spacing = -2;
 
-                spriteBatch.DrawString(SpriteFont, handler, new Vector2(600+80*i, rectangle.Y + 60), color);
+                spriteBatch.DrawString(SpriteFont, handler, new Vector2(rectangle.X-handler.Length+250*i, rectangle.Y + 60), color);
             }
 
             Rectangle pictureRectangle = new Rectangle(0, rectangle.Y, 200, 100);
