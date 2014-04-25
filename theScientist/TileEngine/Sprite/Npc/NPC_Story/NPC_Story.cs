@@ -13,7 +13,7 @@ namespace TileEngine.Sprite.Npc.NPC_Story
     public class NPC_Story : NPC
     {
         protected bool Immortal { get; set; }
-        protected float speakingRadius = 25f;
+        protected float speakingRadius = 30f;
         public bool canTalk = true;
         public Conversation text;
         public Texture2D picture;
