@@ -61,8 +61,9 @@ namespace TileGame
         
         #region Screen Field Region
 
-        const int screenWidth = 1024; //1248 //1920
-        const int screenHeight = 768; //1080
+        const int screenWidth = 1248; //1248 //1920
+        const int screenHeight = 1080; //1080
+        const bool fullScreen = false;
         public readonly Rectangle ScreenRectangle;
 
         #endregion
@@ -73,6 +74,7 @@ namespace TileGame
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = screenWidth;
             graphics.PreferredBackBufferHeight = screenHeight;
+            graphics.IsFullScreen = fullScreen; ;
 
             ScreenRectangle = new Rectangle(
             0,
