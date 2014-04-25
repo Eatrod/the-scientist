@@ -31,39 +31,9 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
         #region Update fält
 
-        /// <summary>
-        /// Uppdaterar NPCns synfält i takt med att den rör sig
-        /// </summary>
-        public void VisionRangeUpdate()
-        {
-            
-        }
-
-        /// <summary>
-        /// Ska lägga till (eller ta bort) fiender i NPCns lista över vilka den ska slåss mot
-        /// </summary>
-        public void EnemyListUpdate()
-        {
-
-        }
-
-        /// <summary>
-        /// Uppdaterar NPCns patrullrutt igenom att ta bort eller lägga till nya tiles.
-        /// </summary>
-        public void PatrolRouteUpdate()
-        {
-            
-        }
 
         #endregion
 
-        /// <summary>
-        /// Alla objekt som NPCn ser?
-        /// </summary>
-        public void VisionObjectInVision()
-        {
-            
-        }
     }
 }
 #endregion

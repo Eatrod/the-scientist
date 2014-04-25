@@ -18,13 +18,6 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
         {
             
         }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-        }
-
-
     }
 }
 #endregion

@@ -34,9 +34,9 @@ namespace TileEngine
             ProgressLine.Add("MetalBladeCrossbow", false);
             ProgressLine.Add("Hookshot", false);
             ProgressLine.Add("treeIsDown", false);
-            ProgressLine.Add("contestAgainstJonnyFinnished", false);
-            ProgressLine.Add("contestAgainstJackFinnished", false);
-            ProgressLine.Add("contestAgainstJohnFinnished", false);
+            ProgressLine.Add("contestAgainstJonnyFinished", false);
+            ProgressLine.Add("contestAgainstJackFinished", false);
+            ProgressLine.Add("contestAgainstJohnFinished", false);
             ProgressLine.Add("immortuiHave", false);
 
             collectedAmountDict.Add("IronOre", 0);
