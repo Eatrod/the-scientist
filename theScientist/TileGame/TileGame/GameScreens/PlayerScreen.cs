@@ -252,19 +252,17 @@ namespace TileGame.GameScreens
             //--
 
             //BF
-            PresentationParameters pp = GraphicsDevice.PresentationParameters;
             renderTarget = new RenderTarget2D(GraphicsDevice,
                 2048, 2048, false,
                 GraphicsDevice.DisplayMode.Format, DepthFormat.Depth24);
-            //BF
-            //BF
+
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer,
                 Color.DarkSlateBlue, 1.0f, 0);
             tileMap.DrawToShadowMap(spriteBatch, player.Position);
             GraphicsDevice.SetRenderTarget(null);
             shadowMap = (Texture2D)renderTarget;
-            //BF
+            
             miniMap = new PictureBox(shadowMap, new Rectangle(
                 GraphicsDevice.Viewport.Width - 205, GraphicsDevice.Viewport.Height - 205,
                 200, 200));
@@ -276,7 +274,6 @@ namespace TileGame.GameScreens
             ControlManager.Add(backgroundToMinimap);
             ControlManager.Add(miniMap);
             
-            //BF
             //BF
             
         }
@@ -322,31 +319,18 @@ namespace TileGame.GameScreens
                     motion.X += 2;
             }
 
-            //BF, draw the tilescene to a shadowmap for minimap
-            GraphicsDevice.SetRenderTarget(renderTarget);
-            GraphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer,
-                Color.Black, 1.0f, 0);
-            tileMap.DrawToShadowMap(spriteBatch, player.Position - new Vector2(1024, 1024));
-            GraphicsDevice.SetRenderTarget(null);
-            shadowMap = (Texture2D)renderTarget;
-            //BF
-            miniMap.Image = shadowMap;
 
             //BF
             if(InputHandler.KeyReleased(Keys.M))
             {
-                //BF
-                //GraphicsDevice.SetRenderTarget(renderTarget);
-                //GraphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer,
-                //    Color.Black, 1.0f, 0);
-                //tileMap.DrawToShadowMap(spriteBatch, player.Position - new Vector2(1024,1024));
-                //GraphicsDevice.SetRenderTarget(null);
-                //shadowMap = (Texture2D)renderTarget;
-                ////BF
-                //miniMap.Image = shadowMap;
-                //ControlManager.Add(miniMap);
-                //BF
-                //BF
+                GraphicsDevice.SetRenderTarget(renderTarget);
+                GraphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer,
+                    Color.Black, 1.0f, 0);
+                tileMap.DrawToShadowMap(spriteBatch, player.Position);
+                GraphicsDevice.SetRenderTarget(null);
+                shadowMap = (Texture2D)renderTarget;
+                miniMap.Image = shadowMap;
+               
                 if (miniMap.Visible == false)
                 {
                     miniMap.Visible = true;

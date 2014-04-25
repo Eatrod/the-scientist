@@ -223,13 +223,32 @@ namespace TileEngine.Tiles
 
         public void DrawToShadowMap(SpriteBatch batch, Point min, Point max, Vector2 place)
         {
+            Vector3 translation = new Vector3((2048 - place.X) / 2, (2048 - place.Y) / 2, 0);
+            if (translation.X > 0)
+                translation.X = 0;
+            if (translation.Y > 0)
+                translation.Y = 0;
+            if (translation.X < -352)
+                translation.X = -352;
+            if (translation.Y < -1952)
+                translation.Y = -1952;
             batch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend,
-                null, null, null, null, Matrix.CreateTranslation(new Vector3(-place.X,-place.Y,0)));
+                null, null, null, null, 
+                Matrix.CreateScale(0.5f) * Matrix.CreateTranslation(
+                translation));
 
             min.X = (int)Math.Max(min.X, 0);
             min.Y = (int)Math.Max(min.Y, 0);
             max.X = (int)Math.Min(max.X, Width);
             max.Y = (int)Math.Min(max.Y, Height);
+            if (max.X < 128)
+                max.X = 128;
+            if (max.Y < 128)
+                max.Y = 128;
+            if (min.X > 22)
+                min.X = 22;
+            if (min.Y > 122)
+                min.Y = 122;
 
             for (int x = min.X; x < max.X; x++)
             {
@@ -249,6 +268,8 @@ namespace TileEngine.Tiles
                                 y * Engine.TileHeight,
                                 Engine.TileWidth,
                                 Engine.TileHeight),
+                            //new Rectangle(
+                            //    x * 16, y * 16, 16, 16),
                             new Color(new Vector4(1f, 1f, 1f, Alpha)));
                     }
                 }

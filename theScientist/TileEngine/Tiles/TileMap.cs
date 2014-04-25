@@ -59,13 +59,16 @@ namespace TileEngine.Tiles
 
         public void DrawToShadowMap(SpriteBatch spriteBatch, Vector2 place)
         {
-
-            Point min = Engine.ConvertPostionToCell(place);
+            //Beräkning görs utifrån att man ska rita ut 4096, 4096 på en texture 2048,2048
+            Point min = Engine.ConvertPostionToCell(
+                (place - new Vector2(2048, 2048)));
+            //Point min = (Point)(place - new Vector2((2048 / 32), (2048 / 32)));
             Point max = new Point(0,0);
 
             foreach (TileLayer layer in Layers)
             {
-                max = Engine.ConvertPostionToCell(place + new Vector2(2024, 2024));
+                max = Engine.ConvertPostionToCell(
+                    (place + new Vector2(2048, 2048)));
                 layer.DrawToShadowMap(spriteBatch, min, max, place);
             }
         }
