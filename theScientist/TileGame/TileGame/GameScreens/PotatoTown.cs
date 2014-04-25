@@ -222,19 +222,19 @@ namespace TileGame.GameScreens
 
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/Jackie"), "Jack");
             npcstory.Origionoffset = new Vector2(25, 65);
-            npcstory.SetSpritePositionInGameWorld(new Vector2(75, 30));
+            npcstory.SetSpritePositionInGameWorld(new Vector2(138, 15));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/HumanNPCDartagnan"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/john"), "John");
             npcstory.Origionoffset = new Vector2(25,65);
-            npcstory.SetSpritePositionInGameWorld(new Vector2(77, 30));
+            npcstory.SetSpritePositionInGameWorld(new Vector2(136, 15));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/HumanNPCDartagnan"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/johnny"), "Johnny");
             npcstory.Origionoffset = new Vector2(25, 65);
-            npcstory.SetSpritePositionInGameWorld(new Vector2(79, 30));
+            npcstory.SetSpritePositionInGameWorld(new Vector2(140, 15));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
@@ -242,7 +242,7 @@ namespace TileGame.GameScreens
             {
                 npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
                 npcNeutral.Origionoffset = new Vector2(25, 65);
-                npcNeutral.SetSpritePositionInGameWorld(new Vector2(65, 32+i));
+                npcNeutral.SetSpritePositionInGameWorld(new Vector2(65-i, 32+i));
                 AnimatedSpriteObject.Add(npcNeutral);
                 NpcNeutralList.Add(npcNeutral);
             }
