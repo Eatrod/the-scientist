@@ -64,7 +64,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.ElapsedSearch += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (startingFlag)
             {
-                this.startingPosition = Position;
+                this.StartingPosition = Position;
                 startingFlag = false;
             }
 

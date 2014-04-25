@@ -15,7 +15,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 {
     public class NPC_Fighting_Guard : NPC_Fighting
     {
-        protected Vector2 startingPosition;
         protected Vector2 vectorTowardsTarget;
         protected Vector2 vectorTowardsStart;
         protected Vector2 aggroStartingPosition;
@@ -126,11 +125,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             set { vectorTowardsTarget = value; }
 
         }
-        public Vector2 StartingPosition
-        {
-            get { return startingPosition; }
-            set { startingPosition = value; }
-        }
+
         public NPC_Fighting_Guard(Texture2D texture, Script script, int[,] Map):base(texture,script)
         {
             this.startingFlag = true;
