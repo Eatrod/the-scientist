@@ -265,6 +265,11 @@
       <Processor>ScriptProcessor</Processor>
       <SubType>Designer</SubType>
     </Compile>
+    <Compile Include="Scripts\PotatotownTownsfolk2.dialog">
+      <Name>PotatotownTownsfolk2</Name>
+      <Importer>ScriptImporter</Importer>
+      <Processor>ScriptProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tiles\Stonewall0000.png">
