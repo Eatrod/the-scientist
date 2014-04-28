@@ -144,12 +144,39 @@ namespace TileEngine.Sprite.Projectiles
             this.Position = position;
             FrameAnimation right = new FrameAnimation(1, 25, 25, 0, 0);
             this.Animations.Add("right", right);
+            //--
+            FrameAnimation right2 = new FrameAnimation(1, 25, 25, 0, 25);
+            this.Animations.Add("right2", right2);
+            FrameAnimation right3 = new FrameAnimation(1, 25, 25, 0, 50);
+            this.Animations.Add("right3", right3);
+            //--
+
             FrameAnimation left = new FrameAnimation(1, 25, 25, 25, 0);
             this.Animations.Add("left", left);
+            //--
+            FrameAnimation left2 = new FrameAnimation(1, 25, 25, 25, 25);
+            this.Animations.Add("left2", left2);
+            FrameAnimation left3 = new FrameAnimation(1, 25, 25, 25, 50);
+            this.Animations.Add("left3", left3);
+            //--
+
             FrameAnimation down = new FrameAnimation(1, 25, 25, 50, 0);
             this.Animations.Add("down", down);
+            //--
+            FrameAnimation down2 = new FrameAnimation(1, 25, 25, 50, 25);
+            this.Animations.Add("down2", down2);
+            FrameAnimation down3 = new FrameAnimation(1, 25, 25, 50, 50);
+            this.Animations.Add("down3", down3);
+            //--
+
             FrameAnimation up = new FrameAnimation(1, 25, 25, 75, 0);
             this.Animations.Add("up", up);
+            //--
+            FrameAnimation up2 = new FrameAnimation(1, 25, 25, 75, 25);
+            this.Animations.Add("up2", up2);
+            FrameAnimation up3 = new FrameAnimation(1, 25, 25, 75, 50);
+            this.Animations.Add("up3", up3);
+            //--
         }  //konstruktor 
     }
 }
