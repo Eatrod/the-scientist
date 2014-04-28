@@ -323,28 +323,29 @@ namespace TileGame.GameScreens
                     npc.CheckForCollisionWithOtherNPCs(NPCFightingFarmers,player);
 
             }
+
             foreach (var npc in NpcStoryList)
             {
-            if (npc.InSpeakingRange(player))
-            {
-                if (npc.canTalk == true)
+                if (npc.InSpeakingRange(player))
                 {
-                    if (InputHandler.KeyReleased(Keys.Space))
+                    if (npc.canTalk == true)
                     {
-                        if (ActiveConversation == false)
+                        if (InputHandler.KeyReleased(Keys.Space))
                         {
-                            PlayerStartConversation(npc, NpcStoryList);
+                            if (ActiveConversation == false)
+                            {
+                                PlayerStartConversation(npc, NpcStoryList);
+                            }
                         }
                     }
-                }
-                else
-                {
-                    if (InputHandler.KeyReleased(Keys.Space))
+                    else
                     {
-                            PlayerEndConversation(npc);
+                        if (InputHandler.KeyReleased(Keys.Space))
+                        {
+                                PlayerEndConversation(npc);
+                            }
                         }
                     }
-                }
                 }
 
             foreach (var npc in NpcNeutralList)

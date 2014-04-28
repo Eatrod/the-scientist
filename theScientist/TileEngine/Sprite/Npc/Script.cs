@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Xna.Framework;
 
 namespace TileEngine.Sprite.Npc
 {
@@ -10,6 +11,22 @@ namespace TileEngine.Sprite.Npc
     {
         Dictionary<string, Conversation> conversations =
             new Dictionary<string, Conversation>();
+
+        public void RemoveHandler(string captionName)
+        {
+            foreach (var con in conversations)
+            {
+                foreach (var handler in con.Value.Handlers)
+                {
+                    if (handler.Caption == captionName)
+                    {
+                        con.Value.Handlers.Remove(handler);
+                        return;
+                    }
+                }
+                    
+            }
+        }
 
         public Conversation this[string name]
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 
 namespace TileEngine.Sprite.Npc
@@ -48,6 +49,11 @@ namespace TileEngine.Sprite.Npc
                 CurrentAnimationName = "WalkLeft"; //Left
                 //motion = new Vector2(-1f, 0f);
             }
+        }
+
+        public void RemoveHandler(string captionName)
+        {
+            script.RemoveHandler(captionName);
         }
 
 
