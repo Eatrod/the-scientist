@@ -10,7 +10,7 @@ namespace TileEngine.Sprite.Npc
         public String NPCName { get; set; }
         protected String Location { get; set; }
         protected Vector2 startingPosition;
-        protected Script script;
+        public Script script;
 
         public Vector2 StartingPosition
         {

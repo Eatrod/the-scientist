@@ -238,14 +238,79 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            for (int i = 0; i < 15; ++i)
-            {
-                npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
-                npcNeutral.Origionoffset = new Vector2(25, 65);
-                npcNeutral.SetSpritePositionInGameWorld(new Vector2(65, 32+i));
-                AnimatedSpriteObject.Add(npcNeutral);
-                NpcNeutralList.Add(npcNeutral);
-            }
+            #region Neutrala Npcs
+            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+            npcNeutral.Origionoffset = new Vector2(25, 65);
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(65, 42));
+            AnimatedSpriteObject.Add(npcNeutral);
+            NpcNeutralList.Add(npcNeutral);
+
+            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+            npcNeutral.Origionoffset = new Vector2(25, 65);
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(55, 32));
+            AnimatedSpriteObject.Add(npcNeutral);
+            NpcNeutralList.Add(npcNeutral);
+
+            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+            npcNeutral.Origionoffset = new Vector2(25, 65);
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(65, 44));
+            AnimatedSpriteObject.Add(npcNeutral);
+            NpcNeutralList.Add(npcNeutral);
+
+            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+            npcNeutral.Origionoffset = new Vector2(25, 65);
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(30,30));
+            AnimatedSpriteObject.Add(npcNeutral);
+            NpcNeutralList.Add(npcNeutral);
+
+            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+            npcNeutral.Origionoffset = new Vector2(25, 65);
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(25, 20));
+            AnimatedSpriteObject.Add(npcNeutral);
+            NpcNeutralList.Add(npcNeutral);
+
+            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+            npcNeutral.Origionoffset = new Vector2(25, 65);
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(55,56));
+            AnimatedSpriteObject.Add(npcNeutral);
+            NpcNeutralList.Add(npcNeutral);
+
+            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+            npcNeutral.Origionoffset = new Vector2(25, 65);
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(110,80));
+            AnimatedSpriteObject.Add(npcNeutral);
+            NpcNeutralList.Add(npcNeutral);
+
+            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+            npcNeutral.Origionoffset = new Vector2(25, 65);
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(12,80));
+            AnimatedSpriteObject.Add(npcNeutral);
+            NpcNeutralList.Add(npcNeutral);
+
+            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+            npcNeutral.Origionoffset = new Vector2(25, 65);
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(24,55));
+            AnimatedSpriteObject.Add(npcNeutral);
+            NpcNeutralList.Add(npcNeutral);
+
+            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+            npcNeutral.Origionoffset = new Vector2(25, 65);
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(55,24));
+            AnimatedSpriteObject.Add(npcNeutral);
+            NpcNeutralList.Add(npcNeutral);
+
+            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+            npcNeutral.Origionoffset = new Vector2(25, 65);
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(70,70));
+            AnimatedSpriteObject.Add(npcNeutral);
+            NpcNeutralList.Add(npcNeutral);
+
+            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+            npcNeutral.Origionoffset = new Vector2(25, 65);
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(111,49));
+            AnimatedSpriteObject.Add(npcNeutral);
+            NpcNeutralList.Add(npcNeutral);
+            #endregion
 
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(90, 40)));
@@ -343,13 +408,16 @@ namespace TileGame.GameScreens
                         if (InputHandler.KeyReleased(Keys.Space))
                         {
                                 PlayerEndConversation(npc);
-                            }
                         }
+                    }
                     }
                 }
 
+            //Kontroller för kod som rör Neutrala NPCs
             foreach (var npc in NpcNeutralList)
             {
+                if (StoryProgress.ProgressLine["asterixTalkedTo"])
+                    npc.script = Content.Load<Script>("Scripts/PotatotownTownsfolk2");
                 if (npc.InHearingRange(player))
                 {
                     if (npc.ShowingBubble == false)

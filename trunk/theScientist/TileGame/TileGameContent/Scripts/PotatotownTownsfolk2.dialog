@@ -1,0 +1,24 @@
+﻿<Conversations>
+  
+  <Conversation Name="Text1">
+    <Text>The farmers in the north west are totally insane</Text>
+    <Handlers>
+      <Handler Caption="d" Action="EndBubble" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Text2">
+    <Text>I dont trust the lumberjacks they look scary</Text>
+    <Handlers>
+      <Handler Caption="d" Action="EndBubble" />
+    </Handlers>
+  </Conversation>
+  
+  <Conversation Name="Text3">
+    <Text>I don't even like potatos...</Text>
+    <Handlers>
+      <Handler Caption="d" Action="EndBubble" />
+    </Handlers>
+  </Conversation>
+  
+</Conversations>
