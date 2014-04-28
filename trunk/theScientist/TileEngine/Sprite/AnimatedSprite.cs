@@ -194,6 +194,21 @@ namespace TileEngine.Sprite
                     animation.CurrentRectangle,
                     new Color(255, 255, 255, (byte)MathHelper.Clamp(Alpha, 0, 255)));
             }
+            
+        }
+
+        public void Draw_test(SpriteBatch spriteBatch, int x, int y, int width, int height)
+        {
+            FrameAnimation animation = CurrentAnimation;
+
+            if (animation != null)
+            {
+                spriteBatch.Draw(
+                    texture,
+                    new Rectangle(x, y, width, height),
+                    animation.CurrentRectangle,
+                    Color.White);
+            }
         }
 
         public AnimatedSprite(Texture2D texture) : base(texture)

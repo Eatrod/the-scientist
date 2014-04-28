@@ -48,14 +48,21 @@ namespace TileGame.GameScreens
 
         //--     
         Texture2D activeItemBackground, abilityBackground, axeImage, swordImage, crossbowImage;
-        Texture2D[] activeItem_textures;
+        Texture2D[] activeItem_textures, crossbow_ability_textures;
         Color[] activeItemBackgroundColor;
         Color[] abilityBackgroundColor;
 
         bool[] flashing_abilityBackground, flashOn;
         float[] flashTime, flashLength;
         const float flashTimeTotal = 1.0f;
+
+        int HUD_size_ref;
+        
+
+        Texture2D Bar_BG, Bar_overlay, Charge_Bar, HP_Bar, Stamina_Bar;
         //--
+
+        int fire_arrow_counter = 0;
 
         #endregion
 
@@ -121,7 +128,9 @@ namespace TileGame.GameScreens
         {
             base.Initialize();
 
-            lifeRect = new Rectangle(0, 0, 100, 20);//lifebarRectangle
+            HUD_size_ref = GameRef.ScreenRectangle.Width / 20;
+
+            lifeRect = new Rectangle(0, 0, 100, 20);//(0, 0, 100, 20);//lifebarRectangle
             staminaRect = new Rectangle(0, 0, 100, 20);//staminabarRectangle
             chargeRect = new Rectangle(0, 0, 100, 20); //chargeRectangle
 
@@ -227,6 +236,12 @@ namespace TileGame.GameScreens
             swordImage = Content.Load<Texture2D>(@"Sprite\Inv Sword test");
             crossbowImage = Content.Load<Texture2D>(@"Sprite\Bow");
             activeItem_textures = new Texture2D[5];
+            crossbow_ability_textures = new Texture2D[3];
+            for (int i = 0; i < crossbow_ability_textures.Count(); i++)
+            {
+                crossbow_ability_textures[i] = Content.Load<Texture2D>(@"Sprite\arrow ability " + (i+1).ToString());
+            }
+
             activeItemBackgroundColor = new Color[5];
             for (int i = 0; i < activeItemBackgroundColor.Count(); i++)
             {
@@ -249,6 +264,12 @@ namespace TileGame.GameScreens
                 flashTime[i] = 0f;
                 flashLength[i] = 0f;
             }
+
+            Bar_BG = Content.Load<Texture2D>(@"Sprite\Bar-BG");
+            Bar_overlay = Content.Load<Texture2D>(@"Sprite\Bar-overlay");
+            Charge_Bar = Content.Load<Texture2D>(@"Sprite\Charge-Bar");
+            HP_Bar = Content.Load<Texture2D>(@"Sprite\HP-Bar");
+            Stamina_Bar = Content.Load<Texture2D>(@"Sprite\Stamina-Bar");
             //--
 
             //BF
@@ -286,7 +307,53 @@ namespace TileGame.GameScreens
 
             foreach (AnimatedProjectile sprite in playerprojectiles)
             {
-                sprite.updateprojectileposition();            
+                sprite.updateprojectileposition();
+
+                if (sprite.GetType() == typeof(FlamingArrowProjectile))
+                {
+                    
+                    FlamingArrowProjectile FireArrow = (FlamingArrowProjectile)sprite;
+                    if ((FireArrow.CurrentAnimationName == "right") || (FireArrow.CurrentAnimationName == "right2") || (FireArrow.CurrentAnimationName == "right3"))
+                    {
+                        if (fire_arrow_counter == 3)//(FireArrow.CurrentAnimationName == "right")
+                            FireArrow.CurrentAnimationName = "right2";
+                        else if (fire_arrow_counter == 6) //(FireArrow.CurrentAnimationName == "right2")
+                            FireArrow.CurrentAnimationName = "right3";
+                        else if (fire_arrow_counter == 9)//(FireArrow.CurrentAnimationName == "right3")
+                            FireArrow.CurrentAnimationName = "right";
+                    }
+                    if ((FireArrow.CurrentAnimationName == "up") || (FireArrow.CurrentAnimationName == "up2") || (FireArrow.CurrentAnimationName == "up3"))
+                    {
+                        if (fire_arrow_counter == 3)
+                            FireArrow.CurrentAnimationName = "up2";
+                        else if (fire_arrow_counter == 6) 
+                            FireArrow.CurrentAnimationName = "up3";
+                        else if (fire_arrow_counter == 9)
+                            FireArrow.CurrentAnimationName = "up";
+                    }
+                    if ((FireArrow.CurrentAnimationName == "left") || (FireArrow.CurrentAnimationName == "left2") || (FireArrow.CurrentAnimationName == "left3"))
+                    {
+                        if (fire_arrow_counter == 3)
+                            FireArrow.CurrentAnimationName = "left2";
+                        else if (fire_arrow_counter == 6)
+                            FireArrow.CurrentAnimationName = "left3";
+                        else if (fire_arrow_counter == 9)
+                            FireArrow.CurrentAnimationName = "left";
+                    }
+                    if ((FireArrow.CurrentAnimationName == "down") || (FireArrow.CurrentAnimationName == "down2") || (FireArrow.CurrentAnimationName == "down3"))
+                    {
+                        if (fire_arrow_counter == 3)
+                            FireArrow.CurrentAnimationName = "down2";
+                        else if (fire_arrow_counter == 6)
+                            FireArrow.CurrentAnimationName = "down3";
+                        else if (fire_arrow_counter == 9)
+                            FireArrow.CurrentAnimationName = "down";
+                    }
+
+                    fire_arrow_counter += 1;
+                    if (fire_arrow_counter > 9)
+                        fire_arrow_counter = 0;
+                }
             }
 
             for (int i = 0; i < playerprojectiles.Count; i++ )
@@ -348,7 +415,7 @@ namespace TileGame.GameScreens
             if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >=0))
             {
 
-                NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 3f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
+                NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
                 temparrow.UpdatecurrentAnimation(motion);        
                 playerprojectiles.Add(temparrow);
                 player.Stamina -= 20f;
@@ -357,7 +424,7 @@ namespace TileGame.GameScreens
             if (InputHandler.KeyReleased(Keys.W) && (player.Stamina - 50 > 0))
             {
 
-                FlamingArrowProjectile temparrow = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FlamingArrow"), 10f, 0.1f, 3f, player.Position);
+                FlamingArrowProjectile temparrow = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FireArrow"), 10f, 0.1f, 6f, player.Position);//"Sprite/FlamingArrow"), 10f, 0.1f, 3f, player.Position);
                 temparrow.UpdatecurrentAnimation(motion);
                 playerprojectiles.Add(temparrow);
                 player.Stamina -= 50;                                    
@@ -365,9 +432,9 @@ namespace TileGame.GameScreens
 
             if (InputHandler.KeyReleased(Keys.E) && (player.Stamina - 40 > 0)) //delay. fixas.
             {
-                NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 3f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);               
-                NormalArrowProjectile temparrow1 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 3f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);                
-                NormalArrowProjectile temparrow2 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 3f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
+                NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);               
+                NormalArrowProjectile temparrow1 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);                
+                NormalArrowProjectile temparrow2 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
 
 
 
@@ -430,7 +497,7 @@ namespace TileGame.GameScreens
             {
                 if (player.Charge == 100 && (player.Stamina - 30) > 0)
                 {
-                    FlamingArrowProjectile temparrow = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FlamingArrow"), 10f, 0.1f, 3f, player.Position);
+                    FlamingArrowProjectile temparrow = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FireArrow"), 10f, 0.1f, 9f, player.Position);//"Sprite/FlamingArrow"), 10f, 0.1f, 3f, player.Position);
                     temparrow.UpdatecurrentAnimation(motion);
                     playerprojectiles.Add(temparrow);
                     player.Stamina -= 30;
@@ -438,7 +505,7 @@ namespace TileGame.GameScreens
 
                 else if ((player.Stamina - 20) > 0)
                 {
-                    NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 3f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
+                    NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
                     temparrow.UpdatecurrentAnimation(motion);
                     playerprojectiles.Add(temparrow);
                 player.Stamina -= 20f;
@@ -452,8 +519,15 @@ namespace TileGame.GameScreens
                 player.Charge = 0;
             }
 
+
+
             if (InputHandler.KeyReleased(Keys.Tab))
+            {
                 player.Stamina = 100;
+                //player.Life -= 10;
+            }
+            if (InputHandler.KeyReleased(Keys.D))
+                player.Life -= 10;
 
             if (InputHandler.KeyReleased(Keys.Escape))
             {
@@ -548,7 +622,7 @@ namespace TileGame.GameScreens
             if (life < 25f)
                 lifemeteranimation.CurrentAnimationName = "TwentyFiveHp";
 
-            lifeRect = new Rectangle(lifemeteranimation.CurrentAnimation.CurrentRectangle.Location.X, lifemeteranimation.CurrentAnimation.CurrentRectangle.Location.Y, lifeRect.Width, lifeRect.Height);
+            lifeRect = new Rectangle(lifemeteranimation.CurrentAnimation.CurrentRectangle.Location.X, lifemeteranimation.CurrentAnimation.CurrentRectangle.Location.Y, lifeRect.Width, lifeRect.Height); 
             lifemeteranimation.CurrentAnimation.CurrentRectangle = lifeRect;
         } //Code for healthbar
 
@@ -687,6 +761,10 @@ namespace TileGame.GameScreens
 
             //tileMap.Draw(spriteBatch, camera); 
 
+            //--
+            HUD_size_ref = GameRef.ScreenRectangle.Width / 20;
+            //--
+
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
                 null, null, null, null, camera.TransforMatrix);
 
@@ -708,11 +786,47 @@ namespace TileGame.GameScreens
             spriteBatch.End();
 
             spriteBatch.Begin();
-         
-            lifemeteranimation.Draw(spriteBatch);
-            staminaanimation.Draw(spriteBatch);
-            chargeanimation.Draw(spriteBatch);
+
+            for (int i = 0; i < 3; i++)
+            {
+                spriteBatch.Draw(
+                    Bar_BG,
+                    new Rectangle(0, (int)(HUD_size_ref / 1.5) * i, (HUD_size_ref * 3) + (int)(HUD_size_ref / 2.5), (int)(HUD_size_ref / 1.5)),  //new Rectangle(110 + (50 * i), 0, 42, 42),
+                    Color.White);
+            }
+
+            //lifemeteranimation.Draw(spriteBatch);
+            lifemeteranimation.Draw_test(spriteBatch, HUD_size_ref / 8, HUD_size_ref / 16, (HUD_size_ref * 4 / 100) * (int)player.Life, HUD_size_ref / 2);
+            //staminaanimation.Draw(spriteBatch);
+            staminaanimation.Draw_test(spriteBatch, HUD_size_ref / 8, HUD_size_ref / 2 + ((HUD_size_ref / 16) * 4), (HUD_size_ref * 4 / 100) * (int)player.Stamina, HUD_size_ref / 2);  
+            //chargeanimation.Draw(spriteBatch);
+            chargeanimation.Draw_test(spriteBatch, HUD_size_ref / 8, (HUD_size_ref / 2) * 2 + ((HUD_size_ref / 16) * 7), (HUD_size_ref * 4 / 100) * (int)player.Charge, HUD_size_ref / 2);
             DrawItemHUD();
+
+            spriteBatch.Draw(
+                HP_Bar,
+                new Rectangle(0, 0, (HUD_size_ref * 3) + (int)(HUD_size_ref /2.5), (int)(HUD_size_ref / 1.5)),  //new Rectangle(110 + (50 * i), 0, 42, 42),
+                Color.White);
+
+            spriteBatch.Draw(
+                Stamina_Bar,
+                new Rectangle(0, (int)(HUD_size_ref / 1.5), (HUD_size_ref * 3) + (int)(HUD_size_ref / 2.5), (int)(HUD_size_ref / 1.5)),  //new Rectangle(110 + (50 * i), 0, 42, 42),
+                Color.White);
+
+            spriteBatch.Draw(
+                Charge_Bar,
+                new Rectangle(0, (int)(HUD_size_ref / 1.5)*2, (HUD_size_ref * 3) + (int)(HUD_size_ref / 2.5), (int)(HUD_size_ref / 1.5)),  //new Rectangle(110 + (50 * i), 0, 42, 42),
+                Color.White);
+
+            for (int i = 0; i < 3; i++)
+            {
+                spriteBatch.Draw(
+                    Bar_overlay,
+                    new Rectangle(0, (int)(HUD_size_ref / 1.5) * i, (HUD_size_ref * 3) + (int)(HUD_size_ref / 2.5), (int)(HUD_size_ref / 1.5)),  //new Rectangle(110 + (50 * i), 0, 42, 42),
+                    Color.White * 0.3f);
+            }
+
+
             //Draws active conversation
             ControlManager.Draw(spriteBatch);
 
@@ -726,35 +840,25 @@ namespace TileGame.GameScreens
             //Weapon backgrounds
             for (int i = 0; i < activeItem_textures.Count(); i++)
             {
-                spriteBatch.Draw( 
-                abilityBackground, 
-                new Rectangle(110 + (50 * i), 0, 42, 42),
-                activeItemBackgroundColor[i]);
+                spriteBatch.Draw(
+                abilityBackground,
+                new Rectangle(((HUD_size_ref * 4) / 100) * 100 + HUD_size_ref / 10 + ((HUD_size_ref + HUD_size_ref / 10) * i) + (HUD_size_ref / 4), 0, HUD_size_ref, HUD_size_ref),  //new Rectangle(110 + (50 * i), 0, 42, 42),
+                activeItemBackgroundColor[i]); //* 0.8f);
             }         
 
+
             //Weapon Ability backgrounds
+            //Bakgrundens "ram" = WAB_width / 8
+            //int WAB_width = GameRef.ScreenRectangle.Width / 20;
             for (int i = 0; i < activeItem_textures.Count(); i++)
             {
                 spriteBatch.Draw(
                 abilityBackground,
-                new Rectangle(GameRef.ScreenRectangle.Width / 2 - (50 * 2 + 21) + (50 * i), GameRef.ScreenRectangle.Height - 50, 42, 42),
+                new Rectangle(GameRef.ScreenRectangle.Width / 2 - (HUD_size_ref * 2 + (HUD_size_ref) / 2) + ((HUD_size_ref + HUD_size_ref/10) * i), GameRef.ScreenRectangle.Height - HUD_size_ref, HUD_size_ref, HUD_size_ref),//(GameRef.ScreenRectangle.Width / 2 - (50 * 2 + 21) + (50 * i), GameRef.ScreenRectangle.Height - 50, 42, 42),
                 abilityBackgroundColor[i]);
             }
 
             //Weapon Ability pics
-            if (StoryProgress.activeItemsDict.ContainsKey("Axe"))
-            {
-                if (StoryProgress.activeItemsDict["Axe"] == Keys.D1 && activeItemBackgroundColor[0] == Color.White)
-                {
-                    for (int i = 0; i < activeItem_textures.Count(); i++)
-                    {
-                        spriteBatch.Draw(
-                        swordImage,
-                        new Rectangle(GameRef.ScreenRectangle.Width / 2 - (50 * 2 + 16) + (50 * i), GameRef.ScreenRectangle.Height - 45, 32, 32),
-                        Color.White);
-                    }
-                }
-            }
 
             string key_string;
             int key_number;
@@ -764,7 +868,42 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["Axe"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                spriteBatch.Draw(axeImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+                if (activeItemBackgroundColor[key_number - 1] == Color.White)
+                {
+                    for (int i = 0; i < activeItem_textures.Count(); i++)
+                    {
+                        spriteBatch.Draw(
+                        swordImage,
+                        new Rectangle(GameRef.ScreenRectangle.Width / 2 - (HUD_size_ref * 2 + (HUD_size_ref) / 2) + ((HUD_size_ref + HUD_size_ref / 10) * i) + HUD_size_ref / 8, GameRef.ScreenRectangle.Height - HUD_size_ref + HUD_size_ref / 8, HUD_size_ref - HUD_size_ref / 4, HUD_size_ref - HUD_size_ref / 4),
+                        Color.White);
+                    }
+                }
+            }
+            if (StoryProgress.activeItemsDict.ContainsKey("Crossbow"))
+            {
+                key_string = StoryProgress.activeItemsDict["Crossbow"].ToString();
+                key_string = key_string.Replace('D', ' ');
+                key_number = Convert.ToInt32(key_string);
+                if (activeItemBackgroundColor[key_number - 1] == Color.White)//(StoryProgress.activeItemsDict["Crossbow"] == Keys.D1 && activeItemBackgroundColor[0] == Color.White)
+                {
+                    for (int i = 0; i < crossbow_ability_textures.Count(); i++)
+                    {
+                        spriteBatch.Draw(
+                        crossbow_ability_textures[i],
+                        new Rectangle(GameRef.ScreenRectangle.Width / 2 - (HUD_size_ref * 2 + (HUD_size_ref) / 2) + ((HUD_size_ref + HUD_size_ref / 10) * i) + HUD_size_ref / 8, GameRef.ScreenRectangle.Height - HUD_size_ref + HUD_size_ref / 8, HUD_size_ref - HUD_size_ref / 4, HUD_size_ref - HUD_size_ref / 4), //(GameRef.ScreenRectangle.Width / 2 - (50 * 2 + 16) + (50 * i), GameRef.ScreenRectangle.Height - 45, 32, 32),
+                        Color.White);
+                    }
+                }
+
+            }
+
+
+            if (StoryProgress.activeItemsDict.ContainsKey("Axe"))
+            {
+                key_string = StoryProgress.activeItemsDict["Axe"].ToString();
+                key_string = key_string.Replace('D', ' ');
+                key_number = Convert.ToInt32(key_string);
+                spriteBatch.Draw(axeImage, new Rectangle(((HUD_size_ref * 4) / 100) * 100 + HUD_size_ref / 10 + ((HUD_size_ref + HUD_size_ref / 10) * (key_number - 1)) + HUD_size_ref / 8 + (HUD_size_ref / 4), HUD_size_ref / 8, HUD_size_ref - HUD_size_ref / 4, HUD_size_ref - HUD_size_ref / 4), Color.White);
             }
            
             if (StoryProgress.activeItemsDict.ContainsKey("Sword"))
@@ -772,7 +911,7 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["Sword"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                spriteBatch.Draw(swordImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+                spriteBatch.Draw(swordImage, new Rectangle(((HUD_size_ref * 4) / 100) * 100 + HUD_size_ref / 10 + ((HUD_size_ref + HUD_size_ref / 10) * (key_number - 1)) + HUD_size_ref / 8 + (HUD_size_ref / 4), HUD_size_ref / 8, HUD_size_ref - HUD_size_ref / 4, HUD_size_ref - HUD_size_ref / 4), Color.White);
             }
             
             if (StoryProgress.activeItemsDict.ContainsKey("Crossbow"))
@@ -780,7 +919,7 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["Crossbow"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+                spriteBatch.Draw(crossbowImage, new Rectangle(((HUD_size_ref * 4) / 100) * 100 + HUD_size_ref / 10 + ((HUD_size_ref + HUD_size_ref / 10) * (key_number - 1)) + HUD_size_ref / 8 + (HUD_size_ref / 4), HUD_size_ref / 8, HUD_size_ref - HUD_size_ref / 4, HUD_size_ref - HUD_size_ref / 4), Color.White);
             }
             
             if (StoryProgress.activeItemsDict.ContainsKey("Spear"))
@@ -788,7 +927,7 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["Spear"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+                spriteBatch.Draw(crossbowImage, new Rectangle(((HUD_size_ref * 4) / 100) * 100 + HUD_size_ref / 10 + ((HUD_size_ref + HUD_size_ref / 10) * (key_number - 1)) + HUD_size_ref / 8 + (HUD_size_ref / 4), HUD_size_ref / 8, HUD_size_ref - HUD_size_ref / 4, HUD_size_ref - HUD_size_ref / 4), Color.White);
             }
             
             if (StoryProgress.activeItemsDict.ContainsKey("DOOM-erang"))
@@ -796,7 +935,7 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["DOOM-erang"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+                spriteBatch.Draw(crossbowImage, new Rectangle(((HUD_size_ref * 4) / 100) * 100 + HUD_size_ref / 10 + ((HUD_size_ref + HUD_size_ref / 10) * (key_number - 1)) + HUD_size_ref / 8 + (HUD_size_ref / 4), HUD_size_ref / 8, HUD_size_ref - HUD_size_ref / 4, HUD_size_ref - HUD_size_ref / 4), Color.White);
             }
             
             if (StoryProgress.activeItemsDict.ContainsKey("Hammer"))
@@ -804,7 +943,7 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["Hammer"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+                spriteBatch.Draw(crossbowImage, new Rectangle(((HUD_size_ref * 4) / 100) * 100 + HUD_size_ref / 10 + ((HUD_size_ref + HUD_size_ref / 10) * (key_number - 1)) + HUD_size_ref / 8 + (HUD_size_ref / 4), HUD_size_ref / 8, HUD_size_ref - HUD_size_ref / 4, HUD_size_ref - HUD_size_ref / 4), Color.White);
             }
             
             if (StoryProgress.activeItemsDict.ContainsKey("MetalBladeCrossbow"))
@@ -812,7 +951,7 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["MetalBladeCrossbow"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+                spriteBatch.Draw(crossbowImage, new Rectangle(((HUD_size_ref * 4) / 100) * 100 + HUD_size_ref / 10 + ((HUD_size_ref + HUD_size_ref / 10) * (key_number - 1)) + HUD_size_ref / 8 + (HUD_size_ref / 4), HUD_size_ref / 8, HUD_size_ref - HUD_size_ref / 4, HUD_size_ref - HUD_size_ref / 4), Color.White);
             }
             
             if (StoryProgress.activeItemsDict.ContainsKey("Hookshot"))
@@ -820,7 +959,7 @@ namespace TileGame.GameScreens
                 key_string = StoryProgress.activeItemsDict["Hookshot"].ToString();
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
-                spriteBatch.Draw(crossbowImage, new Rectangle(115 + (50 * (key_number - 1)), 5, 32, 32), Color.White);
+                spriteBatch.Draw(crossbowImage, new Rectangle(((HUD_size_ref * 4) / 100) * 100 + HUD_size_ref / 10 + ((HUD_size_ref + HUD_size_ref / 10) * (key_number - 1)) + HUD_size_ref / 8 + (HUD_size_ref / 4), HUD_size_ref / 8, HUD_size_ref - HUD_size_ref / 4, HUD_size_ref - HUD_size_ref / 4), Color.White);
             }
             
         }
