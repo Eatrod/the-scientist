@@ -253,7 +253,7 @@ namespace TileGame.GameScreens
 
             npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
             npcNeutral.Origionoffset = new Vector2(25, 65);
-            npcNeutral.SetSpritePositionInGameWorld(new Vector2(65, 44));
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(140, 44));
             AnimatedSpriteObject.Add(npcNeutral);
             NpcNeutralList.Add(npcNeutral);
 
@@ -301,7 +301,7 @@ namespace TileGame.GameScreens
 
             npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
             npcNeutral.Origionoffset = new Vector2(25, 65);
-            npcNeutral.SetSpritePositionInGameWorld(new Vector2(70,70));
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(70,100));
             AnimatedSpriteObject.Add(npcNeutral);
             NpcNeutralList.Add(npcNeutral);
 
