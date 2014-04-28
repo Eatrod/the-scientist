@@ -99,7 +99,7 @@ namespace XtheSmithLibrary.Controls
             {
                 string handler = conversation.Handlers[i-1].Caption;
 
-                Color color = (i-1 == currentHandler) ? Color.Orange : Color.Black;
+                Color color = (i-1 == currentHandler) ? Color.Orange : Color.Red;
                 SpriteFont.Spacing = -2;
 
                 spriteBatch.DrawString(SpriteFont, handler, new Vector2(rectangle.X-handler.Length+250*i, rectangle.Y + 60), color);
