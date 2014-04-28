@@ -4,6 +4,7 @@
     <Text>Jack: What do you think you're doin?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:John1" />
+      <Handler Caption="Skip" Action="StartConversation:Competitions"/>
     </Handlers>
   </Conversation>
 
