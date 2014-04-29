@@ -38,6 +38,7 @@ namespace TileEngine
             ProgressLine.Add("contestAgainstJackFinished", false);
             ProgressLine.Add("contestAgainstJohnFinished", false);
             ProgressLine.Add("immortuiHave", false);
+            ProgressLine.Add("permitHave", false);
 
             collectedAmountDict.Add("IronOre", 0);
         }
