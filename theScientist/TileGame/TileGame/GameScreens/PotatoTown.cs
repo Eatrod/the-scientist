@@ -212,6 +212,7 @@ namespace TileGame.GameScreens
                 NPCFightingFarmers.Add(NPC_Farmer);
 
             }
+            #region Story NPCs
             npcStoryAsterix = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"), "Asterix");
             npcStoryAsterix.Origionoffset = new Vector2(25, 65);
             npcStoryAsterix.SetSpritePositionInGameWorld(new Vector2(64, 11));//(20, 17));
@@ -236,7 +237,26 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            #region Neutrala Npcs
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/DrunkGuard"), Content.Load<Texture2D>("CharacterPotraits/pimp-bender"), "Bibitur");
+            npcstory.Origionoffset = new Vector2(25, 65);
+            npcstory.SetSpritePositionInGameWorld(new Vector2(120, 80));
+            AnimatedSpriteObject.Add(npcstory);
+            NpcStoryList.Add(npcstory);
+
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/GateGuards"), Content.Load<Texture2D>("CharacterPotraits/Jackie"), "Guard");
+            npcstory.Origionoffset = new Vector2(25, 65);
+            npcstory.SetSpritePositionInGameWorld(new Vector2(145, 32));
+            AnimatedSpriteObject.Add(npcstory);
+            NpcStoryList.Add(npcstory);
+
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/GateGuards"), Content.Load<Texture2D>("CharacterPotraits/Jackie"), "Guard");
+            npcstory.Origionoffset = new Vector2(25, 65);
+            npcstory.SetSpritePositionInGameWorld(new Vector2(145, 30));
+            AnimatedSpriteObject.Add(npcstory);
+            NpcStoryList.Add(npcstory);
+            #endregion
+
+            #region Neutrala NPCs
             npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
             npcNeutral.Origionoffset = new Vector2(25, 65);
             npcNeutral.SetSpritePositionInGameWorld(new Vector2(65, 42));
@@ -391,6 +411,8 @@ namespace TileGame.GameScreens
             {
                 if (npc.InSpeakingRange(player))
                 {
+                    if (StoryProgress.ProgressLine["permitHave"] && npc.NPCName == "Guard")
+                        npc.script = Content.Load<Script>("Scripts/GateGuardsHavePermit");
                     if (npc.canTalk == true)
                     {
                         if (InputHandler.KeyReleased(Keys.Space))

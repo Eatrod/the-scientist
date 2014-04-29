@@ -282,6 +282,12 @@
       <Importer>ScriptImporter</Importer>
       <Processor>ScriptProcessor</Processor>
     </Compile>
+    <Compile Include="Scripts\GateGuardsHavePermit.dialog">
+      <SubType>Designer</SubType>
+      <Name>GateGuardsHavePermit</Name>
+      <Importer>ScriptImporter</Importer>
+      <Processor>ScriptProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tiles\Stonewall0000.png">

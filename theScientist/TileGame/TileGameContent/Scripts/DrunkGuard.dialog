@@ -14,17 +14,17 @@
     </Handlers>
   </Conversation>
 
-  <Conversation Name="Bibtitur1">
+  <Conversation Name="Bibitur1">
     <Text>Bibitur: Maybe i do maybe i don't everyone wants something</Text>
     <Handlers>
-      <Handler Caption="Continue" Action="Ignazio2" />
+      <Handler Caption="Continue" Action="StartConversation:Ignazio2" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Ignazio2">
     <Text>Ignazio: Hm let me think about it</Text>
     <Handlers>
-      <Handler Caption="Offer liquor" Action="StartConversation:Bibtur2" />
+      <Handler Caption="Offer liquor" Action="StartConversation:Bibitur2" />
       <Handler Caption="Leave" Action="EndConversation" />
     </Handlers>
   </Conversation>
@@ -67,7 +67,7 @@
   <Conversation Name="Ignazio5">
     <Text>Ignazio: I take that thank you</Text>
     <Handlers>
-      <Handler Caption="Take permit" Action="EndConversation;setToTrue:HavePermit" />
+      <Handler Caption="Take permit" Action="EndConversation;SetToTrue:permitHave" />
     </Handlers>
   </Conversation>
   

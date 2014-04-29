@@ -15,9 +15,9 @@
   </Conversation>
 
   <Conversation Name="Guard1">
-    <Text>Bibitur: Yes you do ragazzo now leave before we force you to</Text>
+    <Text>Guard: Yes you do ragazzo now leave before we force you to</Text>
     <Handlers>
-      <Handler Caption="Continue" Action="Ignazio2" />
+      <Handler Caption="Continue" Action="StartConversation:Ignazio2" />
     </Handlers>
   </Conversation>
 
