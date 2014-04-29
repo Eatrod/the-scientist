@@ -64,7 +64,7 @@ namespace TileGame
         
         const int screenWidth = 1024;//1920; //1248 //1920
         const int screenHeight = 768; //1080
-        const bool fullScreen = true;
+        const bool fullScreen = false;
         public readonly Rectangle ScreenRectangle;
 
         #endregion

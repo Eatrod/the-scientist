@@ -102,7 +102,9 @@ namespace TileGame.Collision
             {
                 for (int Projectile = 0; Projectile < playerprojectiles.Count(); Projectile++)
                 {
-                    if (BaseSprite.AreColliding(playerprojectiles[Projectile], sprite) && SpriteObjectInGameWorld.Contains(sprite))
+                    //if (BaseSprite.AreColliding(playerprojectiles[Projectile], sprite) && SpriteObjectInGameWorld.Contains(sprite))
+                    //{
+                    if (playerprojectiles[Projectile].Bounds.Intersects(sprite.Bounds))
                     {
                         sprite.Life -= playerprojectiles[Projectile].damageofprojectile;
                         //sprite.ArrowDirection = playerprojectiles[Projectile].Origin - sprite.Origin;
@@ -118,6 +120,7 @@ namespace TileGame.Collision
                             //sprite.Life = sprite.FullHp;                         
                         }
                     }
+                    //}
                 }
             }
         }
