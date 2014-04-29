@@ -1,7 +1,7 @@
 ﻿<Converstaions>
 
   <Conversation Name="Greeting">
-    <Text>Bibitur: Hey you have some liquor?</Text>
+    <Text>Bibitur: Hey you have some alcohol?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Ignazio1" />
     </Handlers>

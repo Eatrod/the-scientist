@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TileEngine.Sprite.Npc;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -39,7 +40,7 @@ namespace TileEngine
             ProgressLine.Add("contestAgainstJohnFinished", false);
             ProgressLine.Add("immortuiHave", false);
             ProgressLine.Add("permitHave", false);
-            ProgressLine.Add("liquorHave", false);
+            ProgressLine.Add("alcoholHave", false);
 
             collectedAmountDict.Add("IronOre", 0);
         }
@@ -131,6 +132,7 @@ namespace TileEngine
                 }
             }
         }
+
         #endregion
     }
 }
