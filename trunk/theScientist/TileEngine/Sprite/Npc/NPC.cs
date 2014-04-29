@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
@@ -11,6 +12,8 @@ namespace TileEngine.Sprite.Npc
         protected String Location { get; set; }
         protected Vector2 startingPosition;
         public Script script;
+        public List<Script> scriptList;
+        protected ContentManager content;
 
         public Vector2 StartingPosition
         {
@@ -21,7 +24,10 @@ namespace TileEngine.Sprite.Npc
         public NPC(Texture2D texture, Script script)
             : base(texture)
         {
+            scriptList = new List<Script>();
             this.script = script;
+            if (script != null)
+                this.scriptList.Add(script);
         }
 
         protected void UpdateSpriteAnimation(Vector2 motion)
@@ -56,6 +62,11 @@ namespace TileEngine.Sprite.Npc
             script.RemoveHandler(captionName);
         }
 
+        public void ChangeScript(int listNumber)
+        {
+            if (scriptList.Count > 1)
+                this.script = scriptList[listNumber];
+        }
 
         /*Flyttad till NPC_Story.cs
         public void StartConversation(string conversationName)

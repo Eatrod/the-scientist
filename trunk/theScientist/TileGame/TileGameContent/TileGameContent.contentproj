@@ -294,9 +294,9 @@
       <Importer>ScriptImporter</Importer>
       <Processor>ScriptProcessor</Processor>
     </Compile>
-    <Compile Include="Scripts\DrunkGuardHaveLiquor.dialog">
+    <Compile Include="Scripts\DrunkGuardHaveAlcohol.dialog">
       <SubType>Designer</SubType>
-      <Name>DrunkGuardHaveLiquor</Name>
+      <Name>DrunkGuardHaveAlcohol</Name>
       <Importer>ScriptImporter</Importer>
       <Processor>ScriptProcessor</Processor>
     </Compile>

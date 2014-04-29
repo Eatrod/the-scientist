@@ -9,7 +9,7 @@
   </Conversation>
 
   <Conversation Name="Ignazio1">
-    <Text>Ignazio: One bottle of liquor </Text>
+    <Text>Ignazio: One bottle of alcohol</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Innkeeper1" />
     </Handlers>
@@ -18,7 +18,7 @@
   <Conversation Name="Innkeeper1">
     <Text>Innkeeper: There you go!</Text>
     <Handlers>
-      <Handler Caption="Continue" Action="EndConversation;SetToTrue:liquorHave" />
+      <Handler Caption="Continue" Action="EndConversation;SetToTrue:alcoholHave" />
     </Handlers>
   </Conversation>
   

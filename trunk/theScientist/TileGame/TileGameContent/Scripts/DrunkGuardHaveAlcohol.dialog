@@ -1,7 +1,7 @@
 ﻿<Converstaions>
 
   <Conversation Name="Greeting">
-    <Text>Bibitur: Hey you care to buy me some liquor?</Text>
+    <Text>Bibitur: Hey you care to buy me some alcohol?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Ignazio1" />
     </Handlers>
@@ -24,7 +24,7 @@
   <Conversation Name="Ignazio2">
     <Text>Ignazio: Hm let me think about it</Text>
     <Handlers>
-      <Handler Caption="Offer liquor" Action="StartConversation:Bibitur2" />
+      <Handler Caption="Offer alcohol" Action="StartConversation:Bibitur2" />
       <Handler Caption="Leave" Action="EndConversation" />
     </Handlers>
   </Conversation>
@@ -58,7 +58,7 @@
   </Conversation>
 
   <Conversation Name="Bibitur4">
-    <Text>Bibitur: Of course i do! *burps* I need more liquor i think *collapses*</Text>
+    <Text>Bibitur: Of course i do! *burps* I need more alcohol i think *collapses*</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Ignazio5" />
     </Handlers>

@@ -238,18 +238,21 @@ namespace TileGame.GameScreens
             NpcStoryList.Add(npcstory);
 
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/DrunkGuard"), Content.Load<Texture2D>("CharacterPotraits/pimp-bender"), "Bibitur");
+            npcstory.scriptList.Add(Content.Load<Script>("Scripts/DrunkGuardHaveAlcohol"));
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(120, 80));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/GateGuards"), Content.Load<Texture2D>("CharacterPotraits/Jackie"), "Guard");
+            npcstory.scriptList.Add(Content.Load<Script>("Scripts/GateGuardsHavePermit"));
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(145, 32));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/GateGuards"), Content.Load<Texture2D>("CharacterPotraits/Jackie"), "Guard");
+            npcstory.scriptList.Add(Content.Load<Script>("Scripts/GateGuardsHavePermit"));
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(145, 30));
             AnimatedSpriteObject.Add(npcstory);
@@ -418,9 +421,9 @@ namespace TileGame.GameScreens
                 if (npc.InSpeakingRange(player))
                 {
                     if (StoryProgress.ProgressLine["permitHave"] && npc.NPCName == "Guard")
-                        npc.script = Content.Load<Script>("Scripts/GateGuardsHavePermit");
-                    if (StoryProgress.ProgressLine["liquorHave"] && npc.NPCName == "Bibitur")
-                        npc.script = Content.Load<Script>("Scripts/DrunkGuardHaveLiquor");
+                        npc.ChangeScript(1);
+                    if (StoryProgress.ProgressLine["alcoholHave"] && npc.NPCName == "Bibitur")
+                        npc.ChangeScript(1);
                     if (npc.canTalk == true)
                     {
                         if (InputHandler.KeyReleased(Keys.Space))
