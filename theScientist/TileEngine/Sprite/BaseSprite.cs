@@ -10,7 +10,7 @@ namespace TileEngine.Sprite
         protected Texture2D texture;
 
         protected float Alpha = 255.0f;
-        protected float radius = 30f;
+        protected float radius = 10f;
         protected float speed = 2f;
         protected bool faded = false;
 
