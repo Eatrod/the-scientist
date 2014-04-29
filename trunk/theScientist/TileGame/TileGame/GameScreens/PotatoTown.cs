@@ -35,6 +35,9 @@ namespace TileGame.GameScreens
         private ContentManager Content;
 
         private MultiIronSprite multiIronOre;
+        public Sprite treeStanding;
+        public Sprite treeBridge;
+        public Sprite treeStubbe;
 
         #endregion
 
@@ -61,7 +64,7 @@ namespace TileGame.GameScreens
        
         List<BaseSprite> SpriteObject = new List<BaseSprite>();
         List<BaseSprite> AnimatedSpriteObject = new List<BaseSprite>();
-        List<BaseSprite> SpriteObjectInGameWorld = new List<BaseSprite>();
+        public List<BaseSprite> SpriteObjectInGameWorld = new List<BaseSprite>();
         List<AnimatedProjectile> NPCProjectile = new List<AnimatedProjectile>();
         List<AnimatedSprite> NPCFightingFarmers = new List<AnimatedSprite>();
         List<AnimatedSprite> NPCPatrollingGuards = new List<AnimatedSprite>();
@@ -206,6 +209,21 @@ namespace TileGame.GameScreens
                 NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null, GameRef.random);
                 NPC_Farmer.Origionoffset = new Vector2(25, 65);
                 NPC_Farmer.SetSpritePositionInGameWorld(new Vector2(5 + i, 22));
+                NPC_Farmer.Life = 5;
+                NPC_Farmer.FullHp = 5;
+                AnimatedSpriteObject.Add(NPC_Farmer);
+                NPCFightingFarmers.Add(NPC_Farmer);
+
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                //Detta är NPC_Banditer, ska bli en egen klass senare
+                NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/HumanNPCBandit"), null, GameRef.random);
+                NPC_Farmer.Origionoffset = new Vector2(25, 65);
+                float x = GameRef.random.Next(100, 130);
+                float y = GameRef.random.Next(80, 90);
+                NPC_Farmer.SetSpritePositionInGameWorld(new Vector2(x, y));
                 NPC_Farmer.Life = 5;
                 NPC_Farmer.FullHp = 5;
                 AnimatedSpriteObject.Add(NPC_Farmer);
@@ -358,6 +376,20 @@ namespace TileGame.GameScreens
                 multiIronOre.SetSpritePositionInGameWorld(new Vector2(92, 43));
             }
             AnimatedSpriteObject.Add(multiIronOre);
+
+            treeStanding = new Sprite(Content.Load<Texture2D>("Sprite/BridgeTreeStanding"));
+            treeStanding.SetSpritePositionInGameWorld(new Vector2(35, 15));
+            treeStanding.Origionoffset = new Vector2(48, 80);
+            treeStanding.CollisionRadius = 48.0f;
+            SpriteObject.Add(treeStanding);
+
+            treeBridge = new Sprite(Content.Load<Texture2D>("Sprite/BridgeTreeFallen"));
+            treeBridge.SetSpritePositionInGameWorld(new Vector2(33, 17));
+            //SpriteObject.Add(treeBridge);
+
+            treeStubbe = new Sprite(Content.Load<Texture2D>("Sprite/TreeStubbe"));
+            treeStubbe.SetSpritePositionInGameWorld(new Vector2(36, 18));
+            //SpriteObject.Add(treeStubbe);
 
 
             //--
