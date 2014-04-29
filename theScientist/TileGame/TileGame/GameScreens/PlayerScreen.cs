@@ -522,6 +522,27 @@ namespace TileGame.GameScreens
                 }
             }
 
+            if (StoryProgress.activeItemsDict.ContainsKey("Axe"))
+            {
+                key_string = StoryProgress.activeItemsDict["Axe"].ToString();
+                key_string = key_string.Replace('D', ' ');
+                key_number = Convert.ToInt32(key_string);
+                if (activeItemBackgroundColor[key_number - 1] == Color.White)
+                {
+                    if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >= 0))
+                    {
+                        if (Vector2.Distance(player.Origin, GameRef.GamePlayScreen.treeStanding.Origin) < 75)
+                        {
+                            GameRef.GamePlayScreen.SpriteObjectInGameWorld.Remove(GameRef.GamePlayScreen.treeStanding);
+                            GameRef.GamePlayScreen.renderList.Remove(GameRef.GamePlayScreen.treeStanding);
+                            GameRef.GamePlayScreen.renderList.Add(GameRef.GamePlayScreen.treeBridge);
+                            GameRef.GamePlayScreen.renderList.Add(GameRef.GamePlayScreen.treeStubbe);
+                        }
+                        player.Stamina -= 20f;
+                    }
+                }
+            }
+
             if (InputHandler.KeyReleased(Keys.Tab))
             {
                 player.Stamina = 100;
