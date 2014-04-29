@@ -24,7 +24,11 @@ namespace TileGame.GameScreens
         LinkLabel saveGame;
         LinkLabel loadGame;
         LinkLabel exitGame;
+        LinkLabel writeOver;
+        LinkLabel regretSave;
         float maxItemWidth = 0f;
+
+        object thisLock = new object();
 
         #endregion
 
@@ -96,12 +100,26 @@ namespace TileGame.GameScreens
             exitGame.Selected += menuItem_Selected;
             ControlManager.Add(exitGame);
 
+            writeOver = new LinkLabel();
+            writeOver.Text = "Yes please!";
+            writeOver.Size = writeOver.SpriteFont.MeasureString(writeOver.Text);
+            //writeOver.Visible = false;
+            //writeOver.Enabled = false;
+            //ControlManager.AddItem(writeOver);
+
+            regretSave = new LinkLabel();
+            regretSave.Text = "Nooo!";
+            regretSave.Size = regretSave.SpriteFont.MeasureString(regretSave.Text);
+            //regretSave.Visible = false;
+            //regretSave.Enabled = false;
+            //ControlManager.AddItem(regretSave);
+
             ControlManager.NextControl();
             ControlManager.FocusChanged += new EventHandler(ControlManager_FocusChanged);
             Vector2 position = new Vector2(350, 500);
             foreach (Control c in ControlManager)
             {
-                if (c is LinkLabel)
+                if (c is LinkLabel && c.Enabled)
                 {
                     if (c.Size.X > maxItemWidth)
                         maxItemWidth = c.Size.X;
@@ -110,6 +128,111 @@ namespace TileGame.GameScreens
                 }
             }
             ControlManager_FocusChanged(startGame, null);
+        }
+
+        void SwitchToRealySaveGame()
+        {
+            lock (thisLock)
+            {
+                //Remove control not to use
+                ControlManager.RemoveItem(startGame);
+                //startGame.Visible = false;
+                //startGame.Enabled = false;
+                startGame.Selected -= menuItem_Selected;
+                ControlManager.RemoveItem(contGame);
+                //contGame.Visible = false;
+                //contGame.Enabled = false;
+                contGame.Selected -= menuItem_Selected;
+                ControlManager.RemoveItem(saveGame);
+                //saveGame.Visible = false;
+                //saveGame.Enabled = false;
+                saveGame.Selected -= menuItem_Selected;
+                ControlManager.RemoveItem(loadGame);
+                //loadGame.Visible = false;
+                //loadGame.Enabled = false;
+                loadGame.Selected -= menuItem_Selected;
+                ControlManager.RemoveItem(exitGame);
+                //exitGame.Visible = false;
+                //exitGame.Enabled = false;
+                exitGame.Selected -= menuItem_Selected;
+
+                //Add controls to use
+                ControlManager.AddItem(writeOver);
+                //writeOver.Visible = true;
+                //writeOver.Enabled = true;
+                writeOver.Selected += menuItem_Selected;
+                ControlManager.AddItem(regretSave);
+                //regretSave.Visible = true;
+                //regretSave.Enabled = true;
+                regretSave.Selected += menuItem_Selected;
+            }
+
+            //ControlManager.selectedControl = 0;
+            //ControlManager.NextControl();
+            //Vector2 position = new Vector2(350, 500);
+            //foreach (Control c in ControlManager)
+            //{
+            //    if (c is LinkLabel && c.Enabled)
+            //    {
+            //        if (c.Size.X > maxItemWidth)
+            //            maxItemWidth = c.Size.X;
+            //        c.Position = position;
+            //        position.Y += c.Size.Y + 5f;
+            //    }
+            //}
+
+            //ControlManager_FocusChanged(writeOver, null);
+        }
+
+        void SwitchBackToOriginalMenu()
+        {
+            //Remove not used item
+            ControlManager.RemoveItem(writeOver);
+            //writeOver.Visible = false;
+            //writeOver.Enabled = false;
+            writeOver.Selected -= menuItem_Selected;
+
+            ControlManager.RemoveItem(regretSave);
+            //regretSave.Visible = false;
+            //regretSave.Enabled = false;
+            regretSave.Selected -= menuItem_Selected;
+
+            //Add original items
+            ControlManager.AddItem(startGame);
+            //startGame.Visible = true;
+            //startGame.Enabled = true;
+            loadGame.Selected += menuItem_Selected;
+            ControlManager.AddItem(contGame);
+            //contGame.Visible = true;
+            //contGame.Enabled = true;
+            contGame.Selected += menuItem_Selected;
+            ControlManager.AddItem(saveGame);
+            //saveGame.Visible = true;
+            //saveGame.Enabled = true;
+            saveGame.Selected += menuItem_Selected;
+            ControlManager.AddItem(loadGame);
+            //loadGame.Visible = true;
+            //loadGame.Enabled = true;
+            loadGame.Selected += menuItem_Selected;
+            ControlManager.AddItem(exitGame);
+            //exitGame.Visible = true;
+            //exitGame.Enabled = true;
+            exitGame.Selected += menuItem_Selected;
+
+            //ControlManager.selectedControl = 0;
+            //ControlManager.NextControl();
+            //Vector2 position = new Vector2(350, 500);
+            //foreach (Control c in ControlManager)
+            //{
+            //    if (c is LinkLabel && c.Enabled)
+            //    {
+            //        if (c.Size.X > maxItemWidth)
+            //            maxItemWidth = c.Size.X;
+            //        c.Position = position;
+            //        position.Y += c.Size.Y + 5f;
+            //    }
+            //}
+            //ControlManager_FocusChanged(startGame, null);
         }
 
         void ControlManager_FocusChanged(object sender, EventArgs e)
@@ -131,7 +254,9 @@ namespace TileGame.GameScreens
             }
             if (sender == saveGame)
             {
-                GameRef.SaveGameToFile();
+                //Lägga in för att visa att man sparat spelet
+                SwitchToRealySaveGame();
+                //GameRef.SaveGameToFile();
             }
             if (sender == loadGame)
             {
@@ -141,11 +266,24 @@ namespace TileGame.GameScreens
             {
                 GameRef.Exit();
             }
+            if(sender == writeOver)
+            {
+                GameRef.SaveGameToFile();
+                SwitchBackToOriginalMenu();
+            }
+            if(sender == regretSave)
+            {
+                SwitchBackToOriginalMenu();
+            }
         }
 
         public override void Update(GameTime gameTime)
         {
-            ControlManager.Update(gameTime, 0);
+            lock (thisLock)
+            {
+                ControlManager.Update(gameTime, 0);
+            }
+            calculateControlPosition();
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
@@ -198,6 +336,27 @@ namespace TileGame.GameScreens
             return null;
         }
         #endregion
+
+        public void calculateControlPosition()
+        {
+            Vector2 position = new Vector2(350, 500);
+            foreach (Control c in ControlManager)
+            {
+                if (c is LinkLabel && c.Enabled)
+                {
+                    if (c.Size.X > maxItemWidth)
+                        maxItemWidth = c.Size.X;
+                    c.Position = position;
+                    position.Y += c.Size.Y + 5f;
+                }
+                if(c.HasFocus)
+                {
+                    Vector2 controlPosition = new Vector2(c.Position.X + maxItemWidth + 10f,
+                        c.Position.Y);
+                    arrowImage.SetPosition(controlPosition);
+                }
+            }
+        }
         
     }
 }
