@@ -105,13 +105,17 @@ namespace TileGame.Collision
                     if (BaseSprite.AreColliding(playerprojectiles[Projectile], sprite) && SpriteObjectInGameWorld.Contains(sprite))
                     {
                         sprite.Life -= playerprojectiles[Projectile].damageofprojectile;
+                        //sprite.ArrowDirection = playerprojectiles[Projectile].Origin - sprite.Origin;
+                        sprite.HitByArrowMethod(playerprojectiles[Projectile]);
                         playerprojectiles.RemoveAt(Projectile);
-
+                        //sprite.AggroStartingPosition = sprite.Position;
+                        //sprite.HitByArrow = true;                       
+                        //sprite.Aggro = true;
                         if (sprite.Life <= 0)
                         {
-                            SpriteObjectInGameWorld.Remove(sprite);
-                            renderList.Remove(sprite);
-                            sprite.Life = sprite.FullHp;
+                            //SpriteObjectInGameWorld.Remove(sprite);
+                            //renderList.Remove(sprite);
+                            //sprite.Life = sprite.FullHp;                         
                         }
                     }
                 }

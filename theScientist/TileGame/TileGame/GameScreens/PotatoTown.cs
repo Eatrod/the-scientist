@@ -197,10 +197,10 @@ namespace TileGame.GameScreens
                 NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), null, GameRef.random,this.tileMap.CollisionLayer.Map);
                 NPC_Patroller.Origionoffset = new Vector2(25, 65);
                 NPC_Patroller.SetSpritePositionInGameWorld(new Vector2(22 + i, 50));
-                NPC_Patroller.Life = 5;
-                NPC_Patroller.FullHp = 5;
-                NPC_Patroller.AI.GenerateTileNodes(new Vector2(22 + i, 50));
-                NPC_Patroller.AI.GenerateNeighboursForTileNodes();
+                NPC_Patroller.Life = 50;
+                NPC_Patroller.FullHp = 50;
+                //NPC_Patroller.AI.GenerateTileNodes(new Vector2(22 + i, 50));
+                //NPC_Patroller.AI.GenerateNeighboursForTileNodes();
                 AnimatedSpriteObject.Add(NPC_Patroller);
                 NPCPatrollingGuards.Add(NPC_Patroller);
             }
@@ -407,8 +407,8 @@ namespace TileGame.GameScreens
             //NPC_Guard_2.ElapsedSearch += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             //NPC_Guard_1.ElapsedSearch += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             //try with AI
-            NPC_Guard_1.SetVectorTowardsTargetAndStartAndCheckAggro(player);
-            NPC_Guard_2.SetVectorTowardsTargetAndStartAndCheckAggro(player);
+            NPC_Guard_1.SetVectorTowardsTargetAndStartAndCheckAggro(gameTime,player);
+            NPC_Guard_2.SetVectorTowardsTargetAndStartAndCheckAggro(gameTime,player);
             if(NPC_Guard_1.Aggro)
             {
                 NPC_Guard_1.PlayerPosition = player.Origin;           
@@ -420,12 +420,21 @@ namespace TileGame.GameScreens
 
             foreach(NPC_Fighting_Patrolling npc in NPCPatrollingGuards)
             {
-                npc.SetVectorTowardsTargetAndStartAndCheckAggro(player);
-                if (npc.Aggro)
-                    npc.PlayerPosition = player.Origin;
+                if (!npc.Dead)
+                {
+                    npc.SetVectorTowardsTargetAndStartAndCheckAggro(gameTime, player);
+                    //if(npc.Life <= 0)
+                    //{
+                    //    NPCPatrollingGuards.Remove(npc);
+                    //    AnimatedSpriteObject.Remove(npc);
+                    //    break;
+                    //}
+                    if (npc.Aggro)
+                        npc.PlayerPosition = player.Origin;
+                }
             }
             
-            //NPC_Patroller_1.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(NPC_Patroller_1, NPC_Patroller_1.Motion, this);
+            
             foreach(NPC_Fighting_Farmer npc in NPCFightingFarmers)
             {
                 //CollisionWithCharacter.UpdateCollisionForCharacters(
