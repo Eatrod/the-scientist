@@ -25,11 +25,11 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.ElapsedSearch = 10001.0f;
             this.DelaySearch = 1000f;
             this.Time2 = 0.0f;
-            
+            this.StrikeForce = 5.0f;
             this.startingFlag = true;
             this.VectorTowardsTarget = Vector2.Zero;
             this.VectorTowardsStart = Vector2.Zero;
-            this.aggroStartingPosition = Vector2.Zero;
+            this.AggroStartingPosition = Vector2.Zero;
             this.Aggro = false;
             this.GoingHome = false;
             this.speed = 3.0f;
@@ -68,23 +68,28 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 startingFlag = false;
             }
 
-            if (Aggro)
+            if (Aggro && !StrikeMode)
             {
-                if (Vector2.Distance(this.Origin,this.EndPosition) < 10)
-                {
-                    this.ElapsedSearch = 10001f;
-                }
-                if (this.ElapsedSearch > this.DelaySearch)
-                {
-                    this.ElapsedSearch = 0.0f;
-                    this.UsingAIAndSearchForTarget();
-                }
-                this.Time2 += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                Vector3 tempPos = this.Curve.GetPointOnCurve(this.Time2);
-                this.Position = new Vector2(tempPos.X - 25, tempPos.Y - 65);
+                this.speed = 1.5f;
+                this.Position += VectorTowardsTarget * speed;
+                //if (Vector2.Distance(this.Origin, this.EndPosition) < 10)
+                //{
+                //    this.ElapsedSearch = 10001f;
+                //}
+                //if (this.ElapsedSearch > this.DelaySearch)
+                //{
+                //    this.ElapsedSearch = 0.0f;
+                //    this.UsingAIAndSearchForTarget();
+                //}
+                //this.Time2 += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                //Vector3 tempPos = this.Curve.GetPointOnCurve(this.Time2);
+                //this.Position = new Vector2(tempPos.X - 25, tempPos.Y - 65);
 
-                this.UpdateSpriteAnimation(this.Position - this.OldPosition);
-                this.OldPosition = this.Position;
+                UpdateSpriteAnimation(VectorTowardsTarget);
+            }
+            else if(StrikeMode)
+            {
+                
             }
             else if (goingHome)
             {

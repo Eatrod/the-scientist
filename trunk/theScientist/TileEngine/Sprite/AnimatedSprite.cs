@@ -9,6 +9,14 @@ namespace TileEngine.Sprite
         public Dictionary<string, FrameAnimation> Animations =
             new Dictionary<string, FrameAnimation>();
 
+        private bool aggro;
+        private Vector2 aggroStartingPosition;
+        private bool hitByArrow;
+        private float elapsedHitByArrow;
+        private float delayHitByArrow;
+        private Vector2 arrowDirection;
+
+
         string currentAnimation = null;
         bool animating = true;
         bool takingDamage = false; //kanske flyttas till bas sprite 
@@ -21,6 +29,40 @@ namespace TileEngine.Sprite
         protected float charge = 0;
 
         double oldTime = 0;  //taking damage see kommentar.
+        public Vector2 ArrowDirection
+        {
+            get 
+            {
+                arrowDirection.Normalize();
+                return arrowDirection; 
+            }
+            set { arrowDirection = value; }
+        }
+        public bool HitByArrow
+        {
+            get { return hitByArrow; }
+            set { hitByArrow = value; }
+        }
+        public float ElapsedHitByArrow
+        {
+            get { return elapsedHitByArrow; }
+            set { elapsedHitByArrow = value; }
+        }
+        public float DelayHitByArrow
+        {
+            get { return delayHitByArrow; }
+            set { delayHitByArrow = value; }
+        }
+        public Vector2 AggroStartingPosition
+        {
+            get { return aggroStartingPosition; }
+            set { aggroStartingPosition = value; }
+        }
+        public bool Aggro
+        {
+            get { return aggro; }
+            set { aggro = value; }
+        }
         public bool Animating
         {
             get { return animating; }
@@ -87,7 +129,7 @@ namespace TileEngine.Sprite
             get { return charge; }
             set { charge = value; }
         }
-
+      
         public FrameAnimation CurrentAnimation
         {
             get
@@ -181,7 +223,13 @@ namespace TileEngine.Sprite
             }
 
         }
-
+        public void HitByArrowMethod(AnimatedProjectile sprite)
+        {
+            Aggro = true;
+            HitByArrow = true;
+            AggroStartingPosition = this.Position;
+            ArrowDirection = sprite.Origin - this.Origin;
+        }
         public override void Draw(SpriteBatch spriteBatch)
         {
             FrameAnimation animation = CurrentAnimation;

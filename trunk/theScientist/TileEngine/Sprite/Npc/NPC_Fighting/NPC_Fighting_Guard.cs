@@ -17,13 +17,27 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
     {
         protected Vector2 vectorTowardsTarget;
         protected Vector2 vectorTowardsStart;
-        protected Vector2 aggroStartingPosition;
-        protected bool aggro;
+        
+        
         protected bool startingFlag;
         protected bool goingHome;
         protected float aggroRange;
         protected float aggroCircle;
+
+        private bool dead;
+
+        private float elapsedHitByMelee;
+        private float delayHitByMelee;
+        private bool meleeHit;
+
+        private float strikeForce;
+        private bool strikeMode;
+        private float delayStrike;
+        private float delayStruck;
+        private float elapsedStruck;
+        private float elapsedStrike;
         private float time2;
+
         private float delaySearch;
         private float elapsedSearch;
         private Vector2 playerPosition;
@@ -31,6 +45,56 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         private Curve2D curve;
         private AIsearch ai;
         private Vector2 oldPosition;
+        public bool Dead
+        {
+            get { return dead; }
+            set { dead = value; }
+        }
+        public bool MeleeHit
+        {
+            get { return meleeHit; }
+            set { meleeHit = value; }
+        }
+        public float ElapsedHitByMelee
+        {
+            get { return elapsedHitByMelee; }
+            set { elapsedHitByMelee = value; }
+        }
+        public float DelayHitByMelee
+        {
+            get { return delayHitByMelee; }
+            set { delayHitByMelee = value; }
+        }
+        public float StrikeForce
+        {
+            get { return strikeForce; }
+            set { strikeForce = value; }
+        }
+        public float DelayStruck
+        {
+            get { return delayStruck; }
+            set { delayStruck = value; }
+        }
+        public float ElapsedStruck
+        {
+            get { return elapsedStruck; }
+            set { elapsedStruck = value; }
+        }
+        public bool StrikeMode
+        {
+            get { return strikeMode; }
+            set { strikeMode = value; }
+        }
+        public float DelayStrike
+        {
+            get { return delayStrike; }
+            set { delayStrike = value; }
+        }
+        public float ElapsedStrike
+        {
+            get { return elapsedStrike; }
+            set { elapsedStrike = value; }
+        }
         public Vector2 PlayerPosition
         {
             get { return playerPosition; }
@@ -72,12 +136,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             get { return ai; }
             set { ai = value; }
         }
-        
-        public Vector2 AggroStartingPosition
-        {
-            get { return aggroStartingPosition; }
-            set { aggroStartingPosition = value; }
-        }
         public float AggroCircle
         {
             get { return aggroCircle; }
@@ -100,8 +158,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         }
         public Vector2 VectorTowardsStart
         {
-            get 
-            { 
+            get
+            {
                 vectorTowardsStart.Normalize();
                 return vectorTowardsStart;
             }
@@ -110,32 +168,36 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 vectorTowardsStart = value;
             }
         }
-        public bool Aggro
-        {
-            get { return aggro; }
-            set { aggro = value; }
-        }
         public Vector2 VectorTowardsTarget
         {
             get
             {
                 vectorTowardsTarget.Normalize();
-                return vectorTowardsTarget; 
+                return vectorTowardsTarget;
             }
             set { vectorTowardsTarget = value; }
 
         }
 
-        public NPC_Fighting_Guard(Texture2D texture, Script script, int[,] Map):base(texture,script)
+        public NPC_Fighting_Guard(Texture2D texture, Script script, int[,] Map)
+            : base(texture, script)
         {
+            this.Dead = false;
+            this.ElapsedHitByMelee = 0.0f;
+            this.DelayHitByMelee = 300f;
+            this.strikeMode = false;
             this.startingFlag = true;
             this.vectorTowardsTarget = Vector2.Zero;
             this.vectorTowardsStart = Vector2.Zero;
-            this.aggroStartingPosition = Vector2.Zero;
+            this.AggroStartingPosition = Vector2.Zero;
+            this.DelayStrike = 1000f;
+            this.ElapsedStrike = 0.0f;
             this.Aggro = false;
             this.GoingHome = false;
             this.speed = 1.0f;
-            this.aggroRange = 100;
+            this.aggroRange = 150;
+            this.delayStruck = 500f;
+            this.elapsedStruck = 0.0f;
             this.aggroCircle = 500;
             this.AI = new AIsearch(Map);
         }
@@ -169,23 +231,65 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             }
             Curve.SetTangents();
         }
-        public void SetVectorTowardsTargetAndStartAndCheckAggro(AnimatedSprite player)
+        public void SetVectorTowardsTargetAndStartAndCheckAggro(GameTime gameTime, AnimatedSprite player)
         {
-            vectorTowardsTarget = player.Position - Position;
+
+            vectorTowardsTarget = player.Origin - this.Origin;
             vectorTowardsStart = startingPosition - Position;
-            if (Vector2.Distance(Position, AggroStartingPosition) > AggroCircle && AggroStartingPosition != Vector2.Zero)
+            if (HitByArrow)
+            {
+                ElapsedHitByArrow += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                this.Position -= this.ArrowDirection * 3;
+                if (ElapsedHitByArrow > DelayHitByArrow)
+                {
+                    HitByArrow = false;
+                    ElapsedHitByArrow = 0.0f;
+                }
+            }
+            if (MeleeHit)
+            {
+                ElapsedHitByMelee += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                Vector2 HitVector = this.Origin - player.Origin;
+                HitVector.Normalize();
+                player.Position -= HitVector * 3;
+                if (ElapsedHitByMelee > DelayHitByMelee)
+                {
+                    MeleeHit = false;
+                    ElapsedHitByMelee = 0.0f;
+                }
+            }
+            if (Vector2.Distance(this.Position, player.Position) < 50)
+            {
+                ElapsedStrike += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                strikeMode = true;
+                UpdateSpriteAnimation(player.Position - this.Position);
+                if (ElapsedStrike > DelayStrike)
+                {
+                    this.MeleeHit = true;
+                    player.Life -= StrikeForce;
+                    player.SettingSpriteBlink(gameTime);
+                    ElapsedStrike = 0.0f;
+                }
+
+            }
+            else
+            {
+                strikeMode = false;
+            }
+            if (Vector2.Distance(Position, AggroStartingPosition) > AggroCircle && AggroStartingPosition != Vector2.Zero && !StrikeMode)
             {
                 Aggro = false;
                 GoingHome = true;
                 AggroStartingPosition = Vector2.Zero;
             }
-            else if (Vector2.Distance(player.Position, Position) < AggroRange && !GoingHome &&!Aggro)
+            else if (Vector2.Distance(player.Position, Position) < AggroRange && !GoingHome && !Aggro)
             {
                 AggroStartingPosition = Position;
                 Aggro = true;
             }
-            else if(Vector2.Distance(startingPosition,Position) < 10 && GoingHome)
+            else if (Vector2.Distance(startingPosition, Position) < 10 && GoingHome)
             {
+                //this.Life = 100;
                 GoingHome = false;
             }
             
@@ -198,7 +302,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             //    this.startingPosition = Position;
             //    startingFlag = false;
             //}
-            
+
             //if (Aggro)
             //{
             //    Position += VectorTowardsTarget * speed;
@@ -233,22 +337,25 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
             if (motionAngle >= -MathHelper.PiOver4 && motionAngle <= MathHelper.PiOver4)
             {
-                CurrentAnimationName = "WalkRight"; //Right
+                    CurrentAnimationName = "WalkRight"; //Right
                 //motion = new Vector2(1f, 0f);
             }
             else if (motionAngle >= MathHelper.PiOver4 && motionAngle <= 3f * MathHelper.PiOver4)
             {
-                CurrentAnimationName = "WalkDown"; //Down
+                
+                    CurrentAnimationName = "WalkDown"; //Down
                 //motion = new Vector2(0f, 1f);
             }
             else if (motionAngle <= -MathHelper.PiOver4 && motionAngle >= -3f * MathHelper.PiOver4)
             {
-                CurrentAnimationName = "WalkUp"; // Up
+                
+                    CurrentAnimationName = "WalkUp"; // Up
                 //motion = new Vector2(0f, -1f);
             }
             else
             {
-                CurrentAnimationName = "WalkLeft"; //Left
+                
+                    CurrentAnimationName = "WalkLeft"; //Left
                 //motion = new Vector2(-1f, 0f);
             }
         }

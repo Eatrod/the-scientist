@@ -44,10 +44,10 @@ namespace TileEngine.AI
         }
         public void GenerateTileNodes(Vector2 Position)
         {
-            int topY = (int)Position.Y + 20;
-            int bottomY = (int)Position.Y - 20;
-            int topX = (int)Position.X + 20;
-            int bottomX = (int)Position.X - 20;
+            int topY = (int)Position.Y + 30;
+            int bottomY = (int)Position.Y - 30;
+            int topX = (int)Position.X + 30;
+            int bottomX = (int)Position.X - 30;
             if (bottomX < 0)
                 bottomX = 0;
             if (bottomY < 0)
@@ -81,9 +81,9 @@ namespace TileEngine.AI
             foreach (TileNode tn1 in tileNodes)
             {
                 tn1.Cost = 0;
-                tn1.ManhattanDistance = Vector2.Distance(tn1.PositionInGrid/32, GridPositionGoal); 
-                //tn1.ManhattanDistance = Math.Abs(tn1.PositionInGrid.X - GridPositionGoal.X) +
-                //    Math.Abs(tn1.PositionInGrid.Y - GridPositionGoal.Y);
+                //tn1.ManhattanDistance = Vector2.Distance(tn1.PositionInGrid, GridPositionGoal); 
+                tn1.ManhattanDistance = Math.Abs(tn1.PositionInGrid.X - GridPositionGoal.X) +
+                    Math.Abs(tn1.PositionInGrid.Y - GridPositionGoal.Y);
             }
 
         }
@@ -121,17 +121,20 @@ namespace TileEngine.AI
                 {
                     if (!visitedNodes.Exists(Node => Node == neighbour))
                     {
+                        //if(!Frontier.Contains(neighbour))
                         Frontier.Enqueue(neighbour);
                         if (FirstPath.ContainsKey(neighbour))
                             FirstPath.Remove(neighbour);
                         FirstPath.Add(neighbour, node);
                         neighbour.Cost = node.Cost + 1;
                     }
-                    else if (neighbour.Cost > node.Cost + 1)
+                    else if (neighbour.Cost < node.Cost + 1)
                     {
+                        
                         if (FirstPath.ContainsKey(neighbour))
                             FirstPath.Remove(neighbour);
                         FirstPath.Add(neighbour, node);
+                        //if (!Frontier.Contains(neighbour))
                         Frontier.Enqueue(neighbour);
                         visitedNodes.Remove(neighbour);
                         neighbour.Cost = node.Cost + 1;
@@ -141,7 +144,7 @@ namespace TileEngine.AI
         }
         public void SortQueue(Queue<TileNode> Frontier)
         {
-            Frontier.OrderBy(x => x.ManhattanDistance).ThenBy(x => x.Cost);
+            Frontier.OrderBy(x => x.Cost).ThenBy(x => x.ManhattanDistance);
         }
     }
 }

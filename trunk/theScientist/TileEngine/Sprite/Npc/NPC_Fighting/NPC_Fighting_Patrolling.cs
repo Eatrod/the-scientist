@@ -39,12 +39,16 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         }
         public NPC_Fighting_Patrolling(Texture2D texture, Script script, Random random, int[,] Map) :base(texture,script,Map)
         {
+
+            this.DelayHitByArrow = 300f;
+            this.ElapsedHitByArrow = 0.0f;
+            this.Dead = false;
             this.OldPosition = Vector2.Zero;
             this.EndPosition = Vector2.Zero;
             this.ElapsedSearch = 10001.0f;
             this.DelaySearch = 1000f;
             this.Time2 = 0.0f;
-
+            this.StrikeForce = 5.0f;
             this.collided = false;
             this.random = random;
             this.direction = 0;
@@ -65,13 +69,14 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             FrameAnimation left = new FrameAnimation(1, 50, 80, 0, 80);
             FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);
             FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
-
+            FrameAnimation dead = new FrameAnimation(1, 100, 55, 0, 320);
 
             FrameAnimation walkDown = new FrameAnimation(2, 50, 80, 50, 0);
             FrameAnimation walkLeft = new FrameAnimation(2, 50, 80, 50, 80);
             FrameAnimation walkRight = new FrameAnimation(2, 50, 80, 50, 160);
             FrameAnimation walkUp = new FrameAnimation(2, 50, 80, 50, 240);
 
+            this.Animations.Add("Dead", dead);
 
             this.Animations.Add("Right", right);
             this.Animations.Add("Left", left);
@@ -82,70 +87,65 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.Animations.Add("WalkUp", walkUp);
             this.Animations.Add("WalkDown", walkDown);
             
+            
 
 
         }
         public override void Update(GameTime gameTime)
         {
-            this.ElapsedSearch += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (StartingFlag)
+            if (this.Life <= 0)
+                Dead = true;
+            if (!Dead)
             {
-                this.StartingPosition = Position;
-                StartingFlag = false;
-            }
-            
-            GetRandomDirection(gameTime);
-            
-            this.motion = new Vector2(
-               (float)Math.Cos(MathHelper.ToRadians(direction)),
-               (float)Math.Sin(MathHelper.ToRadians(-direction)));
-            
-            UpdateSpriteAnimation(motion);
-            
-
-            if (Aggro)
-            {
-                if (Vector2.Distance(this.Origin, this.EndPosition) < 10)
+                this.ElapsedSearch += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (StartingFlag)
                 {
-                    this.ElapsedSearch = 10001f;
+                    this.StartingPosition = Position;
+                    StartingFlag = false;
                 }
-                if (this.ElapsedSearch > this.DelaySearch)
-                {
-                    this.ElapsedSearch = 0.0f;
-                    this.UsingAIAndSearchForTarget();
-                }
-                this.Time2 += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                if (this.Curve == null)
-                    return;
-                Vector3 tempPos = this.Curve.GetPointOnCurve(this.Time2);
-                this.Position = new Vector2(tempPos.X - 25, tempPos.Y - 65);
 
-                this.UpdateSpriteAnimation(this.Position - this.OldPosition);
-                this.OldPosition = this.Position;
-                //this.speed = 0.7f;
-                //Position += VectorTowardsTarget * speed;
-                //UpdateSpriteAnimation(VectorTowardsTarget);
-            }
-            else if (GoingHome)
-            {
-                this.speed = 3.0f;
-                Position += VectorTowardsStart * speed;
-                UpdateSpriteAnimation(VectorTowardsStart);
+                GetRandomDirection(gameTime);
+
+                this.motion = new Vector2(
+                   (float)Math.Cos(MathHelper.ToRadians(direction)),
+                   (float)Math.Sin(MathHelper.ToRadians(-direction)));
+
+                UpdateSpriteAnimation(motion);
+
+
+                if (Aggro && !StrikeMode)
+                {
+                    this.speed = 1.5f;
+                    this.Position += VectorTowardsTarget * speed;
+
+                    UpdateSpriteAnimation(VectorTowardsTarget);
+                }
+                else if (StrikeMode)
+                {
+
+                }
+                else if (GoingHome)
+                {
+                    this.speed = 3.0f;
+                    Position += VectorTowardsStart * speed;
+                    UpdateSpriteAnimation(VectorTowardsStart);
+                }
+                else
+                {
+                    this.speed = 0.5f;
+                    Position += motion * speed;
+                }
+                if (!Aggro && !GoingHome && Collided)
+                {
+                    direction += 180;
+                    direction = direction % 360;
+                    Collided = false;
+                }
             }
             else
             {
-                this.speed = 0.5f;
-                Position += motion * speed;
+                CurrentAnimationName = "Dead";
             }
-            
-
-            
-            //if (!Aggro && !GoingHome && Collided)
-            //{
-            //    direction += 180;
-            //    direction = direction % 360;
-            //    Collided = false;
-            //}
             base.Update(gameTime);
             
         }
