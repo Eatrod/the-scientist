@@ -67,7 +67,6 @@
     <Compile Include="AI\Curve2D.cs" />
     <Compile Include="AI\TileNode.cs" />
     <Compile Include="Camera.cs" />
-    <Compile Include="Dialog\Dialog.cs" />
     <Compile Include="Sprite\AnimatedProjectile.cs" />
     <Compile Include="Sprite\AnimatedSprite.cs" />
     <Compile Include="Sprite\BaseSprite.cs" />
