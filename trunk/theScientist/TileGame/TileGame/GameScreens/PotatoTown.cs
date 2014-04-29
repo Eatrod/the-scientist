@@ -11,7 +11,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Media;
-using TileEngine.Dialog;
 using TileEngine.Sprite;
 using TileEngine.Sprite.Npc;
 using TileEngine.Sprite.Npc.NPC_Neutral;
@@ -56,7 +55,6 @@ namespace TileGame.GameScreens
         public List<NPC_Neutral_Townsfolk> NpcNeutralList = new List<NPC_Neutral_Townsfolk>(); 
         public List<NPC_Story> NpcStoryList = new List<NPC_Story>(); 
         protected Rectangle rectangle;
-        protected Dialog dialog ;
         private GraphicsDeviceManager graphics;
 
         CollisionWithCharacter CollisionWithCharacter = new CollisionWithCharacter();

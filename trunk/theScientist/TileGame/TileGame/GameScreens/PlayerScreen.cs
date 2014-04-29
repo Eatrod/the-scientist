@@ -11,7 +11,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Media;
-using TileEngine.Dialog;
 using TileEngine.Sprite;
 using TileEngine.Sprite.Npc.NPC_Neutral;
 using TileEngine.Sprite.Npc.NPC_Story;
@@ -73,7 +72,6 @@ namespace TileGame.GameScreens
 
         public TileMap tileMap = new TileMap();
         protected Camera camera = new Camera();
-        private Dialog dialog;
         protected bool ActiveConversation = false;
         private Rectangle rectangle;
 
@@ -219,7 +217,6 @@ namespace TileGame.GameScreens
                 chargeanimation = new AnimatedSprite(Content.Load<Texture2D>("Sprite/ChargeBar"));
                 chargeanimation.SetSpritePositionInGameWorld(new Vector2(0, 1.4f));
             }
-            dialog = new Dialog();
             rectangle = new Rectangle(0, GraphicsDevice.Viewport.Height - 100, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             dialogBox = new DialogBox(Content.Load<Texture2D>("GUI/DialogPlaceholder"), rectangle, "");
 
@@ -549,15 +546,6 @@ namespace TileGame.GameScreens
                 StateManager.PushState(GameRef.InventoryScreen);
 
             dialogBox.Update(gameTime);
-            if (InputHandler.KeyReleased(Keys.Space))
-            {
-                if (ActiveConversation == true)
-                {
-                    dialog.NextText(this.talksTo, this.talksTo.text,player, GameRef.storyProgress);
-                    dialogBox.Text = dialog.conversation.Text;
-                    dialogBox.conversation = dialog.conversation;
-                }
-            }
 
             if (motion != Vector2.Zero)
             {
