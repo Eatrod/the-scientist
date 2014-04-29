@@ -254,6 +254,12 @@ namespace TileGame.GameScreens
             npcstory.SetSpritePositionInGameWorld(new Vector2(145, 30));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
+
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Human"), Content.Load<Script>("Scripts/Innkeeper"), Content.Load<Texture2D>("CharacterPotraits/asterix"), "Innkeeper");
+            npcstory.Origionoffset = new Vector2(25, 65);
+            npcstory.SetSpritePositionInGameWorld(new Vector2(125, 85));
+            AnimatedSpriteObject.Add(npcstory);
+            NpcStoryList.Add(npcstory);
             #endregion
 
             #region Neutrala NPCs
@@ -413,6 +419,8 @@ namespace TileGame.GameScreens
                 {
                     if (StoryProgress.ProgressLine["permitHave"] && npc.NPCName == "Guard")
                         npc.script = Content.Load<Script>("Scripts/GateGuardsHavePermit");
+                    if (StoryProgress.ProgressLine["liquorHave"] && npc.NPCName == "Bibitur")
+                        npc.script = Content.Load<Script>("Scripts/DrunkGuardHaveLiquor");
                     if (npc.canTalk == true)
                     {
                         if (InputHandler.KeyReleased(Keys.Space))
