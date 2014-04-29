@@ -78,7 +78,6 @@ namespace TileGame.GameScreens
 
         #endregion
 
-
         #region Constructor Region
         public PotatoTown(Game game, GameStateManager manager, string name)
             : base(game, manager)
@@ -148,16 +147,6 @@ namespace TileGame.GameScreens
             tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/testCollision.layer");
 
             //En Sprite i världen som återskapas vid entry.
-            sprite = new Sprite(Content.Load<Texture2D>("Sprite/playerbox"));
-            sprite.Origionoffset = new Vector2(15, 15);
-            sprite.SetSpritePositionInGameWorld(new Vector2(5, 5));
-            SpriteObject.Add(sprite);
-            
-            sprite1 = new Sprite(Content.Load<Texture2D>("Sprite/playerbox"));
-            sprite1.Origionoffset = new Vector2(15, 15);
-            sprite1.SetSpritePositionInGameWorld(new Vector2(10, 10));
-            SpriteObject.Add(sprite1);
-
             NPC1 = new AnimatedSprite(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"));           
             NPC1.Origionoffset = new Vector2(25,65);
             NPC1.SetSpritePositionInGameWorld(new Vector2(9,9));
@@ -230,6 +219,7 @@ namespace TileGame.GameScreens
                 NPCFightingFarmers.Add(NPC_Farmer);
 
             }
+
             #region Story NPCs
             npcStoryAsterix = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"), "Asterix");
             npcStoryAsterix.Origionoffset = new Vector2(25, 65);

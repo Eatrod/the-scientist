@@ -34,6 +34,7 @@ namespace TileGame.GameScreens
 
         #region Property Region
         #endregion
+
         #region Constructor Region
 
         public StartMenuScreen(Game game, GameStateManager manager)
