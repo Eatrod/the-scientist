@@ -1,0 +1,50 @@
+﻿<Converstaions>
+
+  <Conversation Name="Greeting">
+    <Text>Guard: Halt! None may pass through here without a proper permit!</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Ignazio1" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Ignazio1">
+    <Text>Ignazio: I don't need a stupid permit</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Guard1"/>
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Guard1">
+    <Text>Bibitur: Yes you do ragazzo now leave before we force you to</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="Ignazio2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Ignazio2">
+    <Text>Ignazio: Why is the gate closed?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Guard2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Guard2">
+    <Text>Guard: Have you been living under a masso? The plague? You know the plague that kills people?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Ignazio3" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Ignazio3">
+    <Text>Ignazio: Fine I stay here for now</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Guard3"/>
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Guard3">
+    <Text>Guard: Yeah i sure hope so</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="EndConversation" />
+    </Handlers>
+  </Conversation>

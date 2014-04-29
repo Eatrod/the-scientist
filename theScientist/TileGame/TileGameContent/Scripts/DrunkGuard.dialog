@@ -1,0 +1,74 @@
+﻿<Converstaions>
+
+  <Conversation Name="Greeting">
+    <Text>Bibitur: Hey you care to buy me some liquor?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Ignazio1" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Ignazio1">
+    <Text>Ignazio: Depends do you have something i need?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Bibitur1"/>
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Bibtitur1">
+    <Text>Bibitur: Maybe i do maybe i don't everyone wants something</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="Ignazio2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Ignazio2">
+    <Text>Ignazio: Hm let me think about it</Text>
+    <Handlers>
+      <Handler Caption="Offer liquor" Action="StartConversation:Bibtur2" />
+      <Handler Caption="Leave" Action="EndConversation" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Bibitur2">
+    <Text>Bibitur: Thank you ragazzo you know what this plague rumor is porcheria</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Ignazio3" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Ignazio3">
+    <Text>Ignazio: How come?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Bibitur3"/>
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Bibitur3">
+    <Text>Bibitur: It happens so often they have started to hand out these permits like potatos</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Ignazio4" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Ignazio4">
+    <Text>Ignazio: So do you have a permit?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Bibitur4" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Bibitur4">
+    <Text>Bibitur: Of course i do! *burps* I need more liquor i think *collapses*</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Ignazio5" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Ignazio5">
+    <Text>Ignazio: I take that thank you</Text>
+    <Handlers>
+      <Handler Caption="Take permit" Action="EndConversation;setToTrue:HavePermit" />
+    </Handlers>
+  </Conversation>
+  
+</Converstaions>
