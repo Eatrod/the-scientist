@@ -288,6 +288,18 @@
       <Importer>ScriptImporter</Importer>
       <Processor>ScriptProcessor</Processor>
     </Compile>
+    <Compile Include="Scripts\Innkeeper.dialog">
+      <SubType>Designer</SubType>
+      <Name>Innkeeper</Name>
+      <Importer>ScriptImporter</Importer>
+      <Processor>ScriptProcessor</Processor>
+    </Compile>
+    <Compile Include="Scripts\DrunkGuardHaveLiquor.dialog">
+      <SubType>Designer</SubType>
+      <Name>DrunkGuardHaveLiquor</Name>
+      <Importer>ScriptImporter</Importer>
+      <Processor>ScriptProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tiles\Stonewall0000.png">
