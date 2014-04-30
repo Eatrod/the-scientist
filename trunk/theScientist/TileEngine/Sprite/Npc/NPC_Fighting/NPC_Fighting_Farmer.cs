@@ -28,7 +28,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         private Vector2 attackDirection;
         private Point cellPosition;
         private bool collided;
-        private bool aggro;
 
         public bool Running
         {
@@ -39,11 +38,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         {
             get { return attackDirection; }
             set { attackDirection = value; }
-        }
-        public bool Aggro
-        {
-            get { return aggro; }
-            set { aggro = value; }
         }
         public bool Collided
         {
@@ -62,7 +56,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.elapsedAggro = 0;
             this.elapsedDirection = 0;
             this.delayAggro = 1000f;
-            this.aggro = false;
+            this.Aggro = false;
             this.collided = false;
             this.random = random;
             this.speed = 0.5f;
@@ -99,7 +93,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 if(npc.Bounds.Intersects(this.Bounds) && npc.Bounds != this.Bounds && !npc.Running && !npc.Aggro)
                 {
                     this.running = false;
-                    this.aggro = false;
+                    this.Aggro = false;
                     this.HitFlag = true;
                     npc.AttackersDirection = -this.AttackersDirection;
                     npc.HitFlag = true;
@@ -109,7 +103,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 if (player.Bounds.Intersects(this.Bounds))
                 {
                     this.running = false;
-                    this.aggro = false;
+                    this.Aggro = false;
                     this.HitFlag = true;
                     player.Life -= chargeDamage;
                     player.AttackersDirection = -this.AttackersDirection;
@@ -140,11 +134,11 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 direction += 180;
                 direction = direction % 360;
                 running = false;
-                aggro = false;
+                Aggro = false;
                 collided = false;
                 
             }
-            else if ((elapsedDirection > delayDirection) && !aggro && !running && !HitFlag)
+            else if ((elapsedDirection > delayDirection) && !Aggro && !running && !HitFlag)
             {
                 direction = random.Next(0, 360);
                 elapsedDirection = 0.0f;
@@ -156,13 +150,13 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
             UpdateSpriteAnimation(motion);
             
-            if(aggro)
+            if(Aggro)
             {
                 elapsedAggro += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 if(elapsedAggro > delayAggro)
                 {
                     running = true;
-                    aggro = false;
+                    Aggro = false;
                     elapsedAggro = 0;
                 }
             }
@@ -180,7 +174,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 
                 speed = 0.5f;
                 running = false;
-                aggro = false;
+                Aggro = false;
                 Position += speed * motion;
             }
             
