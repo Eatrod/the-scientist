@@ -572,14 +572,14 @@ namespace TileGame.GameScreens
                 {
                     if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >= 0))
                     {
-                        if (Vector2.Distance(player.Origin, GameRef.GamePlayScreen.treeStanding.Origin) < 75)
+                        if (Vector2.Distance(player.Origin, GameRef.PotatoTown.treeStanding.Origin) < 75)
                         {
                             if (!StoryProgress.ProgressLine["treeIsDown"])
                             {
-                                GameRef.GamePlayScreen.SpriteObjectInGameWorld.Remove(GameRef.GamePlayScreen.treeStanding);
-                                GameRef.GamePlayScreen.renderList.Remove(GameRef.GamePlayScreen.treeStanding);
-                                GameRef.GamePlayScreen.renderList.Add(GameRef.GamePlayScreen.treeBridge);
-                                GameRef.GamePlayScreen.renderList.Add(GameRef.GamePlayScreen.treeStubbe);
+                                GameRef.PotatoTown.SpriteObjectInGameWorld.Remove(GameRef.PotatoTown.treeStanding);
+                                GameRef.PotatoTown.renderList.Remove(GameRef.PotatoTown.treeStanding);
+                                GameRef.PotatoTown.renderList.Add(GameRef.PotatoTown.treeBridge);
+                                GameRef.PotatoTown.renderList.Add(GameRef.PotatoTown.treeStubbe);
                                 StoryProgress.ProgressLine["treeIsDown"] = true;
                             }
                         }
@@ -651,7 +651,7 @@ namespace TileGame.GameScreens
             {
                 //player.SetSpritePositionInGameWorld(new Vector2(0, 0));
                 Point startCell;
-                startCell = GameRef.BaseGamePlayScreen.FindCellWithIndexInCurrentTilemap(50, GameRef.GamePlayScreen);
+                startCell = GameRef.BaseGamePlayScreen.FindCellWithIndexInCurrentTilemap(50, GameRef.PotatoTown);
                 player.SetSpritePositionInGameWorld( new Vector2(startCell.X, startCell.Y));
 
                 player.Life = 100;

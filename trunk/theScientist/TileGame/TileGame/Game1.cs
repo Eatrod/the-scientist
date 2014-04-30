@@ -46,7 +46,7 @@ namespace TileGame
         public TitleScreen TitleScreen;
         public StartMenuScreen StartMenuScreen;
         public NotebookScreen NotebookScreen;
-        public PotatoTown GamePlayScreen;
+        public PotatoTown PotatoTown;
         public PlayerScreen BaseGamePlayScreen;
         public GamePlayScreen2 GamePlayScreen2;
         public InventoryScreen InventoryScreen;
@@ -94,12 +94,12 @@ namespace TileGame
             TitleScreen = new TitleScreen(this, stateManager);
             StartMenuScreen = new StartMenuScreen(this, stateManager);
             NotebookScreen = new NotebookScreen(this, stateManager);
-            GamePlayScreen = new PotatoTown(this, stateManager, "Screen1");
+            PotatoTown = new PotatoTown(this, stateManager, "Screen1");
             GamePlayScreen2 = new GamePlayScreen2(this, stateManager, "Screen2");
             BaseGamePlayScreen = new PlayerScreen(this, stateManager);
             InventoryScreen = new InventoryScreen(this, stateManager);
             stateManager.ChangeState(TitleScreen);
-            gamePlayScreens.Add(GamePlayScreen);
+            gamePlayScreens.Add(PotatoTown);
             gamePlayScreens.Add(GamePlayScreen2);
         }
         #endregion
@@ -133,7 +133,7 @@ namespace TileGame
 
             musicStates.Add(TitleScreen, titleMusic);
             musicStates.Add(StartMenuScreen, titleMusic);
-            musicStates.Add(GamePlayScreen, potatotownMusic);
+            musicStates.Add(PotatoTown, potatotownMusic);
         }
 
         /// <summary>
@@ -163,6 +163,12 @@ namespace TileGame
             {
                 if (!musicStates[currentState].SongStart)
                 {
+                    foreach(var s in musicStates)
+                    {
+                        s.Value.SongStart = false;
+                        if (s.Value.SongStart)
+                            MediaPlayer.Stop();
+                    }
                     MediaPlayer.Play(musicStates[currentState].Song);
                     musicStates[currentState].SongStart = true;
                     //oldState = currentState;

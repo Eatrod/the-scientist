@@ -164,9 +164,9 @@ namespace TileGame.GameScreens
             int cellIndex = tileMap.CollisionLayer.GetCellIndex(cell);
             if (cellIndex >= 40 && cellIndex < 50)
             {
-                GateToNextScreen(cellIndex, GameRef.GamePlayScreen, "G0");
+                GateToNextScreen(cellIndex, GameRef.PotatoTown, "G0");
 
-                GateToNextScreen(cellIndex, GameRef.GamePlayScreen, "G1");
+                GateToNextScreen(cellIndex, GameRef.PotatoTown, "G1");
                 
             }
             UnlockGate(cellIndex);
