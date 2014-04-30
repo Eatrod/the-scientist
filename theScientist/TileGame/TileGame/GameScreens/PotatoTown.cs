@@ -118,10 +118,10 @@ namespace TileGame.GameScreens
                 if (s is MultiIronSprite)
                 {
                     MultiIronSprite mis = (MultiIronSprite)s;
-                    FrameAnimation all = new FrameAnimation(1, 32, 32, 0, 0);
+            FrameAnimation all = new FrameAnimation(1, 32, 32, 0, 0);
                     if (!mis.Animations.ContainsKey("all"))
                         mis.Animations.Add("all", all);
-                    FrameAnimation half = new FrameAnimation(1, 32, 32, 32, 0);
+            FrameAnimation half = new FrameAnimation(1, 32, 32, 32, 0);
                     if (!mis.Animations.ContainsKey("half"))
                         mis.Animations.Add("half", half);
                     mis.CurrentAnimationName = "all";
@@ -145,7 +145,7 @@ namespace TileGame.GameScreens
                 this.renderList.Remove(GameRef.GamePlayScreen.treeStanding);
                 this.renderList.Add(GameRef.GamePlayScreen.treeBridge);
                 this.renderList.Add(GameRef.GamePlayScreen.treeStubbe);
-            }
+        }
         }
         protected override void LoadContent()
         {
@@ -261,10 +261,10 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/DrunkGuard"), Content.Load<Texture2D>("CharacterPotraits/pimp-bender"), "Bibitur");
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/NPCGuardCaptain"), Content.Load<Script>("Scripts/DrunkGuard"), Content.Load<Texture2D>("CharacterPotraits/pimp-bender"), "Bibitur");
             npcstory.scriptList.Add(Content.Load<Script>("Scripts/DrunkGuardHaveAlcohol"));
             npcstory.Origionoffset = new Vector2(25, 65);
-            npcstory.SetSpritePositionInGameWorld(new Vector2(120, 80));
+            npcstory.SetSpritePositionInGameWorld(new Vector2(67, 11));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
@@ -284,7 +284,7 @@ namespace TileGame.GameScreens
 
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Human"), Content.Load<Script>("Scripts/Innkeeper"), Content.Load<Texture2D>("CharacterPotraits/asterix"), "Innkeeper");
             npcstory.Origionoffset = new Vector2(25, 65);
-            npcstory.SetSpritePositionInGameWorld(new Vector2(125, 85));
+            npcstory.SetSpritePositionInGameWorld(new Vector2(70, 11));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
             #endregion
@@ -438,7 +438,6 @@ namespace TileGame.GameScreens
                 }
             }
             
-            
             foreach(NPC_Fighting_Farmer npc in NPCFightingFarmers)
             {
                 //CollisionWithCharacter.UpdateCollisionForCharacters(
@@ -474,6 +473,7 @@ namespace TileGame.GameScreens
                         npc.ChangeScript(1);
                     if (npc.canTalk == true)
                     {
+
                         if (InputHandler.KeyReleased(Keys.Space))
                         {
                             if (ActiveConversation == false)
@@ -491,7 +491,8 @@ namespace TileGame.GameScreens
                     }
                     }
                 }
-
+            /*if (showingThinkingBox == false)
+                PlayerShowThinkingBox("hejsan test test");*/
             //Kontroller för kod som rör Neutrala NPCs
             foreach (var npc in NpcNeutralList)
             {
@@ -499,6 +500,7 @@ namespace TileGame.GameScreens
                     npc.script = Content.Load<Script>("Scripts/PotatotownTownsfolk2");
                 if (npc.InHearingRange(player))
                 {
+                    //PlayerHideThinkingBox();
                     if (npc.ShowingBubble == false)
                     {
                         PlayerShowTextBubble(npc);
@@ -531,14 +533,8 @@ namespace TileGame.GameScreens
         
         public override void Draw(GameTime gameTime)
         {
-            
-            
-
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
             tileMap.Draw(spriteBatch, camera);
-
-
             base.Draw(gameTime);
         }
 

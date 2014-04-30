@@ -40,7 +40,9 @@ namespace TileGame.GameScreens
         protected PlayerScreen screen;
         protected DialogBox dialogBox;
         protected TextBubble textBubble;
+        protected ThinkingBox thinkingBox;
         protected NPC_Story talksTo;
+        protected bool showingThinkingBox = false;
         
         public Dictionary<int, bool> lockedGateDict;
         protected Dictionary<string, int> gateDict;
@@ -236,10 +238,11 @@ namespace TileGame.GameScreens
                 chargeanimation = new AnimatedSprite(Content.Load<Texture2D>("Sprite/ChargeBar"));
                 chargeanimation.SetSpritePositionInGameWorld(new Vector2(0, 1.4f));
             }
+
             rectangle = new Rectangle(0, GraphicsDevice.Viewport.Height - 100, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             dialogBox = new DialogBox(Content.Load<Texture2D>("GUI/DialogPlaceholder"), rectangle, "");
-
             textBubble = new TextBubble(Content.Load<Texture2D>("GUI/SpeechBubble"), rectangle, "", Content.Load<SpriteFont>("Fonts/BubbleFont"));
+            thinkingBox = new ThinkingBox(Content.Load<Texture2D>("GUI/DialogPlaceholder"), "", rectangle, player);
 
             gateDict = new Dictionary<string, int>();
             for (int i = 0; i < 10; i++)
@@ -590,6 +593,7 @@ namespace TileGame.GameScreens
                 StateManager.PushState(GameRef.InventoryScreen);
 
             dialogBox.Update(gameTime);
+            thinkingBox.Update(gameTime);
 
             if (motion != Vector2.Zero)
             {
@@ -1059,6 +1063,20 @@ namespace TileGame.GameScreens
 
         
         #region Method Region
+        public void PlayerShowThinkingBox(string text)
+        {
+            showingThinkingBox = true;
+            thinkingBox.Visible = true;
+            thinkingBox.Enabled = true;
+            thinkingBox.text = text;
+            ControlManager.Add(thinkingBox);
+        }
+
+        public void PlayerHideThinkingBox()
+        {
+            showingThinkingBox = false;
+            ControlManager.Remove(thinkingBox);
+        }
 
         public void PlayerShowTextBubble(NPC_Neutral_Townsfolk npc)
         {
