@@ -345,10 +345,8 @@ namespace TileGame.GameScreens
             NpcNeutralList.Add(npcNeutral);
             #endregion
 
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
-                new Vector2(90, 40)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
-                new Vector2(90, 43)));
+            createLifePotatoPlant();
+            
             SpriteObject.Add(new BelladonnaSprite(Content.Load<Texture2D>("Sprite/Belladonna"),
                 new Vector2(85, 43))); //new Vector2(7, 33)));
             SpriteObject.Add(new ImmortuiSprite(Content.Load<Texture2D>("Sprite/Immortui"),
@@ -592,6 +590,44 @@ namespace TileGame.GameScreens
         }
         #endregion
 
-        
+        #region Method Region
+        void createLifePotatoPlant()
+        {
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(90, 40)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(90, 43)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(54, 53)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(45, 48)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(39, 62)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(33, 73)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(24, 40)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(50, 4)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(82, 5)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(133, 30)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(118, 58)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(91, 78)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(94, 99)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(64, 99)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(29, 84)));
+            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+                new Vector2(21, 91)));
+        }
+        #endregion
+
+
     }
 }

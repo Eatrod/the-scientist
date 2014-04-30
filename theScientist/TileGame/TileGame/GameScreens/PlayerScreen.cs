@@ -32,6 +32,8 @@ namespace TileGame.GameScreens
         protected Texture2D shadowMap;
         PictureBox miniMap;
         PictureBox backgroundToMinimap;
+        Label coordX, coordY;
+        bool coordVisible = true;
         RenderTarget2D renderTarget;
         //BF
 
@@ -219,7 +221,19 @@ namespace TileGame.GameScreens
             player.Stamina = 100;
             }
 
-            
+            //BF
+            coordX = new Label();
+            coordX.Text = "";
+            coordY = new Label();
+            coordY.Text = "";
+            coordX.Visible = coordVisible;
+            coordY.Visible = coordVisible;
+            coordX.Position = new Vector2(GraphicsDevice.Viewport.Width - 200, GraphicsDevice.Viewport.Height - 250);
+            coordY.Position = new Vector2(GraphicsDevice.Viewport.Width - 100, GraphicsDevice.Viewport.Height - 250);
+
+            ControlManager.Add(coordX);
+            ControlManager.Add(coordY);
+            //BF
 
             if (lifemeteranimation == null)
             {
@@ -330,6 +344,11 @@ namespace TileGame.GameScreens
             screen = (PlayerScreen)StateManager.CurrentState;
            
             ContentManager Content = Game.Content;
+
+            //BF
+            coordX.Text = ((int)(player.Origin.X / 32)).ToString();
+            coordY.Text = ((int)(player.Origin.Y / 32)).ToString();
+            //BF
 
             foreach (AnimatedProjectile sprite in playerprojectiles)
             {
