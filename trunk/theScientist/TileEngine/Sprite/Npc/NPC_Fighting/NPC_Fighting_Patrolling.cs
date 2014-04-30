@@ -39,6 +39,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         }
         public NPC_Fighting_Patrolling(Texture2D texture, Script script, Random random, int[,] Map) :base(texture,script,Map)
         {
+            this.AggroSpeed = 1.5f;
             this.PatrollingCircle = 200f;
             this.DelayHitByArrow = 300f;
             this.ElapsedHitByArrow = 0.0f;
@@ -117,7 +118,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
                 if (Aggro && !StrikeMode)
                 {
-                    this.speed = 1.5f;
+                    this.speed = AggroSpeed;
                     this.Position += VectorTowardsTarget * speed;
 
                     UpdateSpriteAnimation(VectorTowardsTarget);
