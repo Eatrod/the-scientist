@@ -24,7 +24,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         protected float aggroRange;
         protected float aggroCircle;
 
-        private bool dead;
         private float elapsedRespawn;
         private float delayRespawn;
 
@@ -56,12 +55,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         {
             get { return elapsedRespawn; }
             set { elapsedRespawn = value; }
-        }
-        
-        public bool Dead
-        {
-            get { return dead; }
-            set { dead = value; }
         }
         public bool MeleeHit
         {
