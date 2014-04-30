@@ -70,6 +70,7 @@ namespace TileGame.GameScreens
         List<AnimatedSprite> NPCFightingFarmers = new List<AnimatedSprite>();
         List<AnimatedSprite> NPCPatrollingGuards = new List<AnimatedSprite>();
         List<AnimatedSprite> NPCStationaryGuards = new List<AnimatedSprite>();
+        List<Sprite> DirtPiles = new List<Sprite>();
         
 
         public string Name { get { return name; } }
@@ -174,34 +175,14 @@ namespace TileGame.GameScreens
             NPC2.FullHp = 5;
             AnimatedSpriteObject.Add(NPC2);
 
-            NPC_Guard_1 = new NPC_Fighting_Stationary(Content.Load<Texture2D>("Sprite/Bjorn_Try_Farmer"), null,GameRef.random, this.tileMap.CollisionLayer.Map);
-            NPC_Guard_1.Origionoffset = new Vector2(25, 65);
-            NPC_Guard_1.SetSpritePositionInGameWorld(new Vector2(20, 10));
-            NPC_Guard_1.Life = 100;
-            NPC_Guard_1.FullHp = 100;
-            NPC_Guard_1.AI.GenerateTileNodes(new Vector2(20, 10));
-            NPC_Guard_1.AI.GenerateNeighboursForTileNodes();
-            AnimatedSpriteObject.Add(NPC_Guard_1);
-
-            NPC_Guard_2 = new NPC_Fighting_Stationary(Content.Load<Texture2D>("Sprite/Bjorn_Try_WitchDoctor"), null, GameRef.random, this.tileMap.CollisionLayer.Map);
-            NPC_Guard_2.Origionoffset = new Vector2(25, 65);
-            NPC_Guard_2.SetSpritePositionInGameWorld(new Vector2(30, 11));
-            NPC_Guard_2.Life = 100;
-            NPC_Guard_2.FullHp = 100;
-            NPC_Guard_2.AI.GenerateTileNodes(new Vector2(30, 11));
-            NPC_Guard_2.AI.GenerateNeighboursForTileNodes();
-            AnimatedSpriteObject.Add(NPC_Guard_2);
-
-
+            
             for (int i = 0; i < 15; i++ )
             {
-                NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), null, GameRef.random,this.tileMap.CollisionLayer.Map);
+                NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), null, GameRef.random);
                 NPC_Patroller.Origionoffset = new Vector2(25, 65);
                 NPC_Patroller.SetSpritePositionInGameWorld(new Vector2(22 + i, 50));
                 NPC_Patroller.Life = 100;
                 NPC_Patroller.FullHp = 100;
-                //NPC_Patroller.AI.GenerateTileNodes(new Vector2(22 + i, 50));
-                //NPC_Patroller.AI.GenerateNeighboursForTileNodes();
                 AnimatedSpriteObject.Add(NPC_Patroller);
                 NPCPatrollingGuards.Add(NPC_Patroller);
             }
@@ -220,7 +201,7 @@ namespace TileGame.GameScreens
             for (int i = 0; i < 10; i++)
             {
                 //Detta är NPC_Banditer, ska bli en egen klass senare
-                NPC_Fighting_Patrolling NPC_Bandit = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/HumanNPCBandit"), null, GameRef.random, this.tileMap.CollisionLayer.Map);
+                NPC_Fighting_Patrolling NPC_Bandit = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/HumanNPCBandit"), null, GameRef.random);
                 NPC_Bandit.Origionoffset = new Vector2(25, 65);
                 float x = GameRef.random.Next(102, 137);
                 float y = GameRef.random.Next(88, 100);
@@ -412,15 +393,15 @@ namespace TileGame.GameScreens
         public override void Update(GameTime gameTime)
         {
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
-            NPC_Guard_1.SetVectorTowardsTargetAndStartAndCheckAggro(gameTime,player);
-            NPC_Guard_2.SetVectorTowardsTargetAndStartAndCheckAggro(gameTime,player);
-            if(NPC_Guard_1.Aggro)
+            foreach(DirtPileSprite dirtpile in DirtPiles)
             {
-                NPC_Guard_1.PlayerPosition = player.Origin;           
-            }
-            if(NPC_Guard_2.Aggro)
-            {
-                NPC_Guard_2.PlayerPosition = player.Origin;
+                dirtpile.UpdateTheDirtPile(gameTime);
+                if(dirtpile.Finished)
+                {
+                    DirtPiles.Remove(dirtpile);
+                    renderList.Remove(dirtpile);
+                    break;
+                }
             }
 
             foreach(NPC_Fighting_Patrolling npc in NPCPatrollingGuards)
@@ -436,6 +417,15 @@ namespace TileGame.GameScreens
                     }
                     if (npc.Aggro)
                         npc.PlayerPosition = player.Origin;
+                }
+                else if(!npc.DirtPileCreated)
+                {
+                    DirtPileSprite dirtpile = new DirtPileSprite(Content.Load<Texture2D>("Sprite/dirtpile"));
+                    dirtpile.Position = npc.Position;
+                    dirtpile.DelayTime = npc.DelayRespawn;
+                    DirtPiles.Add(dirtpile);
+                    renderList.Add(dirtpile);
+                    npc.DirtPileCreated = true;
                 }
             }
             

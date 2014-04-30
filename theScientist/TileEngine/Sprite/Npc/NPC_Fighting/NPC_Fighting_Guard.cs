@@ -24,14 +24,12 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         protected float aggroRange;
         protected float aggroCircle;
 
-        
-
         private float aggroSpeed;
 
         private float elapsedHitByMelee;
         private float delayHitByMelee;
         private bool meleeHit;
-
+        private bool dirtPileCreated;
         private float patrollingCircle;
 
         private float strikeForce;
@@ -40,15 +38,14 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         private float delayStruck;
         private float elapsedStruck;
         private float elapsedStrike;
-        private float time2;
 
-        private float delaySearch;
-        private float elapsedSearch;
         private Vector2 playerPosition;
-        private Vector2 endPosition;
-        private Curve2D curve;
-        private AIsearch ai;
         private Vector2 oldPosition;
+        public bool DirtPileCreated
+        {
+            get { return dirtPileCreated; }
+            set { dirtPileCreated = value; }
+        }
         public float AggroSpeed
         {
             get { return aggroSpeed; }
@@ -116,36 +113,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             set { oldPosition = value; }
         }
 
-        public Vector2 EndPosition
-        {
-            get { return endPosition; }
-            set { endPosition = value; }
-        }
-        public float ElapsedSearch
-        {
-            get { return elapsedSearch; }
-            set { elapsedSearch = value; }
-        }
-        public float DelaySearch
-        {
-            get { return delaySearch; }
-            set { delaySearch = value; }
-        }
-        public float Time2
-        {
-            get { return time2; }
-            set { time2 = value; }
-        }
-        public Curve2D Curve
-        {
-            get { return curve; }
-            set { curve = value; }
-        }
-        public AIsearch AI
-        {
-            get { return ai; }
-            set { ai = value; }
-        }
         public float AggroCircle
         {
             get { return aggroCircle; }
@@ -189,7 +156,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
         }
 
-        public NPC_Fighting_Guard(Texture2D texture, Script script, int[,] Map)
+        public NPC_Fighting_Guard(Texture2D texture, Script script)
             : base(texture, script)
         {
             this.Dead = false;
@@ -209,37 +176,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.delayStruck = 500f;
             this.elapsedStruck = 0.0f;
             this.aggroCircle = 500;
-            this.AI = new AIsearch(Map);
-        }
-        public void InitCurve(Dictionary<TileNode, TileNode> WayToGo)
-        {
-
-            Curve = new Curve2D();
-            float time = 0;
-
-            List<Vector2> Positions = new List<Vector2>();
-
-            foreach (var obj in WayToGo)
-            {
-                Positions.Add(obj.Key.PositionInGrid * 32);
-            }
-            Positions.Add(new Vector2(this.Origin.X, this.Origin.Y));
-            int max = Positions.Count - 1;
-            endPosition = Positions[0];
-            for (int i = max; i > -1; i--)
-            {
-                float distance;
-                if (i > 0)
-                    distance = Vector2.Distance(Positions[i], Positions[i - 1]);
-                else
-                    distance = Vector2.Distance(Positions[i], Positions[i + 1]);
-                Curve.AddPoint(new Vector3(Positions[i].X, Positions[i].Y, 0), time);
-                time += 1f;
-                Curve.AddPoint(new Vector3(Positions[i].X, Positions[i].Y, 0), time);
-                time += distance * 8;
-
-            }
-            Curve.SetTangents();
         }
         public void SetVectorTowardsTargetAndStartAndCheckAggro(GameTime gameTime, AnimatedSprite player)
         {
@@ -324,21 +260,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             //else
             //    Position = startingPosition;
             base.Update(gameTime);
-        }
-        public void UsingAIAndSearchForTarget()
-        {
-            this.time2 = 0.0f;
-            AI.SearchForShortestPath(
-                AI.GetNodeFromNodes(new Vector2(((int)this.Origin.X) / 32, ((int)this.Origin.Y) / 32)),
-                AI.GetNodeFromNodes(new Vector2((int)this.PlayerPosition.X / 32, (int)this.PlayerPosition.Y / 32)));
-            int steps = AI.FinalPath.Count;
-            if (steps == 0 || steps > 6)
-            {
-                GoingHome = true;
-                Aggro = false;
-            }
-            else
-                InitCurve(AI.FinalPath);
         }
         public void UpdateSpriteAnimation(Vector2 motion)
         {
