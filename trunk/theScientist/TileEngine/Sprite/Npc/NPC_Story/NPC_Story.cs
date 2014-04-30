@@ -33,7 +33,7 @@ namespace TileEngine.Sprite.Npc.NPC_Story
 
         public void ChangeAnimation(string animationName)
         {
-            this.CurrentAnimationName = animationName;
+            CurrentAnimationName = animationName;
         }
 
         public bool InSpeakingRange(AnimatedSprite sprite)
