@@ -164,8 +164,8 @@ namespace TileGame.GameScreens
             NPC_Guard_1 = new NPC_Fighting_Stationary(Content.Load<Texture2D>("Sprite/Bjorn_Try_Farmer"), null,GameRef.random, this.tileMap.CollisionLayer.Map);
             NPC_Guard_1.Origionoffset = new Vector2(25, 65);
             NPC_Guard_1.SetSpritePositionInGameWorld(new Vector2(20, 10));
-            NPC_Guard_1.Life = 5;
-            NPC_Guard_1.FullHp = 5;
+            NPC_Guard_1.Life = 100;
+            NPC_Guard_1.FullHp = 100;
             NPC_Guard_1.AI.GenerateTileNodes(new Vector2(20, 10));
             NPC_Guard_1.AI.GenerateNeighboursForTileNodes();
             AnimatedSpriteObject.Add(NPC_Guard_1);
@@ -173,21 +173,21 @@ namespace TileGame.GameScreens
             NPC_Guard_2 = new NPC_Fighting_Stationary(Content.Load<Texture2D>("Sprite/Bjorn_Try_WitchDoctor"), null, GameRef.random, this.tileMap.CollisionLayer.Map);
             NPC_Guard_2.Origionoffset = new Vector2(25, 65);
             NPC_Guard_2.SetSpritePositionInGameWorld(new Vector2(30, 11));
-            NPC_Guard_2.Life = 5;
-            NPC_Guard_2.FullHp = 5;
+            NPC_Guard_2.Life = 100;
+            NPC_Guard_2.FullHp = 100;
             NPC_Guard_2.AI.GenerateTileNodes(new Vector2(30, 11));
             NPC_Guard_2.AI.GenerateNeighboursForTileNodes();
             AnimatedSpriteObject.Add(NPC_Guard_2);
 
 
 
-            for (int i = 0; i < 5; i++ )
+            for (int i = 0; i < 15; i++ )
             {
                 NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), null, GameRef.random,this.tileMap.CollisionLayer.Map);
                 NPC_Patroller.Origionoffset = new Vector2(25, 65);
                 NPC_Patroller.SetSpritePositionInGameWorld(new Vector2(22 + i, 50));
-                NPC_Patroller.Life = 50;
-                NPC_Patroller.FullHp = 50;
+                NPC_Patroller.Life = 100;
+                NPC_Patroller.FullHp = 100;
                 //NPC_Patroller.AI.GenerateTileNodes(new Vector2(22 + i, 50));
                 //NPC_Patroller.AI.GenerateNeighboursForTileNodes();
                 AnimatedSpriteObject.Add(NPC_Patroller);
@@ -198,8 +198,8 @@ namespace TileGame.GameScreens
                 NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null, GameRef.random);
                 NPC_Farmer.Origionoffset = new Vector2(25, 65);
                 NPC_Farmer.SetSpritePositionInGameWorld(new Vector2(5 + i, 22));
-                NPC_Farmer.Life = 5;
-                NPC_Farmer.FullHp = 5;
+                NPC_Farmer.Life = 100;
+                NPC_Farmer.FullHp = 100;
                 AnimatedSpriteObject.Add(NPC_Farmer);
                 NPCFightingFarmers.Add(NPC_Farmer);
 
@@ -413,12 +413,6 @@ namespace TileGame.GameScreens
                 if (!npc.Dead)
                 {
                     npc.SetVectorTowardsTargetAndStartAndCheckAggro(gameTime, player);
-                    //if(npc.Life <= 0)
-                    //{
-                    //    NPCPatrollingGuards.Remove(npc);
-                    //    AnimatedSpriteObject.Remove(npc);
-                    //    break;
-                    //}
                     if (npc.Aggro)
                         npc.PlayerPosition = player.Origin;
                 }

@@ -20,6 +20,12 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         public NPC_Fighting_Stationary(Texture2D texture, Script script, Random random, int[,] Map)
             : base(texture, script,Map)
         {
+
+            this.DelayHitByArrow = 300f;
+            this.ElapsedHitByArrow = 0.0f;
+            this.DelayRespawn = 10000f;
+            this.ElapsedRespawn = 0.0f;
+            this.Dead = false;
             this.OldPosition = Vector2.Zero;
             this.EndPosition = Vector2.Zero;
             this.ElapsedSearch = 10001.0f;
@@ -61,47 +67,64 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         
         public override void Update(GameTime gameTime)
         {
-            this.ElapsedSearch += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (startingFlag)
+            if (this.Life <= 0)
+                Dead = true;
+            if (!Dead)
             {
-                this.StartingPosition = Position;
-                startingFlag = false;
-            }
+                this.ElapsedSearch += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (startingFlag)
+                {
+                    this.StartingPosition = Position;
+                    startingFlag = false;
+                }
 
-            if (Aggro && !StrikeMode)
-            {
-                this.speed = 1.5f;
-                this.Position += VectorTowardsTarget * speed;
-                //if (Vector2.Distance(this.Origin, this.EndPosition) < 10)
-                //{
-                //    this.ElapsedSearch = 10001f;
-                //}
-                //if (this.ElapsedSearch > this.DelaySearch)
-                //{
-                //    this.ElapsedSearch = 0.0f;
-                //    this.UsingAIAndSearchForTarget();
-                //}
-                //this.Time2 += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                //Vector3 tempPos = this.Curve.GetPointOnCurve(this.Time2);
-                //this.Position = new Vector2(tempPos.X - 25, tempPos.Y - 65);
+                if (Aggro && !StrikeMode)
+                {
+                    this.speed = 1.5f;
+                    this.Position += VectorTowardsTarget * speed;
+                    //if (Vector2.Distance(this.Origin, this.EndPosition) < 10)
+                    //{
+                    //    this.ElapsedSearch = 10001f;
+                    //}
+                    //if (this.ElapsedSearch > this.DelaySearch)
+                    //{
+                    //    this.ElapsedSearch = 0.0f;
+                    //    this.UsingAIAndSearchForTarget();
+                    //}
+                    //this.Time2 += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    //Vector3 tempPos = this.Curve.GetPointOnCurve(this.Time2);
+                    //this.Position = new Vector2(tempPos.X - 25, tempPos.Y - 65);
 
-                UpdateSpriteAnimation(VectorTowardsTarget);
-            }
-            else if(StrikeMode)
-            {
-                
-            }
-            else if (goingHome)
-            {
-                this.speed = 3.0f;
-                Position += VectorTowardsStart * speed;
-                UpdateSpriteAnimation(VectorTowardsStart);
+                    UpdateSpriteAnimation(VectorTowardsTarget);
+                }
+                else if (StrikeMode)
+                {
+
+                }
+                else if (goingHome)
+                {
+                    this.speed = 3.0f;
+                    Position += VectorTowardsStart * speed;
+                    UpdateSpriteAnimation(VectorTowardsStart);
+                }
+                else
+                {
+                    goingHome = false;
+                    this.Position = startingPosition;
+                    UpdateSpriteAnimation(new Vector2(0, 1));
+                }
             }
             else
             {
-                goingHome = false;
-                this.Position = startingPosition;
-                UpdateSpriteAnimation(new Vector2(0, 1));
+                ElapsedRespawn += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if(ElapsedRespawn > DelayRespawn)
+                {
+                    this.Life = this.FullHp;
+                    this.Dead = false;
+                    this.Aggro = false;
+                    this.GoingHome = true;
+                    this.ElapsedRespawn = 0.0f;
+                }
             }
             base.Update(gameTime);
         }

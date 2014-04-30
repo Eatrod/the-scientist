@@ -92,8 +92,8 @@ namespace TileGame.Collision
                     {
 
                         playerprojectiles.RemoveAt(Projectile);
-                        SpriteObjectInGameWorld.Remove(sprite);
-                        renderList.Remove(sprite);
+                        //SpriteObjectInGameWorld.Remove(sprite);
+                        //renderList.Remove(sprite);
                     }
                 }
             }
@@ -104,7 +104,7 @@ namespace TileGame.Collision
                 {
                     //if (BaseSprite.AreColliding(playerprojectiles[Projectile], sprite) && SpriteObjectInGameWorld.Contains(sprite))
                     //{
-                    if (playerprojectiles[Projectile].Bounds.Intersects(sprite.Bounds))
+                    if (playerprojectiles[Projectile].Bounds.Intersects(sprite.Bounds) && sprite.Life > 0)
                     {
                         sprite.Life -= playerprojectiles[Projectile].damageofprojectile;
                         //sprite.ArrowDirection = playerprojectiles[Projectile].Origin - sprite.Origin;
@@ -113,12 +113,12 @@ namespace TileGame.Collision
                         //sprite.AggroStartingPosition = sprite.Position;
                         //sprite.HitByArrow = true;                       
                         //sprite.Aggro = true;
-                        if (sprite.Life <= 0)
-                        {
-                            //SpriteObjectInGameWorld.Remove(sprite);
-                            //renderList.Remove(sprite);
-                            //sprite.Life = sprite.FullHp;                         
-                        }
+                        //if (sprite.Life <= 0)
+                        //{
+                        //    //SpriteObjectInGameWorld.Remove(sprite);
+                        //    //renderList.Remove(sprite);
+                        //    //sprite.Life = sprite.FullHp;                         
+                        //}
                     }
                     //}
                 }

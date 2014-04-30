@@ -228,7 +228,23 @@ namespace TileEngine.Sprite
             Aggro = true;
             HitByArrow = true;
             AggroStartingPosition = this.Position;
-            ArrowDirection = sprite.Origin - this.Origin;
+            if (sprite.CurrentAnimationName == "right" ||
+                sprite.CurrentAnimationName == "right2" ||
+                sprite.CurrentAnimationName == "right3")
+                ArrowDirection = new Vector2(1, 0);
+            if (sprite.CurrentAnimationName == "left" ||
+                sprite.CurrentAnimationName == "left2" ||
+                sprite.CurrentAnimationName == "left3")
+                ArrowDirection = new Vector2(-1, 0);
+            if (sprite.CurrentAnimationName == "up" ||
+                sprite.CurrentAnimationName == "up2" ||
+                sprite.CurrentAnimationName == "up3")
+                ArrowDirection = new Vector2(0, -1);
+            if (sprite.CurrentAnimationName == "down" ||
+                sprite.CurrentAnimationName == "down2" ||
+                sprite.CurrentAnimationName == "down3")
+                ArrowDirection = new Vector2(0, 1);
+            
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

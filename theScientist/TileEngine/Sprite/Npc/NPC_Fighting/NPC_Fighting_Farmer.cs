@@ -122,6 +122,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         }
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
+                
             cellPosition = Engine.ConvertPostionToCell(Position);
             if (cellPosition.X >= 20 && cellPosition.Y <= 15)
             {
