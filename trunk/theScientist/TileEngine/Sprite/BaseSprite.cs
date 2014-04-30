@@ -14,7 +14,7 @@ namespace TileEngine.Sprite
         protected float speed = 2f;
         protected bool faded = false;
 
-        public Vector2 Position = Vector2.Zero;
+        public Vector2 Position;// Vector2.Zero;
         public Vector2 Origionoffset = Vector2.Zero;
 
         public Vector2 Origin
