@@ -34,7 +34,7 @@ namespace TileGame.GameScreens
         bool gate2Locked = true;
         private ContentManager Content;
 
-        private MultiIronSprite multiIronOre;
+        //private MultiIronSprite multiIronOre;
         public Sprite treeStanding;
         public Sprite treeBridge;
         public Sprite treeStubbe;
@@ -113,13 +113,20 @@ namespace TileGame.GameScreens
                 s.CurrentAnimationName = "Down";
             }
             
-            FrameAnimation all = new FrameAnimation(1, 32, 32, 0, 0);
-            if (!multiIronOre.Animations.ContainsKey("all"))
-                multiIronOre.Animations.Add("all", all);
-            FrameAnimation half = new FrameAnimation(1, 32, 32, 32, 0);
-            if (!multiIronOre.Animations.ContainsKey("half"))
-                multiIronOre.Animations.Add("half", half);
-            multiIronOre.CurrentAnimationName = "all";
+            foreach(var s in AnimatedSpriteObject)
+            {
+                if (s is MultiIronSprite)
+                {
+                    MultiIronSprite mis = (MultiIronSprite)s;
+                    FrameAnimation all = new FrameAnimation(1, 32, 32, 0, 0);
+                    if (!mis.Animations.ContainsKey("all"))
+                        mis.Animations.Add("all", all);
+                    FrameAnimation half = new FrameAnimation(1, 32, 32, 32, 0);
+                    if (!mis.Animations.ContainsKey("half"))
+                        mis.Animations.Add("half", half);
+                    mis.CurrentAnimationName = "all";
+                }
+            }
             
             SpriteObjectInGameWorld.Clear();
             renderList.Clear();
@@ -132,8 +139,13 @@ namespace TileGame.GameScreens
             renderList.AddRange(AnimatedSpriteObject);
             //renderList.AddRange(NPCFightingFarmers);
             //renderList.AddRange(NPCPatrollingGuards);
-            
-            
+            if (StoryProgress.ProgressLine["treeIsDown"])
+            {
+                this.SpriteObjectInGameWorld.Remove(GameRef.GamePlayScreen.treeStanding);
+                this.renderList.Remove(GameRef.GamePlayScreen.treeStanding);
+                this.renderList.Add(GameRef.GamePlayScreen.treeBridge);
+                this.renderList.Add(GameRef.GamePlayScreen.treeStubbe);
+            }
         }
         protected override void LoadContent()
         {
@@ -180,7 +192,6 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(NPC_Guard_2);
 
 
-
             for (int i = 0; i < 15; i++ )
             {
                 NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), null, GameRef.random,this.tileMap.CollisionLayer.Map);
@@ -208,15 +219,19 @@ namespace TileGame.GameScreens
             for (int i = 0; i < 10; i++)
             {
                 //Detta är NPC_Banditer, ska bli en egen klass senare
-                NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/HumanNPCBandit"), null, GameRef.random);
-                NPC_Farmer.Origionoffset = new Vector2(25, 65);
-                float x = GameRef.random.Next(100, 130);
-                float y = GameRef.random.Next(80, 90);
-                NPC_Farmer.SetSpritePositionInGameWorld(new Vector2(x, y));
-                NPC_Farmer.Life = 5;
-                NPC_Farmer.FullHp = 5;
-                AnimatedSpriteObject.Add(NPC_Farmer);
-                NPCFightingFarmers.Add(NPC_Farmer);
+                NPC_Fighting_Patrolling NPC_Bandit = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/HumanNPCBandit"), null, GameRef.random, this.tileMap.CollisionLayer.Map);
+                NPC_Bandit.Origionoffset = new Vector2(25, 65);
+                float x = GameRef.random.Next(102, 137);
+                float y = GameRef.random.Next(88, 100);
+                NPC_Bandit.SetSpritePositionInGameWorld(new Vector2(x, y));
+                NPC_Bandit.Life = 100;
+                NPC_Bandit.FullHp = 100;
+                NPC_Bandit.AggroCircle = 600; //Hur långt han följer
+                NPC_Bandit.AggroRange = 300; //Hur långt ifrån du blir upptäckt
+                NPC_Bandit.PatrollingCircle = 100;
+                NPC_Bandit.StrikeForce = 10;
+                AnimatedSpriteObject.Add(NPC_Bandit);
+                NPCPatrollingGuards.Add(NPC_Bandit);
 
             }
 
@@ -360,12 +375,16 @@ namespace TileGame.GameScreens
 
             //SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/multi_iron_ore"),
             //    new Vector2(92, 43)));
-            if (multiIronOre == null)
+
+            for (int i = 0; i < 30; i++)
             {
-                multiIronOre = new MultiIronSprite(Content.Load<Texture2D>("Sprite/multi_iron_ore"));
-                multiIronOre.SetSpritePositionInGameWorld(new Vector2(92, 43));
+                int x = GameRef.random.Next(102, 137);
+                int y = GameRef.random.Next(88, 100);
+                MultiIronSprite multiIronOre = new MultiIronSprite(Content.Load<Texture2D>("Sprite/multi_iron_ore"));
+                multiIronOre.SetSpritePositionInGameWorld(new Vector2(x, y));
+                AnimatedSpriteObject.Add(multiIronOre);
             }
-            AnimatedSpriteObject.Add(multiIronOre);
+            
 
             treeStanding = new Sprite(Content.Load<Texture2D>("Sprite/BridgeTreeStanding"));
             treeStanding.SetSpritePositionInGameWorld(new Vector2(35, 15));
@@ -375,12 +394,9 @@ namespace TileGame.GameScreens
 
             treeBridge = new Sprite(Content.Load<Texture2D>("Sprite/BridgeTreeFallen"));
             treeBridge.SetSpritePositionInGameWorld(new Vector2(33, 17));
-            //SpriteObject.Add(treeBridge);
 
             treeStubbe = new Sprite(Content.Load<Texture2D>("Sprite/TreeStubbe"));
             treeStubbe.SetSpritePositionInGameWorld(new Vector2(36, 18));
-            //SpriteObject.Add(treeStubbe);
-
 
             //--
             lockedGateDict = new Dictionary<int,bool>();
