@@ -444,20 +444,23 @@ namespace TileGame.GameScreens
                 //CollisionWithCharacter.UpdateCollisionForCharacters(
                 //    gameTime, SpriteObjectInGameWorld, npc,
                 //    SpriteObject, playerprojectiles, renderList, AnimatedSpriteObject);
-                if(npc.Motion != Vector2.Zero)
+                if (!npc.Dead)
                 {
-                    npc.Motion.Normalize();
-                    npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
+                    if (npc.Motion != Vector2.Zero)
+                    {
+                        npc.Motion.Normalize();
+                        npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
 
+                    }
+                    //Aggro range
+                    if (Vector2.Distance(npc.Position, player.Position) < 100 && !npc.Aggro && !npc.Running && !npc.HitFlag)
+                    {
+                        npc.Aggro = true;
+                        npc.AttackersDirection = player.Position - npc.Position;
+                    }
+                    if (npc.Running)
+                        npc.CheckForCollisionWithOtherNPCs(NPCFightingFarmers, player);
                 }
-                //Aggro range
-                if (Vector2.Distance(npc.Position, player.Position) < 100 && !npc.Aggro && !npc.Running && !npc.HitFlag)
-                {
-                    npc.Aggro = true;
-                    npc.AttackersDirection = player.Position - npc.Position; 
-                }
-                if(npc.Running)
-                    npc.CheckForCollisionWithOtherNPCs(NPCFightingFarmers,player);
 
             }
 

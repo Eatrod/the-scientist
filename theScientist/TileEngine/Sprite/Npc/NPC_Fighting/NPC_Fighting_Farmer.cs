@@ -116,68 +116,83 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         }
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-                
-            cellPosition = Engine.ConvertPostionToCell(Position);
-            if (cellPosition.X >= 20 && cellPosition.Y <= 15)
+            if (Life <= 0)
+                Dead = true;
+            if (!Dead)
             {
-                Position.X -= 5f;
-                collided = true;
-            }
-            elapsedDirection += (float)gameTime.ElapsedGameTime.TotalMilliseconds; 
-            if(collided && !HitFlag)
-            {
-                if (running)
-                {
-                    HitFlag = true;
-                    ElapsedHit = 0;
-                }
-                direction += 180;
-                direction = direction % 360;
-                running = false;
-                Aggro = false;
-                collided = false;
-                
-            }
-            else if ((elapsedDirection > delayDirection) && !Aggro && !running && !HitFlag)
-            {
-                direction = random.Next(0, 360);
-                elapsedDirection = 0.0f;
-            }
-            
-            this.motion = new Vector2(
-                (float)Math.Cos(MathHelper.ToRadians(direction)),
-                (float)Math.Sin(MathHelper.ToRadians(-direction)));
 
-            UpdateSpriteAnimation(motion);
-            
-            if(Aggro)
-            {
-                elapsedAggro += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                if(elapsedAggro > delayAggro)
+                cellPosition = Engine.ConvertPostionToCell(Position);
+                if (cellPosition.X >= 20 && cellPosition.Y <= 15)
                 {
-                    running = true;
-                    Aggro = false;
-                    elapsedAggro = 0;
+                    Position.X -= 5f;
+                    collided = true;
                 }
-            }
-            else if (running)
-            {
-                speed = 5.0f;
-                Position += AttackersDirection * speed;//speed;
-            }
-            else if(HitFlag)
-            {
-                 MovementAfterBeingHit(gameTime);
+                elapsedDirection += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (collided && !HitFlag)
+                {
+                    if (running)
+                    {
+                        HitFlag = true;
+                        ElapsedHit = 0;
+                    }
+                    direction += 180;
+                    direction = direction % 360;
+                    running = false;
+                    Aggro = false;
+                    collided = false;
+
+                }
+                else if ((elapsedDirection > delayDirection) && !Aggro && !running && !HitFlag)
+                {
+                    direction = random.Next(0, 360);
+                    elapsedDirection = 0.0f;
+                }
+
+                this.motion = new Vector2(
+                    (float)Math.Cos(MathHelper.ToRadians(direction)),
+                    (float)Math.Sin(MathHelper.ToRadians(-direction)));
+
+                UpdateSpriteAnimation(motion);
+
+                if (Aggro)
+                {
+                    elapsedAggro += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    if (elapsedAggro > delayAggro)
+                    {
+                        running = true;
+                        Aggro = false;
+                        elapsedAggro = 0;
+                    }
+                }
+                else if (running)
+                {
+                    speed = 5.0f;
+                    Position += AttackersDirection * speed;//speed;
+                }
+                else if (HitFlag)
+                {
+                    MovementAfterBeingHit(gameTime);
+                }
+                else
+                {
+
+                    speed = 0.5f;
+                    running = false;
+                    Aggro = false;
+                    Position += speed * motion;
+                }
             }
             else
             {
-                
-                speed = 0.5f;
-                running = false;
-                Aggro = false;
-                Position += speed * motion;
+                ElapsedRespawn += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if(ElapsedRespawn > DelayRespawn)
+                {
+                    this.Life = this.FullHp;
+                    this.Dead = false;
+                    this.Aggro = false;
+                    this.ElapsedRespawn = 0.0f;
+                }
             }
-            
             base.Update(gameTime);
         }
 

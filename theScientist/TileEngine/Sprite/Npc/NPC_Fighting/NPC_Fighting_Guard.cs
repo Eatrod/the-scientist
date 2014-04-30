@@ -24,8 +24,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         protected float aggroRange;
         protected float aggroCircle;
 
-        private float elapsedRespawn;
-        private float delayRespawn;
+        
 
         private float aggroSpeed;
 
@@ -60,16 +59,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             get { return patrollingCircle; }
             set { patrollingCircle = value; }
         }
-        public float DelayRespawn
-        {
-            get { return delayRespawn; }
-            set { delayRespawn = value; }
-        }
-        public float ElapsedRespawn
-        {
-            get { return elapsedRespawn; }
-            set { elapsedRespawn = value; }
-        }
+       
         public bool MeleeHit
         {
             get { return meleeHit; }
