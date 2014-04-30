@@ -25,6 +25,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         protected float aggroCircle;
 
         private bool dead;
+        private float elapsedRespawn;
+        private float delayRespawn;
 
         private float elapsedHitByMelee;
         private float delayHitByMelee;
@@ -45,6 +47,17 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         private Curve2D curve;
         private AIsearch ai;
         private Vector2 oldPosition;
+        public float DelayRespawn
+        {
+            get { return delayRespawn; }
+            set { delayRespawn = value; }
+        }
+        public float ElapsedRespawn
+        {
+            get { return elapsedRespawn; }
+            set { elapsedRespawn = value; }
+        }
+        
         public bool Dead
         {
             get { return dead; }
@@ -239,7 +252,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             if (HitByArrow)
             {
                 ElapsedHitByArrow += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                this.Position -= this.ArrowDirection * 3;
+                this.Position += this.ArrowDirection * 3;
                 if (ElapsedHitByArrow > DelayHitByArrow)
                 {
                     HitByArrow = false;
@@ -252,6 +265,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 Vector2 HitVector = this.Origin - player.Origin;
                 HitVector.Normalize();
                 player.Position -= HitVector * 3;
+                player.SettingSpriteBlink(gameTime);
                 if (ElapsedHitByMelee > DelayHitByMelee)
                 {
                     MeleeHit = false;
@@ -267,7 +281,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 {
                     this.MeleeHit = true;
                     player.Life -= StrikeForce;
-                    player.SettingSpriteBlink(gameTime);
                     ElapsedStrike = 0.0f;
                 }
 

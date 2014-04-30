@@ -42,6 +42,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
             this.DelayHitByArrow = 300f;
             this.ElapsedHitByArrow = 0.0f;
+            this.DelayRespawn = 10000f;
+            this.ElapsedRespawn = 0.0f;
             this.Dead = false;
             this.OldPosition = Vector2.Zero;
             this.EndPosition = Vector2.Zero;
@@ -145,6 +147,15 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             else
             {
                 CurrentAnimationName = "Dead";
+                ElapsedRespawn += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if(ElapsedRespawn > DelayRespawn)
+                {
+                    this.Life = this.FullHp;
+                    this.Dead = false;
+                    this.Aggro = false;
+                    this.GoingHome = true;
+                    this.ElapsedRespawn = 0.0f;
+                }
             }
             base.Update(gameTime);
             

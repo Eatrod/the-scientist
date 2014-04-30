@@ -137,7 +137,7 @@ namespace TileEngine.Sprite.Projectiles
         public FlamingArrowProjectile(Texture2D texture, float life, float timetolive, float speed, Vector2 position)
             : base(texture) 
         {
-            this.damageofprojectile = 30;
+            this.damageofprojectile = 20;
             this.life = life;
             this.timetolive = timetolive;
             this.speed = speed;
