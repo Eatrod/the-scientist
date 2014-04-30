@@ -503,7 +503,6 @@ namespace TileGame.GameScreens
                     if (npc.ShowingBubble == false)
                     {
                         npc.changeSpeed = false;
-                        npc.Speed = 0;
                         PlayerShowTextBubble(npc);
                     }
                 }
