@@ -2448,6 +2448,55 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tiles\GenericHouse\BrickHouseDoor1.png">
+      <Name>BrickHouseDoor1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickHouseDoor2.png">
+      <Name>BrickHouseDoor2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickHouseDoor3.png">
+      <Name>BrickHouseDoor3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickHouseDoor4.png">
+      <Name>BrickHouseDoor4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickHouseDoor5.png">
+      <Name>BrickHouseDoor5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickHouseDoor6.png">
+      <Name>BrickHouseDoor6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickHouseWindow.png">
+      <Name>BrickHouseWindow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tiles\GenericHouse\BrickHouseDoor1wtf.png">
+      <Name>BrickHouseDoor1wtf</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tiles\GenericHouse\BrickHouseDoor2wtf.png">
+      <Name>BrickHouseDoor2wtf</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Sprite\dirtpile.png">
       <Name>dirtpile</Name>
       <Importer>TextureImporter</Importer>
