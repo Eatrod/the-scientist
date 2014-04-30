@@ -72,6 +72,7 @@
     <Compile Include="Sprite\BaseSprite.cs" />
     <Compile Include="Sprite\BelladonnaSprite.cs" />
     <Compile Include="Sprite\CharacterSprite.cs" />
+    <Compile Include="Sprite\DirtPileSprite.cs" />
     <Compile Include="Sprite\FrameAnimation.cs" />
     <Compile Include="Sprite\MultiIronSprite.cs" />
     <Compile Include="Sprite\ImmortuiSprite.cs" />

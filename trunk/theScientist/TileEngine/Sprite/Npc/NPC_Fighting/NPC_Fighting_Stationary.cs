@@ -18,19 +18,15 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         
 
         public NPC_Fighting_Stationary(Texture2D texture, Script script, Random random, int[,] Map)
-            : base(texture, script,Map)
+            : base(texture, script)
         {
-
+            this.DirtPileCreated = false;
             this.DelayHitByArrow = 300f;
             this.ElapsedHitByArrow = 0.0f;
             this.DelayRespawn = 10000f;
             this.ElapsedRespawn = 0.0f;
             this.Dead = false;
             this.OldPosition = Vector2.Zero;
-            this.EndPosition = Vector2.Zero;
-            this.ElapsedSearch = 10001.0f;
-            this.DelaySearch = 1000f;
-            this.Time2 = 0.0f;
             this.StrikeForce = 5.0f;
             this.startingFlag = true;
             this.VectorTowardsTarget = Vector2.Zero;
@@ -46,6 +42,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             FrameAnimation left = new FrameAnimation(1, 50, 80, 0, 80);
             FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);
             FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
+            FrameAnimation nothing = new FrameAnimation(1, 0, 0, 0, 0);
 
 
             FrameAnimation walkDown = new FrameAnimation(2, 50, 80, 50, 0);
@@ -53,6 +50,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             FrameAnimation walkRight = new FrameAnimation(2, 50, 80, 50, 160);
             FrameAnimation walkUp = new FrameAnimation(2, 50, 80, 50, 240);
 
+            this.Animations.Add("Nothing", nothing);
 
             this.Animations.Add("Right", right);
             this.Animations.Add("Left", left);
@@ -71,7 +69,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 Dead = true;
             if (!Dead)
             {
-                this.ElapsedSearch += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 if (startingFlag)
                 {
                     this.StartingPosition = Position;
@@ -82,19 +79,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 {
                     this.speed = 1.5f;
                     this.Position += VectorTowardsTarget * speed;
-                    //if (Vector2.Distance(this.Origin, this.EndPosition) < 10)
-                    //{
-                    //    this.ElapsedSearch = 10001f;
-                    //}
-                    //if (this.ElapsedSearch > this.DelaySearch)
-                    //{
-                    //    this.ElapsedSearch = 0.0f;
-                    //    this.UsingAIAndSearchForTarget();
-                    //}
-                    //this.Time2 += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                    //Vector3 tempPos = this.Curve.GetPointOnCurve(this.Time2);
-                    //this.Position = new Vector2(tempPos.X - 25, tempPos.Y - 65);
-
                     UpdateSpriteAnimation(VectorTowardsTarget);
                 }
                 else if (StrikeMode)
@@ -116,14 +100,16 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             }
             else
             {
+                CurrentAnimationName = "Nothing";
                 ElapsedRespawn += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 if(ElapsedRespawn > DelayRespawn)
                 {
                     this.Life = this.FullHp;
                     this.Dead = false;
                     this.Aggro = false;
-                    this.GoingHome = true;
+                    this.Position = this.StartingPosition;
                     this.ElapsedRespawn = 0.0f;
+                    this.DirtPileCreated = false;
                 }
             }
             base.Update(gameTime);
