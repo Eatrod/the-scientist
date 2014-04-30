@@ -13,7 +13,7 @@ namespace TileEngine.Sprite.Npc.NPC_Story
     public class NPC_Story : NPC
     {
         protected bool Immortal { get; set; }
-        protected float speakingRadius = 30f;
+        protected float speakingRadius = 50f;
         public bool canTalk = true;
         public Conversation text;
         public Texture2D picture;
@@ -29,6 +29,11 @@ namespace TileEngine.Sprite.Npc.NPC_Story
         {
             get { return speakingRadius; }
             set { speakingRadius = (float) Math.Max(value, CollisionRadius); }
+        }
+
+        public void ChangeAnimation(string animationName)
+        {
+            this.CurrentAnimationName = animationName;
         }
 
         public bool InSpeakingRange(AnimatedSprite sprite)
