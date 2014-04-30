@@ -394,9 +394,6 @@ namespace TileGame.GameScreens
         public override void Update(GameTime gameTime)
         {
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
-            //NPC_Guard_2.ElapsedSearch += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            //NPC_Guard_1.ElapsedSearch += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            //try with AI
             NPC_Guard_1.SetVectorTowardsTargetAndStartAndCheckAggro(gameTime,player);
             NPC_Guard_2.SetVectorTowardsTargetAndStartAndCheckAggro(gameTime,player);
             if(NPC_Guard_1.Aggro)

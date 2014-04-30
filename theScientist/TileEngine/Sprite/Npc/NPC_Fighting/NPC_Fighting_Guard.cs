@@ -31,6 +31,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         private float delayHitByMelee;
         private bool meleeHit;
 
+        private float patrollingCircle;
+
         private float strikeForce;
         private bool strikeMode;
         private float delayStrike;
@@ -46,6 +48,11 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         private Curve2D curve;
         private AIsearch ai;
         private Vector2 oldPosition;
+        public float PatrollingCircle
+        {
+            get { return patrollingCircle; }
+            set { patrollingCircle = value; }
+        }
         public float DelayRespawn
         {
             get { return delayRespawn; }

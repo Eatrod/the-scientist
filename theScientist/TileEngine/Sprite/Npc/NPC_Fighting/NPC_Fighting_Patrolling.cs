@@ -39,7 +39,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         }
         public NPC_Fighting_Patrolling(Texture2D texture, Script script, Random random, int[,] Map) :base(texture,script,Map)
         {
-
+            this.PatrollingCircle = 200f;
             this.DelayHitByArrow = 300f;
             this.ElapsedHitByArrow = 0.0f;
             this.DelayRespawn = 10000f;
@@ -164,7 +164,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         public void GetRandomDirection(GameTime gameTime)
         {
             elapsedDirection += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (Vector2.Distance(StartingPosition, Position) > AggroCircle && !Aggro && !GoingHome)
+            if (Vector2.Distance(StartingPosition, Position) > PatrollingCircle && !Aggro && !GoingHome)
             {
                 direction += 180;
                 direction = direction % 360;
