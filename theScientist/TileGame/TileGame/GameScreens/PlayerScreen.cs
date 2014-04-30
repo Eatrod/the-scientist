@@ -552,10 +552,14 @@ namespace TileGame.GameScreens
                     {
                         if (Vector2.Distance(player.Origin, GameRef.GamePlayScreen.treeStanding.Origin) < 75)
                         {
-                            GameRef.GamePlayScreen.SpriteObjectInGameWorld.Remove(GameRef.GamePlayScreen.treeStanding);
-                            GameRef.GamePlayScreen.renderList.Remove(GameRef.GamePlayScreen.treeStanding);
-                            GameRef.GamePlayScreen.renderList.Add(GameRef.GamePlayScreen.treeBridge);
-                            GameRef.GamePlayScreen.renderList.Add(GameRef.GamePlayScreen.treeStubbe);
+                            if (!StoryProgress.ProgressLine["treeIsDown"])
+                            {
+                                GameRef.GamePlayScreen.SpriteObjectInGameWorld.Remove(GameRef.GamePlayScreen.treeStanding);
+                                GameRef.GamePlayScreen.renderList.Remove(GameRef.GamePlayScreen.treeStanding);
+                                GameRef.GamePlayScreen.renderList.Add(GameRef.GamePlayScreen.treeBridge);
+                                GameRef.GamePlayScreen.renderList.Add(GameRef.GamePlayScreen.treeStubbe);
+                                StoryProgress.ProgressLine["treeIsDown"] = true;
+                            }
                         }
                         player.Stamina -= 20f;
                     }

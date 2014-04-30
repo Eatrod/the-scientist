@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Content;
 
 using XtheSmithLibrary;
 using XtheSmithLibrary.Controls;
+using TileEngine;
 
 namespace TileGame.GameScreens
 {
@@ -303,7 +304,10 @@ namespace TileGame.GameScreens
         private void StartGame()
         {
             Point startCell;
+            GameRef.storyProgress = new StoryProgress();
+            GameRef.GamePlayScreen = new PotatoTown(GameRef, GameRef.stateManager, "Screen1");
             StateManager.ChangeState(GameRef.GamePlayScreen);
+            
             startCell = GameRef.BaseGamePlayScreen.FindCellWithIndexInCurrentTilemap(
                 50,
                 GameRef.GamePlayScreen);

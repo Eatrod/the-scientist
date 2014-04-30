@@ -23,26 +23,26 @@ namespace TileEngine
 
         public StoryProgress()
         {
-            ProgressLine.Add("asterixTalkedTo", false);
-            ProgressLine.Add("lumberjacksTalkedTo", false);
-            ProgressLine.Add("belladonnaHave", false);
-            ProgressLine.Add("Axe", true);
-            ProgressLine.Add("Sword", false);
-            ProgressLine.Add("Crossbow", true);
-            ProgressLine.Add("Spear", false);
-            ProgressLine.Add("DOOM-erang", false);
-            ProgressLine.Add("Hammer", false);
-            ProgressLine.Add("MetalBladeCrossbow", false);
-            ProgressLine.Add("Hookshot", false);
-            ProgressLine.Add("treeIsDown", false);
-            ProgressLine.Add("contestAgainstJonnyFinished", false);
-            ProgressLine.Add("contestAgainstJackFinished", false);
-            ProgressLine.Add("contestAgainstJohnFinished", false);
-            ProgressLine.Add("immortuiHave", false);
-            ProgressLine.Add("permitHave", false);
-            ProgressLine.Add("alcoholHave", false);
+            AddItemProgressLine("asterixTalkedTo", false);
+            AddItemProgressLine("lumberjacksTalkedTo", false);
+            AddItemProgressLine("belladonnaHave", false);
+            AddItemProgressLine("Axe", true);
+            AddItemProgressLine("Sword", false);
+            AddItemProgressLine("Crossbow", true);
+            AddItemProgressLine("Spear", false);
+            AddItemProgressLine("DOOM-erang", false);
+            AddItemProgressLine("Hammer", false);
+            AddItemProgressLine("MetalBladeCrossbow", false);
+            AddItemProgressLine("Hookshot", false);
+            AddItemProgressLine("treeIsDown", false);
+            AddItemProgressLine("contestAgainstJonnyFinished", false);
+            AddItemProgressLine("contestAgainstJackFinished", false);
+            AddItemProgressLine("contestAgainstJohnFinished", false);
+            AddItemProgressLine("immortuiHave", false);
+            AddItemProgressLine("permitHave", false);
+            AddItemProgressLine("alcoholHave", false);
 
-            collectedAmountDict.Add("IronOre", 0);
+            AddItemCollectedAmountDict("IronOre", 0);
         }
 
 
@@ -51,6 +51,22 @@ namespace TileEngine
         {
             if(ProgressLine.ContainsKey(key))
             ProgressLine[key] = true;
+        }
+
+        private void AddItemProgressLine(string key, bool value)
+        {
+            if (!ProgressLine.ContainsKey(key))
+                ProgressLine.Add(key, value);
+            else
+                ProgressLine[key] = value;
+        }
+
+        private void AddItemCollectedAmountDict(string key, int value)
+        {
+            if (!collectedAmountDict.ContainsKey(key))
+                collectedAmountDict.Add(key, value);
+            else
+                collectedAmountDict[key] = value;
         }
 
         #endregion
