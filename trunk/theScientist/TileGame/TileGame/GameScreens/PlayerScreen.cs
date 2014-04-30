@@ -152,15 +152,15 @@ namespace TileGame.GameScreens
             if (!player.Animations.ContainsKey("IdleDown"))
                 player.Animations.Add("IdleDown", idledown);
  
-            FrameAnimation idleleft = new FrameAnimation(4, 50, 80, 200, 80);
+            FrameAnimation idleleft = new FrameAnimation(1, 50, 80, 200, 80);
             if (!player.Animations.ContainsKey("IdleLeft"))
                 player.Animations.Add("IdleLeft", idleleft);
 
-            FrameAnimation idleright = new FrameAnimation(4, 50, 80, 200, 160);
+            FrameAnimation idleright = new FrameAnimation(1, 50, 80, 200, 160);
             if (!player.Animations.ContainsKey("IdleRight"))
                 player.Animations.Add("IdleRight", idleright);        
 
-            FrameAnimation idleup = new FrameAnimation(4, 50, 80, 200, 240);
+            FrameAnimation idleup = new FrameAnimation(1, 50, 80, 200, 240);
             if (!player.Animations.ContainsKey("IdleUp"))
                 player.Animations.Add("IdleUp", idleup);
 
@@ -593,20 +593,20 @@ namespace TileGame.GameScreens
                 motion = CollisionWithTerrain.CheckCollisionForMotion(motion, player,screen);
 
                 //sprite.Position += motion * sprite.Speed;
-                //UpdateSpriteAnimation(motion);
+                UpdateSpriteAnimation(motion);
                 player.isAnimating = true;
                 CollisionWithTerrain.CheckForCollisionAroundSprite(player, motion,screen);
             }
             else
             {
-                //UpdateSpriteIdleAnimation(sprite);
+                UpdateSpriteIdleAnimation(player);
                 player.isAnimating = false;
                 motion = new Vector2(0, 0);
             }
 
 
             motion = CollisionWithTerrain.CheckCollisionAutomaticMotion(motion, player,screen);
-            UpdateSpriteAnimation(motion);
+            //UpdateSpriteAnimation(motion);
             player.Position += motion * player.Speed;
             player.ClampToArea(screen.tileMap.GetWidthInPixels(), screen.tileMap.GetHeightInPixels());  //Funktion för att hämta nuvarande tilemap state.
             player.Update(gameTime);
@@ -1026,7 +1026,7 @@ namespace TileGame.GameScreens
         private void UpdateSpriteAnimation(Vector2 motion)
         {
             float motionAngle = (float)Math.Atan2(motion.Y, motion.X);
-            player.CurrentAnimation.FramesPerSeconds = ;
+            player.CurrentAnimation.FramesPerSeconds = 0.20f;
 
             if (motionAngle >= -MathHelper.PiOver4 && motionAngle <= MathHelper.PiOver4)
             {

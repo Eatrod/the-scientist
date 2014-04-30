@@ -11,15 +11,27 @@ namespace TileEngine.Sprite
         float frameLength = .35f;
         float timer = 0;
 
-        public int FramesPerSeconds
+        //public int FramesPerSeconds
+        //{
+        //    get
+        //    {
+        //        return (int)(1f / frameLength);
+        //    }
+        //    set
+        //    {
+        //        frameLength = 1f / (float)Math.Max(1f / (float)value, .01f);
+        //    }
+        //}
+
+        public float FramesPerSeconds
         {
-            get 
+            get
             {
-                return (int)(1f / frameLength);
+                return frameLength;
             }
-            set 
-            { 
-                frameLength = 1f / (float)Math.Max(1f / (float)value, .01f); 
+            set
+            {
+                frameLength = value;
             }
         }
 
