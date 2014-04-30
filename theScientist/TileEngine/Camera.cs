@@ -12,8 +12,8 @@ namespace TileEngine
         
 
         public Vector2 Position = Vector2.Zero;
-        
-        
+
+             
 
         public Matrix TransforMatrix
         {
