@@ -211,7 +211,7 @@ namespace TileGame.GameScreens
             if(player == null)
             {
                 player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/Player"), Content.Load<Texture2D>("CharacterPotraits/Assassins-Creed-4"));
-            player.Origionoffset = new Vector2(15, 15);
+            player.Origionoffset = new Vector2(25, 65);
                 //player.SetSpritePositionInGameWorld(new Vector2(4, 3));
             player.Life = 100;
             player.Stamina = 100;
