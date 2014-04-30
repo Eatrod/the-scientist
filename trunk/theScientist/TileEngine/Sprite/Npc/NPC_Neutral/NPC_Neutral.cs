@@ -18,7 +18,6 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
         private Random random;
         bool StartingFlag = true;
         private Vector2 motion;
-        private float ElapsedSeconds;
         public bool changeSpeed = true;
 
         private int direction;
