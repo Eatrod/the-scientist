@@ -490,10 +490,21 @@ namespace TileGame.GameScreens
                                 PlayerEndConversation(npc);
                         }
                     }
-                    }
                 }
-            /*if (showingThinkingBox == false)
-                PlayerShowThinkingBox("hejsan test test");*/
+            }
+
+
+            foreach (var sprite in SpriteObjectInGameWorld)
+            {
+                if (PlayerInTriggerRange(sprite))
+                {
+                    if (showingThinkingBox == false)
+                        if (StoryProgress.ProgressLine["Axe"] && sprite == treeStanding)
+                            PlayerShowThinkingBox("(Jag vet han har redan yxan) I will need an axe for this");
+                }
+            }
+
+
             //Kontroller för kod som rör Neutrala NPCs
             foreach (var npc in NpcNeutralList)
             {
@@ -501,7 +512,6 @@ namespace TileGame.GameScreens
                     npc.script = Content.Load<Script>("Scripts/PotatotownTownsfolk2");
                 if (npc.InHearingRange(player))
                 {
-                    //PlayerHideThinkingBox();
                     if (npc.ShowingBubble == false)
                     {
                         PlayerShowTextBubble(npc);

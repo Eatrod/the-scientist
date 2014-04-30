@@ -1125,6 +1125,12 @@ namespace TileGame.GameScreens
             ActiveConversation = false;
         }
 
+        public bool PlayerInTriggerRange(BaseSprite sprite)
+        {
+            Vector2 d = player.Origin - sprite.Origin;
+            return (d.Length() < 70);
+        }
+
         public void SetPlayerPosition(int x, int y)
         {
             player.SetSpritePositionInGameWorld(new Vector2(x, y));
