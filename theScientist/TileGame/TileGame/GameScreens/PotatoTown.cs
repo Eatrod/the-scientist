@@ -413,6 +413,12 @@ namespace TileGame.GameScreens
                 if (!npc.Dead)
                 {
                     npc.SetVectorTowardsTargetAndStartAndCheckAggro(gameTime, player);
+                    if (npc.Motion != Vector2.Zero)
+                    {
+                        npc.Motion.Normalize();
+                        npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
+
+                    }
                     if (npc.Aggro)
                         npc.PlayerPosition = player.Origin;
                 }

@@ -14,10 +14,16 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
         //TODO: Komma på hur synfältet ska defineras (Cirkelsektor är en place holder idé)
         //private Math.circlesector VisionRange{ get; set;}
+        private bool dead;
         protected int Hitpoints { get; set; }
         protected int AttackDamage { get; set; }
         protected List<NPC_Fighting> NpcEnemies { get; set; }
         protected int BattleStance { get; set; }
+        public bool Dead
+        {
+            get { return dead; }
+            set { dead = value; }
+        }
         //private List<Tiles> PatrolRoute { get; set; } 
 
         #endregion

@@ -108,7 +108,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
                 GetRandomDirection(gameTime);
 
-                this.motion = new Vector2(
+                this.Motion = new Vector2(
                    (float)Math.Cos(MathHelper.ToRadians(direction)),
                    (float)Math.Sin(MathHelper.ToRadians(-direction)));
 
