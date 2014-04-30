@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace TileEngine.Sprite.Npc.NPC_Story
 {
-    class NPC_Story_GuardCaptain : NPC_Story
+    public class NPC_Story_GuardCaptain : NPC_Story
     {
         public NPC_Story_GuardCaptain(Texture2D texture, Script script, Texture2D picture, string name)
             : base(texture, script, picture, name)
