@@ -488,7 +488,7 @@ namespace TileGame.GameScreens
                 {
                     if (showingThinkingBox == false)
                         if (StoryProgress.ProgressLine["Axe"] && sprite == treeStanding)
-                            PlayerShowThinkingBox("(Jag vet han har redan yxan) I will need an axe for this");
+                            PlayerShowThinkingBox("(Jag vet han har redan yxan) I will need an axe for this");                        
                 }
             }
 
@@ -502,6 +502,8 @@ namespace TileGame.GameScreens
                 {
                     if (npc.ShowingBubble == false)
                     {
+                        npc.changeSpeed = false;
+                        npc.Speed = 0;
                         PlayerShowTextBubble(npc);
                     }
                 }
@@ -510,6 +512,7 @@ namespace TileGame.GameScreens
                 {
                     if (npc.ShowingBubble == true)
                     {
+                        npc.changeSpeed = true;
                         PlayerHideTextBubble(npc);
                     }
                 }

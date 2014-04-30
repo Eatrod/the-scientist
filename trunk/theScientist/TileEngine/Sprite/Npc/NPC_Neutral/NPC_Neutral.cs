@@ -19,6 +19,7 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
         bool StartingFlag = true;
         private Vector2 motion;
         private float ElapsedSeconds;
+        public bool changeSpeed = true;
 
         private int direction;
         protected float delayDirection;
@@ -64,22 +65,29 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
 
         public override void Update(GameTime gameTime)
         {
-            if (StartingFlag)
+            if (changeSpeed == true)
             {
-                this.StartingPosition = Position;
-                StartingFlag = false;
+                if (StartingFlag)
+                {
+                    this.StartingPosition = Position;
+                    StartingFlag = false;
+                }
+
+                GetRandomDirection(gameTime);
+
+                this.motion = new Vector2(
+                    (float)Math.Cos(MathHelper.ToRadians(direction)),
+                    (float)Math.Sin(MathHelper.ToRadians(-direction)));
+
+                UpdateSpriteAnimation(motion);
+                this.speed = 0.5f;
+                Position += motion * speed;
+                base.Update(gameTime);
             }
-
-            GetRandomDirection(gameTime);
-
-            this.motion = new Vector2(
-                (float)Math.Cos(MathHelper.ToRadians(direction)),
-                (float)Math.Sin(MathHelper.ToRadians(-direction)));
-
-            UpdateSpriteAnimation(motion);
-            this.speed = 0.5f;
-            Position += motion * speed;
-            base.Update(gameTime);
+            else
+            {
+                CurrentAnimationName = "Down";
+            }
         }
 
         public bool InHearingRange(AnimatedSprite sprite)
