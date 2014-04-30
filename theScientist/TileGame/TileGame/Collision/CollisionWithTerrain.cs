@@ -61,7 +61,7 @@ namespace TileGame.Collision
             if (up != null && screen.tileMap.CollisionLayer.GetCellIndex(up.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(up.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -72,7 +72,7 @@ namespace TileGame.Collision
             if (down != null && screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(down.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -83,7 +83,7 @@ namespace TileGame.Collision
             if (left != null && screen.tileMap.CollisionLayer.GetCellIndex(left.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(left.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -95,7 +95,7 @@ namespace TileGame.Collision
             if (right != null && screen.tileMap.CollisionLayer.GetCellIndex(right.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(right.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -108,7 +108,7 @@ namespace TileGame.Collision
             if (upLeft != null && screen.tileMap.CollisionLayer.GetCellIndex(upLeft.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(upLeft.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -123,7 +123,7 @@ namespace TileGame.Collision
             if (upRight != null && screen.tileMap.CollisionLayer.GetCellIndex(upRight.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(upRight.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -138,7 +138,7 @@ namespace TileGame.Collision
             if (downLeft != null && screen.tileMap.CollisionLayer.GetCellIndex(downLeft.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(downLeft.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -153,7 +153,7 @@ namespace TileGame.Collision
             if (downRight != null && screen.tileMap.CollisionLayer.GetCellIndex(downRight.Value) == 1)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(downRight.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -173,7 +173,7 @@ namespace TileGame.Collision
             if (up != null && (screen.tileMap.CollisionLayer.GetCellIndex(up.Value) == 14 || screen.tileMap.CollisionLayer.GetCellIndex(up.Value) == 16 || screen.tileMap.CollisionLayer.GetCellIndex(up.Value) == 18))
             {
                 Rectangle cellRect = Engine.CreateRectForCell(up.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -184,7 +184,7 @@ namespace TileGame.Collision
             if (down != null && (screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 13 || screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 17 || screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 15))
             {
                 Rectangle cellRect = Engine.CreateRectForCell(down.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -195,7 +195,7 @@ namespace TileGame.Collision
             if (left != null && (screen.tileMap.CollisionLayer.GetCellIndex(left.Value) == 11 || screen.tileMap.CollisionLayer.GetCellIndex(left.Value) == 15 || screen.tileMap.CollisionLayer.GetCellIndex(left.Value) == 16))
             {
                 Rectangle cellRect = Engine.CreateRectForCell(left.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -207,7 +207,7 @@ namespace TileGame.Collision
             if (right != null && (screen.tileMap.CollisionLayer.GetCellIndex(right.Value) == 12 || screen.tileMap.CollisionLayer.GetCellIndex(right.Value) == 17 || screen.tileMap.CollisionLayer.GetCellIndex(right.Value) == 18))
             {
                 Rectangle cellRect = Engine.CreateRectForCell(right.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -220,7 +220,7 @@ namespace TileGame.Collision
             if (upLeft != null && screen.tileMap.CollisionLayer.GetCellIndex(upLeft.Value) == 16)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(upLeft.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -234,7 +234,7 @@ namespace TileGame.Collision
             if (upRight != null && screen.tileMap.CollisionLayer.GetCellIndex(upRight.Value) == 18)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(upRight.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -248,7 +248,7 @@ namespace TileGame.Collision
             if (downLeft != null && screen.tileMap.CollisionLayer.GetCellIndex(downLeft.Value) == 15)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(downLeft.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -262,7 +262,7 @@ namespace TileGame.Collision
             if (downRight != null && screen.tileMap.CollisionLayer.GetCellIndex(downRight.Value) == 17)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(downRight.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -280,7 +280,7 @@ namespace TileGame.Collision
             if (up != null && screen.tileMap.CollisionLayer.GetCellIndex(up.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(up.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -292,7 +292,7 @@ namespace TileGame.Collision
             if (down != null && screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(down.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -304,7 +304,7 @@ namespace TileGame.Collision
             if (left != null && screen.tileMap.CollisionLayer.GetCellIndex(left.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(left.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -317,7 +317,7 @@ namespace TileGame.Collision
             if (right != null && screen.tileMap.CollisionLayer.GetCellIndex(right.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(right.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -331,7 +331,7 @@ namespace TileGame.Collision
             if (upLeft != null && screen.tileMap.CollisionLayer.GetCellIndex(upLeft.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(upLeft.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -344,7 +344,7 @@ namespace TileGame.Collision
             if (upRight != null && screen.tileMap.CollisionLayer.GetCellIndex(upRight.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(upRight.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -357,7 +357,7 @@ namespace TileGame.Collision
             if (downLeft != null && screen.tileMap.CollisionLayer.GetCellIndex(downLeft.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(downLeft.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {
@@ -370,7 +370,7 @@ namespace TileGame.Collision
             if (downRight != null && screen.tileMap.CollisionLayer.GetCellIndex(downRight.Value) == 31)
             {
                 Rectangle cellRect = Engine.CreateRectForCell(downRight.Value);
-                Rectangle spriteRect = sprite.Bounds;
+                Rectangle spriteRect = sprite.MovementBounds();
 
                 if (cellRect.Intersects(spriteRect))
                 {

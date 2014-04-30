@@ -143,10 +143,10 @@ namespace TileGame.GameScreens
             //renderList.AddRange(NPCPatrollingGuards);
             if (StoryProgress.ProgressLine["treeIsDown"])
             {
-                this.SpriteObjectInGameWorld.Remove(GameRef.GamePlayScreen.treeStanding);
-                this.renderList.Remove(GameRef.GamePlayScreen.treeStanding);
-                this.renderList.Add(GameRef.GamePlayScreen.treeBridge);
-                this.renderList.Add(GameRef.GamePlayScreen.treeStubbe);
+                this.SpriteObjectInGameWorld.Remove(GameRef.PotatoTown.treeStanding);
+                this.renderList.Remove(GameRef.PotatoTown.treeStanding);
+                this.renderList.Add(GameRef.PotatoTown.treeBridge);
+                this.renderList.Add(GameRef.PotatoTown.treeStubbe);
         }
         }
         protected override void LoadContent()

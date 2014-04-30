@@ -89,6 +89,16 @@ namespace TileEngine.Sprite
             }
         } 
 
+        public Rectangle MovementBounds()
+        {
+            Rectangle rect = CurrentAnimation.CurrentRectangle;
+            rect.Height = rect.Width - 20;
+            rect.Width = rect.Width - 20;
+            rect.X = (int)(Origin.X - rect.Width / 2);
+            rect.Y = (int)(Origin.Y - rect.Height / 2);
+            return rect;
+        }
+
         public bool isAnimating
         {
             get { return animating; }

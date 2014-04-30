@@ -252,7 +252,7 @@ namespace TileGame.GameScreens
             }
             if (sender == contGame)
             {
-                StateManager.ChangeState(GameRef.GamePlayScreen);
+                StateManager.ChangeState(GameRef.PotatoTown);
             }
             if (sender == saveGame)
             {
@@ -305,14 +305,14 @@ namespace TileGame.GameScreens
         {
             Point startCell;
             GameRef.storyProgress = new StoryProgress();
-            GameRef.GamePlayScreen = new PotatoTown(GameRef, GameRef.stateManager, "Screen1");
-            StateManager.ChangeState(GameRef.GamePlayScreen);
+            GameRef.PotatoTown = new PotatoTown(GameRef, GameRef.stateManager, "Screen1");
+            StateManager.ChangeState(GameRef.PotatoTown);
             
             startCell = GameRef.BaseGamePlayScreen.FindCellWithIndexInCurrentTilemap(
                 50,
-                GameRef.GamePlayScreen);
+                GameRef.PotatoTown);
             PlayerScreen.player.Life = 100;
-            GameRef.GamePlayScreen.Gate1Locked = true;
+            GameRef.PotatoTown.Gate1Locked = true;
             //PlayerScreen.player.SetSpritePositionInGameWorld(new Vector2(16, 6));
             PlayerScreen.player.SetSpritePositionInGameWorld(
                 new Vector2(startCell.X, startCell.Y));
