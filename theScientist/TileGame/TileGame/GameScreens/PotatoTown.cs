@@ -230,6 +230,7 @@ namespace TileGame.GameScreens
                 NPC_Bandit.AggroRange = 300; //Hur långt ifrån du blir upptäckt
                 NPC_Bandit.PatrollingCircle = 100;
                 NPC_Bandit.StrikeForce = 10;
+                NPC_Bandit.AggroSpeed = 1.8f;
                 AnimatedSpriteObject.Add(NPC_Bandit);
                 NPCPatrollingGuards.Add(NPC_Bandit);
 
