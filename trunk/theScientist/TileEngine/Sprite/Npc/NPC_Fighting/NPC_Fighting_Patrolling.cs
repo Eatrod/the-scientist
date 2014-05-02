@@ -39,16 +39,18 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         }
         public NPC_Fighting_Patrolling(Texture2D texture, Script script, Random random) :base(texture,script)
         {
+            this.ElapsedHitByMelee = 0.0f;
+            this.DelayHitByMelee = 300f;
             this.DirtPileCreated = false;
             this.AggroSpeed = 1.5f;
             this.PatrollingCircle = 200f;
             this.DelayHitByArrow = 300f;
             this.ElapsedHitByArrow = 0.0f;
-            this.DelayRespawn = 250000f;
+            this.DelayRespawn = 25000f;
             this.ElapsedRespawn = 0.0f;
             this.Dead = false;
             this.OldPosition = Vector2.Zero;
-            this.StrikeForce = 5.0f;
+            this.StrikeForce = 1.0f;
             this.collided = false;
             this.random = random;
             this.direction = 0;
@@ -75,6 +77,17 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             FrameAnimation walkLeft = new FrameAnimation(2, 50, 80, 50, 80);
             FrameAnimation walkRight = new FrameAnimation(2, 50, 80, 50, 160);
             FrameAnimation walkUp = new FrameAnimation(2, 50, 80, 50, 240);
+
+            FrameAnimation attackDown = new FrameAnimation(2, 65, 80, 200, 0);
+            FrameAnimation attackLeft = new FrameAnimation(2, 65, 80, 200, 80);
+            FrameAnimation attackRight = new FrameAnimation(2, 65, 80, 200, 160);
+            FrameAnimation attackUp = new FrameAnimation(2, 65, 80, 200, 240);
+
+            this.Animations.Add("AttackRight", attackRight);
+            this.Animations.Add("AttackLeft", attackLeft);
+            this.Animations.Add("AttackUp", attackUp);
+            this.Animations.Add("AttackDown", attackDown);
+            
 
             this.Animations.Add("Nothing", nothing);
 
@@ -121,7 +134,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 }
                 else if (StrikeMode)
                 {
-
+                    UpdateSpriteAttackAnimation(VectorTowardsTarget);
                 }
                 else if (GoingHome)
                 {
@@ -145,14 +158,15 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             {
                 CurrentAnimationName = "Nothing";
                 ElapsedRespawn += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                this.HitByArrow = false;
                 if(ElapsedRespawn > DelayRespawn)
                 {
                     this.Life = this.FullHp;
                     this.Dead = false;
-                    this.Aggro = false;
-                    this.Position = this.StartingPosition;
+                    this.Aggro = false;                    
                     this.ElapsedRespawn = 0.0f;
                     DirtPileCreated = false;
+                    this.Position = StartingPosition;
                 }
             }
             base.Update(gameTime);
@@ -176,31 +190,31 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
         }
 
-        //private void UpdateSpriteAnimation(Vector2 motion)
-        //{
+        private void UpdateSpriteAttackAnimation(Vector2 motion)
+        {
 
-        //    float motionAngle = (float)Math.Atan2(motion.Y, motion.X);
+            float motionAngle = (float)Math.Atan2(motion.Y, motion.X);
 
-        //    if (motionAngle >= -MathHelper.PiOver4 && motionAngle <= MathHelper.PiOver4)
-        //    {
-        //        CurrentAnimationName = "WalkRight"; //Right
-        //        //motion = new Vector2(1f, 0f);
-        //    }
-        //    else if (motionAngle >= MathHelper.PiOver4 && motionAngle <= 3f * MathHelper.PiOver4)
-        //    {
-        //        CurrentAnimationName = "WalkDown"; //Down
-        //        //motion = new Vector2(0f, 1f);
-        //    }
-        //    else if (motionAngle <= -MathHelper.PiOver4 && motionAngle >= -3f * MathHelper.PiOver4)
-        //    {
-        //        CurrentAnimationName = "WalkUp"; // Up
-        //        //motion = new Vector2(0f, -1f);
-        //    }
-        //    else
-        //    {
-        //        CurrentAnimationName = "WalkLeft"; //Left
-        //        //motion = new Vector2(-1f, 0f);
-        //    }
-        //}
+            if (motionAngle >= -MathHelper.PiOver4 && motionAngle <= MathHelper.PiOver4)
+            {
+                CurrentAnimationName = "AttackRight"; //Right
+                //motion = new Vector2(1f, 0f);
+            }
+            else if (motionAngle >= MathHelper.PiOver4 && motionAngle <= 3f * MathHelper.PiOver4)
+            {
+                CurrentAnimationName = "AttackDown"; //Down
+                //motion = new Vector2(0f, 1f);
+            }
+            else if (motionAngle <= -MathHelper.PiOver4 && motionAngle >= -3f * MathHelper.PiOver4)
+            {
+                CurrentAnimationName = "AttackUp"; // Up
+                //motion = new Vector2(0f, -1f);
+            }
+            else
+            {
+                CurrentAnimationName = "AttackLeft"; //Left
+                //motion = new Vector2(-1f, 0f);
+            }
+        }
     }
 }

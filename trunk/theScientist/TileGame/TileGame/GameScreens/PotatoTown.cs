@@ -49,8 +49,7 @@ namespace TileGame.GameScreens
         Sprite sprite, sprite1;
         AnimatedSprite NPC1, NPC2;
         public NPC_Story npcstory, npcStoryAsterix;//npcstory2;
-        NPC_Fighting_Stationary NPC_Guard_1;
-        NPC_Fighting_Stationary NPC_Guard_2;
+
    
         public NPC_Story npc;
         public NPC_Story_GuardCaptain guard;
@@ -70,7 +69,10 @@ namespace TileGame.GameScreens
         List<AnimatedSprite> NPCFightingFarmers = new List<AnimatedSprite>();
         List<AnimatedSprite> NPCPatrollingGuards = new List<AnimatedSprite>();
         List<AnimatedSprite> NPCStationaryGuards = new List<AnimatedSprite>();
+        List<AnimatedSprite> NPCRangedGuards = new List<AnimatedSprite>();
         List<Sprite> DirtPiles = new List<Sprite>();
+        List<Sprite> BombSprites = new List<Sprite>();
+        List<AnimatedSprite> Explosions = new List<AnimatedSprite>();
         
 
         public string Name { get { return name; } }
@@ -175,12 +177,22 @@ namespace TileGame.GameScreens
             NPC2.FullHp = 5;
             AnimatedSpriteObject.Add(NPC2);
 
-            
-            for (int i = 0; i < 15; i++ )
+            for (int i = 0; i < 1; i++ )
             {
-                NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), null, GameRef.random);
+                NPC_Fighting_Ranged NPC_Ranged = new NPC_Fighting_Ranged(Content.Load<Texture2D>("Sprite/Bjorn_Try_Ranged"), null, GameRef.random);
+                NPC_Ranged.Origionoffset = new Vector2(25, 65);
+                NPC_Ranged.SetSpritePositionInGameWorld(new Vector2(81 + i, 70));
+                NPC_Ranged.Life = 100;
+                NPC_Ranged.FullHp = 100;
+                AnimatedSpriteObject.Add(NPC_Ranged);
+                NPCRangedGuards.Add(NPC_Ranged);
+            }
+            
+            for (int i = 0; i < 0; i++ )
+            {
+                NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/Bjorn_Try_Golden_Soldier_Strike"), null, GameRef.random);
                 NPC_Patroller.Origionoffset = new Vector2(25, 65);
-                NPC_Patroller.SetSpritePositionInGameWorld(new Vector2(22 + i, 50));
+                NPC_Patroller.SetSpritePositionInGameWorld(new Vector2(81 + i, 70));
                 NPC_Patroller.Life = 100;
                 NPC_Patroller.FullHp = 100;
                 AnimatedSpriteObject.Add(NPC_Patroller);
@@ -401,12 +413,54 @@ namespace TileGame.GameScreens
                     break;
                 }
             }
-
+            foreach(Explosion explosion in Explosions)
+            {
+                explosion.UpdateExplosion(gameTime);
+                if(explosion.Finished)
+                {
+                    AnimatedSpriteObject.Remove(explosion);
+                    renderList.Remove(explosion);
+                    Explosions.Remove(explosion);
+                    break;
+                }
+            }
+            foreach(BombSprite bomb in BombSprites)
+            {
+                bomb.UpdateBomb(gameTime);
+                if(bomb.Bounds.Intersects(player.Bounds))
+                {
+                    player.Life -= bomb.Damage;
+                    bomb.Boom = true;
+                }
+                if(bomb.Boom)
+                {
+                    Explosion explosion = new Explosion(Content.Load<Texture2D>("Sprite/Bjorn_Try_Explosion"), bomb.Position);
+                    Explosions.Add(explosion);
+                    AnimatedSpriteObject.Add(explosion);
+                    renderList.Add(explosion);
+                    BombSprites.Remove(bomb);
+                    renderList.Remove(bomb);
+                    
+                    break;
+                }
+            }
+            foreach(NPC_Fighting_Ranged npc in NPCRangedGuards)
+            {
+                npc.UpdateRangedFighter(gameTime, player);
+                if(npc.BombThrow)
+                {
+                    BombSprite bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),player.Position,npc.Position);
+                    bomb.Position = npc.Position;
+                    BombSprites.Add(bomb);
+                    renderList.Add(bomb);
+                    npc.BombThrow = false;
+                }
+            }
             foreach(NPC_Fighting_Patrolling npc in NPCPatrollingGuards)
             {
                 if (!npc.Dead)
                 {
-                    npc.SetVectorTowardsTargetAndStartAndCheckAggro(gameTime, player);
+                    npc.SetVectorTowardsTargetAndStartAndCheckAggroMelee(gameTime, player);
                     if (npc.Motion != Vector2.Zero)
                     {
                         npc.Motion.Normalize();

@@ -71,8 +71,10 @@
     <Compile Include="Sprite\AnimatedSprite.cs" />
     <Compile Include="Sprite\BaseSprite.cs" />
     <Compile Include="Sprite\BelladonnaSprite.cs" />
+    <Compile Include="Sprite\BombSprite.cs" />
     <Compile Include="Sprite\CharacterSprite.cs" />
     <Compile Include="Sprite\DirtPileSprite.cs" />
+    <Compile Include="Sprite\Explosion.cs" />
     <Compile Include="Sprite\FrameAnimation.cs" />
     <Compile Include="Sprite\MultiIronSprite.cs" />
     <Compile Include="Sprite\ImmortuiSprite.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Farmer.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Guard.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Patrolling.cs" />
+    <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Ranged.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Stationary.cs" />
     <Compile Include="Sprite\Npc\NPC_Neutral\NPC_Neutral.cs" />
     <Compile Include="Sprite\Npc\NPC_Neutral\NPC_Neutral_Critters.cs" />

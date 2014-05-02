@@ -109,6 +109,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                     this.Aggro = false;
                     this.Position = this.StartingPosition;
                     this.ElapsedRespawn = 0.0f;
+                    this.HitByArrow = false;
                     this.DirtPileCreated = false;
                 }
             }
