@@ -31,11 +31,15 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         }
         public NPC_Fighting_Ranged(Texture2D texture, Script script, Random random): base(texture,null)
         {
+            this.ElapsedHitByArrow = 0.0f;
+            this.DelayHitByArrow = 300f;
+            this.ElapsedRespawn = 0.0f;
+            this.DelayRespawn = 25000f;
             this.elapsedThrowBomb = 0.0f;
             this.delayThrowBomb = 3000f;
             this.animationTime = false;
             this.elapsedAnimationTime = 0.0f;
-            this.delayAnimationTime = 500f;
+            this.delayAnimationTime = 750f;
             this.bombThrow = false;
             this.lockAndLoad = false;
             this.animationTime = false;
@@ -45,6 +49,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             FrameAnimation left = new FrameAnimation(1, 50, 80, 0, 80);
             FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);
             FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
+            FrameAnimation nothing = new FrameAnimation(1, 0, 0, 0, 0);
+
 
             FrameAnimation walkDown = new FrameAnimation(2, 50, 80, 50, 0);
             FrameAnimation walkLeft = new FrameAnimation(2, 50, 80, 50, 80);
@@ -56,7 +62,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
             this.Animations.Add("ThrowLeft", throwLeft);
             this.Animations.Add("ThrowRight", throwRight);
-
+            this.Animations.Add("Nothing", nothing);
             this.Animations.Add("Right", right);
             this.Animations.Add("Left", left);
             this.Animations.Add("Up", up);
@@ -65,6 +71,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.Animations.Add("WalkLeft", walkLeft);
             this.Animations.Add("WalkUp", walkUp);
             this.Animations.Add("WalkDown", walkDown);
+            
         }
         public void UpdateRangedFighter(GameTime gameTime, AnimatedSprite player)
         {
@@ -101,6 +108,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                     this.CurrentAnimationName = "ThrowRight";
                 else
                     this.CurrentAnimationName = "ThrowLeft";
+                this.CurrentAnimation.FramesPerSeconds = 0.40f;
                 if(elapsedAnimationTime > delayAnimationTime)
                 {
                     this.bombThrow = true;
@@ -109,17 +117,51 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                     elapsedAnimationTime = 0.0f;
                 }
             }
+            if (HitByArrow)
+            {
+                ElapsedHitByArrow += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                this.Position += this.ArrowDirection;
+                if (ElapsedHitByArrow > DelayHitByArrow)
+                {
+                    HitByArrow = false;
+                    ElapsedHitByArrow = 0.0f;
+                }
+            }
         }
         public override void Update(GameTime gameTime)
         {
-            if (StartingFlag)
+            if (this.Life <= 0)
+                this.Dead = true;
+            if (!Dead)
             {
-                this.StartingPosition = Position;
-                StartingFlag = false;
+                if (StartingFlag)
+                {
+                    this.StartingPosition = Position;
+                    StartingFlag = false;
+                }
+                if (!animationTime)
+                {
+                    this.CurrentAnimationName = "Down";
+                }
             }
-            if (!animationTime)
+            else
             {
-                this.CurrentAnimationName = "Down";
+                this.CurrentAnimationName = "Nothing";
+                
+                ElapsedRespawn += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if(ElapsedRespawn > DelayRespawn)
+                {
+                    this.Aggro = false;
+                    this.animationTime = false;
+                    this.bombThrow = false;
+                    this.Dead = false;
+                    this.HitByArrow = false;
+                    this.ElapsedRespawn = 0.0f;
+                    this.Position = this.StartingPosition;
+                    this.lockAndLoad = false;
+                    this.DirtPileCreated = false;
+                    this.Life = this.FullHp;
+                }
             }
             base.Update(gameTime);
         }

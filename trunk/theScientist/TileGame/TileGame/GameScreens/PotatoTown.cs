@@ -446,15 +446,28 @@ namespace TileGame.GameScreens
             }
             foreach(NPC_Fighting_Ranged npc in NPCRangedGuards)
             {
-                npc.UpdateRangedFighter(gameTime, player);
-                if(npc.BombThrow)
+                if (!npc.Dead)
                 {
-                    BombSprite bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),player.Position,npc.Position);
-                    bomb.Position = npc.Position;
-                    BombSprites.Add(bomb);
-                    renderList.Add(bomb);
-                    npc.BombThrow = false;
+                    npc.UpdateRangedFighter(gameTime, player);
+                    if (npc.BombThrow)
+                    {
+                        BombSprite bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"), player.Position, npc.Position);
+                        bomb.Position = npc.Position;
+                        BombSprites.Add(bomb);
+                        renderList.Add(bomb);
+                        npc.BombThrow = false;
+                    }
                 }
+                else if(!npc.DirtPileCreated)
+                {
+                    DirtPileSprite dirtpile = new DirtPileSprite(Content.Load<Texture2D>("Sprite/dirtpile"));
+                    dirtpile.Position = npc.Position;
+                    dirtpile.DelayTime = npc.DelayRespawn;
+                    DirtPiles.Add(dirtpile);
+                    renderList.Add(dirtpile);
+                    npc.DirtPileCreated = true;
+                }
+
             }
             foreach(NPC_Fighting_Patrolling npc in NPCPatrollingGuards)
             {
