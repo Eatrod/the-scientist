@@ -516,7 +516,7 @@ namespace TileGame.GameScreens
 
                         if (InputHandler.KeyReleased(Keys.Space))
                         {
-                            if (ActiveConversation == false)
+                            if (ActiveConversation == false && npc.script != null)
                             {
                                 PlayerStartConversation(npc, NpcStoryList);
                             }
