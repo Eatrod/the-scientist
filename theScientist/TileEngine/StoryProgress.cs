@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using TileEngine.Sprite.Npc.NPC_Neutral;
+using TileEngine.Sprite.Npc.NPC_Story;
 
 namespace TileEngine
 {
@@ -67,6 +69,19 @@ namespace TileEngine
                 collectedAmountDict.Add(key, value);
             else
                 collectedAmountDict[key] = value;
+        }
+
+        public void ChangeScriptsForNPCs(NPC npc)
+        {
+            //Story NPCs
+            if (npc.NPCName == "Bibitur" && ProgressLine["alcoholHave"])
+                npc.ChangeScript(1);
+            if (StoryProgress.ProgressLine["permitHave"] && npc.NPCName == "Guard")
+                npc.ChangeScript(1);
+
+            //Neutrala NPCs
+            if (StoryProgress.ProgressLine["asterixTalkedTo"] && npc.GetType() == typeof(NPC_Neutral))
+                npc.ChangeScript(1);
         }
 
         #endregion
