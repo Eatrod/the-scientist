@@ -160,8 +160,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             : base(texture, script)
         {
             this.Dead = false;
-            this.ElapsedHitByMelee = 0.0f;
-            this.DelayHitByMelee = 300f;
             this.strikeMode = false;
             this.startingFlag = true;
             this.vectorTowardsTarget = Vector2.Zero;
@@ -177,7 +175,15 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.elapsedStruck = 0.0f;
             this.aggroCircle = 500;
         }
-        public void SetVectorTowardsTargetAndStartAndCheckAggro(GameTime gameTime, AnimatedSprite player)
+        public void SetVectorTowardsTargetAndStartAndCheckAggroRanged(GameTime gameTime, AnimatedSprite player)
+        {
+            vectorTowardsTarget = player.Origin - this.Origin;
+            vectorTowardsStart = startingPosition - Position;
+            
+            
+
+        }
+        public void SetVectorTowardsTargetAndStartAndCheckAggroMelee(GameTime gameTime, AnimatedSprite player)
         {
 
             vectorTowardsTarget = player.Origin - this.Origin;
@@ -195,9 +201,9 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             if (MeleeHit)
             {
                 ElapsedHitByMelee += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                Vector2 HitVector = this.Origin - player.Origin;
-                HitVector.Normalize();
-                player.Position -= HitVector * 3;
+                //Vector2 HitVector = this.Origin - player.Origin;
+                //HitVector.Normalize();
+                //player.Position -= HitVector;
                 player.SettingSpriteBlink(gameTime);
                 if (ElapsedHitByMelee > DelayHitByMelee)
                 {
@@ -209,7 +215,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             {
                 ElapsedStrike += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 strikeMode = true;
-                UpdateSpriteAnimation(player.Position - this.Position);
+                //UpdateSpriteAnimation(player.Position - this.Position);
                 if (ElapsedStrike > DelayStrike)
                 {
                     this.MeleeHit = true;

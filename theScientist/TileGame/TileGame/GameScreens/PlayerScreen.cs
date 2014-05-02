@@ -73,7 +73,6 @@ namespace TileGame.GameScreens
 
         //GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
         public TileMap tileMap = new TileMap();
         protected Camera camera = new Camera();
         protected bool ActiveConversation = false;
@@ -429,6 +428,7 @@ namespace TileGame.GameScreens
                     motion.X -= 2;
                 if (InputHandler.KeyDown(Keys.Right))
                     motion.X += 2;
+
             }
 
 
