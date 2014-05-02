@@ -22,6 +22,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         private bool animationTime;
         private float elapsedAnimationTime;
         private float delayAnimationTime;
+        private bool walkAround;
         
 
         public bool BombThrow
@@ -31,19 +32,27 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         }
         public NPC_Fighting_Ranged(Texture2D texture, Script script, Random random): base(texture,null)
         {
+            this.walkAround = true;
+            this.PatrollingCircle = 300f;
             this.ElapsedHitByArrow = 0.0f;
             this.DelayHitByArrow = 300f;
             this.ElapsedRespawn = 0.0f;
             this.DelayRespawn = 25000f;
             this.elapsedThrowBomb = 0.0f;
-            this.delayThrowBomb = 3000f;
+            this.delayThrowBomb = 2500f;
             this.animationTime = false;
             this.elapsedAnimationTime = 0.0f;
             this.delayAnimationTime = 750f;
             this.bombThrow = false;
             this.lockAndLoad = false;
             this.animationTime = false;
-            this.AggroRange = 800f;
+            this.AggroRange = 500f;
+            this.Random = random;
+            this.Direction = 0;
+            this.Speed = 0.5f;
+            this.ElapsedDirection = 0.0f;
+            this.DelayDirection = 4000f;
+
 
             FrameAnimation down = new FrameAnimation(1, 50, 80, 0, 0);
             FrameAnimation left = new FrameAnimation(1, 50, 80, 0, 80);
@@ -79,6 +88,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             {
                 Aggro = true;
                 lockAndLoad = true;
+                this.walkAround = false;
             }
             else if (Vector2.Distance(player.Origin,this.Origin) > AggroRange)
             {
@@ -86,8 +96,9 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 lockAndLoad = false;
                 animationTime = false;
                 bombThrow = false;
+                this.walkAround = true;
             }
-            if(Aggro && lockAndLoad)
+            if(Aggro && lockAndLoad && !walkAround)
             {
                 elapsedThrowBomb += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 if(elapsedThrowBomb > delayThrowBomb)
@@ -139,9 +150,19 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                     this.StartingPosition = Position;
                     StartingFlag = false;
                 }
-                if (!animationTime)
+                if (!animationTime && Aggro)
                 {
                     this.CurrentAnimationName = "Down";
+                }
+                else if (walkAround)
+                {
+                    GetRandomDirection(gameTime);
+
+                    this.Motion = new Vector2(
+                       (float)Math.Cos(MathHelper.ToRadians(Direction)),
+                       (float)Math.Sin(MathHelper.ToRadians(-Direction)));
+                    this.Position += this.Motion * this.Speed;
+                    UpdateSpriteAnimation(Motion);
                 }
             }
             else
@@ -165,5 +186,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             }
             base.Update(gameTime);
         }
+        
     }
 }

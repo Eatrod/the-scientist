@@ -14,29 +14,17 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 {
     public class NPC_Fighting_Patrolling: NPC_Fighting_Guard
     {
-        private int direction;
-        private Random random;
-        private Vector2 motion;
-        private float delayDirection;
-        private float elapsedDirection;
+        
+        
+        
+        
         private bool collided;
         public bool Collided
         {
             get { return collided; }
             set { collided = value; }
         }
-       
-        public int Direction
-        {
-            get { return direction; }
-            set { direction = value; }
-        }
-        public Vector2 Motion
-        {
-            get { return motion; }
-            set { motion = value; }
-            
-        }
+      
         public NPC_Fighting_Patrolling(Texture2D texture, Script script, Random random) :base(texture,script)
         {
             this.ElapsedHitByMelee = 0.0f;
@@ -52,8 +40,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.OldPosition = Vector2.Zero;
             this.StrikeForce = 1.0f;
             this.collided = false;
-            this.random = random;
-            this.direction = 0;
+            this.Random = random;
+            this.Direction = 0;
             this.speed = 0.5f;
             this.StartingFlag = true;
             this.VectorTowardsStart = Vector2.Zero;
@@ -63,8 +51,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.AggroRange = 100;
             this.AggroCircle = 500;
             this.GoingHome = false;
-            this.elapsedDirection = 0.0f;
-            this.delayDirection = 3000f;
+            this.ElapsedDirection = 0.0f;
+            this.DelayDirection = 3000f;
             
 
             FrameAnimation down = new FrameAnimation(1, 50, 80, 0, 0);
@@ -119,10 +107,10 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 GetRandomDirection(gameTime);
 
                 this.Motion = new Vector2(
-                   (float)Math.Cos(MathHelper.ToRadians(direction)),
-                   (float)Math.Sin(MathHelper.ToRadians(-direction)));
+                   (float)Math.Cos(MathHelper.ToRadians(Direction)),
+                   (float)Math.Sin(MathHelper.ToRadians(-Direction)));
 
-                UpdateSpriteAnimation(motion);
+                UpdateSpriteAnimation(Motion);
 
 
                 if (Aggro && !StrikeMode)
@@ -145,12 +133,12 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 else
                 {
                     this.speed = 0.5f;
-                    Position += motion * speed;
+                    Position += Motion * speed;
                 }
                 if (!Aggro && !GoingHome && Collided)
                 {
-                    direction += 180;
-                    direction = direction % 360;
+                    Direction += 180;
+                    Direction = Direction % 360;
                     Collided = false;
                 }
             }
@@ -172,24 +160,22 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             base.Update(gameTime);
             
         }
+        //public void GetRandomDirection(GameTime gameTime)
+        //{
+        //    ElapsedDirection += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+        //    if (Vector2.Distance(StartingPosition, Position) > PatrollingCircle && !Aggro && !GoingHome)
+        //    {
+        //        Direction += 180;
+        //        Direction = Direction % 360;
+        //    }
+        //    if (ElapsedDirection > DelayDirection && !GoingHome)
+        //    {
+        //        Direction = random.Next(0, 360);
+        //        ElapsedDirection = 0;
+        //    }
 
-        public void GetRandomDirection(GameTime gameTime)
-        {
-            elapsedDirection += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (Vector2.Distance(StartingPosition, Position) > PatrollingCircle && !Aggro && !GoingHome)
-            {
-                direction += 180;
-                direction = direction % 360;
-            }
-            if(elapsedDirection > delayDirection && !GoingHome)
-            {
-                direction = random.Next(0, 360);
-                elapsedDirection = 0;
-            }
-            
 
-        }
-
+        //}
         private void UpdateSpriteAttackAnimation(Vector2 motion)
         {
 
