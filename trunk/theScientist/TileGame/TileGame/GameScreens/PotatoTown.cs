@@ -181,7 +181,7 @@ namespace TileGame.GameScreens
             {
                 NPC_Fighting_Ranged NPC_Ranged = new NPC_Fighting_Ranged(Content.Load<Texture2D>("Sprite/Bjorn_Try_Ranged"), null, GameRef.random);
                 NPC_Ranged.Origionoffset = new Vector2(25, 65);
-                NPC_Ranged.SetSpritePositionInGameWorld(new Vector2(81 + i, 70));
+                NPC_Ranged.SetSpritePositionInGameWorld(new Vector2(81 + i, 70 + i));
                 NPC_Ranged.Life = 100;
                 NPC_Ranged.FullHp = 100;
                 AnimatedSpriteObject.Add(NPC_Ranged);

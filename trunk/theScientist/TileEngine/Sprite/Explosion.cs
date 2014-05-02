@@ -26,26 +26,27 @@ namespace TileEngine.Sprite
         {
             this.Position = Position;
             this.elapsedTime = 0.0f;
-            this.timeToLive = 2000f;
+            this.timeToLive = 1000f;
             this.finished = false;
-            FrameAnimation burn = new FrameAnimation(4, 12, 12, 0, 0);
+            FrameAnimation burn = new FrameAnimation(4,24, 24, 0, 0);
             this.Animations.Add("Burn", burn);
             this.CurrentAnimationName = "Burn";
             this.CurrentAnimation.FramesPerSeconds = 0.20f;
 
             
+
+            
         }
         public void UpdateExplosion(GameTime gameTime)
         {
-            this.isAnimating = true;
-            this.Animating = true;
-            elapsedTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            elapsedTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;      
             if (elapsedTime > timeToLive)
                 finished = true;
+            base.Update(gameTime);
         }
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+            
         }
     }
 }

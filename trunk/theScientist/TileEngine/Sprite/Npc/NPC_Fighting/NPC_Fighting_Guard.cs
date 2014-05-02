@@ -23,15 +23,17 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         protected bool goingHome;
         protected float aggroRange;
         protected float aggroCircle;
-
+        private Random random;
         private float aggroSpeed;
-
+        private Vector2 motion;
         private float elapsedHitByMelee;
         private float delayHitByMelee;
         private bool meleeHit;
         private bool dirtPileCreated;
         private float patrollingCircle;
-
+        private float delayDirection;
+        private float elapsedDirection;
+        private int direction;
         private float strikeForce;
         private bool strikeMode;
         private float delayStrike;
@@ -41,6 +43,31 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
         private Vector2 playerPosition;
         private Vector2 oldPosition;
+        public Random Random
+        {
+            get { return random; }
+            set { random = value; }
+        }
+        public int Direction
+        {
+            get { return direction; }
+            set { direction = value; }
+        }
+        public Vector2 Motion
+        {
+            get { return motion; }
+            set { motion = value; }
+        }
+        public float DelayDirection
+        {
+            get { return delayDirection; }
+            set { delayDirection = value; }
+        }
+        public float ElapsedDirection
+        {
+            get { return elapsedDirection; }
+            set { elapsedDirection = value; }
+        }
         public bool DirtPileCreated
         {
             get { return dirtPileCreated; }
@@ -245,6 +272,22 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 GoingHome = false;
             }
             
+
+        }
+        public void GetRandomDirection(GameTime gameTime)
+        {
+            ElapsedDirection += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (Vector2.Distance(StartingPosition, Position) > PatrollingCircle && !Aggro && !GoingHome)
+            {
+                Direction += 180;
+                Direction = direction % 360;
+            }
+            if (ElapsedDirection > DelayDirection && !GoingHome)
+            {
+                Direction = Random.Next(0, 360);
+                ElapsedDirection = 0;
+            }
+
 
         }
         public override void Update(GameTime gameTime)
