@@ -510,10 +510,7 @@ namespace TileGame.GameScreens
             {
                 if (npc.InSpeakingRange(player))
                 {
-                    if (StoryProgress.ProgressLine["permitHave"] && npc.NPCName == "Guard")
-                        npc.ChangeScript(1);
-                    if (StoryProgress.ProgressLine["alcoholHave"] && npc.NPCName == "Bibitur")
-                        npc.ChangeScript(1);
+                    GameRef.storyProgress.ChangeScriptsForNPCs(npc);
                     if (npc.canTalk == true)
                     {
 
@@ -550,8 +547,7 @@ namespace TileGame.GameScreens
             //Kontroller för kod som rör Neutrala NPCs
             foreach (var npc in NpcNeutralList)
             {
-                if (StoryProgress.ProgressLine["asterixTalkedTo"])
-                    npc.script = Content.Load<Script>("Scripts/PotatotownTownsfolk2");
+                GameRef.storyProgress.ChangeScriptsForNPCs(npc);
                 if (npc.InHearingRange(player))
                 {
                     if (npc.ShowingBubble == false)
