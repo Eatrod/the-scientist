@@ -78,6 +78,8 @@ namespace TileEngine
                 npc.ChangeScript(1);
             if (StoryProgress.ProgressLine["permitHave"] && npc.NPCName == "Guard")
                 npc.ChangeScript(1);
+            if (StoryProgress.ProgressLine["permitHave"] && npc.NPCName == "Bibitur")
+                npc.script = null;
 
             //Neutrala NPCs
             if (StoryProgress.ProgressLine["asterixTalkedTo"] && npc.GetType() == typeof(NPC_Neutral))
