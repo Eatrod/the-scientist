@@ -27,7 +27,7 @@ namespace TileEngine.Sprite.Npc
             scriptDict = new Dictionary<string, Script>();
             this.script = script;
             if (script != null)
-                this.scriptDict.Add("defualt", script);
+                this.scriptDict.Add("default", script);
         }
 
         protected void UpdateSpriteAnimation(Vector2 motion)
