@@ -12,7 +12,7 @@ namespace TileEngine.Sprite.Npc
         protected String Location { get; set; }
         protected Vector2 startingPosition;
         public Script script;
-        public List<Script> scriptList;
+        public Dictionary<string, Script> scriptDict;
         protected ContentManager content;
 
         public Vector2 StartingPosition
@@ -24,10 +24,10 @@ namespace TileEngine.Sprite.Npc
         public NPC(Texture2D texture, Script script)
             : base(texture)
         {
-            scriptList = new List<Script>();
+            scriptDict = new Dictionary<string, Script>();
             this.script = script;
             if (script != null)
-                this.scriptList.Add(script);
+                this.scriptDict.Add("defualt", script);
         }
 
         protected void UpdateSpriteAnimation(Vector2 motion)
@@ -62,10 +62,10 @@ namespace TileEngine.Sprite.Npc
             script.RemoveHandler(captionName);
         }
 
-        public void ChangeScript(int listNumber)
+        public void ChangeScript(string scriptName)
         {
-            if (scriptList.Count > 1)
-                this.script = scriptList[listNumber];
+            if (scriptDict.ContainsKey(scriptName))
+                this.script = scriptDict[scriptName];
         }
 
         /*Flyttad till NPC_Story.cs

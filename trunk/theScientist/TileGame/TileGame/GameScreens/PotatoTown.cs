@@ -256,21 +256,21 @@ namespace TileGame.GameScreens
             NpcStoryList.Add(npcstory);
 
             guard = new NPC_Story_GuardCaptain(Content.Load<Texture2D>("Sprite/NPCGuardCaptain"), Content.Load<Script>("Scripts/DrunkGuard"), Content.Load<Texture2D>("CharacterPotraits/pimp-bender"), "Bibitur");
-            guard.scriptList.Add(Content.Load<Script>("Scripts/DrunkGuardHaveAlcohol"));
+            guard.scriptDict.Add("alcoholHave", Content.Load<Script>("Scripts/DrunkGuardHaveAlcohol"));
             guard.Origionoffset = new Vector2(25, 65);
             guard.SetSpritePositionInGameWorld(new Vector2(64, 13));
             AnimatedSpriteObject.Add(guard);
             NpcStoryList.Add(guard);
 
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/GateGuards"), Content.Load<Texture2D>("CharacterPotraits/Jackie"), "Guard");
-            npcstory.scriptList.Add(Content.Load<Script>("Scripts/GateGuardsHavePermit"));
+            npcstory.scriptDict.Add("permitHave", Content.Load<Script>("Scripts/GateGuardsHavePermit"));
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(145, 32));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/GateGuards"), Content.Load<Texture2D>("CharacterPotraits/Jackie"), "Guard");
-            npcstory.scriptList.Add(Content.Load<Script>("Scripts/GateGuardsHavePermit"));
+            npcstory.scriptDict.Add("permitHave", Content.Load<Script>("Scripts/GateGuardsHavePermit"));
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(145, 30));
             AnimatedSpriteObject.Add(npcstory);

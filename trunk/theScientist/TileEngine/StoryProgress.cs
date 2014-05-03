@@ -75,15 +75,15 @@ namespace TileEngine
         {
             //Story NPCs
             if (npc.NPCName == "Bibitur" && ProgressLine["alcoholHave"])
-                npc.ChangeScript(1);
+                npc.ChangeScript("alcoholHave");
             if (StoryProgress.ProgressLine["permitHave"] && npc.NPCName == "Guard")
-                npc.ChangeScript(1);
+                npc.ChangeScript("permitHave");
             if (StoryProgress.ProgressLine["permitHave"] && npc.NPCName == "Bibitur")
                 npc.script = null;
 
             //Neutrala NPCs
             if (StoryProgress.ProgressLine["asterixTalkedTo"] && npc.GetType() == typeof(NPC_Neutral))
-                npc.ChangeScript(1);
+                npc.ChangeScript("asterixTalkedTo");
         }
 
         #endregion
