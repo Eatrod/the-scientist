@@ -271,7 +271,7 @@ namespace TileEngine.Sprite
             
         }
 
-        public void Draw_test(SpriteBatch spriteBatch, int x, int y, int width, int height)
+        public void Draw_test(SpriteBatch spriteBatch, int x, int y, int width, int height, Color color)
         {
             FrameAnimation animation = CurrentAnimation;
 
@@ -281,7 +281,7 @@ namespace TileEngine.Sprite
                     texture,
                     new Rectangle(x, y, width, height),
                     animation.CurrentRectangle,
-                    Color.White);
+                    color);
             }
         }
 
