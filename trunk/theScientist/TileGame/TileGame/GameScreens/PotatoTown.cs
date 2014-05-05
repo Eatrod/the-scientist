@@ -360,7 +360,7 @@ namespace TileGame.GameScreens
             createLifePotatoPlant();
             
             SpriteObject.Add(new BelladonnaSprite(Content.Load<Texture2D>("Sprite/Belladonna"),
-                new Vector2(85, 43))); //new Vector2(7, 33)));
+                new Vector2(7, 33)));
             SpriteObject.Add(new ImmortuiSprite(Content.Load<Texture2D>("Sprite/Immortui"),
                 new Vector2(87, 45))); //just testing the immortui mushroom
             SpriteObject.Add(new ImmortuiSprite(Content.Load<Texture2D>("Sprite/Immortui big"),
@@ -551,8 +551,8 @@ namespace TileGame.GameScreens
                 if (PlayerInTriggerRange(sprite))
                 {
                     if (showingThinkingBox == false)
-                        if (StoryProgress.ProgressLine["Axe"] && sprite == treeStanding)
-                            PlayerShowThinkingBox("(Jag vet han har redan yxan) I will need an axe for this");                        
+                        if (!StoryProgress.ProgressLine["Axe"] && sprite == treeStanding)
+                            PlayerShowThinkingBox("I will need an axe for this");                        
                     }
                 }
 
