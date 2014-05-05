@@ -65,7 +65,9 @@ namespace TileGame.Collision
 
                 if (cellRect.Intersects(spriteRect))
                 {
-                    sprite.Position.Y = up.Value.Y * Engine.TileHeight + sprite.Bounds.Height;
+                    
+                    sprite.Position.Y += 2;
+                    //sprite.Position.Y = up.Value.Y * Engine.TileHeight + sprite.Bounds.Height;
                     collided = true;
                 }
             }
@@ -76,7 +78,8 @@ namespace TileGame.Collision
 
                 if (cellRect.Intersects(spriteRect))
                 {
-                    sprite.Position.Y = down.Value.Y * Engine.TileHeight - sprite.Bounds.Height;
+                    sprite.Position.Y -= 2;
+                    //sprite.Position.Y = down.Value.Y * Engine.TileHeight - sprite.Bounds.Height;
                     collided = true;
                 }
             }
@@ -87,7 +90,8 @@ namespace TileGame.Collision
 
                 if (cellRect.Intersects(spriteRect))
                 {
-                    sprite.Position.X = left.Value.X * Engine.TileWidth + sprite.Bounds.Width;
+                    sprite.Position.X += 2;
+                    //sprite.Position.X = left.Value.X * Engine.TileWidth + sprite.Bounds.Width;
                     collided = true;
                 }
 
@@ -99,7 +103,8 @@ namespace TileGame.Collision
 
                 if (cellRect.Intersects(spriteRect))
                 {
-                    sprite.Position.X = right.Value.X * Engine.TileWidth - sprite.Bounds.Width;
+                    sprite.Position.X -= 2;
+                    //sprite.Position.X = right.Value.X * Engine.TileWidth - sprite.Bounds.Width;
                     collided = true;
                 }
 
@@ -113,9 +118,11 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (motion.X != 0)
-                        sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                        sprite.Position.X += 2;
+                        //sprite.Position.X = spriteCell.X * Engine.TileWidth;
                     if (motion.Y != 0)
-                        sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                        sprite.Position.Y += 2;
+                        //sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
                     collided = true;
                 }
             }
@@ -128,9 +135,11 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (motion.X != 0)
-                        sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                        sprite.Position.X -= 2;
+                        //sprite.Position.X = spriteCell.X * Engine.TileWidth;
                     if (motion.Y != 0)
-                        sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                        sprite.Position.Y += 2;
+                        //sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
                     collided = true;
                 }
             }
@@ -143,9 +152,11 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (motion.X != 0)
-                        sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                        sprite.Position.X += 2;
+                        //sprite.Position.X = spriteCell.X * Engine.TileWidth;
                     if (motion.Y != 0)
-                        sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                        sprite.Position.Y -= 2;
+                        //sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
                     collided = true;
                 }
             }
@@ -158,9 +169,11 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (motion.X != 0)
-                        sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                        sprite.Position.X -= 2;
+                        //sprite.Position.X = spriteCell.X * Engine.TileWidth;
                     if (motion.Y != 0)
-                        sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                        sprite.Position.Y -= 2;
+                        //sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
                     collided = true;
                 }
             }
@@ -178,7 +191,8 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (!(motion.Y >= 0))
-                        sprite.Position.Y = up.Value.Y * Engine.TileHeight + sprite.Bounds.Height;
+                        sprite.Position.Y += 1;
+                        //sprite.Position.Y = up.Value.Y * Engine.TileHeight + sprite.Bounds.Height;
                 }
             }
             if (down != null && (screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 13 || screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 17 || screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 15))
