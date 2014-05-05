@@ -75,8 +75,8 @@ namespace TileGame.GameScreens
             InsertTextToMessageDictionary(2, "Asterix told you to find potato The Belladonna. Check out the abandoned fields in the north west.");
             InsertTextToMessageDictionary(3, "You have now the Belladonna potato and should move on to next town.");
             InsertTextToMessageDictionary(4, "You managed to solve Johns riddle.");
-            InsertTextToMessageDictionary(5, "Detta ska synas, men det kan vara en valdigt lang text, apiorgj aklfnb voahfg oahfgka jfogahr eogihaeg");
-            InsertTextToMessageDictionary(6, "Detta ska inte synas!");
+            InsertTextToMessageDictionary(5, "You need an official permit to leave the town");
+            InsertTextToMessageDictionary(6, "You have aquired a valid permit");
             InsertTextToMessageDictionary(7, "Mer text sa nu ska du ga till utgangen for nasta quest");
 
             messageDict[0].Unlocked = true;
@@ -93,6 +93,8 @@ namespace TileGame.GameScreens
                 messageDict[3].Unlocked = true;
             if (StoryProgress.ProgressLine["contestAgainstJohnFinished"])
                 messageDict[4].Unlocked = true;
+            if (StoryProgress.ProgressLine["permitHave"])
+                messageDict[6].Unlocked = true;
 
             GetKeysThatAreNotLocked();
 

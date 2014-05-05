@@ -28,7 +28,7 @@ namespace TileEngine
             AddItemProgressLine("asterixTalkedTo", false);
             AddItemProgressLine("lumberjacksTalkedTo", false);
             AddItemProgressLine("belladonnaHave", false);
-            AddItemProgressLine("Axe", true);
+            AddItemProgressLine("Axe", false);
             AddItemProgressLine("Sword", false);
             AddItemProgressLine("Crossbow", true);
             AddItemProgressLine("Spear", false);
