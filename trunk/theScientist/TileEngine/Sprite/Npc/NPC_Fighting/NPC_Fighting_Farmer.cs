@@ -16,6 +16,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 {
     public class NPC_Fighting_Farmer: NPC_Fighting
     {
+        private bool dirtPileCreated;
         private bool leftOrRight;
         private Random random;
         private float delayDirection;
@@ -29,6 +30,11 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         private Vector2 attackDirection;
         private Point cellPosition;
         private bool collided;
+        public bool DirtPileCreated
+        {
+            get { return dirtPileCreated; }
+            set { dirtPileCreated = value; }
+        }
 
         public bool Running
         {
@@ -53,12 +59,13 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         public NPC_Fighting_Farmer(Texture2D texture, Script script, Random random)
             : base(texture, script)
         {
+            this.dirtPileCreated = false;
             this.chargeDamage = 5;
             this.elapsedAggro = 0;
             this.ElapsedHit = 0.0f;
             this.HitDelay = 500f;
             this.elapsedDirection = 0;
-            this.delayAggro = 1000f;
+            this.delayAggro = 2000f;
             this.Aggro = false;
             this.collided = false;
             this.random = random;
@@ -74,9 +81,9 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
 
             FrameAnimation charge = new FrameAnimation(2, 50, 80, 200, 80);
-            FrameAnimation glide = new FrameAnimation(1, 50, 80, 300, 80);
+            FrameAnimation glide = new FrameAnimation(2, 50, 80, 300, 80);
 
-            FrameAnimation hitLeft = new FrameAnimation(1, 50, 80, 250, 80);
+            FrameAnimation hitLeft = new FrameAnimation(1, 50, 80, 200, 160);
             FrameAnimation hitRight = new FrameAnimation(1, 50, 80, 250, 160);
 
             FrameAnimation walkDown = new FrameAnimation(2,50,80,50,0);
@@ -119,7 +126,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 //    this.elapsedAggro = 0;
                 //    break;
                 //}
-                if (player.Bounds.Intersects(this.Bounds))
+                if (player.Bounds.Intersects(this.MovementBounds()))
                 {
                     this.running = false;
                     this.Aggro = false;
@@ -172,11 +179,13 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                     (float)Math.Sin(MathHelper.ToRadians(-direction)));
 
                 UpdateSpriteAnimation(motion);
+                this.CurrentAnimation.FramesPerSeconds = .35f;
 
                 if (Aggro)
                 {
                     elapsedAggro += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                     this.CurrentAnimationName = "Charge";
+                    this.CurrentAnimation.FramesPerSeconds = 0.15f;
                     if (elapsedAggro > delayAggro)
                     {
                         running = true;
@@ -187,6 +196,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 else if (running)
                 {
                     this.CurrentAnimationName = "Glide";
+                    this.CurrentAnimation.FramesPerSeconds = .20f;
                     speed = 5.0f;
                     Position += AttackersDirection * speed;//speed;
                 }
@@ -196,6 +206,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                         this.CurrentAnimationName = "HitRight";
                     else
                         this.CurrentAnimationName = "HitLeft";
+                    this.CurrentAnimation.FramesPerSeconds = .35f;
                     MovementAfterBeingHit(gameTime);
                 }
                 else
