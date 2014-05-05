@@ -18,7 +18,7 @@
   <Conversation Name="Fisherman1">
     <Text>Fisherman: Here's some coins</Text>
     <Handlers>
-      <Handler Caption="Continue" Action="EndConversation" />
+      <Handler Caption="Continue" Action="AddItemCollectedAmount:5;EndConversation" />
     </Handlers>
   </Conversation>
   
