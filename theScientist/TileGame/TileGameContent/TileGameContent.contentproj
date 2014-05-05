@@ -300,6 +300,24 @@
       <Importer>ScriptImporter</Importer>
       <Processor>ScriptProcessor</Processor>
     </Compile>
+    <Compile Include="Scripts\Fishmarket.dialog">
+      <SubType>Designer</SubType>
+      <Name>Fishmarket</Name>
+      <Importer>ScriptImporter</Importer>
+      <Processor>ScriptProcessor</Processor>
+    </Compile>
+    <Compile Include="Scripts\FishmarketNoFish.dialog">
+      <SubType>Designer</SubType>
+      <Name>FishmarketNoFish</Name>
+      <Importer>ScriptImporter</Importer>
+      <Processor>ScriptProcessor</Processor>
+    </Compile>
+    <Compile Include="Scripts\InnkeeperNoMoney.dialog">
+      <SubType>Designer</SubType>
+      <Name>InnkeeperNoMoney</Name>
+      <Importer>ScriptImporter</Importer>
+      <Processor>ScriptProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tiles\Stonewall0000.png">

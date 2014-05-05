@@ -27,7 +27,6 @@ namespace TileEngine
         {
             AddItemProgressLine("asterixTalkedTo", false);
             AddItemProgressLine("lumberjacksTalkedTo", false);
-            AddItemProgressLine("belladonnaHave", false);
             AddItemProgressLine("Axe", false);
             AddItemProgressLine("Sword", false);
             AddItemProgressLine("Crossbow", true);
@@ -40,11 +39,15 @@ namespace TileEngine
             AddItemProgressLine("contestAgainstJonnyFinished", false);
             AddItemProgressLine("contestAgainstJackFinished", false);
             AddItemProgressLine("contestAgainstJohnFinished", false);
+            //Have sektion
             AddItemProgressLine("immortuiHave", false);
             AddItemProgressLine("permitHave", false);
             AddItemProgressLine("alcoholHave", false);
+            AddItemProgressLine("fishesHave", false);
+            AddItemProgressLine("belladonnaHave", false);
 
             AddItemCollectedAmountDict("IronOre", 0);
+            AddItemCollectedAmountDict("Money", 0);
         }
 
 
@@ -80,6 +83,10 @@ namespace TileEngine
                 npc.ChangeScript("permitHave");
             if (StoryProgress.ProgressLine["permitHave"] && npc.NPCName == "Bibitur")
                 npc.script = null;
+            if (StoryProgress.ProgressLine["fishesHave"] && npc.NPCName == "Fisherman")
+                npc.ChangeScript("fishesHave");
+            if (StoryProgress.collectedAmountDict["Money"] >= 5 && npc.NPCName == "Innkeeper")
+                npc.ChangeScript("moneyHave");
 
             //Neutrala NPCs
             if (StoryProgress.ProgressLine["asterixTalkedTo"] && npc.GetType() == typeof(NPC_Neutral))
