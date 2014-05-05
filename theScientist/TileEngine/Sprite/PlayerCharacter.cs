@@ -8,6 +8,18 @@ namespace TileEngine.Sprite
          public Texture2D portrait;
          private bool hasAxe = false;
          private bool hasBow = false;
+         public string oldAnimation { get; set; }
+         public bool shotFired { get; set; }
+
+
+         public bool multishotArrow { get; set; }
+         public bool fireArrow { get; set; }
+         public bool normalArrow { get; set; }
+
+
+
+         public float delayShot = 500f;
+         public float elapsedShot = 0.0f;
          
 
          public PlayerCharacter(Texture2D texture, Texture2D portrait)
