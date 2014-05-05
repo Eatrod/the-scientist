@@ -49,7 +49,7 @@ namespace TileGame.GameScreens
         Sprite sprite, sprite1;
         AnimatedSprite NPC1, NPC2;
         public NPC_Story npcstory, npcStoryAsterix;//npcstory2;
-
+   
    
         public NPC_Story npc;
         public NPC_Story_GuardCaptain guard;
@@ -187,7 +187,7 @@ namespace TileGame.GameScreens
                 AnimatedSpriteObject.Add(NPC_Ranged);
                 NPCRangedGuards.Add(NPC_Ranged);
             }
-            
+
             for (int i = 0; i < 3; i++ )
             {
                 NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/Bjorn_Try_Golden_Soldier_Strike"), null, GameRef.random);
@@ -344,11 +344,11 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcNeutral);
             NpcNeutralList.Add(npcNeutral);
 
-            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
-            npcNeutral.Origionoffset = new Vector2(25, 65);
+                npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+                npcNeutral.Origionoffset = new Vector2(25, 65);
             npcNeutral.SetSpritePositionInGameWorld(new Vector2(70,100));
-            AnimatedSpriteObject.Add(npcNeutral);
-            NpcNeutralList.Add(npcNeutral);
+                AnimatedSpriteObject.Add(npcNeutral);
+                NpcNeutralList.Add(npcNeutral);
 
             npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
             npcNeutral.Origionoffset = new Vector2(25, 65);
@@ -375,9 +375,9 @@ namespace TileGame.GameScreens
                 int y = GameRef.random.Next(88, 100);
                 MultiIronSprite multiIronOre = new MultiIronSprite(Content.Load<Texture2D>("Sprite/multi_iron_ore"));
                 multiIronOre.SetSpritePositionInGameWorld(new Vector2(x, y));
-                AnimatedSpriteObject.Add(multiIronOre);
+            AnimatedSpriteObject.Add(multiIronOre);
             }
-            
+
 
             treeStanding = new Sprite(Content.Load<Texture2D>("Sprite/BridgeTreeStanding"));
             treeStanding.SetSpritePositionInGameWorld(new Vector2(35, 15));
@@ -411,7 +411,7 @@ namespace TileGame.GameScreens
                     DirtPiles.Remove(dirtpile);
                     renderList.Remove(dirtpile);
                     break;
-                }
+            }
             }
             foreach(Explosion explosion in Explosions)
             {
@@ -459,14 +459,14 @@ namespace TileGame.GameScreens
                     }
                 }
                 else if(!npc.DirtPileCreated)
-                {
+            {
                     DirtPileSprite dirtpile = new DirtPileSprite(Content.Load<Texture2D>("Sprite/dirtpile"));
                     dirtpile.Position = npc.Position;
                     dirtpile.DelayTime = npc.DelayRespawn;
                     DirtPiles.Add(dirtpile);
                     renderList.Add(dirtpile);
                     npc.DirtPileCreated = true;
-                }
+            }
 
             }
             foreach(NPC_Fighting_Patrolling npc in NPCPatrollingGuards)
@@ -480,9 +480,9 @@ namespace TileGame.GameScreens
                     //    npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
 
                     //}
-                    if (npc.Aggro)
-                        npc.PlayerPosition = player.Origin;
-                }
+                if (npc.Aggro)
+                    npc.PlayerPosition = player.Origin;
+            }
                 else if(!npc.DirtPileCreated)
                 {
                     DirtPileSprite dirtpile = new DirtPileSprite(Content.Load<Texture2D>("Sprite/dirtpile"));
@@ -502,17 +502,17 @@ namespace TileGame.GameScreens
                 if (!npc.Dead)
                 {
                     if (npc.Motion != Vector2.Zero)
-                    {
-                        npc.Motion.Normalize();
-                        npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
+                {
+                    npc.Motion.Normalize();
+                    npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
 
-                    }
-                    //Aggro range
-                    if (Vector2.Distance(npc.Position, player.Position) < 100 && !npc.Aggro && !npc.Running && !npc.HitFlag)
-                    {
-                        npc.Aggro = true;
-                        npc.AttackersDirection = player.Position - npc.Position;
-                    }
+                }
+                //Aggro range
+                if (Vector2.Distance(npc.Position, player.Position) < 100 && !npc.Aggro && !npc.Running && !npc.HitFlag)
+                {
+                    npc.Aggro = true;
+                    npc.AttackersDirection = player.Position - npc.Position; 
+                }
                     if (npc.Running)
                         npc.CheckForCollisionWithOtherNPCs(NPCFightingFarmers, player);
                 }
@@ -540,8 +540,8 @@ namespace TileGame.GameScreens
                         if (InputHandler.KeyReleased(Keys.Space))
                         {
                                 PlayerEndConversation(npc);
+                            }
                         }
-                    }
                 }
             }
 
@@ -553,8 +553,8 @@ namespace TileGame.GameScreens
                     if (showingThinkingBox == false)
                         if (StoryProgress.ProgressLine["Axe"] && sprite == treeStanding)
                             PlayerShowThinkingBox("(Jag vet han har redan yxan) I will need an axe for this");                        
+                    }
                 }
-            }
 
 
             //Kontroller för kod som rör Neutrala NPCs
@@ -693,6 +693,6 @@ namespace TileGame.GameScreens
         }
         #endregion
 
-
+        
     }
 }
