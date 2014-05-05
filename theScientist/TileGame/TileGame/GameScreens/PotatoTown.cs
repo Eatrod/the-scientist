@@ -512,19 +512,28 @@ namespace TileGame.GameScreens
                 if (!npc.Dead)
                 {
                     if (npc.Motion != Vector2.Zero)
-                {
-                    npc.Motion.Normalize();
-                    npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
+                    {
+                        npc.Motion.Normalize();
+                        npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
 
-                }
-                //Aggro range
-                if (Vector2.Distance(npc.Position, player.Position) < 100 && !npc.Aggro && !npc.Running && !npc.HitFlag)
-                {
-                    npc.Aggro = true;
-                    npc.AttackersDirection = player.Position - npc.Position; 
-                }
+                    }
+                    //Aggro range
+                    if (Vector2.Distance(npc.Position, player.Position) < 200 && !npc.Aggro && !npc.Running && !npc.HitFlag)
+                    {
+                        npc.Aggro = true;
+                        npc.AttackersDirection = player.Position - npc.Position;
+                    }
                     if (npc.Running)
                         npc.CheckForCollisionWithOtherNPCs(NPCFightingFarmers, player);
+                }
+                else if(!npc.DirtPileCreated)
+                {
+                    DirtPileSprite dirtpile = new DirtPileSprite(Content.Load<Texture2D>("Sprite/dirtpile"));
+                    dirtpile.Position = npc.Position;
+                    dirtpile.DelayTime = npc.DelayRespawn;
+                    DirtPiles.Add(dirtpile);
+                    renderList.Add(dirtpile);
+                    npc.DirtPileCreated = true;
                 }
 
             }
