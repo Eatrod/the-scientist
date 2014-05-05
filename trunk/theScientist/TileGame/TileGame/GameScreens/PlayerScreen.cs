@@ -150,12 +150,12 @@ namespace TileGame.GameScreens
 
             FrameAnimation up = new FrameAnimation(4, 50, 80, 0, 240);
             if(!player.Animations.ContainsKey("Up"))
-                player.Animations.Add("Up", up);
+                player.Animations.Add("Up", up);         
 
             FrameAnimation idledown = new FrameAnimation(1, 50, 80, 200, 0);
             if (!player.Animations.ContainsKey("IdleDown"))
                 player.Animations.Add("IdleDown", idledown);
-
+ 
             FrameAnimation idleleft = new FrameAnimation(1, 50, 80, 200, 80);
             if (!player.Animations.ContainsKey("IdleLeft"))
                 player.Animations.Add("IdleLeft", idleleft);
@@ -169,7 +169,27 @@ namespace TileGame.GameScreens
                 player.Animations.Add("IdleUp", idleup);
 
 
+
+            FrameAnimation bowright = new FrameAnimation(2, 50, 80, 0, 480);
+            if (!player.Animations.ContainsKey("BowRight"))
+                player.Animations.Add("BowRight", bowright);
+
+            FrameAnimation bowleft = new FrameAnimation(2, 50, 80, 100, 480);
+            if (!player.Animations.ContainsKey("BowLeft"))
+                player.Animations.Add("BowLeft", bowleft);
+
+            FrameAnimation bowdown = new FrameAnimation(2, 50, 80, 200, 480);
+            if (!player.Animations.ContainsKey("BowDown"))
+                player.Animations.Add("BowDown", bowdown);
+
+            FrameAnimation bowup = new FrameAnimation(2, 50, 80, 300, 480);
+            if (!player.Animations.ContainsKey("BowUp"))
+                player.Animations.Add("BowUp", bowup);
+
+
+
             player.CurrentAnimationName = "Down";
+            player.oldAnimation = player.CurrentAnimationName;
             renderList.Add(player);
             //renderList.Add(sprite);
 
@@ -209,7 +229,7 @@ namespace TileGame.GameScreens
             ContentManager Content = Game.Content;
 
             base.LoadContent();
-
+                       
             
        
             if(player == null)
@@ -217,8 +237,8 @@ namespace TileGame.GameScreens
                 player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/Player"), Content.Load<Texture2D>("CharacterPotraits/Assassins-Creed-4"));
             player.Origionoffset = new Vector2(25, 65);
                 //player.SetSpritePositionInGameWorld(new Vector2(4, 3));
-                player.Life = 100;
-                player.Stamina = 100;
+            player.Life = 100;
+            player.Stamina = 100;
             }
 
             //BF
@@ -230,7 +250,7 @@ namespace TileGame.GameScreens
             coordY.Visible = coordVisible;
             coordX.Position = new Vector2(GraphicsDevice.Viewport.Width - 200, GraphicsDevice.Viewport.Height - 250);
             coordY.Position = new Vector2(GraphicsDevice.Viewport.Width - 100, GraphicsDevice.Viewport.Height - 250);
-
+            
             ControlManager.Add(coordX);
             ControlManager.Add(coordY);
             //BF
@@ -354,7 +374,7 @@ namespace TileGame.GameScreens
 
             foreach (AnimatedProjectile sprite in playerprojectiles)
             {
-                sprite.updateprojectileposition();
+                sprite.updateprojectileposition();            
 
                 if (sprite.GetType() == typeof(FlamingArrowProjectile))
                 {
@@ -368,7 +388,7 @@ namespace TileGame.GameScreens
                             FireArrow.CurrentAnimationName = "right3";
                         else if (fire_arrow_counter == 9)//(FireArrow.CurrentAnimationName == "right3")
                             FireArrow.CurrentAnimationName = "right";
-                    }
+            }
                     if ((FireArrow.CurrentAnimationName == "up") || (FireArrow.CurrentAnimationName == "up2") || (FireArrow.CurrentAnimationName == "up3"))
                     {
                         if (fire_arrow_counter == 3)
@@ -445,7 +465,7 @@ namespace TileGame.GameScreens
                 GraphicsDevice.SetRenderTarget(null);
                 shadowMap = (Texture2D)renderTarget;
                 miniMap.Image = shadowMap;
-               
+
                 if (miniMap.Visible == false)
                 {
                     miniMap.Visible = true;
@@ -468,105 +488,67 @@ namespace TileGame.GameScreens
                 key_number = Convert.ToInt32(key_string);
                 if (activeItemBackgroundColor[key_number - 1] == Color.White)
                 {
-                    if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >= 0))
+                    if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >= 0) && !player.shotFired)
                     {
-                        NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
-                        temparrow.UpdatecurrentAnimation(motion);
-                        playerprojectiles.Add(temparrow);
-                        player.Stamina -= 20f;
+                        player.oldAnimation = player.CurrentAnimationName;
+                        player.shotFired = true;
+                        player.normalArrow = true;
+                        UpdateBowAttackAnimaition();                                     
+            }
+
+                    if (InputHandler.KeyReleased(Keys.W) && (player.Stamina - 50 > 0) && !player.shotFired)
+            {
+                        player.oldAnimation = player.CurrentAnimationName;
+                        player.shotFired = true;
+                        player.fireArrow = true;
+                        UpdateBowAttackAnimaition();                                                               
+            }
+
+                    if (InputHandler.KeyReleased(Keys.E) && (player.Stamina - 40 > 0) && !player.shotFired)
+            {
+                        player.oldAnimation = player.CurrentAnimationName;
+                        player.shotFired = true;
+                        player.multishotArrow = true;
+                        UpdateBowAttackAnimaition();        
                     }
-
-                    if (InputHandler.KeyReleased(Keys.W) && (player.Stamina - 50 > 0))
-                    {
-                        FlamingArrowProjectile temparrow = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FireArrow"), 10f, 0.1f, 6f, player.Position);//"Sprite/FlamingArrow"), 10f, 0.1f, 3f, player.Position);
-                        temparrow.UpdatecurrentAnimation(motion);
-                        playerprojectiles.Add(temparrow);
-                        player.Stamina -= 50;
-                    }
-
-                    if (InputHandler.KeyReleased(Keys.E) && (player.Stamina - 40 > 0)) //delay. fixas.
-                    {
-                        NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);               
-                        NormalArrowProjectile temparrow1 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);                
-                        NormalArrowProjectile temparrow2 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
-
-                        if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "Down")
-                        {
-                            temparrow1.Position.X += 10;
-                            temparrow2.Position.X -= 10;
-
-                            if (player.CurrentAnimationName == "Up")
-                            {
-                                temparrow1.Position.Y += 5;
-                                temparrow2.Position.Y += 5;
-                            }
-                            else
-                            {
-                                temparrow1.Position.Y -= 5;
-                                temparrow2.Position.Y -= 5;
-                            }
-
-                        }
-                        else
-                        {
-                            temparrow1.Position.Y += 10;
-                            temparrow2.Position.Y -= 10;
-
-                            if (player.CurrentAnimationName == "Left")
-                            {
-                                temparrow1.Position.X += 5;
-                                temparrow2.Position.X += 5;
-                            }
-                            else
-                            {
-                                temparrow1.Position.X -= 5;
-                                temparrow2.Position.X -= 5;
-                            }
-                        }
-                        temparrow.UpdatecurrentAnimation(motion);
-                        playerprojectiles.Add(temparrow);
-                        temparrow1.UpdatecurrentAnimation(motion);
-                        playerprojectiles.Add(temparrow1);
-                        temparrow2.UpdatecurrentAnimation(motion);
-                        playerprojectiles.Add(temparrow2);
-                        player.Stamina -= 40f;
-                    }
-
-                    if (InputHandler.KeyDown(Keys.R))
-                    {
-                        player.Charge += 0.5f;
+                    
+            if (InputHandler.KeyDown(Keys.R))
+            {
+                player.Charge += 0.5f;
                         if (player.Charge >= 100)
                         {
-                            player.Charge = 100;
+                    player.Charge = 100;           
                             if (Charge_Bar_Color == Color.Blue)
                                 Charge_Bar_Color = Color.White;
                             else
                                 Charge_Bar_Color = Color.Crimson;
+            }
                     }
-                    }
 
-                    if (InputHandler.KeyReleased(Keys.R))
-                    {
-                        if (player.Charge == 100 && (player.Stamina - 30) > 0)
-                        {
-                            FlamingArrowProjectile temparrow = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FireArrow"), 10f, 0.1f, 9f, player.Position);//"Sprite/FlamingArrow"), 10f, 0.1f, 3f, player.Position);
-                            temparrow.UpdatecurrentAnimation(motion);
-                            playerprojectiles.Add(temparrow);
-                            player.Stamina -= 30;
-                        }
+            if (InputHandler.KeyReleased(Keys.R))
+            {
+                        if (player.Charge == 100 && (player.Stamina - 30) > 0 && !player.shotFired)
+                {
 
-                        else if ((player.Stamina - 20) > 0)
-                        {
-                            NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);//"Sprite/Arrow"), 10f, 0.1f, 3f, player.Position);
-                            temparrow.UpdatecurrentAnimation(motion);
-                            playerprojectiles.Add(temparrow);
-                            player.Stamina -= 20f;
-                        }
+                            player.oldAnimation = player.CurrentAnimationName;
+                            player.shotFired = true;
+                            player.fireArrow = true;
+                            UpdateBowAttackAnimaition();
 
-                        else
-                        {
-                            player.Stamina = 10;
-                        }
+                }
+
+                        else if ((player.Stamina - 20) > 0 && !player.shotFired)
+                {
+                            player.oldAnimation = player.CurrentAnimationName;
+                            player.shotFired = true;
+                            player.normalArrow = true;
+                            UpdateBowAttackAnimaition();                           
+                }
+
+                else
+                {
+                    player.Stamina = 10;
+                }
                         player.Charge = 0;
                         Charge_Bar_Color = Color.White;
                     }
@@ -594,7 +576,7 @@ namespace TileGame.GameScreens
                             }
                         }
                         player.Stamina -= 20f;
-            }
+                    }
                 }
             }
 
@@ -624,7 +606,7 @@ namespace TileGame.GameScreens
             dialogBox.Update(gameTime);
             thinkingBox.Update(gameTime);
 
-            if (motion != Vector2.Zero)
+            if (motion != Vector2.Zero && !player.shotFired)
             {
                 motion.Normalize();                 //Comment out to use gamePad
                 motion = CollisionWithTerrain.CheckCollisionForMotion(motion, player,screen);
@@ -634,11 +616,50 @@ namespace TileGame.GameScreens
                 player.isAnimating = true;
                 CollisionWithTerrain.CheckForCollisionAroundSprite(player, motion,screen);
             }
-            else
+            else if (!player.shotFired)
             {
                 UpdateSpriteIdleAnimation(player);
                 player.isAnimating = false;
                 motion = new Vector2(0, 0);
+            }
+
+            else
+            {
+                player.elapsedShot += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                player.Speed = -0.1f;
+
+                if (player.elapsedShot > player.delayShot && player.multishotArrow)
+                {
+                    MultiarrowFired(Content, motion);
+                    player.CurrentAnimation.CurrentFrame = 0;
+                    player.elapsedShot = 0.0f;
+                    player.shotFired = false;
+                    player.multishotArrow = false;
+                    player.CurrentAnimationName = player.oldAnimation;
+                    player.Speed = 2;
+                }
+
+                if (player.elapsedShot > player.delayShot && player.fireArrow)
+                {
+                    FirearrowFired(Content, motion);
+                    player.CurrentAnimation.CurrentFrame = 0;
+                    player.elapsedShot = 0.0f;
+                    player.shotFired = false;
+                    player.fireArrow = false;
+                    player.CurrentAnimationName = player.oldAnimation;
+                    player.Speed = 2;
+                }
+
+                if (player.elapsedShot > player.delayShot && player.normalArrow)
+                {
+                    NormalarrowFired(Content, motion);
+                    player.CurrentAnimation.CurrentFrame = 0;
+                    player.elapsedShot = 0.0f;
+                    player.shotFired = false;
+                    player.normalArrow = false;
+                    player.CurrentAnimationName = player.oldAnimation;
+                    player.Speed = 2;
+                }
             }
 
 
@@ -674,9 +695,241 @@ namespace TileGame.GameScreens
 
             UpdateItemHUD(gameTime);
 
-            base.Update(gameTime);       
+            base.Update(gameTime);
         }
 
+        private static void UpdateBowAttackAnimaition()
+        {
+            if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "Down" || player.CurrentAnimationName == "IdleUp" || player.CurrentAnimationName == "IdleDown")
+            {
+
+                if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "IdleUp")
+                {
+                    player.CurrentAnimationName = "BowUp";
+                }
+                else
+                {
+                    player.CurrentAnimationName = "BowDown";
+                }
+
+            }
+            else
+            {
+                if (player.CurrentAnimationName == "Left" || player.CurrentAnimationName == "IdleLeft")
+                {
+                    player.CurrentAnimationName = "BowLeft";
+
+                }
+                else
+                {
+                    player.CurrentAnimationName = "BowRight";
+                }
+            }
+        }
+
+        private void NormalarrowFired(ContentManager Content, Vector2 motion)
+        {
+            NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);
+
+            if (motion == Vector2.Zero)
+            {
+                if (player.CurrentAnimationName == "BowUp")
+                {
+                    motion = new Vector2(0, -2);
+                }
+                if (player.CurrentAnimationName == "BowDown")
+                {
+                    motion = new Vector2(0, 2);
+                }
+                if (player.CurrentAnimationName == "BowLeft")
+                {
+                    motion = new Vector2(-2, 0);
+                }
+                if (player.CurrentAnimationName == "BowRight")
+                {
+                    motion = new Vector2(2, 0);
+                }
+
+                temparrow.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow);
+                player.Stamina -= 20f;
+                motion = Vector2.Zero;
+            }
+
+            else
+            {
+                temparrow.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow);
+                player.Stamina -= 20f;
+            }
+        }
+
+        private void FirearrowFired(ContentManager Content, Vector2 motion)
+        {
+            if (motion == Vector2.Zero)
+            {
+                if (player.CurrentAnimationName == "BowUp")
+                {
+                    motion = new Vector2(0, -2);
+                }
+                if (player.CurrentAnimationName == "BowDown")
+                {
+                    motion = new Vector2(0, 2);
+                }
+                if (player.CurrentAnimationName == "BowLeft")
+                {
+                    motion = new Vector2(-2, 0);
+                }
+                if (player.CurrentAnimationName == "BowRight")
+                {
+                    motion = new Vector2(2, 0);
+                }
+
+                FlamingArrowProjectile temparrow = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FireArrow"), 10f, 0.1f, 6f, player.Position);
+                temparrow.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow);
+                player.Stamina -= 50;
+                motion = Vector2.Zero;
+            }
+
+            else
+            {
+                FlamingArrowProjectile temparrow = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FireArrow"), 10f, 0.1f, 6f, player.Position);
+                temparrow.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow);
+                player.Stamina -= 50;
+            }
+        }
+
+        private void MultiarrowFired(ContentManager Content, Vector2 motion)
+        {
+            if (motion == Vector2.Zero)
+            {
+                if (player.CurrentAnimationName == "BowUp")
+                {
+                    motion = new Vector2(0, -2);
+                }
+                if (player.CurrentAnimationName == "BowDown")
+                {
+                    motion = new Vector2(0, 2);
+                }
+                if (player.CurrentAnimationName == "BowLeft")
+                {
+                    motion = new Vector2(-2, 0);
+                }
+                if (player.CurrentAnimationName == "BowRight")
+                {
+                    motion = new Vector2(2, 0);
+                }
+
+                NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);             
+                NormalArrowProjectile temparrow1 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);            
+                NormalArrowProjectile temparrow2 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);
+                if (player.CurrentAnimationName == "BowUp" || player.CurrentAnimationName == "BowDown")
+                {
+                    temparrow1.Position.X += 10;
+                    temparrow2.Position.X -= 10;
+
+                    if (player.CurrentAnimationName == "BowUp")
+                    {
+                        temparrow1.Position.Y += 5;
+                        temparrow2.Position.Y += 5;
+                    }
+                    else
+                    {
+                        temparrow1.Position.Y -= 5;
+                        temparrow2.Position.Y -= 5;
+                    }
+
+                }
+                else
+                {
+
+
+                    if (player.CurrentAnimationName == "BowLeft")
+                    {
+                        temparrow.Position.Y += 30;
+                        temparrow1.Position.Y += 20;
+                        temparrow2.Position.Y += 40;
+                        temparrow.Position.X -= 10;
+                        temparrow1.Position.X -= 5;
+                        temparrow2.Position.X -= 5;
+                    }
+                    else
+                    {
+                        temparrow.Position.Y += 30;
+                        temparrow1.Position.Y += 20;
+                        temparrow2.Position.Y += 40;
+                        temparrow.Position.X += 60;
+                        temparrow1.Position.X += 55;
+                        temparrow2.Position.X += 55;
+                    }
+                }
+                temparrow.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow);
+                temparrow1.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow1);
+                temparrow2.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow2);
+                player.Stamina -= 40f;
+                motion = Vector2.Zero;
+            }
+
+            else 
+            {
+                NormalArrowProjectile temparrow = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);       
+                NormalArrowProjectile temparrow1 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);            
+                NormalArrowProjectile temparrow2 = new NormalArrowProjectile(Content.Load<Texture2D>("Sprite/Arrow2"), 10f, 0.1f, 6f, player.Position);
+                if (player.CurrentAnimationName == "BowUp" || player.CurrentAnimationName == "BowDown")
+                {
+                    temparrow1.Position.X += 10;
+                    temparrow2.Position.X -= 10;
+
+                    if (player.CurrentAnimationName == "BowUp")
+                    {
+                        temparrow1.Position.Y += 5;
+                        temparrow2.Position.Y += 5;
+                    }
+                    else
+                    {
+                        temparrow1.Position.Y -= 5;
+                        temparrow2.Position.Y -= 5;
+                    }
+
+                }
+                else
+                {
+
+
+                    if (player.CurrentAnimationName == "BowLeft")
+                    {
+                        temparrow.Position.Y += 30;
+                        temparrow1.Position.Y += 20;
+                        temparrow2.Position.Y += 40;
+                        temparrow.Position.X -= 10;
+                        temparrow1.Position.X -= 5;
+                        temparrow2.Position.X -= 5;
+                    }
+                    else
+                    {
+                        temparrow.Position.Y += 30;
+                        temparrow1.Position.Y += 20;
+                        temparrow2.Position.Y += 40;
+                        temparrow.Position.X += 60;
+                        temparrow1.Position.X += 55;
+                        temparrow2.Position.X += 55;
+                    }
+                }
+                temparrow.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow);
+                temparrow1.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow1);
+                temparrow2.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow2);
+                player.Stamina -= 40f;
+            
+            }
+        }
       
         private void UpdateHealthBarAnimation()
         {
@@ -693,7 +946,7 @@ namespace TileGame.GameScreens
             if (life < 25f)
                 lifemeteranimation.CurrentAnimationName = "TwentyFiveHp";
 
-            lifeRect = new Rectangle(lifemeteranimation.CurrentAnimation.CurrentRectangle.Location.X, lifemeteranimation.CurrentAnimation.CurrentRectangle.Location.Y, lifeRect.Width, lifeRect.Height); 
+            lifeRect = new Rectangle(lifemeteranimation.CurrentAnimation.CurrentRectangle.Location.X, lifemeteranimation.CurrentAnimation.CurrentRectangle.Location.Y, lifeRect.Width, lifeRect.Height);
             lifemeteranimation.CurrentAnimation.CurrentRectangle = lifeRect;
         } //Code for healthbar
 
@@ -701,7 +954,7 @@ namespace TileGame.GameScreens
         {
             stamina = player.Stamina;
 
-            staminaRect.Width = (int)stamina;
+                staminaRect.Width = (int)stamina;
 
             staminaRect = new Rectangle(
                 staminaanimation.CurrentAnimation.CurrentRectangle.Location.X, 
@@ -714,7 +967,7 @@ namespace TileGame.GameScreens
         {
             charge = player.Charge;
 
-            chargeRect.Width = (int)charge;
+                chargeRect.Width = (int)charge;
 
             chargeRect = new Rectangle(
                 chargeanimation.CurrentAnimation.CurrentRectangle.Location.X,
@@ -857,7 +1110,7 @@ namespace TileGame.GameScreens
             spriteBatch.End();
 
             spriteBatch.Begin();
-
+         
             for (int i = 0; i < 3; i++)
             {
                 spriteBatch.Draw(
@@ -911,8 +1164,8 @@ namespace TileGame.GameScreens
             //Weapon backgrounds
             for (int i = 0; i < activeItem_textures.Count(); i++)
             {
-                spriteBatch.Draw(
-                abilityBackground,
+                spriteBatch.Draw( 
+                abilityBackground, 
                 new Rectangle(((HUD_size_ref * 4) / 100) * 100 + HUD_size_ref / 10 + ((HUD_size_ref + HUD_size_ref / 10) * i) + (HUD_size_ref / 4), 0, HUD_size_ref, HUD_size_ref),  //new Rectangle(110 + (50 * i), 0, 42, 42),
                 activeItemBackgroundColor[i]); //* 0.8f);
             }         
