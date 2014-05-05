@@ -38,7 +38,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.ElapsedRespawn = 0.0f;
             this.Dead = false;
             this.OldPosition = Vector2.Zero;
-            this.StrikeForce = 1.0f;
+            this.StrikeForce = 2.5f;
             this.collided = false;
             this.Random = random;
             this.Direction = 0;
@@ -66,10 +66,10 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             FrameAnimation walkRight = new FrameAnimation(2, 50, 80, 50, 160);
             FrameAnimation walkUp = new FrameAnimation(2, 50, 80, 50, 240);
 
-            FrameAnimation attackDown = new FrameAnimation(2, 65, 80, 200, 0);
-            FrameAnimation attackLeft = new FrameAnimation(2, 65, 80, 200, 80);
-            FrameAnimation attackRight = new FrameAnimation(2, 65, 80, 200, 160);
-            FrameAnimation attackUp = new FrameAnimation(2, 65, 80, 200, 240);
+            FrameAnimation attackDown = new FrameAnimation(2, 65, 80, 205, 0);
+            FrameAnimation attackLeft = new FrameAnimation(2, 65, 80, 205, 80);
+            FrameAnimation attackRight = new FrameAnimation(2, 65, 80, 205, 160);
+            FrameAnimation attackUp = new FrameAnimation(2, 65, 80, 205, 240);
 
             this.Animations.Add("AttackRight", attackRight);
             this.Animations.Add("AttackLeft", attackLeft);
