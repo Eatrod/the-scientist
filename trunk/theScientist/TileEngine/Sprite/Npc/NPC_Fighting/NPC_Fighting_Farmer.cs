@@ -16,6 +16,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 {
     public class NPC_Fighting_Farmer: NPC_Fighting
     {
+        private bool leftOrRight;
         private Random random;
         private float delayDirection;
         private float elapsedDirection;
@@ -54,6 +55,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         {
             this.chargeDamage = 5;
             this.elapsedAggro = 0;
+            this.ElapsedHit = 0.0f;
+            this.HitDelay = 500f;
             this.elapsedDirection = 0;
             this.delayAggro = 1000f;
             this.Aggro = false;
@@ -69,14 +72,25 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             FrameAnimation left = new FrameAnimation(1, 50, 80, 0, 80);
             FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);            
             FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
-            
+
+            FrameAnimation charge = new FrameAnimation(2, 50, 80, 200, 80);
+            FrameAnimation glide = new FrameAnimation(1, 50, 80, 300, 80);
+
+            FrameAnimation hitLeft = new FrameAnimation(1, 50, 80, 250, 80);
+            FrameAnimation hitRight = new FrameAnimation(1, 50, 80, 250, 160);
 
             FrameAnimation walkDown = new FrameAnimation(2,50,80,50,0);
             FrameAnimation walkLeft = new FrameAnimation(2, 50, 80, 50, 80);
             FrameAnimation walkRight = new FrameAnimation(2, 50, 80, 50, 160);
             FrameAnimation walkUp = new FrameAnimation(2, 50, 80, 50, 240);
-                       
-            
+
+
+            this.Animations.Add("Charge", charge);
+            this.Animations.Add("Glide", glide);
+            this.Animations.Add("HitLeft", hitLeft);
+            this.Animations.Add("HitRight", hitRight);
+
+
             this.Animations.Add("Right", right);
             this.Animations.Add("Left", left);
             this.Animations.Add("Up", up);
@@ -90,16 +104,21 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         {
             foreach (NPC_Fighting_Farmer npc in Npcs)
             {
-                if(npc.Bounds.Intersects(this.Bounds) && npc.Bounds != this.Bounds && !npc.Running && !npc.Aggro)
-                {
-                    this.running = false;
-                    this.Aggro = false;
-                    this.HitFlag = true;
-                    npc.AttackersDirection = -this.AttackersDirection;
-                    npc.HitFlag = true;
-                    this.elapsedAggro = 0;
-                    break;
-                }
+                if (npc.Position.X < player.Position.X)
+                    leftOrRight = false;
+                else
+                    leftOrRight = true;
+                
+                //if(npc.Bounds.Intersects(this.Bounds) && npc.Bounds != this.Bounds && !npc.Running && !npc.Aggro)
+                //{
+                //    this.running = false;
+                //    this.Aggro = false;
+                //    this.HitFlag = true;
+                //    npc.AttackersDirection = -this.AttackersDirection;
+                //    npc.HitFlag = true;
+                //    this.elapsedAggro = 0;
+                //    break;
+                //}
                 if (player.Bounds.Intersects(this.Bounds))
                 {
                     this.running = false;
@@ -157,6 +176,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 if (Aggro)
                 {
                     elapsedAggro += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    this.CurrentAnimationName = "Charge";
                     if (elapsedAggro > delayAggro)
                     {
                         running = true;
@@ -166,11 +186,16 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 }
                 else if (running)
                 {
+                    this.CurrentAnimationName = "Glide";
                     speed = 5.0f;
                     Position += AttackersDirection * speed;//speed;
                 }
                 else if (HitFlag)
                 {
+                    if (leftOrRight)
+                        this.CurrentAnimationName = "HitRight";
+                    else
+                        this.CurrentAnimationName = "HitLeft";
                     MovementAfterBeingHit(gameTime);
                 }
                 else
