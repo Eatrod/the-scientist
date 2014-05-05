@@ -198,9 +198,9 @@ namespace TileGame.GameScreens
                 AnimatedSpriteObject.Add(NPC_Patroller);
                 NPCPatrollingGuards.Add(NPC_Patroller);
             }
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 8; i++)
             {
-                NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), null, GameRef.random);
+                NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/Bjorn_Try_Farmer"), null, GameRef.random);
                 NPC_Farmer.Origionoffset = new Vector2(25, 65);
                 NPC_Farmer.SetSpritePositionInGameWorld(new Vector2(5 + i, 22));
                 NPC_Farmer.Life = 100;
@@ -452,6 +452,7 @@ namespace TileGame.GameScreens
                     
                     break;
                 }
+                
             }
             foreach(NPC_Fighting_Ranged npc in NPCRangedGuards)
             {
