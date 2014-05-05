@@ -177,7 +177,7 @@ namespace TileGame.GameScreens
             NPC2.FullHp = 5;
             AnimatedSpriteObject.Add(NPC2);
 
-            for (int i = 0; i < 1; i++ )
+            for (int i = 0; i < 2; i++ )
             {
                 NPC_Fighting_Ranged NPC_Ranged = new NPC_Fighting_Ranged(Content.Load<Texture2D>("Sprite/Bjorn_Try_Ranged"), null, GameRef.random);
                 NPC_Ranged.Origionoffset = new Vector2(25, 65);
@@ -188,7 +188,7 @@ namespace TileGame.GameScreens
                 NPCRangedGuards.Add(NPC_Ranged);
             }
             
-            for (int i = 0; i < 0; i++ )
+            for (int i = 0; i < 3; i++ )
             {
                 NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/Bjorn_Try_Golden_Soldier_Strike"), null, GameRef.random);
                 NPC_Patroller.Origionoffset = new Vector2(25, 65);
@@ -213,7 +213,7 @@ namespace TileGame.GameScreens
             for (int i = 0; i < 10; i++)
             {
                 //Detta är NPC_Banditer, ska bli en egen klass senare
-                NPC_Fighting_Patrolling NPC_Bandit = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/HumanNPCBandit"), null, GameRef.random);
+                NPC_Fighting_Patrolling NPC_Bandit = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/HumanNPCBandit_WithAttack"), null, GameRef.random);
                 NPC_Bandit.Origionoffset = new Vector2(25, 65);
                 float x = GameRef.random.Next(102, 137);
                 float y = GameRef.random.Next(88, 100);
@@ -474,12 +474,12 @@ namespace TileGame.GameScreens
                 if (!npc.Dead)
                 {
                     npc.SetVectorTowardsTargetAndStartAndCheckAggroMelee(gameTime, player);
-                    if (npc.Motion != Vector2.Zero)
-                    {
-                        npc.Motion.Normalize();
-                        npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
+                    //if (npc.Motion != Vector2.Zero)
+                    //{
+                    //    npc.Motion.Normalize();
+                    //    npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
 
-                    }
+                    //}
                     if (npc.Aggro)
                         npc.PlayerPosition = player.Origin;
                 }
