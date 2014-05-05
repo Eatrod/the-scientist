@@ -43,11 +43,11 @@ namespace TileEngine
             AddItemProgressLine("immortuiHave", false);
             AddItemProgressLine("permitHave", false);
             AddItemProgressLine("alcoholHave", false);
-            AddItemProgressLine("fishesHave", false);
             AddItemProgressLine("belladonnaHave", false);
 
             AddItemCollectedAmountDict("IronOre", 0);
             AddItemCollectedAmountDict("Money", 0);
+            AddItemCollectedAmountDict("Fish", 0);
         }
 
 
@@ -74,6 +74,11 @@ namespace TileEngine
                 collectedAmountDict[key] = value;
         }
 
+        private void AddItemCollectedAmount(string key, int value)
+        {
+            collectedAmountDict[key] += value;
+        }
+
         public void ChangeScriptsForNPCs(NPC npc)
         {
             //Story NPCs
@@ -83,7 +88,7 @@ namespace TileEngine
                 npc.ChangeScript("permitHave");
             if (StoryProgress.ProgressLine["permitHave"] && npc.NPCName == "Bibitur")
                 npc.script = null;
-            if (StoryProgress.ProgressLine["fishesHave"] && npc.NPCName == "Fisherman")
+            if (StoryProgress.collectedAmountDict["Fish"] > 0 && npc.NPCName == "Fisherman")
                 npc.ChangeScript("fishesHave");
             if (StoryProgress.collectedAmountDict["Money"] >= 5 && npc.NPCName == "Innkeeper")
                 npc.ChangeScript("moneyHave");
