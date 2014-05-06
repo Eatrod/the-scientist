@@ -27,7 +27,12 @@ namespace TileGame.GameScreens
         int rightPageIndex = 0;
         Texture2D backgroundImage;
         
-        Dictionary<int, Message> messageDict = new Dictionary<int, Message>();
+        Dictionary<int, Message> taskDict = new Dictionary<int, Message>();
+        Dictionary<int, Message> completedDict = new Dictionary<int, Message>();
+        Dictionary<int, Message> hintDict = new Dictionary<int, Message>();
+
+        Dictionary<int, Message> activeDict = new Dictionary<int, Message>();
+
         List<int> ListOfUnlockedKeys;
         Label leftText;
         Label rightText;
@@ -50,6 +55,7 @@ namespace TileGame.GameScreens
         #region XNA Method Region
         public override void Initialize()
         {
+            activeDict = taskDict;
             ListOfUnlockedKeys = new List<int>();
             textRect = new Rectangle(0, 0, 400, 600);
             base.Initialize();
@@ -84,17 +90,25 @@ namespace TileGame.GameScreens
             rightText.Color = Color.DarkBlue;
             ControlManager.Add(rightText);
 
-            InsertTextToMessageDictionary(0, "");
-            InsertTextToMessageDictionary(1, "Hint: Find Asterix and talk to him!");
-            InsertTextToMessageDictionary(2, "Task: Asterix told you to find potato The Belladonna. Check out the abandoned fields in the north west.");
-            InsertTextToMessageDictionary(3, "Task: You have now the Belladonna potato and should move on to next town.");
-            InsertTextToMessageDictionary(4, "Completed: You managed to solve Johns riddle.");
-            InsertTextToMessageDictionary(5, "Hint: You need an official permit to leave the town");
-            InsertTextToMessageDictionary(6, "Completed: You have aquired a valid permit");
-            InsertTextToMessageDictionary(7, "Hint: Now you have the axe, you can use it to figth or chop");
+            InsertTextToDictionary(hintDict, 0, "");
+            InsertTextToDictionary(hintDict, 1, "Hint: You need an official permit to leave the town");
+            InsertTextToDictionary(hintDict, 2, "Hint: Now you have the axe, you can use it to figth or chop");
 
-            messageDict[0].Unlocked = true;
-            messageDict[1].Unlocked = true;
+            InsertTextToDictionary(taskDict, 0, "");
+            InsertTextToDictionary(taskDict, 1, "Task: Asterix told you to find potato The Belladonna. Check out the abandoned fields in the north west.");
+            InsertTextToDictionary(taskDict, 2, "Task: You have now the Belladonna potato and should move on to next town.");
+            InsertTextToDictionary(taskDict, 3, "Task: Talk to Asterix.");
+
+            InsertTextToDictionary(completedDict, 0, "");
+            InsertTextToDictionary(completedDict, 1, "Completed: You managed to solve Johns riddle.");
+            InsertTextToDictionary(completedDict, 2, "Completed: You have aquired a valid permit");
+            InsertTextToDictionary(completedDict, 3, "Completed: You talked to Asterix");
+            InsertTextToDictionary(completedDict, 4, "Completed: You collected the Belladona");
+
+            hintDict[0].Unlocked = true;
+            taskDict[0].Unlocked = true;
+            completedDict[0].Unlocked = true;
+            taskDict[1].Unlocked = true;
         }
         public override void Update(GameTime gameTime)
         {
@@ -103,20 +117,40 @@ namespace TileGame.GameScreens
 
             if (StoryProgress.ProgressLine["asterixTalkedTo"])
             {
-                messageDict[2].Unlocked = true;
-                messageDict[1].Unlocked = false;
+                taskDict[1].Unlocked = true;
+                completedDict[3].Unlocked = true;
+                completedDict[1].Unlocked = true;
+                completedDict[2].Unlocked = true;
+                completedDict[4].Unlocked = true;
             }
             if (StoryProgress.ProgressLine["belladonnaHave"])
-                messageDict[3].Unlocked = true;
+            {
+                taskDict[1].Unlocked = false;
+                taskDict[2].Unlocked = true;
+                completedDict[4].Unlocked = true;
+            }
             if (StoryProgress.ProgressLine["contestAgainstJohnFinished"])
-                messageDict[4].Unlocked = true;
+                completedDict[1].Unlocked = true;
             if (StoryProgress.ProgressLine["permitHave"])
             {
-                messageDict[5].Unlocked = false;
-                messageDict[6].Unlocked = true;
+                //messageDict[5].Unlocked = false;
+                //messageDict[6].Unlocked = true;
             }
             if (StoryProgress.ProgressLine["Axe"])
-                messageDict[7].Unlocked = true;
+                hintDict[2].Unlocked = true;
+
+            if (InputHandler.KeyReleased(Keys.H))
+            {
+                activeDict = hintDict;
+            }
+            if (InputHandler.KeyReleased(Keys.C))
+            {
+                activeDict = completedDict;
+            }
+            if (InputHandler.KeyReleased(Keys.T))
+            {
+                activeDict = taskDict;
+            }
 
             GetKeysThatAreNotLocked();
 
@@ -126,10 +160,10 @@ namespace TileGame.GameScreens
                     leftPageIndex = ListOfUnlockedKeys[pageIndex + 1];
                 else
                     leftPageIndex = 0;
-                if (messageDict.ContainsKey(leftPageIndex))
+                if (activeDict.ContainsKey(leftPageIndex))
                 {
                     leftText.Color = GetTextColor(leftText.Text.Split(':')[0]);
-                    leftText.Text = messageDict[leftPageIndex].Text;
+                    leftText.Text = activeDict[leftPageIndex].Text;
                     if (pageIndex == 0)
                         leftPagenumberText.Text = "1";
                     else
@@ -142,10 +176,10 @@ namespace TileGame.GameScreens
                     rightPageIndex = ListOfUnlockedKeys[pageIndex + 2];
                 else
                     rightPageIndex = 0;
-                if (messageDict.ContainsKey(rightPageIndex))
+                if (activeDict.ContainsKey(rightPageIndex))
                 {
                     rightText.Color = GetTextColor(rightText.Text.Split(':')[0]);
-                    rightText.Text = messageDict[rightPageIndex].Text;
+                    rightText.Text = activeDict[rightPageIndex].Text;
                     if (pageIndex == 0)
                         rightPagenumberText.Text = "2";
                     else
@@ -191,7 +225,8 @@ namespace TileGame.GameScreens
         #endregion
 
         #region Methods Region
-        public void InsertTextToMessageDictionary(int key, string text)
+
+        private void InsertTextToDictionary(Dictionary<int, Message> messageDict,int key, string text)
         {
             StringBuilder stringBuild = new StringBuilder();
             string formatedText;
@@ -207,7 +242,7 @@ namespace TileGame.GameScreens
         private void GetKeysThatAreNotLocked()
         {
             ListOfUnlockedKeys.Clear();
-            foreach(KeyValuePair<int, Message> pair in messageDict)
+            foreach(KeyValuePair<int, Message> pair in activeDict)
             {
                 if (pair.Value.Unlocked)
                     ListOfUnlockedKeys.Add(pair.Key);
