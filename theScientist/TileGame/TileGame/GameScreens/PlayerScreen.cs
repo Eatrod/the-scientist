@@ -187,6 +187,39 @@ namespace TileGame.GameScreens
                 player.Animations.Add("BowUp", bowup);
 
 
+            FrameAnimation axestartright = new FrameAnimation(1, 50, 80, 0, 560);
+            if (!player.Animations.ContainsKey("AxeStartRight"))
+                player.Animations.Add("AxeStartRight", axestartright);
+
+            FrameAnimation axestartleft = new FrameAnimation(1, 50, 80, 250, 560);
+            if (!player.Animations.ContainsKey("AxeStartLeft"))
+                player.Animations.Add("AxeStartLeft", axestartleft);
+
+            FrameAnimation axestartdown = new FrameAnimation(1, 50, 80, 150, 560);
+            if (!player.Animations.ContainsKey("AxeStartDown"))
+                player.Animations.Add("AxeStartDown", axestartdown);
+
+            FrameAnimation axestartup = new FrameAnimation(1, 50, 80, 400, 560);
+            if (!player.Animations.ContainsKey("AxeStartUp"))
+                player.Animations.Add("AxeStartUp", axestartup);
+
+            
+            FrameAnimation axefinishright = new FrameAnimation(1, 100, 80, 50, 560);
+            if (!player.Animations.ContainsKey("AxeFinishRight"))
+                player.Animations.Add("AxeFinishRight", axefinishright);
+
+            FrameAnimation axefinishleft = new FrameAnimation(1, 100, 80, 300, 560);
+            if (!player.Animations.ContainsKey("AxeFinishLeft"))
+                player.Animations.Add("AxeFinishLeft", axefinishleft);
+
+            FrameAnimation axefinishdown = new FrameAnimation(1, 50, 80, 200, 560);
+            if (!player.Animations.ContainsKey("AxeFinishDown"))
+                player.Animations.Add("AxeFinishDown", axefinishdown);
+
+            FrameAnimation axefinishup = new FrameAnimation(1, 50, 80, 450, 560);
+            if (!player.Animations.ContainsKey("AxeFinishUp"))
+                player.Animations.Add("AxeFinishUp", axefinishup);
+
 
             player.CurrentAnimationName = "Down";
             player.oldAnimation = player.CurrentAnimationName;
@@ -528,7 +561,6 @@ namespace TileGame.GameScreens
                         {
                             player.oldAnimation = player.CurrentAnimationName;
                             player.shotFired = true;
-                            //player.fireArrow = true;
                             player.multishotFireArrow = true;
                             UpdateBowAttackAnimaition();
                         }
@@ -557,9 +589,36 @@ namespace TileGame.GameScreens
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
                 if (activeItemBackgroundColor[key_number - 1] == Color.White)
-                {
-                    if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >= 0))
+                {                   
+
+                    if (InputHandler.KeyDown(Keys.Q) && !player.meleeAttackStart && (player.Stamina - 20 >= 0) || InputHandler.KeyDown(Keys.W) && !player.meleeAttackStart && (player.Stamina - 50 >= 0))
                     {
+                        player.oldAnimation = player.CurrentAnimationName;
+                        player.meleeAttackStart = true;
+                        UpdateAxeStartAttackAnimaition();
+                    }
+                    
+                    
+                    
+                    
+                    if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >= 0) && player.meleeAttackStart)
+                    {
+                        player.meleeAttackStart = false;
+                        player.meleeAttackFinish = true;
+                        UpdateAxeFinishAttackAnimaition();
+
+                        if (player.CurrentAnimationName == "AxeFinishLeft")
+                        {
+                            player.Position.X -= 27;
+                        }
+
+                        if (player.CurrentAnimationName == "AxeFinishRight")
+                        {
+                            player.Position.X -= 27;
+                        }
+
+                        
+
                         if (Vector2.Distance(player.Origin, GameRef.PotatoTown.treeStanding.Origin) < 75)
                         {
                             if (!StoryProgress.ProgressLine["treeIsDown"])
@@ -572,7 +631,7 @@ namespace TileGame.GameScreens
                             }
                         }
                         player.Stamina -= 20f;
-                    }
+                    }                   
                 }
             }
 
@@ -602,7 +661,7 @@ namespace TileGame.GameScreens
             dialogBox.Update(gameTime);
             thinkingBox.Update(gameTime);
 
-            if (motion != Vector2.Zero && !player.shotFired)
+            if (motion != Vector2.Zero && !player.shotFired && !player.meleeAttackStart && !player.meleeAttackFinish)
             {
                 motion.Normalize();                 //Comment out to use gamePad
                 motion = CollisionWithTerrain.CheckCollisionForMotion(motion, player,screen);
@@ -612,7 +671,7 @@ namespace TileGame.GameScreens
                 player.isAnimating = true;
                 CollisionWithTerrain.CheckForCollisionAroundSprite(player, motion,screen);
             }
-            else if (!player.shotFired)
+            else if (!player.shotFired && !player.meleeAttackStart && !player.meleeAttackFinish)
             {
                 UpdateSpriteIdleAnimation(player);
                 player.isAnimating = false;
@@ -622,7 +681,9 @@ namespace TileGame.GameScreens
             else
             {
                 player.elapsedShot += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                player.elapsedAttack += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 player.Speed = -0.1f;
+                
                 if (player.elapsedShot > player.delayShot && player.multishotArrow)
                 {
  
@@ -665,6 +726,26 @@ namespace TileGame.GameScreens
                     player.shotFired = false;
                     player.normalArrow = false;
                     player.CurrentAnimationName = player.oldAnimation;
+                    player.Speed = 2;
+                }
+
+                if (player.elapsedAttack > player.delayAttack && player.meleeAttackFinish)
+                {
+                    player.elapsedAttack = 0.0f;
+                    player.meleeAttackFinish = false;
+                    if (player.CurrentAnimationName == "AxeFinishLeft")
+                    {
+                        player.Position.X += 27;
+                    }
+
+                    if (player.CurrentAnimationName == "AxeFinishRight")
+                    {
+                        player.Position.X += 27;
+                    } 
+                    UpdateAxeDoneAttackAnimaition();
+
+                    
+                    //player.CurrentAnimationName = player.oldAnimation;
                     player.Speed = 2;
                 }
             }
@@ -1432,6 +1513,93 @@ namespace TileGame.GameScreens
             }
         }
 
+        private static void UpdateAxeStartAttackAnimaition()
+        {
+            if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "Down" || player.CurrentAnimationName == "IdleUp" || player.CurrentAnimationName == "IdleDown")
+            {
+
+                if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "IdleUp")
+                {
+                    player.CurrentAnimationName = "AxeStartUp";
+                }
+                else
+                {
+                    player.CurrentAnimationName = "AxeStartDown";
+                }
+
+            }
+            else
+            {
+                if (player.CurrentAnimationName == "Left" || player.CurrentAnimationName == "IdleLeft")
+                {
+                    player.CurrentAnimationName = "AxeStartLeft";
+
+                }
+                else
+                {
+                    player.CurrentAnimationName = "AxeStartRight";
+                }
+            }
+        }
+
+        private static void UpdateAxeFinishAttackAnimaition()
+        {
+            if (player.CurrentAnimationName == "AxeStartUp" || player.CurrentAnimationName == "AxeStartDown" )
+            {
+
+                if (player.CurrentAnimationName == "AxeStartUp" )
+                {
+                    player.CurrentAnimationName = "AxeFinishUp";
+                }
+                else
+                {
+                    player.CurrentAnimationName = "AxeFinishDown";
+                }
+
+            }
+            else
+            {
+                if (player.CurrentAnimationName == "AxeStartLeft")
+                {
+                    player.CurrentAnimationName = "AxeFinishLeft";
+
+                }
+                else
+                {
+                    player.CurrentAnimationName = "AxeFinishRight";
+                }
+            }
+        }
+
+        private static void UpdateAxeDoneAttackAnimaition()
+        {
+            if (player.CurrentAnimationName == "AxeFinishUp" || player.CurrentAnimationName == "AxeFinishDown")
+            {
+
+                if (player.CurrentAnimationName == "AxeFinishUp")
+                {
+                    player.CurrentAnimationName = "IdleUp";
+                }
+                else
+                {
+                    player.CurrentAnimationName = "IdleDown";
+                }
+
+            }
+            else
+            {
+                if (player.CurrentAnimationName == "AxeFinishLeft")
+                {
+                    player.CurrentAnimationName = "IdleLeft";
+
+                }
+                else
+                {
+                    player.CurrentAnimationName = "IdleRight";
+                }
+            }
+        }
+
         private void UpdateSpriteIdleAnimation(AnimatedSprite sprite)
         {
             if (sprite.CurrentAnimationName == "Up")
@@ -1441,15 +1609,7 @@ namespace TileGame.GameScreens
             if (sprite.CurrentAnimationName == "Right")
                 sprite.CurrentAnimationName = "IdleRight";
             if (sprite.CurrentAnimationName == "Left")
-                sprite.CurrentAnimationName = "IdleLeft";
-            //if (sprite.CurrentAnimationName == "Down")
-            //    sprite.CurrentAnimationName = "Down";
-            //if (sprite.CurrentAnimationName == "Left")
-            //    sprite.CurrentAnimationName = "Left";
-            //if (sprite.CurrentAnimationName == "Right")
-            //    sprite.CurrentAnimationName = "Right";
-            //if (sprite.CurrentAnimationName == "Up")
-            //    sprite.CurrentAnimationName = "Up";
+                sprite.CurrentAnimationName = "IdleLeft";           
         }
 
         private void UpdateSpriteAnimation(Vector2 motion)
