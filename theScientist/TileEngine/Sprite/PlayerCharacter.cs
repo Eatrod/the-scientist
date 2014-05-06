@@ -13,6 +13,7 @@ namespace TileEngine.Sprite
 
 
          public bool multishotArrow { get; set; }
+         public bool multishotFireArrow { get; set; }
          public bool fireArrow { get; set; }
          public bool normalArrow { get; set; }
 

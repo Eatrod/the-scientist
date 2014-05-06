@@ -20,12 +20,12 @@ namespace TileGame.GameScreens
         #region Field region
 
         Texture2D inventoryBackground;
-        Texture2D axeImage, swordImage, crossbowImage, BelladonnaImage, ImmortuiImage, ironOreImage;
+        Texture2D axeImage, swordImage, crossbowImage, belladonnaImage, immortuiImage, ironOreImage, permitImage, goldImage, alcoholImage, fishImage;
         Texture2D inventoryCursorImage;
         int cursor_X, cursor_Y;
         int cursor_item_number;
-        Label belladonnaLabel, immortuiLabel, ironOreLabel;
-        Label amountOfIronLabel;
+        Label belladonnaLabel, immortuiLabel, ironOreLabel, permitLabel, goldLabel, alcoholLabel, fishLabel;
+        Label amountOfIronLabel, amountOfGoldLabel, amountOfFishLabel;
         Label[] activeWeaponNumbers;
 
         #endregion
@@ -60,9 +60,13 @@ namespace TileGame.GameScreens
             swordImage = Content.Load<Texture2D>(@"Sprite\Inv Sword test");
             crossbowImage = Content.Load<Texture2D>(@"Sprite\Bow");
             inventoryCursorImage = Content.Load<Texture2D>(@"Sprite\Inventory Cursor test");
-            BelladonnaImage = Content.Load<Texture2D>(@"Sprite\Belladonna");
-            ImmortuiImage = Content.Load<Texture2D>(@"Sprite\Immortui big");
+            belladonnaImage = Content.Load<Texture2D>(@"Sprite\Belladonna");
+            immortuiImage = Content.Load<Texture2D>(@"Sprite\Immortui big");
             ironOreImage = Content.Load<Texture2D>(@"Sprite\Iron ore inv");
+            permitImage = Content.Load<Texture2D>(@"Sprite\Permit");
+            goldImage = Content.Load<Texture2D>(@"Sprite\Gold");
+            alcoholImage = Content.Load<Texture2D>(@"Sprite\Wine");
+            fishImage = Content.Load<Texture2D>(@"Sprite\Fish");
 
             amountOfIronLabel = new Label();
             //GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6
@@ -71,16 +75,46 @@ namespace TileGame.GameScreens
             amountOfIronLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3) + (GameRef.ScreenRectangle.Height / 6) / 3); //new Vector2(860, 200 + (140 * 3)); //1110 //860
             ControlManager.Add(amountOfIronLabel);
 
+            amountOfGoldLabel = new Label();
+            amountOfGoldLabel.Text = "";
+            amountOfGoldLabel.Color = Color.Black;
+            amountOfGoldLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + GameRef.ScreenRectangle.Width / 8 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3) + (GameRef.ScreenRectangle.Height / 6) / 3); //new Vector2(860, 200 + (140 * 3)); //1110 //860
+            ControlManager.Add(amountOfGoldLabel);
+
+            amountOfFishLabel = new Label();
+            amountOfFishLabel.Text = "";
+            amountOfFishLabel.Color = Color.Black;
+            amountOfFishLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + GameRef.ScreenRectangle.Width / 8 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 2) + (GameRef.ScreenRectangle.Height / 6) / 3);
+            ControlManager.Add(amountOfFishLabel);
+
             belladonnaLabel = new Label();
             belladonnaLabel.Text = "";
             belladonnaLabel.Color = Color.Black;
             belladonnaLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 0, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0) + GameRef.ScreenRectangle.Height / 6);
             ControlManager.Add(belladonnaLabel);
 
+            fishLabel = new Label();
+            fishLabel.Text = "";
+            fishLabel.Color = Color.Black;
+            fishLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0) + GameRef.ScreenRectangle.Height / 6);
+            ControlManager.Add(fishLabel);           
+
+            alcoholLabel = new Label();
+            alcoholLabel.Text = "";
+            alcoholLabel.Color = Color.Black;
+            alcoholLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0) + GameRef.ScreenRectangle.Height / 6);
+            ControlManager.Add(alcoholLabel);
+
+            permitLabel = new Label();
+            permitLabel.Text = "";
+            permitLabel.Color = Color.Black;
+            permitLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0) + GameRef.ScreenRectangle.Height / 6);
+            ControlManager.Add(permitLabel);
+
             immortuiLabel = new Label();
             immortuiLabel.Text = "";
             immortuiLabel.Color = Color.Black;
-            immortuiLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0) + GameRef.ScreenRectangle.Height / 6);
+            immortuiLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 0, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 1) + GameRef.ScreenRectangle.Height / 6);
             ControlManager.Add(immortuiLabel);
 
             ironOreLabel = new Label();
@@ -88,6 +122,12 @@ namespace TileGame.GameScreens
             ironOreLabel.Color = Color.Black;
             ironOreLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3) + GameRef.ScreenRectangle.Height / 6);
             ControlManager.Add(ironOreLabel);
+
+            goldLabel = new Label();
+            goldLabel.Text = "Gold";
+            goldLabel.Color = Color.Black;
+            goldLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3) + GameRef.ScreenRectangle.Height / 6);
+            ControlManager.Add(goldLabel);
 
             activeWeaponNumbers = new Label[5];
             for (int i = 0; i < 5; i++)
@@ -333,7 +373,7 @@ namespace TileGame.GameScreens
             if (StoryProgress.ProgressLine["belladonnaHave"] == true)
             {
                 GameRef.spriteBatch.Draw(
-                        BelladonnaImage,
+                        belladonnaImage,
                         new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2)/10, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),  //new Rectangle(750, 180 + (140 * 0), 100, 90),
                         Color.White);
 
@@ -343,18 +383,49 @@ namespace TileGame.GameScreens
             if (StoryProgress.ProgressLine["immortuiHave"] == true)
             {
                 GameRef.spriteBatch.Draw(
-                            ImmortuiImage,
-                            new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                            immortuiImage,
+                            //new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                            new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 1), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
                             Color.White);
                 immortuiLabel.Text = "Immortui";
             }
+
+            if (StoryProgress.ProgressLine["permitHave"] == true)
+            {
+                GameRef.spriteBatch.Draw(
+                            permitImage,
+                            new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                            Color.White);
+                permitLabel.Text = "Permit";
+            }          
+
+            if (StoryProgress.ProgressLine["alcoholHave"] == true)
+            {
+                GameRef.spriteBatch.Draw(
+                            alcoholImage,
+                            new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                            Color.White);
+                alcoholLabel.Text = "Alcohol";
+            }
+
+            //if (StoryProgress.ProgressLine["fishesHave"] == true)
+            //{
+                GameRef.spriteBatch.Draw(
+                            fishImage,
+                            new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 2), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                            Color.White);
+                //fishLabel.Text = "Nemo";
+            //}
 
             GameRef.spriteBatch.Draw(
                     ironOreImage,
                     new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
                     Color.White);
-
-
+         
+            GameRef.spriteBatch.Draw(
+                        goldImage,
+                        new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                        Color.White);
 
             ControlManager.Draw(GameRef.spriteBatch);
 
@@ -402,6 +473,8 @@ namespace TileGame.GameScreens
             }
 
             amountOfIronLabel.Text = "x " + StoryProgress.collectedAmountDict["IronOre"].ToString();
+            amountOfGoldLabel.Text = "x " + StoryProgress.collectedAmountDict["Money"].ToString();
+            amountOfFishLabel.Text = "x " + StoryProgress.collectedAmountDict["Fish"].ToString();
         }
 
         private void ResetKey(Keys Key)
