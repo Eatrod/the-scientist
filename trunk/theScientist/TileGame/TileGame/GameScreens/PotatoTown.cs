@@ -410,7 +410,7 @@ namespace TileGame.GameScreens
         }
         public override void Update(GameTime gameTime)
         {
-            player.Speed = 10;
+            //player.Speed = 10;
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
             foreach(DirtPileSprite dirtpile in DirtPiles)
             {
