@@ -77,7 +77,7 @@ namespace TileGame.GameScreens
             InsertTextToMessageDictionary(4, "You managed to solve Johns riddle.");
             InsertTextToMessageDictionary(5, "You need an official permit to leave the town");
             InsertTextToMessageDictionary(6, "You have aquired a valid permit");
-            InsertTextToMessageDictionary(7, "Mer text sa nu ska du ga till utgangen for nasta quest");
+            InsertTextToMessageDictionary(7, "Now you have the axe, you can use it to figth or chop");
 
             messageDict[0].Unlocked = true;
             messageDict[1].Unlocked = true;
@@ -95,6 +95,8 @@ namespace TileGame.GameScreens
                 messageDict[4].Unlocked = true;
             if (StoryProgress.ProgressLine["permitHave"])
                 messageDict[6].Unlocked = true;
+            if (StoryProgress.ProgressLine["Axe"])
+                messageDict[7].Unlocked = true;
 
             GetKeysThatAreNotLocked();
 

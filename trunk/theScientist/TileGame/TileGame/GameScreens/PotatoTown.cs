@@ -688,27 +688,27 @@ namespace TileGame.GameScreens
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(39, 62)));
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
-                new Vector2(33, 73)));
+                new Vector2(39, 75)));
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
-                new Vector2(24, 40)));
+                new Vector2(25, 40)));
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(50, 4)));
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(82, 5)));
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
-                new Vector2(133, 30)));
+                new Vector2(133, 31)));
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
-                new Vector2(118, 58)));
+                new Vector2(129, 58)));
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(91, 78)));
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(94, 99)));
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
-                new Vector2(64, 99)));
+                new Vector2(64, 100)));
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
-                new Vector2(29, 84)));
+                new Vector2(29, 85)));
             SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
-                new Vector2(21, 91)));
+                new Vector2(11, 91)));
         }
         #endregion
 
