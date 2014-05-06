@@ -66,8 +66,7 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     
-                    sprite.Position.Y += 2;
-                    //sprite.Position.Y = up.Value.Y * Engine.TileHeight + sprite.Bounds.Height;
+                    sprite.Position.Y += sprite.Speed;
                     collided = true;
                 }
             }
@@ -78,8 +77,7 @@ namespace TileGame.Collision
 
                 if (cellRect.Intersects(spriteRect))
                 {
-                    sprite.Position.Y -= 2;
-                    //sprite.Position.Y = down.Value.Y * Engine.TileHeight - sprite.Bounds.Height;
+                    sprite.Position.Y -= sprite.Speed;
                     collided = true;
                 }
             }
@@ -90,8 +88,7 @@ namespace TileGame.Collision
 
                 if (cellRect.Intersects(spriteRect))
                 {
-                    sprite.Position.X += 2;
-                    //sprite.Position.X = left.Value.X * Engine.TileWidth + sprite.Bounds.Width;
+                    sprite.Position.X += sprite.Speed;
                     collided = true;
                 }
 
@@ -103,8 +100,7 @@ namespace TileGame.Collision
 
                 if (cellRect.Intersects(spriteRect))
                 {
-                    sprite.Position.X -= 2;
-                    //sprite.Position.X = right.Value.X * Engine.TileWidth - sprite.Bounds.Width;
+                    sprite.Position.X -= sprite.Speed;
                     collided = true;
                 }
 
@@ -118,11 +114,9 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (motion.X != 0)
-                        sprite.Position.X += 2;
-                        //sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                        sprite.Position.X += sprite.Speed;
                     if (motion.Y != 0)
-                        sprite.Position.Y += 2;
-                        //sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                        sprite.Position.Y += sprite.Speed;
                     collided = true;
                 }
             }
@@ -135,11 +129,9 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (motion.X != 0)
-                        sprite.Position.X -= 2;
-                        //sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                        sprite.Position.X -= sprite.Speed;
                     if (motion.Y != 0)
-                        sprite.Position.Y += 2;
-                        //sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                        sprite.Position.Y += sprite.Speed;
                     collided = true;
                 }
             }
@@ -152,11 +144,9 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (motion.X != 0)
-                        sprite.Position.X += 2;
-                        //sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                        sprite.Position.X += sprite.Speed;
                     if (motion.Y != 0)
-                        sprite.Position.Y -= 2;
-                        //sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                        sprite.Position.Y -= sprite.Speed;
                     collided = true;
                 }
             }
@@ -169,11 +159,9 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (motion.X != 0)
-                        sprite.Position.X -= 2;
-                        //sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                        sprite.Position.X -= sprite.Speed;
                     if (motion.Y != 0)
-                        sprite.Position.Y -= 2;
-                        //sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                        sprite.Position.Y -= sprite.Speed;
                     collided = true;
                 }
             }
@@ -191,8 +179,7 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (!(motion.Y >= 0))
-                        sprite.Position.Y += 2;
-                        //sprite.Position.Y = up.Value.Y * Engine.TileHeight + sprite.Bounds.Height;
+                        sprite.Position.Y += sprite.Speed;
                 }
             }
             if (down != null && (screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 13 || screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 17 || screen.tileMap.CollisionLayer.GetCellIndex(down.Value) == 15))
@@ -203,8 +190,7 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (!(motion.Y <= 0))
-                        sprite.Position.Y -= 2;
-                        //sprite.Position.Y = down.Value.Y * Engine.TileHeight - sprite.Bounds.Height;
+                        sprite.Position.Y -= sprite.Speed;
                 }
             }
             if (left != null && (screen.tileMap.CollisionLayer.GetCellIndex(left.Value) == 11 || screen.tileMap.CollisionLayer.GetCellIndex(left.Value) == 15 || screen.tileMap.CollisionLayer.GetCellIndex(left.Value) == 16))
@@ -215,8 +201,7 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (!(motion.X >= 0))
-                        sprite.Position.X += 2;
-                        //sprite.Position.X = left.Value.X * Engine.TileWidth + sprite.Bounds.Width;
+                        sprite.Position.X += sprite.Speed;
                 }
 
             }
@@ -228,8 +213,7 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (!(motion.X <= 0))
-                        sprite.Position.X -= 2;
-                        //sprite.Position.X = right.Value.X * Engine.TileWidth - sprite.Bounds.Width;
+                        sprite.Position.X -= sprite.Speed;
                 }
 
             }
@@ -242,11 +226,9 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (!(motion.X >= 0))
-                        sprite.Position.X += 2;
-                        //sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                        sprite.Position.X += sprite.Speed;
                     if (!(motion.Y <= 0))
-                        sprite.Position.Y += 2;
-                        //sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                        sprite.Position.Y += sprite.Speed;
                 }
             }
 
@@ -258,11 +240,9 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (!(motion.X <= 0))
-                        sprite.Position.X -= 2;
-                        //sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                        sprite.Position.X -= sprite.Speed;
                     if (!(motion.Y >= 0))
-                        sprite.Position.Y += 2;
-                        //sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                        sprite.Position.Y += sprite.Speed;
                 }
             }
 
@@ -274,11 +254,9 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (!(motion.X >= 0))
-                        sprite.Position.X += 2;
-                        //sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                        sprite.Position.X += sprite.Speed;
                     if (!(motion.Y <= 0))
-                        sprite.Position.Y -= 2;
-                        //sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                        sprite.Position.Y -= sprite.Speed;
                 }
             }
 
@@ -290,11 +268,9 @@ namespace TileGame.Collision
                 if (cellRect.Intersects(spriteRect))
                 {
                     if (!(motion.X <= 0))
-                        sprite.Position.X -= 2;
-                        //sprite.Position.X = spriteCell.X * Engine.TileWidth;
+                        sprite.Position.X -= sprite.Speed;
                     if (!(motion.Y <= 0))
-                        sprite.Position.Y -= 2;
-                        //sprite.Position.Y = spriteCell.Y * Engine.TileHeight;
+                        sprite.Position.Y -= sprite.Speed;
                 }
             }
         }
