@@ -122,10 +122,10 @@ namespace TileGame.GameScreens
                 if (s is MultiIronSprite)
                 {
                     MultiIronSprite mis = (MultiIronSprite)s;
-            FrameAnimation all = new FrameAnimation(1, 32, 32, 0, 0);
+                    FrameAnimation all = new FrameAnimation(1, 32, 32, 0, 0);
                     if (!mis.Animations.ContainsKey("all"))
                         mis.Animations.Add("all", all);
-            FrameAnimation half = new FrameAnimation(1, 32, 32, 32, 0);
+                    FrameAnimation half = new FrameAnimation(1, 32, 32, 32, 0);
                     if (!mis.Animations.ContainsKey("half"))
                         mis.Animations.Add("half", half);
                     mis.CurrentAnimationName = "all";

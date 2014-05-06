@@ -16,8 +16,22 @@ namespace TileGame.GameScreens
     {
         #region Field region
 
-        Texture2D backgroundImage;
+        Texture2D backgroundImage1;
+        Texture2D backgroundImage2;
+        Texture2D backgroundImage3;
+        Texture2D backgroundImage4;
+        Texture2D backgroundImage5;
+        Texture2D backgroundImage6;
+        Texture2D backgroundImage7;
+        Texture2D backgroundImage8;
+
+        Texture2D currentPicture;
         LinkLabel startLabel;
+
+        public float elapsedTime = 0f;
+        public float timeDelay = 300f;
+
+        int counter = 0;
 
         #endregion
 
@@ -33,12 +47,22 @@ namespace TileGame.GameScreens
         protected override void LoadContent()
         {
             ContentManager Content = GameRef.Content;
-            backgroundImage = Content.Load<Texture2D>(@"Backgrounds\Blacksmith");
+            backgroundImage1 = Content.Load<Texture2D>(@"Backgrounds\PotatoWarsSplashScreen_1");
+            backgroundImage2 = Content.Load<Texture2D>(@"Backgrounds\PotatoWarsSplashScreen_2");
+            backgroundImage3 = Content.Load<Texture2D>(@"Backgrounds\PotatoWarsSplashScreen_3");
+            backgroundImage4 = Content.Load<Texture2D>(@"Backgrounds\PotatoWarsSplashScreen_4");
+            backgroundImage5 = Content.Load<Texture2D>(@"Backgrounds\PotatoWarsSplashScreen_5");
+            backgroundImage6 = Content.Load<Texture2D>(@"Backgrounds\PotatoWarsSplashScreen_6");
+            backgroundImage7 = Content.Load<Texture2D>(@"Backgrounds\PotatoWarsSplashScreen_7");
+            backgroundImage8 = Content.Load<Texture2D>(@"Backgrounds\PotatoWarsSplashScreen_8");
+            
+            
+            
             base.LoadContent();
 
             startLabel = new LinkLabel();
             startLabel.Position = new Vector2(350, 600);
-            startLabel.Text = "Press SPACEBAR to begin";
+            startLabel.Text = "";
             startLabel.Color = Color.White;
             startLabel.TabStop = true;
             startLabel.HasFocus = true;
@@ -49,6 +73,48 @@ namespace TileGame.GameScreens
         {
             ControlManager.Update(gameTime, PlayerIndex.One);
 
+            elapsedTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if (counter == 1)
+            {
+                currentPicture = backgroundImage1;
+                if (elapsedTime > timeDelay)
+                {
+                    counter++;
+                    elapsedTime = 0f;
+                }
+            }
+            else if (counter == 2)
+            {
+                currentPicture = backgroundImage8;
+                if (elapsedTime > timeDelay)
+                {
+                    counter++;
+                    elapsedTime = 0f;
+                }
+            } 
+
+            else if (counter == 3)
+            {
+                currentPicture = backgroundImage5;
+                if (elapsedTime > timeDelay)
+                {
+                    counter++;
+                    elapsedTime = 0f;
+                }
+            }
+            
+            else 
+            {
+                currentPicture = backgroundImage4;
+                if (elapsedTime > timeDelay)
+                {
+                    counter = 1;
+                    elapsedTime = 0f;
+                }
+            }
+          
+
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
@@ -58,7 +124,7 @@ namespace TileGame.GameScreens
              base.Draw(gameTime);
 
              GameRef.spriteBatch.Draw(
-                backgroundImage,
+                currentPicture,
                 GameRef.ScreenRectangle,
                 Color.White);
 
