@@ -305,11 +305,14 @@ namespace TileGame.GameScreens
                 chargeanimation = new AnimatedSprite(Content.Load<Texture2D>("Sprite/ChargeBar"));
                 chargeanimation.SetSpritePositionInGameWorld(new Vector2(0, 1.4f));
             }
-
-            rectangle = new Rectangle(0, GraphicsDevice.Viewport.Height - 100, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            dialogBox = new DialogBox(Content.Load<Texture2D>("GUI/DialogPlaceholder"), rectangle, "");
+            //TODO: Fixa det här
+            List<SpriteFont> fonts = new List<SpriteFont>(); 
+            fonts.Add(Content.Load<SpriteFont>("Fonts/VeniceClassic"));
+            fonts.Add(Content.Load<SpriteFont>("Fonts/pixel_pirate"));
+            rectangle = new Rectangle(GraphicsDevice.Viewport.Width/2-350, GraphicsDevice.Viewport.Height - 200, 700, 193);
+            dialogBox = new DialogBox(fonts,Content.Load<Texture2D>("GUI/DialogBox"), rectangle, "", Content.Load<Texture2D>("GUI/DialogArrow"));
             textBubble = new TextBubble(Content.Load<Texture2D>("GUI/SpeechBubble"), rectangle, "", Content.Load<SpriteFont>("Fonts/BubbleFont"));
-            thinkingBox = new ThinkingBox(Content.Load<Texture2D>("GUI/DialogPlaceholder"), "", rectangle, player);
+            thinkingBox = new ThinkingBox(Content.Load<Texture2D>("GUI/DialogBox"), "", rectangle, player);
 
             gateDict = new Dictionary<string, int>();
             for (int i = 0; i < 10; i++)
