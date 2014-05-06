@@ -61,13 +61,13 @@ namespace TileGame.GameScreens
             base.LoadContent();
 
             leftPagenumberText = new Label();
-            leftPagenumberText.Position = new Vector2(100, 600);
+            leftPagenumberText.Position = new Vector2(100, GraphicsDevice.Viewport.Height - 110);
             leftPagenumberText.Text = pageIndex.ToString();
             leftPagenumberText.Color = Color.DarkBlue;
             ControlManager.Add(leftPagenumberText);
 
             rightPagenumberText = new Label();
-            rightPagenumberText.Position = new Vector2(900, 600);
+            rightPagenumberText.Position = new Vector2(GraphicsDevice.Viewport.Width - 69, GraphicsDevice.Viewport.Height - 110);
             rightPagenumberText.Text = pageIndex.ToString();
             rightPagenumberText.Color = Color.DarkBlue;
             ControlManager.Add(rightPagenumberText);
@@ -111,7 +111,10 @@ namespace TileGame.GameScreens
             if (StoryProgress.ProgressLine["contestAgainstJohnFinished"])
                 messageDict[4].Unlocked = true;
             if (StoryProgress.ProgressLine["permitHave"])
+            {
+                messageDict[5].Unlocked = false;
                 messageDict[6].Unlocked = true;
+            }
             if (StoryProgress.ProgressLine["Axe"])
                 messageDict[7].Unlocked = true;
 
