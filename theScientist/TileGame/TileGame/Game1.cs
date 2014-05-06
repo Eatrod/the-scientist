@@ -38,6 +38,7 @@ namespace TileGame
 
         #region Field Region
         public Random random;
+        public bool firstRun = true;
         #endregion
 
         #region Game State Region
@@ -62,8 +63,8 @@ namespace TileGame
         #region Screen Field Region
 
         
-        const int screenWidth = 1920;//1920; //1248 //1920
-        const int screenHeight = 1080; //1080
+        const int screenWidth = 1248;//1920; //1248 //1920
+        const int screenHeight = 768; //1080
         const bool fullScreen = false;
         public readonly Rectangle ScreenRectangle;
 

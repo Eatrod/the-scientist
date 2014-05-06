@@ -13,7 +13,7 @@ namespace XtheSmithLibrary.Controls
     {
         #region Fields and Properties
 
-        Color selectedColor = Color.Red;
+        Color selectedColor = Color.DarkOrange;
         public Color SelectedColor
         {
             get { return selectedColor; }
@@ -49,8 +49,12 @@ namespace XtheSmithLibrary.Controls
         {
             if (!HasFocus)
                 return;
+
             if (InputHandler.KeyReleased(Keys.Space) || InputHandler.KeyReleased(Keys.Enter))
+            {
                 base.OnSelected(null);
+                InputHandler.Flush();
+            }
         }
 
         #endregion

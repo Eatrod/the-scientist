@@ -20,6 +20,7 @@ namespace TileGame.GameScreens
 
         PictureBox backgroundImage;
         PictureBox arrowImage;
+        PictureBox helpMenuImage;
         LinkLabel startGame;
         LinkLabel contGame;
         LinkLabel saveGame;
@@ -27,6 +28,10 @@ namespace TileGame.GameScreens
         LinkLabel exitGame;
         LinkLabel writeOver;
         LinkLabel regretSave;
+        LinkLabel startOver;
+        LinkLabel regretStartOver;
+        LinkLabel helpMenu;
+        Label saveText;
         float maxItemWidth = 0f;
 
         object thisLock = new object();
@@ -62,7 +67,7 @@ namespace TileGame.GameScreens
                 GameRef.ScreenRectangle);
             ControlManager.Add(backgroundImage);
             Texture2D arrowTexture = Content.Load<Texture2D>(@"GUI\leftarrowUp");
-
+            
             arrowImage = new PictureBox(
                 arrowTexture,
                 new Rectangle(
@@ -71,6 +76,11 @@ namespace TileGame.GameScreens
                 arrowTexture.Width,
                 arrowTexture.Height));
             ControlManager.Add(arrowImage);
+
+            helpMenuImage = new PictureBox(
+                Content.Load<Texture2D>(@"BackGrounds\Controls"),
+                GameRef.ScreenRectangle);
+            helpMenuImage.Visible = false;
 
             startGame = new LinkLabel();
             startGame.Text = "The story begins";
@@ -81,8 +91,17 @@ namespace TileGame.GameScreens
             contGame = new LinkLabel();
             contGame.Text = "The story continues";
             contGame.Size = contGame.SpriteFont.MeasureString(contGame.Text);
-            contGame.Selected += menuItem_Selected;
-            ControlManager.Add(contGame);
+            if (!GameRef.firstRun)
+            {
+                contGame.Selected += menuItem_Selected;
+                ControlManager.Add(contGame);
+            }
+
+            helpMenu = new LinkLabel();
+            helpMenu.Text = "The story's controls!";
+            helpMenu.Size = helpMenu.SpriteFont.MeasureString(helpMenu.Text);
+            helpMenu.Selected += menuItem_Selected;
+            ControlManager.Add(helpMenu);
 
             saveGame = new LinkLabel();
             saveGame.Text = "The story saves";
@@ -105,16 +124,16 @@ namespace TileGame.GameScreens
             writeOver = new LinkLabel();
             writeOver.Text = "Yes please!";
             writeOver.Size = writeOver.SpriteFont.MeasureString(writeOver.Text);
-            //writeOver.Visible = false;
-            //writeOver.Enabled = false;
-            //ControlManager.AddItem(writeOver);
 
             regretSave = new LinkLabel();
             regretSave.Text = "Nooo!";
             regretSave.Size = regretSave.SpriteFont.MeasureString(regretSave.Text);
-            //regretSave.Visible = false;
-            //regretSave.Enabled = false;
-            //ControlManager.AddItem(regretSave);
+
+            saveText = new Label();
+            saveText.Text = "Write over your last save, Smith?";
+            saveText.Size = saveText.SpriteFont.MeasureString(saveText.Text);
+
+            
 
             ControlManager.NextControl();
             ControlManager.FocusChanged += new EventHandler(ControlManager_FocusChanged);
@@ -138,103 +157,85 @@ namespace TileGame.GameScreens
             {
                 //Remove control not to use
                 ControlManager.RemoveItem(startGame);
-                //startGame.Visible = false;
-                //startGame.Enabled = false;
                 startGame.Selected -= menuItem_Selected;
+
                 ControlManager.RemoveItem(contGame);
-                //contGame.Visible = false;
-                //contGame.Enabled = false;
                 contGame.Selected -= menuItem_Selected;
+
                 ControlManager.RemoveItem(saveGame);
-                //saveGame.Visible = false;
-                //saveGame.Enabled = false;
                 saveGame.Selected -= menuItem_Selected;
+
                 ControlManager.RemoveItem(loadGame);
-                //loadGame.Visible = false;
-                //loadGame.Enabled = false;
                 loadGame.Selected -= menuItem_Selected;
+
                 ControlManager.RemoveItem(exitGame);
-                //exitGame.Visible = false;
-                //exitGame.Enabled = false;
                 exitGame.Selected -= menuItem_Selected;
 
+                ControlManager.RemoveItem(helpMenu);
+                helpMenu.Selected -= menuItem_Selected;
+                
+
                 //Add controls to use
+                ControlManager.AddItem(saveText);
+
                 ControlManager.AddItem(writeOver);
-                //writeOver.Visible = true;
-                //writeOver.Enabled = true;
                 writeOver.Selected += menuItem_Selected;
+
                 ControlManager.AddItem(regretSave);
-                //regretSave.Visible = true;
-                //regretSave.Enabled = true;
                 regretSave.Selected += menuItem_Selected;
             }
 
-            //ControlManager.selectedControl = 0;
-            //ControlManager.NextControl();
-            //Vector2 position = new Vector2(350, 500);
-            //foreach (Control c in ControlManager)
-            //{
-            //    if (c is LinkLabel && c.Enabled)
-            //    {
-            //        if (c.Size.X > maxItemWidth)
-            //            maxItemWidth = c.Size.X;
-            //        c.Position = position;
-            //        position.Y += c.Size.Y + 5f;
-            //    }
-            //}
+        }
 
-            //ControlManager_FocusChanged(writeOver, null);
+        void SwitchToHelpMenuScreen()
+        {
+            ControlManager.RemoveItem(startGame);
+            startGame.Selected -= menuItem_Selected;
+
+            ControlManager.RemoveItem(contGame);
+            contGame.Selected -= menuItem_Selected;
+
+            ControlManager.RemoveItem(saveGame);
+            saveGame.Selected -= menuItem_Selected;
+
+            ControlManager.RemoveItem(loadGame);
+            loadGame.Selected -= menuItem_Selected;
+
+            ControlManager.RemoveItem(exitGame);
+            exitGame.Selected -= menuItem_Selected;
+
+            ControlManager.RemoveItem(helpMenu);
+            helpMenu.Selected -= menuItem_Selected;
         }
 
         void SwitchBackToOriginalMenu()
         {
             //Remove not used item
             ControlManager.RemoveItem(writeOver);
-            //writeOver.Visible = false;
-            //writeOver.Enabled = false;
             writeOver.Selected -= menuItem_Selected;
 
             ControlManager.RemoveItem(regretSave);
-            //regretSave.Visible = false;
-            //regretSave.Enabled = false;
             regretSave.Selected -= menuItem_Selected;
+
+            ControlManager.RemoveItem(saveText);
 
             //Add original items
             ControlManager.AddItem(startGame);
-            //startGame.Visible = true;
-            //startGame.Enabled = true;
-            loadGame.Selected += menuItem_Selected;
-            ControlManager.AddItem(contGame);
-            //contGame.Visible = true;
-            //contGame.Enabled = true;
-            contGame.Selected += menuItem_Selected;
+            startGame.Selected += menuItem_Selected;
+            if (!GameRef.firstRun)
+            {
+                ControlManager.AddItem(contGame);
+                contGame.Selected += menuItem_Selected;
+            }
+            ControlManager.AddItem(helpMenu);
+            helpMenu.Selected += menuItem_Selected;
             ControlManager.AddItem(saveGame);
-            //saveGame.Visible = true;
-            //saveGame.Enabled = true;
             saveGame.Selected += menuItem_Selected;
             ControlManager.AddItem(loadGame);
-            //loadGame.Visible = true;
-            //loadGame.Enabled = true;
             loadGame.Selected += menuItem_Selected;
             ControlManager.AddItem(exitGame);
-            //exitGame.Visible = true;
-            //exitGame.Enabled = true;
             exitGame.Selected += menuItem_Selected;
 
-            //ControlManager.selectedControl = 0;
-            //ControlManager.NextControl();
-            //Vector2 position = new Vector2(350, 500);
-            //foreach (Control c in ControlManager)
-            //{
-            //    if (c is LinkLabel && c.Enabled)
-            //    {
-            //        if (c.Size.X > maxItemWidth)
-            //            maxItemWidth = c.Size.X;
-            //        c.Position = position;
-            //        position.Y += c.Size.Y + 5f;
-            //    }
-            //}
-            //ControlManager_FocusChanged(startGame, null);
         }
 
         void ControlManager_FocusChanged(object sender, EventArgs e)
@@ -245,7 +246,7 @@ namespace TileGame.GameScreens
             arrowImage.SetPosition(position);
         }
         private void menuItem_Selected(object sender, EventArgs e)
-        {
+         {
             if (sender == startGame)
             {
                 StartGame();
@@ -277,6 +278,12 @@ namespace TileGame.GameScreens
             {
                 SwitchBackToOriginalMenu();
             }
+            if(sender == helpMenu)
+            {
+                SwitchToHelpMenuScreen();
+                helpMenuImage.Visible = true;
+                ControlManager.AddItem(helpMenuImage);
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -284,6 +291,17 @@ namespace TileGame.GameScreens
             lock (thisLock)
             {
                 ControlManager.Update(gameTime, 0);
+            }
+            if (helpMenuImage.Visible)
+            {
+                //InputHandler.Flush();
+                if (InputHandler.KeyReleased(Keys.Space) || InputHandler.KeyReleased(Keys.Enter))
+                {
+                    InputHandler.Flush();
+                    helpMenuImage.Visible = false;
+                    ControlManager.RemoveItem(helpMenuImage);
+                    SwitchBackToOriginalMenu();
+                }
             }
             calculateControlPosition();
             base.Update(gameTime);
@@ -305,8 +323,7 @@ namespace TileGame.GameScreens
         {
             Point startCell;
             GameRef.storyProgress = new StoryProgress();
-            GameRef.PotatoTown = new PotatoTown(GameRef, GameRef.stateManager, "Screen1");
-
+            //GameRef.PotatoTown = new PotatoTown(GameRef, GameRef.stateManager, "Screen1");
             StateManager.ChangeState(GameRef.PotatoTown);
             
             startCell = GameRef.BaseGamePlayScreen.FindCellWithIndexInCurrentTilemap(
@@ -345,10 +362,10 @@ namespace TileGame.GameScreens
 
         public void calculateControlPosition()
         {
-            Vector2 position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 200 , GraphicsDevice.Viewport.Height / 2 + 200);
+            Vector2 position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 200 , GraphicsDevice.Viewport.Height / 3 * 2);
             foreach (Control c in ControlManager)
             {
-                if (c is LinkLabel && c.Enabled)
+                if (c is LinkLabel || c is Label)
                 {
                     if (c.Size.X > maxItemWidth)
                         maxItemWidth = c.Size.X;
