@@ -102,7 +102,10 @@ namespace TileGame.GameScreens
             base.Update(gameTime);
 
             if (StoryProgress.ProgressLine["asterixTalkedTo"])
+            {
                 messageDict[2].Unlocked = true;
+                messageDict[1].Unlocked = false;
+            }
             if (StoryProgress.ProgressLine["belladonnaHave"])
                 messageDict[3].Unlocked = true;
             if (StoryProgress.ProgressLine["contestAgainstJohnFinished"])
@@ -148,6 +151,7 @@ namespace TileGame.GameScreens
                     }
                 }
             }
+
             if (InputHandler.KeyReleased(Keys.N))
                 StateManager.PopState();
             if(InputHandler.KeyReleased(Keys.Left))
