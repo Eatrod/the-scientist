@@ -32,6 +32,7 @@ namespace XtheSmithLibrary.Controls
         public List<SpriteFont> fonts;
         private Texture2D dialogArrow;
 
+        Vector2 arrowVector;
         Vector2 handlerVector;
         Rectangle arrowRect;
 
@@ -56,7 +57,8 @@ namespace XtheSmithLibrary.Controls
             this.fonts = fonts;
             this.dialogArrow = dialogArrow;
             handlerVector = new Vector2(rectangle.X + 70, rectangle.Y + 100);
-            arrowRect = new Rectangle((int)handlerVector.X - 20, (int)handlerVector.Y + 5, 22, 19);
+            arrowRect = new Rectangle((int)handlerVector.X-20, (int)handlerVector.Y, 22, 19);
+            arrowVector.Y = handlerVector.Y+5;
         }
 
         #endregion
@@ -76,17 +78,18 @@ namespace XtheSmithLibrary.Controls
                 currentHandler--;
                 if (currentHandler < 0)
                     currentHandler = conversation.Handlers.Count - 1;
-                arrowRect.Y = (int)handlerVector.Y * currentHandler+1;
+                arrowRect.Y = (int)arrowVector.Y + currentHandler*20;
             }
 
             if (newState.IsKeyDown(Keys.Down) && lastState.IsKeyUp(Keys.Down))
             {
                 currentHandler = (currentHandler + 1) % conversation.Handlers.Count;
-                arrowRect.Y = (int)handlerVector.Y * currentHandler+1;
+                arrowRect.Y = (int)arrowVector.Y + currentHandler*20;
             }
 
             if (newState.IsKeyDown(Keys.Space) && lastState.IsKeyUp(Keys.Space))
             {
+                arrowRect.Y = (int)arrowVector.Y;
                 conversation.Handlers[currentHandler].Invoke(npc,player, story);
                 this.Text = npc.text.Text;
                 this.conversation = npc.text;
