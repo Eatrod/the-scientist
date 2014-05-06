@@ -3025,6 +3025,72 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sprite\PotatoWarsMenu.png">
+      <Name>PotatoWarsMenu</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackGrounds\PotatoWarsYellow.png">
+      <Name>PotatoWarsYellow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackGrounds\PotatoWarsSplashScreen_1.png">
+      <Name>PotatoWarsSplashScreen_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="BackGrounds\PotatoWarsSplashScreen_2.png">
+      <Name>PotatoWarsSplashScreen_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="BackGrounds\PotatoWarsSplashScreen_3.png">
+      <Name>PotatoWarsSplashScreen_3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="BackGrounds\PotatoWarsSplashScreen_4.png">
+      <Name>PotatoWarsSplashScreen_4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="BackGrounds\PotatoWarsSplashScreen_5.png">
+      <Name>PotatoWarsSplashScreen_5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="BackGrounds\PotatoWarsSplashScreen_6.png">
+      <Name>PotatoWarsSplashScreen_6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="BackGrounds\PotatoWarsSplashScreen_7.png">
+      <Name>PotatoWarsSplashScreen_7</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="BackGrounds\PotatoWarsSplashScreen_8.png">
+      <Name>PotatoWarsSplashScreen_8</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Sprite\arrow ability 4.png">
       <Name>arrow ability 4</Name>
       <Importer>TextureImporter</Importer>

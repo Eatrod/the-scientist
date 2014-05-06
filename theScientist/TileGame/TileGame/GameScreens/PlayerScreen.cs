@@ -708,34 +708,7 @@ namespace TileGame.GameScreens
             base.Update(gameTime);
         }
 
-        private static void UpdateBowAttackAnimaition()
-        {
-            if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "Down" || player.CurrentAnimationName == "IdleUp" || player.CurrentAnimationName == "IdleDown")
-            {
-
-                if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "IdleUp")
-                {
-                    player.CurrentAnimationName = "BowUp";
-                }
-                else
-                {
-                    player.CurrentAnimationName = "BowDown";
-                }
-
-            }
-            else
-            {
-                if (player.CurrentAnimationName == "Left" || player.CurrentAnimationName == "IdleLeft")
-                {
-                    player.CurrentAnimationName = "BowLeft";
-
-                }
-                else
-                {
-                    player.CurrentAnimationName = "BowRight";
-                }
-            }
-        }
+        
 
         private void NormalarrowFired(ContentManager Content, Vector2 motion)
         {
@@ -1432,6 +1405,36 @@ namespace TileGame.GameScreens
         #endregion
 
         #region Sprite Animation Code
+
+        private static void UpdateBowAttackAnimaition()
+        {
+            if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "Down" || player.CurrentAnimationName == "IdleUp" || player.CurrentAnimationName == "IdleDown")
+            {
+
+                if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "IdleUp")
+                {
+                    player.CurrentAnimationName = "BowUp";
+                }
+                else
+                {
+                    player.CurrentAnimationName = "BowDown";
+                }
+
+            }
+            else
+            {
+                if (player.CurrentAnimationName == "Left" || player.CurrentAnimationName == "IdleLeft")
+                {
+                    player.CurrentAnimationName = "BowLeft";
+
+                }
+                else
+                {
+                    player.CurrentAnimationName = "BowRight";
+                }
+            }
+        }
+
         private void UpdateSpriteIdleAnimation(AnimatedSprite sprite)
         {
             if (sprite.CurrentAnimationName == "Up")
@@ -1478,8 +1481,7 @@ namespace TileGame.GameScreens
                 //motion = new Vector2(-1f, 0f);
             }
         }
-
-        
+       
         #endregion
 
         

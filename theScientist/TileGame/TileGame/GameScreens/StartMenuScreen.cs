@@ -58,7 +58,7 @@ namespace TileGame.GameScreens
             ContentManager Content = Game.Content; 
             
             backgroundImage = new PictureBox(
-                Content.Load<Texture2D>(@"Backgrounds\titlescreen"),
+                Content.Load<Texture2D>(@"BackGrounds\PotatoWarsYellow"),
                 GameRef.ScreenRectangle);
             ControlManager.Add(backgroundImage);
             Texture2D arrowTexture = Content.Load<Texture2D>(@"GUI\leftarrowUp");
@@ -118,7 +118,7 @@ namespace TileGame.GameScreens
 
             ControlManager.NextControl();
             ControlManager.FocusChanged += new EventHandler(ControlManager_FocusChanged);
-            Vector2 position = new Vector2(350, 500);
+            Vector2 position = new Vector2(GraphicsDevice.Viewport.Width / 2 , GraphicsDevice.Viewport.Height / 2 );
             foreach (Control c in ControlManager)
             {
                 if (c is LinkLabel && c.Enabled)
@@ -344,7 +344,7 @@ namespace TileGame.GameScreens
 
         public void calculateControlPosition()
         {
-            Vector2 position = new Vector2(350, 500);
+            Vector2 position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 200 , GraphicsDevice.Viewport.Height / 2 + 200);
             foreach (Control c in ControlManager)
             {
                 if (c is LinkLabel && c.Enabled)
