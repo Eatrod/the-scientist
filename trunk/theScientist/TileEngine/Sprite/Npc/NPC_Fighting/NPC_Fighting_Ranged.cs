@@ -112,6 +112,12 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                     elapsedThrowBomb = 0.0f;
                 }
             }
+            if (!Aggro && Collided)
+            {
+                Direction += 180;
+                Direction = Direction % 360;
+                Collided = false;
+            }
             if(animationTime)
             {
                 elapsedAnimationTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;

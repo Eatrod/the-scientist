@@ -223,7 +223,7 @@ namespace TileGame.GameScreens
                 NPC_Bandit.AggroCircle = 600; //Hur långt han följer
                 NPC_Bandit.AggroRange = 300; //Hur långt ifrån du blir upptäckt
                 NPC_Bandit.PatrollingCircle = 100;
-                NPC_Bandit.StrikeForce = 5;
+                NPC_Bandit.StrikeForce = 2;
                 NPC_Bandit.AggroSpeed = 1.8f;
                 AnimatedSpriteObject.Add(NPC_Bandit);
                 NPCPatrollingGuards.Add(NPC_Bandit);
@@ -467,6 +467,12 @@ namespace TileGame.GameScreens
                         BombSprites.Add(bomb);
                         renderList.Add(bomb);
                         npc.BombThrow = false;
+                    }
+                    if (npc.Motion != Vector2.Zero && !npc.GoingHome)
+                    {
+                        npc.Motion.Normalize();
+                        npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
+
                     }
                 }
                 else if(!npc.DirtPileCreated)
