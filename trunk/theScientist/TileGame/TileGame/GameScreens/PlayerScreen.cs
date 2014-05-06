@@ -296,7 +296,7 @@ namespace TileGame.GameScreens
                 axe_ability_textures[i] = Content.Load<Texture2D>(@"Sprite\axe ability " + (i + 1).ToString());
             }
 
-            crossbow_ability_textures = new Texture2D[3];
+            crossbow_ability_textures = new Texture2D[4];
             for (int i = 0; i < crossbow_ability_textures.Count(); i++)
             {
                 crossbow_ability_textures[i] = Content.Load<Texture2D>(@"Sprite\arrow ability " + (i+1).ToString());
@@ -494,61 +494,60 @@ namespace TileGame.GameScreens
                         player.shotFired = true;
                         player.normalArrow = true;
                         UpdateBowAttackAnimaition();                                     
-            }
+                    }
 
                     if (InputHandler.KeyReleased(Keys.W) && (player.Stamina - 50 > 0) && !player.shotFired)
-            {
+                    {
                         player.oldAnimation = player.CurrentAnimationName;
                         player.shotFired = true;
                         player.fireArrow = true;
                         UpdateBowAttackAnimaition();                                                               
-            }
+                    }
 
                     if (InputHandler.KeyReleased(Keys.E) && (player.Stamina - 40 > 0) && !player.shotFired)
-            {
+                    {
                         player.oldAnimation = player.CurrentAnimationName;
                         player.shotFired = true;
                         player.multishotArrow = true;
                         UpdateBowAttackAnimaition();        
                     }
                     
-            if (InputHandler.KeyDown(Keys.R))
-            {
-                player.Charge += 0.5f;
+                    if (InputHandler.KeyDown(Keys.R))
+                    {
+                        player.Charge += 0.5f;
                         if (player.Charge >= 100)
                         {
-                    player.Charge = 100;           
+                        player.Charge = 100;           
                             if (Charge_Bar_Color == Color.Blue)
                                 Charge_Bar_Color = Color.White;
                             else
                                 Charge_Bar_Color = Color.Crimson;
-            }
+                        }
                     }
 
-            if (InputHandler.KeyReleased(Keys.R))
-            {
+                    if (InputHandler.KeyReleased(Keys.R))
+                    {
                         if (player.Charge == 100 && (player.Stamina - 30) > 0 && !player.shotFired)
-                {
-
+                        {
                             player.oldAnimation = player.CurrentAnimationName;
                             player.shotFired = true;
-                            player.fireArrow = true;
+                            //player.fireArrow = true;
+                            player.multishotFireArrow = true;
                             UpdateBowAttackAnimaition();
-
-                }
+                        }
 
                         else if ((player.Stamina - 20) > 0 && !player.shotFired)
-                {
+                        {
                             player.oldAnimation = player.CurrentAnimationName;
                             player.shotFired = true;
                             player.normalArrow = true;
                             UpdateBowAttackAnimaition();                           
-                }
+                        }
 
-                else
-                {
-                    player.Stamina = 10;
-                }
+                        else
+                        {
+                            player.Stamina = 10;
+                        }
                         player.Charge = 0;
                         Charge_Bar_Color = Color.White;
                     }
@@ -635,6 +634,17 @@ namespace TileGame.GameScreens
                     player.elapsedShot = 0.0f;
                     player.shotFired = false;
                     player.multishotArrow = false;
+                    player.CurrentAnimationName = player.oldAnimation;
+                    player.Speed = 2;
+                }
+
+                if (player.elapsedShot > player.delayShot && player.multishotFireArrow)
+                {
+                    MultiFireArrowFired(Content, motion);
+                    player.CurrentAnimation.CurrentFrame = 0;
+                    player.elapsedShot = 0.0f;
+                    player.shotFired = false;
+                    player.multishotFireArrow = false;
                     player.CurrentAnimationName = player.oldAnimation;
                     player.Speed = 2;
                 }
@@ -930,7 +940,136 @@ namespace TileGame.GameScreens
             
             }
         }
-      
+
+        private void MultiFireArrowFired(ContentManager Content, Vector2 motion)
+        {
+            if (motion == Vector2.Zero)
+            {
+                if (player.CurrentAnimationName == "BowUp")
+                {
+                    motion = new Vector2(0, -2);
+                }
+                if (player.CurrentAnimationName == "BowDown")
+                {
+                    motion = new Vector2(0, 2);
+                }
+                if (player.CurrentAnimationName == "BowLeft")
+                {
+                    motion = new Vector2(-2, 0);
+                }
+                if (player.CurrentAnimationName == "BowRight")
+                {
+                    motion = new Vector2(2, 0);
+                }
+
+                FlamingArrowProjectile temparrow = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FireArrow"), 10f, 0.1f, 6f, player.Position);
+                FlamingArrowProjectile temparrow1 = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FireArrow"), 10f, 0.1f, 6f, player.Position);
+                FlamingArrowProjectile temparrow2 = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FireArrow"), 10f, 0.1f, 6f, player.Position);
+                if (player.CurrentAnimationName == "BowUp" || player.CurrentAnimationName == "BowDown")
+                {
+                    temparrow1.Position.X += 10;
+                    temparrow2.Position.X -= 10;
+
+                    if (player.CurrentAnimationName == "BowUp")
+                    {
+                        temparrow1.Position.Y += 5;
+                        temparrow2.Position.Y += 5;
+                    }
+                    else
+                    {
+                        temparrow1.Position.Y -= 5;
+                        temparrow2.Position.Y -= 5;
+                    }
+
+                }
+                else
+                {
+
+
+                    if (player.CurrentAnimationName == "BowLeft")
+                    {
+                        temparrow.Position.Y += 30;
+                        temparrow1.Position.Y += 20;
+                        temparrow2.Position.Y += 40;
+                        temparrow.Position.X -= 10;
+                        temparrow1.Position.X -= 5;
+                        temparrow2.Position.X -= 5;
+                    }
+                    else
+                    {
+                        temparrow.Position.Y += 30;
+                        temparrow1.Position.Y += 20;
+                        temparrow2.Position.Y += 40;
+                        temparrow.Position.X += 60;
+                        temparrow1.Position.X += 55;
+                        temparrow2.Position.X += 55;
+                    }
+                }
+                temparrow.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow);
+                temparrow1.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow1);
+                temparrow2.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow2);
+                player.Stamina -= 40f;
+                motion = Vector2.Zero;
+            }
+
+            else
+            {
+                FlamingArrowProjectile temparrow = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FireArrow"), 10f, 0.1f, 6f, player.Position);
+                FlamingArrowProjectile temparrow1 = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FireArrow"), 10f, 0.1f, 6f, player.Position);
+                FlamingArrowProjectile temparrow2 = new FlamingArrowProjectile(Content.Load<Texture2D>("Sprite/FireArrow"), 10f, 0.1f, 6f, player.Position);
+                if (player.CurrentAnimationName == "BowUp" || player.CurrentAnimationName == "BowDown")
+                {
+                    temparrow1.Position.X += 10;
+                    temparrow2.Position.X -= 10;
+
+                    if (player.CurrentAnimationName == "BowUp")
+                    {
+                        temparrow1.Position.Y += 5;
+                        temparrow2.Position.Y += 5;
+                    }
+                    else
+                    {
+                        temparrow1.Position.Y -= 5;
+                        temparrow2.Position.Y -= 5;
+                    }
+
+                }
+                else
+                {
+
+
+                    if (player.CurrentAnimationName == "BowLeft")
+                    {
+                        temparrow.Position.Y += 30;
+                        temparrow1.Position.Y += 20;
+                        temparrow2.Position.Y += 40;
+                        temparrow.Position.X -= 10;
+                        temparrow1.Position.X -= 5;
+                        temparrow2.Position.X -= 5;
+                    }
+                    else
+                    {
+                        temparrow.Position.Y += 30;
+                        temparrow1.Position.Y += 20;
+                        temparrow2.Position.Y += 40;
+                        temparrow.Position.X += 60;
+                        temparrow1.Position.X += 55;
+                        temparrow2.Position.X += 55;
+                    }
+                }
+                temparrow.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow);
+                temparrow1.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow1);
+                temparrow2.UpdatecurrentAnimation(motion);
+                playerprojectiles.Add(temparrow2);
+                player.Stamina -= 40f;
+            }
+        }
+
         private void UpdateHealthBarAnimation()
         {
             life = player.Life;
@@ -1086,7 +1225,7 @@ namespace TileGame.GameScreens
             //tileMap.Draw(spriteBatch, camera); 
 
             //--
-            HUD_size_ref = GameRef.ScreenRectangle.Width / 20;
+            HUD_size_ref = GameRef.ScreenRectangle.Width / 25;// /20
             //--
 
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
