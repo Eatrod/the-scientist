@@ -8,7 +8,7 @@ namespace TileEngine.Sprite
     {
         public Dictionary<string, FrameAnimation> Animations =
             new Dictionary<string, FrameAnimation>();
-
+        private Vector2 attackersDirection;
         private bool aggro;
         private Vector2 aggroStartingPosition;
         private bool hitByArrow;
@@ -29,6 +29,15 @@ namespace TileEngine.Sprite
         protected float charge = 0;
 
         double oldTime = 0;  //taking damage see kommentar.
+        public Vector2 AttackersDirection
+        {
+            get
+            {
+                attackersDirection.Normalize();
+                return attackersDirection;
+            }
+            set { attackersDirection = value; }
+        }
         public Vector2 ArrowDirection
         {
             get 

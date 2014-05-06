@@ -36,6 +36,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         private int direction;
         private float strikeForce;
         private bool strikeMode;
+        private bool timeToStrike;
         private float delayStrike;
         private float delayStruck;
         private float elapsedStruck;
@@ -43,6 +44,11 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
         private Vector2 playerPosition;
         private Vector2 oldPosition;
+        public bool TimeToStrike
+        {
+            get { return timeToStrike; }
+            set { timeToStrike = value; }
+        }
         public Random Random
         {
             get { return random; }
@@ -215,6 +221,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
             vectorTowardsTarget = player.Origin - this.Origin;
             vectorTowardsStart = startingPosition - Position;
+            
             if (HitByArrow)
             {
                 ElapsedHitByArrow += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -228,31 +235,39 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             if (MeleeHit)
             {
                 ElapsedHitByMelee += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                //Vector2 HitVector = this.Origin - player.Origin;
-                //HitVector.Normalize();
-                //player.Position -= HitVector;
-                player.SettingSpriteBlink(gameTime);
+                
+                
                 if (ElapsedHitByMelee > DelayHitByMelee)
                 {
+                    //Vector2 HitVector = this.Origin - player.Origin;
+                    //HitVector.Normalize();
+                    //player.Position -= HitVector;
+                    this.Animations["AttackLeft"].CurrentFrame = 0;
+                    this.Animations["AttackRight"].CurrentFrame = 0;
+                    this.Animations["AttackDown"].CurrentFrame = 0;
+                    this.Animations["AttackUp"].CurrentFrame = 0;
+                    player.Life -= StrikeForce;
                     MeleeHit = false;
                     ElapsedHitByMelee = 0.0f;
                 }
             }
             if (Vector2.Distance(this.Position, player.Position) < 50)
-            {
-                ElapsedStrike += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            {       
                 strikeMode = true;
+                ElapsedStrike += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 //UpdateSpriteAnimation(player.Position - this.Position);
                 if (ElapsedStrike > DelayStrike)
                 {
-                    this.MeleeHit = true;
-                    player.Life -= StrikeForce;
+                    
+                    this.TimeToStrike = true;
+                    this.MeleeHit = true;                
                     ElapsedStrike = 0.0f;
                 }
 
             }
             else
             {
+                this.ElapsedStrike = 0.0f;
                 strikeMode = false;
             }
             if (Vector2.Distance(Position, AggroStartingPosition) > AggroCircle && AggroStartingPosition != Vector2.Zero && !StrikeMode)

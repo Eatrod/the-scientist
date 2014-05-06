@@ -109,6 +109,7 @@ namespace TileGame.Collision
                         sprite.Life -= playerprojectiles[Projectile].damageofprojectile;
                         //sprite.ArrowDirection = playerprojectiles[Projectile].Origin - sprite.Origin;
                         sprite.HitByArrowMethod(playerprojectiles[Projectile]);
+                        sprite.AttackersDirection = player.Position - sprite.Position;
                         playerprojectiles.RemoveAt(Projectile);
                         //sprite.AggroStartingPosition = sprite.Position;
                         //sprite.HitByArrow = true;                       
