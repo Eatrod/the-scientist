@@ -122,6 +122,7 @@ namespace TileGame.GameScreens
                     leftPageIndex = 0;
                 if (messageDict.ContainsKey(leftPageIndex))
                 {
+                    leftText.Color = GetTextColor(leftText.Text.Split(':')[0]);
                     leftText.Text = messageDict[leftPageIndex].Text;
                     if (pageIndex == 0)
                         leftPagenumberText.Text = "1";
@@ -137,6 +138,7 @@ namespace TileGame.GameScreens
                     rightPageIndex = 0;
                 if (messageDict.ContainsKey(rightPageIndex))
                 {
+                    rightText.Color = GetTextColor(rightText.Text.Split(':')[0]);
                     rightText.Text = messageDict[rightPageIndex].Text;
                     if (pageIndex == 0)
                         rightPagenumberText.Text = "2";
@@ -204,6 +206,20 @@ namespace TileGame.GameScreens
                     ListOfUnlockedKeys.Add(pair.Key);
             }
             ListOfUnlockedKeys.Sort();
+        }
+
+        private Color GetTextColor(string text)
+        {
+            if (text == "Hint")
+                return Color.ForestGreen;
+            else if (text == "Completed")
+                return Color.IndianRed;
+            else if (text == "Task")
+                return Color.DarkBlue;
+            else
+            {
+                return Color.DarkBlue;
+            }
         }
 
         public class WordWrapper 
