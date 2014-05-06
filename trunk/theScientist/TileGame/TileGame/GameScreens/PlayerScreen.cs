@@ -290,7 +290,7 @@ namespace TileGame.GameScreens
             crossbowImage = Content.Load<Texture2D>(@"Sprite\Bow");
             activeItem_textures = new Texture2D[5];
 
-            axe_ability_textures = new Texture2D[1];
+            axe_ability_textures = new Texture2D[2];
             for (int i = 0; i < axe_ability_textures.Count(); i++)
             {
                 axe_ability_textures[i] = Content.Load<Texture2D>(@"Sprite\axe ability " + (i + 1).ToString());
@@ -517,11 +517,8 @@ namespace TileGame.GameScreens
                         player.Charge += 0.5f;
                         if (player.Charge >= 100)
                         {
-                        player.Charge = 100;           
-                            if (Charge_Bar_Color == Color.Blue)
-                                Charge_Bar_Color = Color.White;
-                            else
-                                Charge_Bar_Color = Color.Crimson;
+                            player.Charge = 100;           
+                            Charge_Bar_Color = Color.Crimson;
                         }
                     }
 

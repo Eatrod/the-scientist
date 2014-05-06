@@ -369,10 +369,10 @@ namespace TileGame.GameScreens
             
             SpriteObject.Add(new BelladonnaSprite(Content.Load<Texture2D>("Sprite/Belladonna"),
                 new Vector2(7, 33)));
-            SpriteObject.Add(new ImmortuiSprite(Content.Load<Texture2D>("Sprite/Immortui"),
-                new Vector2(87, 45))); //just testing the immortui mushroom
-            SpriteObject.Add(new ImmortuiSprite(Content.Load<Texture2D>("Sprite/Immortui big"),
-                new Vector2(85, 45))); //just testing the big immortui mushroom
+            //SpriteObject.Add(new ImmortuiSprite(Content.Load<Texture2D>("Sprite/Immortui"),
+            //    new Vector2(87, 45))); //just testing the immortui mushroom
+            //SpriteObject.Add(new ImmortuiSprite(Content.Load<Texture2D>("Sprite/Immortui big"),
+            //    new Vector2(85, 45))); //just testing the big immortui mushroom
 
             //SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/multi_iron_ore"),
             //    new Vector2(92, 43)));
