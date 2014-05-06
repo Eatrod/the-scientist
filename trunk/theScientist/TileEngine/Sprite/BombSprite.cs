@@ -19,6 +19,8 @@ namespace TileEngine.Sprite
         private Vector2 goalTargetVector;
         private bool boom;
         private float speedOfBomb;
+        private float elapsedFly;
+        private float delayFly;
         private float maxSpeedOfBomb;
         public float Damage
         {
@@ -33,10 +35,12 @@ namespace TileEngine.Sprite
         
         public BombSprite(Texture2D texture, Vector2 goalTarget, Vector2 Position): base(texture)
         {
-            this.maxSpeedOfBomb = 3.0f;
+            this.maxSpeedOfBomb = 5.0f;
             this.speedOfBomb = 0.0f;
             this.goalTarget = goalTarget;
             this.Position = Position;
+            this.elapsedFly = 0.0f;
+            this.delayFly = 2500f;
             this.boom = false;
             this.goalTargetVector = goalTarget - this.Position;
             this.goalTargetVector.Normalize();
@@ -46,10 +50,11 @@ namespace TileEngine.Sprite
         {
             if(this.speedOfBomb < maxSpeedOfBomb)
             {
-                this.speedOfBomb += 0.3f;
+                this.speedOfBomb += 0.1f;
             }
-            this.Position += goalTargetVector * this.speedOfBomb;
-            if(Vector2.Distance(this.Position,this.goalTarget) < 5)
+            this.Position += goalTargetVector * this.maxSpeedOfBomb;
+            elapsedFly +=(float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            if(elapsedFly > delayFly)
             {
                 boom = true;
             }

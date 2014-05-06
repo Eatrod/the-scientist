@@ -163,19 +163,19 @@ namespace TileGame.GameScreens
             tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/testCollision.layer");
 
             //En Sprite i världen som återskapas vid entry.
-            NPC1 = new AnimatedSprite(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"));           
-            NPC1.Origionoffset = new Vector2(25,65);
-            NPC1.SetSpritePositionInGameWorld(new Vector2(9,9));
-            NPC1.Life = 30;
-            NPC1.FullHp = 30;
-            AnimatedSpriteObject.Add(NPC1);
+            //NPC1 = new AnimatedSprite(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"));           
+            //NPC1.Origionoffset = new Vector2(25,65);
+            //NPC1.SetSpritePositionInGameWorld(new Vector2(9,9));
+            //NPC1.Life = 30;
+            //NPC1.FullHp = 30;
+            //AnimatedSpriteObject.Add(NPC1);
 
-            NPC2 = new AnimatedSprite(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"));
-            NPC2.Origionoffset = new Vector2(25, 65);
-            NPC2.SetSpritePositionInGameWorld(new Vector2(12, 12));
-            NPC2.Life = 5;
-            NPC2.FullHp = 5;
-            AnimatedSpriteObject.Add(NPC2);
+            //NPC2 = new AnimatedSprite(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"));
+            //NPC2.Origionoffset = new Vector2(25, 65);
+            //NPC2.SetSpritePositionInGameWorld(new Vector2(12, 12));
+            //NPC2.Life = 5;
+            //NPC2.FullHp = 5;
+            //AnimatedSpriteObject.Add(NPC2);
 
             for (int i = 0; i < 2; i++ )
             {
@@ -188,7 +188,7 @@ namespace TileGame.GameScreens
                 NPCRangedGuards.Add(NPC_Ranged);
             }
 
-            for (int i = 0; i < 3; i++ )
+            for (int i = 0; i < 0; i++ )
             {
                 NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/Bjorn_Try_Golden_Soldier_Strike"), null, GameRef.random);
                 NPC_Patroller.Origionoffset = new Vector2(25, 65);
@@ -200,11 +200,11 @@ namespace TileGame.GameScreens
             }
             for (int i = 0; i < 8; i++)
             {
-                NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/Bjorn_Try_Farmer"), null, GameRef.random);
+                NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/Bjorn_Try_Farmer"), null, GameRef.random, new Vector2((5+i) * 32, 22 * 32));
                 NPC_Farmer.Origionoffset = new Vector2(25, 65);
                 NPC_Farmer.SetSpritePositionInGameWorld(new Vector2(5 + i, 22));
-                NPC_Farmer.Life = 100;
-                NPC_Farmer.FullHp = 100;
+                NPC_Farmer.Life = 10;
+                NPC_Farmer.FullHp = 10;
                 AnimatedSpriteObject.Add(NPC_Farmer);
                 NPCFightingFarmers.Add(NPC_Farmer);
 
@@ -223,7 +223,7 @@ namespace TileGame.GameScreens
                 NPC_Bandit.AggroCircle = 600; //Hur långt han följer
                 NPC_Bandit.AggroRange = 300; //Hur långt ifrån du blir upptäckt
                 NPC_Bandit.PatrollingCircle = 100;
-                NPC_Bandit.StrikeForce = 10;
+                NPC_Bandit.StrikeForce = 5;
                 NPC_Bandit.AggroSpeed = 1.8f;
                 AnimatedSpriteObject.Add(NPC_Bandit);
                 NPCPatrollingGuards.Add(NPC_Bandit);
@@ -436,7 +436,7 @@ namespace TileGame.GameScreens
             foreach(BombSprite bomb in BombSprites)
             {
                 bomb.UpdateBomb(gameTime);
-                if(bomb.Bounds.Intersects(player.Bounds))
+                if(bomb.Bounds.Intersects(new Rectangle(player.Bounds.X + 10,player.Bounds.Y + 10,30,50)))
                 {
                     player.Life -= bomb.Damage;
                     bomb.Boom = true;
@@ -461,7 +461,8 @@ namespace TileGame.GameScreens
                     npc.UpdateRangedFighter(gameTime, player);
                     if (npc.BombThrow)
                     {
-                        BombSprite bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"), player.Position, npc.Position);
+                        BombSprite bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
+                            new Vector2(player.Origin.X, player.Origin.Y - 40), npc.Position);
                         bomb.Position = npc.Position;
                         BombSprites.Add(bomb);
                         renderList.Add(bomb);
@@ -484,12 +485,12 @@ namespace TileGame.GameScreens
                 if (!npc.Dead)
                 {
                     npc.SetVectorTowardsTargetAndStartAndCheckAggroMelee(gameTime, player);
-                    //if (npc.Motion != Vector2.Zero)
-                    //{
-                    //    npc.Motion.Normalize();
-                    //    npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
+                    if (npc.Motion != Vector2.Zero && !npc.GoingHome)
+                    {
+                        npc.Motion.Normalize();
+                        npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
 
-                    //}
+                    }
                 if (npc.Aggro)
                     npc.PlayerPosition = player.Origin;
             }

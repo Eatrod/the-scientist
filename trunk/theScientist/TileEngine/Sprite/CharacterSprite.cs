@@ -14,7 +14,7 @@ namespace TileEngine.Sprite
         private bool hitFlag;
         private float hitDelay;
         private float elapsedHit;
-        private Vector2 attackersDirection;
+        
         public bool HitFlag
         {
             get { return hitFlag; }
@@ -30,28 +30,20 @@ namespace TileEngine.Sprite
             get { return elapsedHit; }
             set { elapsedHit = value; }
         }
-        public Vector2 AttackersDirection
-        {
-            get
-            {
-                attackersDirection.Normalize();
-                return attackersDirection;
-            }
-            set { attackersDirection = value; }
-        }
+        
 
         public CharacterSprite(Texture2D texture) : base(texture)
         {
             this.hitFlag = false;
             this.hitDelay = 1000f;
             this.elapsedHit = 0.0f;
-            this.attackersDirection = Vector2.Zero;
+            this.AttackersDirection = Vector2.Zero;
         }
         public void MovementAfterBeingHit(GameTime gameTime)
         {
-            attackersDirection.Normalize();      
+            AttackersDirection.Normalize();      
             elapsedHit += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            Position -= attackersDirection * 1.0f;
+            Position -= AttackersDirection * 1.0f;
             if(elapsedHit > hitDelay)
             {
                 hitFlag = false;

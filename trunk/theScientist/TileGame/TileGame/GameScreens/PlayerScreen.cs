@@ -626,9 +626,9 @@ namespace TileGame.GameScreens
             {
                 player.elapsedShot += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 player.Speed = -0.1f;
-
                 if (player.elapsedShot > player.delayShot && player.multishotArrow)
                 {
+ 
                     MultiarrowFired(Content, motion);
                     player.CurrentAnimation.CurrentFrame = 0;
                     player.elapsedShot = 0.0f;

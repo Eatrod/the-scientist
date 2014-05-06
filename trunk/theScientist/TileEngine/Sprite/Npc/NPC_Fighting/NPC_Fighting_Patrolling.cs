@@ -27,8 +27,11 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
       
         public NPC_Fighting_Patrolling(Texture2D texture, Script script, Random random) :base(texture,script)
         {
+            this.TimeToStrike = false;
+            this.ElapsedStrike = 0.0f;
+            this.DelayStrike = 1500f;
             this.ElapsedHitByMelee = 0.0f;
-            this.DelayHitByMelee = 300f;
+            this.DelayHitByMelee = 500f;
             this.DirtPileCreated = false;
             this.AggroSpeed = 1.5f;
             this.PatrollingCircle = 200f;
@@ -55,7 +58,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.DelayDirection = 3000f;
             
 
-            FrameAnimation down = new FrameAnimation(1, 50, 80, 0, 0);
+            FrameAnimation down = new FrameAnimation(1, 50, 80, 150, 0);
             FrameAnimation left = new FrameAnimation(1, 50, 80, 0, 80);
             FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);
             FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
@@ -66,10 +69,10 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             FrameAnimation walkRight = new FrameAnimation(2, 50, 80, 50, 160);
             FrameAnimation walkUp = new FrameAnimation(2, 50, 80, 50, 240);
 
-            FrameAnimation attackDown = new FrameAnimation(2, 65, 80, 205, 0);
-            FrameAnimation attackLeft = new FrameAnimation(2, 65, 80, 205, 80);
-            FrameAnimation attackRight = new FrameAnimation(2, 65, 80, 205, 160);
-            FrameAnimation attackUp = new FrameAnimation(2, 65, 80, 205, 240);
+            FrameAnimation attackDown = new FrameAnimation(2, 50, 80, 200, 0);
+            FrameAnimation attackLeft = new FrameAnimation(2, 65, 80, 200, 80);
+            FrameAnimation attackRight = new FrameAnimation(2, 70, 80, 200, 160);
+            FrameAnimation attackUp = new FrameAnimation(2, 50, 80, 200, 240);
 
             this.Animations.Add("AttackRight", attackRight);
             this.Animations.Add("AttackLeft", attackLeft);
@@ -87,6 +90,10 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.Animations.Add("WalkLeft", walkLeft);
             this.Animations.Add("WalkUp", walkUp);
             this.Animations.Add("WalkDown", walkDown);
+            this.Animations["AttackLeft"].FramesPerSeconds = (this.DelayHitByMelee / 2000) + 0.1f; ;
+            this.Animations["AttackRight"].FramesPerSeconds = (this.DelayHitByMelee / 2000) + 0.1f; ;
+            this.Animations["AttackDown"].FramesPerSeconds = (this.DelayHitByMelee / 2000) + 0.1f;
+            this.Animations["AttackUp"].FramesPerSeconds = (this.DelayHitByMelee / 2000) + 0.1f ;
             
             
 
@@ -117,10 +124,14 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 {
                     this.speed = AggroSpeed;
                     this.Position += VectorTowardsTarget * speed;
-
                     UpdateSpriteAnimation(VectorTowardsTarget);
+                    
                 }
-                else if (StrikeMode)
+                else if (StrikeMode && !MeleeHit)
+                {
+                    UpdateSpriteStandingStillAnimation(VectorTowardsTarget);                                     
+                }
+                else if(MeleeHit)
                 {
                     UpdateSpriteAttackAnimation(VectorTowardsTarget);
                 }
@@ -176,6 +187,32 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
 
         //}
+        private void UpdateSpriteStandingStillAnimation(Vector2 motion)
+        {
+
+            float motionAngle = (float)Math.Atan2(motion.Y, motion.X);
+
+            if (motionAngle >= -MathHelper.PiOver4 && motionAngle <= MathHelper.PiOver4)
+            {
+                CurrentAnimationName = "Right"; //Right
+                //motion = new Vector2(1f, 0f);
+            }
+            else if (motionAngle >= MathHelper.PiOver4 && motionAngle <= 3f * MathHelper.PiOver4)
+            {
+                CurrentAnimationName = "Down"; //Down
+                //motion = new Vector2(0f, 1f);
+            }
+            else if (motionAngle <= -MathHelper.PiOver4 && motionAngle >= -3f * MathHelper.PiOver4)
+            {
+                CurrentAnimationName = "Up"; // Up
+                //motion = new Vector2(0f, -1f);
+            }
+            else
+            {
+                CurrentAnimationName = "Left"; //Left
+                //motion = new Vector2(-1f, 0f);
+            }
+        }
         private void UpdateSpriteAttackAnimation(Vector2 motion)
         {
 
