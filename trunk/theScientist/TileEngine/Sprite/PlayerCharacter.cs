@@ -16,9 +16,13 @@ namespace TileEngine.Sprite
          public bool multishotFireArrow { get; set; }
          public bool fireArrow { get; set; }
          public bool normalArrow { get; set; }
+         
+         public bool meleeAttackStart { get; set; }
+         public bool meleeAttackFinish { get; set; }
 
 
-
+         public float delayAttack = 300f;
+         public float elapsedAttack = 0.0f;
          public float delayShot = 500f;
          public float elapsedShot = 0.0f;
          
