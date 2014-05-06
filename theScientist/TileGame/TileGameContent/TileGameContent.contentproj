@@ -210,6 +210,18 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
+    <Compile Include="Fonts\VeniceClassic.spritefont">
+      <SubType>Designer</SubType>
+      <Name>VeniceClassic</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+    <Compile Include="Fonts\pixel_pirate.spritefont">
+      <SubType>Designer</SubType>
+      <Name>pixel_pirate</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="Layers\Demo1.layer">
       <Name>Demo1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -3113,6 +3125,25 @@
   <ItemGroup>
     <Compile Include="Sprite\Axe ability 2.png">
       <Name>Axe ability 2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GUI\DialogArrow.png">
+      <Name>DialogArrow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="GUI\DialogBox.png">
+      <Name>DialogBox</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CharacterPotraits\DiaPortPlcholder.png">
+      <Name>DiaPortPlcholder</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

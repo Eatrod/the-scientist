@@ -20,7 +20,6 @@ namespace TileGame.GameScreens
         #region Field region
 
         //Message message;
-        int textMessage = 0;
         int pageIndex = 0;
         int lastPageIndex = 0;
         int leftPageIndex = 0;
@@ -156,7 +155,7 @@ namespace TileGame.GameScreens
 
             if (pageIndex < (ListOfUnlockedKeys.Count))
             {
-                if(pageIndex + 1 < ListOfUnlockedKeys.Count)
+                if (pageIndex + 1 < ListOfUnlockedKeys.Count)
                     leftPageIndex = ListOfUnlockedKeys[pageIndex + 1];
                 else
                     leftPageIndex = 0;
@@ -168,7 +167,7 @@ namespace TileGame.GameScreens
                         leftPagenumberText.Text = "1";
                     else
                     {
-                        leftPagenumberText.Text = (pageIndex+1).ToString();
+                        leftPagenumberText.Text = (pageIndex + 1).ToString();
                     }
                 }
 

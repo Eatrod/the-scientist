@@ -283,7 +283,7 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Human"), Content.Load<Script>("Scripts/FishmarketNoFish"), Content.Load<Texture2D>("CharacterPotraits/asterix"), "Fisherman");
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Human"), Content.Load<Script>("Scripts/FishmarketNoFish"), Content.Load<Texture2D>("CharacterPotraits/DiaPortPlcholder"), "Fisherman");
             npcstory.scriptDict.Add("fishHave", Content.Load<Script>("Scripts/Fishmarket"));
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(84, 49));
@@ -410,7 +410,7 @@ namespace TileGame.GameScreens
         }
         public override void Update(GameTime gameTime)
         {
-            //player.Speed = 10;
+            player.Speed = 10;
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
             foreach(DirtPileSprite dirtpile in DirtPiles)
             {

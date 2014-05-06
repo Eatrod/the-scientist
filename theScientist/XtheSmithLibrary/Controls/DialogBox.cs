@@ -29,6 +29,11 @@ namespace XtheSmithLibrary.Controls
         private StringBuilder stringBuilder;
         private int currentHandler;
         private KeyboardState lastState;
+        public List<SpriteFont> fonts;
+        private Texture2D dialogArrow;
+
+        Vector2 handlerVector;
+        Rectangle arrowRect;
 
         #endregion
 
@@ -43,11 +48,15 @@ namespace XtheSmithLibrary.Controls
         #endregion
 
         #region Constructor Region
-        public DialogBox(Texture2D texture, Rectangle rectangle, string text) : base(texture, rectangle)
+        public DialogBox(List<SpriteFont> fonts,Texture2D texture, Rectangle rectangle, string text, Texture2D dialogArrow) : base(texture, rectangle)
         {
             tabStop = false;
             this.text = text;
             this.rectangle = rectangle;
+            this.fonts = fonts;
+            this.dialogArrow = dialogArrow;
+            handlerVector = new Vector2(rectangle.X + 70, rectangle.Y + 100);
+            arrowRect = new Rectangle((int)handlerVector.X - 20, (int)handlerVector.Y + 5, 22, 19);
         }
 
         #endregion
@@ -62,16 +71,18 @@ namespace XtheSmithLibrary.Controls
             if (npc == null || conversation == null)
                 return;
 
-            if (newState.IsKeyDown(Keys.Left) && lastState.IsKeyUp(Keys.Left))
+            if (newState.IsKeyDown(Keys.Up) && lastState.IsKeyUp(Keys.Up))
             {
                 currentHandler--;
                 if (currentHandler < 0)
                     currentHandler = conversation.Handlers.Count - 1;
+                arrowRect.Y = (int)handlerVector.Y * currentHandler+1;
             }
 
-            if (newState.IsKeyDown(Keys.Right) && lastState.IsKeyUp(Keys.Right))
+            if (newState.IsKeyDown(Keys.Down) && lastState.IsKeyUp(Keys.Down))
             {
                 currentHandler = (currentHandler + 1) % conversation.Handlers.Count;
+                arrowRect.Y = (int)handlerVector.Y * currentHandler+1;
             }
 
             if (newState.IsKeyDown(Keys.Space) && lastState.IsKeyUp(Keys.Space))
@@ -88,6 +99,7 @@ namespace XtheSmithLibrary.Controls
         public override void Draw(SpriteBatch spriteBatch)
         {          
             base.Draw(spriteBatch);
+            string stringWhoSaid = whoSaid(Text);
             StringBuilder stringBuilder = new StringBuilder();
             WrapWord(new StringBuilder(text), stringBuilder, SpriteFont, rectangle);
             Text = stringBuilder.ToString();
@@ -95,8 +107,10 @@ namespace XtheSmithLibrary.Controls
             {
                 SpriteFont.LineSpacing = 25;
             }
-            spriteBatch.DrawString(SpriteFont, Text, new Vector2(200, rectangle.Y - 5), Color.Black);
+            spriteBatch.DrawString(fonts[1], stringWhoSaid, new Vector2(rectangle.X + 45, rectangle.Y+10), Color.White);
+            spriteBatch.DrawString(fonts[0], Text.Split(':')[1], new Vector2(rectangle.X+20, rectangle.Y+40), Color.White);
 
+            handlerVector = new Vector2(rectangle.X + 70, rectangle.Y + 100);
             for (int i = 1; i < conversation.Handlers.Count+1; ++i)
             {
                 string handler = conversation.Handlers[i-1].Caption;
@@ -104,10 +118,12 @@ namespace XtheSmithLibrary.Controls
                 Color color = (i-1 == currentHandler) ? Color.Orange : Color.Red;
                 SpriteFont.Spacing = -2;
 
-                spriteBatch.DrawString(SpriteFont, handler, new Vector2(rectangle.X-handler.Length+250*i, rectangle.Y + 60), color);
+                spriteBatch.Draw(dialogArrow, arrowRect, Color.White);
+                spriteBatch.DrawString(fonts[0], handler, handlerVector, color);
+                handlerVector.Y += 20;
             }
 
-            Rectangle pictureRectangle = new Rectangle(0, rectangle.Y, 200, 100);
+            Rectangle pictureRectangle = new Rectangle(rectangle.X + 15, rectangle.Y-225, 200, 225);
             foreach (var npc in npcStoryList)
             {
                 if (whoSaid(Text) == npc.NPCName)
@@ -146,7 +162,7 @@ namespace XtheSmithLibrary.Controls
                 }
                 target.Append(character);
                 currentTargetSize = font.MeasureString(target);
-                if (currentTargetSize.X > bounds.Width - 200)
+                if (currentTargetSize.X > bounds.Width)
                 {
                     target.Insert(lastWhiteSpace, NewLine);
                     target.Remove(lastWhiteSpace + NewLine.Length, 1);
