@@ -49,7 +49,7 @@ namespace XtheSmithLibrary.Controls
         {
             if (!HasFocus)
                 return;
-            if (InputHandler.KeyReleased(Keys.Enter))
+            if (InputHandler.KeyReleased(Keys.Space))
                 base.OnSelected(null);
         }
 
