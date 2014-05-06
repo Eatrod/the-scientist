@@ -40,7 +40,11 @@ namespace TileEngine.Sprite
             get { return frames[currentFrame]; }
             set { frames[currentFrame] = value; }
         }
-
+        public int CurrentFrameAlternative
+        {
+            get { return currentFrame; }
+            set { currentFrame = value; }
+        }
         public int CurrentFrame
         {
             get { return currentFrame; }

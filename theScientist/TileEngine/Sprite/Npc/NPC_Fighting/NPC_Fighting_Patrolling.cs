@@ -18,20 +18,18 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         
         
         
-        private bool collided;
-        public bool Collided
-        {
-            get { return collided; }
-            set { collided = value; }
-        }
+        
       
         public NPC_Fighting_Patrolling(Texture2D texture, Script script, Random random) :base(texture,script)
         {
             this.TimeToStrike = false;
+            this.DelayTimeToStrike = 200f;
+            this.ElapsedTimeToStrike = 0.0f;
+
             this.ElapsedStrike = 0.0f;
-            this.DelayStrike = 1500f;
+            this.DelayStrike = 800f;
             this.ElapsedHitByMelee = 0.0f;
-            this.DelayHitByMelee = 500f;
+            this.DelayHitByMelee = 200f;
             this.DirtPileCreated = false;
             this.AggroSpeed = 1.5f;
             this.PatrollingCircle = 200f;
@@ -42,7 +40,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.Dead = false;
             this.OldPosition = Vector2.Zero;
             this.StrikeForce = 2.5f;
-            this.collided = false;
+            this.Collided = false;
             this.Random = random;
             this.Direction = 0;
             this.speed = 0.5f;
@@ -69,15 +67,27 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             FrameAnimation walkRight = new FrameAnimation(2, 50, 80, 50, 160);
             FrameAnimation walkUp = new FrameAnimation(2, 50, 80, 50, 240);
 
-            FrameAnimation attackDown = new FrameAnimation(2, 50, 80, 200, 0);
-            FrameAnimation attackLeft = new FrameAnimation(2, 65, 80, 200, 80);
-            FrameAnimation attackRight = new FrameAnimation(2, 70, 80, 200, 160);
-            FrameAnimation attackUp = new FrameAnimation(2, 50, 80, 200, 240);
+            FrameAnimation attackStartDown = new FrameAnimation(1, 50, 80, 200, 0);
+            FrameAnimation attackStartLeft = new FrameAnimation(1, 50, 80, 200, 80);
+            FrameAnimation attackStartRight = new FrameAnimation(1, 50, 80, 200, 160);
+            FrameAnimation attackStartUp = new FrameAnimation(1, 50, 80, 200, 240);
 
-            this.Animations.Add("AttackRight", attackRight);
-            this.Animations.Add("AttackLeft", attackLeft);
-            this.Animations.Add("AttackUp", attackUp);
-            this.Animations.Add("AttackDown", attackDown);
+            FrameAnimation attackFinishDown = new FrameAnimation(1, 50, 80, 250, 0);
+            FrameAnimation attackFinishLeft = new FrameAnimation(1, 62, 80, 250, 80);
+            FrameAnimation attackFinishRight = new FrameAnimation(1, 62, 80, 250, 160);
+            FrameAnimation attackFinishUp = new FrameAnimation(1, 50, 80, 250, 240);
+
+            
+
+            this.Animations.Add("AttackStartRight", attackStartRight);
+            this.Animations.Add("AttackStartLeft", attackStartLeft);
+            this.Animations.Add("AttackStartUp", attackStartUp);
+            this.Animations.Add("AttackStartDown", attackStartDown);
+
+            this.Animations.Add("AttackFinishRight", attackFinishRight);
+            this.Animations.Add("AttackFinishLeft", attackFinishLeft);
+            this.Animations.Add("AttackFinishUp", attackFinishUp);
+            this.Animations.Add("AttackFinishDown", attackFinishDown);
             
 
             this.Animations.Add("Nothing", nothing);
@@ -90,14 +100,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.Animations.Add("WalkLeft", walkLeft);
             this.Animations.Add("WalkUp", walkUp);
             this.Animations.Add("WalkDown", walkDown);
-            this.Animations["AttackLeft"].FramesPerSeconds = (this.DelayHitByMelee / 2000) + 0.1f; ;
-            this.Animations["AttackRight"].FramesPerSeconds = (this.DelayHitByMelee / 2000) + 0.1f; ;
-            this.Animations["AttackDown"].FramesPerSeconds = (this.DelayHitByMelee / 2000) + 0.1f;
-            this.Animations["AttackUp"].FramesPerSeconds = (this.DelayHitByMelee / 2000) + 0.1f ;
-            
-            
-
-
         }
         public override void Update(GameTime gameTime)
         {
@@ -116,8 +118,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 this.Motion = new Vector2(
                    (float)Math.Cos(MathHelper.ToRadians(Direction)),
                    (float)Math.Sin(MathHelper.ToRadians(-Direction)));
-
-                UpdateSpriteAnimation(Motion);
+                if(!TimeToStrike && !MeleeHit)
+                    UpdateSpriteAnimation(Motion);
 
 
                 if (Aggro && !StrikeMode)
@@ -127,13 +129,17 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                     UpdateSpriteAnimation(VectorTowardsTarget);
                     
                 }
-                else if (StrikeMode && !MeleeHit)
+                else if (StrikeMode && !MeleeHit &&!TimeToStrike)
                 {
-                    UpdateSpriteStandingStillAnimation(VectorTowardsTarget);                                     
+                    UpdateSpriteStandingStillAnimation(VectorTowardsTarget);
                 }
                 else if(MeleeHit)
                 {
-                    UpdateSpriteAttackAnimation(VectorTowardsTarget);
+                    UpdateSpriteStartAttackAnimation();
+                }
+                else if(TimeToStrike)
+                {
+                    UpdateSpriteFinishAttackAnimation();
                 }
                 else if (GoingHome)
                 {
@@ -213,31 +219,45 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 //motion = new Vector2(-1f, 0f);
             }
         }
-        private void UpdateSpriteAttackAnimation(Vector2 motion)
+        private void UpdateSpriteFinishAttackAnimation()
         {
+            if (this.CurrentAnimationName == "AttackStartRight")
+            {
+                CurrentAnimationName = "AttackFinishRight";
+            }
+            else if (this.CurrentAnimationName == "AttackStartLeft")
+            {
+                CurrentAnimationName = "AttackFinishLeft";
+            }
+            else if (this.CurrentAnimationName == "AttackStartUp")
+            {
+                CurrentAnimationName = "AttackFinishUp";
+            }
+            else if (this.CurrentAnimationName == "AttackStartDown")
+            {
+                CurrentAnimationName = "AttackFinishDown";
+            }
 
-            float motionAngle = (float)Math.Atan2(motion.Y, motion.X);
-
-            if (motionAngle >= -MathHelper.PiOver4 && motionAngle <= MathHelper.PiOver4)
+        }
+        private void UpdateSpriteStartAttackAnimation()
+        {
+            if (this.CurrentAnimationName == "Right" || this.CurrentAnimationName == "WalkRight")
             {
-                CurrentAnimationName = "AttackRight"; //Right
-                //motion = new Vector2(1f, 0f);
+                CurrentAnimationName = "AttackStartRight";               
             }
-            else if (motionAngle >= MathHelper.PiOver4 && motionAngle <= 3f * MathHelper.PiOver4)
+            else if (this.CurrentAnimationName == "Left" || this.CurrentAnimationName == "WalkLeft")
             {
-                CurrentAnimationName = "AttackDown"; //Down
-                //motion = new Vector2(0f, 1f);
+                CurrentAnimationName = "AttackStartLeft";
             }
-            else if (motionAngle <= -MathHelper.PiOver4 && motionAngle >= -3f * MathHelper.PiOver4)
+            else if (this.CurrentAnimationName == "Up" || this.CurrentAnimationName == "WalkUp")
             {
-                CurrentAnimationName = "AttackUp"; // Up
-                //motion = new Vector2(0f, -1f);
+                CurrentAnimationName = "AttackStartUp";
             }
-            else
+            else if (this.CurrentAnimationName == "Down" || this.CurrentAnimationName == "WalkDown")
             {
-                CurrentAnimationName = "AttackLeft"; //Left
-                //motion = new Vector2(-1f, 0f);
+                CurrentAnimationName = "AttackStartDown";
             }
+           
         }
     }
 }

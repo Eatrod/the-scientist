@@ -36,7 +36,10 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         private int direction;
         private float strikeForce;
         private bool strikeMode;
+
         private bool timeToStrike;
+        private float delayTimeToStrike;
+        private float elapsedTimeToStrike;
         private float delayStrike;
         private float delayStruck;
         private float elapsedStruck;
@@ -44,6 +47,22 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
         private Vector2 playerPosition;
         private Vector2 oldPosition;
+        private bool collided;
+        public float ElapsedTimeToStrike
+        {
+            get { return elapsedTimeToStrike; }
+            set { elapsedTimeToStrike = value; }
+        }
+        public float DelayTimeToStrike
+        {
+            get { return delayTimeToStrike; }
+            set { delayTimeToStrike = value; }
+        }
+        public bool Collided
+        {
+            get { return collided; }
+            set { collided = value; }
+        }
         public bool TimeToStrike
         {
             get { return timeToStrike; }
@@ -242,13 +261,22 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                     //Vector2 HitVector = this.Origin - player.Origin;
                     //HitVector.Normalize();
                     //player.Position -= HitVector;
-                    this.Animations["AttackLeft"].CurrentFrame = 0;
-                    this.Animations["AttackRight"].CurrentFrame = 0;
-                    this.Animations["AttackDown"].CurrentFrame = 0;
-                    this.Animations["AttackUp"].CurrentFrame = 0;
-                    player.Life -= StrikeForce;
+
+                    this.TimeToStrike = true;
+                    
                     MeleeHit = false;
                     ElapsedHitByMelee = 0.0f;
+                }
+            }
+            if(TimeToStrike)
+            {
+                ElapsedTimeToStrike += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                if(ElapsedTimeToStrike > DelayTimeToStrike)
+                {
+                    player.Life -= StrikeForce;
+                    TimeToStrike = false;
+                    ElapsedTimeToStrike = 0.0f;
                 }
             }
             if (Vector2.Distance(this.Position, player.Position) < 50)
@@ -257,9 +285,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 ElapsedStrike += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 //UpdateSpriteAnimation(player.Position - this.Position);
                 if (ElapsedStrike > DelayStrike)
-                {
-                    
-                    this.TimeToStrike = true;
+                {             
                     this.MeleeHit = true;                
                     ElapsedStrike = 0.0f;
                 }
