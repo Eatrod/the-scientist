@@ -131,9 +131,11 @@ namespace TileGame
 
             MediaPlayer.IsRepeating = true;
 
-            musicStates.Add(TitleScreen, titleMusic);
-            musicStates.Add(StartMenuScreen, titleMusic);
-            musicStates.Add(PotatoTown, potatotownMusic);
+            GameState ptown = PotatoTown;
+
+            musicStates.Add(ptown, potatotownMusic);
+            musicStates.Add((GameState)TitleScreen, titleMusic);
+            musicStates.Add((GameState)StartMenuScreen, titleMusic);
         }
 
         /// <summary>
@@ -166,7 +168,7 @@ namespace TileGame
                     foreach(var s in musicStates)
                     {
                         s.Value.SongStart = false;
-                        if (s.Value.SongStart)
+                        //if (s.Value.SongStart)
                             MediaPlayer.Stop();
                     }
                     MediaPlayer.Play(musicStates[currentState].Song);
@@ -174,6 +176,7 @@ namespace TileGame
                     //oldState = currentState;
                     //musicStates[oldState].SongStart = false;
                 }
+
             }
 
             base.Update(gameTime);
