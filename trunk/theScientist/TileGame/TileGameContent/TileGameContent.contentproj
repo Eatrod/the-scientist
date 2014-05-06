@@ -192,6 +192,12 @@
     <Fakes Include="Fakes\TileContent.fakes">
       <Name>TileContent</Name>
     </Fakes>
+    <Compile Include="Fonts\Venice.spritefont">
+      <SubType>Designer</SubType>
+      <Name>Venice</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="Fonts\AGothiqueTime.spritefont">
       <Name>AGothiqueTime</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -3093,6 +3099,13 @@
   <ItemGroup>
     <Compile Include="Sprite\arrow ability 4.png">
       <Name>arrow ability 4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackGrounds\Controls.png">
+      <Name>Controls</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

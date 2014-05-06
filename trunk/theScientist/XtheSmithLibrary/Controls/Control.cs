@@ -108,7 +108,7 @@ namespace XtheSmithLibrary.Controls
 
         public Control()
         {
-            Color = Color.White;
+            Color = Color.MediumSpringGreen;
             Enabled = true;
             Visible = true; SpriteFont = ControlManager.SpriteFont;
         }
