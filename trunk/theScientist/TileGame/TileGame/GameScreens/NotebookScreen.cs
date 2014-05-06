@@ -31,6 +31,8 @@ namespace TileGame.GameScreens
         List<int> ListOfUnlockedKeys;
         Label leftText;
         Label rightText;
+        Label leftPagenumberText;
+        Label rightPagenumberText;
         Rectangle textRect;
         #endregion
 
@@ -58,6 +60,18 @@ namespace TileGame.GameScreens
             backgroundImage = Content.Load<Texture2D>(@"Backgrounds\book");
             base.LoadContent();
 
+            leftPagenumberText = new Label();
+            leftPagenumberText.Position = new Vector2(100, 600);
+            leftPagenumberText.Text = pageIndex.ToString();
+            leftPagenumberText.Color = Color.DarkBlue;
+            ControlManager.Add(leftPagenumberText);
+
+            rightPagenumberText = new Label();
+            rightPagenumberText.Position = new Vector2(900, 600);
+            rightPagenumberText.Text = pageIndex.ToString();
+            rightPagenumberText.Color = Color.DarkBlue;
+            ControlManager.Add(rightPagenumberText);
+
             leftText = new Label();
             leftText.Position = new Vector2(100, 100);
             leftText.Text = "";
@@ -71,13 +85,13 @@ namespace TileGame.GameScreens
             ControlManager.Add(rightText);
 
             InsertTextToMessageDictionary(0, "");
-            InsertTextToMessageDictionary(1, "Find Asterix and talk to him!");
-            InsertTextToMessageDictionary(2, "Asterix told you to find potato The Belladonna. Check out the abandoned fields in the north west.");
-            InsertTextToMessageDictionary(3, "You have now the Belladonna potato and should move on to next town.");
-            InsertTextToMessageDictionary(4, "You managed to solve Johns riddle.");
-            InsertTextToMessageDictionary(5, "You need an official permit to leave the town");
-            InsertTextToMessageDictionary(6, "You have aquired a valid permit");
-            InsertTextToMessageDictionary(7, "Now you have the axe, you can use it to figth or chop");
+            InsertTextToMessageDictionary(1, "Hint: Find Asterix and talk to him!");
+            InsertTextToMessageDictionary(2, "Task: Asterix told you to find potato The Belladonna. Check out the abandoned fields in the north west.");
+            InsertTextToMessageDictionary(3, "Task: You have now the Belladonna potato and should move on to next town.");
+            InsertTextToMessageDictionary(4, "Completed: You managed to solve Johns riddle.");
+            InsertTextToMessageDictionary(5, "Hint: You need an official permit to leave the town");
+            InsertTextToMessageDictionary(6, "Completed: You have aquired a valid permit");
+            InsertTextToMessageDictionary(7, "Hint: Now you have the axe, you can use it to figth or chop");
 
             messageDict[0].Unlocked = true;
             messageDict[1].Unlocked = true;
@@ -107,14 +121,30 @@ namespace TileGame.GameScreens
                 else
                     leftPageIndex = 0;
                 if (messageDict.ContainsKey(leftPageIndex))
+                {
                     leftText.Text = messageDict[leftPageIndex].Text;
+                    if (pageIndex == 0)
+                        leftPagenumberText.Text = "1";
+                    else
+                    {
+                        leftPagenumberText.Text = (pageIndex+1).ToString();
+                    }
+                }
 
                 if (pageIndex + 2 < ListOfUnlockedKeys.Count)
                     rightPageIndex = ListOfUnlockedKeys[pageIndex + 2];
                 else
                     rightPageIndex = 0;
                 if (messageDict.ContainsKey(rightPageIndex))
+                {
                     rightText.Text = messageDict[rightPageIndex].Text;
+                    if (pageIndex == 0)
+                        rightPagenumberText.Text = "2";
+                    else
+                    {
+                        rightPagenumberText.Text = (pageIndex+2).ToString();
+                    }
+                }
             }
             if (InputHandler.KeyReleased(Keys.N))
                 StateManager.PopState();
@@ -175,6 +205,7 @@ namespace TileGame.GameScreens
             }
             ListOfUnlockedKeys.Sort();
         }
+
         public class WordWrapper 
 	    { 
 	        public static char[] NewLine = {'\r','\n'}; 
