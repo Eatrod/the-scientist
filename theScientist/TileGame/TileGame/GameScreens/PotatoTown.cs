@@ -177,11 +177,11 @@ namespace TileGame.GameScreens
             //NPC2.FullHp = 5;
             //AnimatedSpriteObject.Add(NPC2);
 
-            for (int i = 0; i < 2; i++ )
+            for (int i = 0; i < 4; i++ )
             {
                 NPC_Fighting_Ranged NPC_Ranged = new NPC_Fighting_Ranged(Content.Load<Texture2D>("Sprite/Bjorn_Try_Ranged"), null, GameRef.random);
                 NPC_Ranged.Origionoffset = new Vector2(25, 65);
-                NPC_Ranged.SetSpritePositionInGameWorld(new Vector2(81 + i, 70 + i));
+                NPC_Ranged.SetSpritePositionInGameWorld(new Vector2(120 + i, 90 + i));
                 NPC_Ranged.Life = 100;
                 NPC_Ranged.FullHp = 100;
                 AnimatedSpriteObject.Add(NPC_Ranged);
@@ -425,6 +425,11 @@ namespace TileGame.GameScreens
             foreach(Explosion explosion in Explosions)
             {
                 explosion.UpdateExplosion(gameTime);
+                if (explosion.Bounds.Intersects(new Rectangle(player.Bounds.X + 10, player.Bounds.Y + 10, 30, 50)))
+                {
+                    player.Life -= explosion.Damage;
+                    explosion.Finished = true;
+                }
                 if(explosion.Finished)
                 {
                     AnimatedSpriteObject.Remove(explosion);
@@ -438,15 +443,18 @@ namespace TileGame.GameScreens
                 bomb.UpdateBomb(gameTime);
                 if(bomb.Bounds.Intersects(new Rectangle(player.Bounds.X + 10,player.Bounds.Y + 10,30,50)))
                 {
-                    player.Life -= bomb.Damage;
                     bomb.Boom = true;
                 }
                 if(bomb.Boom)
                 {
-                    Explosion explosion = new Explosion(Content.Load<Texture2D>("Sprite/Bjorn_Try_Explosion"), bomb.Position);
-                    Explosions.Add(explosion);
-                    AnimatedSpriteObject.Add(explosion);
-                    renderList.Add(explosion);
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Explosion explosion = new Explosion(Content.Load<Texture2D>("Sprite/Bjorn_Try_Explosion"),
+                            bomb.Position,new Vector2(GameRef.random.Next(-100,100)/100f,GameRef.random.Next(-100,100)/100f));
+                        Explosions.Add(explosion);
+                        AnimatedSpriteObject.Add(explosion);
+                        renderList.Add(explosion);
+                    }
                     BombSprites.Remove(bomb);
                     renderList.Remove(bomb);
                     

@@ -23,13 +23,13 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         public NPC_Fighting_Patrolling(Texture2D texture, Script script, Random random) :base(texture,script)
         {
             this.TimeToStrike = false;
-            this.DelayTimeToStrike = 200f;
+            this.DelayTimeToStrike = 250f;
             this.ElapsedTimeToStrike = 0.0f;
 
             this.ElapsedStrike = 0.0f;
-            this.DelayStrike = 800f;
+            this.DelayStrike = 1000f;
             this.ElapsedHitByMelee = 0.0f;
-            this.DelayHitByMelee = 200f;
+            this.DelayHitByMelee = 250f;
             this.DirtPileCreated = false;
             this.AggroSpeed = 1.5f;
             this.PatrollingCircle = 200f;
@@ -63,35 +63,29 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             FrameAnimation nothing = new FrameAnimation(1, 0, 0, 0, 0);
 
             FrameAnimation walkDown = new FrameAnimation(2, 50, 80, 50, 0);
-            FrameAnimation walkLeft = new FrameAnimation(2, 50, 80, 50, 80);
-            FrameAnimation walkRight = new FrameAnimation(2, 50, 80, 50, 160);
+            FrameAnimation walkLeft = new FrameAnimation(4, 50, 80, 0, 80);
+            FrameAnimation walkRight = new FrameAnimation(4, 50, 80, 0, 160);
             FrameAnimation walkUp = new FrameAnimation(2, 50, 80, 50, 240);
 
             FrameAnimation attackStartDown = new FrameAnimation(1, 50, 80, 200, 0);
-            FrameAnimation attackStartLeft = new FrameAnimation(1, 50, 80, 200, 80);
-            FrameAnimation attackStartRight = new FrameAnimation(1, 50, 80, 200, 160);
+            FrameAnimation attackStartLeft = new FrameAnimation(1, 50, 80, 250, 80);
+            FrameAnimation attackStartRight = new FrameAnimation(1, 50, 80, 250, 160);
             FrameAnimation attackStartUp = new FrameAnimation(1, 50, 80, 200, 240);
 
             FrameAnimation attackFinishDown = new FrameAnimation(1, 50, 80, 250, 0);
-            FrameAnimation attackFinishLeft = new FrameAnimation(1, 62, 80, 250, 80);
-            FrameAnimation attackFinishRight = new FrameAnimation(1, 62, 80, 250, 160);
+            FrameAnimation attackFinishLeft = new FrameAnimation(1, 63, 80, 300, 80);
+            FrameAnimation attackFinishRight = new FrameAnimation(1, 63, 80, 300, 160);
             FrameAnimation attackFinishUp = new FrameAnimation(1, 50, 80, 250, 240);
-
-            
 
             this.Animations.Add("AttackStartRight", attackStartRight);
             this.Animations.Add("AttackStartLeft", attackStartLeft);
             this.Animations.Add("AttackStartUp", attackStartUp);
             this.Animations.Add("AttackStartDown", attackStartDown);
-
             this.Animations.Add("AttackFinishRight", attackFinishRight);
             this.Animations.Add("AttackFinishLeft", attackFinishLeft);
             this.Animations.Add("AttackFinishUp", attackFinishUp);
             this.Animations.Add("AttackFinishDown", attackFinishDown);
-            
-
             this.Animations.Add("Nothing", nothing);
-
             this.Animations.Add("Right", right);
             this.Animations.Add("Left", left);
             this.Animations.Add("Up", up);
@@ -100,6 +94,9 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.Animations.Add("WalkLeft", walkLeft);
             this.Animations.Add("WalkUp", walkUp);
             this.Animations.Add("WalkDown", walkDown);
+
+            this.Animations["WalkRight"].FramesPerSeconds = 0.25f;
+            this.Animations["WalkLeft"].FramesPerSeconds = 0.25f;
         }
         public override void Update(GameTime gameTime)
         {

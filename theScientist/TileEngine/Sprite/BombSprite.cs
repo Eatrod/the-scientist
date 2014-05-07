@@ -14,7 +14,7 @@ namespace TileEngine.Sprite
 {
     public class BombSprite: Sprite
     {
-        private float damage;
+       
         private Vector2 goalTarget;
         private Vector2 goalTargetVector;
         private bool boom;
@@ -22,11 +22,7 @@ namespace TileEngine.Sprite
         private float elapsedFly;
         private float delayFly;
         private float maxSpeedOfBomb;
-        public float Damage
-        {
-            get { return damage; }
-            set { damage = value; }
-        }
+    
         public bool Boom
         {
             get { return boom; }
@@ -40,11 +36,10 @@ namespace TileEngine.Sprite
             this.goalTarget = goalTarget;
             this.Position = Position;
             this.elapsedFly = 0.0f;
-            this.delayFly = 2500f;
+            this.delayFly = 1500f;
             this.boom = false;
             this.goalTargetVector = goalTarget - this.Position;
             this.goalTargetVector.Normalize();
-            this.damage = 5.0f;
         }
         public void UpdateBomb(GameTime gameTime)
         {
@@ -52,7 +47,7 @@ namespace TileEngine.Sprite
             {
                 this.speedOfBomb += 0.1f;
             }
-            this.Position += goalTargetVector * this.maxSpeedOfBomb;
+            this.Position += goalTargetVector * this.speedOfBomb;
             elapsedFly +=(float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if(elapsedFly > delayFly)
             {
