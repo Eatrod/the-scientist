@@ -1,28 +1,28 @@
 ﻿<Conversations>
   
   <Conversation Name="Text1">
-    <Text>The potato sprouts have awesome healing power</Text>
+    <Text>The potato sprouts have awesome healing power.</Text>
     <Handlers>
       <Handler Caption="d" Action="EndBubble" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Text2">
-    <Text>I would never travel without a proper weapon these days</Text>
+    <Text>I would never travel without a proper weapon these days.</Text>
     <Handlers>
       <Handler Caption="d" Action="EndBubble" />
     </Handlers>
   </Conversation>
   
     <Conversation Name="Text3">
-    <Text>I heard terrible rumors about a plague but i refuse to belive it</Text>
+    <Text>I heard terrible rumors about a plague but i refuse to belive it.</Text>
     <Handlers>
       <Handler Caption="d" Action="EndBubble" />
     </Handlers>
   </Conversation>
   
   <Conversation Name="Text4">
-    <Text>I don't even like potatos...</Text>
+    <Text>I don't even like potatoes...</Text>
     <Handlers>
       <Handler Caption="d" Action="EndBubble" />
     </Handlers>

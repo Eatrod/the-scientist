@@ -271,11 +271,11 @@ namespace TileGame.GameScreens
                 startCell = GameRef.BaseGamePlayScreen.FindCellWithIndexInCurrentTilemap(
                 50,
                 GameRef.PotatoTown);
-                player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/Player"), Content.Load<Texture2D>("CharacterPotraits/Assassins-Creed-4"));
-                player.Origionoffset = new Vector2(25, 65);
+                player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/Player"), Content.Load<Texture2D>("CharacterPotraits/DiaPortPlcholder"));
+            player.Origionoffset = new Vector2(25, 65);
                 player.SetSpritePositionInGameWorld(new Vector2(startCell.X, startCell.Y));
-                player.Life = 100;
-                player.Stamina = 100;
+            player.Life = 100;
+            player.Stamina = 100;
             }
 
             //BF

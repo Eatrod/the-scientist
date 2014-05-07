@@ -1,14 +1,14 @@
 ﻿<Conversations>
 
   <Conversation Name="Greeting">
-    <Text>Asterix: Howdy what do you want signore?</Text>
+    <Text>Asterix: Howdy, what do you want signore?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:IgnazioResponse" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="IgnazioResponse">
-    <Text>Ignazio: I am in need of a potato rich in Alkaloids</Text>
+    <Text>Ignazio: I am in need of a potato rich in Alkaloids.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:AsterixAnswer" />
     </Handlers>
@@ -22,21 +22,21 @@
   </Conversation>
 
   <Conversation Name="IgnazioInterupt">
-    <Text>Ignazio: I am short on time, I need one right now</Text>
+    <Text>Ignazio: I am short on time, I need one right now.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:AsterixStory" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="AsterixStory">
-    <Text>Asterix: According to the legend, there once was a potato so rich in Alkaloids it drove some farmers crasy.</Text>
+    <Text>Asterix: According to the legend, there once was a potato so rich in Alkaloids it drove some farmers crazy.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:IgnazioSays" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="IgnazioSays">
-    <Text>Ignazio: I don't want any legends, I want the potato</Text>
+    <Text>Ignazio: I don't want any legends, I want the potato.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:AsterixResponse" />
     </Handlers>
@@ -50,7 +50,7 @@
   </Conversation>
 
   <Conversation Name="AsterixShout">
-    <Text>Asterix: God speed, ragazzo</Text>
+    <Text>Asterix: God speed, ragazzo.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="SetToTrue:asterixTalkedTo;EndConversation" />
     </Handlers>

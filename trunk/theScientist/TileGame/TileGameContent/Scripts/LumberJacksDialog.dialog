@@ -9,7 +9,7 @@
   </Conversation>
 
   <Conversation Name="John1">
-    <Text>John: You can axe if you want to borrow it</Text>
+    <Text>John: You can axe if you want to borrow it.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Johnny1" />
     </Handlers>
@@ -23,14 +23,14 @@
   </Conversation>
 
   <Conversation Name="Ignazio1">
-    <Text>Ignazio: How about i take your axe</Text>
+    <Text>Ignazio: How about i take your axe?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Jack2" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Jack2">
-    <Text>Jack: How about i kick your ass!</Text>
+    <Text>Jack: How about I kick your ass!</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:John2" />
     </Handlers>
@@ -72,14 +72,14 @@
   </Conversation>
   
   <Conversation Name="Johnny3">
-    <Text>Johnny: Potato..</Text>
+    <Text>Johnny: Potato...</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Competitions" />
     </Handlers>
   </Conversation>
   
   <Conversation Name="Competitions">
-    <Text>Ignazio: Fine i start with..</Text>
+    <Text>Ignazio: Fine i start with...</Text>
     <Handlers>
       <Handler Caption="Arm wrestling" Action="EndConversation" />
       <Handler Caption="Riddle" Action="StartConversation:Riddle" />
@@ -89,7 +89,7 @@
   </Conversation>
   
     <Conversation Name="Riddle">
-    <Text>John: A mother has 6 children and 5 potatoes. How can she feed each on equal amount of potatoes?</Text>
+    <Text>John: A mother has six children and five potatoes. How can she feed each one equal amount of potatoes?</Text>
     <Handlers>
       <Handler Caption="Arm wrestling" Action="StartConversation:RiddleWrong" />
       <Handler Caption="Kill the children" Action="StartConversation:RiddleWrong" />

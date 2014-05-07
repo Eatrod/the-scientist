@@ -15,7 +15,7 @@
   </Conversation>
   
   <Conversation Name="Text3">
-    <Text>I don't even like potatos...</Text>
+    <Text>I don't even like potatoes...</Text>
     <Handlers>
       <Handler Caption="d" Action="EndBubble" />
     </Handlers>

@@ -49,8 +49,8 @@ namespace XtheSmithLibrary.Controls
             this.fonts = fonts;
             this.dialogArrow = dialogArrow;
             handlerVector = new Vector2(rectangle.X + 70, rectangle.Y + 100);
-            arrowRect = new Rectangle((int)handlerVector.X-20, (int)handlerVector.Y, 22, 19);
-            arrowVector.Y = handlerVector.Y+5;
+            arrowRect = new Rectangle((int)handlerVector.X-38, (int)handlerVector.Y+7, 22, 19);
+            arrowVector.Y = handlerVector.Y+7;
         }
 
         #endregion
@@ -67,13 +67,13 @@ namespace XtheSmithLibrary.Controls
                 currentHandler--;
                 if (currentHandler < 0)
                     currentHandler = conversation.Handlers.Count - 1;
-                arrowRect.Y = (int)arrowVector.Y + currentHandler*20;
+                arrowRect.Y = (int)arrowVector.Y + currentHandler*21;
             }
 
             if (InputHandler.KeyboardState.IsKeyDown(Keys.Down) && InputHandler.LastKeyboardState.IsKeyUp(Keys.Down))
             {
                 currentHandler = (currentHandler + 1) % conversation.Handlers.Count;
-                arrowRect.Y = (int)arrowVector.Y + currentHandler*20;
+                arrowRect.Y = (int)arrowVector.Y + currentHandler*21;
             }
 
             if (InputHandler.KeyboardState.IsKeyDown(Keys.Space) && InputHandler.LastKeyboardState.IsKeyUp(Keys.Space))
@@ -125,7 +125,7 @@ namespace XtheSmithLibrary.Controls
             {
                 string handler = conversation.Handlers[i - 1].Caption;
 
-                color = (i - 1 == currentHandler) ? Color.Orange : Color.Red;
+                color = (i - 1 == currentHandler) ? Color.Gold : Color.Lime;
                 SpriteFont.Spacing = -2;
 
                 spriteBatch.Draw(dialogArrow, arrowRect, Color.White);
