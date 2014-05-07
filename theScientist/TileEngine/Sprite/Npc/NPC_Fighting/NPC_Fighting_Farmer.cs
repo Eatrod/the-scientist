@@ -19,7 +19,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         private bool dirtPileCreated;
         private bool leftOrRight;
         private Random random;
-        
+        private float elapsedMaxRunning;
+        private float delayMaxRunning;
         private float delayDirection;
         private float elapsedDirection;
         private float elapsedAggro;
@@ -60,6 +61,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         public NPC_Fighting_Farmer(Texture2D texture, Script script, Random random, Vector2 StartingPosition)
             : base(texture, script)
         {
+            this.elapsedMaxRunning = 0.0f;
+            this.delayMaxRunning = 6000f;
             this.StartingPosition = StartingPosition;
             this.ElapsedRespawn = 0.0f;
             this.DelayRespawn = 30000f;
@@ -69,7 +72,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.ElapsedHit = 0.0f;
             this.HitDelay = 500f;
             this.elapsedDirection = 0;
-            this.delayAggro = 2000f;
+            this.delayAggro = 1200f;
             this.Aggro = false;
             this.collided = false;
             this.random = random;
@@ -126,17 +129,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                     leftOrRight = false;
                 else
                     leftOrRight = true;
-                
-                //if(npc.Bounds.Intersects(this.Bounds) && npc.Bounds != this.Bounds && !npc.Running && !npc.Aggro)
-                //{
-                //    this.running = false;
-                //    this.Aggro = false;
-                //    this.HitFlag = true;
-                //    npc.AttackersDirection = -this.AttackersDirection;
-                //    npc.HitFlag = true;
-                //    this.elapsedAggro = 0;
-                //    break;
-                //}
+
                 if (player.MovementBounds().Intersects(this.MovementBounds()))
                 {
                     this.running = false;
@@ -157,7 +150,10 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 Dead = true;
             if (!Dead)
             {
-
+                if (!running)
+                {
+                    elapsedMaxRunning = 0.0f;
+                }
                 cellPosition = Engine.ConvertPostionToCell(Position);
                 if (cellPosition.X >= 34 && cellPosition.Y <= 18)
                 {
@@ -207,9 +203,14 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 }
                 else if (running)
                 {
+                    elapsedMaxRunning += (float)gameTime.ElapsedGameTime.TotalMilliseconds;    
                     this.CurrentAnimationName = "Glide";
                     speed = 5.0f;
-                    Position += AttackersDirection * speed;//speed;
+                    Position += AttackersDirection * speed;
+                    if (elapsedMaxRunning > delayMaxRunning)
+                    {
+                        running = false;
+                    }
                 }
                 else if (HitFlag)
                 {

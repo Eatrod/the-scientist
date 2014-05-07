@@ -53,8 +53,11 @@ namespace TileEngine.Sprite
         }
         public void UpdateExplosion(GameTime gameTime)
         {
-            elapsedTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            this.Position += this.Direction * 5.0f;
+            if (!finished)
+            {
+                elapsedTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                this.Position += this.Direction * 2.0f;
+            }
             if (elapsedTime > timeToLive)
                 finished = true;
             base.Update(gameTime);

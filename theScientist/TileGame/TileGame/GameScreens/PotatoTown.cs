@@ -518,19 +518,14 @@ namespace TileGame.GameScreens
                     npc.DirtPileCreated = true;
                 }
             }
-            
-            foreach(NPC_Fighting_Farmer npc in NPCFightingFarmers)
+            foreach (NPC_Fighting_Farmer npc in NPCFightingFarmers)
             {
-                //CollisionWithCharacter.UpdateCollisionForCharacters(
-                //    gameTime, SpriteObjectInGameWorld, npc,
-                //    SpriteObject, playerprojectiles, renderList, AnimatedSpriteObject);
                 if (!npc.Dead)
                 {
                     if (npc.Motion != Vector2.Zero)
                     {
                         npc.Motion.Normalize();
                         npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
-
                     }
                     //Aggro range
                     if (Vector2.Distance(npc.Position, player.Position) < 200 && !npc.Aggro && !npc.Running && !npc.HitFlag)
@@ -538,6 +533,7 @@ namespace TileGame.GameScreens
                         npc.Aggro = true;
                         npc.AttackersDirection = player.Position - npc.Position;
                     }
+                    
                     if (npc.Running)
                         npc.CheckForCollisionWithOtherNPCs(NPCFightingFarmers, player);
                 }
