@@ -62,12 +62,12 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
 
             FrameAnimation walkDown = new FrameAnimation(2, 50, 80, 50, 0);
-            FrameAnimation walkLeft = new FrameAnimation(2, 50, 80, 50, 80);
-            FrameAnimation walkRight = new FrameAnimation(2, 50, 80, 50, 160);
+            FrameAnimation walkLeft = new FrameAnimation(4, 50, 80, 0, 80);
+            FrameAnimation walkRight = new FrameAnimation(4, 50, 80, 0, 160);
             FrameAnimation walkUp = new FrameAnimation(2, 50, 80, 50, 240);
 
-            FrameAnimation throwLeft = new FrameAnimation(2, 50, 80, 200, 80);
-            FrameAnimation throwRight = new FrameAnimation(2, 50, 80, 200, 160);
+            FrameAnimation throwLeft = new FrameAnimation(2, 50, 80, 250, 80);
+            FrameAnimation throwRight = new FrameAnimation(2, 50, 80, 250, 160);
 
             this.Animations.Add("ThrowLeft", throwLeft);
             this.Animations.Add("ThrowRight", throwRight);
@@ -80,6 +80,9 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.Animations.Add("WalkLeft", walkLeft);
             this.Animations.Add("WalkUp", walkUp);
             this.Animations.Add("WalkDown", walkDown);
+
+            this.Animations["WalkRight"].FramesPerSeconds = 0.25f;
+            this.Animations["WalkLeft"].FramesPerSeconds = 0.25f;
             
         }
         public void UpdateRangedFighter(GameTime gameTime, AnimatedSprite player)
