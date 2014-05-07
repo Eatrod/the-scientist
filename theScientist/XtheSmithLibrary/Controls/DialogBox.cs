@@ -18,7 +18,6 @@ namespace XtheSmithLibrary.Controls
     {
         #region Field Region
 
-        private string text;
         public NPC_Story npc;
         public StoryProgress story;
         public List<NPC_Story> npcStoryList;
@@ -28,7 +27,6 @@ namespace XtheSmithLibrary.Controls
         private Rectangle rectangle;
         private StringBuilder stringBuilder;
         private int currentHandler;
-        private KeyboardState lastState;
         public List<SpriteFont> fonts;
         private Texture2D dialogArrow;
 
@@ -39,12 +37,6 @@ namespace XtheSmithLibrary.Controls
         #endregion
 
         #region Properties Region
-
-        public string Text
-        {
-            get { return text; }
-            set { this.text = value; }
-        }
 
         #endregion
 
@@ -68,12 +60,9 @@ namespace XtheSmithLibrary.Controls
 
         public override void Update(GameTime gameTime)
         {
-            KeyboardState newState = Keyboard.GetState();
-
             if (npc == null || conversation == null)
                 return;
-
-            if (newState.IsKeyDown(Keys.Up) && lastState.IsKeyUp(Keys.Up))
+            if (InputHandler.KeyboardState.IsKeyDown(Keys.Up) && InputHandler.LastKeyboardState.IsKeyUp(Keys.Up))
             {
                 currentHandler--;
                 if (currentHandler < 0)
@@ -81,13 +70,13 @@ namespace XtheSmithLibrary.Controls
                 arrowRect.Y = (int)arrowVector.Y + currentHandler*20;
             }
 
-            if (newState.IsKeyDown(Keys.Down) && lastState.IsKeyUp(Keys.Down))
+            if (InputHandler.KeyboardState.IsKeyDown(Keys.Down) && InputHandler.LastKeyboardState.IsKeyUp(Keys.Down))
             {
                 currentHandler = (currentHandler + 1) % conversation.Handlers.Count;
                 arrowRect.Y = (int)arrowVector.Y + currentHandler*20;
             }
 
-            if (newState.IsKeyDown(Keys.Space) && lastState.IsKeyUp(Keys.Space))
+            if (InputHandler.KeyboardState.IsKeyDown(Keys.Space) && InputHandler.LastKeyboardState.IsKeyUp(Keys.Space))
             {
                 arrowRect.Y = (int)arrowVector.Y;
                 conversation.Handlers[currentHandler].Invoke(npc,player, story);
@@ -95,58 +84,71 @@ namespace XtheSmithLibrary.Controls
                 this.conversation = npc.text;
                 currentHandler = 0;
             }
-
-            lastState = newState;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {          
             base.Draw(spriteBatch);
-            string stringWhoSaid = whoSaid(Text);
-            StringBuilder stringBuilder = new StringBuilder();
+            string stringWhoSaid = WhoSaid(Text);
+            this.BuildText();
+            this.DrawText(spriteBatch, stringWhoSaid);
+            this.DrawHandlers(spriteBatch);
+            this.DrawCharacterPortraits(spriteBatch);
+        }
+  
+
+        #endregion
+
+        #region Methods
+
+        private void BuildText()
+        {
+            stringBuilder = new StringBuilder();
             WrapWord(new StringBuilder(text), stringBuilder, SpriteFont, rectangle);
             Text = stringBuilder.ToString();
             if (rectangle.Y < 800 && rectangle.X < 1025)
             {
                 SpriteFont.LineSpacing = 25;
             }
-            spriteBatch.DrawString(fonts[1], stringWhoSaid, new Vector2(rectangle.X + 45, rectangle.Y+10), Color.White);
-            spriteBatch.DrawString(fonts[0], Text.Split(':')[1], new Vector2(rectangle.X+20, rectangle.Y+40), Color.White);
+        }
 
+        private void DrawText(SpriteBatch spriteBatch, string stringWhoSaid)
+        {
+            spriteBatch.DrawString(fonts[1], stringWhoSaid, new Vector2(rectangle.X + 45, rectangle.Y + 10), Color.White);
+            spriteBatch.DrawString(fonts[0], Text.Split(':')[1], new Vector2(rectangle.X + 20, rectangle.Y + 40), Color.White);
+        }
+
+        private void DrawHandlers(SpriteBatch spriteBatch)
+        {
             handlerVector = new Vector2(rectangle.X + 70, rectangle.Y + 100);
-            for (int i = 1; i < conversation.Handlers.Count+1; ++i)
+            for (int i = 1; i < conversation.Handlers.Count + 1; ++i)
             {
-                string handler = conversation.Handlers[i-1].Caption;
+                string handler = conversation.Handlers[i - 1].Caption;
 
-                Color color = (i-1 == currentHandler) ? Color.Orange : Color.Red;
+                color = (i - 1 == currentHandler) ? Color.Orange : Color.Red;
                 SpriteFont.Spacing = -2;
 
                 spriteBatch.Draw(dialogArrow, arrowRect, Color.White);
                 spriteBatch.DrawString(fonts[0], handler, handlerVector, color);
                 handlerVector.Y += 20;
             }
+        }
 
-            Rectangle pictureRectangle = new Rectangle(rectangle.X + 15, rectangle.Y-225, 200, 225);
+        private void DrawCharacterPortraits(SpriteBatch spriteBatch)
+        {
+            Rectangle pictureRectangle = new Rectangle(rectangle.X + 15, rectangle.Y - 225, 200, 225);
             foreach (var npc in npcStoryList)
             {
-                if (whoSaid(Text) == npc.NPCName)
+                if (WhoSaid(Text) == npc.NPCName)
                     spriteBatch.Draw(npc.picture, pictureRectangle, Color.White);
-                else if (whoSaid(Text) == "Ignazio")
+                else if (WhoSaid(Text) == "Ignazio")
                 {
                     spriteBatch.Draw(player.portrait, pictureRectangle, Color.White);
                 }
             }
         }
 
-        public override void HandleInput(PlayerIndex playerIndex)
-        {
-        }   
-
-        #endregion
-
-        #region Methods
-
-        public string whoSaid(string text)
+        public string WhoSaid(string text)
         {
             string[] talker = text.Split(':');
             return talker[0];
