@@ -3155,6 +3155,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharacterPotraits\FishmanTemp.png">
+      <Name>FishmanTemp</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="BackGrounds\selected.png">
       <Name>selected</Name>
       <Importer>TextureImporter</Importer>

@@ -8,14 +8,14 @@
   </Conversation>
 
   <Conversation Name="Ignazio1">
-    <Text>Ignazio: I don't need a stupid permit</Text>
+    <Text>Ignazio: I don't need a stupid permit!</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Guard1"/>
     </Handlers>
   </Conversation>
 
   <Conversation Name="Guard1">
-    <Text>Guard: Yes you do ragazzo now leave before we force you to</Text>
+    <Text>Guard: Yes you do ragazzo, now leave before we force you to.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Ignazio2" />
     </Handlers>
@@ -29,21 +29,21 @@
   </Conversation>
 
   <Conversation Name="Guard2">
-    <Text>Guard: Have you been living under a masso? The plague? You know the plague that kills people?</Text>
+    <Text>Guard: Have you been living under a masso? The plague? You know, the plague that kills people?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Ignazio3" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Ignazio3">
-    <Text>Ignazio: Fine I stay here for now</Text>
+    <Text>Ignazio: Fine, I stay here for now.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Guard3"/>
     </Handlers>
   </Conversation>
 
   <Conversation Name="Guard3">
-    <Text>Guard: Yeah i sure hope so</Text>
+    <Text>Guard: Yeah I sure hope so.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="EndConversation" />
     </Handlers>

@@ -1,21 +1,21 @@
 ﻿<Converstaions>
 
   <Conversation Name="Greeting">
-    <Text>Bibitur: Hey you have some alcohol?</Text>
+    <Text>Bibitur: Hey, you have some alcohol?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Ignazio1" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Ignazio1">
-    <Text>Ignazio: No i do not</Text>
+    <Text>Ignazio: No, I do not.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Bibitur1"/>
     </Handlers>
   </Conversation>
 
   <Conversation Name="Bibitur1">
-    <Text>Bibitur: Bah then leave me alone!</Text>
+    <Text>Bibitur: Bah, then leave me alone!</Text>
     <Handlers>
       <Handler Caption="Continue" Action="EndConversation" />
     </Handlers>

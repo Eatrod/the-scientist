@@ -283,7 +283,7 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Human"), Content.Load<Script>("Scripts/FishmarketNoFish"), Content.Load<Texture2D>("CharacterPotraits/DiaPortPlcholder"), "Fisherman");
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Human"), Content.Load<Script>("Scripts/FishmarketNoFish"), Content.Load<Texture2D>("CharacterPotraits/FishmanTemp"), "Fisherman");
             npcstory.scriptDict.Add("fishHave", Content.Load<Script>("Scripts/Fishmarket"));
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(84, 49));
