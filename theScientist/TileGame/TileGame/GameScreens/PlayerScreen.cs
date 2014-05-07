@@ -690,7 +690,7 @@ namespace TileGame.GameScreens
             {
                 player.elapsedShot += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 player.elapsedAttack += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                player.Speed = -0.1f;
+                //player.Speed = -0.1f;
                 
                 if (player.elapsedShot > player.delayShot && player.multishotArrow)
                 {
