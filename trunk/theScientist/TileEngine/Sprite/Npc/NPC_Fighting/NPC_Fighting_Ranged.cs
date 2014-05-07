@@ -46,7 +46,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.bombThrow = false;
             this.lockAndLoad = false;
             this.animationTime = false;
-            this.AggroRange = 300f;
+            this.AggroRange = 500f;
             this.Random = random;
             this.Direction = 0;
             this.Speed = 0.5f;

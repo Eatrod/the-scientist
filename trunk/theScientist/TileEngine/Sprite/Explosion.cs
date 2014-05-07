@@ -42,7 +42,7 @@ namespace TileEngine.Sprite
         {
             this.Position = Position;
             this.elapsedTime = 0.0f;
-            this.timeToLive = 1000f;
+            this.timeToLive = 700f;
             this.finished = false;
             this.damage = 2.0f;
             this.direction = Direction;
@@ -54,7 +54,7 @@ namespace TileEngine.Sprite
         public void UpdateExplosion(GameTime gameTime)
         {
             elapsedTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            this.Position += this.Direction * 2.0f;
+            this.Position += this.Direction * 5.0f;
             if (elapsedTime > timeToLive)
                 finished = true;
             base.Update(gameTime);

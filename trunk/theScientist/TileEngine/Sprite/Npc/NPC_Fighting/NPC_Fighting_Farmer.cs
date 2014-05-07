@@ -64,7 +64,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.ElapsedRespawn = 0.0f;
             this.DelayRespawn = 30000f;
             this.dirtPileCreated = false;
-            this.chargeDamage = 5;
+            this.chargeDamage = 10;
             this.elapsedAggro = 0;
             this.ElapsedHit = 0.0f;
             this.HitDelay = 500f;
@@ -76,7 +76,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.speed = 0.5f;
             this.direction = 0;
             this.cellPosition = Engine.ConvertPostionToCell(Position);
-            this.delayDirection = 5000f;
+            this.delayDirection = this.random.Next(2500,5000);
             this.motion = Vector2.Zero;
            
             FrameAnimation down = new FrameAnimation(1, 50, 80, 0, 0);
@@ -84,15 +84,15 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);            
             FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
 
-            FrameAnimation charge = new FrameAnimation(2, 50, 80, 200, 80);
-            FrameAnimation glide = new FrameAnimation(2, 50, 80, 300, 80);
+            FrameAnimation charge = new FrameAnimation(2, 50, 80, 250, 80);
+            FrameAnimation glide = new FrameAnimation(2, 50, 80, 350, 80);
 
-            FrameAnimation hitLeft = new FrameAnimation(1, 50, 80, 200, 160);
-            FrameAnimation hitRight = new FrameAnimation(1, 50, 80, 250, 160);
+            FrameAnimation hitLeft = new FrameAnimation(1, 50, 80, 250, 160);
+            FrameAnimation hitRight = new FrameAnimation(1, 50, 80, 300, 160);
 
             FrameAnimation walkDown = new FrameAnimation(2,50,80,50,0);
-            FrameAnimation walkLeft = new FrameAnimation(2, 50, 80, 50, 80);
-            FrameAnimation walkRight = new FrameAnimation(2, 50, 80, 50, 160);
+            FrameAnimation walkLeft = new FrameAnimation(4, 50, 80, 0, 80);
+            FrameAnimation walkRight = new FrameAnimation(4, 50, 80, 0, 160);
             FrameAnimation walkUp = new FrameAnimation(2, 50, 80, 50, 240);
             FrameAnimation nothing = new FrameAnimation(1, 0, 0, 0, 0);
 
@@ -111,6 +111,12 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.Animations.Add("WalkLeft", walkLeft);
             this.Animations.Add("WalkUp", walkUp);
             this.Animations.Add("WalkDown", walkDown);
+
+            this.Animations["Charge"].FramesPerSeconds = 0.15f;
+            this.Animations["Glide"].FramesPerSeconds = 0.15f;
+            this.Animations["WalkRight"].FramesPerSeconds = 0.25f;
+            this.Animations["WalkLeft"].FramesPerSeconds = 0.25f;
+
         }
         public void CheckForCollisionWithOtherNPCs(List<AnimatedSprite> Npcs, CharacterSprite player)
         {
@@ -153,10 +159,12 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             {
 
                 cellPosition = Engine.ConvertPostionToCell(Position);
-                if (cellPosition.X >= 20 && cellPosition.Y <= 15)
+                if (cellPosition.X >= 34 && cellPosition.Y <= 18)
                 {
-                    Position.X -= 5f;
+
+                    Position.X -= 10f;
                     collided = true;
+                    
                 }
                 elapsedDirection += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 if (collided && !HitFlag)
@@ -184,13 +192,12 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                     (float)Math.Sin(MathHelper.ToRadians(-direction)));
 
                 UpdateSpriteAnimation(motion);
-                this.CurrentAnimation.FramesPerSeconds = .35f;
+               
 
                 if (Aggro)
                 {
                     elapsedAggro += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                     this.CurrentAnimationName = "Charge";
-                    this.CurrentAnimation.FramesPerSeconds = 0.15f;
                     if (elapsedAggro > delayAggro)
                     {
                         running = true;
@@ -201,7 +208,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 else if (running)
                 {
                     this.CurrentAnimationName = "Glide";
-                    this.CurrentAnimation.FramesPerSeconds = .15f;
                     speed = 5.0f;
                     Position += AttackersDirection * speed;//speed;
                 }

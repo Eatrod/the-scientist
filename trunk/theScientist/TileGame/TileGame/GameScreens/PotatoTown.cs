@@ -162,21 +162,7 @@ namespace TileGame.GameScreens
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testFront.layer"));
             tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/testCollision.layer");
 
-            //En Sprite i världen som återskapas vid entry.
-            //NPC1 = new AnimatedSprite(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"));           
-            //NPC1.Origionoffset = new Vector2(25,65);
-            //NPC1.SetSpritePositionInGameWorld(new Vector2(9,9));
-            //NPC1.Life = 30;
-            //NPC1.FullHp = 30;
-            //AnimatedSpriteObject.Add(NPC1);
-
-            //NPC2 = new AnimatedSprite(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"));
-            //NPC2.Origionoffset = new Vector2(25, 65);
-            //NPC2.SetSpritePositionInGameWorld(new Vector2(12, 12));
-            //NPC2.Life = 5;
-            //NPC2.FullHp = 5;
-            //AnimatedSpriteObject.Add(NPC2);
-
+            #region Potatiskastare
             for (int i = 0; i < 4; i++ )
             {
                 NPC_Fighting_Ranged NPC_Ranged = new NPC_Fighting_Ranged(Content.Load<Texture2D>("Sprite/Bjorn_Try_Ranged"), null, GameRef.random);
@@ -187,29 +173,42 @@ namespace TileGame.GameScreens
                 AnimatedSpriteObject.Add(NPC_Ranged);
                 NPCRangedGuards.Add(NPC_Ranged);
             }
+#endregion
 
-            for (int i = 0; i < 0; i++ )
-            {
-                NPC_Fighting_Patrolling NPC_Patroller = new NPC_Fighting_Patrolling(Content.Load<Texture2D>("Sprite/Bjorn_Try_Golden_Soldier_Strike"), null, GameRef.random);
-                NPC_Patroller.Origionoffset = new Vector2(25, 65);
-                NPC_Patroller.SetSpritePositionInGameWorld(new Vector2(81 + i, 70));
-                NPC_Patroller.Life = 100;
-                NPC_Patroller.FullHp = 100;
-                AnimatedSpriteObject.Add(NPC_Patroller);
-                NPCPatrollingGuards.Add(NPC_Patroller);
-            }
-            for (int i = 0; i < 8; i++)
+            #region Dementa bönder
+            for (int i = 0; i < 10; i++)
             {
                 NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/Bjorn_Try_Farmer"), null, GameRef.random, new Vector2((5+i) * 32, 22 * 32));
                 NPC_Farmer.Origionoffset = new Vector2(25, 65);
                 NPC_Farmer.SetSpritePositionInGameWorld(new Vector2(5 + i, 22));
-                NPC_Farmer.Life = 10;
-                NPC_Farmer.FullHp = 10;
+                NPC_Farmer.Life = 100;
+                NPC_Farmer.FullHp = 100;
                 AnimatedSpriteObject.Add(NPC_Farmer);
                 NPCFightingFarmers.Add(NPC_Farmer);
-
             }
+            for (int i = 0; i < 7; i++)
+            {
+                NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/Bjorn_Try_Farmer"), null, GameRef.random, new Vector2((5 + i) * 32, 22 * 32));
+                NPC_Farmer.Origionoffset = new Vector2(25, 65);
+                NPC_Farmer.SetSpritePositionInGameWorld(new Vector2(23, 19));
+                NPC_Farmer.Life = 100;
+                NPC_Farmer.FullHp = 100;
+                AnimatedSpriteObject.Add(NPC_Farmer);
+                NPCFightingFarmers.Add(NPC_Farmer);
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                NPC_Fighting_Farmer NPC_Farmer = new NPC_Fighting_Farmer(Content.Load<Texture2D>("Sprite/Bjorn_Try_Farmer"), null, GameRef.random, new Vector2((5 + i) * 32, 22 * 32));
+                NPC_Farmer.Origionoffset = new Vector2(25, 65);
+                NPC_Farmer.SetSpritePositionInGameWorld(new Vector2(21, 10));
+                NPC_Farmer.Life = 100;
+                NPC_Farmer.FullHp = 100;
+                AnimatedSpriteObject.Add(NPC_Farmer);
+                NPCFightingFarmers.Add(NPC_Farmer);
+            }
+            #endregion
 
+            #region Patrullerande Banditer
             for (int i = 0; i < 10; i++)
             {
                 //Detta är NPC_Banditer, ska bli en egen klass senare
@@ -229,6 +228,7 @@ namespace TileGame.GameScreens
                 NPCPatrollingGuards.Add(NPC_Bandit);
 
             }
+            #endregion
 
             #region Story NPCs
             npcStoryAsterix = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"), "Asterix");
