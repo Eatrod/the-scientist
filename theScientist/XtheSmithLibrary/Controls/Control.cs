@@ -24,7 +24,7 @@ namespace XtheSmithLibrary.Controls
         protected bool visible;
         protected bool tabStop;
         protected SpriteFont spriteFont;
-        protected Color color;
+        public Color color;
         protected string type;
 
         #endregion
