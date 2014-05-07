@@ -32,6 +32,8 @@ namespace TileGame.GameScreens
         LinkLabel regretStartOver;
         LinkLabel helpMenu;
         Label saveText;
+        Label startOverText;
+        Texture2D arrowTexture;
         float maxItemWidth = 0f;
 
         object thisLock = new object();
@@ -66,7 +68,7 @@ namespace TileGame.GameScreens
                 Content.Load<Texture2D>(@"BackGrounds\PotatoWarsYellow"),
                 GameRef.ScreenRectangle);
             ControlManager.Add(backgroundImage);
-            Texture2D arrowTexture = Content.Load<Texture2D>(@"GUI\leftarrowUp");
+            arrowTexture = Content.Load<Texture2D>(@"BackGrounds\selected");
             
             arrowImage = new PictureBox(
                 arrowTexture,
@@ -96,6 +98,8 @@ namespace TileGame.GameScreens
                 contGame.Selected += menuItem_Selected;
                 ControlManager.Add(contGame);
             }
+
+            SpriteFont fontLarge = Content.Load<SpriteFont>(@"Fonts\Large_Venice");
 
             helpMenu = new LinkLabel();
             helpMenu.Text = "The story's controls!";
@@ -132,8 +136,21 @@ namespace TileGame.GameScreens
             saveText = new Label();
             saveText.Text = "Write over your last save, Smith?";
             saveText.Size = saveText.SpriteFont.MeasureString(saveText.Text);
+            saveText.SpriteFont = fontLarge;
 
+            startOver = new LinkLabel();
+            startOver.Text = "Yes please!";
+            startOver.Size = startOver.SpriteFont.MeasureString(startOver.Text);
+
+            regretStartOver = new LinkLabel();
+            regretStartOver.Text = "Nooo!";
+            regretStartOver.Size = regretStartOver.SpriteFont.MeasureString(regretStartOver.Text);
+
+            startOverText = new Label();
+            startOverText.Text = "Realy start a new story, Smith?";
+            startOverText.Size = startOverText.SpriteFont.MeasureString(startOverText.Text);
             
+            startOverText.SpriteFont = fontLarge;
 
             ControlManager.NextControl();
             ControlManager.FocusChanged += new EventHandler(ControlManager_FocusChanged);
@@ -208,7 +225,7 @@ namespace TileGame.GameScreens
             helpMenu.Selected -= menuItem_Selected;
         }
 
-        void SwitchBackToOriginalMenu()
+        public void SwitchBackToOriginalMenu()
         {
             //Remove not used item
             ControlManager.RemoveItem(writeOver);
@@ -217,7 +234,14 @@ namespace TileGame.GameScreens
             ControlManager.RemoveItem(regretSave);
             regretSave.Selected -= menuItem_Selected;
 
+            ControlManager.RemoveItem(startOver);
+            startOver.Selected -= menuItem_Selected;
+
+            ControlManager.RemoveItem(regretStartOver);
+            regretStartOver.Selected -= menuItem_Selected;
+
             ControlManager.RemoveItem(saveText);
+            ControlManager.RemoveItem(startOverText);
 
             //Add original items
             ControlManager.AddItem(startGame);
@@ -238,21 +262,66 @@ namespace TileGame.GameScreens
 
         }
 
+        void SwitchToRealyRestartGame()
+        {
+            //Remove control not to use
+            ControlManager.RemoveItem(startGame);
+            startGame.Selected -= menuItem_Selected;
+
+            ControlManager.RemoveItem(contGame);
+            contGame.Selected -= menuItem_Selected;
+
+            ControlManager.RemoveItem(saveGame);
+            saveGame.Selected -= menuItem_Selected;
+
+            ControlManager.RemoveItem(loadGame);
+            loadGame.Selected -= menuItem_Selected;
+
+            ControlManager.RemoveItem(exitGame);
+            exitGame.Selected -= menuItem_Selected;
+
+            ControlManager.RemoveItem(helpMenu);
+            helpMenu.Selected -= menuItem_Selected;
+
+            //Add controls to use
+            ControlManager.AddItem(startOverText);
+
+            ControlManager.AddItem(startOver);
+            startOver.Selected += menuItem_Selected;
+
+            ControlManager.AddItem(regretStartOver);
+            regretStartOver.Selected += menuItem_Selected;
+        }
+
         void ControlManager_FocusChanged(object sender, EventArgs e)
         {
             Control control = sender as Control;
-            Vector2 position = new Vector2(control.Position.X + maxItemWidth + 10f,
+           // Vector2 position = new Vector2(control.Position.X + maxItemWidth + 10f,
+           //control.Position.Y);
+            Vector2 position = new Vector2(control.Position.X - 10f,
            control.Position.Y);
+            //arrowImage.DestinationRectangle = new Rectangle(0, 0, (int)control.Size.X, (int)control.Size.Y);
+            //arrowImage.SourceRectangle = new Rectangle(0,0,(int)control.Size.X, (int)control.Size.Y);
             arrowImage.SetPosition(position);
         }
         private void menuItem_Selected(object sender, EventArgs e)
          {
             if (sender == startGame)
             {
-                StartGame();
+                if (GameRef.firstRun)
+                {
+                    GameRef.firstRun = false;
+                    SwitchToRealyRestartGame();
+                    StartGame();
+                }
+                else
+                {
+                    SwitchToRealyRestartGame();
+                }
             }
             if (sender == contGame)
             {
+                SwitchToRealyRestartGame();
                 StateManager.ChangeState(GameRef.PotatoTown);
             }
             if (sender == saveGame)
@@ -263,6 +332,7 @@ namespace TileGame.GameScreens
             }
             if (sender == loadGame)
             {
+                SwitchToRealyRestartGame();
                 LoadGame();
             }
             if (sender == exitGame)
@@ -283,6 +353,16 @@ namespace TileGame.GameScreens
                 SwitchToHelpMenuScreen();
                 helpMenuImage.Visible = true;
                 ControlManager.AddItem(helpMenuImage);
+            }
+            if(sender == startOver)
+            {
+                GameRef.firstRun = false;
+                StartGame();
+                
+            }
+            if(sender == regretStartOver)
+            {
+                SwitchBackToOriginalMenu();
             }
         }
 
@@ -374,8 +454,10 @@ namespace TileGame.GameScreens
                 }
                 if(c.HasFocus)
                 {
-                    Vector2 controlPosition = new Vector2(c.Position.X + maxItemWidth + 10f,
+                    Vector2 controlPosition = new Vector2(c.Position.X - 10f,
                         c.Position.Y);
+                    //arrowImage.DestinationRectangle = new Rectangle(0, 0, (int)c.Size.X, (int)c.Size.Y);
+                    //arrowImage.SourceRectangle = new Rectangle(0, 0, (int)c.Size.X, (int)c.Size.Y);
                     arrowImage.SetPosition(controlPosition);
                 }
             }

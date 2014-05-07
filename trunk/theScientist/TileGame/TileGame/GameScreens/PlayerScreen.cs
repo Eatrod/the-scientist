@@ -267,11 +267,15 @@ namespace TileGame.GameScreens
        
             if(player == null)
             {
+                Point startCell;
+                startCell = GameRef.BaseGamePlayScreen.FindCellWithIndexInCurrentTilemap(
+                50,
+                GameRef.PotatoTown);
                 player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/Player"), Content.Load<Texture2D>("CharacterPotraits/Assassins-Creed-4"));
-            player.Origionoffset = new Vector2(25, 65);
-                //player.SetSpritePositionInGameWorld(new Vector2(4, 3));
-            player.Life = 100;
-            player.Stamina = 100;
+                player.Origionoffset = new Vector2(25, 65);
+                player.SetSpritePositionInGameWorld(new Vector2(startCell.X, startCell.Y));
+                player.Life = 100;
+                player.Stamina = 100;
             }
 
             //BF
@@ -648,6 +652,7 @@ namespace TileGame.GameScreens
 
             if (InputHandler.KeyReleased(Keys.Escape))
             {
+                GameRef.StartMenuScreen.SwitchBackToOriginalMenu();
                 GameRef.lastGameScreen = GameRef.stateManager.CurrentState.Tag.ToString();
                 GameRef.playerPosition = player.Position;
                 GameRef.playerLife = player.Life;
