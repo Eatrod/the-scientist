@@ -104,7 +104,7 @@ namespace TileGame.Collision
                 {
                     //if (BaseSprite.AreColliding(playerprojectiles[Projectile], sprite) && SpriteObjectInGameWorld.Contains(sprite))
                     //{
-                    if (playerprojectiles[Projectile].Bounds.Intersects(sprite.Bounds) && sprite.Life > 0)
+                    if (playerprojectiles[Projectile].Bounds.Intersects(sprite.MovementBounds()) && sprite.Life > 0)
                     {
                         sprite.Life -= playerprojectiles[Projectile].damageofprojectile;
                         //sprite.ArrowDirection = playerprojectiles[Projectile].Origin - sprite.Origin;
