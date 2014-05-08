@@ -48,7 +48,7 @@ namespace XtheSmithLibrary.Controls
             this.rectangle = rectangle;
             this.fonts = fonts;
             this.dialogArrow = dialogArrow;
-            handlerVector = new Vector2(rectangle.X + 70, rectangle.Y + 100);
+            handlerVector = new Vector2(rectangle.X + 70, rectangle.Y + 80);
             arrowRect = new Rectangle((int)handlerVector.X-38, (int)handlerVector.Y+7, 22, 19);
             arrowVector.Y = handlerVector.Y+7;
         }
@@ -114,13 +114,13 @@ namespace XtheSmithLibrary.Controls
 
         private void DrawText(SpriteBatch spriteBatch, string stringWhoSaid)
         {
-            spriteBatch.DrawString(fonts[1], stringWhoSaid, new Vector2(rectangle.X + 45, rectangle.Y + 10), Color.White);
-            spriteBatch.DrawString(fonts[0], Text.Split(':')[1], new Vector2(rectangle.X + 20, rectangle.Y + 40), Color.White);
+            //spriteBatch.DrawString(fonts[1], stringWhoSaid, new Vector2(rectangle.X + 45, rectangle.Y + 10), Color.White);
+            spriteBatch.DrawString(fonts[0], Text.Split(':')[1], new Vector2(rectangle.X + 20, rectangle.Y + 25), Color.White);
         }
 
         private void DrawHandlers(SpriteBatch spriteBatch)
         {
-            handlerVector = new Vector2(rectangle.X + 70, rectangle.Y + 100);
+            handlerVector = new Vector2(rectangle.X + 70, rectangle.Y + 80);
             for (int i = 1; i < conversation.Handlers.Count + 1; ++i)
             {
                 string handler = conversation.Handlers[i - 1].Caption;
@@ -136,11 +136,14 @@ namespace XtheSmithLibrary.Controls
 
         private void DrawCharacterPortraits(SpriteBatch spriteBatch)
         {
-            Rectangle pictureRectangle = new Rectangle(rectangle.X + 15, rectangle.Y - 225, 200, 225);
+            Rectangle pictureRectangle = new Rectangle(rectangle.X + 15, rectangle.Y - 255, 200, 275);
             foreach (var npc in npcStoryList)
             {
                 if (WhoSaid(Text) == npc.NPCName)
+                {
+                    pictureRectangle.X = rectangle.X + 475;
                     spriteBatch.Draw(npc.picture, pictureRectangle, Color.White);
+                }
                 else if (WhoSaid(Text) == "Ignazio")
                 {
                     spriteBatch.Draw(player.portrait, pictureRectangle, Color.White);

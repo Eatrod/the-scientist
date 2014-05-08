@@ -278,6 +278,7 @@
       <Name>AsterixDialog</Name>
       <Importer>ScriptImporter</Importer>
       <Processor>ScriptProcessor</Processor>
+      <SubType>Designer</SubType>
     </Compile>
     <None Include="Layers\testMiddle.layer">
       <Name>testMiddle</Name>
@@ -1895,6 +1896,7 @@
       <Name>PotatotownTownsfolk</Name>
       <Importer>ScriptImporter</Importer>
       <Processor>ScriptProcessor</Processor>
+      <SubType>Designer</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -3155,15 +3157,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharacterPotraits\FishmanTemp.png">
-      <Name>FishmanTemp</Name>
+    <Compile Include="BackGrounds\selected.png">
+      <Name>selected</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackGrounds\selected.png">
-      <Name>selected</Name>
+    <Compile Include="CharacterPotraits\Fisherman.png">
+      <Name>Fisherman</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
