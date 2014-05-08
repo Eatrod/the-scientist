@@ -138,11 +138,11 @@ namespace TileGame.GameScreens
             if (StoryProgress.ProgressLine["Axe"])
                 hintDict[2].Unlocked = true;
 
-            if (InputHandler.KeyReleased(Keys.H))
+            if (InputHandler.KeyReleased(Keys.Up))
             {
                 activeDict = hintDict;
             }
-            if (InputHandler.KeyReleased(Keys.C))
+            if (InputHandler.KeyReleased(Keys.Down))
             {
                 activeDict = completedDict;
             }

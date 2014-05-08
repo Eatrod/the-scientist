@@ -574,18 +574,7 @@ namespace TileGame.GameScreens
                         }
                 }
             }
-
-
-            foreach (var sprite in SpriteObjectInGameWorld)
-            {
-                if (PlayerInTriggerRange(sprite))
-                {
-                    if (showingThinkingBox == false)
-                        if (!StoryProgress.ProgressLine["Axe"] && sprite == treeStanding)
-                            PlayerShowThinkingBox("I will need an axe for this");                        
-                    }
-                }
-
+          
 
             //Kontroller för kod som rör Neutrala NPCs
             foreach (var npc in NpcNeutralList)
