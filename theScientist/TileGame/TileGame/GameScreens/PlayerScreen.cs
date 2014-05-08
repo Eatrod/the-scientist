@@ -42,7 +42,6 @@ namespace TileGame.GameScreens
         protected PlayerScreen screen;
         protected DialogBox dialogBox;
         protected TextBubble textBubble;
-        protected ThinkingBox thinkingBox;
         protected NPC_Story talksTo;
         protected bool showingThinkingBox = false;
         
@@ -316,7 +315,6 @@ namespace TileGame.GameScreens
             rectangle = new Rectangle(GraphicsDevice.Viewport.Width/2-350, GraphicsDevice.Viewport.Height - 200, 700, 193);
             dialogBox = new DialogBox(fonts,Content.Load<Texture2D>("GUI/DialogBox"), rectangle, "", Content.Load<Texture2D>("GUI/DialogArrow"));
             textBubble = new TextBubble(Content.Load<Texture2D>("GUI/SpeechBubble"), rectangle, "", Content.Load<SpriteFont>("Fonts/BubbleFont"));
-            thinkingBox = new ThinkingBox(Content.Load<Texture2D>("GUI/DialogBox"), "", rectangle, player);
 
             gateDict = new Dictionary<string, int>();
             for (int i = 0; i < 10; i++)
@@ -667,7 +665,6 @@ namespace TileGame.GameScreens
                 StateManager.PushState(GameRef.InventoryScreen);
 
             dialogBox.Update(gameTime);
-            thinkingBox.Update(gameTime);
 
             if (motion != Vector2.Zero && !player.shotFired && !player.meleeAttackStart && !player.meleeAttackFinish)
             {
@@ -1651,21 +1648,6 @@ namespace TileGame.GameScreens
 
         
         #region Method Region
-        public void PlayerShowThinkingBox(string text)
-        {
-            showingThinkingBox = true;
-            thinkingBox.Visible = true;
-            thinkingBox.Enabled = true;
-            thinkingBox.text = text;
-            ControlManager.Add(thinkingBox);
-        }
-
-        public void PlayerHideThinkingBox()
-        {
-            showingThinkingBox = false;
-            ControlManager.Remove(thinkingBox);
-        }
-
         public void PlayerShowTextBubble(NPC_Neutral_Townsfolk npc)
         {
             npc.TextBubble();
