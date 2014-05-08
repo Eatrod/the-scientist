@@ -1,14 +1,14 @@
 ﻿<Converstaions>
 
   <Conversation Name="Greeting">
-    <Text>Guard: You again?! I told you, no passing if you don't have permit!</Text>
+    <Text>Guard:You again?! I told you, no passing if you don't have permit!</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Ignazio1" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Ignazio1">
-    <Text>Ignazio: But I do have a permit.</Text>
+    <Text>Ignazio:But I do have a permit.</Text>
     <Handlers>
       <Handler Caption="Show permit" Action="StartConversation:Guard1"/>
       <Handler Caption="Leave" Action="EndConversation"/>
@@ -16,7 +16,7 @@
   </Conversation>
 
   <Conversation Name="Guard1">
-    <Text>Guard: Ah yes, very well, then you may pass!</Text>
+    <Text>Guard:Ah yes, very well, then you may pass!</Text>
     <Handlers>
       <Handler Caption="Continue" Action="EndConversation" />
     </Handlers>
