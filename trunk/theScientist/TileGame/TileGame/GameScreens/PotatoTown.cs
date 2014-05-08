@@ -231,7 +231,7 @@ namespace TileGame.GameScreens
             #endregion
 
             #region Story NPCs
-            npcStoryAsterix = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/asterix"), "Asterix");
+            npcStoryAsterix = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/Anon"), "Asterix");
             npcStoryAsterix.Origionoffset = new Vector2(25, 65);
             npcStoryAsterix.SetSpritePositionInGameWorld(new Vector2(64, 11));//(20, 17));
             AnimatedSpriteObject.Add(npcStoryAsterix);
@@ -243,40 +243,40 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/HumanNPCDartagnan"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/john"), "John");
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/HumanNPCDartagnan"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/Anon"), "John");
             npcstory.Origionoffset = new Vector2(25,65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(136, 15));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/HumanNPCDartagnan"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/johnny"), "Johnny");
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/HumanNPCDartagnan"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/Anon"), "Johnny");
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(140, 15));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            guard = new NPC_Story_GuardCaptain(Content.Load<Texture2D>("Sprite/NPCGuardCaptain"), Content.Load<Script>("Scripts/DrunkGuard"), Content.Load<Texture2D>("CharacterPotraits/pimp-bender"), "Bibitur");
+            guard = new NPC_Story_GuardCaptain(Content.Load<Texture2D>("Sprite/NPCGuardCaptain"), Content.Load<Script>("Scripts/DrunkGuard"), Content.Load<Texture2D>("CharacterPotraits/Anon"), "Bibitur");
             guard.scriptDict.Add("alcoholHave", Content.Load<Script>("Scripts/DrunkGuardHaveAlcohol"));
             guard.Origionoffset = new Vector2(25, 65);
             guard.SetSpritePositionInGameWorld(new Vector2(64, 13));
             AnimatedSpriteObject.Add(guard);
             NpcStoryList.Add(guard);
 
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/GateGuards"), Content.Load<Texture2D>("CharacterPotraits/Jackie"), "Guard");
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/GateGuards"), Content.Load<Texture2D>("CharacterPotraits/Anon"), "Guard");
             npcstory.scriptDict.Add("permitHave", Content.Load<Script>("Scripts/GateGuardsHavePermit"));
             npcstory.Origionoffset = new Vector2(25, 65);
-            npcstory.SetSpritePositionInGameWorld(new Vector2(145, 32));
+            npcstory.SetSpritePositionInGameWorld(new Vector2(144, 33));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/GateGuards"), Content.Load<Texture2D>("CharacterPotraits/Jackie"), "Guard");
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/GateGuards"), Content.Load<Texture2D>("CharacterPotraits/Anon"), "Guard");
             npcstory.scriptDict.Add("permitHave", Content.Load<Script>("Scripts/GateGuardsHavePermit"));
             npcstory.Origionoffset = new Vector2(25, 65);
-            npcstory.SetSpritePositionInGameWorld(new Vector2(145, 30));
+            npcstory.SetSpritePositionInGameWorld(new Vector2(144, 31));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Human"), Content.Load<Script>("Scripts/InnkeeperNoMoney"), Content.Load<Texture2D>("CharacterPotraits/asterix"), "Innkeeper");
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Human"), Content.Load<Script>("Scripts/InnkeeperNoMoney"), Content.Load<Texture2D>("CharacterPotraits/Anon"), "Innkeeper");
             npcstory.scriptDict.Add("moneyHave", Content.Load<Script>("Scripts/Innkeeper"));
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(62, 13));
