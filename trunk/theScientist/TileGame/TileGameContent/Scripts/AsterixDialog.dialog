@@ -15,7 +15,14 @@
   </Conversation>
 
   <Conversation Name="AsterixAnswer">
-    <Text>Asterix: Ain't no potato that ain't my potato, ragazzo. We have Le Adora di Ravenna, Rapido di Milano, Silla di Roma and Velox di Valencia, but they be far from this..</Text>
+    <Text>Asterix: Ain't no potato that ain't my potato, ragazzo.</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:AsterixAnswer2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="AsterixAnswer2">
+    <Text>Asterix: We have Le Adora di Ravenna, Rapido di Milano, Silla di Roma and Velox di Valencia, but they be far from this..</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:IgnazioInterupt" />
     </Handlers>
