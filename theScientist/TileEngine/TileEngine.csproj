@@ -84,6 +84,7 @@
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Farmer.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Guard.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Patrolling.cs" />
+    <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_PotatoeGunner.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Ranged.cs" />
     <Compile Include="Sprite\Npc\NPC_Fighting\NPC_Fighting_Stationary.cs" />
     <Compile Include="Sprite\Npc\NPC_Neutral\NPC_Neutral.cs" />

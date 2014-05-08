@@ -14,18 +14,16 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 {
     public class NPC_Fighting_Patrolling: NPC_Fighting_Guard
     {
-        
-        
-        
+
         
         
       
         public NPC_Fighting_Patrolling(Texture2D texture, Script script, Random random) :base(texture,script)
         {
+           
             this.TimeToStrike = false;
             this.DelayTimeToStrike = 250f;
             this.ElapsedTimeToStrike = 0.0f;
-
             this.ElapsedStrike = 0.0f;
             this.DelayStrike = 1000f;
             this.ElapsedHitByMelee = 0.0f;
@@ -54,7 +52,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.GoingHome = false;
             this.ElapsedDirection = 0.0f;
             this.DelayDirection = 3000f;
-            
+            this.delaySeek = random.Next(500,2000);
+            this.elapsedSeek = 0.0f;
 
             FrameAnimation down = new FrameAnimation(1, 50, 80, 150, 0);
             FrameAnimation left = new FrameAnimation(1, 50, 80, 0, 80);

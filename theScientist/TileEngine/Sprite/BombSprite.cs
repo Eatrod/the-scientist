@@ -31,7 +31,7 @@ namespace TileEngine.Sprite
         
         public BombSprite(Texture2D texture, Vector2 goalTarget, Vector2 Position): base(texture)
         {
-            this.maxSpeedOfBomb = 5.0f;
+            this.maxSpeedOfBomb = 3.0f;
             this.speedOfBomb = 0.0f;
             this.goalTarget = goalTarget;
             this.Position = Position;
@@ -43,11 +43,7 @@ namespace TileEngine.Sprite
         }
         public void UpdateBomb(GameTime gameTime)
         {
-            if(this.speedOfBomb < maxSpeedOfBomb)
-            {
-                this.speedOfBomb += 0.1f;
-            }
-            this.Position += goalTargetVector * this.speedOfBomb;
+            this.Position += goalTargetVector * this.maxSpeedOfBomb;
             elapsedFly +=(float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if(elapsedFly > delayFly)
             {

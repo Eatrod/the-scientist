@@ -70,9 +70,11 @@ namespace TileGame.GameScreens
         List<AnimatedSprite> NPCPatrollingGuards = new List<AnimatedSprite>();
         List<AnimatedSprite> NPCStationaryGuards = new List<AnimatedSprite>();
         List<AnimatedSprite> NPCRangedGuards = new List<AnimatedSprite>();
+        List<AnimatedSprite> NPCPotatoeGunners = new List<AnimatedSprite>();
         List<Sprite> DirtPiles = new List<Sprite>();
         List<Sprite> BombSprites = new List<Sprite>();
         List<AnimatedSprite> Explosions = new List<AnimatedSprite>();
+        
         
 
         public string Name { get { return name; } }
@@ -162,17 +164,34 @@ namespace TileGame.GameScreens
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testFront.layer"));
             tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/testCollision.layer");
 
-            #region Potatiskastare
-            for (int i = 0; i < 4; i++ )
+            #region Potatisgunners
+            for (int i = 0; i < 4; i++)
             {
-                NPC_Fighting_Ranged NPC_Ranged = new NPC_Fighting_Ranged(Content.Load<Texture2D>("Sprite/Bjorn_Try_Ranged"), null, GameRef.random);
-                NPC_Ranged.Origionoffset = new Vector2(25, 65);
-                NPC_Ranged.SetSpritePositionInGameWorld(new Vector2(120 + i, 90 + i));
-                NPC_Ranged.Life = 100;
-                NPC_Ranged.FullHp = 100;
-                AnimatedSpriteObject.Add(NPC_Ranged);
-                NPCRangedGuards.Add(NPC_Ranged);
+                NPC_Fighting_PotatoeGunner NPC_Gunner = new NPC_Fighting_PotatoeGunner(Content.Load<Texture2D>("Sprite/Bjorn_Try_PotatoeGunner"), null);
+                NPC_Gunner.Origionoffset = new Vector2(25, 65);
+                NPC_Gunner.SetSpritePositionInGameWorld(new Vector2(80 + i, 70 + i));
+                NPC_Gunner.Life = 100;
+                NPC_Gunner.FullHp = 100;
+                AnimatedSpriteObject.Add(NPC_Gunner);
+                NPCPotatoeGunners.Add(NPC_Gunner);
             }
+            NPCPotatoeGunners[0].SetSpritePositionInGameWorld(new Vector2(87, 65));
+            NPCPotatoeGunners[1].SetSpritePositionInGameWorld(new Vector2(87, 75));
+            NPCPotatoeGunners[2].SetSpritePositionInGameWorld(new Vector2(77, 65));
+            NPCPotatoeGunners[3].SetSpritePositionInGameWorld(new Vector2(77, 75));
+            #endregion
+
+            #region Potatiskastare
+                for (int i = 0; i < 4; i++)
+                {
+                    NPC_Fighting_Ranged NPC_Ranged = new NPC_Fighting_Ranged(Content.Load<Texture2D>("Sprite/Bjorn_Try_Ranged"), null, GameRef.random);
+                    NPC_Ranged.Origionoffset = new Vector2(25, 65);
+                    NPC_Ranged.SetSpritePositionInGameWorld(new Vector2(120 + i, 90 + i));
+                    NPC_Ranged.Life = 100;
+                    NPC_Ranged.FullHp = 100;
+                    AnimatedSpriteObject.Add(NPC_Ranged);
+                    NPCRangedGuards.Add(NPC_Ranged);
+                }
 #endregion
 
             #region Dementa bönder
@@ -447,7 +466,7 @@ namespace TileGame.GameScreens
                 }
                 if(bomb.Boom)
                 {
-                    for (int i = 0; i < 5; i++)
+                    for (int i = 0; i < 4; i++)
                     {
                         Explosion explosion = new Explosion(Content.Load<Texture2D>("Sprite/Bjorn_Try_Explosion"),
                             bomb.Position,new Vector2(GameRef.random.Next(-100,100)/100f,GameRef.random.Next(-100,100)/100f));
@@ -462,6 +481,24 @@ namespace TileGame.GameScreens
                 }
                 
             }
+            foreach(NPC_Fighting_PotatoeGunner npc in NPCPotatoeGunners)
+            {
+                npc.UpdateWithPlayer(gameTime, player);
+                if(npc.FireTime)
+                {
+                    BombSprite bomb;
+                    if(npc.CurrentAnimationName == "AttackPlayerRight")
+                        bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
+                                new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(npc.Position.X + 50, npc.Position.Y + 20));
+                    else
+                        bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
+                               new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(npc.Position.X, npc.Position.Y + 20));
+                    BombSprites.Add(bomb);
+                    renderList.Add(bomb);
+                    npc.FireTime = false;
+                   
+                }
+            }
             foreach(NPC_Fighting_Ranged npc in NPCRangedGuards)
             {
                 if (!npc.Dead)
@@ -469,9 +506,13 @@ namespace TileGame.GameScreens
                     npc.UpdateRangedFighter(gameTime, player);
                     if (npc.BombThrow)
                     {
-                        BombSprite bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
-                            new Vector2(player.Origin.X, player.Origin.Y - 40), npc.Position);
-                        bomb.Position = npc.Position;
+                        BombSprite bomb;
+                        if (npc.CurrentAnimationName == "ThrowRight")
+                            bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
+                                    new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(npc.Position.X + 50, npc.Position.Y + 20));
+                        else
+                            bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
+                                   new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(npc.Position.X, npc.Position.Y + 20));
                         BombSprites.Add(bomb);
                         renderList.Add(bomb);
                         npc.BombThrow = false;
