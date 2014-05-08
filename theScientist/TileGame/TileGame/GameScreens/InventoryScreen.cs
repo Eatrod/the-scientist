@@ -24,9 +24,16 @@ namespace TileGame.GameScreens
         Texture2D inventoryCursorImage;
         int cursor_X, cursor_Y;
         int cursor_item_number;
+        Label axeLabel, bowLabel;
         Label belladonnaLabel, immortuiLabel, ironOreLabel, permitLabel, goldLabel, alcoholLabel, fishLabel;
         Label amountOfIronLabel, amountOfGoldLabel, amountOfFishLabel;
         Label[] activeWeaponNumbers;
+
+        int item_width, item_height, active_item_width, active_item_height;
+        int weapon_starting_x, nonweapon_starting_x, item_starting_y, item_x_distance, item_y_distance;
+        int cursor_bracket_width, cursor_y_distance, cursor_width, cursor_height;
+        int active_item_slot_width, active_item_slot_height, active_item_slot_starting_x, active_item_slot_bracket_width;
+        int active_item_y, active_item_x_distance, active_item_starting_x;
 
         #endregion
 
@@ -55,6 +62,32 @@ namespace TileGame.GameScreens
             ContentManager Content = GameRef.Content;
             base.LoadContent();
 
+            cursor_bracket_width = (GameRef.ScreenRectangle.Width / 6) / 6;
+            cursor_y_distance = GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10;
+            cursor_width = GameRef.ScreenRectangle.Width / 6;
+            cursor_height = GameRef.ScreenRectangle.Height / 6;
+
+            item_width = GameRef.ScreenRectangle.Width / 8;
+            item_height = GameRef.ScreenRectangle.Height / 6;
+
+            active_item_slot_width = GameRef.ScreenRectangle.Width / 15;
+            active_item_slot_height = GameRef.ScreenRectangle.Height / 15;
+            active_item_slot_starting_x = GameRef.ScreenRectangle.Width / 15;
+            active_item_slot_bracket_width = GameRef.ScreenRectangle.Width / 90;
+
+            active_item_width = GameRef.ScreenRectangle.Width / 20;
+            active_item_height = GameRef.ScreenRectangle.Height / 15;
+            active_item_y = GameRef.ScreenRectangle.Height / 12;
+            active_item_x_distance = GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15;
+            active_item_starting_x = active_item_slot_starting_x + active_item_slot_bracket_width;
+
+            item_x_distance = GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5;
+            weapon_starting_x = GameRef.ScreenRectangle.Width / 15 + cursor_bracket_width;
+            nonweapon_starting_x = GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10;
+
+            item_starting_y = GameRef.ScreenRectangle.Height / 5;
+            item_y_distance = item_height + item_height / 10;
+
             inventoryBackground = Content.Load<Texture2D>(@"Backgrounds\Inventory test");
             axeImage = Content.Load<Texture2D>(@"Sprite\Axe");
             swordImage = Content.Load<Texture2D>(@"Sprite\Inv Sword test");
@@ -69,76 +102,87 @@ namespace TileGame.GameScreens
             fishImage = Content.Load<Texture2D>(@"Sprite\Fish");
 
             amountOfIronLabel = new Label();
-            //GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6
             amountOfIronLabel.Text = "";
             amountOfIronLabel.Color = Color.Black;
-            amountOfIronLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3) + (GameRef.ScreenRectangle.Height / 6) / 3); //new Vector2(860, 200 + (140 * 3)); //1110 //860
+            amountOfIronLabel.Position = new Vector2(nonweapon_starting_x + item_width + item_x_distance * 0, item_starting_y + item_y_distance * 3 + item_height / 3); //new Vector2(860, 200 + (140 * 3)); //1110 //860
             ControlManager.Add(amountOfIronLabel);
 
             amountOfGoldLabel = new Label();
             amountOfGoldLabel.Text = "";
             amountOfGoldLabel.Color = Color.Black;
-            amountOfGoldLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + GameRef.ScreenRectangle.Width / 8 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3) + (GameRef.ScreenRectangle.Height / 6) / 3); //new Vector2(860, 200 + (140 * 3)); //1110 //860
+            amountOfGoldLabel.Position = new Vector2(nonweapon_starting_x + item_width + item_x_distance * 1, item_starting_y + item_y_distance * 3 + item_height / 3); //new Vector2(860, 200 + (140 * 3)); //1110 //860
             ControlManager.Add(amountOfGoldLabel);
 
             amountOfFishLabel = new Label();
             amountOfFishLabel.Text = "";
             amountOfFishLabel.Color = Color.Black;
-            amountOfFishLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + GameRef.ScreenRectangle.Width / 8 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 2) + (GameRef.ScreenRectangle.Height / 6) / 3);
+            amountOfFishLabel.Position = new Vector2(nonweapon_starting_x + item_width + item_x_distance * 1, item_starting_y + item_y_distance * 2 + item_height / 3);
             ControlManager.Add(amountOfFishLabel);
 
             belladonnaLabel = new Label();
             belladonnaLabel.Text = "";
             belladonnaLabel.Color = Color.Black;
-            belladonnaLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 0, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0) + GameRef.ScreenRectangle.Height / 6);
+            belladonnaLabel.Position = new Vector2(nonweapon_starting_x + item_x_distance * 0, item_starting_y + item_y_distance * 0 + item_height);
             ControlManager.Add(belladonnaLabel);
                     
             alcoholLabel = new Label();
             alcoholLabel.Text = "";
             alcoholLabel.Color = Color.Black;
-            alcoholLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0) + GameRef.ScreenRectangle.Height / 6);
+            alcoholLabel.Position = new Vector2(nonweapon_starting_x + item_x_distance * 1, item_starting_y + item_y_distance * 0 + item_height);
             ControlManager.Add(alcoholLabel);
 
             permitLabel = new Label();
             permitLabel.Text = "";
             permitLabel.Color = Color.Black;
-            permitLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0) + GameRef.ScreenRectangle.Height / 6);
+            permitLabel.Position = new Vector2(nonweapon_starting_x + item_x_distance * 1, item_starting_y + item_y_distance * 0 + item_height);
             ControlManager.Add(permitLabel);
 
             immortuiLabel = new Label();
             immortuiLabel.Text = "";
             immortuiLabel.Color = Color.Black;
-            immortuiLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 0, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 1) + GameRef.ScreenRectangle.Height / 6);
+            immortuiLabel.Position = new Vector2(nonweapon_starting_x + item_x_distance * 0, item_starting_y + item_y_distance * 1 + item_height);
             ControlManager.Add(immortuiLabel);
 
             ironOreLabel = new Label();
             ironOreLabel.Text = "Iron Ore";
             ironOreLabel.Color = Color.Black;
-            ironOreLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3) + GameRef.ScreenRectangle.Height / 6);
+            ironOreLabel.Position = new Vector2(nonweapon_starting_x + item_x_distance * 0, item_starting_y + item_y_distance * 3 + item_height);
             ControlManager.Add(ironOreLabel);
 
             goldLabel = new Label();
             goldLabel.Text = "Gold";
             goldLabel.Color = Color.Black;
-            goldLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3) + GameRef.ScreenRectangle.Height / 6);
+            goldLabel.Position = new Vector2(nonweapon_starting_x + item_x_distance * 1, item_starting_y + item_y_distance * 3 + item_height);
             ControlManager.Add(goldLabel);
 
             fishLabel = new Label();
             fishLabel.Text = "Fish";
             fishLabel.Color = Color.Black;
-            fishLabel.Position = new Vector2(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 2) + GameRef.ScreenRectangle.Height / 6);
-            ControlManager.Add(fishLabel);   
+            fishLabel.Position = new Vector2(nonweapon_starting_x + item_x_distance * 1, item_starting_y + item_y_distance * 2 + item_height);
+            ControlManager.Add(fishLabel);
+
+            axeLabel = new Label();
+            axeLabel.Text = "";
+            axeLabel.Color = Color.Black;
+            axeLabel.Position = new Vector2(weapon_starting_x + item_x_distance * 0, item_starting_y + item_y_distance * 0 + item_height);
+            ControlManager.Add(axeLabel);
+
+            bowLabel = new Label();
+            bowLabel.Text = "";
+            bowLabel.Color = Color.Black;
+            bowLabel.Position = new Vector2(weapon_starting_x + item_x_distance * 0, item_starting_y + item_y_distance * 1 + item_height);
+            ControlManager.Add(bowLabel);
 
             activeWeaponNumbers = new Label[5];
             for (int i = 0; i < 5; i++)
             {
                 activeWeaponNumbers[i] = new Label();
-                activeWeaponNumbers[i].Position = new Vector2(GameRef.ScreenRectangle.Width / 15 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * i) - (GameRef.ScreenRectangle.Width / 15)/4, GameRef.ScreenRectangle.Height / 12);
+                activeWeaponNumbers[i].Position = new Vector2(active_item_slot_starting_x + active_item_x_distance * i - active_item_slot_width / 4, active_item_y);
                 activeWeaponNumbers[i].Text = (i + 1).ToString();
                 activeWeaponNumbers[i].Color = Color.Black;
                 ControlManager.Add(activeWeaponNumbers[i]);
-            }
-            
+            }          
+
         }
         public override void Update(GameTime gameTime)
         {
@@ -150,36 +194,36 @@ namespace TileGame.GameScreens
 
             if (InputHandler.KeyReleased(Keys.Right))
             {
-                if (cursor_X != GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5)
+                if (cursor_X != weapon_starting_x - cursor_bracket_width + item_x_distance)
                 {
-                    cursor_X += GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6)/5;//200;
+                    cursor_X += item_x_distance;
                     cursor_item_number += 1;
                 }
             }
 
             if (InputHandler.KeyReleased(Keys.Left))
             {
-                if (cursor_X != GameRef.ScreenRectangle.Width / 15)
+                if (cursor_X != weapon_starting_x - cursor_bracket_width)
                 {
-                    cursor_X -= GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5;//200;
+                    cursor_X -= item_x_distance;
                     cursor_item_number -= 1;
                 }
             }
 
             if (InputHandler.KeyReleased(Keys.Up))
             {
-                if (cursor_Y != GameRef.ScreenRectangle.Height / 5)
+                if (cursor_Y != item_starting_y)
                 {
-                    cursor_Y -= GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10;//140;
+                    cursor_Y -= cursor_y_distance;
                     cursor_item_number -= 2;
                 }
             }
 
             if (InputHandler.KeyReleased(Keys.Down))
             {
-                if (cursor_Y != GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3))
+                if (cursor_Y != item_starting_y + cursor_y_distance * 3)
                 {
-                    cursor_Y += GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6)/10;//140;
+                    cursor_Y += cursor_y_distance;
                     cursor_item_number += 2;
                 }
             }
@@ -200,7 +244,7 @@ namespace TileGame.GameScreens
             //Cursor
             GameRef.spriteBatch.Draw(
                 inventoryCursorImage,
-                new Rectangle(cursor_X, cursor_Y, GameRef.ScreenRectangle.Width / 6, GameRef.ScreenRectangle.Height / 6), //150, 100),
+                new Rectangle(cursor_X, cursor_Y, cursor_width, cursor_height),
                 Color.White);
             //------
 
@@ -209,15 +253,16 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     axeImage,
-                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 0, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                    new Rectangle(weapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 0), item_width, item_height),
                     Color.White);
+                axeLabel.Text = "Axe";
             }
 
             if (StoryProgress.ProgressLine["Sword"] == true)
             {
                 GameRef.spriteBatch.Draw(
                     swordImage,
-                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6), 
+                    new Rectangle(weapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 0), item_width, item_height), 
                     Color.White);
             }
 
@@ -225,15 +270,16 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 0, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 1), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                    new Rectangle(weapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 1), item_width, item_height),
                     Color.White);
+                bowLabel.Text = "Bow & Arrows";
             }
 
             if (StoryProgress.ProgressLine["Spear"] == true)
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 1), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                    new Rectangle(weapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 1), item_width, item_height),
                     Color.White);
             }
 
@@ -241,14 +287,14 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 0, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 2), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                    new Rectangle(weapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 2), item_width, item_height),
                     Color.White);
             }
 
             if (StoryProgress.ProgressLine["Hammer"] == true)
             {
                 GameRef.spriteBatch.Draw(crossbowImage,
-                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 2), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                    new Rectangle(weapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 2), item_width, item_height),
                     Color.White);
             }
 
@@ -256,7 +302,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 0, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                    new Rectangle(weapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 3), item_width, item_height),
                     Color.White);
             }
 
@@ -264,7 +310,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + (GameRef.ScreenRectangle.Width / 6) / 6 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                    new Rectangle(weapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 3), item_width, item_height),
                     Color.White);
             }
             //-------
@@ -274,7 +320,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     inventoryCursorImage,
-                    new Rectangle(GameRef.ScreenRectangle.Width / 15 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * i), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / 15, GameRef.ScreenRectangle.Height / 15), //90, 50), //new Rectangle(95 + (160 * i), 65, 90, 50), GameRef.ScreenRectangle.Width
+                    new Rectangle(active_item_slot_starting_x + active_item_x_distance * i, active_item_y, active_item_slot_width, active_item_slot_height), 
                     Color.White);
             }
             //--
@@ -289,8 +335,8 @@ namespace TileGame.GameScreens
                 key_number = Convert.ToInt32(key_string);
                 GameRef.spriteBatch.Draw(
                     axeImage,
-                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
-                    Color.White); //new Rectangle(110 + (160 * (key_number - 1))
+                    new Rectangle(active_item_starting_x + active_item_x_distance * (key_number - 1), active_item_y, active_item_width, active_item_height),
+                    Color.White); 
             }
 
             if (StoryProgress.activeItemsDict.ContainsKey("Sword"))
@@ -300,7 +346,7 @@ namespace TileGame.GameScreens
                 key_number = Convert.ToInt32(key_string);
                 GameRef.spriteBatch.Draw(
                     swordImage,
-                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    new Rectangle(active_item_starting_x + active_item_x_distance * (key_number - 1), active_item_y, active_item_width, active_item_height),
                     Color.White);
             }
 
@@ -311,7 +357,7 @@ namespace TileGame.GameScreens
                 key_number = Convert.ToInt32(key_string);
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    new Rectangle(active_item_starting_x + active_item_x_distance * (key_number - 1), active_item_y, active_item_width, active_item_height),
                     Color.White);
             }
 
@@ -322,7 +368,7 @@ namespace TileGame.GameScreens
                 key_number = Convert.ToInt32(key_string);
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    new Rectangle(active_item_starting_x + active_item_x_distance * (key_number - 1), active_item_y, active_item_width, active_item_height),
                     Color.White);
             }
 
@@ -333,7 +379,7 @@ namespace TileGame.GameScreens
                 key_number = Convert.ToInt32(key_string);
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    new Rectangle(active_item_starting_x + active_item_x_distance * (key_number - 1), active_item_y, active_item_width, active_item_height),
                     Color.White);
             }
 
@@ -344,7 +390,7 @@ namespace TileGame.GameScreens
                 key_number = Convert.ToInt32(key_string);
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    new Rectangle(active_item_starting_x + active_item_x_distance * (key_number - 1), active_item_y, active_item_width, active_item_height),
                     Color.White);
             }
 
@@ -355,7 +401,7 @@ namespace TileGame.GameScreens
                 key_number = Convert.ToInt32(key_string);
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    new Rectangle(active_item_starting_x + active_item_x_distance * (key_number - 1), active_item_y, active_item_width, active_item_height),
                     Color.White);
             }
 
@@ -366,15 +412,16 @@ namespace TileGame.GameScreens
                 key_number = Convert.ToInt32(key_string);
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle((GameRef.ScreenRectangle.Width / 15) + GameRef.ScreenRectangle.Width / 90 + ((GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15) * (key_number - 1)), GameRef.ScreenRectangle.Height / 12, GameRef.ScreenRectangle.Width / (20), GameRef.ScreenRectangle.Height / 15),
+                    new Rectangle(active_item_starting_x + active_item_x_distance * (key_number - 1), active_item_y, active_item_width, active_item_height),
                     Color.White);
             }
-            //-------------------------
+
+            // Non Weapon Items -------------------------
             if (StoryProgress.ProgressLine["belladonnaHave"] == true)
             {
                 GameRef.spriteBatch.Draw(
                         belladonnaImage,
-                        new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2)/10, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),  //new Rectangle(750, 180 + (140 * 0), 100, 90),
+                        new Rectangle(nonweapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 0), item_width, item_height),
                         Color.White);
 
                 belladonnaLabel.Text = "Belladonna";
@@ -384,8 +431,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                             immortuiImage,
-                            //new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
-                            new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 1), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                            new Rectangle(nonweapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 1), item_width, item_height),
                             Color.White);
                 immortuiLabel.Text = "Immortui";
             }
@@ -394,7 +440,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                             permitImage,
-                            new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                            new Rectangle(nonweapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 0), item_width, item_height),
                             Color.White);
                 permitLabel.Text = "Permit";
             }          
@@ -403,24 +449,24 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                             alcoholImage,
-                            new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 0), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                            new Rectangle(nonweapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 0), item_width, item_height),
                             Color.White);
                 alcoholLabel.Text = "Alcohol";
             }
 
             GameRef.spriteBatch.Draw(
                         fishImage,
-                        new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 2), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                        new Rectangle(nonweapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 2), item_width, item_height),
                         Color.White);
 
             GameRef.spriteBatch.Draw(
                     ironOreImage,
-                    new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                    new Rectangle(nonweapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 3), item_width, item_height),
                     Color.White);
          
             GameRef.spriteBatch.Draw(
                         goldImage,
-                        new Rectangle(GameRef.ScreenRectangle.Width / 2 + (GameRef.ScreenRectangle.Width / 2) / 10 + (GameRef.ScreenRectangle.Width / 6 + (GameRef.ScreenRectangle.Width / 6) / 5) * 1, GameRef.ScreenRectangle.Height / 5 + ((GameRef.ScreenRectangle.Height / 6 + (GameRef.ScreenRectangle.Height / 6) / 10) * 3), GameRef.ScreenRectangle.Width / 8, GameRef.ScreenRectangle.Height / 6),
+                        new Rectangle(nonweapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 3), item_width, item_height),
                         Color.White);
 
             ControlManager.Draw(GameRef.spriteBatch);
