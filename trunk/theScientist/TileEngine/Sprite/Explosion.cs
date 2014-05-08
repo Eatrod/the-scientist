@@ -14,6 +14,7 @@ namespace TileEngine.Sprite
 {
     public class Explosion:AnimatedSprite
     {
+
         private float timeToLive;
         private float elapsedTime;
         private bool finished;
