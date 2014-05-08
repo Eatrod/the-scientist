@@ -1,63 +1,63 @@
 ﻿<Conversations>
 
   <Conversation Name="Greeting">
-    <Text>Asterix: Howdy, what do you want signore?</Text>
+    <Text>Asterix:Howdy, what do you want signore?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:IgnazioResponse" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="IgnazioResponse">
-    <Text>Ignazio: I am in need of a potato rich in Alkaloids.</Text>
+    <Text>Ignazio:I am in need of a potato rich in Alkaloids.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:AsterixAnswer" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="AsterixAnswer">
-    <Text>Asterix: Ain't no potato that ain't my potato, ragazzo.</Text>
+    <Text>Asterix:Ain't no potato that ain't my potato, ragazzo.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:AsterixAnswer2" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="AsterixAnswer2">
-    <Text>Asterix: We have Le Adora di Ravenna, Rapido di Milano, Silla di Roma and Velox di Valencia, but they be far from this..</Text>
+    <Text>Asterix:We have Le Adora di Ravenna, Rapido di Milano, Silla di Roma and Velox di Valencia, but they be far from this..</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:IgnazioInterupt" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="IgnazioInterupt">
-    <Text>Ignazio: I am short on time, I need one right now.</Text>
+    <Text>Ignazio:I am short on time, I need one right now.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:AsterixStory" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="AsterixStory">
-    <Text>Asterix: According to the legend, there once was a potato so rich in Alkaloids it drove some farmers crazy.</Text>
+    <Text>Asterix:According to the legend, there once was a potato so rich in Alkaloids it drove some farmers crazy.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:IgnazioSays" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="IgnazioSays">
-    <Text>Ignazio: I don't want any legends, I want the potato.</Text>
+    <Text>Ignazio:I don't want any legends, I want the potato.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:AsterixResponse" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="AsterixResponse">
-    <Text>Asterix: Well, there is one. The Belladonna. Check out the abandoned fields in the north west.</Text>
+    <Text>Asterix:Well, there is one. The Belladonna. Check out the abandoned fields in the north west.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:AsterixShout" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="AsterixShout">
-    <Text>Asterix: God speed, ragazzo.</Text>
+    <Text>Asterix:God speed, ragazzo.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="SetToTrue:asterixTalkedTo;EndConversation" />
     </Handlers>
