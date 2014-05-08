@@ -178,26 +178,6 @@ namespace XtheSmithLibrary.Controls
             }
         }
 
-        private String parseText(String text)
-        {
-            String line = String.Empty;
-            String returnString = String.Empty;
-            String[] wordArray = text.Split(' ');
-
-            foreach (String word in wordArray)
-            {
-                if (fonts[0].MeasureString(line + word).Length() > rectangle.Width)
-                {
-                    returnString = returnString + line + '\n';
-                    line = String.Empty;
-                }
-
-                line = line + word + ' ';
-            }
-
-            return returnString + line;
-        }
-
 
         #endregion
     }
