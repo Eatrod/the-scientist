@@ -606,13 +606,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackGrounds\book.jpg">
-      <Name>book</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Tiles\FarmerDoorLowerLeft.png">
       <Name>FarmerDoorLowerLeft</Name>
       <Importer>TextureImporter</Importer>
@@ -3204,6 +3197,13 @@
   <ItemGroup>
     <Compile Include="CharacterPotraits\Anon.png">
       <Name>Anon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackGrounds\Book.png">
+      <Name>Book</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
