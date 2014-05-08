@@ -66,25 +66,25 @@ namespace TileGame.GameScreens
             base.LoadContent();
 
             leftPagenumberText = new Label();
-            leftPagenumberText.Position = new Vector2(100, GraphicsDevice.Viewport.Height - 110);
+            leftPagenumberText.Position = new Vector2(140, GraphicsDevice.Viewport.Height - 140);
             leftPagenumberText.Text = pageIndex.ToString();
             leftPagenumberText.Color = Color.DarkBlue;
             ControlManager.Add(leftPagenumberText);
 
             rightPagenumberText = new Label();
-            rightPagenumberText.Position = new Vector2(GraphicsDevice.Viewport.Width - 69, GraphicsDevice.Viewport.Height - 110);
+            rightPagenumberText.Position = new Vector2(GraphicsDevice.Viewport.Width - 170, GraphicsDevice.Viewport.Height - 140);
             rightPagenumberText.Text = pageIndex.ToString();
             rightPagenumberText.Color = Color.DarkBlue;
             ControlManager.Add(rightPagenumberText);
 
             leftText = new Label();
-            leftText.Position = new Vector2(100, 100);
+            leftText.Position = new Vector2(150, 180);
             leftText.Text = "";
             leftText.Color = Color.DarkBlue;
             ControlManager.Add(leftText);
 
             rightText = new Label();
-            rightText.Position = new Vector2(GraphicsDevice.Viewport.Width/ 2 + 67, 100);
+            rightText.Position = new Vector2(GraphicsDevice.Viewport.Width/ 2 + 67, 180);
             rightText.Text = "";
             rightText.Color = Color.DarkBlue;
             ControlManager.Add(rightText);
