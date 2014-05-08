@@ -1,7 +1,7 @@
 ﻿<Conversations>
 
   <Conversation Name="Greeting">
-    <Text>Jack: What do you think you're doin?</Text>
+    <Text>Jack:What do you think you're doin?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:John1" />
       <Handler Caption="Skip" Action="StartConversation:Competitions"/>
@@ -9,77 +9,77 @@
   </Conversation>
 
   <Conversation Name="John1">
-    <Text>John: You can axe if you want to borrow it.</Text>
+    <Text>John:You can axe if you want to borrow it.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Johnny1" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Johnny1">
-    <Text>Johnny: Potato!</Text>
+    <Text>Johnny:Potato!</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Ignazio1" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Ignazio1">
-    <Text>Ignazio: How about i take your axe?</Text>
+    <Text>Ignazio:How about i take your axe?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Jack2" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Jack2">
-    <Text>Jack: How about I kick your ass!</Text>
+    <Text>Jack:How about I kick your ass!</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:John2" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="John2">
-    <Text>John: How about a competition?</Text>
+    <Text>John:How about a competition?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Johnny2" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Johnny2">
-    <Text>Johnny: Potato?</Text>
+    <Text>Johnny:Potato?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Ignazio2" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Ignazio2">
-    <Text>Ignazio: Fine. What type of competition?</Text>
+    <Text>Ignazio:Fine. What type of competition?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Jack3" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Jack3">
-    <Text>Jack: Arm wrestling!</Text>
+    <Text>Jack:Arm wrestling!</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:John3" />
     </Handlers>
   </Conversation>
   
   <Conversation Name="John3">
-    <Text>John: A riddle!</Text>
+    <Text>John:A riddle!</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Johnny3" />
     </Handlers>
   </Conversation>
   
   <Conversation Name="Johnny3">
-    <Text>Johnny: Potato...</Text>
+    <Text>Johnny:Potato...</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Competitions" />
     </Handlers>
   </Conversation>
   
   <Conversation Name="Competitions">
-    <Text>Ignazio: Fine i start with...</Text>
+    <Text>Ignazio:Fine i start with...</Text>
     <Handlers>
       <Handler Caption="Arm wrestling" Action="EndConversation" />
       <Handler Caption="Riddle" Action="StartConversation:Riddle" />
@@ -89,7 +89,7 @@
   </Conversation>
   
     <Conversation Name="Riddle">
-    <Text>John: A mother has six children and five potatoes. How can she feed each one equal amount of potatoes?</Text>
+    <Text>John:A mother has six children and five potatoes. How can she feed each one equal amount of potatoes?</Text>
     <Handlers>
       <Handler Caption="Arm wrestling" Action="StartConversation:RiddleWrong" />
       <Handler Caption="Kill the children" Action="StartConversation:RiddleWrong" />
@@ -99,14 +99,14 @@
   </Conversation>
   
     <Conversation Name="RiddleWrong">
-    <Text>John: Wrong! Is it to hard for you?</Text>
+    <Text>John:Wrong! Is it to hard for you?</Text>
     <Handlers>
       <Handler Caption="Leave" Action="EndConversation" />
     </Handlers>
   </Conversation>
 
     <Conversation Name="RiddleCorrect">
-    <Text>John: How did you figure it out?!</Text>
+    <Text>John:How did you figure it out?!</Text>
     <Handlers>
       <Handler Caption="Leave" Action="SetToTrue:Axe;SetToTrue:contestAgainstJohnFinished;RemoveHandler:Riddle;EndConversation" />
     </Handlers>
