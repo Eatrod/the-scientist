@@ -68,7 +68,7 @@ namespace XtheSmithLibrary.Controls
         {
             if (type == null)
                 return;
-            if (dictionary[currentKey] == false)
+            if (dictionary[type] == false)
             {
                 spriteBatch.DrawString(spriteFont, text + type,new Vector2(500, 500), Color.White);
                 if (elapsedTime > 5)
