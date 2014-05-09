@@ -332,6 +332,7 @@ namespace TileGame.GameScreens
             }
             if (sender == loadGame)
             {
+                GameRef.firstRun = false;
                 SwitchToRealyRestartGame();
                 LoadGame();
             }

@@ -656,7 +656,7 @@ namespace TileGame.GameScreens
 
                 GateToNextScreen(cellIndex, GameRef.GamePlayScreen2, "G1");
 
-                GateToNextScreen(cellIndex, GameRef.CollectGameScreen, "G2");  
+                //GateToNextScreen(cellIndex, GameRef.CollectGameScreen, "G2");  
             }
             UnlockGate(cellIndex);
 
