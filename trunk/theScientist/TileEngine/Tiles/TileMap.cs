@@ -69,7 +69,7 @@ namespace TileEngine.Tiles
             {
                 max = Engine.ConvertPostionToCell(
                     (place + new Vector2(2048, 2048)));
-                layer.DrawToShadowMap(spriteBatch, min, max, place);
+                //layer.DrawToShadowMap(spriteBatch, min, max, place);
             }
         }
     }
