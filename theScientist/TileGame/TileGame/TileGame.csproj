@@ -79,6 +79,7 @@
     <Compile Include="Collision\CollisionWithCharacter.cs" />
     <Compile Include="Collision\CollisionWithTerrain.cs" />
     <Compile Include="GameScreens\BaseGameState.cs" />
+    <Compile Include="GameScreens\CollectGameScreen.cs" />
     <Compile Include="GameScreens\InventoryScreen.cs" />
     <Compile Include="GameScreens\PlayerScreen.cs" />
     <Compile Include="GameScreens\GamePlayScreen2.cs" />
