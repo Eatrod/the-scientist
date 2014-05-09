@@ -103,6 +103,7 @@
     <Compile Include="Sprite\PlayerCharacter.cs" />
     <Compile Include="Sprite\Projectiles\FlamingArrowProjectile.cs" />
     <Compile Include="Sprite\Projectiles\NormalArrowProjectile.cs" />
+    <Compile Include="Sprite\Projectiles\SpinningAxe.cs" />
     <Compile Include="Sprite\Sprite.cs" />
     <Compile Include="StoryProgress.cs" />
     <Compile Include="Tiles\CollisionLayer.cs" />
