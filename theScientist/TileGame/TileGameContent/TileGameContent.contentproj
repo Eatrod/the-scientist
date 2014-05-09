@@ -852,18 +852,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharacterPotraits\Assassins-Creed-4.jpg">
-      <Name>Assassins-Creed-4</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="CharacterPotraits\asterix.png">
-      <Name>asterix</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Tiles\RoadHBot1.png">
       <Name>RoadHBot1</Name>
       <Importer>TextureImporter</Importer>
@@ -1245,13 +1233,6 @@
     </Compile>
     <Compile Include="Tiles\CityHall\CityHall_6_8.png">
       <Name>CityHall_6_8</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="CharacterPotraits\pimp-bender.jpg">
-      <Name>pimp-bender</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -2288,23 +2269,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharacterPotraits\Jackie.png">
-      <Name>Jackie</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="CharacterPotraits\john.png">
-      <Name>john</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="CharacterPotraits\johnny.png">
-      <Name>johnny</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sprite\multi_iron_ore.png">
       <Name>multi_iron_ore</Name>
       <Importer>TextureImporter</Importer>
@@ -3232,13 +3196,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Scripts\ChainLeftRight.png">
+    <Compile Include="Sprite\ChainLeftRight.png">
       <Name>ChainLeftRight</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Scripts\ChainUpDown.png">
+    <Compile Include="Sprite\ChainUpDown.png">
       <Name>ChainUpDown</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -3312,6 +3276,13 @@
       <Name>zombie</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GUI\QuestBox.png">
+      <Name>QuestBox</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
