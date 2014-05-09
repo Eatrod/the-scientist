@@ -338,11 +338,11 @@ namespace TileGame.GameScreens
                 chargeanimation = new AnimatedSprite(Content.Load<Texture2D>("Sprite/ChargeBar"));
                 chargeanimation.SetSpritePositionInGameWorld(new Vector2(0, 1.4f));
             }
-            //TODO: Fixa det här
             rectangle = new Rectangle(GraphicsDevice.Viewport.Width/2-350, GraphicsDevice.Viewport.Height - 175, 700, 175);
             dialogBox = new DialogBox(Content.Load<Texture2D>("GUI/DialogBox"), rectangle, "", Content.Load<Texture2D>("GUI/DialogArrow"));
             textBubble = new TextBubble(Content.Load<Texture2D>("GUI/SpeechBubble"), rectangle, "", Content.Load<SpriteFont>("Fonts/BubbleFont"));
             feedbackBox = new FeedbackBox();
+            ControlManager.Add(feedbackBox);
 
             gateDict = new Dictionary<string, int>();
             for (int i = 0; i < 10; i++)
@@ -717,7 +717,6 @@ namespace TileGame.GameScreens
 
             dialogBox.Update(gameTime);
             feedbackBox.Update(gameTime);
-            ControlManager.Add(feedbackBox);
 
             if (motion != Vector2.Zero && !player.shotFired && !player.meleeAttackStart && !player.meleeAttackFinish)
             {
