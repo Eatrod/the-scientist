@@ -50,6 +50,7 @@ namespace TileGame
         public PotatoTown PotatoTown;
         public PlayerScreen BaseGamePlayScreen;
         public GamePlayScreen2 GamePlayScreen2;
+        public CollectGameScreen CollectGameScreen;
         public InventoryScreen InventoryScreen;
 
         public string lastGameScreen;
@@ -97,6 +98,9 @@ namespace TileGame
             NotebookScreen = new NotebookScreen(this, stateManager);
             PotatoTown = new PotatoTown(this, stateManager, "Screen1");
             GamePlayScreen2 = new GamePlayScreen2(this, stateManager, "Screen2");
+            //--
+            CollectGameScreen = new CollectGameScreen(this, stateManager, "CollectGame");
+            //--
             BaseGamePlayScreen = new PlayerScreen(this, stateManager);
             InventoryScreen = new InventoryScreen(this, stateManager);
             stateManager.ChangeState(TitleScreen);
