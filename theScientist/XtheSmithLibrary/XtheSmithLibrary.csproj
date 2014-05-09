@@ -66,6 +66,7 @@
     <Compile Include="Controls\Control.cs" />
     <Compile Include="Controls\ControlManager.cs" />
     <Compile Include="Controls\DialogBox.cs" />
+    <Compile Include="Controls\FeedbackBox.cs" />
     <Compile Include="Controls\Label.cs" />
     <Compile Include="Controls\LinkLabel.cs" />
     <Compile Include="Controls\PictureBox.cs" />

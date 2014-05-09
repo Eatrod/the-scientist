@@ -41,6 +41,7 @@ namespace TileGame.GameScreens
         //bool gate2Locked = true;
         protected PlayerScreen screen;
         protected DialogBox dialogBox;
+        protected FeedbackBox feedbackBox;
         protected TextBubble textBubble;
         protected NPC_Story talksTo;
         protected bool showingThinkingBox = false;
@@ -344,6 +345,7 @@ namespace TileGame.GameScreens
             rectangle = new Rectangle(GraphicsDevice.Viewport.Width/2-350, GraphicsDevice.Viewport.Height - 175, 700, 175);
             dialogBox = new DialogBox(fonts,Content.Load<Texture2D>("GUI/DialogBox"), rectangle, "", Content.Load<Texture2D>("GUI/DialogArrow"));
             textBubble = new TextBubble(Content.Load<Texture2D>("GUI/SpeechBubble"), rectangle, "", Content.Load<SpriteFont>("Fonts/BubbleFont"));
+            feedbackBox = new FeedbackBox();
 
             gateDict = new Dictionary<string, int>();
             for (int i = 0; i < 10; i++)
@@ -697,6 +699,8 @@ namespace TileGame.GameScreens
                 StateManager.PushState(GameRef.InventoryScreen);
 
             dialogBox.Update(gameTime);
+            feedbackBox.Update(gameTime);
+            ControlManager.Add(feedbackBox);
 
             if (motion != Vector2.Zero && !player.shotFired && !player.meleeAttackStart && !player.meleeAttackFinish)
             {
