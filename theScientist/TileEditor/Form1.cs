@@ -689,8 +689,8 @@ namespace TileEditor
         private CollisionLayer AddNewCollisionTileLayer(frmNewLayer newLayerForm)
         {
             CollisionLayer collisionLayer = new CollisionLayer(
-               int.Parse(newLayerForm.txtLayerHeight.Text),
-               int.Parse(newLayerForm.txtLayerWidth.Text));
+               int.Parse(newLayerForm.txtLayerWidth.Text),
+               int.Parse(newLayerForm.txtLayerHeight.Text));
 
             layerDict.Add(newLayerForm.txtLayerName.Text + "Collision", collisionLayer);
             tileMap.CollisionLayer = collisionLayer;
@@ -701,8 +701,8 @@ namespace TileEditor
         private void AddNewWorldTileLayerGroundTiles(frmNewLayer newLayerForm)
         {
             TileLayer tileLayer = new TileLayer(
-               int.Parse(newLayerForm.txtLayerHeight.Text),
-               int.Parse(newLayerForm.txtLayerWidth.Text));
+               int.Parse(newLayerForm.txtLayerWidth.Text),
+               int.Parse(newLayerForm.txtLayerHeight.Text));
 
             layerDict.Add(newLayerForm.txtLayerName.Text + "Ground", tileLayer);
             tileMap.Layers.Add(tileLayer);
@@ -712,8 +712,8 @@ namespace TileEditor
         private void AddNewWorldTileLayerBack(frmNewLayer newLayerForm)
         {
             TileLayer tileLayer = new TileLayer(
-               int.Parse(newLayerForm.txtLayerHeight.Text),
-               int.Parse(newLayerForm.txtLayerWidth.Text));
+               int.Parse(newLayerForm.txtLayerWidth.Text),
+               int.Parse(newLayerForm.txtLayerHeight.Text));
 
             layerDict.Add(newLayerForm.txtLayerName.Text + "Back", tileLayer);
             tileMap.Layers.Add(tileLayer);
@@ -723,8 +723,8 @@ namespace TileEditor
         private void AddNewWorldTileLayerFront(frmNewLayer newLayerForm)
         {
             TileLayer tileLayer = new TileLayer(
-               int.Parse(newLayerForm.txtLayerHeight.Text),
-               int.Parse(newLayerForm.txtLayerWidth.Text));
+               int.Parse(newLayerForm.txtLayerWidth.Text),
+               int.Parse(newLayerForm.txtLayerHeight.Text));
 
             layerDict.Add(newLayerForm.txtLayerName.Text + "Front", tileLayer);
             tileMap.Layers.Add(tileLayer);
@@ -734,8 +734,8 @@ namespace TileEditor
         private void AddNewWorldTileLayer(frmNewLayer newLayerForm)
         {
             TileLayer tileLayer = new TileLayer(
-               int.Parse(newLayerForm.txtLayerHeight.Text),
-               int.Parse(newLayerForm.txtLayerWidth.Text));
+               int.Parse(newLayerForm.txtLayerWidth.Text),
+               int.Parse(newLayerForm.txtLayerHeight.Text));
 
             layerDict.Add(newLayerForm.txtLayerName.Text + "Middle", tileLayer);
             tileMap.Layers.Add(tileLayer);
