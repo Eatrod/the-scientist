@@ -56,7 +56,7 @@ namespace TileGame.GameScreens
         {
             activeDict = taskDict;
             ListOfUnlockedKeys = new List<int>();
-            textRect = new Rectangle(0, 0, 400, 600);
+            //textRect = new Rectangle(0, 0, 400, 600);
             base.Initialize();
         }
         protected override void LoadContent()
@@ -65,26 +65,33 @@ namespace TileGame.GameScreens
             backgroundImage = Content.Load<Texture2D>(@"Backgrounds\book");
             base.LoadContent();
 
+            float middle = GraphicsDevice.Viewport.Width / 2;
+            float middleLeftSide = middle / 2;
+            float middleRightSide = middle + middleLeftSide;
+            float widthOffset = GraphicsDevice.Viewport.Width / 1248f;
+            float heightOffset = GraphicsDevice.Viewport.Height / 768f;
+            textRect = new Rectangle(0, 0, (int)(400 * widthOffset), (int)(600 * heightOffset));
+
             leftPagenumberText = new Label();
-            leftPagenumberText.Position = new Vector2(140, GraphicsDevice.Viewport.Height - 140);
+            leftPagenumberText.Position = new Vector2(middleLeftSide + 40 * widthOffset, GraphicsDevice.Viewport.Height - 170 * widthOffset);
             leftPagenumberText.Text = pageIndex.ToString();
             leftPagenumberText.Color = Color.DarkBlue;
             ControlManager.Add(leftPagenumberText);
 
             rightPagenumberText = new Label();
-            rightPagenumberText.Position = new Vector2(GraphicsDevice.Viewport.Width - 170, GraphicsDevice.Viewport.Height - 140);
+            rightPagenumberText.Position = new Vector2(middleRightSide - 70 *widthOffset, GraphicsDevice.Viewport.Height - 160 * widthOffset);
             rightPagenumberText.Text = pageIndex.ToString();
             rightPagenumberText.Color = Color.DarkBlue;
             ControlManager.Add(rightPagenumberText);
 
             leftText = new Label();
-            leftText.Position = new Vector2(150, 180);
+            leftText.Position = new Vector2(middleLeftSide - 140 * widthOffset, 220 * heightOffset); //150, 180
             leftText.Text = "";
             leftText.Color = Color.DarkBlue;
             ControlManager.Add(leftText);
 
             rightText = new Label();
-            rightText.Position = new Vector2(GraphicsDevice.Viewport.Width/ 2 + 67, 180);
+            rightText.Position = new Vector2(middleRightSide - 140 * widthOffset, 220 * heightOffset);
             rightText.Text = "";
             rightText.Color = Color.DarkBlue;
             ControlManager.Add(rightText);
@@ -163,6 +170,7 @@ namespace TileGame.GameScreens
                 {
                     leftText.Color = GetTextColor(leftText.Text.Split(':')[0]);
                     leftText.Text = activeDict[leftPageIndex].Text;
+                    //leftText.Size = leftText.SpriteFont.MeasureString(leftText.Text);
                     if (pageIndex == 0)
                         leftPagenumberText.Text = "1";
                     else
