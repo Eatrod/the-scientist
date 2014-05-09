@@ -22,6 +22,7 @@ namespace XtheSmithLibrary.Controls
             dictionary = new Dictionary<string,bool>();
             this.dictionary.Add("Axe", false);
             this.dictionary.Add("John", false);
+            this.dictionary.Add("Talked to Asterix", false);
         }
 
         public override void Update(GameTime gameTime)
@@ -38,6 +39,12 @@ namespace XtheSmithLibrary.Controls
             {
                 this.text = "You have completed the task: ";
                 this.type = "John";
+                isShowing = true;
+            }
+            if (StoryProgress.ProgressLine["asterixTalkedTo"] && dictionary["Talked to Asterix"] == false && isShowing == false)
+            {
+                this.text = "You have completed the task: ";
+                this.type = "Talked to Asterix";
                 isShowing = true;
             }
         }
