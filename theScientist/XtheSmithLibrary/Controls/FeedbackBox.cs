@@ -15,13 +15,19 @@ namespace XtheSmithLibrary.Controls
         private Dictionary<string, bool> dictionary;
         public bool isShowing = false;
         private float elapsedTime = 0.0f;
+        private Texture2D texture;
+        private Rectangle rectangle;
 
-        public FeedbackBox()
+
+        public FeedbackBox(Texture2D texture, Rectangle rectangle) : base(texture, rectangle)
         {
+            this.rectangle = rectangle;
+            this.texture = texture;
             dictionary = new Dictionary<string,bool>();
             this.dictionary.Add("Axe", false);
             this.dictionary.Add("John", false);
             this.dictionary.Add("Talked to Asterix", false);
+            this.dictionary.Add("Permit", false);
         }
 
         public override void Update(GameTime gameTime)
@@ -48,6 +54,12 @@ namespace XtheSmithLibrary.Controls
                 this.type = "Axe";
                 isShowing = true;
             }
+            if (StoryProgress.ProgressLine["permitHave"] && dictionary["Permit"] == false && isShowing == false)
+            {
+                this.text = "You now have the item: ";
+                this.type = "Permit";
+                isShowing = true;
+            }
             if (StoryProgress.ProgressLine["contestAgainstJohnFinished"] && dictionary["John"] == false && isShowing == false)
             {
                 this.text = "You have completed the task: ";
@@ -68,7 +80,8 @@ namespace XtheSmithLibrary.Controls
                 return;
             if (dictionary[type] == false)
             {
-                spriteBatch.DrawString(spriteFont, text + type,new Vector2(500, 500), Color.White);
+                spriteBatch.Draw(texture, rectangle, Color.Black);
+                spriteBatch.DrawString(spriteFont, text + type,new Vector2(rectangle.X+20, rectangle.Y+20), Color.LightGreen);
                 if (elapsedTime > 5)
                 {
                     elapsedTime = 0;
