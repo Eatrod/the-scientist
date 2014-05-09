@@ -13,8 +13,6 @@ namespace XtheSmithLibrary.Controls
     public class FeedbackBox : PictureBox
     {
         private Dictionary<string, bool> dictionary;
-        private string type;
-        private string currentKey;
         public bool isShowing = false;
         private float elapsedTime = 0.0f;
 
