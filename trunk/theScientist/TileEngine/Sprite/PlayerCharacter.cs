@@ -1,6 +1,14 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using TileEngine.Sprite;
 
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using TileEngine;
+//using TileEngine.Sprite;
+
 namespace TileEngine.Sprite
 {
      public class PlayerCharacter : CharacterSprite
@@ -26,6 +34,7 @@ namespace TileEngine.Sprite
          public float delayShot = 500f;
          public float elapsedShot = 0.0f;
          
+         public float pick_up_radius = 30f;
 
          public PlayerCharacter(Texture2D texture, Texture2D portrait)
              : base(texture)
