@@ -339,11 +339,8 @@ namespace TileGame.GameScreens
                 chargeanimation.SetSpritePositionInGameWorld(new Vector2(0, 1.4f));
             }
             //TODO: Fixa det här
-            List<SpriteFont> fonts = new List<SpriteFont>(); 
-            fonts.Add(Content.Load<SpriteFont>("Fonts/VeniceClassic"));
-            fonts.Add(Content.Load<SpriteFont>("Fonts/pixel_pirate"));
             rectangle = new Rectangle(GraphicsDevice.Viewport.Width/2-350, GraphicsDevice.Viewport.Height - 175, 700, 175);
-            dialogBox = new DialogBox(fonts,Content.Load<Texture2D>("GUI/DialogBox"), rectangle, "", Content.Load<Texture2D>("GUI/DialogArrow"));
+            dialogBox = new DialogBox(Content.Load<Texture2D>("GUI/DialogBox"), rectangle, "", Content.Load<Texture2D>("GUI/DialogArrow"));
             textBubble = new TextBubble(Content.Load<Texture2D>("GUI/SpeechBubble"), rectangle, "", Content.Load<SpriteFont>("Fonts/BubbleFont"));
             feedbackBox = new FeedbackBox();
 
