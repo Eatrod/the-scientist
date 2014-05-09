@@ -250,6 +250,11 @@ namespace TileEngine.Tiles
             if (min.Y > 122)
                 min.Y = 122;
 
+            if (max.X > this.Width)
+                max.X = this.Width - 1;
+            if (max.Y > this.Height)
+                max.Y = this.Height -1;
+
             for (int x = min.X; x < max.X; x++)
             {
                 for (int y = min.Y; y < max.Y; y++)

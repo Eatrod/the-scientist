@@ -3237,11 +3237,6 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="Sounds\Effects\male_fight.mp3">
-      <Name>male_fight</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
     <Compile Include="Sounds\Effects\metal_1.wav">
       <Name>metal_1</Name>
       <Importer>WavImporter</Importer>
