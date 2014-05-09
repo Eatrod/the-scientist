@@ -25,6 +25,9 @@ namespace TileEngine
 
         public StoryProgress()
         {
+            ProgressLine.Clear();
+            activeItemsDict.Clear();
+            collectedAmountDict.Clear();
             AddItemProgressLine("asterixTalkedTo", false);
             AddItemProgressLine("lumberjacksTalkedTo", false);
             AddItemProgressLine("Axe", false);

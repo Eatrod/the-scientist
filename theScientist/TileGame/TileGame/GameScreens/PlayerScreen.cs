@@ -1972,12 +1972,12 @@ namespace TileGame.GameScreens
         }
 
         //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        public static bool PickUpPossible(PlayerCharacter a, BaseSprite b)
-        {
-            Vector2 d = b.Origin - a.Origin;
+        //public static bool PickUpPossible(PlayerCharacter a, BaseSprite b)
+        //{
+        //    Vector2 d = b.Origin - a.Origin;
 
-            return (d.Length() < b.CollisionRadius + a.pick_up_radius);
-        }
+        //    return (d.Length() < b.CollisionRadius + a.pick_up_radius);
+        //}
 
         public static void PickUp(
             GameTime gameTime,
@@ -1992,71 +1992,71 @@ namespace TileGame.GameScreens
             {
                 s.Update(gameTime);
 
-                if (PickUpPossible(player, s))
-                {
-                    if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "IdleUp")
-                    {
-                        player.CurrentAnimationName = "PickupUp";
-                    }
-                    if (player.CurrentAnimationName == "Right" || player.CurrentAnimationName == "IdleRight")
-                    {
-                        player.CurrentAnimationName = "PickupRight";
-                    }
-                    if (player.CurrentAnimationName == "Left" || player.CurrentAnimationName == "IdleLeft")
-                    {
-                        player.CurrentAnimationName = "PickupLeft";
-                    }
-                    if (player.CurrentAnimationName == "Down" || player.CurrentAnimationName == "IdleDown")
-                    {
-                        player.CurrentAnimationName = "PickupDown";
-                    }
+                //if (PickUpPossible(player, s))
+                //{
+                //    if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "IdleUp")
+                //    {
+                //        player.CurrentAnimationName = "PickupUp";
+                //    }
+                //    if (player.CurrentAnimationName == "Right" || player.CurrentAnimationName == "IdleRight")
+                //    {
+                //        player.CurrentAnimationName = "PickupRight";
+                //    }
+                //    if (player.CurrentAnimationName == "Left" || player.CurrentAnimationName == "IdleLeft")
+                //    {
+                //        player.CurrentAnimationName = "PickupLeft";
+                //    }
+                //    if (player.CurrentAnimationName == "Down" || player.CurrentAnimationName == "IdleDown")
+                //    {
+                //        player.CurrentAnimationName = "PickupDown";
+                //    }
 
-                    if (s is LifePotatoSprite)
-                    {
-                        SpriteObjectInGameWorld.Remove(s);
-                        renderList.Remove(s);
+                //    if (s is LifePotatoSprite)
+                //    {
+                //        SpriteObjectInGameWorld.Remove(s);
+                //        renderList.Remove(s);
 
-                        player2.Life += 10;
-                        if (player2.Life > 100)
-                            player2.Life = 100;
-                        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
-                        break;
-                    }
+                //        player2.Life += 10;
+                //        if (player2.Life > 100)
+                //            player2.Life = 100;
+                //        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
+                //        break;
+                //    }
 
-                    else if (s is BelladonnaSprite)
-                    {
-                        SpriteObjectInGameWorld.Remove(s);
-                        renderList.Remove(s);
-                        StoryProgress.ProgressLine["belladonnaHave"] = true;
+                //    else if (s is BelladonnaSprite)
+                //    {
+                //        SpriteObjectInGameWorld.Remove(s);
+                //        renderList.Remove(s);
+                //        StoryProgress.ProgressLine["belladonnaHave"] = true;
 
-                        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
-                        break;
-                    }
+                //        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
+                //        break;
+                //    }
 
-                    else if (s is ImmortuiSprite)
-                    {
-                        SpriteObjectInGameWorld.Remove(s);
-                        renderList.Remove(s);
-                        StoryProgress.ProgressLine["immortuiHave"] = true;
+                //    else if (s is ImmortuiSprite)
+                //    {
+                //        SpriteObjectInGameWorld.Remove(s);
+                //        renderList.Remove(s);
+                //        StoryProgress.ProgressLine["immortuiHave"] = true;
 
-                        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
-                        break;
-                    }
+                //        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
+                //        break;
+                //    }
 
-                    else if (s is MultiIronSprite)
-                    {
-                        StoryProgress.collectedAmountDict["IronOre"] += 100;
-                        MultiIronSprite mis = (MultiIronSprite)s;
-                        if (mis.CurrentAnimationName == "all")
-                            mis.CurrentAnimationName = "half";
-                        else
-                        {
-                            SpriteObjectInGameWorld.Remove(s);
-                            renderList.Remove(s);
-                            break;
-                        }
-                    }
-                }
+                //    else if (s is MultiIronSprite)
+                //    {
+                //        StoryProgress.collectedAmountDict["IronOre"] += 100;
+                //        MultiIronSprite mis = (MultiIronSprite)s;
+                //        if (mis.CurrentAnimationName == "all")
+                //            mis.CurrentAnimationName = "half";
+                //        else
+                //        {
+                //            SpriteObjectInGameWorld.Remove(s);
+                //            renderList.Remove(s);
+                //            break;
+                //        }
+                //    }
+                //}
             }
         }
 
