@@ -99,7 +99,7 @@
   </Conversation>
   
     <Conversation Name="RiddleWrong">
-    <Text>John:Wrong! Is it to hard for you?</Text>
+    <Text>John:Wrong! Is it too hard for you?</Text>
     <Handlers>
       <Handler Caption="Leave" Action="EndConversation" />
     </Handlers>
