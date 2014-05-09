@@ -30,56 +30,58 @@ namespace TileGame.Collision
                 {
                     Vector2 d = Vector2.Normalize(s.Origin - player.Origin);
 
-                    player.Position =
-                        s.Position - (d * (player.CollisionRadius + s.CollisionRadius));
-
-                    if(s.GetType() == typeof(LifePotatoSprite))
+                    if (s is CharacterSprite)
                     {
-                        SpriteObjectInGameWorld.Remove(s);
-                        renderList.Remove(s);
+                        player.Position =
+                            s.Position - (d * (player.CollisionRadius + s.CollisionRadius));
+                    }
+
+                    //if(s is LifePotatoSprite)
+                    //{
+                    //    SpriteObjectInGameWorld.Remove(s);
+                    //    renderList.Remove(s);
                         
-                        player.Life += 10;
+                    //    player.Life += 10;
 
-                        if (player.Life > 100)
-                            player.Life = 100;
-                        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
-                        break;
-                    }
+                    //    if (player.Life > 100)
+                    //        player.Life = 100;
+                    //    //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
+                    //    break;
+                    //}
 
-                    if (s.GetType() == typeof(BelladonnaSprite))
-                    {
-                        SpriteObjectInGameWorld.Remove(s);
-                        renderList.Remove(s);
-                        StoryProgress.ProgressLine["belladonnaHave"] = true;
+                    //if (s is BelladonnaSprite)
+                    //{
+                    //    SpriteObjectInGameWorld.Remove(s);
+                    //    renderList.Remove(s);
+                    //    StoryProgress.ProgressLine["belladonnaHave"] = true;
                         
-                        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
-                        break;
-                    }
+                    //    //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
+                    //    break;
+                    //}
 
-                    if (s.GetType() == typeof(ImmortuiSprite))
-                    {
-                        SpriteObjectInGameWorld.Remove(s);
-                        renderList.Remove(s);
-                        StoryProgress.ProgressLine["immortuiHave"] = true;
+                    //if (s is ImmortuiSprite)
+                    //{
+                    //    SpriteObjectInGameWorld.Remove(s);
+                    //    renderList.Remove(s);
+                    //    StoryProgress.ProgressLine["immortuiHave"] = true;
 
-                        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
-                        break;
-                    }
-                    if(s.GetType() == typeof(MultiIronSprite))
-                    {
-                        StoryProgress.collectedAmountDict["IronOre"] += 100;
-                        MultiIronSprite mis = (MultiIronSprite)s;
-                        if (mis.CurrentAnimationName == "all" )
-                            mis.CurrentAnimationName = "half";
-                        else
-                        {
-                            SpriteObjectInGameWorld.Remove(s);
-                            renderList.Remove(s);
-                            break;
-                        }
-                    }
+                    //    //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
+                    //    break;
+                    //}
 
-                    
+                    //if(s is MultiIronSprite)
+                    //{
+                    //    StoryProgress.collectedAmountDict["IronOre"] += 100;
+                    //    MultiIronSprite mis = (MultiIronSprite)s;
+                    //    if (mis.CurrentAnimationName == "all" )
+                    //        mis.CurrentAnimationName = "half";
+                    //    else
+                    //    {
+                    //        SpriteObjectInGameWorld.Remove(s);
+                    //        renderList.Remove(s);
+                    //        break;
+                    //    }
+                    //}                
                 }
             }
 
