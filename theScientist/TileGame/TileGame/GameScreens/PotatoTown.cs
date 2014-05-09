@@ -274,7 +274,7 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            guard = new NPC_Story_GuardCaptain(Content.Load<Texture2D>("Sprite/NPCGuardCaptain"), Content.Load<Script>("Scripts/DrunkGuard"), Content.Load<Texture2D>("CharacterPotraits/Anon"), "Bibitur");
+            guard = new NPC_Story_GuardCaptain(Content.Load<Texture2D>("Sprite/NPCGuardCaptain"), Content.Load<Script>("Scripts/DrunkGuard"), Content.Load<Texture2D>("CharacterPotraits/Bibitur"), "Bibitur");
             guard.scriptDict.Add("alcoholHave", Content.Load<Script>("Scripts/DrunkGuardHaveAlcohol"));
             guard.Origionoffset = new Vector2(25, 65);
             guard.SetSpritePositionInGameWorld(new Vector2(64, 13));
