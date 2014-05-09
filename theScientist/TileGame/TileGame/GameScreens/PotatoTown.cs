@@ -430,7 +430,7 @@ namespace TileGame.GameScreens
         }
         public override void Update(GameTime gameTime)
         {
-            player.Speed = 10;
+            player.Speed = 2;
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
             //--
             if (InputHandler.KeyReleased(Keys.Space))
@@ -543,6 +543,17 @@ namespace TileGame.GameScreens
             }
 
             }
+
+            foreach (NPC_Neutral npc in NpcNeutralList)
+            {
+                if (npc.Motion != Vector2.Zero)
+                {
+                    npc.Motion.Normalize();
+                    npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
+
+                }
+            }
+
             foreach(NPC_Fighting_Patrolling npc in NPCPatrollingGuards)
             {
                 if (!npc.Dead)
