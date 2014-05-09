@@ -11,6 +11,7 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
 {
     public class NPC_Neutral : NPC
     {
+        #region Field Region
         public Conversation text;
         private const int SpeakingRadius = 40;
         public bool ShowingBubble { get; set; }
@@ -21,16 +22,26 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
         public bool changeSpeed = true;
 
         private int direction;
+        private bool collided;
         protected float delayDirection;
         protected float elapsedDirection;
         protected float WalkingCircle;
+        #endregion
 
+        #region Properties Region
+        public bool Collided
+        {
+            get { return collided; }
+            set { this.collided = value; }
+        }
+        
         public Vector2 Motion
         {
             get { return motion; }
             set { motion = value; }
 
         }
+        #endregion
 
         protected NPC_Neutral(Texture2D texture, Script script) : base(texture,script)
         {
@@ -56,10 +67,11 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
             this.Animations.Add("WalkDown", walkDown);
 
             this.elapsedDirection = 0.0f;
-            this.delayDirection = 3000f;
-            this.WalkingCircle = 100;
+            this.delayDirection = 10000f;
+            this.WalkingCircle = 500;
             this.direction = 0;
             this.random = new Random();
+            this.collided = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -73,6 +85,13 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
                 }
 
                 GetRandomDirection(gameTime);
+
+                if(collided)
+                {
+                    direction += 110;
+                    direction = direction % 360;
+                    collided = false;
+                }
 
                 this.motion = new Vector2(
                     (float)Math.Cos(MathHelper.ToRadians(direction)),
