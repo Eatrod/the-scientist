@@ -41,12 +41,11 @@ namespace XtheSmithLibrary.Controls
         #endregion
 
         #region Constructor Region
-        public DialogBox(List<SpriteFont> fonts,Texture2D texture, Rectangle rectangle, string text, Texture2D dialogArrow) : base(texture, rectangle)
+        public DialogBox(Texture2D texture, Rectangle rectangle, string text, Texture2D dialogArrow) : base(texture, rectangle)
         {
             tabStop = false;
             this.text = text;
             this.rectangle = rectangle;
-            this.fonts = fonts;
             this.dialogArrow = dialogArrow;
             handlerVector = new Vector2(rectangle.X + 70, rectangle.Y + 80);
             arrowRect = new Rectangle((int)handlerVector.X-38, (int)handlerVector.Y+7, 22, 19);
@@ -115,7 +114,7 @@ namespace XtheSmithLibrary.Controls
         private void DrawText(SpriteBatch spriteBatch, string stringWhoSaid)
         {
             //spriteBatch.DrawString(fonts[1], stringWhoSaid, new Vector2(rectangle.X + 45, rectangle.Y + 10), Color.White);
-            spriteBatch.DrawString(fonts[0], Text.Split(':')[1], new Vector2(rectangle.X + 20, rectangle.Y + 25), Color.White);
+            spriteBatch.DrawString(spriteFont, Text.Split(':')[1], new Vector2(rectangle.X + 20, rectangle.Y + 25), Color.White);
         }
 
         private void DrawHandlers(SpriteBatch spriteBatch)
@@ -129,7 +128,7 @@ namespace XtheSmithLibrary.Controls
                 SpriteFont.Spacing = -2;
 
                 spriteBatch.Draw(dialogArrow, arrowRect, Color.White);
-                spriteBatch.DrawString(fonts[0], handler, handlerVector, color);
+                spriteBatch.DrawString(spriteFont, handler, handlerVector, color);
                 handlerVector.Y += 20;
             }
         }

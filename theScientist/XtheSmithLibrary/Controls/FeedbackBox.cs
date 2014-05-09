@@ -14,6 +14,7 @@ namespace XtheSmithLibrary.Controls
     {
         private Dictionary<string, bool> dictionary;
         private string type;
+        private string currentKey;
         public bool isShowing = false;
         private float elapsedTime = 0.0f;
 
@@ -29,6 +30,20 @@ namespace XtheSmithLibrary.Controls
         {
             if (isShowing)
                 elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //TODO: Hitta ett sätt att implementera den här lösningen (förutsätter att this.dictionary=StoryProgress.ProgressLine)
+            /*foreach (var key in StoryProgress.ProgressLine)
+            {
+                if (dictionary.ContainsKey(key.Key))
+                {
+                    if (dictionary[key.Key] == false && isShowing == false)
+                    {
+                        this.text = "You now have the item: TESTEST";
+                        this.currentKey = key.Key;
+                        isShowing = true;
+                    }
+                }
+
+            }*/
             if (StoryProgress.ProgressLine["Axe"] && dictionary["Axe"] == false && isShowing == false)
             {
                 this.text = "You now have the item: ";
@@ -53,7 +68,7 @@ namespace XtheSmithLibrary.Controls
         {
             if (type == null)
                 return;
-            if (dictionary[type] == false)
+            if (dictionary[currentKey] == false)
             {
                 spriteBatch.DrawString(spriteFont, text + type,new Vector2(500, 500), Color.White);
                 if (elapsedTime > 5)
