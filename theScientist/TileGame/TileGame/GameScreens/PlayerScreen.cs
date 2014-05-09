@@ -667,6 +667,26 @@ namespace TileGame.GameScreens
                             }
                         }
                         player.Stamina -= 20f;
+                    }
+
+                    if (InputHandler.KeyReleased(Keys.W) && (player.Stamina - 40 >= 0) && player.meleeAttackStart)
+                    {
+                        player.meleeAttackStart = false;
+                        player.meleeAttackFinish = true;
+                        player.meleeAttackSpinAxe = true;
+                        UpdateAxeFinishAttackAnimaition();
+
+                        if (player.CurrentAnimationName == "AxeFinishLeft")
+                        {
+                            player.Position.X -= 27;
+                        }
+
+                        if (player.CurrentAnimationName == "AxeFinishRight")
+                        {
+                            player.Position.X -= 27;
+                        }
+                                             
+                        player.Stamina -= 40f;
                     }                   
                 }
             }
@@ -767,7 +787,7 @@ namespace TileGame.GameScreens
                     player.Speed = 2;
                 }
 
-                if (player.elapsedAttack > player.delayAttack && player.meleeAttackFinish)
+                if (player.elapsedAttack > player.delayAttack && player.meleeAttackFinish && !player.meleeAttackSpinAxe)
                 {
                     player.elapsedAttack = 0.0f;
                     player.meleeAttackFinish = false;
@@ -781,9 +801,27 @@ namespace TileGame.GameScreens
                         player.Position.X += 27;
                     } 
                     UpdateAxeDoneAttackAnimaition();
+                                      
+                    player.Speed = 2;
+                }
 
-                    
-                    //player.CurrentAnimationName = player.oldAnimation;
+                if (player.elapsedAttack > player.delayAttack && player.meleeAttackFinish && player.meleeAttackSpinAxe)
+                {
+                    player.elapsedAttack = 0.0f;
+                    player.meleeAttackFinish = false;
+                    player.meleeAttackSpinAxe = false;
+                    ChainAxe(Content, motion);
+                    if (player.CurrentAnimationName == "AxeFinishLeft")
+                    {
+                        player.Position.X += 27;
+                    }
+
+                    if (player.CurrentAnimationName == "AxeFinishRight")
+                    {
+                        player.Position.X += 27;
+                    }
+                    UpdateAxeDoneAttackAnimaition();
+
                     player.Speed = 2;
                 }
             }
@@ -829,7 +867,41 @@ namespace TileGame.GameScreens
             base.Update(gameTime);
         }
 
-        
+        private void ChainAxe(ContentManager Content, Vector2 motion)
+        {
+            SpinningAxe tempaxe = new SpinningAxe(Content.Load<Texture2D>("Sprite/AxeSpin"), 10f, 0.1f, 8f, player.Position);
+            tempaxe.CurrentAnimationName = "up";
+
+            if (motion == Vector2.Zero)
+            {
+                if (player.CurrentAnimationName == "AxeFinishUp")
+                {
+                    motion = new Vector2(0, -2);
+                }
+                if (player.CurrentAnimationName == "AxeFinishDown")
+                {
+                    motion = new Vector2(0, 2);
+                }
+                if (player.CurrentAnimationName == "AxeFinishLeft")
+                {
+                    motion = new Vector2(-2, 0);
+                }
+                if (player.CurrentAnimationName == "AxeFinishRight")
+                {
+                    motion = new Vector2(2, 0);
+                }
+
+                renderList.Add(tempaxe);           
+                player.Stamina -= 20f;
+                motion = Vector2.Zero;
+            }
+
+            else
+            {
+                renderList.Add(tempaxe);
+                player.Stamina -= 20f;
+            }
+        }
 
         private void NormalarrowFired(ContentManager Content, Vector2 motion)
         {
