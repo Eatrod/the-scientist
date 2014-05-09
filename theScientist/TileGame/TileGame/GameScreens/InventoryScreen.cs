@@ -128,7 +128,7 @@ namespace TileGame.GameScreens
             alcoholLabel = new Label();
             alcoholLabel.Text = "";
             alcoholLabel.Color = Color.Black;
-            alcoholLabel.Position = new Vector2(nonweapon_starting_x + item_x_distance * 1, item_starting_y + item_y_distance * 0 + item_height);
+            alcoholLabel.Position = new Vector2(nonweapon_starting_x + item_x_distance * 0, item_starting_y + item_y_distance * 1 + item_height);
             ControlManager.Add(alcoholLabel);
 
             permitLabel = new Label();
@@ -431,7 +431,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                             immortuiImage,
-                            new Rectangle(nonweapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 1), item_width, item_height),
+                            new Rectangle(nonweapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 1), item_width, item_height),
                             Color.White);
                 immortuiLabel.Text = "Immortui";
             }
@@ -449,7 +449,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                             alcoholImage,
-                            new Rectangle(nonweapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 0), item_width, item_height),
+                            new Rectangle(nonweapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 1), item_width, item_height),
                             Color.White);
                 alcoholLabel.Text = "Alcohol";
             }
