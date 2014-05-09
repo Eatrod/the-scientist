@@ -62,7 +62,7 @@ namespace TileGame.GameScreens
 
         CollisionWithCharacter CollisionWithCharacter = new CollisionWithCharacter();
        
-        List<BaseSprite> SpriteObject = new List<BaseSprite>();
+        public List<BaseSprite> SpriteObject = new List<BaseSprite>();
         List<BaseSprite> AnimatedSpriteObject = new List<BaseSprite>();
         public List<BaseSprite> SpriteObjectInGameWorld = new List<BaseSprite>();
         List<AnimatedProjectile> NPCProjectile = new List<AnimatedProjectile>();
@@ -422,6 +422,7 @@ namespace TileGame.GameScreens
             lockedGateDict = new Dictionary<int,bool>();
             lockedGateDict[40] = true;
             lockedGateDict[41] = true;
+            lockedGateDict[42] = true;
             //--
 
 
@@ -431,6 +432,13 @@ namespace TileGame.GameScreens
         {
             player.Speed = 10;
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
+            //--
+            if (InputHandler.KeyReleased(Keys.Space))
+            {
+                PlayerScreen.PickUp(gameTime, SpriteObjectInGameWorld, player, SpriteObject, playerprojectiles, renderList, AnimatedSpriteObject);
+            }
+            //--
+
             foreach(DirtPileSprite dirtpile in DirtPiles)
             {
                 dirtpile.UpdateTheDirtPile(gameTime);
@@ -645,8 +653,10 @@ namespace TileGame.GameScreens
             if (cellIndex >= 40 && cellIndex < 50)
             {
                 GateToNextScreen(cellIndex, GameRef.GamePlayScreen2, "G0");
-                
-                GateToNextScreen(cellIndex, GameRef.GamePlayScreen2, "G1");  
+
+                GateToNextScreen(cellIndex, GameRef.GamePlayScreen2, "G1");
+
+                GateToNextScreen(cellIndex, GameRef.CollectGameScreen, "G2");  
             }
             UnlockGate(cellIndex);
 
