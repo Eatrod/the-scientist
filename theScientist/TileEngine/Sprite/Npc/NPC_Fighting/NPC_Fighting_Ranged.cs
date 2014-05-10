@@ -53,6 +53,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.ElapsedDirection = 0.0f;
             this.DelayDirection = 4000f;
 
+            FrameAnimation playerNear = new FrameAnimation(7, 50, 80, 200, 0);
 
             FrameAnimation down = new FrameAnimation(1, 50, 80, 0, 0);
             FrameAnimation left = new FrameAnimation(1, 50, 80, 0, 80);
@@ -69,6 +70,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             FrameAnimation throwLeft = new FrameAnimation(2, 50, 80, 250, 80);
             FrameAnimation throwRight = new FrameAnimation(2, 50, 80, 250, 160);
 
+            this.Animations.Add("PlayerNear", playerNear);
             this.Animations.Add("ThrowLeft", throwLeft);
             this.Animations.Add("ThrowRight", throwRight);
             this.Animations.Add("Nothing", nothing);
@@ -161,7 +163,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 }
                 if (!animationTime && Aggro)
                 {
-                    this.CurrentAnimationName = "Down";
+                    this.CurrentAnimationName = "PlayerNear";
+                    this.CurrentAnimation.FramesPerSeconds = 0.15f;
                 }
                 else if (walkAround)
                 {
