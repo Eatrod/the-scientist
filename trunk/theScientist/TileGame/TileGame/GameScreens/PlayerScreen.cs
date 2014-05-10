@@ -137,35 +137,35 @@ namespace TileGame.GameScreens
             staminaRect = new Rectangle(0, 0, 100, 20);//staminabarRectangle
             chargeRect = new Rectangle(0, 0, 100, 20); //chargeRectangle
 
-            FrameAnimation down = new FrameAnimation(4, 50, 80, 0, 0);
+            FrameAnimation down = new FrameAnimation(8, 50, 80, 0, 0);
             if(!player.Animations.ContainsKey("Down"))
                 player.Animations.Add("Down", down);
 
-            FrameAnimation left = new FrameAnimation(4, 50, 80, 0, 80);
+            FrameAnimation left = new FrameAnimation(8, 50, 80, 0, 80);
             if (!player.Animations.ContainsKey("Left"))
                 player.Animations.Add("Left", left);
 
-            FrameAnimation right = new FrameAnimation(4, 50, 80, 0, 160);
+            FrameAnimation right = new FrameAnimation(8, 50, 80, 0, 160);
             if(!player.Animations.ContainsKey("Right"))
                 player.Animations.Add("Right", right);
 
-            FrameAnimation up = new FrameAnimation(4, 50, 80, 0, 240);
+            FrameAnimation up = new FrameAnimation(8, 50, 80, 0, 240);
             if(!player.Animations.ContainsKey("Up"))
                 player.Animations.Add("Up", up);         
 
-            FrameAnimation idledown = new FrameAnimation(1, 50, 80, 200, 0);
+            FrameAnimation idledown = new FrameAnimation(1, 50, 80, 400, 0);
             if (!player.Animations.ContainsKey("IdleDown"))
                 player.Animations.Add("IdleDown", idledown);
  
-            FrameAnimation idleleft = new FrameAnimation(1, 50, 80, 200, 80);
+            FrameAnimation idleleft = new FrameAnimation(1, 50, 80, 400, 80);
             if (!player.Animations.ContainsKey("IdleLeft"))
                 player.Animations.Add("IdleLeft", idleleft);
 
-            FrameAnimation idleright = new FrameAnimation(1, 50, 80, 200, 160);
+            FrameAnimation idleright = new FrameAnimation(1, 50, 80, 400, 160);
             if (!player.Animations.ContainsKey("IdleRight"))
                 player.Animations.Add("IdleRight", idleright);        
 
-            FrameAnimation idleup = new FrameAnimation(1, 50, 80, 200, 240);
+            FrameAnimation idleup = new FrameAnimation(1, 50, 80, 400, 240);
             if (!player.Animations.ContainsKey("IdleUp"))
                 player.Animations.Add("IdleUp", idleup);
 
@@ -222,28 +222,28 @@ namespace TileGame.GameScreens
                 player.Animations.Add("AxeFinishUp", axefinishup);
 
 
-            FrameAnimation pickupdown = new FrameAnimation(3, 50, 80, 200, 0);
+            FrameAnimation pickupdown = new FrameAnimation(3, 50, 80, 400, 0);
             if (!player.Animations.ContainsKey("PickupDown"))
             {
                 player.Animations.Add("PickupDown", pickupdown);
                 player.Animations["PickupDown"].FramesPerSeconds = 35;
             }
 
-            FrameAnimation pickupleft = new FrameAnimation(3, 50, 80, 200, 80);
+            FrameAnimation pickupleft = new FrameAnimation(3, 50, 80, 400, 80);
             if (!player.Animations.ContainsKey("PickupLeft"))
             {
                 player.Animations.Add("PickupLeft", pickupleft);
                 player.Animations["PickupLeft"].FramesPerSeconds = 35;
             }
 
-            FrameAnimation pickupright = new FrameAnimation(3, 50, 80, 200, 160);
+            FrameAnimation pickupright = new FrameAnimation(3, 50, 80, 400, 160);
             if (!player.Animations.ContainsKey("PickupRight"))
             {
                 player.Animations.Add("PickupRight", pickupright);
                 player.Animations["PickupRight"].FramesPerSeconds = 35;
             }
 
-            FrameAnimation pickupup = new FrameAnimation(3, 50, 80, 200, 240);
+            FrameAnimation pickupup = new FrameAnimation(3, 50, 80, 400, 240);
             if (!player.Animations.ContainsKey("PickupUp"))
             {
                 player.Animations.Add("PickupUp", pickupup);
@@ -300,7 +300,7 @@ namespace TileGame.GameScreens
                 startCell = GameRef.BaseGamePlayScreen.FindCellWithIndexInCurrentTilemap(
                 50,
                 GameRef.PotatoTown);
-                player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/Player"), Content.Load<Texture2D>("CharacterPotraits/DiaPortPlcholder"));
+                player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/Bjorn_Try_Player"), Content.Load<Texture2D>("CharacterPotraits/DiaPortPlcholder"));
             player.Origionoffset = new Vector2(25, 65);
                 player.SetSpritePositionInGameWorld(new Vector2(startCell.X, startCell.Y));
             player.Life = 100;
@@ -1824,7 +1824,7 @@ namespace TileGame.GameScreens
         private void UpdateSpriteAnimation(Vector2 motion)
         {
             float motionAngle = (float)Math.Atan2(motion.Y, motion.X);
-            player.CurrentAnimation.FramesPerSeconds = 0.20f;
+            player.CurrentAnimation.FramesPerSeconds = 0.10f;
 
             if (motionAngle >= -MathHelper.PiOver4 && motionAngle <= MathHelper.PiOver4)
             {
