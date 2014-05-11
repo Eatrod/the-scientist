@@ -18,14 +18,20 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
         public bool walkingright;
         public float delayWalk;
         public float elapsedWalk;
+        public float delayFly;
+        public float elapsedFly;
         public bool danceFlag;
         public float delayDance;
         public float elapsedDance;
         public bool angry;
         public float acc;
+        public Vector2 startPosition;
         
-        public NPC_Neutral_Bjorn(Texture2D texture): base(texture)
+        public NPC_Neutral_Bjorn(Texture2D texture,Vector2 startPosition): base(texture)
         {
+            this.startPosition = startPosition;
+            this.elapsedFly = 0.0f;
+            this.delayFly = 10000f;
             this.angry = false;
             this.acc = 1f;
             this.delayDance = 3000f;
@@ -35,11 +41,17 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
             this.elapsedWalk = 0.0f;
             this.walkingright = true;
 
+            FrameAnimation redbull = new FrameAnimation(16, 50, 80, 0, 0);
+            FrameAnimation wings = new FrameAnimation(4, 75, 80, 0, 400);
+            FrameAnimation fly = new FrameAnimation(6, 75, 80, 300, 400);
             FrameAnimation angry = new FrameAnimation(1, 50, 80, 0, 320);
             FrameAnimation dance = new FrameAnimation(7, 50, 80, 0, 240);
             FrameAnimation moonwalkRight = new FrameAnimation(8, 50, 80, 0, 80); 
             FrameAnimation moonwalkLeft = new FrameAnimation(8, 50, 80, 0, 160);
 
+            this.Animations.Add("Redbull", redbull);
+            this.Animations.Add("Wings", wings);
+            this.Animations.Add("Fly", fly);
             this.Animations.Add("Angry", angry);
             this.Animations.Add("MoonwalkRight", moonwalkRight);
             this.Animations.Add("MoonwalkLeft", moonwalkLeft);
@@ -51,13 +63,43 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
             {
                 angry = true;
             }
-            else
-                angry = false;
         }
         public override void Update(GameTime gameTime)
         {
+
             if (angry)
-                this.CurrentAnimationName = "Angry";
+            {
+                if (this.CurrentAnimationName != "Wings" && this.CurrentAnimationName != "Fly")
+                {
+                    this.CurrentAnimationName = "Redbull";
+                    this.CurrentAnimation.FramesPerSeconds = 0.20f;
+                }
+                if(this.CurrentAnimation.CurrentFrame >= 15 && this.CurrentAnimationName == "Redbull")
+                {
+                    this.Position.X -= 9;
+                    this.CurrentAnimationName = "Wings";
+                    this.CurrentAnimation.FramesPerSeconds = 0.20f;
+                }
+                if(this.CurrentAnimationName == "Wings" && this.CurrentAnimation.CurrentFrame >= 3)
+                {
+                    this.CurrentAnimationName = "Fly";
+                    this.CurrentAnimation.FramesPerSeconds = 0.15f;
+                }
+                if(this.CurrentAnimationName == "Fly")
+                {
+                    this.elapsedFly +=(float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    this.Position -= new Vector2(1,1);
+                    if(elapsedFly > delayFly)
+                    {
+                        angry = false;
+                        this.Position = this.startPosition;
+                        this.elapsedFly = 0.0f;
+                        this.Animations["Redbull"].CurrentFrame = 0;
+                        this.Animations["Wings"].CurrentFrame = 0;
+                        this.Animations["Fly"].CurrentFrame = 0;
+                    }
+                }
+            }
             else
             {
                 if (danceFlag)
