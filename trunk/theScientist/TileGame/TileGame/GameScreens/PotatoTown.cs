@@ -167,7 +167,7 @@ namespace TileGame.GameScreens
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testFront.layer"));
             tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/testCollision.layer");
             #region Björn NPC
-            bjorne = new NPC_Neutral_Bjorn(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bjorn"));
+            bjorne = new NPC_Neutral_Bjorn(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bjorn"),new Vector2(32 * 32,54 * 32));
             bjorne.Origionoffset = new Vector2(25, 65);
             bjorne.SetSpritePositionInGameWorld(new Vector2(32, 54));
             bjorne.Life = 100;
