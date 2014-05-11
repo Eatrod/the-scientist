@@ -88,7 +88,7 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
                 if(this.CurrentAnimationName == "Fly")
                 {
                     this.elapsedFly +=(float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                    this.Position -= new Vector2(1,1);
+                    this.Position -= new Vector2(1,2);
                     if(elapsedFly > delayFly)
                     {
                         angry = false;
