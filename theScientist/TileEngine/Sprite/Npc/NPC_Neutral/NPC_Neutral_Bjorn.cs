@@ -28,7 +28,7 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
         {
             this.angry = false;
             this.acc = 1f;
-            this.delayDance = 5000f;
+            this.delayDance = 3000f;
             this.elapsedDance = 0.0f;
             this.danceFlag = false;
             this.delayWalk = 8000f;
