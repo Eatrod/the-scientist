@@ -49,8 +49,11 @@ namespace TileGame.GameScreens
         Sprite sprite, sprite1;
         AnimatedSprite NPC1, NPC2;
         public NPC_Story npcstory, npcStoryAsterix;//npcstory2;
-   
-   
+
+        #region Björn NPC
+        NPC_Neutral_Bjorn bjorne;
+        #endregion
+
         public NPC_Story npc;
         public NPC_Story_GuardCaptain guard;
         public NPC_Neutral_Townsfolk npcNeutral;
@@ -163,6 +166,14 @@ namespace TileGame.GameScreens
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testMiddle.layer"));
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/testFront.layer"));
             tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/testCollision.layer");
+            #region Björn NPC
+            bjorne = new NPC_Neutral_Bjorn(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bjorn"));
+            bjorne.Origionoffset = new Vector2(25, 65);
+            bjorne.SetSpritePositionInGameWorld(new Vector2(32, 54));
+            bjorne.Life = 100;
+            bjorne.FullHp = 100;
+            AnimatedSpriteObject.Add(bjorne);
+            #endregion
 
             #region Potatisgunners
             for (int i = 0; i < 4; i++)
@@ -438,8 +449,10 @@ namespace TileGame.GameScreens
                 PlayerScreen.PickUp(gameTime, SpriteObjectInGameWorld, player, SpriteObject, playerprojectiles, renderList, AnimatedSpriteObject);
             }
             //--
-
-            foreach(DirtPileSprite dirtpile in DirtPiles)
+            #region Björn NPC
+            bjorne.AngryCheck(player);
+            #endregion
+            foreach (DirtPileSprite dirtpile in DirtPiles)
             {
                 dirtpile.UpdateTheDirtPile(gameTime);
                 if(dirtpile.Finished)
