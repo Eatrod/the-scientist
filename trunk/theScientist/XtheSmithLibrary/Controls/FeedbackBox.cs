@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using System.Linq;
 using System.Text;
 using TileEngine;
@@ -14,12 +15,15 @@ namespace XtheSmithLibrary.Controls
     {
         private Dictionary<string, bool> dictionary;
         public bool isShowing = false;
+        public bool soundPlayed = false;
         private float elapsedTime = 0.0f;
         private Texture2D texture;
         private Rectangle rectangle;
+        private SoundEffect questCompleteSound;
+        private ContentManager Content;
 
 
-        public FeedbackBox(Texture2D texture, Rectangle rectangle) : base(texture, rectangle)
+        public FeedbackBox(Texture2D texture, Rectangle rectangle, ContentManager Content) : base(texture, rectangle)
         {
             this.rectangle = rectangle;
             this.texture = texture;
@@ -29,6 +33,15 @@ namespace XtheSmithLibrary.Controls
             this.dictionary.Add("Talked to Asterix", false);
             this.dictionary.Add("Permit", false);
             this.dictionary.Add("Belladonna", false);
+            this.Content = Content;
+            questCompleteSound = Content.Load<SoundEffect>(@"Sounds/Effects/quest_completed");
+        }
+
+        protected override void LoadContent()
+        {
+
+            //ContentManager Content = Game.Content;
+            questCompleteSound = Content.Load<SoundEffect>(@"Sounds/Effects/quest_completed");
         }
 
         public override void Update(GameTime gameTime)
@@ -87,6 +100,12 @@ namespace XtheSmithLibrary.Controls
                 return;
             if (dictionary[type] == false)
             {
+                if (soundPlayed == false)
+                {
+                    questCompleteSound.Play(0.5f, 0.0f, 0.0f);
+                    soundPlayed = true;
+                }
+
                 spriteBatch.Draw(texture, rectangle, Color.Black);
                 spriteBatch.DrawString(spriteFont, text + type,new Vector2(rectangle.X+20, rectangle.Y+20), Color.LightGreen);
                 if (elapsedTime > 5)
@@ -94,6 +113,7 @@ namespace XtheSmithLibrary.Controls
                     elapsedTime = 0;
                     dictionary[type] = true;
                     isShowing = false;
+                    soundPlayed = false;
                 }
             }
         }

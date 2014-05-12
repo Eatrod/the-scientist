@@ -117,6 +117,7 @@ namespace XtheSmithLibrary.Controls
 
         #region Abstract Methods
 
+        protected abstract void LoadContent();
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(SpriteBatch spriteBatch);
         public abstract void HandleInput(PlayerIndex playerIndex);

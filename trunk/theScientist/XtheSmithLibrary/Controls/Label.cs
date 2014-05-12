@@ -21,6 +21,10 @@ namespace XtheSmithLibrary.Controls
 
         #region Abstract Methods
 
+        protected override void LoadContent()
+        {
+            
+        }
         public override void Update(GameTime gameTime)
         {
         }
