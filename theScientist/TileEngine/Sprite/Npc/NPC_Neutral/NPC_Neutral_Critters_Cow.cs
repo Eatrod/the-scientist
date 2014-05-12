@@ -55,6 +55,7 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
             //this.Animations.Add("WalkUp", walkUp);
             //this.Animations.Add("WalkDown", walkDown);
 
+            SpeakingRadius = 80;
             this.elapsedDirection = 0.0f;
             this.delayDirection = 10000f;
             this.WalkingCircle = 500;

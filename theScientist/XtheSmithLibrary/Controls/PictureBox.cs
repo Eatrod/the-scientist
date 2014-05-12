@@ -14,8 +14,8 @@ namespace XtheSmithLibrary.Controls
         #region Field Region
 
         Texture2D image;
-        Rectangle sourceRect;
-        Rectangle destRect;
+        protected Rectangle sourceRect;
+        protected Rectangle destRect;
 
         #endregion
 

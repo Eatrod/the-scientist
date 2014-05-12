@@ -58,8 +58,16 @@ namespace XtheSmithLibrary.Controls
             foreach (var npc in npcList)
             {
                 SetPosition(new Vector2(npc.Position.X+20,npc.Position.Y-35));
-                rectangle.Width = 150;
-                rectangle.Height = 150;
+                if (text.Length < 15)
+                {
+                    destRect.Width = 110;
+                    destRect.Height = 25;
+                }
+                else
+                {
+                    destRect.Width = 150;
+                    destRect.Height = 150;
+                }
                 base.Draw(spriteBatch);
                 StringBuilder stringBuilder = new StringBuilder();
                 WrapWord(new StringBuilder(text), stringBuilder, SpriteFont, rectangle);

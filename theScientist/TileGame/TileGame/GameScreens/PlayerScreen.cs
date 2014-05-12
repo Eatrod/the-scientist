@@ -1870,10 +1870,9 @@ namespace TileGame.GameScreens
         }
        
         #endregion
-
-        
+      
         #region Method Region
-        public void PlayerShowTextBubble(NPC_Neutral_Townsfolk npc)
+        public void PlayerShowTextBubble(NPC_Neutral npc)
         {
             npc.TextBubble();
             textBubble.conversation = npc.text;
@@ -1885,7 +1884,7 @@ namespace TileGame.GameScreens
             npc.ShowingBubble = true;
         }
 
-        public void PlayerHideTextBubble(NPC_Neutral_Townsfolk npc)
+        public void PlayerHideTextBubble(NPC_Neutral npc)
         {
             textBubble.Visible = false;
             textBubble.Enabled = false;
