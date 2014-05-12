@@ -36,6 +36,11 @@ namespace TileGame.Collision
                             s.Position - (d * (player.CollisionRadius + s.CollisionRadius));
                     }
 
+                    if( s is TreeStandingBridge)
+                    {
+                        player.Position = player.Position + (-d) * player.Speed;
+                    }
+
                     //if(s is LifePotatoSprite)
                     //{
                     //    SpriteObjectInGameWorld.Remove(s);
