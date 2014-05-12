@@ -83,7 +83,7 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
                 if(this.CurrentAnimationName == "Wings" && this.CurrentAnimation.CurrentFrame >= 3)
                 {
                     this.CurrentAnimationName = "Fly";
-                    this.CurrentAnimation.FramesPerSeconds = 0.15f;
+                    this.CurrentAnimation.FramesPerSeconds = 0.20f;
                 }
                 if(this.CurrentAnimationName == "Fly")
                 {
