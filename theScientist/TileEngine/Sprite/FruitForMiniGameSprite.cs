@@ -20,7 +20,6 @@ namespace TileEngine.Sprite
         private bool alive;
         private float playerPoints;
         private float npcPoints;
-        private float score;
         public bool Alive
         {
             get { return alive; }
@@ -30,20 +29,20 @@ namespace TileEngine.Sprite
         {
             this.npcPoints = 0.0f;
             this.playerPoints = 0.0f;
-            this.score = 100f;
             this.alive = true;
             this.random = random;
-            this.delayLifeTime = random.Next(10000, 20000);
+            this.delayLifeTime = random.Next(15000, 25000);
             this.elapsedLifeTime = 0.0f;
-            this.Position = new Vector2(random.Next(10, 55), random.Next(10, 40));
+            this.Position = new Vector2(random.Next(10, 55) * 32, random.Next(10, 40) * 32);
 
-            FrameAnimation freshFruit = new FrameAnimation(1, 32, 32, 0, 0);
+            FrameAnimation freshFruit = new FrameAnimation(1, 32, 32, 64, 0);
             FrameAnimation middleFruit = new FrameAnimation(1, 32, 32, 32, 0);
-            FrameAnimation rottenFruit = new FrameAnimation(1, 32, 32, 64, 0);
+            FrameAnimation rottenFruit = new FrameAnimation(1, 32, 32, 0, 0);
 
             this.Animations.Add("FreshFruit", freshFruit);
             this.Animations.Add("MiddleFruit", middleFruit);
             this.Animations.Add("RottenFruit", rottenFruit);
+            this.CurrentAnimationName = "FreshFruit";
         }
         public void CheckForContactWithPlayerOrNPC(AnimatedSprite player, LumberJackJohnny npc)
         {
@@ -69,7 +68,7 @@ namespace TileEngine.Sprite
                     this.npcPoints += 50;
             }
         }
-        public void UpdateFruit(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             elapsedLifeTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (elapsedLifeTime < delayLifeTime / 2)
@@ -87,7 +86,7 @@ namespace TileEngine.Sprite
             if(!alive)
             {
                 this.elapsedLifeTime = 0.0f;
-                this.Position = new Vector2(random.Next(10, 55), random.Next(10, 40));
+                this.Position = new Vector2(random.Next(10, 55) *32, random.Next(10, 40) * 32);
                 this.CurrentAnimationName = "FreshFruit";
                 this.alive = true;
             }
@@ -99,7 +98,7 @@ namespace TileEngine.Sprite
             {
 
             }
-            base.Update(gameTime);
+ 	        base.Update(gameTime);
         }
     }
 }
