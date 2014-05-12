@@ -92,9 +92,23 @@ namespace TileEngine
             if (StoryProgress.ProgressLine["permitHave"] && npc.NPCName == "Bibitur")
                 npc.script = null;
             if (StoryProgress.collectedAmountDict["Fish"] > 0 && npc.NPCName == "Fisherman")
+            {
                 npc.ChangeScript("fishHave");
+            }
+            else 
+            {
+                if (npc.NPCName == "Fisherman")
+                    npc.ChangeScript("default");
+            }
             if (StoryProgress.collectedAmountDict["Money"] >= 5 && npc.NPCName == "Innkeeper")
+            {
                 npc.ChangeScript("moneyHave");
+            }
+            else
+            {
+                if (npc.NPCName == "Innkeeper")
+                    npc.ChangeScript("default");
+            }
 
             //Neutrala NPCs
             if (StoryProgress.ProgressLine["asterixTalkedTo"] && npc.GetType() == typeof(NPC_Neutral))
