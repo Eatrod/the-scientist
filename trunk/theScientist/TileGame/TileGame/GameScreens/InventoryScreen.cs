@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 using XtheSmithLibrary;
 using XtheSmithLibrary.Controls;
@@ -34,6 +35,9 @@ namespace TileGame.GameScreens
         int cursor_bracket_width, cursor_y_distance, cursor_width, cursor_height;
         int active_item_slot_width, active_item_slot_height, active_item_slot_starting_x, active_item_slot_bracket_width;
         int active_item_y, active_item_x_distance, active_item_starting_x;
+
+
+        SoundEffect inventorySelectSound;
 
         #endregion
 
@@ -181,7 +185,10 @@ namespace TileGame.GameScreens
                 activeWeaponNumbers[i].Text = (i + 1).ToString();
                 activeWeaponNumbers[i].Color = Color.Black;
                 ControlManager.Add(activeWeaponNumbers[i]);
-            }          
+            }
+
+
+            inventorySelectSound = Content.Load<SoundEffect>(@"Sounds/Effects/inventory_pickup");
 
         }
         public override void Update(GameTime gameTime)
@@ -486,30 +493,35 @@ namespace TileGame.GameScreens
 
             if (InputHandler.KeyReleased(Keys.D1))
             {
+                inventorySelectSound.Play();
                 ResetKey(Keys.D1);
                 AssignKeyToItem(Keys.D1);
             }
 
             if (InputHandler.KeyReleased(Keys.D2))
             {
+                inventorySelectSound.Play();
                 ResetKey(Keys.D2);
                 AssignKeyToItem(Keys.D2);
             }
 
             if (InputHandler.KeyReleased(Keys.D3))
             {
+                inventorySelectSound.Play();
                 ResetKey(Keys.D3);
                 AssignKeyToItem(Keys.D3);
             }
 
             if (InputHandler.KeyReleased(Keys.D4))
             {
+                inventorySelectSound.Play();
                 ResetKey(Keys.D4);
                 AssignKeyToItem(Keys.D4);
             }
 
             if (InputHandler.KeyReleased(Keys.D5))
             {
+                inventorySelectSound.Play();
                 ResetKey(Keys.D5);
                 AssignKeyToItem(Keys.D5);
             }
