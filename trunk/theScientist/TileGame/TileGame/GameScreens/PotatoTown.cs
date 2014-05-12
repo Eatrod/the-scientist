@@ -408,6 +408,15 @@ namespace TileGame.GameScreens
                 NpcCritters.Add(npcCow);
             }
 
+            for (int i = 0; i < 5; i++)
+            {
+                npcCow = new NPC_Neutral_Critters_Cow(Content.Load<Texture2D>("Sprite/Cow"), Content.Load<Script>("Scripts/PotatotownTownsfolk"), GameRef.random);
+                npcCow.Origionoffset = new Vector2(16, 16);
+                npcCow.SetSpritePositionInGameWorld(new Vector2(127 + i, 39 + i));
+                AnimatedSpriteObject.Add(npcCow);
+                NpcCritters.Add(npcCow);
+            }
+
             #endregion
 
             createLifePotatoPlant();
