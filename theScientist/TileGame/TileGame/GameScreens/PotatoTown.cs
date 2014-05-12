@@ -188,7 +188,7 @@ namespace TileGame.GameScreens
             }
             NPCPotatoeGunners[0].SetSpritePositionInGameWorld(new Vector2(133, 90));
             NPCPotatoeGunners[1].SetSpritePositionInGameWorld(new Vector2(115, 98));
-            NPCPotatoeGunners[2].SetSpritePositionInGameWorld(new Vector2(123, 75));
+            NPCPotatoeGunners[2].SetSpritePositionInGameWorld(new Vector2(105, 95));
             NPCPotatoeGunners[3].SetSpritePositionInGameWorld(new Vector2(115, 85));
             #endregion
 
