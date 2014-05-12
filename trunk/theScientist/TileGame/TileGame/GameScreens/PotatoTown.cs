@@ -387,11 +387,11 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcNeutral);
             NpcNeutralList.Add(npcNeutral);
 
-                npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
-                npcNeutral.Origionoffset = new Vector2(25, 65);
+            npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
+            npcNeutral.Origionoffset = new Vector2(25, 65);
             npcNeutral.SetSpritePositionInGameWorld(new Vector2(70,100));
-                AnimatedSpriteObject.Add(npcNeutral);
-                NpcNeutralList.Add(npcNeutral);
+            AnimatedSpriteObject.Add(npcNeutral);
+            NpcNeutralList.Add(npcNeutral);
 
             npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
             npcNeutral.Origionoffset = new Vector2(25, 65);
