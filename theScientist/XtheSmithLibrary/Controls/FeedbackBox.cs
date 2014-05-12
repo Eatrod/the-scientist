@@ -25,7 +25,7 @@ namespace XtheSmithLibrary.Controls
             this.texture = texture;
             dictionary = new Dictionary<string,bool>();
             this.dictionary.Add("Axe", false);
-            this.dictionary.Add("Johns Riddle", false);
+            this.dictionary.Add("Johns riddle", false);
             this.dictionary.Add("Talked to Asterix", false);
             this.dictionary.Add("Permit", false);
             this.dictionary.Add("Belladonna", false);
@@ -61,7 +61,7 @@ namespace XtheSmithLibrary.Controls
                 this.type = "Permit";
                 isShowing = true;
             }
-            if (StoryProgress.ProgressLine["contestAgainstJohnFinished"] && dictionary["John"] == false && isShowing == false)
+            if (StoryProgress.ProgressLine["contestAgainstJohnFinished"] && dictionary["Johns riddle"] == false && isShowing == false)
             {
                 this.text = "You have completed the task: ";
                 this.type = "Johns riddle";
