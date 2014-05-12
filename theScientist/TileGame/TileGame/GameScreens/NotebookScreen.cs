@@ -183,12 +183,14 @@ namespace TileGame.GameScreens
             #region Section updates
             if (InputHandler.KeyReleased(Keys.Up))
             {
+                pageIndex = 0;
                 sectionHandler--;
                 if (sectionHandler < 0)
                     sectionHandler = 2;
             }
             if (InputHandler.KeyReleased(Keys.Down))
             {
+                pageIndex = 0;
                 sectionHandler++;
                 if (sectionHandler > 2)
                     sectionHandler = 0;
