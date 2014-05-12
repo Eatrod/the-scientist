@@ -401,7 +401,7 @@ namespace TileGame.GameScreens
 
             for (int i = 0; i < 9; i++)
             {
-                npcCow = new NPC_Neutral_Critters_Cow(Content.Load<Texture2D>("Sprite/Cow"), Content.Load<Script>("Scripts/PotatotownTownsfolk"), GameRef.random);
+                npcCow = new NPC_Neutral_Critters_Cow(Content.Load<Texture2D>("Sprite/Cow"), Content.Load<Script>("Scripts/Cows"), GameRef.random);
                 npcCow.Origionoffset = new Vector2(16, 16);
                 npcCow.SetSpritePositionInGameWorld(new Vector2(112 + i, 36 + i));
                 AnimatedSpriteObject.Add(npcCow);
@@ -410,7 +410,7 @@ namespace TileGame.GameScreens
 
             for (int i = 0; i < 5; i++)
             {
-                npcCow = new NPC_Neutral_Critters_Cow(Content.Load<Texture2D>("Sprite/Cow"), Content.Load<Script>("Scripts/PotatotownTownsfolk"), GameRef.random);
+                npcCow = new NPC_Neutral_Critters_Cow(Content.Load<Texture2D>("Sprite/Cow"), Content.Load<Script>("Scripts/Cows"), GameRef.random);
                 npcCow.Origionoffset = new Vector2(16, 16);
                 npcCow.SetSpritePositionInGameWorld(new Vector2(127 + i, 39 + i));
                 AnimatedSpriteObject.Add(npcCow);
@@ -599,11 +599,28 @@ namespace TileGame.GameScreens
                 {
                     npc.Motion.Normalize();
                     npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
+                }
+                GameRef.storyProgress.ChangeScriptsForNPCs(npc);
+                if (npc.InHearingRange(player))
+                {
+                    if (npc.ShowingBubble == false)
+                    {
+                        npc.changeSpeed = false;
+                        PlayerShowTextBubble(npc);
+                    }
+                }
 
+                else
+                {
+                    if (npc.ShowingBubble == true)
+                    {
+                        npc.changeSpeed = true;
+                        PlayerHideTextBubble(npc);
+                    }
                 }
             }
 
-            foreach (NPC_Neutral npc in NpcCritters)
+            foreach (var npc in NpcCritters)
             {
                 if (npc.Motion != Vector2.Zero)
                 {
@@ -611,6 +628,21 @@ namespace TileGame.GameScreens
                     npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
 
                 }
+                if (npc.InHearingRange(player))
+                {
+                    if (npc.ShowingBubble == false)
+                    {
+                        PlayerShowTextBubble(npc);
+                    }
+                }
+                else
+                {
+                    if (npc.ShowingBubble == true)
+                    {
+                        PlayerHideTextBubble(npc);
+                    }
+                }
+                
             }
 
             foreach(NPC_Fighting_Patrolling npc in NPCPatrollingGuards)
@@ -693,31 +725,7 @@ namespace TileGame.GameScreens
                         }
                 }
             }
-          
-
-            //Kontroller för kod som rör Neutrala NPCs
-            foreach (var npc in NpcNeutralList)
-            {
-                GameRef.storyProgress.ChangeScriptsForNPCs(npc);
-                if (npc.InHearingRange(player))
-                {
-                    if (npc.ShowingBubble == false)
-                    {
-                        npc.changeSpeed = false;
-                        PlayerShowTextBubble(npc);
-                    }
-                }
-
-                else
-                {
-                    if (npc.ShowingBubble == true)
-                    {
-                        npc.changeSpeed = true;
-                        PlayerHideTextBubble(npc);
-                    }
-                }
-            }
-            
+                  
             Point cell = Engine.ConvertPostionToCell(player.Origin);
             int cellIndex = tileMap.CollisionLayer.GetCellIndex(cell);
             if (cellIndex >= 40 && cellIndex < 50)

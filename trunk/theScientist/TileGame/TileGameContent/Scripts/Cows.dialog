@@ -1,0 +1,24 @@
+﻿<Converstaions>
+
+  <Conversation Name="Text1">
+    <Text>Mooooooo</Text>
+    <Handlers>
+      <Handler Caption="d" Action="EndBubble" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Text2">
+    <Text>Baaaaa</Text>
+    <Handlers>
+      <Handler Caption="d" Action="EndBubble" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Text3">
+    <Text>Feed me human!</Text>
+    <Handlers>
+      <Handler Caption="d" Action="EndBubble" />
+    </Handlers>
+  </Conversation>
+  
+</Converstaions>

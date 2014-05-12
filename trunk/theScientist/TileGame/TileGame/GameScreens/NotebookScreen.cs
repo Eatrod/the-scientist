@@ -133,11 +133,6 @@ namespace TileGame.GameScreens
             InsertTextToDictionary(completedDict, 2, "Completed: You have aquired a valid permit");
             InsertTextToDictionary(completedDict, 3, "Completed: You talked to Asterix");
             InsertTextToDictionary(completedDict, 4, "Completed: You collected the Belladona");
-            InsertTextToDictionary(completedDict, 5, "Completed: bababa");
-            InsertTextToDictionary(completedDict, 6, "Completed: bababa");
-            InsertTextToDictionary(completedDict, 7, "Completed: bababa");
-            InsertTextToDictionary(completedDict, 8, "Completed: bababa");
-            InsertTextToDictionary(completedDict, 9, "Completed: bababa");
 
 
             hintDict[0].Unlocked = true;
@@ -154,15 +149,7 @@ namespace TileGame.GameScreens
             if (StoryProgress.ProgressLine["asterixTalkedTo"])
             {
                 taskDict[1].Unlocked = true;
-                completedDict[1].Unlocked = true;
-                completedDict[2].Unlocked = true;
                 completedDict[3].Unlocked = true;
-                completedDict[4].Unlocked = true;
-                completedDict[5].Unlocked = true;
-                completedDict[6].Unlocked = true;
-                completedDict[7].Unlocked = true;
-                completedDict[8].Unlocked = true;
-                completedDict[9].Unlocked = true;
             }
             if (StoryProgress.ProgressLine["belladonnaHave"])
             {
@@ -171,13 +158,18 @@ namespace TileGame.GameScreens
                 completedDict[4].Unlocked = true;
             }
             if (StoryProgress.ProgressLine["contestAgainstJohnFinished"])
+            {
                 completedDict[1].Unlocked = true;
+            }
+
             if (StoryProgress.ProgressLine["permitHave"])
             {
                 completedDict[2].Unlocked = true;
             }
             if (StoryProgress.ProgressLine["Axe"])
+            {
                 hintDict[2].Unlocked = true;
+            }
             #endregion
 
             #region Section updates

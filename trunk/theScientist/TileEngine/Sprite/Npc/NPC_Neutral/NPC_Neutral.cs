@@ -13,7 +13,7 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
     {
         #region Field Region
         public Conversation text;
-        protected const int SpeakingRadius = 40;
+        protected int SpeakingRadius = 40;
         public bool ShowingBubble { get; set; }
         protected bool startingFlag;
         protected Random random;
