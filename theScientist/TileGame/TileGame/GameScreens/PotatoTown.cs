@@ -57,8 +57,10 @@ namespace TileGame.GameScreens
         public NPC_Story npc;
         public NPC_Story_GuardCaptain guard;
         public NPC_Neutral_Townsfolk npcNeutral;
+        public NPC_Neutral_Critters_Cow npcCow;
 
-        public List<NPC_Neutral_Townsfolk> NpcNeutralList = new List<NPC_Neutral_Townsfolk>(); 
+        public List<NPC_Neutral_Townsfolk> NpcNeutralList = new List<NPC_Neutral_Townsfolk>();
+        public List<NPC_Neutral_Critters_Cow> NpcCritters = new List<NPC_Neutral_Critters_Cow>();
         public List<NPC_Story> NpcStoryList = new List<NPC_Story>(); 
         protected Rectangle rectangle;
         private GraphicsDeviceManager graphics;
@@ -396,6 +398,16 @@ namespace TileGame.GameScreens
             npcNeutral.SetSpritePositionInGameWorld(new Vector2(111,49));
             AnimatedSpriteObject.Add(npcNeutral);
             NpcNeutralList.Add(npcNeutral);
+
+            for (int i = 0; i < 9; i++)
+            {
+                npcCow = new NPC_Neutral_Critters_Cow(Content.Load<Texture2D>("Sprite/Cow"), Content.Load<Script>("Scripts/PotatotownTownsfolk"), GameRef.random);
+                npcCow.Origionoffset = new Vector2(16, 16);
+                npcCow.SetSpritePositionInGameWorld(new Vector2(112 + i, 36 + i));
+                AnimatedSpriteObject.Add(npcCow);
+                NpcCritters.Add(npcCow);
+            }
+
             #endregion
 
             createLifePotatoPlant();
@@ -573,6 +585,16 @@ namespace TileGame.GameScreens
             }
 
             foreach (NPC_Neutral npc in NpcNeutralList)
+            {
+                if (npc.Motion != Vector2.Zero)
+                {
+                    npc.Motion.Normalize();
+                    npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
+
+                }
+            }
+
+            foreach (NPC_Neutral npc in NpcCritters)
             {
                 if (npc.Motion != Vector2.Zero)
                 {
