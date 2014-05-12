@@ -107,6 +107,7 @@ namespace TileGame
             stateManager.ChangeState(TitleScreen);
             gamePlayScreens.Add(PotatoTown);
             gamePlayScreens.Add(GamePlayScreen2);
+            gamePlayScreens.Add(CollectGameScreen);
         }
         #endregion
 

@@ -48,6 +48,10 @@ namespace TileEngine
             AddItemProgressLine("alcoholHave", false);
             AddItemProgressLine("belladonnaHave", false);
 
+            //--
+            AddItemProgressLine("CollectMinigame", false);
+            //--
+
             AddItemCollectedAmountDict("IronOre", 0);
             AddItemCollectedAmountDict("Money", 0);
             AddItemCollectedAmountDict("Fish", 5);

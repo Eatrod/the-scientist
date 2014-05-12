@@ -89,7 +89,9 @@ namespace TileGame.GameScreens
 
             //player.CurrentAnimationName = "Down";
             //renderList.Add(player);
-            
+
+            player.SetSpritePositionInGameWorld(new Vector2(22, 12));
+
             SpriteObjectInGameWorld.Clear();
             renderList.Clear();
             renderList.Add(player);
@@ -172,10 +174,11 @@ namespace TileGame.GameScreens
             int cellIndex = tileMap.CollisionLayer.GetCellIndex(cell);
             if (cellIndex >= 40 && cellIndex < 50)
             {
-                GateToNextScreen(cellIndex, GameRef.PotatoTown, "G0");
+                //GateToNextScreen(cellIndex, GameRef.PotatoTown, "G0");
 
-                GateToNextScreen(cellIndex, GameRef.PotatoTown, "G1");
-                
+                //GateToNextScreen(cellIndex, GameRef.PotatoTown, "G1");
+
+                GateToNextScreen(cellIndex, GameRef.PotatoTown, "G2");
             }
             UnlockGate(cellIndex);
 

@@ -1275,6 +1275,7 @@
       <Name>LumberJacksDialog</Name>
       <Importer>ScriptImporter</Importer>
       <Processor>ScriptProcessor</Processor>
+      <SubType>Designer</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -3415,12 +3416,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Sounds\Effects\throw_1.wav">
+    <Compile Include="Sounds\Effects\throw_1.wav">
       <Name>throw_1</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Sounds\Effects\explosion.wav">
