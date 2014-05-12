@@ -261,7 +261,7 @@ namespace TileGame.GameScreens
             #endregion
 
             #region Story NPCs
-            npcStoryAsterix = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/PortraitAsterix"), "Asterix");
+            npcStoryAsterix = new NPC_Story(Content.Load<Texture2D>("Sprite/Asterix"), Content.Load<Script>("Scripts/AsterixDialog"), Content.Load<Texture2D>("CharacterPotraits/PortraitAsterix"), "Asterix");
             npcStoryAsterix.Origionoffset = new Vector2(25, 65);
             npcStoryAsterix.SetSpritePositionInGameWorld(new Vector2(64, 11));//(20, 17));
             AnimatedSpriteObject.Add(npcStoryAsterix);
