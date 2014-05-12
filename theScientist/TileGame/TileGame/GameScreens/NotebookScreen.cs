@@ -24,6 +24,7 @@ namespace TileGame.GameScreens
         int lastPageIndex = 0;
         int leftPageIndex = 0;
         int rightPageIndex = 0;
+        int sectionHandler = 0;
         Texture2D backgroundImage;
         
         Dictionary<int, Message> taskDict = new Dictionary<int, Message>();
@@ -91,7 +92,7 @@ namespace TileGame.GameScreens
             ControlManager.Add(leftText);
 
             rightText = new Label();
-            rightText.Position = new Vector2(middleRightSide - 140 * widthOffset, 220 * heightOffset);
+            rightText.Position = new Vector2(middleRightSide - 200 * widthOffset, 220 * heightOffset);
             rightText.Text = "";
             rightText.Color = Color.DarkBlue;
             ControlManager.Add(rightText);
@@ -121,13 +122,11 @@ namespace TileGame.GameScreens
             ControlManager.Update(gameTime, PlayerIndex.One);
             base.Update(gameTime);
 
+            #region Dict updates
             if (StoryProgress.ProgressLine["asterixTalkedTo"])
             {
                 taskDict[1].Unlocked = true;
                 completedDict[3].Unlocked = true;
-                completedDict[1].Unlocked = true;
-                completedDict[2].Unlocked = true;
-                completedDict[4].Unlocked = true;
             }
             if (StoryProgress.ProgressLine["belladonnaHave"])
             {
@@ -144,19 +143,34 @@ namespace TileGame.GameScreens
             }
             if (StoryProgress.ProgressLine["Axe"])
                 hintDict[2].Unlocked = true;
+            #endregion
 
+            #region Section updates
             if (InputHandler.KeyReleased(Keys.Up))
             {
-                activeDict = hintDict;
+                sectionHandler--;
+                if (sectionHandler < 0)
+                    sectionHandler = 2;
             }
             if (InputHandler.KeyReleased(Keys.Down))
             {
-                activeDict = completedDict;
+                sectionHandler++;
+                if (sectionHandler > 2)
+                    sectionHandler = 0;
             }
-            if (InputHandler.KeyReleased(Keys.T))
+            if (sectionHandler == 0)
             {
                 activeDict = taskDict;
             }
+            else if (sectionHandler == 1)
+            {
+                activeDict = hintDict;
+            }
+            else if (sectionHandler == 2)
+            {
+                activeDict = completedDict;
+            }
+            #endregion
 
             GetKeysThatAreNotLocked();
 

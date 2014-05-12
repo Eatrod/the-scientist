@@ -28,6 +28,7 @@ namespace XtheSmithLibrary.Controls
             this.dictionary.Add("John", false);
             this.dictionary.Add("Talked to Asterix", false);
             this.dictionary.Add("Permit", false);
+            this.dictionary.Add("Belladonna", false);
         }
 
         public override void Update(GameTime gameTime)
@@ -63,13 +64,19 @@ namespace XtheSmithLibrary.Controls
             if (StoryProgress.ProgressLine["contestAgainstJohnFinished"] && dictionary["John"] == false && isShowing == false)
             {
                 this.text = "You have completed the task: ";
-                this.type = "John";
+                this.type = "Johns riddle";
                 isShowing = true;
             }
             if (StoryProgress.ProgressLine["asterixTalkedTo"] && dictionary["Talked to Asterix"] == false && isShowing == false)
             {
                 this.text = "You have completed the task: ";
                 this.type = "Talked to Asterix";
+                isShowing = true;
+            }
+            if (StoryProgress.ProgressLine["belladonnaHave"] && dictionary["Belladonna"] == false && isShowing == false)
+            {
+                this.text = "You now have the item: ";
+                this.type = "Belldonna";
                 isShowing = true;
             }
         }
