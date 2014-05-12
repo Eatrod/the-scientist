@@ -3384,6 +3384,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sprite\Cow.png">
+      <Name>Cow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Sprite\Bjorn_Try_Fruit.png">
       <Name>Bjorn_Try_Fruit</Name>
       <Importer>TextureImporter</Importer>
