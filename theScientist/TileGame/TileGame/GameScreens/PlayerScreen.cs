@@ -69,6 +69,11 @@ namespace TileGame.GameScreens
 
         int fire_arrow_counter = 0;
 
+        //Ljud
+        SoundEffect bowSound;
+        SoundEffect choosingWeaponSound;
+        //
+
         #endregion
 
         #region Property Region
@@ -426,6 +431,11 @@ namespace TileGame.GameScreens
             ControlManager.Add(miniMap);
             
             //BF
+
+            //Ljud
+            bowSound = Content.Load<SoundEffect>(@"Sounds/Effects/bow_1bf");
+            choosingWeaponSound = Content.Load<SoundEffect>(@"Sounds/Effects/chosing_weapon");
+            //
             
         }
         public override void Update(GameTime gameTime)
@@ -561,7 +571,8 @@ namespace TileGame.GameScreens
                         player.oldAnimation = player.CurrentAnimationName;
                         player.shotFired = true;
                         player.normalArrow = true;
-                        UpdateBowAttackAnimaition();                                     
+                        UpdateBowAttackAnimaition();
+                        bowSound.Play();
                     }
 
                     if (InputHandler.KeyReleased(Keys.W) && (player.Stamina - 50 > 0) && !player.shotFired && !charging)
@@ -569,7 +580,8 @@ namespace TileGame.GameScreens
                         player.oldAnimation = player.CurrentAnimationName;
                         player.shotFired = true;
                         player.fireArrow = true;
-                        UpdateBowAttackAnimaition();                                                               
+                        UpdateBowAttackAnimaition();
+                        bowSound.Play();                                     
                     }
 
                     if (InputHandler.KeyReleased(Keys.E) && (player.Stamina - 40 > 0) && !player.shotFired && !charging)
@@ -577,7 +589,8 @@ namespace TileGame.GameScreens
                         player.oldAnimation = player.CurrentAnimationName;
                         player.shotFired = true;
                         player.multishotArrow = true;
-                        UpdateBowAttackAnimaition();        
+                        UpdateBowAttackAnimaition();
+                        bowSound.Play();
                     }
                     
                     if (InputHandler.KeyDown(Keys.R))
@@ -616,6 +629,8 @@ namespace TileGame.GameScreens
                         }
                         player.Charge = 0;
                         Charge_Bar_Color = Color.White;
+
+                        bowSound.Play();
                     }
                 }
             }
@@ -1379,6 +1394,7 @@ namespace TileGame.GameScreens
         {
             if (InputHandler.KeyReleased(Keys.D1))
             {
+                choosingWeaponSound.Play(0.3f, 0.0f, 0.0f);
                 for (int i = 0; i < activeItemBackgroundColor.Count(); i++)
                 {
                     activeItemBackgroundColor[i] = Color.LightSlateGray;
@@ -1387,6 +1403,7 @@ namespace TileGame.GameScreens
             }
             if (InputHandler.KeyReleased(Keys.D2))
             {
+                choosingWeaponSound.Play(0.3f,0.0f, 0.0f);
                 for (int i = 0; i < activeItemBackgroundColor.Count(); i++)
                 {
                     activeItemBackgroundColor[i] = Color.LightSlateGray;
@@ -1395,6 +1412,7 @@ namespace TileGame.GameScreens
             }
             if (InputHandler.KeyReleased(Keys.D3))
             {
+                choosingWeaponSound.Play(0.3f, 0.0f, 0.0f);
                 for (int i = 0; i < activeItemBackgroundColor.Count(); i++)
                 {
                     activeItemBackgroundColor[i] = Color.LightSlateGray;
@@ -1403,6 +1421,7 @@ namespace TileGame.GameScreens
             }
             if (InputHandler.KeyReleased(Keys.D4))
             {
+                choosingWeaponSound.Play(0.3f, 0.0f, 0.0f);
                 for (int i = 0; i < activeItemBackgroundColor.Count(); i++)
                 {
                     activeItemBackgroundColor[i] = Color.LightSlateGray;
@@ -1411,6 +1430,7 @@ namespace TileGame.GameScreens
             }
             if (InputHandler.KeyReleased(Keys.D5))
             {
+                choosingWeaponSound.Play(0.3f, 0.0f, 0.0f);
                 for (int i = 0; i < activeItemBackgroundColor.Count(); i++)
                 {
                     activeItemBackgroundColor[i] = Color.LightSlateGray;
