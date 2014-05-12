@@ -35,7 +35,7 @@ namespace TileGame.GameScreens
         private ContentManager Content;
 
         //private MultiIronSprite multiIronOre;
-        public Sprite treeStanding;
+        public TreeStandingBridge treeStanding;
         public Sprite treeBridge;
         public Sprite treeStubbe;
 
@@ -417,7 +417,7 @@ namespace TileGame.GameScreens
             }
 
 
-            treeStanding = new Sprite(Content.Load<Texture2D>("Sprite/BridgeTreeStanding"));
+            treeStanding = new TreeStandingBridge(Content.Load<Texture2D>("Sprite/BridgeTreeStanding"));
             treeStanding.SetSpritePositionInGameWorld(new Vector2(35, 15));
             treeStanding.Origionoffset = new Vector2(48, 80);
             treeStanding.CollisionRadius = 48.0f;

@@ -106,6 +106,7 @@
     <Compile Include="Sprite\Projectiles\NormalArrowProjectile.cs" />
     <Compile Include="Sprite\Projectiles\SpinningAxe.cs" />
     <Compile Include="Sprite\Sprite.cs" />
+    <Compile Include="Sprite\TreeStandingBridge.cs" />
     <Compile Include="StoryProgress.cs" />
     <Compile Include="Tiles\CollisionLayer.cs" />
     <Compile Include="Tiles\Engine.cs" />
