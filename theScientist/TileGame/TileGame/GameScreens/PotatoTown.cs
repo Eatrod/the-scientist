@@ -186,10 +186,10 @@ namespace TileGame.GameScreens
                 AnimatedSpriteObject.Add(NPC_Gunner);
                 NPCPotatoeGunners.Add(NPC_Gunner);
             }
-            NPCPotatoeGunners[0].SetSpritePositionInGameWorld(new Vector2(87, 65));
-            NPCPotatoeGunners[1].SetSpritePositionInGameWorld(new Vector2(87, 75));
-            NPCPotatoeGunners[2].SetSpritePositionInGameWorld(new Vector2(77, 65));
-            NPCPotatoeGunners[3].SetSpritePositionInGameWorld(new Vector2(77, 75));
+            NPCPotatoeGunners[0].SetSpritePositionInGameWorld(new Vector2(133, 90));
+            NPCPotatoeGunners[1].SetSpritePositionInGameWorld(new Vector2(115, 98));
+            NPCPotatoeGunners[2].SetSpritePositionInGameWorld(new Vector2(123, 75));
+            NPCPotatoeGunners[3].SetSpritePositionInGameWorld(new Vector2(115, 85));
             #endregion
 
             #region Potatiskastare
