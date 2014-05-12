@@ -73,6 +73,7 @@ namespace TileGame.GameScreens
         SoundEffect bowSound;
         SoundEffect choosingWeaponSound;
         SoundEffect axeSound;
+        static SoundEffect pickUpSound;
         //
 
         #endregion
@@ -427,6 +428,7 @@ namespace TileGame.GameScreens
             bowSound = Content.Load<SoundEffect>(@"Sounds/Effects/bow_1bf");
             choosingWeaponSound = Content.Load<SoundEffect>(@"Sounds/Effects/chosing_weapon");
             axeSound = Content.Load<SoundEffect>(@"Sounds/Effects/axe_slash");
+            pickUpSound = Content.Load<SoundEffect>(@"Sounds/Effects/pick_sound");
             //
             
         }
@@ -2015,6 +2017,7 @@ namespace TileGame.GameScreens
 
                 if (PickUpPossible(player2, s) && SpriteObjectInGameWorld.Contains(s) )
                 {
+                    pickUpSound.Play();
                     if (player2.CurrentAnimationName == "Up" || player2.CurrentAnimationName == "IdleUp")
                     {
                         player2.oldAnimation = player2.CurrentAnimationName;
@@ -2039,7 +2042,7 @@ namespace TileGame.GameScreens
                         player2.pickingup = true;
                         player2.CurrentAnimationName = "PickupDown";
                     }
-
+                    
                     if (s is LifePotatoSprite && SpriteObjectInGameWorld.Contains(s))
                     {
                         SpriteObjectInGameWorld.Remove(s);

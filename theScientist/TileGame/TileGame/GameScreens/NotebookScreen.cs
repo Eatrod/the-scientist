@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 using XtheSmithLibrary;
 using XtheSmithLibrary.Controls;
@@ -45,6 +46,7 @@ namespace TileGame.GameScreens
         Label leftPagenumberText;
         Label rightPagenumberText;
         Rectangle textRect;
+        SoundEffect changePageSound;
         #endregion
 
         #region Property Region
@@ -138,6 +140,9 @@ namespace TileGame.GameScreens
             hintDict[0].Unlocked = true;
             taskDict[0].Unlocked = true;
             completedDict[0].Unlocked = true;
+            taskDict[1].Unlocked = true;
+
+            changePageSound = Content.Load<SoundEffect>(@"Sounds/Effects/switch_page");
             taskDict[3].Unlocked = true;
         }
         public override void Update(GameTime gameTime)
@@ -257,16 +262,23 @@ namespace TileGame.GameScreens
                 StateManager.PopState();
             if(InputHandler.KeyReleased(Keys.Left))
             {
+                changePageSound.Play();
+                pageIndex -= 2;
                 pageIndex -= 4;
                 if (pageIndex < 0)
                     pageIndex = 0;
+                //else
+                //  changePageSound.Play();
             }
             if(InputHandler.KeyReleased(Keys.Right))
             {
+                changePageSound.Play();
                 lastPageIndex = pageIndex;
                 pageIndex += 4;
                 if (pageIndex > ListOfUnlockedKeys.Count - 2)
                     pageIndex = lastPageIndex;
+                //else
+                //    changePageSound.Play();
             }
         }
         public override void Draw(GameTime gameTime)

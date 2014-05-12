@@ -20,6 +20,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
         public float DelayFirstShot;
         public bool FireTime;
         public int ShotTicker;
+        public SoundEffect shootPotatoSound;
+        
         public NPC_Fighting_PotatoeGunner(Texture2D texture, Script script): base(texture,script)
         {
             this.DirtPileCreated = false;
@@ -92,6 +94,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                     this.CurrentAnimation.FramesPerSeconds = 0.6f;
                     if (ElapsedShot > DelayShot)
                     {
+                        shootPotatoSound.Play();
                         ShotTicker++;
                         ElapsedShot = 0.0f;
                         FireTime = true;
