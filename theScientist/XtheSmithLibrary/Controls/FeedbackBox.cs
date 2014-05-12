@@ -25,7 +25,7 @@ namespace XtheSmithLibrary.Controls
             this.texture = texture;
             dictionary = new Dictionary<string,bool>();
             this.dictionary.Add("Axe", false);
-            this.dictionary.Add("John", false);
+            this.dictionary.Add("Johns Riddle", false);
             this.dictionary.Add("Talked to Asterix", false);
             this.dictionary.Add("Permit", false);
             this.dictionary.Add("Belladonna", false);
