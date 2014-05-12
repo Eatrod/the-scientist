@@ -77,6 +77,7 @@ namespace TileGame.GameScreens
         List<Sprite> DirtPiles = new List<Sprite>();
         List<Sprite> BombSprites = new List<Sprite>();
         List<AnimatedSprite> Explosions = new List<AnimatedSprite>();
+        List<BaseSprite> pickupableobjects = new List<BaseSprite>();
         
         
 
@@ -141,11 +142,13 @@ namespace TileGame.GameScreens
             renderList.Clear();
             renderList.Add(player);
             SpriteObjectInGameWorld.AddRange(AnimatedSpriteObject);
+            SpriteObjectInGameWorld.AddRange(pickupableobjects);
             SpriteObjectInGameWorld.AddRange(SpriteObject);            
             //SpriteObjectInGameWorld.AddRange(NPCFightingFarmers);
             //SpriteObjectInGameWorld.AddRange(NPCPatrollingGuards);
             renderList.AddRange(SpriteObject);
             renderList.AddRange(AnimatedSpriteObject);
+            renderList.AddRange(pickupableobjects);
             //renderList.AddRange(NPCFightingFarmers);
             //renderList.AddRange(NPCPatrollingGuards);
             if (StoryProgress.ProgressLine["treeIsDown"])
@@ -396,8 +399,8 @@ namespace TileGame.GameScreens
             #endregion
 
             createLifePotatoPlant();
-            
-            SpriteObject.Add(new BelladonnaSprite(Content.Load<Texture2D>("Sprite/Belladonna"),
+
+            pickupableobjects.Add(new BelladonnaSprite(Content.Load<Texture2D>("Sprite/Belladonna"),
                 new Vector2(7, 33)));
             //SpriteObject.Add(new ImmortuiSprite(Content.Load<Texture2D>("Sprite/Immortui"),
             //    new Vector2(87, 45))); //just testing the immortui mushroom
@@ -446,7 +449,7 @@ namespace TileGame.GameScreens
             //--
             if (InputHandler.KeyReleased(Keys.Space))
             {
-                PlayerScreen.PickUp(gameTime, SpriteObjectInGameWorld, player, SpriteObject, playerprojectiles, renderList, AnimatedSpriteObject);
+                PlayerScreen.PickUp(gameTime, SpriteObjectInGameWorld, player, SpriteObject, playerprojectiles, renderList, AnimatedSpriteObject, pickupableobjects);
             }
             //--
             #region Björn NPC
@@ -764,37 +767,37 @@ namespace TileGame.GameScreens
         #region Method Region
         void createLifePotatoPlant()
         {
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(90, 40)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(90, 43)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(54, 53)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(45, 48)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(39, 62)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(39, 75)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(25, 40)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(50, 4)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(82, 5)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(133, 31)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(129, 58)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(91, 78)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(94, 99)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(64, 100)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(29, 85)));
-            SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
+            pickupableobjects.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/LifePotato"),
                 new Vector2(11, 91)));
         }
         #endregion

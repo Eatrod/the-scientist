@@ -36,6 +36,7 @@ namespace TileEngine.Sprite
          public float elapsedShot = 0.0f;
          
          public float pick_up_radius = 30f;
+         public bool pickingup;
 
          public PlayerCharacter(Texture2D texture, Texture2D portrait)
              : base(texture)
