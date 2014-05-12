@@ -15,7 +15,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
     public class NPC_Fighting_Patrolling: NPC_Fighting_Guard
     {
 
-        
+        public SoundEffect swordSound;
+        private bool soundPlayed = false;
         
       
         public NPC_Fighting_Patrolling(Texture2D texture, Script script, Random random) :base(texture,script)
@@ -128,6 +129,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 else if (StrikeMode && !MeleeHit &&!TimeToStrike)
                 {
                     UpdateSpriteStandingStillAnimation(VectorTowardsTarget);
+                    soundPlayed = false;
                 }
                 else if(MeleeHit)
                 {
@@ -135,6 +137,11 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 }
                 else if(TimeToStrike)
                 {
+                    if (!soundPlayed)
+                    {
+                        swordSound.Play();
+                        soundPlayed = true;
+                    }
                     UpdateSpriteFinishAttackAnimation();
                 }
                 else if (GoingHome)

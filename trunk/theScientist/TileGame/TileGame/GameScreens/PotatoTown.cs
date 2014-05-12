@@ -188,6 +188,7 @@ namespace TileGame.GameScreens
                 NPC_Gunner.SetSpritePositionInGameWorld(new Vector2(80 + i, 70 + i));
                 NPC_Gunner.Life = 100;
                 NPC_Gunner.FullHp = 100;
+                NPC_Gunner.shootPotatoSound = Content.Load<SoundEffect>(@"Sounds/Effects/throw_1");
                 AnimatedSpriteObject.Add(NPC_Gunner);
                 NPCPotatoeGunners.Add(NPC_Gunner);
             }
@@ -259,6 +260,7 @@ namespace TileGame.GameScreens
                 NPC_Bandit.PatrollingCircle = 100;
                 NPC_Bandit.StrikeForce = 2;
                 NPC_Bandit.AggroSpeed = 1.8f;
+                NPC_Bandit.swordSound = Content.Load<SoundEffect>(@"Sounds/Effects/sword");
                 AnimatedSpriteObject.Add(NPC_Bandit);
                 NPCPatrollingGuards.Add(NPC_Bandit);
 
@@ -511,6 +513,7 @@ namespace TileGame.GameScreens
                 }
                 if(bomb.Boom)
                 {
+                    
                     for (int i = 0; i < 4; i++)
                     {
                         Explosion explosion = new Explosion(Content.Load<Texture2D>("Sprite/Bjorn_Try_Explosion"),
@@ -535,11 +538,17 @@ namespace TileGame.GameScreens
                     {
                         BombSprite bomb;
                         if (npc.CurrentAnimationName == "AttackPlayerRight")
+                        {
                             bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
                                     new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(npc.Position.X + 50, npc.Position.Y + 20));
+                            bomb.potatoExplosionSound = Content.Load<SoundEffect>(@"Sounds/Effects/explosion");
+                        }
                         else
+                        {
                             bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
                                    new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(npc.Position.X, npc.Position.Y + 20));
+                            bomb.potatoExplosionSound = Content.Load<SoundEffect>(@"Sounds/Effects/explosion");
+                        }
                         BombSprites.Add(bomb);
                         renderList.Add(bomb);
                         npc.FireTime = false;
@@ -563,13 +572,20 @@ namespace TileGame.GameScreens
                     npc.UpdateRangedFighter(gameTime, player);
                     if (npc.BombThrow)
                     {
+                        //
                         BombSprite bomb;
                         if (npc.CurrentAnimationName == "ThrowRight")
+                        {
                             bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
                                     new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(npc.Position.X + 50, npc.Position.Y + 20));
+                            bomb.potatoExplosionSound = Content.Load<SoundEffect>(@"Sounds/Effects/explosion");
+                        }
                         else
+                        {
                             bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
                                    new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(npc.Position.X, npc.Position.Y + 20));
+                            bomb.potatoExplosionSound = Content.Load<SoundEffect>(@"Sounds/Effects/explosion");
+                        }
                         BombSprites.Add(bomb);
                         renderList.Add(bomb);
                         npc.BombThrow = false;

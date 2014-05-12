@@ -22,6 +22,7 @@ namespace TileEngine.Sprite
         private float elapsedFly;
         private float delayFly;
         private float maxSpeedOfBomb;
+        public SoundEffect potatoExplosionSound;
     
         public bool Boom
         {
@@ -48,6 +49,7 @@ namespace TileEngine.Sprite
             if(elapsedFly > delayFly)
             {
                 boom = true;
+                potatoExplosionSound.Play();
             }
         }
     }
