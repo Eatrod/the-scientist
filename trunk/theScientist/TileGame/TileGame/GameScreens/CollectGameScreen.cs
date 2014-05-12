@@ -33,7 +33,7 @@ namespace TileGame.GameScreens
 
         //TileMap tileMap = new TileMap();
         //Camera camera = new Camera();
-
+        FruitForMiniGameSprite fruit;
         Sprite sprite;
         //PlayerCharacter player;
 
@@ -113,7 +113,9 @@ namespace TileGame.GameScreens
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/CollectMinigameMiddle.layer"));
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/CollectMinigameFront.layer"));
             tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/CollectMinigameCollision.layer");
-
+            fruit = new FruitForMiniGameSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Fruit"),GameRef.random);
+            renderList.Add(fruit);
+            SpriteObjectInGameWorld.Add(fruit);
             //sprite = new Sprite(Content.Load<Texture2D>("Sprite/playerbox"));
             //sprite.Origionoffset = new Vector2(15, 15);
             //sprite.SetSpritePositionInGameWorld(new Vector2(10, 10));
@@ -136,8 +138,8 @@ namespace TileGame.GameScreens
         }
         public override void Update(GameTime gameTime)
         {
-           
 
+            fruit.UpdateFruit(gameTime);
             foreach (BaseSprite s in SpriteObjectInGameWorld)
             {
                 s.Update(gameTime);
@@ -186,7 +188,7 @@ namespace TileGame.GameScreens
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             tileMap.Draw(spriteBatch, camera);
-
+            
             //spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
             //    null, null, null, null, camera.TransforMatrix);
 

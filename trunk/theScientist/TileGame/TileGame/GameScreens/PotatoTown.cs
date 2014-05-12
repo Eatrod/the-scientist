@@ -504,20 +504,32 @@ namespace TileGame.GameScreens
             }
             foreach(NPC_Fighting_PotatoeGunner npc in NPCPotatoeGunners)
             {
-                npc.UpdateWithPlayer(gameTime, player);
-                if(npc.FireTime)
+                if (!npc.Dead)
                 {
-                    BombSprite bomb;
-                    if(npc.CurrentAnimationName == "AttackPlayerRight")
-                        bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
-                                new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(npc.Position.X + 50, npc.Position.Y + 20));
-                    else
-                        bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
-                               new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(npc.Position.X, npc.Position.Y + 20));
-                    BombSprites.Add(bomb);
-                    renderList.Add(bomb);
-                    npc.FireTime = false;
-                   
+                    npc.UpdateWithPlayer(gameTime, player);
+                    if (npc.FireTime)
+                    {
+                        BombSprite bomb;
+                        if (npc.CurrentAnimationName == "AttackPlayerRight")
+                            bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
+                                    new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(npc.Position.X + 50, npc.Position.Y + 20));
+                        else
+                            bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
+                                   new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(npc.Position.X, npc.Position.Y + 20));
+                        BombSprites.Add(bomb);
+                        renderList.Add(bomb);
+                        npc.FireTime = false;
+
+                    }
+                }
+                else if (!npc.DirtPileCreated)
+                {
+                    DirtPileSprite dirtpile = new DirtPileSprite(Content.Load<Texture2D>("Sprite/dirtpile"));
+                    dirtpile.Position = npc.Position;
+                    dirtpile.DelayTime = npc.DelayRespawn;
+                    DirtPiles.Add(dirtpile);
+                    renderList.Add(dirtpile);
+                    npc.DirtPileCreated = true;
                 }
             }
             foreach(NPC_Fighting_Ranged npc in NPCRangedGuards)
