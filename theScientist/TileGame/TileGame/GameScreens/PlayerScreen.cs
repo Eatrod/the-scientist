@@ -227,33 +227,23 @@ namespace TileGame.GameScreens
                 player.Animations.Add("AxeFinishUp", axefinishup);
 
 
-            FrameAnimation pickupdown = new FrameAnimation(3, 50, 80, 400, 0);
+
+            FrameAnimation pickupdown = new FrameAnimation(3, 50, 80, 450, 0);
             if (!player.Animations.ContainsKey("PickupDown"))
-            {
-                player.Animations.Add("PickupDown", pickupdown);
-                player.Animations["PickupDown"].FramesPerSeconds = 35;
-            }
+                 player.Animations.Add("PickupDown", pickupdown);
 
-            FrameAnimation pickupleft = new FrameAnimation(3, 50, 80, 400, 80);
+            FrameAnimation pickupleft = new FrameAnimation(3, 50, 80, 450, 80);
             if (!player.Animations.ContainsKey("PickupLeft"))
-            {
                 player.Animations.Add("PickupLeft", pickupleft);
-                player.Animations["PickupLeft"].FramesPerSeconds = 35;
-            }
 
-            FrameAnimation pickupright = new FrameAnimation(3, 50, 80, 400, 160);
+            FrameAnimation pickupright = new FrameAnimation(3, 50, 80, 450, 160);
             if (!player.Animations.ContainsKey("PickupRight"))
-            {
                 player.Animations.Add("PickupRight", pickupright);
-                player.Animations["PickupRight"].FramesPerSeconds = 35;
-            }
 
-            FrameAnimation pickupup = new FrameAnimation(3, 50, 80, 400, 240);
+            FrameAnimation pickupup = new FrameAnimation(3, 50, 80, 450, 240);
             if (!player.Animations.ContainsKey("PickupUp"))
-            {
                 player.Animations.Add("PickupUp", pickupup);
-                player.Animations["PickupUp"].FramesPerSeconds = 35;
-            }
+
 
             player.CurrentAnimationName = "Down";
             player.oldAnimation = player.CurrentAnimationName;
@@ -649,9 +639,7 @@ namespace TileGame.GameScreens
                         player.meleeAttackStart = true;
                         UpdateAxeStartAttackAnimaition();
                     }
-                    
-                    
-                    
+                                                            
                     
                     if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >= 0) && player.meleeAttackStart)
                     {
@@ -734,7 +722,7 @@ namespace TileGame.GameScreens
             dialogBox.Update(gameTime);
             feedbackBox.Update(gameTime);
 
-            if (motion != Vector2.Zero && !player.shotFired && !player.meleeAttackStart && !player.meleeAttackFinish)
+            if (motion != Vector2.Zero && !player.shotFired && !player.meleeAttackStart && !player.meleeAttackFinish && !player.pickingup)
             {
                 motion.Normalize();                 //Comment out to use gamePad
                 motion = CollisionWithTerrain.CheckCollisionForMotion(motion, player,screen);
@@ -744,11 +732,19 @@ namespace TileGame.GameScreens
                 player.isAnimating = true;
                 CollisionWithTerrain.CheckForCollisionAroundSprite(player, motion,screen);
             }
-            else if (!player.shotFired && !player.meleeAttackStart && !player.meleeAttackFinish)
+            else if (!player.shotFired && !player.meleeAttackStart && !player.meleeAttackFinish && !player.pickingup)
             {
                 UpdateSpriteIdleAnimation(player);
                 player.isAnimating = false;
                 motion = new Vector2(0, 0);
+            }
+
+            else if (player.pickingup && player.CurrentAnimation.CurrentFrame >= 2)
+            {                                
+                    player.pickingup = false;
+                    player.CurrentAnimation.CurrentFrame = 0;
+                    player.CurrentAnimationName = player.oldAnimation;
+                    player.Speed = 2;
             }
 
             else
@@ -756,10 +752,10 @@ namespace TileGame.GameScreens
                 player.elapsedShot += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 player.elapsedAttack += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 player.Speed = -0.1f;
-                
+
                 if (player.elapsedShot > player.delayShot && player.multishotArrow)
                 {
- 
+
                     MultiarrowFired(Content, motion);
                     player.CurrentAnimation.CurrentFrame = 0;
                     player.elapsedShot = 0.0f;
@@ -814,9 +810,9 @@ namespace TileGame.GameScreens
                     if (player.CurrentAnimationName == "AxeFinishRight")
                     {
                         player.Position.X += 27;
-                    } 
+                    }
                     UpdateAxeDoneAttackAnimaition();
-                                      
+
                     player.Speed = 2;
                 }
 
@@ -1992,12 +1988,12 @@ namespace TileGame.GameScreens
         }
 
         //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        //public static bool PickUpPossible(PlayerCharacter a, BaseSprite b)
-        //{
-        //    Vector2 d = b.Origin - a.Origin;
+        public static bool PickUpPossible(PlayerCharacter a, BaseSprite b)
+        {
+            Vector2 d = b.Origin - a.Origin;
 
-        //    return (d.Length() < b.CollisionRadius + a.pick_up_radius);
-        //}
+            return (d.Length() < b.CollisionRadius + a.pick_up_radius);
+        }
 
         public static void PickUp(
             GameTime gameTime,
@@ -2006,77 +2002,86 @@ namespace TileGame.GameScreens
             List<BaseSprite> SpriteObject,
             List<AnimatedProjectile> playerprojectiles,
             List<BaseSprite> renderList,
-            List<BaseSprite> AnimatedSpriteObject)
+            List<BaseSprite> AnimatedSpriteObject,
+            List<BaseSprite> pickupableobjects)
         {
-            foreach (BaseSprite s in SpriteObjectInGameWorld)
+            foreach (BaseSprite s in pickupableobjects)
             {
                 s.Update(gameTime);
 
-                //if (PickUpPossible(player, s))
-                //{
-                //    if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "IdleUp")
-                //    {
-                //        player.CurrentAnimationName = "PickupUp";
-                //    }
-                //    if (player.CurrentAnimationName == "Right" || player.CurrentAnimationName == "IdleRight")
-                //    {
-                //        player.CurrentAnimationName = "PickupRight";
-                //    }
-                //    if (player.CurrentAnimationName == "Left" || player.CurrentAnimationName == "IdleLeft")
-                //    {
-                //        player.CurrentAnimationName = "PickupLeft";
-                //    }
-                //    if (player.CurrentAnimationName == "Down" || player.CurrentAnimationName == "IdleDown")
-                //    {
-                //        player.CurrentAnimationName = "PickupDown";
-                //    }
+                if (PickUpPossible(player2, s) && SpriteObjectInGameWorld.Contains(s) )
+                {
+                    if (player2.CurrentAnimationName == "Up" || player2.CurrentAnimationName == "IdleUp")
+                    {
+                        player2.oldAnimation = player2.CurrentAnimationName;
+                        player2.pickingup = true;
+                        player2.CurrentAnimationName = "PickupUp";
+                    }
+                    if (player2.CurrentAnimationName == "Right" || player2.CurrentAnimationName == "IdleRight")
+                    {
+                        player2.oldAnimation = player2.CurrentAnimationName;
+                        player2.pickingup = true;
+                        player2.CurrentAnimationName = "PickupRight";
+                    }
+                    if (player2.CurrentAnimationName == "Left" || player2.CurrentAnimationName == "IdleLeft")
+                    {
+                        player2.oldAnimation = player2.CurrentAnimationName;
+                        player2.pickingup = true;
+                        player2.CurrentAnimationName = "PickupLeft";
+                    }
+                    if (player2.CurrentAnimationName == "Down" || player2.CurrentAnimationName == "IdleDown")
+                    {
+                        player2.oldAnimation = player2.CurrentAnimationName;
+                        player2.pickingup = true;
+                        player2.CurrentAnimationName = "PickupDown";
+                    }
 
-                //    if (s is LifePotatoSprite)
-                //    {
-                //        SpriteObjectInGameWorld.Remove(s);
-                //        renderList.Remove(s);
+                    if (s is LifePotatoSprite && SpriteObjectInGameWorld.Contains(s))
+                    {
+                        SpriteObjectInGameWorld.Remove(s);
+                        renderList.Remove(s);
 
-                //        player2.Life += 10;
-                //        if (player2.Life > 100)
-                //            player2.Life = 100;
-                //        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
-                //        break;
-                //    }
+                        player2.Life += 10;
+                        if (player2.Life > 100)
+                            player2.Life = 100;
+                        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
+                        break;
+                    }
 
-                //    else if (s is BelladonnaSprite)
-                //    {
-                //        SpriteObjectInGameWorld.Remove(s);
-                //        renderList.Remove(s);
-                //        StoryProgress.ProgressLine["belladonnaHave"] = true;
+                    else if (s is BelladonnaSprite && SpriteObjectInGameWorld.Contains(s))
+                    {
+                        SpriteObjectInGameWorld.Remove(s);
+                        renderList.Remove(s);
+                        StoryProgress.ProgressLine["belladonnaHave"] = true;
 
-                //        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
-                //        break;
-                //    }
+                        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
+                        break;
+                    }
 
-                //    else if (s is ImmortuiSprite)
-                //    {
-                //        SpriteObjectInGameWorld.Remove(s);
-                //        renderList.Remove(s);
-                //        StoryProgress.ProgressLine["immortuiHave"] = true;
+                    //else if (s is ImmortuiSprite)
+                    //{
+                    //    SpriteObjectInGameWorld.Remove(s);
+                    //    renderList.Remove(s);
+                    //    StoryProgress.ProgressLine["immortuiHave"] = true;
 
-                //        //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
-                //        break;
-                //    }
+                    //    Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
+                    //    break;
+                    //}
 
-                //    else if (s is MultiIronSprite)
-                //    {
-                //        StoryProgress.collectedAmountDict["IronOre"] += 100;
-                //        MultiIronSprite mis = (MultiIronSprite)s;
-                //        if (mis.CurrentAnimationName == "all")
-                //            mis.CurrentAnimationName = "half";
-                //        else
-                //        {
-                //            SpriteObjectInGameWorld.Remove(s);
-                //            renderList.Remove(s);
-                //            break;
-                //        }
-                //    }
-                //}
+                    //else if (s is MultiIronSprite)
+                    //{
+                    //    StoryProgress.collectedAmountDict["IronOre"] += 100;
+                    //    MultiIronSprite mis = (MultiIronSprite)s;
+                    //    if (mis.CurrentAnimationName == "all")
+                    //        mis.CurrentAnimationName = "half";
+                    //    else
+                    //    {
+                    //        SpriteObjectInGameWorld.Remove(s);
+                    //        renderList.Remove(s);
+                    //        break;
+                    //    }
+                    //}
+                }
             }
         }
 
