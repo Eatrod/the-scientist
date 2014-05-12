@@ -89,7 +89,7 @@ namespace XtheSmithLibrary.Controls
             if (StoryProgress.ProgressLine["belladonnaHave"] && dictionary["Belladonna"] == false && isShowing == false)
             {
                 this.text = "You now have the item: ";
-                this.type = "Belldonna";
+                this.type = "Belladonna";
                 isShowing = true;
             }
         }
