@@ -34,6 +34,7 @@ namespace TileGame.GameScreens
         //TileMap tileMap = new TileMap();
         //Camera camera = new Camera();
         FruitForMiniGameSprite fruit;
+        LumberJackJohnny johnny;
         Sprite sprite;
         //PlayerCharacter player;
 
@@ -95,6 +96,10 @@ namespace TileGame.GameScreens
             SpriteObjectInGameWorld.Clear();
             renderList.Clear();
             renderList.Add(player);
+            renderList.Add(fruit);
+            renderList.Add(johnny);
+            SpriteObjectInGameWorld.Add(johnny);
+            SpriteObjectInGameWorld.Add(fruit);
             SpriteObjectInGameWorld.AddRange(SpriteObjects);
             renderList.AddRange(SpriteObjects);
             
@@ -116,8 +121,10 @@ namespace TileGame.GameScreens
             tileMap.Layers.Add(TileLayer.FromFile(Content, "Content/Layers/CollectMinigameFront.layer"));
             tileMap.CollisionLayer = CollisionLayer.ProcessFile("Content/Layers/CollectMinigameCollision.layer");
             fruit = new FruitForMiniGameSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Fruit"),GameRef.random);
-            renderList.Add(fruit);
-            SpriteObjectInGameWorld.Add(fruit);
+            fruit.Origionoffset = new Vector2(16, 16);
+            johnny = new LumberJackJohnny(Content.Load<Texture2D>("Sprite/Bjorn_Try_Johnny"), GameRef.random);
+            johnny.Origionoffset = new Vector2(25, 65);
+            
             //sprite = new Sprite(Content.Load<Texture2D>("Sprite/playerbox"));
             //sprite.Origionoffset = new Vector2(15, 15);
             //sprite.SetSpritePositionInGameWorld(new Vector2(10, 10));
@@ -140,8 +147,11 @@ namespace TileGame.GameScreens
         }
         public override void Update(GameTime gameTime)
         {
-
-            fruit.UpdateFruit(gameTime);
+            player.Speed = 3.0f;
+            fruit.CheckForContactWithPlayerOrNPC(player, johnny);
+            johnny.SearchTowardsTarget(gameTime, fruit);
+            CollisionWithTerrain.CheckForCollisionAroundSprite(johnny, johnny.TargetedPosition, this);
+            johnny.SlowWalk = CollisionWithTerrain.CheckCollisionForMotionBool(johnny, this);
             foreach (BaseSprite s in SpriteObjectInGameWorld)
             {
                 s.Update(gameTime);
@@ -189,7 +199,6 @@ namespace TileGame.GameScreens
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
             tileMap.Draw(spriteBatch, camera);
             
             //spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
@@ -203,6 +212,7 @@ namespace TileGame.GameScreens
             //spriteBatch.End();
 
             base.Draw(gameTime);
+            //spriteBatch.End();
         }
 
         #endregion

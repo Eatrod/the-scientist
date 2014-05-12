@@ -411,6 +411,17 @@ namespace TileGame.Collision
 
             return motion;
         }
+        public bool CheckCollisionForMotionBool(AnimatedSprite sprite, PlayerScreen screen)
+        {
+            Point cell = Engine.ConvertPostionToCell(sprite.Origin);
+            //screen = (PlayerScreen)StateManager.CurrentState;
+            int colIndex = screen.tileMap.CollisionLayer.GetCellIndex(cell);
+
+            if (colIndex == 2)
+                return true; ;
+
+            return false;
+        }
 
         public Vector2 CheckCollisionAutomaticMotion(Vector2 motion, AnimatedSprite sprite, PlayerScreen screen)
         {
