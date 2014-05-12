@@ -83,7 +83,7 @@
     <Handlers>
       <Handler Caption="Arm wrestling" Action="EndConversation" />
       <Handler Caption="Riddle" Action="StartConversation:Riddle" />
-      <Handler Caption="Potato!?" Action="EndConversation" />
+      <Handler Caption="Potato!?" Action="StartConversation:Potato!?" />
       <Handler Caption="Leave" Action="EndConversation" />
     </Handlers>
   </Conversation>
@@ -112,4 +112,11 @@
     </Handlers>
   </Conversation>
 
+  <Conversation Name="Potato!?">
+    <Text>John:Then you'll compete against my brother in a collectathon at our fruit field! The first to earn 1000 points is the victor!</Text>
+    <Handlers>
+      <Handler Caption="Leave" Action="SetToTrue:CollectMinigame;EndConversation" />
+    </Handlers>
+  </Conversation>
+  
 </Conversations>

@@ -754,6 +754,8 @@ namespace TileGame.GameScreens
             }
             UnlockGate(cellIndex);
 
+            if (StoryProgress.ProgressLine["CollectMinigame"] == true)
+                StateManager.ChangeState(GameRef.CollectGameScreen);
 
             base.Update(gameTime);
         }
