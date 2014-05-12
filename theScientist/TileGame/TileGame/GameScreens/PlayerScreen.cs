@@ -72,6 +72,7 @@ namespace TileGame.GameScreens
         //Ljud
         SoundEffect bowSound;
         SoundEffect choosingWeaponSound;
+        SoundEffect axeSound;
         //
 
         #endregion
@@ -337,7 +338,7 @@ namespace TileGame.GameScreens
             dialogBox = new DialogBox(Content.Load<Texture2D>("GUI/DialogBox"), rectangle, "", Content.Load<Texture2D>("GUI/DialogArrow"));
             textBubble = new TextBubble(Content.Load<Texture2D>("GUI/SpeechBubble"), rectangle, "", Content.Load<SpriteFont>("Fonts/BubbleFont"));
             rectangle = new Rectangle(GraphicsDevice.Viewport.Width / 2 - 300, GraphicsDevice.Viewport.Height/2 - 300, 600, 80);
-            feedbackBox = new FeedbackBox(Content.Load<Texture2D>("GUI/QuestBox"), rectangle);
+            feedbackBox = new FeedbackBox(Content.Load<Texture2D>("GUI/QuestBox"), rectangle, Game.Content);
             ControlManager.Add(feedbackBox);
 
             gateDict = new Dictionary<string, int>();
@@ -425,6 +426,7 @@ namespace TileGame.GameScreens
             //Ljud
             bowSound = Content.Load<SoundEffect>(@"Sounds/Effects/bow_1bf");
             choosingWeaponSound = Content.Load<SoundEffect>(@"Sounds/Effects/chosing_weapon");
+            axeSound = Content.Load<SoundEffect>(@"Sounds/Effects/axe_slash");
             //
             
         }
@@ -638,6 +640,7 @@ namespace TileGame.GameScreens
                         player.oldAnimation = player.CurrentAnimationName;
                         player.meleeAttackStart = true;
                         UpdateAxeStartAttackAnimaition();
+                        
                     }
                                                             
                     
@@ -671,6 +674,7 @@ namespace TileGame.GameScreens
                             }
                         }
                         player.Stamina -= 20f;
+                        axeSound.Play();
                     }
 
                     if (InputHandler.KeyReleased(Keys.W) && (player.Stamina - 40 >= 0) && player.meleeAttackStart)
@@ -691,6 +695,7 @@ namespace TileGame.GameScreens
                         }
                                              
                         player.Stamina -= 40f;
+                        axeSound.Play();
                     }                   
                 }
             }

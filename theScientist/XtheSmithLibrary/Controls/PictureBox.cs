@@ -65,6 +65,8 @@ namespace XtheSmithLibrary.Controls
 
         #region Abstract Method Region
 
+        protected override void LoadContent()
+        { }
         public override void Update(GameTime gameTime)
         { }
         public override void Draw(SpriteBatch spriteBatch)
