@@ -26,6 +26,10 @@ namespace TileGame.GameScreens
         int rightPageIndex = 0;
         int sectionHandler = 0;
         Texture2D backgroundImage;
+        Texture2D rightArrow;
+        Rectangle rightArrowRect;
+        Texture2D leftArrow;
+        Rectangle leftArrowRect;
         
         Dictionary<int, Message> taskDict = new Dictionary<int, Message>();
         Dictionary<int, Message> completedDict = new Dictionary<int, Message>();
@@ -36,6 +40,8 @@ namespace TileGame.GameScreens
         List<int> ListOfUnlockedKeys;
         Label leftText;
         Label rightText;
+        Label leftText2;
+        Label rightText2;
         Label leftPagenumberText;
         Label rightPagenumberText;
         Rectangle textRect;
@@ -64,6 +70,8 @@ namespace TileGame.GameScreens
         {
             ContentManager Content = GameRef.Content;
             backgroundImage = Content.Load<Texture2D>(@"Backgrounds\book");
+            rightArrow = Content.Load<Texture2D>("GUI/rightarrowUp");
+            leftArrow = Content.Load<Texture2D>("GUI/leftarrowUp");
             base.LoadContent();
 
             float middle = GraphicsDevice.Viewport.Width / 2;
@@ -72,6 +80,8 @@ namespace TileGame.GameScreens
             float widthOffset = GraphicsDevice.Viewport.Width / 1248f;
             float heightOffset = GraphicsDevice.Viewport.Height / 768f;
             textRect = new Rectangle(0, 0, (int)(400 * widthOffset), (int)(600 * heightOffset));
+            rightArrowRect = new Rectangle((int)middleRightSide + 200 * (int)widthOffset, 900 * (int)heightOffset, 25, 25);
+            leftArrowRect = new Rectangle((int)middleLeftSide - 200 * (int)widthOffset, 900 * (int)heightOffset, 25, 25);
 
             leftPagenumberText = new Label();
             leftPagenumberText.Position = new Vector2(middleLeftSide + 40 * widthOffset, GraphicsDevice.Viewport.Height - 170 * widthOffset);
@@ -97,6 +107,18 @@ namespace TileGame.GameScreens
             rightText.Color = Color.DarkBlue;
             ControlManager.Add(rightText);
 
+            leftText2 = new Label();
+            leftText2.Position = new Vector2(middleLeftSide - 140 * widthOffset, 450 * heightOffset); //150, 180
+            leftText2.Text = "";
+            leftText2.Color = Color.DarkBlue;
+            ControlManager.Add(leftText2);
+
+            rightText2 = new Label();
+            rightText2.Position = new Vector2(middleRightSide - 200 * widthOffset, 450 * heightOffset);
+            rightText2.Text = "";
+            rightText2.Color = Color.DarkBlue;
+            ControlManager.Add(rightText2);
+
             InsertTextToDictionary(hintDict, 0, "");
             InsertTextToDictionary(hintDict, 1, "Hint: You need an official permit to leave the town");
             InsertTextToDictionary(hintDict, 2, "Hint: Now you have the axe, you can use it to figth or chop");
@@ -111,11 +133,17 @@ namespace TileGame.GameScreens
             InsertTextToDictionary(completedDict, 2, "Completed: You have aquired a valid permit");
             InsertTextToDictionary(completedDict, 3, "Completed: You talked to Asterix");
             InsertTextToDictionary(completedDict, 4, "Completed: You collected the Belladona");
+            InsertTextToDictionary(completedDict, 5, "Completed: bababa");
+            InsertTextToDictionary(completedDict, 6, "Completed: bababa");
+            InsertTextToDictionary(completedDict, 7, "Completed: bababa");
+            InsertTextToDictionary(completedDict, 8, "Completed: bababa");
+            InsertTextToDictionary(completedDict, 9, "Completed: bababa");
+
 
             hintDict[0].Unlocked = true;
             taskDict[0].Unlocked = true;
             completedDict[0].Unlocked = true;
-            taskDict[1].Unlocked = true;
+            taskDict[3].Unlocked = true;
         }
         public override void Update(GameTime gameTime)
         {
@@ -126,7 +154,15 @@ namespace TileGame.GameScreens
             if (StoryProgress.ProgressLine["asterixTalkedTo"])
             {
                 taskDict[1].Unlocked = true;
+                completedDict[1].Unlocked = true;
+                completedDict[2].Unlocked = true;
                 completedDict[3].Unlocked = true;
+                completedDict[4].Unlocked = true;
+                completedDict[5].Unlocked = true;
+                completedDict[6].Unlocked = true;
+                completedDict[7].Unlocked = true;
+                completedDict[8].Unlocked = true;
+                completedDict[9].Unlocked = true;
             }
             if (StoryProgress.ProgressLine["belladonnaHave"])
             {
@@ -138,8 +174,7 @@ namespace TileGame.GameScreens
                 completedDict[1].Unlocked = true;
             if (StoryProgress.ProgressLine["permitHave"])
             {
-                //messageDict[5].Unlocked = false;
-                //messageDict[6].Unlocked = true;
+                completedDict[2].Unlocked = true;
             }
             if (StoryProgress.ProgressLine["Axe"])
                 hintDict[2].Unlocked = true;
@@ -174,6 +209,11 @@ namespace TileGame.GameScreens
 
             GetKeysThatAreNotLocked();
 
+            leftText.Text = "";
+            leftText2.Text = "";
+            rightText.Text = "";
+            rightText2.Text = "";         
+
             if (pageIndex < (ListOfUnlockedKeys.Count))
             {
                 if (pageIndex + 1 < ListOfUnlockedKeys.Count)
@@ -182,30 +222,39 @@ namespace TileGame.GameScreens
                     leftPageIndex = 0;
                 if (activeDict.ContainsKey(leftPageIndex))
                 {
-                    leftText.Color = GetTextColor(leftText.Text.Split(':')[0]);
                     leftText.Text = activeDict[leftPageIndex].Text;
-                    //leftText.Size = leftText.SpriteFont.MeasureString(leftText.Text);
+                    leftText.Color = GetTextColor(leftText.Text.Split(':')[0]);
+                    if (activeDict.ContainsKey(leftPageIndex + 1) && leftPageIndex != 0)
+                    {
+                        leftText2.Text = activeDict[leftPageIndex + 1].Text;
+                        leftText2.Color = GetTextColor(leftText2.Text.Split(':')[0]);
+                    }
                     if (pageIndex == 0)
                         leftPagenumberText.Text = "1";
                     else
                     {
-                        leftPagenumberText.Text = (pageIndex + 1).ToString();
+                        leftPagenumberText.Text = (pageIndex/2+1).ToString();
                     }
                 }
 
-                if (pageIndex + 2 < ListOfUnlockedKeys.Count)
-                    rightPageIndex = ListOfUnlockedKeys[pageIndex + 2];
+                if (pageIndex + 3 < ListOfUnlockedKeys.Count)
+                    rightPageIndex = ListOfUnlockedKeys[pageIndex + 3];
                 else
                     rightPageIndex = 0;
                 if (activeDict.ContainsKey(rightPageIndex))
                 {
-                    rightText.Color = GetTextColor(rightText.Text.Split(':')[0]);
                     rightText.Text = activeDict[rightPageIndex].Text;
+                    rightText.Color = GetTextColor(rightText.Text.Split(':')[0]);
+                    if (activeDict.ContainsKey(rightPageIndex+1) && rightPageIndex != 0)
+                    {
+                        rightText2.Text = activeDict[rightPageIndex+1].Text;
+                        rightText2.Color = GetTextColor(rightText2.Text.Split(':')[0]);
+                    }
                     if (pageIndex == 0)
                         rightPagenumberText.Text = "2";
                     else
                     {
-                        rightPagenumberText.Text = (pageIndex+2).ToString();
+                        rightPagenumberText.Text = (pageIndex/2+2).ToString();
                     }
                 }
             }
@@ -214,14 +263,14 @@ namespace TileGame.GameScreens
                 StateManager.PopState();
             if(InputHandler.KeyReleased(Keys.Left))
             {
-                pageIndex -= 2;
+                pageIndex -= 4;
                 if (pageIndex < 0)
                     pageIndex = 0;
             }
             if(InputHandler.KeyReleased(Keys.Right))
             {
                 lastPageIndex = pageIndex;
-                pageIndex += 2;
+                pageIndex += 4;
                 if (pageIndex > ListOfUnlockedKeys.Count - 2)
                     pageIndex = lastPageIndex;
             }
@@ -235,6 +284,12 @@ namespace TileGame.GameScreens
                 backgroundImage,
                 GameRef.ScreenRectangle,
                 Color.White);
+
+            if (pageIndex+4 < ListOfUnlockedKeys.Count)
+                GameRef.spriteBatch.Draw(rightArrow, rightArrowRect, Color.White);
+
+            if (pageIndex >= 4)
+                GameRef.spriteBatch.Draw(leftArrow, leftArrowRect, Color.White);
 
             ControlManager.Draw(GameRef.spriteBatch);
 
