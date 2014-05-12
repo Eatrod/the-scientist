@@ -60,6 +60,7 @@ namespace TileEngine.Sprite
             //FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);
             //FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
             //FrameAnimation nothing = new FrameAnimation(1, 0, 0, 0, 0);
+            FrameAnimation monkey = new FrameAnimation(12, 50, 80, 450, 0);
             FrameAnimation celebration = new FrameAnimation(8, 50, 80, 0, 400);
             FrameAnimation walkDown = new FrameAnimation(8, 50, 80, 0, 0);
             FrameAnimation mudWalk = new FrameAnimation(8, 61, 80, 0, 160);
@@ -72,6 +73,7 @@ namespace TileEngine.Sprite
             //this.Animations.Add("Left", left);
             //this.Animations.Add("Up", up);
             //this.Animations.Add("Down", down);
+            this.Animations.Add("Monkey", monkey);
             this.Animations.Add("Celebration", celebration);
             this.Animations.Add("WalkRight", walkRight);
             this.Animations.Add("WalkLeft", walkLeft);
@@ -95,8 +97,9 @@ namespace TileEngine.Sprite
             if (gotIT)
             {
                 elapsedCelebration += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                this.CurrentAnimationName = "Celebration";
-                this.CurrentAnimation.FramesPerSeconds = 0.05f;
+                //this.CurrentAnimationName = "Celebration";
+                this.CurrentAnimationName = "Monkey";
+                this.CurrentAnimation.FramesPerSeconds = 0.10f;
                 if(elapsedCelebration > delayCelebration)
                 {
                     gotIT = false;
