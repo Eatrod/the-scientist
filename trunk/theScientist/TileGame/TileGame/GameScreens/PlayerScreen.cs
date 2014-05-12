@@ -300,7 +300,7 @@ namespace TileGame.GameScreens
                 startCell = GameRef.BaseGamePlayScreen.FindCellWithIndexInCurrentTilemap(
                 50,
                 GameRef.PotatoTown);
-                player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/Bjorn_Try_Player"), Content.Load<Texture2D>("CharacterPotraits/DiaPortPlcholder"));
+                player = new PlayerCharacter(Content.Load<Texture2D>("Sprite/Bjorn_Try_Player"), Content.Load<Texture2D>("CharacterPotraits/PortraitIgnazio"));
             player.Origionoffset = new Vector2(25, 65);
                 player.SetSpritePositionInGameWorld(new Vector2(startCell.X, startCell.Y));
             player.Life = 100;
