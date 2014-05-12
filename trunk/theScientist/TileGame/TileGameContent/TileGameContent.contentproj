@@ -3364,6 +3364,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharacterPotraits\PortraitAsterix.png">
+      <Name>PortraitAsterix</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="CharacterPotraits\PortraitIgnazio.png">
+      <Name>PortraitIgnazio</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Sounds\Effects\cut_the_tree.wav">
       <Name>cut_the_tree</Name>
       <Importer>WavImporter</Importer>
