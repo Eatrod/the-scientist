@@ -65,8 +65,8 @@ namespace XtheSmithLibrary.Controls
                 }
                 else
                 {
-                    destRect.Width = 150;
-                    destRect.Height = 150;
+                    this.rectangle.Width = 150;
+                    this.rectangle.Height = 150;
                 }
                 base.Draw(spriteBatch);
                 StringBuilder stringBuilder = new StringBuilder();
