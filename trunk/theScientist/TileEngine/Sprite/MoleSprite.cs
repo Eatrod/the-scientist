@@ -17,8 +17,6 @@ namespace TileEngine.Sprite
         private Vector2 shotVector;
         private bool finished;
         private bool throwBomb;
-        private float elapsedAttack;
-        private float delayAttack;
         public bool Finished
         {
             get { return finished; }
@@ -34,8 +32,6 @@ namespace TileEngine.Sprite
             this.Position = Position;
             this.finished = false;
             this.throwBomb = false;
-            this.delayAttack = 2000f;
-            this.elapsedAttack = 0.0f;
             this.shotVector = Vector2.Zero;
 
             FrameAnimation rise = new FrameAnimation(7, 32, 50, 0, 0);
