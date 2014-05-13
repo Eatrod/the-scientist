@@ -22,6 +22,7 @@ namespace TileEngine.Sprite
         private bool slowWalk;
         private float delayCelebration;
         private float elapsedCelebration;
+        public bool StartFlag;
         public bool SlowWalk
         {
             get { return slowWalk; }
@@ -44,6 +45,7 @@ namespace TileEngine.Sprite
         }
         public LumberJackJohnny(Texture2D texture, Random random): base(texture)
         {
+            this.StartFlag = true;
             this.delayCelebration = 2000f;
             this.elapsedCelebration = 0.0f;
             this.slowWalk = false;
@@ -54,7 +56,7 @@ namespace TileEngine.Sprite
             this.elapsedSeek = 1500f;
             this.Speed = 2.0f;
             this.TargetedPosition = Vector2.Zero;
-            this.Position = new Vector2(55 * 32, 10 * 32);
+            this.Position = new Vector2(35 * 32, 28 * 32);
             //FrameAnimation down = new FrameAnimation(1, 50, 80, 150, 0);
             //FrameAnimation left = new FrameAnimation(1, 50, 80, 0, 80);
             //FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);
@@ -94,38 +96,44 @@ namespace TileEngine.Sprite
         }
         public override void Update(GameTime gameTime)
         {
-            if (gotIT)
+            if (this.StartFlag)
             {
-                elapsedCelebration += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                //this.CurrentAnimationName = "Celebration";
                 this.CurrentAnimationName = "Monkey";
                 this.CurrentAnimation.FramesPerSeconds = 0.10f;
-                if(elapsedCelebration > delayCelebration)
-                {
-                    gotIT = false;
-                    this.elapsedCelebration = 0.0f;
-                }
-
             }
             else
             {
-                if (slowWalk)
+                if (gotIT)
                 {
-                    Speed = 1f;
-                    this.CurrentAnimationName = "MudWalk";
-                    this.CurrentAnimation.FramesPerSeconds = 0.20f;
+                    elapsedCelebration += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    this.CurrentAnimationName = "Celebration";
+                    this.CurrentAnimation.FramesPerSeconds = 0.05f;
+                    if (elapsedCelebration > delayCelebration)
+                    {
+                        gotIT = false;
+                        this.elapsedCelebration = 0.0f;
+                    }
 
                 }
                 else
                 {
-                    Speed = 3.0f;
-                    UpdateSpriteAnimation(TargetedPosition);
-                    this.CurrentAnimation.FramesPerSeconds = 0.08f;
-                }
+                    if (slowWalk)
+                    {
+                        Speed = 1f;
+                        this.CurrentAnimationName = "MudWalk";
+                        this.CurrentAnimation.FramesPerSeconds = 0.20f;
 
-                this.Position += TargetedPosition * Speed;
+                    }
+                    else
+                    {
+                        Speed = 3.0f;
+                        UpdateSpriteAnimation(TargetedPosition);
+                        this.CurrentAnimation.FramesPerSeconds = 0.08f;
+                    }
+
+                    this.Position += TargetedPosition * Speed;
+                }
             }
-            
             base.Update(gameTime);
         }
         public void UpdateSpriteAnimation(Vector2 motion)

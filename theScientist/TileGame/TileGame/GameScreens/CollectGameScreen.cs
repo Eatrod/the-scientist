@@ -39,6 +39,10 @@ namespace TileGame.GameScreens
         private float elapsedSlow;
         private float delaySlow;
         private bool SlowFlag;
+
+        private float elapsedStart;
+        private float delayStart;
+        private bool StartFlag;
         Sprite sprite;
         //PlayerCharacter player;
 
@@ -97,11 +101,14 @@ namespace TileGame.GameScreens
             //player.CurrentAnimationName = "Down";
             //renderList.Add(player);
 
-            player.SetSpritePositionInGameWorld(new Vector2(22, 12));
+            player.SetSpritePositionInGameWorld(new Vector2(32, 28));
 
             SlowFlag = false;
             elapsedSlow = 0.0f;
             delaySlow = 2000f;
+            StartFlag = true;
+            delayStart = 10000f;
+            elapsedStart = 0.0f;
 
             SpriteObjectInGameWorld.Clear();
             renderList.Clear();
@@ -160,101 +167,120 @@ namespace TileGame.GameScreens
         }
         public override void Update(GameTime gameTime)
         {
-            if(molehandler.SpawnFlag)
+            if (StartFlag)
             {
-                MoleSprite mole = new MoleSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Mole"),
-                    new Vector2(GameRef.random.Next(10,55) * 32, GameRef.random.Next(10,40) * 32));
-                mole.Origionoffset = new Vector2(16, 40);
-                molehandler.SpawnFlag = false;
-                molehandler.Moles.Add(mole);
-                SpriteObjectInGameWorld.Add(mole);
-                renderList.Add(mole);
-            }
-            foreach (Explosion explosion in Explosions)
-            {
-                explosion.UpdateExplosion(gameTime);
-                if (explosion.Bounds.Intersects(new Rectangle(player.Bounds.X + 10, player.Bounds.Y + 10, 30, 50)))
+                elapsedStart += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                player.Speed = 0.0f;
+                if (elapsedStart > delayStart)
                 {
-                    SlowFlag = true;
-                    explosion.Finished = true;
-                }
-                if (explosion.Finished)
-                {
-                    renderList.Remove(explosion);
-                    Explosions.Remove(explosion);
-                    break;
+                    johnny.StartFlag = false;
+                    this.StartFlag = false;
                 }
             }
-            foreach (BombSprite bomb in BombSprites)
+            else
             {
-                bomb.UpdateBomb(gameTime);
-                if (bomb.Bounds.Intersects(new Rectangle(player.Bounds.X + 10, player.Bounds.Y + 10, 30, 50)))
+                if (SlowFlag)
                 {
-                    bomb.Boom = true;
-                }
-                if (bomb.Boom)
-                {
-
-                    for (int i = 0; i < 4; i++)
+                    elapsedSlow += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    player.Speed = 1.0f;
+                    if (elapsedSlow > delaySlow)
                     {
-                        Explosion explosion = new Explosion(Content.Load<Texture2D>("Sprite/Bjorn_Try_Explosion"),
-                            bomb.Position, new Vector2(GameRef.random.Next(-100, 100) / 100f, GameRef.random.Next(-100, 100) / 100f));
-                        Explosions.Add(explosion);
-                        renderList.Add(explosion);
+                        SlowFlag = false;
+                        elapsedSlow = 0.0f;
                     }
-                    int randomnumber = GameRef.random.Next(1, 11);
-                    if (randomnumber <= 3)
+                }
+                else
+                    player.Speed = 3.0f;
+            }
+        
+                if (!StartFlag)
+                {
+                    if (molehandler.SpawnFlag)
                     {
                         MoleSprite mole = new MoleSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Mole"),
-                            bomb.Position);
+                            new Vector2(GameRef.random.Next(10, 55) * 32, GameRef.random.Next(10, 40) * 32));
                         mole.Origionoffset = new Vector2(16, 40);
+                        molehandler.SpawnFlag = false;
                         molehandler.Moles.Add(mole);
                         SpriteObjectInGameWorld.Add(mole);
                         renderList.Add(mole);
                     }
-                    BombSprites.Remove(bomb);
-                    renderList.Remove(bomb);
-                    break;
+                }
+                foreach (Explosion explosion in Explosions)
+                {
+                    explosion.UpdateExplosion(gameTime);
+                    if (explosion.Bounds.Intersects(new Rectangle(player.Bounds.X + 10, player.Bounds.Y + 10, 30, 50)))
+                    {
+                        SlowFlag = true;
+                        explosion.Finished = true;
+                    }
+                    if (explosion.Finished)
+                    {
+                        renderList.Remove(explosion);
+                        Explosions.Remove(explosion);
+                        break;
+                    }
+                }
+                foreach (BombSprite bomb in BombSprites)
+                {
+                    bomb.UpdateBomb(gameTime);
+                    if (bomb.Bounds.Intersects(new Rectangle(player.Bounds.X + 10, player.Bounds.Y + 10, 30, 50)))
+                    {
+                        bomb.Boom = true;
+                    }
+                    if (bomb.Boom)
+                    {
+
+                        for (int i = 0; i < 4; i++)
+                        {
+                            Explosion explosion = new Explosion(Content.Load<Texture2D>("Sprite/Bjorn_Try_Explosion"),
+                                bomb.Position, new Vector2(GameRef.random.Next(-100, 100) / 100f, GameRef.random.Next(-100, 100) / 100f));
+                            Explosions.Add(explosion);
+                            renderList.Add(explosion);
+                        }
+                        int randomnumber = GameRef.random.Next(1, 11);
+                        if (randomnumber <= 3)
+                        {
+                            MoleSprite mole = new MoleSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Mole"),
+                                bomb.Position);
+                            mole.Origionoffset = new Vector2(16, 40);
+                            molehandler.Moles.Add(mole);
+                            SpriteObjectInGameWorld.Add(mole);
+                            renderList.Add(mole);
+                        }
+                        BombSprites.Remove(bomb);
+                        renderList.Remove(bomb);
+                        break;
+                    }
+
+                }
+                foreach (MoleSprite mole in molehandler.Moles)
+                {
+                    mole.SearchTowardsTarget(player);
+                    if (mole.ThrowBomb)
+                    {
+                        BombSprite bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
+                                        new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(mole.Position.X + 15, mole.Position.Y + 23));
+                        bomb.potatoExplosionSound = Content.Load<SoundEffect>(@"Sounds/Effects/explosion");
+                        BombSprites.Add(bomb);
+                        renderList.Add(bomb);
+
+                        mole.ThrowBomb = false;
+                    }
+                    if (mole.Finished)
+                    {
+                        molehandler.Moles.Remove(mole);
+                        SpriteObjectInGameWorld.Remove(mole);
+                        renderList.Remove(mole);
+                        break;
+                    }
                 }
 
-            }
-            foreach(MoleSprite mole in molehandler.Moles)
-            {
-                mole.SearchTowardsTarget(player);
-                if(mole.ThrowBomb)
-                {
-                    BombSprite bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
-                                    new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(mole.Position.X + 15, mole.Position.Y + 23));
-                    bomb.potatoExplosionSound = Content.Load<SoundEffect>(@"Sounds/Effects/explosion");
-                    BombSprites.Add(bomb);
-                    renderList.Add(bomb);
-                    
-                    mole.ThrowBomb = false;
-                }
-                if(mole.Finished)
-                {
-                    molehandler.Moles.Remove(mole);
-                    SpriteObjectInGameWorld.Remove(mole);
-                    renderList.Remove(mole);
-                    break;
-                }
-            }
-            if(SlowFlag)
-            {
-                elapsedSlow += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                player.Speed = 1.0f;
-                if (elapsedSlow > delaySlow)
-                {
-                    SlowFlag = false;
-                    elapsedSlow = 0.0f;
-                }
-            }
-            else
-                player.Speed = 3.0f;
-            fruit.CheckForContactWithPlayerOrNPC(player, johnny);
-            johnny.SearchTowardsTarget(gameTime, fruit);
-            CollisionWithTerrain.CheckForCollisionAroundSprite(johnny, johnny.TargetedPosition, this);
-            johnny.SlowWalk = CollisionWithTerrain.CheckCollisionForMotionBool(johnny, this);
+                fruit.CheckForContactWithPlayerOrNPC(player, johnny);
+                johnny.SearchTowardsTarget(gameTime, fruit);
+                CollisionWithTerrain.CheckForCollisionAroundSprite(johnny, johnny.TargetedPosition, this);
+                johnny.SlowWalk = CollisionWithTerrain.CheckCollisionForMotionBool(johnny, this);
+            
             foreach (BaseSprite s in SpriteObjectInGameWorld)
             {
                 s.Update(gameTime);
