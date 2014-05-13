@@ -78,6 +78,8 @@
     <Compile Include="Sprite\FrameAnimation.cs" />
     <Compile Include="Sprite\FruitForMiniGameSprite.cs" />
     <Compile Include="Sprite\LumberJackJohnny.cs" />
+    <Compile Include="Sprite\MoleHandlerSprite.cs" />
+    <Compile Include="Sprite\MoleSprite.cs" />
     <Compile Include="Sprite\MultiIronSprite.cs" />
     <Compile Include="Sprite\ImmortuiSprite.cs" />
     <Compile Include="Sprite\Npc\NPC.cs" />
