@@ -25,10 +25,16 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
         public float elapsedDance;
         public bool angry;
         public float acc;
+        public bool BearFlag;
+        public float elapsedBear;
+        public float delayBear;
         public Vector2 startPosition;
         
         public NPC_Neutral_Bjorn(Texture2D texture,Vector2 startPosition): base(texture)
         {
+            this.elapsedBear = 0.0f;
+            this.delayBear = 3000f;
+            this.BearFlag = false;
             this.startPosition = startPosition;
             this.elapsedFly = 0.0f;
             this.delayFly = 10000f;
@@ -44,7 +50,8 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
             FrameAnimation redbull = new FrameAnimation(16, 50, 80, 0, 0);
             FrameAnimation wings = new FrameAnimation(4, 75, 80, 0, 400);
             FrameAnimation fly = new FrameAnimation(6, 75, 80, 300, 400);
-            FrameAnimation angry = new FrameAnimation(1, 50, 80, 0, 320);
+            FrameAnimation beartransform = new FrameAnimation(6, 50, 80, 0, 320);
+            FrameAnimation bear = new FrameAnimation(1, 50, 80, 250, 320);
             FrameAnimation dance = new FrameAnimation(7, 50, 80, 0, 240);
             FrameAnimation moonwalkRight = new FrameAnimation(8, 50, 80, 0, 80); 
             FrameAnimation moonwalkLeft = new FrameAnimation(8, 50, 80, 0, 160);
@@ -52,7 +59,8 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
             this.Animations.Add("Redbull", redbull);
             this.Animations.Add("Wings", wings);
             this.Animations.Add("Fly", fly);
-            this.Animations.Add("Angry", angry);
+            this.Animations.Add("Beartransform", beartransform);
+            this.Animations.Add("Bear", bear);
             this.Animations.Add("MoonwalkRight", moonwalkRight);
             this.Animations.Add("MoonwalkLeft", moonwalkLeft);
             this.Animations.Add("Dance", dance);
@@ -63,12 +71,43 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
             {
                 angry = true;
             }
+            else if(Vector2.Distance(player.Position, this.Position) < 200)
+            {
+                BearFlag = true;
+            }
+
         }
         public override void Update(GameTime gameTime)
         {
-
-            if (angry)
+            if(BearFlag && !angry)
             {
+                if(CurrentAnimationName != "Bear")
+                {
+                    this.CurrentAnimationName = "Beartransform";
+                    this.CurrentAnimation.FramesPerSeconds = 0.10f;
+                }
+                if (CurrentAnimationName == "Beartransform" && this.CurrentAnimation.CurrentFrame >= 5)
+                {
+                    this.CurrentAnimation.CurrentFrame = 0;
+                    this.CurrentAnimationName = "Bear";
+                }
+                if(CurrentAnimationName == "Bear")
+                {
+                    elapsedBear += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    if(elapsedBear > delayBear)
+                    {
+                        BearFlag = false;
+                        this.elapsedBear = 0.0f;
+                        
+                    }
+                    
+                }
+            }
+            else if (angry)
+            {
+                this.BearFlag = false;
+                this.elapsedBear = 0.0f;
+                this.Animations["Beartransform"].CurrentFrame = 0;
                 if (this.CurrentAnimationName != "Wings" && this.CurrentAnimationName != "Fly")
                 {
                     this.CurrentAnimationName = "Redbull";
