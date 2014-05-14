@@ -3400,6 +3400,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sprite\Asterix.png">
+      <Name>Asterix</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Sounds\Effects\bow_1bf.wav">
       <Name>bow_1bf</Name>
       <Importer>WavImporter</Importer>

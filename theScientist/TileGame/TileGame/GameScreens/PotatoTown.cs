@@ -125,7 +125,7 @@ namespace TileGame.GameScreens
                 s.CurrentAnimationName = "Down";
             }
             
-            foreach(var s in AnimatedSpriteObject)
+            foreach(var s in pickupableobjects)
             {
                 if (s is MultiIronSprite)
                 {
@@ -144,7 +144,7 @@ namespace TileGame.GameScreens
             renderList.Clear();
             renderList.Add(player);
             SpriteObjectInGameWorld.AddRange(AnimatedSpriteObject);
-            SpriteObjectInGameWorld.AddRange(pickupableobjects);
+            SpriteObjectInGameWorld.AddRange(pickupableobjects);            
             SpriteObjectInGameWorld.AddRange(SpriteObject);            
             //SpriteObjectInGameWorld.AddRange(NPCFightingFarmers);
             //SpriteObjectInGameWorld.AddRange(NPCPatrollingGuards);
@@ -438,8 +438,8 @@ namespace TileGame.GameScreens
                 int x = GameRef.random.Next(102, 137);
                 int y = GameRef.random.Next(88, 100);
                 MultiIronSprite multiIronOre = new MultiIronSprite(Content.Load<Texture2D>("Sprite/multi_iron_ore"));
-                multiIronOre.SetSpritePositionInGameWorld(new Vector2(x, y));
-            AnimatedSpriteObject.Add(multiIronOre);
+                multiIronOre.SetSpritePositionInGameWorld(new Vector2(x, y));                
+                pickupableobjects.Add(multiIronOre);
             }
 
 
