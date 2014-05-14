@@ -50,6 +50,7 @@ namespace TileEngine.Sprite
             if(playerPoints >= 800)
             {
                 npc.AngryFlag = true;
+                npc.delayTripped = 500f;
             }
             if(player.MovementBounds().Intersects(this.Bounds))
             {
