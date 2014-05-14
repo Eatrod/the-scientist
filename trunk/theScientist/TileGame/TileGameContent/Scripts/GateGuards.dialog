@@ -45,7 +45,7 @@
   <Conversation Name="Guard3">
     <Text>Guard:Yeah I sure hope so.</Text>
     <Handlers>
-      <Handler Caption="Continue" Action="EndConversation" />
+      <Handler Caption="Continue" Action="SetToTrue:leavingTown;EndConversation" />
     </Handlers>
   </Conversation>
 
