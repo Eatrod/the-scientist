@@ -143,7 +143,7 @@ namespace TileEngine.Sprite
                 }
                 if (FruitForMiniGameSprite.playerPoints >= 1000)
                 {
-                    this.CurrentAnimationName = "TrippLeft";
+                    this.CurrentAnimationName = "Losing";
                 }
             }
             else
