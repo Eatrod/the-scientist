@@ -53,7 +53,7 @@ namespace TileEngine.Sprite
         {
             this.AngryFlag = false;
             this.elapsedTripped = 0.0f;
-            this.delayTripped = 2000f;
+            this.delayTripped = 1000f;
             this.HitFlag = false;
             this.StartFlag = true;
             this.StopFlag = false;
@@ -134,8 +134,15 @@ namespace TileEngine.Sprite
             }
             else if (StopFlag)
             {
-                this.CurrentAnimationName = "Monkey";
-                this.CurrentAnimation.FramesPerSeconds = 0.10f;
+                if (FruitForMiniGameSprite.npcPoints >= 1000)
+                {
+                    this.CurrentAnimationName = "Monkey";
+                    this.CurrentAnimation.FramesPerSeconds = 0.10f;
+                }
+                if (FruitForMiniGameSprite.playerPoints >= 1000)
+                {
+                    this.CurrentAnimationName = "TrippLeft";
+                }
             }
             else
             {
