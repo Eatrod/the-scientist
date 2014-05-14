@@ -156,7 +156,7 @@ namespace TileGame.GameScreens
                 taskDict[3].Unlocked = true;
                 completedDict[3].Unlocked = true;
             }
-            if (StoryProgress.ProgressLine["belladonnaHave"])
+            if (StoryProgress.ProgressLine["Belladonna"])
             {
                 taskDict[1].Unlocked = false;
                 taskDict[2].Unlocked = true;
@@ -167,7 +167,7 @@ namespace TileGame.GameScreens
                 completedDict[1].Unlocked = true;
             }
 
-            if (StoryProgress.ProgressLine["permitHave"])
+            if (StoryProgress.ProgressLine["Permit"])
             {
                 completedDict[2].Unlocked = true;
             }
