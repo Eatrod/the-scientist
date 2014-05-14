@@ -49,6 +49,7 @@ namespace TileEngine
             AddItemProgressLine("contestAgainstJohnFinished", false, "Quest");
             AddItemProgressLine("asterixTalkedTo", false, "Quest");
             AddItemProgressLine("lumberjacksTalkedTo", false, "Quest");
+            AddItemProgressLine("leavingTown", false, "Quest");
 
             //--
             AddItemProgressLine("CollectMinigame", false, "Minigame");
