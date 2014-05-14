@@ -294,7 +294,7 @@ namespace TileGame.GameScreens
 
             base.LoadContent();
             gameOver = new PictureBox(
-                Content.Load<Texture2D>("BackGrounds\\Controls"),
+                Content.Load<Texture2D>("BackGrounds\\EndingGameOver"),
                    GameRef.ScreenRectangle);
             //EndingGameover = Content.Load<Texture2D>(@"BackGrounds\EndingGameOver");
             //gameOver = new PictureBox(EndingGameover, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height));
