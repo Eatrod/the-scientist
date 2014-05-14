@@ -10,14 +10,14 @@ namespace TileGame.Collision
 {
     public class CollisionWithCharacter
     {
-        
+
         public void UpdateCollisionForCharacters(
-             GameTime gameTime, 
-             List<BaseSprite> SpriteObjectInGameWorld, 
-             PlayerCharacter player, 
-             List<BaseSprite> SpriteObject, 
-             List<AnimatedProjectile> playerprojectiles, 
-             List<BaseSprite> renderList, 
+             GameTime gameTime,
+             List<BaseSprite> SpriteObjectInGameWorld,
+             PlayerCharacter player,
+             List<BaseSprite> SpriteObject,
+             List<AnimatedProjectile> playerprojectiles,
+             List<BaseSprite> renderList,
              List<BaseSprite> AnimatedSpriteObject)
         {
             foreach (BaseSprite s in SpriteObjectInGameWorld)
@@ -36,57 +36,11 @@ namespace TileGame.Collision
                             s.Position - (d * (player.CollisionRadius + s.CollisionRadius));
                     }
 
-                    if( s is TreeStandingBridge)
+                    if (s is TreeStandingBridge)
                     {
                         player.Position = player.Position + (-d) * player.Speed;
                     }
-
-                    //if(s is LifePotatoSprite)
-                    //{
-                    //    SpriteObjectInGameWorld.Remove(s);
-                    //    renderList.Remove(s);
-                        
-                    //    player.Life += 10;
-
-                    //    if (player.Life > 100)
-                    //        player.Life = 100;
-                    //    //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
-                    //    break;
-                    //}
-
-                    //if (s is BelladonnaSprite)
-                    //{
-                    //    SpriteObjectInGameWorld.Remove(s);
-                    //    renderList.Remove(s);
-                    //    StoryProgress.ProgressLine["belladonnaHave"] = true;
-                        
-                    //    //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
-                    //    break;
-                    //}
-
-                    //if (s is ImmortuiSprite)
-                    //{
-                    //    SpriteObjectInGameWorld.Remove(s);
-                    //    renderList.Remove(s);
-                    //    StoryProgress.ProgressLine["immortuiHave"] = true;
-
-                    //    //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
-                    //    break;
-                    //}
-
-                    //if(s is MultiIronSprite)
-                    //{
-                    //    StoryProgress.collectedAmountDict["IronOre"] += 100;
-                    //    MultiIronSprite mis = (MultiIronSprite)s;
-                    //    if (mis.CurrentAnimationName == "all" )
-                    //        mis.CurrentAnimationName = "half";
-                    //    else
-                    //    {
-                    //        SpriteObjectInGameWorld.Remove(s);
-                    //        renderList.Remove(s);
-                    //        break;
-                    //    }
-                    //}                
+                                   
                 }
             }
 
@@ -112,7 +66,7 @@ namespace TileGame.Collision
                     //if (BaseSprite.AreColliding(playerprojectiles[Projectile], sprite) && SpriteObjectInGameWorld.Contains(sprite))
                     //{
                     if (playerprojectiles[Projectile].Bounds.Intersects(new Rectangle((int)sprite.Position.X + 20,
-                        (int)sprite.Position.Y + 10,10,55)) && sprite.Life > 0)
+                        (int)sprite.Position.Y + 10, 10, 55)) && sprite.Life > 0)
                     {
                         sprite.Life -= playerprojectiles[Projectile].damageofprojectile;
                         //sprite.ArrowDirection = playerprojectiles[Projectile].Origin - sprite.Origin;
@@ -133,5 +87,7 @@ namespace TileGame.Collision
                 }
             }
         }
-    }
+
+    } 
+        
 }

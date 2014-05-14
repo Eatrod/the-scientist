@@ -105,13 +105,14 @@ namespace TileGame.GameScreens
 
         //player Collision
         protected CollisionWithTerrain CollisionWithTerrain = new CollisionWithTerrain();
+        protected CollisionWithCharacter CollisionWithCharacter = new CollisionWithCharacter();
 
         //Player Projectiles code
         static protected AnimatedSprite arrowprojectile;
         protected List<AnimatedProjectile> playerprojectiles = new List<AnimatedProjectile>();
 
-        //List<AnimatedSprite> npcs = new List<AnimatedSprite>();
-        protected List<BaseSprite> renderList = new List<BaseSprite>();
+        protected List<BaseSprite> npcs = new List<BaseSprite>();
+        protected List<BaseSprite> renderList = new List<BaseSprite>();        
         protected List <TextBubble> bubbleList = new List<TextBubble>();
 
         Comparison<BaseSprite> renderSort = new Comparison<BaseSprite>(renderSpriteCompare);
@@ -776,7 +777,7 @@ namespace TileGame.GameScreens
             else if (player.pickingup && player.CurrentAnimation.CurrentFrame >= 2)
             {                                
                     player.pickingup = false;
-                    player.CurrentAnimation.CurrentFrame = 0;
+                    player.CurrentAnimation.CurrentFrame = 0;                   
                     player.CurrentAnimationName = player.oldAnimation;
                     player.Speed = 2;
             }
@@ -836,6 +837,8 @@ namespace TileGame.GameScreens
                 {
                     player.elapsedAttack = 0.0f;
                     player.meleeAttackFinish = false;
+                    CheckForMeleehit(player, npcs);
+
                     if (player.CurrentAnimationName == "AxeFinishLeft")
                     {
                         player.Position.X += 27;
@@ -950,6 +953,7 @@ namespace TileGame.GameScreens
                 player.Stamina -= 20f;
             }
         }
+
 
         private void NormalarrowFired(ContentManager Content, Vector2 motion)
         {
@@ -1916,6 +1920,20 @@ namespace TileGame.GameScreens
         #endregion
       
         #region Method Region
+
+
+        public void CheckForMeleehit(CharacterSprite player, List<BaseSprite> npcs)
+        {
+            foreach (AnimatedSprite s in npcs)
+            {
+                
+                if (player.Bounds.Intersects(s.Bounds))
+                {                  
+                        s.Life -= 100;              
+                }
+            }
+        }
+
         public void PlayerShowTextBubble(NPC_Neutral npc)
         {
             npc.TextBubble();
