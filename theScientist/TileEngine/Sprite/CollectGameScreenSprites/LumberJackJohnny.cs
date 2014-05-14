@@ -15,7 +15,7 @@ namespace TileEngine.Sprite
     public class LumberJackJohnny: AnimatedSprite
     {
         private float elapsedTripped;
-        private float delayTripped;
+        public float delayTripped;
         private float elapsedSeek;
         private float delaySeek;
         private Random random;
@@ -71,6 +71,7 @@ namespace TileEngine.Sprite
             //FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);
             //FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
             //FrameAnimation nothing = new FrameAnimation(1, 0, 0, 0, 0);
+            FrameAnimation rise = new FrameAnimation(39,50,80,0,800);
             FrameAnimation monkey = new FrameAnimation(12, 50, 80, 450, 0);
             FrameAnimation celebration = new FrameAnimation(8, 50, 80, 0, 400);
             FrameAnimation swimUp = new FrameAnimation(8, 50, 80, 0, 480);
@@ -86,6 +87,7 @@ namespace TileEngine.Sprite
             FrameAnimation trippLeft = new FrameAnimation(4, 50, 80, 600, 400);
             FrameAnimation trippMud = new FrameAnimation(1, 61, 80, 488, 160);
 
+            this.Animations.Add("Rise", rise);
             this.Animations.Add("SwimUp", swimUp);
             this.Animations.Add("SwimRight", swimRight);
             this.Animations.Add("SwimLeft", swimLeft);
@@ -117,8 +119,16 @@ namespace TileEngine.Sprite
         {
             if (this.StopSearch)
             {
-                this.CurrentAnimationName = "Monkey";
-                this.CurrentAnimation.FramesPerSeconds = 0.10f;
+                if(this.CurrentAnimationName != "Monkey")
+                {
+                    this.CurrentAnimationName = "Rise";
+                    this.CurrentAnimation.FramesPerSeconds = 0.03f;
+                }
+                if (this.CurrentAnimationName == "Rise" && this.CurrentAnimation.CurrentFrame >= 38)
+                {
+                    this.CurrentAnimationName = "Monkey";
+                    this.CurrentAnimation.FramesPerSeconds = 0.10f;
+                }
             }
             else
             {
