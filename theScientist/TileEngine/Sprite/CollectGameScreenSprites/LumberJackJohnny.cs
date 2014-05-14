@@ -144,6 +144,7 @@ namespace TileEngine.Sprite
                 if (FruitForMiniGameSprite.playerPoints >= 1000)
                 {
                     this.CurrentAnimationName = "Losing";
+                    this.CurrentAnimation.FramesPerSeconds = 0.1f;
                 }
             }
             else
