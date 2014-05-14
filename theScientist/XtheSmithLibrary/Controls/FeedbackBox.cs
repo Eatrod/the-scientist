@@ -21,19 +21,26 @@ namespace XtheSmithLibrary.Controls
         private Rectangle rectangle;
         private SoundEffect questCompleteSound;
         private ContentManager Content;
+        private string currentKey;
 
 
-        public FeedbackBox(Texture2D texture, Rectangle rectangle, ContentManager Content) : base(texture, rectangle)
+        public FeedbackBox(Texture2D texture, Rectangle rectangle, ContentManager content) : base(texture, rectangle)
         {
             this.rectangle = rectangle;
             this.texture = texture;
             dictionary = new Dictionary<string,bool>();
+            /*
             this.dictionary.Add("Axe", false);
             this.dictionary.Add("Johns riddle", false);
             this.dictionary.Add("Talked to Asterix", false);
             this.dictionary.Add("Permit", false);
-            this.dictionary.Add("Belladonna", false);
-            this.Content = Content;
+            this.dictionary.Add("Belladonna", false);*/
+            //this.dictionary = StoryProgress.ProgressLine;
+            foreach (var key in StoryProgress.ProgressLine)
+            {
+                this.dictionary.Add(key.Key,key.Value);
+            }
+            this.Content = content;
             questCompleteSound = Content.Load<SoundEffect>(@"Sounds/Effects/quest_completed");
         }
 
@@ -49,19 +56,24 @@ namespace XtheSmithLibrary.Controls
             if (isShowing)
                 elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
             //TODO: Hitta ett sätt att implementera den här lösningen (förutsätter att this.dictionary=StoryProgress.ProgressLine)
-            /*foreach (var key in StoryProgress.ProgressLine)
+            //Det här nu officela lösningen!
+            foreach (var key in dictionary)
             {
-                if (dictionary.ContainsKey(key.Key))
+                if (StoryProgress.ProgressLine.ContainsKey(key.Key))
                 {
-                    if (dictionary[key.Key] == false && isShowing == false)
+                    if (dictionary[key.Key] == false && StoryProgress.ProgressLine[key.Key] && isShowing == false)
                     {
-                        this.text = "You now have the item: TESTEST";
+                        if (StoryProgress.ProgressType[key.Key] == "Quest")
+                            this.text = "You have completed the task: ";
+                        else if (StoryProgress.ProgressType[key.Key] == "Item")
+                            this.text = "You now have the item: ";
                         this.currentKey = key.Key;
                         isShowing = true;
                     }
                 }
 
-            }*/
+            }
+            /*
             if (StoryProgress.ProgressLine["Axe"] && dictionary["Axe"] == false && isShowing == false)
             {
                 this.text = "You now have the item: ";
@@ -91,14 +103,14 @@ namespace XtheSmithLibrary.Controls
                 this.text = "You now have the item: ";
                 this.type = "Belladonna";
                 isShowing = true;
-            }
+            }*/
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (type == null)
+            if (currentKey == null)
                 return;
-            if (dictionary[type] == false)
+            if (dictionary[currentKey] == false)
             {
                 if (soundPlayed == false)
                 {
@@ -107,11 +119,11 @@ namespace XtheSmithLibrary.Controls
                 }
 
                 spriteBatch.Draw(texture, rectangle, Color.Black);
-                spriteBatch.DrawString(spriteFont, text + type,new Vector2(rectangle.X+20, rectangle.Y+20), Color.LightGreen);
+                spriteBatch.DrawString(spriteFont, text + currentKey,new Vector2(rectangle.X+20, rectangle.Y+20), Color.LightGreen);
                 if (elapsedTime > 5)
                 {
                     elapsedTime = 0;
-                    dictionary[type] = true;
+                    dictionary[currentKey] = true;
                     isShowing = false;
                     soundPlayed = false;
                 }
