@@ -2009,7 +2009,8 @@ namespace TileGame.GameScreens
             List<AnimatedProjectile> playerprojectiles,
             List<BaseSprite> renderList,
             List<BaseSprite> AnimatedSpriteObject,
-            List<BaseSprite> pickupableobjects)
+            List<BaseSprite> pickupableobjects
+            )
         {
             foreach (BaseSprite s in pickupableobjects)
             {
@@ -2074,20 +2075,20 @@ namespace TileGame.GameScreens
                     //    Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
                     //    break;
                     //}
-
-                    //else if (s is MultiIronSprite)
-                    //{
-                    //    StoryProgress.collectedAmountDict["IronOre"] += 100;
-                    //    MultiIronSprite mis = (MultiIronSprite)s;
-                    //    if (mis.CurrentAnimationName == "all")
-                    //        mis.CurrentAnimationName = "half";
-                    //    else
-                    //    {
-                    //        SpriteObjectInGameWorld.Remove(s);
-                    //        renderList.Remove(s);
-                    //        break;
-                    //    }
-                    //}
+                
+                    if (s is MultiIronSprite)
+                    {
+                        StoryProgress.collectedAmountDict["IronOre"] += 100;
+                        MultiIronSprite mis = (MultiIronSprite)s;
+                        if (mis.CurrentAnimationName == "all")
+                            mis.CurrentAnimationName = "half";
+                        else
+                        {
+                            SpriteObjectInGameWorld.Remove(s);
+                            renderList.Remove(s);
+                            break;
+                        }
+                    }
                 }
             }
         }
