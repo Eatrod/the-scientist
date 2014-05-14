@@ -46,6 +46,10 @@ namespace TileEngine.Sprite
         }
         public void CheckForContactWithPlayerOrNPC(AnimatedSprite player, LumberJackJohnny npc)
         {
+            if(this.playerPoints >= 800)
+            {
+                npc.AngryFlag = true;
+            }
             if(player.MovementBounds().Intersects(this.Bounds))
             {
                 this.alive = false;

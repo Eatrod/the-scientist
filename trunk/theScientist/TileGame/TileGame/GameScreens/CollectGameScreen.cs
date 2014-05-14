@@ -214,6 +214,11 @@ namespace TileGame.GameScreens
                         SlowFlag = true;
                         explosion.Finished = true;
                     }
+                    else if (explosion.Bounds.Intersects(new Rectangle(johnny.Bounds.X + 10, johnny.Bounds.Y + 10, 30, 50)))
+                    {
+                        johnny.HitFlag = true;
+                        explosion.Finished = true;
+                    }
                     if (explosion.Finished)
                     {
                         renderList.Remove(explosion);
@@ -226,6 +231,11 @@ namespace TileGame.GameScreens
                     bomb.UpdateBomb(gameTime);
                     if (bomb.Bounds.Intersects(new Rectangle(player.Bounds.X + 10, player.Bounds.Y + 10, 30, 50)))
                     {
+                        bomb.Boom = true;
+                    }
+                    if (bomb.Bounds.Intersects(new Rectangle(johnny.Bounds.X + 10, johnny.Bounds.Y + 10, 30, 50)))
+                    {
+                        johnny.HitFlag = true;
                         bomb.Boom = true;
                     }
                     if (bomb.Boom)
@@ -259,8 +269,14 @@ namespace TileGame.GameScreens
                     mole.SearchTowardsTarget(player);
                     if (mole.ThrowBomb)
                     {
-                        BombSprite bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
+                        BombSprite bomb;
+                        int randomnumber = GameRef.random.Next(1, 11);
+                        if(randomnumber <= 8)
+                            bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
                                         new Vector2(player.Origin.X, player.Origin.Y - 40), new Vector2(mole.Position.X + 15, mole.Position.Y + 23));
+                        else
+                            bomb = new BombSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Bomb"),
+                                        new Vector2(johnny.Origin.X, johnny.Origin.Y - 40), new Vector2(mole.Position.X + 15, mole.Position.Y + 23));
                         bomb.potatoExplosionSound = Content.Load<SoundEffect>(@"Sounds/Effects/explosion");
                         BombSprites.Add(bomb);
                         renderList.Add(bomb);
