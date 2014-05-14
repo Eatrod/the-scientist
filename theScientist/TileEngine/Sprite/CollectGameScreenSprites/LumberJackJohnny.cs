@@ -128,7 +128,12 @@ namespace TileEngine.Sprite
                 {
                     elapsedTripped += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                     this.Speed = 0.0f;
-                    if (this.CurrentAnimationName == "MudWalk" || this.CurrentAnimationName == "TrippMud")
+                    if (this.CurrentAnimationName == "MudWalk" ||
+                        this.CurrentAnimationName == "TrippMud" ||
+                        this.CurrentAnimationName == "SwimLeft" ||
+                        this.CurrentAnimationName == "SwimRight" ||
+                        this.CurrentAnimationName == "SwimUp" ||
+                        this.CurrentAnimationName == "SwimDown")
                     {
                         this.CurrentAnimationName = "TrippMud";
                     }
@@ -172,7 +177,7 @@ namespace TileEngine.Sprite
                         {
                             if (AngryFlag)
                             {
-                                this.Speed = 2.0f;
+                                this.Speed = 1.5f;
                                 this.Position += targetedPosition * speed;
                                 UpdateSpriteAnimationSwim(targetedPosition);
                                 this.CurrentAnimation.FramesPerSeconds = 0.10f;
