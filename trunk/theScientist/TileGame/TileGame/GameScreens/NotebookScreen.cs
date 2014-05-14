@@ -63,7 +63,6 @@ namespace TileGame.GameScreens
         #region XNA Method Region
         public override void Initialize()
         {
-            activeDict = taskDict;
             ListOfUnlockedKeys = new List<int>();
             //textRect = new Rectangle(0, 0, 400, 600);
             base.Initialize();
@@ -126,9 +125,9 @@ namespace TileGame.GameScreens
             InsertTextToDictionary(hintDict, 2, "Hint: Now you have the axe, you can use it to figth or chop");
 
             InsertTextToDictionary(taskDict, 0, "");
-            InsertTextToDictionary(taskDict, 1, "Task: Asterix told you to find potato The Belladonna. Check out the abandoned fields in the north west.");
+            InsertTextToDictionary(taskDict, 1, "Task: Find and talk to Asterix.");
             InsertTextToDictionary(taskDict, 2, "Task: You have now the Belladonna potato and should move on to next town.");
-            InsertTextToDictionary(taskDict, 3, "Task: Talk to Asterix.");
+            InsertTextToDictionary(taskDict, 3, "Task: Asterix told you to find potato The Belladonna. Check out the abandoned fields in the north west.");
 
             InsertTextToDictionary(completedDict, 0, "");
             InsertTextToDictionary(completedDict, 1, "Completed: You managed to solve Johns riddle.");
@@ -153,7 +152,8 @@ namespace TileGame.GameScreens
             #region Dict updates
             if (StoryProgress.ProgressLine["asterixTalkedTo"])
             {
-                taskDict[1].Unlocked = true;
+                taskDict[1].Unlocked = false;
+                taskDict[3].Unlocked = true;
                 completedDict[3].Unlocked = true;
             }
             if (StoryProgress.ProgressLine["belladonnaHave"])
@@ -178,6 +178,7 @@ namespace TileGame.GameScreens
             #endregion
 
             #region Section updates
+
             if (InputHandler.KeyReleased(Keys.Up))
             {
                 pageIndex = 0;
@@ -194,15 +195,30 @@ namespace TileGame.GameScreens
             }
             if (sectionHandler == 0)
             {
-                activeDict = taskDict;
+                activeDict.Clear();
+                foreach (var key in taskDict)
+                {
+                    if(taskDict[key.Key].Unlocked)
+                        activeDict.Add(key.Key, key.Value);
+                }
             }
             else if (sectionHandler == 1)
             {
-                activeDict = hintDict;
+                activeDict.Clear();
+                foreach (var key in hintDict)
+                {
+                    if (hintDict[key.Key].Unlocked)
+                        activeDict.Add(key.Key, key.Value);
+                }
             }
             else if (sectionHandler == 2)
             {
-                activeDict = completedDict;
+                activeDict.Clear();
+                foreach (var key in completedDict)
+                {
+                    if (completedDict[key.Key].Unlocked)
+                        activeDict.Add(key.Key, key.Value);
+                }
             }
             #endregion
 

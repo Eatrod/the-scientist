@@ -18,7 +18,7 @@
   <Conversation Name="Innkeeper1">
     <Text>Innkeeper:There you go!</Text>
     <Handlers>
-      <Handler Caption="Continue" Action="EndConversation;SetToTrue:alcoholHave;AddItemCollectedAmount:Money,-5" />
+      <Handler Caption="Continue" Action="EndConversation;SetToTrue:Alcohol;AddItemCollectedAmount:Money,-5" />
     </Handlers>
   </Conversation>
   

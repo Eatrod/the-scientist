@@ -67,7 +67,7 @@
   <Conversation Name="Ignazio5">
     <Text>Ignazio:I'll take that, thank you.</Text>
     <Handlers>
-      <Handler Caption="Take permit" Action="EndConversation;SetToTrue:permitHave;ChangeAnimation:Sleeping" />
+      <Handler Caption="Take permit" Action="EndConversation;SetToTrue:Permit;ChangeAnimation:Sleeping" />
     </Handlers>
   </Conversation>
   
