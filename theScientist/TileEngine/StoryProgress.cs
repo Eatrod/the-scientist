@@ -39,7 +39,7 @@ namespace TileEngine
             AddItemProgressLine("MetalBladeCrossbow", false, "Item");
             AddItemProgressLine("Hookshot", false, "Item");
             AddItemProgressLine("Immortui", false, "Item");
-            AddItemProgressLine("Permit", false, "Item");
+            AddItemProgressLine("Permit", true, "Item");
             AddItemProgressLine("Alcohol", false, "Item");
             AddItemProgressLine("Belladonna", false, "Item");
             //Quests
@@ -49,7 +49,7 @@ namespace TileEngine
             AddItemProgressLine("contestAgainstJohnFinished", false, "Quest");
             AddItemProgressLine("asterixTalkedTo", false, "Quest");
             AddItemProgressLine("lumberjacksTalkedTo", false, "Quest");
-            AddItemProgressLine("leavingTown", false, "Quest");
+            AddItemProgressLine("leavingTown", false, "Flag");
 
             //--
             AddItemProgressLine("CollectMinigame", false, "Minigame");
