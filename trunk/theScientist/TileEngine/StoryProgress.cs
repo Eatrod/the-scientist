@@ -20,6 +20,7 @@ namespace TileEngine
         #endregion
 
         public static Dictionary<string, bool> ProgressLine = new Dictionary<string, bool>();
+        public static Dictionary<string, string> ProgressType = new Dictionary<string, string>();
         static public Dictionary<string, Keys> activeItemsDict = new Dictionary<string, Keys>();
         static public Dictionary<string, int> collectedAmountDict = new Dictionary<string, int>();
 
@@ -28,28 +29,28 @@ namespace TileEngine
             ProgressLine.Clear();
             activeItemsDict.Clear();
             collectedAmountDict.Clear();
-            AddItemProgressLine("asterixTalkedTo", false);
-            AddItemProgressLine("lumberjacksTalkedTo", false);
-            AddItemProgressLine("Axe", false);
-            AddItemProgressLine("Sword", false);
-            AddItemProgressLine("Crossbow", true);
-            AddItemProgressLine("Spear", false);
-            AddItemProgressLine("DOOM-erang", false);
-            AddItemProgressLine("Hammer", false);
-            AddItemProgressLine("MetalBladeCrossbow", false);
-            AddItemProgressLine("Hookshot", false);
-            AddItemProgressLine("treeIsDown", false);
-            AddItemProgressLine("contestAgainstJonnyFinished", false);
-            AddItemProgressLine("contestAgainstJackFinished", false);
-            AddItemProgressLine("contestAgainstJohnFinished", false);
+            AddItemProgressLine("asterixTalkedTo", false, "Quest");
+            AddItemProgressLine("lumberjacksTalkedTo", false, "Quest");
+            AddItemProgressLine("Axe", false, "Item");
+            AddItemProgressLine("Sword", false, "Item");
+            AddItemProgressLine("Crossbow", true, "Item");
+            AddItemProgressLine("Spear", false, "Item");
+            AddItemProgressLine("DOOM-erang", false, "Item");
+            AddItemProgressLine("Hammer", false, "Item");
+            AddItemProgressLine("MetalBladeCrossbow", false, "Item");
+            AddItemProgressLine("Hookshot", false, "Item");
+            AddItemProgressLine("treeIsDown", false, "Quest");
+            AddItemProgressLine("contestAgainstJonnyFinished", false, "Quest");
+            AddItemProgressLine("contestAgainstJackFinished", false, "Quest");
+            AddItemProgressLine("contestAgainstJohnFinished", false, "Quest");
             //Have sektion
-            AddItemProgressLine("immortuiHave", false);
-            AddItemProgressLine("permitHave", false);
-            AddItemProgressLine("alcoholHave", false);
-            AddItemProgressLine("belladonnaHave", false);
+            AddItemProgressLine("immortuiHave", false, "Item");
+            AddItemProgressLine("permitHave", false, "Item");
+            AddItemProgressLine("alcoholHave", false, "Item");
+            AddItemProgressLine("belladonnaHave", false, "Item");
 
             //--
-            AddItemProgressLine("CollectMinigame", false);
+            AddItemProgressLine("CollectMinigame", false, "Minigame");
             //--
 
             AddItemCollectedAmountDict("IronOre", 0);
@@ -65,12 +66,23 @@ namespace TileEngine
             ProgressLine[key] = true;
         }
 
-        private void AddItemProgressLine(string key, bool value)
+        private void AddItemProgressLine(string key, bool value, string type)
         {
             if (!ProgressLine.ContainsKey(key))
+            {
                 ProgressLine.Add(key, value);
+                AddItemProgressType(key, type);
+            }
             else
                 ProgressLine[key] = value;
+        }
+
+        private void AddItemProgressType(string key, string type)
+        {
+            if (!ProgressType.ContainsKey(key))
+                ProgressType.Add(key, type);
+            else
+                ProgressType[key] = type;
         }
 
         private void AddItemCollectedAmountDict(string key, int value)
