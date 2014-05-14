@@ -424,7 +424,7 @@ namespace TileGame.GameScreens
             }
 
             // Non Weapon Items -------------------------
-            if (StoryProgress.ProgressLine["belladonnaHave"] == true)
+            if (StoryProgress.ProgressLine["Belladonna"] == true)
             {
                 GameRef.spriteBatch.Draw(
                         belladonnaImage,
@@ -434,7 +434,7 @@ namespace TileGame.GameScreens
                 belladonnaLabel.Text = "Belladonna";
             }
 
-            if (StoryProgress.ProgressLine["immortuiHave"] == true)
+            if (StoryProgress.ProgressLine["Immortui"] == true)
             {
                 GameRef.spriteBatch.Draw(
                             immortuiImage,
@@ -443,7 +443,7 @@ namespace TileGame.GameScreens
                 immortuiLabel.Text = "Immortui";
             }
 
-            if (StoryProgress.ProgressLine["permitHave"] == true)
+            if (StoryProgress.ProgressLine["Permit"] == true)
             {
                 GameRef.spriteBatch.Draw(
                             permitImage,
@@ -452,7 +452,7 @@ namespace TileGame.GameScreens
                 permitLabel.Text = "Permit";
             }          
 
-            if (StoryProgress.ProgressLine["alcoholHave"] == true)
+            if (StoryProgress.ProgressLine["Alcohol"] == true)
             {
                 GameRef.spriteBatch.Draw(
                             alcoholImage,
