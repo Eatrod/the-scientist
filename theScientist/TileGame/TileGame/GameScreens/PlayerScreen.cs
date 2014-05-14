@@ -68,8 +68,8 @@ namespace TileGame.GameScreens
         Color Charge_Bar_Color;
         bool charging;
 
-        Label CollectMinigamePlayerScoreLabel;
-        Label CollectMinigameNpcScoreLabel;
+        Label CollectMinigamePlayerScoreLabel, CollectMinigameNpcScoreLabel;
+        Texture2D CollectMinigamePlayerPortrait, CollectMinigameNpcPortrait;
         //--
 
         int fire_arrow_counter = 0;
@@ -419,8 +419,11 @@ namespace TileGame.GameScreens
             CollectMinigameNpcScoreLabel = new Label();
             CollectMinigameNpcScoreLabel.Text = "";
             CollectMinigameNpcScoreLabel.Color = Color.Red;
-            CollectMinigameNpcScoreLabel.Position = new Vector2(GraphicsDevice.Viewport.Width - (HUD_size_ref * 10), HUD_size_ref);//(600, 40);
+            CollectMinigameNpcScoreLabel.Position = new Vector2(GraphicsDevice.Viewport.Width - (HUD_size_ref * 9), HUD_size_ref);//(600, 40);
             ControlManager.Add(CollectMinigameNpcScoreLabel);
+
+            CollectMinigamePlayerPortrait = Content.Load<Texture2D>(@"CharacterPotraits\PortraitIgnazio");
+            CollectMinigameNpcPortrait = Content.Load<Texture2D>(@"CharacterPotraits\Anon");
             //--
 
             //BF
@@ -1576,6 +1579,16 @@ namespace TileGame.GameScreens
             {
                 CollectMinigamePlayerScoreLabel.Text = FruitForMiniGameSprite.playerPoints.ToString();
                 CollectMinigameNpcScoreLabel.Text = FruitForMiniGameSprite.npcPoints.ToString();
+
+                spriteBatch.Draw(
+                CollectMinigamePlayerPortrait,
+                new Rectangle(HUD_size_ref * 11, 0, HUD_size_ref * 2, HUD_size_ref * 3), 
+                Color.White);
+
+                spriteBatch.Draw(
+                CollectMinigameNpcPortrait,
+                new Rectangle(GraphicsDevice.Viewport.Width - (HUD_size_ref * 11), 0, HUD_size_ref * 2, HUD_size_ref * 3),
+                Color.White);
             }
 
             spriteBatch.Draw(
