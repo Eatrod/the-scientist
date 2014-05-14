@@ -29,8 +29,7 @@ namespace TileEngine
             ProgressLine.Clear();
             activeItemsDict.Clear();
             collectedAmountDict.Clear();
-            AddItemProgressLine("asterixTalkedTo", false, "Quest");
-            AddItemProgressLine("lumberjacksTalkedTo", false, "Quest");
+            //items
             AddItemProgressLine("Axe", false, "Item");
             AddItemProgressLine("Sword", false, "Item");
             AddItemProgressLine("Crossbow", true, "Item");
@@ -39,15 +38,17 @@ namespace TileEngine
             AddItemProgressLine("Hammer", false, "Item");
             AddItemProgressLine("MetalBladeCrossbow", false, "Item");
             AddItemProgressLine("Hookshot", false, "Item");
+            AddItemProgressLine("Immortui", false, "Item");
+            AddItemProgressLine("Permit", false, "Item");
+            AddItemProgressLine("Alcohol", false, "Item");
+            AddItemProgressLine("Belladonna", false, "Item");
+            //Quests
             AddItemProgressLine("treeIsDown", false, "Quest");
             AddItemProgressLine("contestAgainstJonnyFinished", false, "Quest");
             AddItemProgressLine("contestAgainstJackFinished", false, "Quest");
             AddItemProgressLine("contestAgainstJohnFinished", false, "Quest");
-            //Have sektion
-            AddItemProgressLine("immortuiHave", false, "Item");
-            AddItemProgressLine("permitHave", false, "Item");
-            AddItemProgressLine("alcoholHave", false, "Item");
-            AddItemProgressLine("belladonnaHave", false, "Item");
+            AddItemProgressLine("asterixTalkedTo", false, "Quest");
+            AddItemProgressLine("lumberjacksTalkedTo", false, "Quest");
 
             //--
             AddItemProgressLine("CollectMinigame", false, "Minigame");
@@ -101,11 +102,11 @@ namespace TileEngine
         public void ChangeScriptsForNPCs(NPC npc)
         {
             //Story NPCs
-            if (npc.NPCName == "Bibitur" && ProgressLine["alcoholHave"])
-                npc.ChangeScript("alcoholHave");
-            if (StoryProgress.ProgressLine["permitHave"] && npc.NPCName == "Guard")
-                npc.ChangeScript("permitHave");
-            if (StoryProgress.ProgressLine["permitHave"] && npc.NPCName == "Bibitur")
+            if (npc.NPCName == "Bibitur" && ProgressLine["Alcohol"])
+                npc.ChangeScript("Alcohol");
+            if (StoryProgress.ProgressLine["Permit"] && npc.NPCName == "Guard")
+                npc.ChangeScript("Permit");
+            if (StoryProgress.ProgressLine["Permit"] && npc.NPCName == "Bibitur")
                 npc.script = null;
             if (StoryProgress.collectedAmountDict["Fish"] > 0 && npc.NPCName == "Fisherman")
             {
