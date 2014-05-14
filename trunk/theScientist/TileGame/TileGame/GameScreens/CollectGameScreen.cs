@@ -128,7 +128,7 @@ namespace TileGame.GameScreens
                 player.Speed = 0.0f;
                 if (elapsedStart > delayStart)
                 {
-                    johnny.StopSearch = false;
+                    johnny.StartFlag = false;
                     this.StartFlag = false;
                 }
             }
@@ -288,6 +288,8 @@ namespace TileGame.GameScreens
             //}
             //UnlockGate(cellIndex);
 
+            CheckGameFinished();
+
             base.Update(gameTime);
         }
  
@@ -317,13 +319,16 @@ namespace TileGame.GameScreens
 
         private void CheckGameFinished()
         {
-            if (FruitForMiniGameSprite.npcPoints > 1000)
+            if (FruitForMiniGameSprite.npcPoints >= 1000)
             {
-                
+                johnny.StopFlag = true;
+                //johnny.Speed = 0f;
+                    
             }
-            if (FruitForMiniGameSprite.playerPoints > 1000)
+            if (FruitForMiniGameSprite.playerPoints >= 1000)
             {
-
+                johnny.StopFlag = true;
+                //johnny.Speed = 0f;
             }
         }
 

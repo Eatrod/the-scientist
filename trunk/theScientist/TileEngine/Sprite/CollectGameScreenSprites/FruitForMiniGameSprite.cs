@@ -96,14 +96,16 @@ namespace TileEngine.Sprite
                 this.CurrentAnimationName = "FreshFruit";
                 this.alive = true;
             }
-            //if(npcPoints > 1000)
-            //{
-                
-            //}
-            //if(playerPoints > 1000)
+
+            //if (npcPoints > 1000)
             //{
 
             //}
+            //if (playerPoints > 1000)
+            //{
+
+            //}
+
  	        base.Update(gameTime);
         }
     }
