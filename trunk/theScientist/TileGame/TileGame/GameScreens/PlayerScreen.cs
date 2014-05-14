@@ -67,6 +67,9 @@ namespace TileGame.GameScreens
         Texture2D Bar_BG, Bar_overlay, Charge_Bar, HP_Bar, Stamina_Bar;
         Color Charge_Bar_Color;
         bool charging;
+
+        Label CollectMinigamePlayerScoreLabel;
+        Label CollectMinigameNpcScoreLabel;
         //--
 
         int fire_arrow_counter = 0;
@@ -140,7 +143,7 @@ namespace TileGame.GameScreens
         {
             base.Initialize();
 
-            HUD_size_ref = GameRef.ScreenRectangle.Width / 20;
+            
 
             lifeRect = new Rectangle(0, 0, 100, 20);//(0, 0, 100, 20);//lifebarRectangle
             staminaRect = new Rectangle(0, 0, 100, 20);//staminabarRectangle
@@ -297,8 +300,8 @@ namespace TileGame.GameScreens
             //gameOver = new PictureBox(EndingGameover, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height));
             ControlManager.Add(gameOver);
             gameOver.Visible = false;
-                       
-            
+
+            HUD_size_ref = GameRef.ScreenRectangle.Width / 25;
        
             if(player == null)
             {
@@ -406,6 +409,18 @@ namespace TileGame.GameScreens
 
             Charge_Bar_Color = Color.White;
             charging = false;
+
+            CollectMinigamePlayerScoreLabel = new Label();
+            CollectMinigamePlayerScoreLabel.Text = "";
+            CollectMinigamePlayerScoreLabel.Color = Color.Red;
+            CollectMinigamePlayerScoreLabel.Position = new Vector2(HUD_size_ref * 10, HUD_size_ref);//(300, 40);
+            ControlManager.Add(CollectMinigamePlayerScoreLabel);
+
+            CollectMinigameNpcScoreLabel = new Label();
+            CollectMinigameNpcScoreLabel.Text = "";
+            CollectMinigameNpcScoreLabel.Color = Color.Red;
+            CollectMinigameNpcScoreLabel.Position = new Vector2(GraphicsDevice.Viewport.Width - (HUD_size_ref * 10), HUD_size_ref);//(600, 40);
+            ControlManager.Add(CollectMinigameNpcScoreLabel);
             //--
 
             //BF
@@ -1517,11 +1532,7 @@ namespace TileGame.GameScreens
         {
             //GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            //tileMap.Draw(spriteBatch, camera); 
-
-            //--
-            HUD_size_ref = GameRef.ScreenRectangle.Width / 25;// /20
-            //--
+            //tileMap.Draw(spriteBatch, camera);           
 
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
                 null, null, null, null, camera.TransforMatrix);
@@ -1560,6 +1571,12 @@ namespace TileGame.GameScreens
             //chargeanimation.Draw(spriteBatch);
             chargeanimation.Draw_test(spriteBatch, HUD_size_ref / 8, (HUD_size_ref / 2) * 2 + ((HUD_size_ref / 16) * 7), (HUD_size_ref * 4 / 100) * (int)player.Charge, HUD_size_ref / 2, Charge_Bar_Color);
             DrawItemHUD();
+
+            if(StoryProgress.ProgressLine["CollectMinigame"] == true)
+            {
+                CollectMinigamePlayerScoreLabel.Text = FruitForMiniGameSprite.playerPoints.ToString();
+                CollectMinigameNpcScoreLabel.Text = FruitForMiniGameSprite.npcPoints.ToString();
+            }
 
             spriteBatch.Draw(
                 HP_Bar,
