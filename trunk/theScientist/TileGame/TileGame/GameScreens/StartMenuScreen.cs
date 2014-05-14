@@ -147,7 +147,7 @@ namespace TileGame.GameScreens
             regretStartOver.Size = regretStartOver.SpriteFont.MeasureString(regretStartOver.Text);
 
             startOverText = new Label();
-            startOverText.Text = "Realy start a new story, Smith?";
+            startOverText.Text = "Really start a new story, Smith?";
             startOverText.Size = startOverText.SpriteFont.MeasureString(startOverText.Text);
             
             startOverText.SpriteFont = fontLarge;

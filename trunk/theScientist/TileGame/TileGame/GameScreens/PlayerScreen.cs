@@ -32,6 +32,8 @@ namespace TileGame.GameScreens
         protected Texture2D shadowMap;
         PictureBox miniMap;
         PictureBox backgroundToMinimap;
+        protected PictureBox gameOver;
+        Texture2D EndingGameover;
         Label coordX, coordY;
         bool coordVisible = true;
         RenderTarget2D renderTarget;
@@ -288,6 +290,13 @@ namespace TileGame.GameScreens
             ContentManager Content = Game.Content;
 
             base.LoadContent();
+            gameOver = new PictureBox(
+                Content.Load<Texture2D>("BackGrounds\\Controls"),
+                   GameRef.ScreenRectangle);
+            //EndingGameover = Content.Load<Texture2D>(@"BackGrounds\EndingGameOver");
+            //gameOver = new PictureBox(EndingGameover, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height));
+            ControlManager.Add(gameOver);
+            gameOver.Visible = false;
                        
             
        
@@ -862,16 +871,19 @@ namespace TileGame.GameScreens
 
             if (player.Life <= 0)
             {
-                //player.SetSpritePositionInGameWorld(new Vector2(0, 0));
-                Point startCell;
-                startCell = GameRef.BaseGamePlayScreen.FindCellWithIndexInCurrentTilemap(50, GameRef.PotatoTown);
-                player.SetSpritePositionInGameWorld( new Vector2(startCell.X, startCell.Y));
+                gameOver.Visible = true;
 
-                player.Life = 100;
-                player.areTakingDamage = false;
-                lifeRect = new Rectangle(0, 0, 100, 20);
-                staminaRect = new Rectangle(0, 0, 100, 20);
-                chargeRect = new Rectangle(0, 0, 100, 20);
+
+                //player.SetSpritePositionInGameWorld(new Vector2(0, 0));
+                //Point startCell;
+                //startCell = GameRef.BaseGamePlayScreen.FindCellWithIndexInCurrentTilemap(50, GameRef.PotatoTown);
+                //player.SetSpritePositionInGameWorld( new Vector2(startCell.X, startCell.Y));
+
+                //player.Life = 100;
+                //player.areTakingDamage = false;
+                //lifeRect = new Rectangle(0, 0, 100, 20);
+                //staminaRect = new Rectangle(0, 0, 100, 20);
+                //chargeRect = new Rectangle(0, 0, 100, 20);
 
             }
 
