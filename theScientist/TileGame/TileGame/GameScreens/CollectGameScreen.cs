@@ -33,7 +33,7 @@ namespace TileGame.GameScreens
         private ContentManager Content;
         //TileMap tileMap = new TileMap();
         //Camera camera = new Camera();
-        FruitForMiniGameSprite fruit;
+        public FruitForMiniGameSprite fruit;
         LumberJackJohnny johnny;
         MoleHandlerSprite molehandler;
         private float elapsedSlow;
@@ -121,9 +121,9 @@ namespace TileGame.GameScreens
             SpriteObjectInGameWorld.Add(fruit);
             SpriteObjectInGameWorld.AddRange(SpriteObjects);
             renderList.AddRange(SpriteObjects);
-            
-            
-            
+
+
+            //StoryProgress.ProgressLine["CollectMinigame"] = false;
             
         }
         protected override void LoadContent()

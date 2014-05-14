@@ -18,8 +18,8 @@ namespace TileEngine.Sprite
         private float delayLifeTime;
         private float elapsedLifeTime;
         private bool alive;
-        private float playerPoints;
-        private float npcPoints;
+        static public float playerPoints;
+        static public float npcPoints;
         public bool Alive
         {
             get { return alive; }
@@ -27,8 +27,8 @@ namespace TileEngine.Sprite
         }
         public FruitForMiniGameSprite(Texture2D texture, Random random):base(texture)
         {
-            this.npcPoints = 0.0f;
-            this.playerPoints = 0.0f;
+            npcPoints = 0.0f;
+            playerPoints = 0.0f;
             this.alive = true;
             this.random = random;
             this.delayLifeTime = random.Next(15000, 25000);
@@ -46,7 +46,7 @@ namespace TileEngine.Sprite
         }
         public void CheckForContactWithPlayerOrNPC(AnimatedSprite player, LumberJackJohnny npc)
         {
-            if(this.playerPoints >= 800)
+            if(playerPoints >= 800)
             {
                 npc.AngryFlag = true;
             }
@@ -54,22 +54,22 @@ namespace TileEngine.Sprite
             {
                 this.alive = false;
                 if (this.CurrentAnimationName == "FreshFruit")
-                    this.playerPoints += 100;
+                    playerPoints += 100;
                 else if (this.CurrentAnimationName == "MiddleFruit")
-                    this.playerPoints += 75;
+                    playerPoints += 75;
                 else if (this.CurrentAnimationName == "RottenFruit")
-                    this.playerPoints += 50;
+                    playerPoints += 50;
             }
             else if (npc.MovementBounds().Intersects(this.Bounds))
             {
                 this.alive = false;
                 npc.GotIT = true;
                 if (this.CurrentAnimationName == "FreshFruit")
-                    this.npcPoints += 100;
+                    npcPoints += 100;
                 else if (this.CurrentAnimationName == "MiddleFruit")
-                    this.npcPoints += 75;
+                    npcPoints += 75;
                 else if (this.CurrentAnimationName == "RottenFruit")
-                    this.npcPoints += 50;
+                    npcPoints += 50;
             }
         }
         public override void Update(GameTime gameTime)
