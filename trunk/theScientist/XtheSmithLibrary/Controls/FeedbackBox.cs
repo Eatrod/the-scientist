@@ -67,6 +67,10 @@ namespace XtheSmithLibrary.Controls
                             this.text = "You have completed the task: ";
                         else if (StoryProgress.ProgressType[key.Key] == "Item")
                             this.text = "You now have the item: ";
+                        else
+                        {
+                            return;
+                        }
                         this.currentKey = key.Key;
                         isShowing = true;
                     }
