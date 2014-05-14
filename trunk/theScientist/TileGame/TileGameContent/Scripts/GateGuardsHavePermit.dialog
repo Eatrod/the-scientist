@@ -18,7 +18,7 @@
   <Conversation Name="Guard1">
     <Text>Guard:Ah yes, very well, then you may pass!</Text>
     <Handlers>
-      <Handler Caption="Continue" Action="EndConversation" />
+      <Handler Caption="Continue" Action="SetToTrue:leavingTown;EndConversation" />
     </Handlers>
   </Conversation>
 
