@@ -2089,7 +2089,7 @@ namespace TileGame.GameScreens
                     {
                         SpriteObjectInGameWorld.Remove(s);
                         renderList.Remove(s);
-                        StoryProgress.ProgressLine["belladonnaHave"] = true;
+                        StoryProgress.ProgressLine["Belladonna"] = true;
 
                         //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
                         break;
@@ -2099,7 +2099,7 @@ namespace TileGame.GameScreens
                     //{
                     //    SpriteObjectInGameWorld.Remove(s);
                     //    renderList.Remove(s);
-                    //    StoryProgress.ProgressLine["immortuiHave"] = true;
+                    //    StoryProgress.ProgressLine["Immortui"] = true;
 
                     //    Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
                     //    break;
