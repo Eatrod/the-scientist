@@ -24,7 +24,7 @@ namespace TileEngine.Sprite
         public bool HitFlag;
         private bool gotIT;
         private bool slowWalk;
-        private float delayCelebration;
+        public float delayCelebration;
         private float elapsedCelebration;
         public bool StartFlag;
         public bool StopFlag;
@@ -73,6 +73,7 @@ namespace TileEngine.Sprite
             //FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);
             //FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
             //FrameAnimation nothing = new FrameAnimation(1, 0, 0, 0, 0);
+            FrameAnimation losing = new FrameAnimation(6, 50, 80, 0, 880);
             FrameAnimation rise = new FrameAnimation(39,50,80,0,800);
             FrameAnimation monkey = new FrameAnimation(12, 50, 80, 450, 0);
             FrameAnimation celebration = new FrameAnimation(8, 50, 80, 0, 400);
@@ -89,6 +90,7 @@ namespace TileEngine.Sprite
             FrameAnimation trippLeft = new FrameAnimation(4, 50, 80, 600, 400);
             FrameAnimation trippMud = new FrameAnimation(1, 61, 80, 488, 160);
 
+            this.Animations.Add("Losing", losing);
             this.Animations.Add("Rise", rise);
             this.Animations.Add("SwimUp", swimUp);
             this.Animations.Add("SwimRight", swimRight);
@@ -201,14 +203,14 @@ namespace TileEngine.Sprite
                         {
                             if (AngryFlag)
                             {
-                                this.Speed = 1.5f;
+                                this.Speed = 2f;
                                 this.Position += targetedPosition * speed;
                                 UpdateSpriteAnimationSwim(targetedPosition);
                                 this.CurrentAnimation.FramesPerSeconds = 0.10f;
                             }
                             else
                             {
-                                Speed = 1f;
+                                Speed = 1.5f;
                                 this.CurrentAnimationName = "MudWalk";
                                 this.CurrentAnimation.FramesPerSeconds = 0.20f;
                             }
