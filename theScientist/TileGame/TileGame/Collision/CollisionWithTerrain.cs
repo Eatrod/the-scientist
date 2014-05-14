@@ -407,7 +407,7 @@ namespace TileGame.Collision
             int colIndex = screen.tileMap.CollisionLayer.GetCellIndex(cell);
 
             if (colIndex == 2)
-                return motion * .2f;
+                return motion * .5f;
 
             return motion;
         }
