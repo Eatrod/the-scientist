@@ -472,7 +472,17 @@ namespace TileGame.GameScreens
             //--
             if (InputHandler.KeyReleased(Keys.Space))
             {
-                PlayerScreen.PickUp(gameTime, SpriteObjectInGameWorld, player, SpriteObject, playerprojectiles, renderList, AnimatedSpriteObject, pickupableobjects);
+                if (gameOver.Visible)
+                {
+                    StateManager.PushState(GameRef.StartMenuScreen);
+                    GameRef.firstRun = true;
+                    gameOver.Visible = false;
+
+                }
+                else 
+                    PlayerScreen.PickUp(gameTime, SpriteObjectInGameWorld, player, SpriteObject, playerprojectiles, renderList, AnimatedSpriteObject, pickupableobjects);
+
+                
             }
             //--
             #region Björn NPC

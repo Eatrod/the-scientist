@@ -14,7 +14,6 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
 {
     public class NPC_Neutral_Critters_Cow : NPC_Neutral_Critters
     {
-        int randomDirection;
 
         public NPC_Neutral_Critters_Cow(Texture2D texture, Script script, Random random) : base(texture, script)
         {
@@ -88,7 +87,7 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
                     (float)Math.Sin(MathHelper.ToRadians(-direction)));
 
                 UpdateSpriteAnimation(motion);
-                this.speed = 0.01f;
+                this.speed = 0.1f;
                 Position += motion * speed;
                 base.Update(gameTime);
             }
@@ -119,6 +118,7 @@ namespace TileEngine.Sprite.Npc.NPC_Neutral
         public void GetRandomDirection(GameTime gameTime)
         {
             elapsedDirection += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
             if (Vector2.Distance(StartingPosition, Position) > WalkingCircle)
             {
                 direction += 180;
