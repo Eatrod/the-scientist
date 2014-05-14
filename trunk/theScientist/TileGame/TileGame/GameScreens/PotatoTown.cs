@@ -141,11 +141,14 @@ namespace TileGame.GameScreens
             }
             
             SpriteObjectInGameWorld.Clear();
+            npcs.Clear();
             renderList.Clear();
             renderList.Add(player);
             SpriteObjectInGameWorld.AddRange(AnimatedSpriteObject);
             SpriteObjectInGameWorld.AddRange(pickupableobjects);            
-            SpriteObjectInGameWorld.AddRange(SpriteObject);            
+            SpriteObjectInGameWorld.AddRange(SpriteObject);
+
+            npcs.AddRange(AnimatedSpriteObject);
             //SpriteObjectInGameWorld.AddRange(NPCFightingFarmers);
             //SpriteObjectInGameWorld.AddRange(NPCPatrollingGuards);
             renderList.AddRange(SpriteObject);
