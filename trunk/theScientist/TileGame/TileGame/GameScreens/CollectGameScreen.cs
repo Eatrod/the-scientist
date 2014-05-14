@@ -148,7 +148,7 @@ namespace TileGame.GameScreens
                     player.Speed = 3.5f;
             }
         
-                if (!StartFlag)
+                if (!StartFlag && !johnny.StopFlag)
                 {
                     if (molehandler.SpawnFlag)
                     {
