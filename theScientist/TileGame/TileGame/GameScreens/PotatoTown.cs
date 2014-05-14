@@ -474,9 +474,13 @@ namespace TileGame.GameScreens
             {
                 if (gameOver.Visible)
                 {
-                    StateManager.PushState(GameRef.StartMenuScreen);
                     GameRef.firstRun = true;
                     gameOver.Visible = false;
+                    //InputHandler.Flush();
+                    GameRef.StartMenuScreen.SwitchBackToOriginalMenu();
+                    StateManager.PushState(GameRef.StartMenuScreen);
+                    
+                    return;
 
                 }
                 else 
