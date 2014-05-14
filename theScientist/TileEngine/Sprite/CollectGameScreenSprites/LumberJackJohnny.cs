@@ -26,7 +26,8 @@ namespace TileEngine.Sprite
         private bool slowWalk;
         private float delayCelebration;
         private float elapsedCelebration;
-        public bool StopSearch;
+        public bool StartFlag;
+        public bool StopFlag;
         public bool AngryFlag;
         public bool SlowWalk
         {
@@ -54,7 +55,8 @@ namespace TileEngine.Sprite
             this.elapsedTripped = 0.0f;
             this.delayTripped = 2000f;
             this.HitFlag = false;
-            this.StopSearch = true;
+            this.StartFlag = true;
+            this.StopFlag = false;
             this.delayCelebration = 2000f;
             this.elapsedCelebration = 0.0f;
             this.slowWalk = false;
@@ -117,7 +119,7 @@ namespace TileEngine.Sprite
         }
         public override void Update(GameTime gameTime)
         {
-            if (this.StopSearch)
+            if (this.StartFlag)
             {
                 if(this.CurrentAnimationName != "Monkey")
                 {
@@ -130,9 +132,14 @@ namespace TileEngine.Sprite
                     this.CurrentAnimation.FramesPerSeconds = 0.10f;
                 }
             }
+            else if (StopFlag)
+            {
+                this.CurrentAnimationName = "Monkey";
+                this.CurrentAnimation.FramesPerSeconds = 0.10f;
+            }
             else
             {
-               
+                
                 
                 if (HitFlag)
                 {
