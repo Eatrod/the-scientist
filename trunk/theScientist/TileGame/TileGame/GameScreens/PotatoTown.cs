@@ -295,7 +295,7 @@ namespace TileGame.GameScreens
             guard = new NPC_Story_GuardCaptain(Content.Load<Texture2D>("Sprite/NPCGuardCaptain"), Content.Load<Script>("Scripts/DrunkGuard"), Content.Load<Texture2D>("CharacterPotraits/Bibitur"), "Bibitur");
             guard.scriptDict.Add("Alcohol", Content.Load<Script>("Scripts/DrunkGuardHaveAlcohol"));
             guard.Origionoffset = new Vector2(25, 65);
-            guard.SetSpritePositionInGameWorld(new Vector2(64, 13));
+            guard.SetSpritePositionInGameWorld(new Vector2(101, 40));
             AnimatedSpriteObject.Add(guard);
             NpcStoryList.Add(guard);
 
@@ -316,7 +316,7 @@ namespace TileGame.GameScreens
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/NPCInkeeper"), Content.Load<Script>("Scripts/InnkeeperNoMoney"), Content.Load<Texture2D>("CharacterPotraits/Innkeeper"), "Innkeeper");
             npcstory.scriptDict.Add("moneyHave", Content.Load<Script>("Scripts/Innkeeper"));
             npcstory.Origionoffset = new Vector2(25, 65);
-            npcstory.SetSpritePositionInGameWorld(new Vector2(62, 13));
+            npcstory.SetSpritePositionInGameWorld(new Vector2(80, 72));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
