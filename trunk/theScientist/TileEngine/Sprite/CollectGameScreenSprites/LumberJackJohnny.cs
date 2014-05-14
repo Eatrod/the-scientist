@@ -181,7 +181,6 @@ namespace TileEngine.Sprite
                                 this.Position += targetedPosition * speed;
                                 UpdateSpriteAnimationSwim(targetedPosition);
                                 this.CurrentAnimation.FramesPerSeconds = 0.10f;
-                                //eyooo
                             }
                             else
                             {

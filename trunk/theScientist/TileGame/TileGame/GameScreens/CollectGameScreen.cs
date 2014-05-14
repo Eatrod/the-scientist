@@ -190,7 +190,7 @@ namespace TileGame.GameScreens
                     }
                 }
                 else
-                    player.Speed = 3.0f;
+                    player.Speed = 3.5f;
             }
         
                 if (!StartFlag)
@@ -249,7 +249,7 @@ namespace TileGame.GameScreens
                             renderList.Add(explosion);
                         }
                         int randomnumber = GameRef.random.Next(1, 11);
-                        if (randomnumber <= 3)
+                        if (randomnumber <= 5)
                         {
                             MoleSprite mole = new MoleSprite(Content.Load<Texture2D>("Sprite/Bjorn_Try_Mole"),
                                 bomb.Position);
