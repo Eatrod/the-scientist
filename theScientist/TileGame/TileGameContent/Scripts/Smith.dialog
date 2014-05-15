@@ -1,0 +1,26 @@
+﻿<Converstaions>
+
+  <Conversation Name="Greeting">
+    <Text>Smith:Hello you here to trade som ore?</Text>
+    <Handlers>
+      <Handler Caption="Trade" Action="StartConversation:Ignazio1" />
+      <Handler Caption="Leave" Action="StartConversation:Ignazio2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Ignazio1">
+    <Text>Ignazio: Yes</Text>
+    <Handlers>
+      <Handler Caption="Trade" Action="StartConversation:Ignazio1" />
+      <Handler Caption="Leave" Action="StartConversation:Ignazio2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Ignazio2">
+    <Text>Ignazio:Not now</Text>
+    <Handlers>
+      <Handler Caption="Leave" Action="EndConversation" />
+    </Handlers>
+  </Conversation>
+  
+</Converstaions>
