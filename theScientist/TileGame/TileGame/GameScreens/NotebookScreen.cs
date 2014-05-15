@@ -121,19 +121,24 @@ namespace TileGame.GameScreens
             ControlManager.Add(rightText2);
 
             InsertTextToDictionary(hintDict, 0, "");
-            InsertTextToDictionary(hintDict, 1, "Hint: You need an official permit to leave the town");
-            InsertTextToDictionary(hintDict, 2, "Hint: Now you have the axe, you can use it to figth or chop");
+            InsertTextToDictionary(hintDict, 1, "Hint: You need an official permit to leave the town.");
+            InsertTextToDictionary(hintDict, 2, "Hint: Now you have the axe, you can use it to figth or chop!");
+            InsertTextToDictionary(hintDict, 3, "Hint: Some guards like alchohol.");
 
             InsertTextToDictionary(taskDict, 0, "");
             InsertTextToDictionary(taskDict, 1, "Task: Find and talk to Asterix.");
             InsertTextToDictionary(taskDict, 2, "Task: You have now the Belladonna potato and should move on to next town.");
             InsertTextToDictionary(taskDict, 3, "Task: Asterix told you to find potato The Belladonna. Check out the abandoned fields in the north west.");
+            InsertTextToDictionary(taskDict, 4, "Task: Rescue Ariels fish friends.");
+            InsertTextToDictionary(taskDict, 5, "Task: Retrive a valid permit.");
 
             InsertTextToDictionary(completedDict, 0, "");
             InsertTextToDictionary(completedDict, 1, "Completed: You managed to solve Johns riddle.");
-            InsertTextToDictionary(completedDict, 2, "Completed: You have aquired a valid permit");
-            InsertTextToDictionary(completedDict, 3, "Completed: You talked to Asterix");
-            InsertTextToDictionary(completedDict, 4, "Completed: You collected the Belladona");
+            InsertTextToDictionary(completedDict, 2, "Completed: You managed to beat Johnnys challenge.");
+            InsertTextToDictionary(completedDict, 3, "Completed: You managed to Defeat Jack.");
+            InsertTextToDictionary(completedDict, 4, "Completed: You have aquired a valid permit.");
+            InsertTextToDictionary(completedDict, 5, "Completed: You talked to Asterix.");
+            InsertTextToDictionary(completedDict, 6, "Completed: You collected the Belladona.");
 
 
             hintDict[0].Unlocked = true;
@@ -165,6 +170,14 @@ namespace TileGame.GameScreens
             if (StoryProgress.ProgressLine["contestAgainstJohnFinished"])
             {
                 completedDict[1].Unlocked = true;
+            }
+            if (StoryProgress.ProgressLine["contestAgainstJohnnyFinished"])
+            {
+                completedDict[2].Unlocked = true;
+            }
+            if (StoryProgress.ProgressLine["contestAgainstJackFinished"])
+            {
+                completedDict[3].Unlocked = true;
             }
 
             if (StoryProgress.ProgressLine["Permit"])
