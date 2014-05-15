@@ -131,6 +131,7 @@ namespace TileGame.GameScreens
             InsertTextToDictionary(taskDict, 3, "Task: Asterix told you to find potato The Belladonna. Check out the abandoned fields in the north west.");
             InsertTextToDictionary(taskDict, 4, "Task: Rescue Ariels fish friends.");
             InsertTextToDictionary(taskDict, 5, "Task: Retrive a valid permit.");
+            InsertTextToDictionary(taskDict, 6, "Task: Cut down the tree.");
 
             InsertTextToDictionary(completedDict, 0, "");
             InsertTextToDictionary(completedDict, 1, "Completed: You managed to solve Johns riddle.");
@@ -139,6 +140,7 @@ namespace TileGame.GameScreens
             InsertTextToDictionary(completedDict, 4, "Completed: You have aquired a valid permit.");
             InsertTextToDictionary(completedDict, 5, "Completed: You talked to Asterix.");
             InsertTextToDictionary(completedDict, 6, "Completed: You collected the Belladona.");
+            InsertTextToDictionary(completedDict, 7, "Completed: You cut down the tree.");
 
 
             hintDict[0].Unlocked = true;
@@ -155,21 +157,29 @@ namespace TileGame.GameScreens
             base.Update(gameTime);
 
             #region Dict updates
+
+            if (StoryProgress.ProgressLine["treeIsDown"])
+            {
+                completedDict[7].Unlocked = true;
+                taskDict[6].Unlocked = false;
+            }
             if (StoryProgress.ProgressLine["asterixTalkedTo"])
             {
                 taskDict[1].Unlocked = false;
                 taskDict[3].Unlocked = true;
                 completedDict[3].Unlocked = true;
             }
-            if (StoryProgress.ProgressLine["guardsTalkedTo"])
+            if (StoryProgress.ProgressLine["gateGuardsTalkedTo"])
             {
                 hintDict[3].Unlocked = true;
                 taskDict[5].Unlocked = true;
+                taskDict[2].Unlocked = false;
             }
             if (StoryProgress.ProgressLine["Belladonna"])
             {
                 taskDict[1].Unlocked = false;
                 taskDict[2].Unlocked = true;
+                taskDict[3].Unlocked = false;
                 completedDict[4].Unlocked = true;
             }
             if (StoryProgress.ProgressLine["contestAgainstJohnFinished"])
