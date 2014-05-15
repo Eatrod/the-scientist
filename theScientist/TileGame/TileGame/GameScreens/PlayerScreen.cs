@@ -560,13 +560,13 @@ namespace TileGame.GameScreens
 
             if (!ActiveConversation)
             {
-                if (InputHandler.KeyDown(Keys.Up))
+                if (InputHandler.KeyDown(Keys.Up) && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
                     motion.Y -= 2;
-                if (InputHandler.KeyDown(Keys.Down))
+                if (InputHandler.KeyDown(Keys.Down) && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
                     motion.Y += 2;
-                if (InputHandler.KeyDown(Keys.Left))
+                if (InputHandler.KeyDown(Keys.Left) && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
                     motion.X -= 2;
-                if (InputHandler.KeyDown(Keys.Right))
+                if (InputHandler.KeyDown(Keys.Right) && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
                     motion.X += 2;
 
             }
@@ -608,6 +608,7 @@ namespace TileGame.GameScreens
                     if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >= 0) && !player.shotFired && !charging)
                     {
                         player.oldAnimation = player.CurrentAnimationName;
+                        motion = Vector2.Zero;
                         player.shotFired = true;
                         player.normalArrow = true;
                         UpdateBowAttackAnimaition();
@@ -617,6 +618,7 @@ namespace TileGame.GameScreens
                     if (InputHandler.KeyReleased(Keys.W) && (player.Stamina - 50 > 0) && !player.shotFired && !charging)
                     {
                         player.oldAnimation = player.CurrentAnimationName;
+                        motion = Vector2.Zero;
                         player.shotFired = true;
                         player.fireArrow = true;
                         UpdateBowAttackAnimaition();
@@ -626,6 +628,7 @@ namespace TileGame.GameScreens
                     if (InputHandler.KeyReleased(Keys.E) && (player.Stamina - 40 > 0) && !player.shotFired && !charging)
                     {
                         player.oldAnimation = player.CurrentAnimationName;
+                        motion = Vector2.Zero;
                         player.shotFired = true;
                         player.multishotArrow = true;
                         UpdateBowAttackAnimaition();
@@ -649,6 +652,7 @@ namespace TileGame.GameScreens
                         if (player.Charge == 100 && (player.Stamina - 30) > 0 && !player.shotFired)
                         {
                             player.oldAnimation = player.CurrentAnimationName;
+                            motion = Vector2.Zero;
                             player.shotFired = true;
                             player.multishotFireArrow = true;
                             UpdateBowAttackAnimaition();
@@ -657,6 +661,7 @@ namespace TileGame.GameScreens
                         else if ((player.Stamina - 20) > 0 && !player.shotFired)
                         {
                             player.oldAnimation = player.CurrentAnimationName;
+                            motion = Vector2.Zero;
                             player.shotFired = true;
                             player.normalArrow = true;
                             UpdateBowAttackAnimaition();                           
@@ -686,6 +691,7 @@ namespace TileGame.GameScreens
                     {
                         player.oldAnimation = player.CurrentAnimationName;
                         player.meleeAttackStart = true;
+                        motion = Vector2.Zero;
                         UpdateAxeStartAttackAnimaition();
                         
                     }
