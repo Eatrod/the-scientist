@@ -1,22 +1,22 @@
 ﻿<Converstaions>
 
   <Conversation Name="Greeting">
-    <Text>Fisherman:Hey you here to sell some pesci?</Text>
+    <Text>Fisherman:You can you save my fish friends the bandits kidnapped?</Text>
     <Handlers>
-      <Handler Caption="Sell fishes" Action="StartConversation:Ignazio1" />
+      <Handler Caption="Countinue" Action="StartConversation:Ignazio1" />
       <Handler Caption="Leave" Action="StartConversation:Ignazio2" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Ignazio1">
-    <Text>Ignazio:Yes, I have them here.</Text>
+    <Text>Ignazio:Let me think about it.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Fisherman1" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Fisherman1">
-    <Text>Fisherman:You try to desrisoro me? You dont have any fishes!</Text>
+    <Text>Fisherman:Oh thank you!</Text>
     <Handlers>
       <Handler Caption="Continue" Action="EndConversation" />
     </Handlers>
