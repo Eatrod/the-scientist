@@ -369,6 +369,12 @@
       <Importer>ScriptImporter</Importer>
       <Processor>ScriptProcessor</Processor>
     </Compile>
+    <Compile Include="Scripts\Smith.dialog">
+      <SubType>Designer</SubType>
+      <Name>Smith</Name>
+      <Importer>ScriptImporter</Importer>
+      <Processor>ScriptProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tiles\Stonewall0000.png">

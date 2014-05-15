@@ -55,7 +55,7 @@ namespace TileEngine
 
             AddItemCollectedAmountDict("IronOre", 0);
             AddItemCollectedAmountDict("Money", 0);
-            AddItemCollectedAmountDict("Fish", 5);
+            AddItemCollectedAmountDict("Fish", 0);
         }
 
 
