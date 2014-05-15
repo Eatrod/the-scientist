@@ -133,8 +133,10 @@ namespace TileGame.GameScreens
             {
                 elapsedStart += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 player.SetSpritePositionInGameWorld(new Vector2(32, 28));
+                player.MiniGameWait = true;
                 if (elapsedStart > delayStart)
                 {
+                    player.MiniGameWait = false;
                     johnny.StartFlag = false;
                     this.StartFlag = false;
                     elapsedStart = 0.0f;

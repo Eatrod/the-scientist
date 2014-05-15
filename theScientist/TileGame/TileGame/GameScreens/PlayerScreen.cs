@@ -565,13 +565,13 @@ namespace TileGame.GameScreens
 
             if (!ActiveConversation)
             {
-                if (InputHandler.KeyDown(Keys.Up) && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
+                if (InputHandler.KeyDown(Keys.Up) && !player.MiniGameWait && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
                     motion.Y -= 2;
-                if (InputHandler.KeyDown(Keys.Down) && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
+                if (InputHandler.KeyDown(Keys.Down) && !player.MiniGameWait && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
                     motion.Y += 2;
-                if (InputHandler.KeyDown(Keys.Left) && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
+                if (InputHandler.KeyDown(Keys.Left) && !player.MiniGameWait && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
                     motion.X -= 2;
-                if (InputHandler.KeyDown(Keys.Right) && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
+                if (InputHandler.KeyDown(Keys.Right) && !player.MiniGameWait && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
                     motion.X += 2;
 
             }
