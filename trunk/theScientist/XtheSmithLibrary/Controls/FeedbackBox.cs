@@ -29,13 +29,6 @@ namespace XtheSmithLibrary.Controls
             this.rectangle = rectangle;
             this.texture = texture;
             dictionary = new Dictionary<string,bool>();
-            /*
-            this.dictionary.Add("Axe", false);
-            this.dictionary.Add("Johns riddle", false);
-            this.dictionary.Add("Talked to Asterix", false);
-            this.dictionary.Add("Permit", false);
-            this.dictionary.Add("Belladonna", false);*/
-            //this.dictionary = StoryProgress.ProgressLine;
             foreach (var key in StoryProgress.ProgressLine)
             {
                 this.dictionary.Add(key.Key,key.Value);
@@ -55,8 +48,7 @@ namespace XtheSmithLibrary.Controls
         {
             if (isShowing)
                 elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //TODO: Hitta ett sätt att implementera den här lösningen (förutsätter att this.dictionary=StoryProgress.ProgressLine)
-            //Det här nu officela lösningen!
+
             foreach (var key in dictionary)
             {
                 if (StoryProgress.ProgressLine.ContainsKey(key.Key))
@@ -87,30 +79,6 @@ namespace XtheSmithLibrary.Controls
             {
                 this.text = "You now have the item: ";
                 this.type = "Axe";
-                isShowing = true;
-            }
-            if (StoryProgress.ProgressLine["permitHave"] && dictionary["Permit"] == false && isShowing == false)
-            {
-                this.text = "You now have the item: ";
-                this.type = "Permit";
-                isShowing = true;
-            }
-            if (StoryProgress.ProgressLine["contestAgainstJohnFinished"] && dictionary["Johns riddle"] == false && isShowing == false)
-            {
-                this.text = "You have completed the task: ";
-                this.type = "Johns riddle";
-                isShowing = true;
-            }
-            if (StoryProgress.ProgressLine["asterixTalkedTo"] && dictionary["Talked to Asterix"] == false && isShowing == false)
-            {
-                this.text = "You have completed the task: ";
-                this.type = "Talked to Asterix";
-                isShowing = true;
-            }
-            if (StoryProgress.ProgressLine["belladonnaHave"] && dictionary["Belladonna"] == false && isShowing == false)
-            {
-                this.text = "You now have the item: ";
-                this.type = "Belladonna";
                 isShowing = true;
             }*/
         }
