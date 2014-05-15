@@ -52,11 +52,14 @@ namespace TileGame
         public GamePlayScreen2 GamePlayScreen2;
         public CollectGameScreen CollectGameScreen;
         public InventoryScreen InventoryScreen;
+        public EndingScreen EndingScreen;
 
         public string lastGameScreen;
         public Vector2 playerPosition;
         public float playerLife;
         public float playerStamina;
+
+        public InputHandler inputHandler;
         
 
         #endregion
@@ -88,7 +91,9 @@ namespace TileGame
 
             Content.RootDirectory = "Content";
 
-            Components.Add(new InputHandler(this));
+            inputHandler = new InputHandler(this);
+            //Components.Add(new InputHandler(this));
+            Components.Add(inputHandler);
 
             stateManager = new GameStateManager(this);
             Components.Add(stateManager);
@@ -104,6 +109,7 @@ namespace TileGame
             //--
             BaseGamePlayScreen = new PlayerScreen(this, stateManager);
             InventoryScreen = new InventoryScreen(this, stateManager);
+            EndingScreen = new EndingScreen(this, stateManager);
             stateManager.ChangeState(TitleScreen);
             gamePlayScreens.Add(PotatoTown);
             gamePlayScreens.Add(GamePlayScreen2);

@@ -33,7 +33,7 @@ namespace TileGame.GameScreens
         PictureBox miniMap;
         PictureBox backgroundToMinimap;
         protected PictureBox gameOver;
-        Texture2D EndingGameover;
+        
         Label coordX, coordY;
         bool coordVisible = true;
         RenderTarget2D renderTarget;
@@ -300,10 +300,12 @@ namespace TileGame.GameScreens
             gameOver = new PictureBox(
                 Content.Load<Texture2D>("BackGrounds\\EndingGameOver"),
                    GameRef.ScreenRectangle);
+            
             //EndingGameover = Content.Load<Texture2D>(@"BackGrounds\EndingGameOver");
             //gameOver = new PictureBox(EndingGameover, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height));
             ControlManager.Add(gameOver);
             gameOver.Visible = false;
+            
 
             HUD_size_ref = GameRef.ScreenRectangle.Width / 25;
        
@@ -936,6 +938,14 @@ namespace TileGame.GameScreens
             UpdateItemHUD(gameTime);
 
             base.Update(gameTime);
+
+            if (StoryProgress.ProgressLine["leavingTown"] && !ActiveConversation &&
+                StoryProgress.ProgressLine["Belladonna"] && StoryProgress.ProgressLine["Crossbow"])
+            //if (StoryProgress.ProgressLine["leavingTown"] && !ActiveConversation )
+            {
+                
+                StateManager.PushState(GameRef.EndingScreen);
+            }
         }
 
         private void ChainAxe(ContentManager Content, Vector2 motion)

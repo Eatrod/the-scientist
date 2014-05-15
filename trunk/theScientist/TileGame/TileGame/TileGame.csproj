@@ -86,6 +86,7 @@
     <Compile Include="GameScreens\PotatoTown.cs" />
     <Compile Include="GameScreens\NotebookScreen.cs" />
     <Compile Include="GameScreens\StartMenuScreen.cs" />
+    <Compile Include="GameScreens\EndingScreen.cs" />
     <Compile Include="GameScreens\TitleScreen.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MiniMap.cs" />
