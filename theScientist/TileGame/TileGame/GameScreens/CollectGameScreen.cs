@@ -345,6 +345,9 @@ namespace TileGame.GameScreens
                     FruitForMiniGameSprite.playerPoints = 0;
                     StoryProgress.ProgressLine["CollectMinigame"] = false;
                     StoryProgress.ProgressLine["contestAgainstJonnyFinished"] = true;
+                    johnny = new LumberJackJohnny(Content.Load<Texture2D>("Sprite/Bjorn_Try_Johnny"), GameRef.random);
+                    this.StartFlag = true;
+                    fruit.Reset();
                 }
             }
             if (FruitForMiniGameSprite.playerPoints >= 1000)
