@@ -153,6 +153,7 @@ namespace TileGame.GameScreens
             staminaRect = new Rectangle(0, 0, 100, 20);//staminabarRectangle
             chargeRect = new Rectangle(0, 0, 100, 20); //chargeRectangle
 
+
             FrameAnimation down = new FrameAnimation(8, 50, 80, 0, 0);
             if(!player.Animations.ContainsKey("Down"))
                 player.Animations.Add("Down", down);
@@ -254,6 +255,10 @@ namespace TileGame.GameScreens
             FrameAnimation pickupup = new FrameAnimation(3, 50, 80, 450, 240);
             if (!player.Animations.ContainsKey("PickupUp"))
                 player.Animations.Add("PickupUp", pickupup);
+
+            FrameAnimation captainMorgan = new FrameAnimation(1, 50, 80, 0, 320);
+            if (!player.Animations.ContainsKey("CaptainMorgan"))
+                player.Animations.Add("CaptainMorgan", captainMorgan);
 
 
             player.CurrentAnimationName = "Down";

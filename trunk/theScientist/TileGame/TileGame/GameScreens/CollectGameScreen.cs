@@ -134,6 +134,7 @@ namespace TileGame.GameScreens
                 elapsedStart += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 player.SetSpritePositionInGameWorld(new Vector2(32, 28));
                 player.MiniGameWait = true;
+                player.CurrentAnimationName = "CaptainMorgan";
                 if (elapsedStart > delayStart)
                 {
                     player.MiniGameWait = false;
