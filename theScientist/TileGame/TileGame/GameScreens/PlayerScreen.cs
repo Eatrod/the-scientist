@@ -288,6 +288,8 @@ namespace TileGame.GameScreens
                 chargeanimation.Animations.Add("ChargeBar", chargebar);
             chargeanimation.CurrentAnimationName = "ChargeBar";
 
+            player.meleeAttackPossible = true;
+
         }
         protected override void LoadContent()
         {
@@ -676,9 +678,9 @@ namespace TileGame.GameScreens
                 key_string = key_string.Replace('D', ' ');
                 key_number = Convert.ToInt32(key_string);
                 if (activeItemBackgroundColor[key_number - 1] == Color.White)
-                {                   
+                {
 
-                    if (InputHandler.KeyDown(Keys.Q) && !player.meleeAttackStart && (player.Stamina - 20 >= 0) || InputHandler.KeyDown(Keys.W) && !player.meleeAttackStart && (player.Stamina - 50 >= 0))
+                    if (InputHandler.KeyDown(Keys.Q) && !player.meleeAttackStart && (player.Stamina - 20 >= 0) && player.meleeAttackPossible || InputHandler.KeyDown(Keys.W) && !player.meleeAttackStart && (player.Stamina - 50 >= 0) && player.meleeAttackPossible)
                     {
                         player.oldAnimation = player.CurrentAnimationName;
                         player.meleeAttackStart = true;
@@ -687,9 +689,10 @@ namespace TileGame.GameScreens
                     }
                                                             
                     
-                    if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >= 0) && player.meleeAttackStart)
+                    if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >= 0) && player.meleeAttackStart && player.meleeAttackPossible)
                     {
                         player.meleeAttackStart = false;
+                        player.meleeAttackPossible = false;
                         player.meleeAttackFinish = true;
                         UpdateAxeFinishAttackAnimaition();
 
@@ -700,7 +703,7 @@ namespace TileGame.GameScreens
 
                         if (player.CurrentAnimationName == "AxeFinishRight")
                         {
-                            player.Position.X -= 27;
+                            player.Position.X -= 25;
                         }
 
                         
@@ -720,9 +723,10 @@ namespace TileGame.GameScreens
                         axeSound.Play();
                     }
 
-                    if (InputHandler.KeyReleased(Keys.W) && (player.Stamina - 40 >= 0) && player.meleeAttackStart)
+                    if (InputHandler.KeyReleased(Keys.W) && (player.Stamina - 40 >= 0) && player.meleeAttackStart && player.meleeAttackPossible)
                     {
                         player.meleeAttackStart = false;
+                        player.meleeAttackPossible = false;
                         player.meleeAttackFinish = true;
                         player.meleeAttackSpinAxe = true;
                         UpdateAxeFinishAttackAnimaition();
@@ -734,7 +738,7 @@ namespace TileGame.GameScreens
 
                         if (player.CurrentAnimationName == "AxeFinishRight")
                         {
-                            player.Position.X -= 27;
+                            player.Position.X -= 25;
                         }
                                              
                         player.Stamina -= 40f;
@@ -850,16 +854,17 @@ namespace TileGame.GameScreens
                 {
                     player.elapsedAttack = 0.0f;
                     player.meleeAttackFinish = false;
+                    player.meleeAttackPossible = true;
                     CheckForMeleehit(player, npcs);
 
                     if (player.CurrentAnimationName == "AxeFinishLeft")
                     {
-                        player.Position.X += 27;
+                        player.Position.X += 26;
                     }
 
                     if (player.CurrentAnimationName == "AxeFinishRight")
                     {
-                        player.Position.X += 27;
+                        player.Position.X += 25;
                     }
                     UpdateAxeDoneAttackAnimaition();
 
@@ -871,15 +876,17 @@ namespace TileGame.GameScreens
                     player.elapsedAttack = 0.0f;
                     player.meleeAttackFinish = false;
                     player.meleeAttackSpinAxe = false;
+                    player.meleeAttackPossible = true;
+
                     ChainAxe(Content, motion);
                     if (player.CurrentAnimationName == "AxeFinishLeft")
                     {
-                        player.Position.X += 27;
+                        player.Position.X += 26;
                     }
 
                     if (player.CurrentAnimationName == "AxeFinishRight")
                     {
-                        player.Position.X += 27;
+                        player.Position.X += 25;
                     }
                     UpdateAxeDoneAttackAnimaition();
 
