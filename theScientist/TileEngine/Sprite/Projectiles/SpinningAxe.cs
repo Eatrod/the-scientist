@@ -7,13 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TileEngine.Sprite.Projectiles
 {
-    public class SpinningAxe : AnimatedSprite
+    public class SpinningAxe : AnimatedProjectile
     {
         //float damageofprojectile = 30;
 
-        string currentAnimation = null;
-        float damageofprojectile;
-        float timetolive;
+        string currentAnimation = null;        
+        
        
         bool takingDamage = false;      //kanske flyttas till bas sprite 
 
@@ -68,7 +67,7 @@ namespace TileEngine.Sprite.Projectiles
         public override void Update(GameTime gameTime)
         {
             FrameAnimation animation = CurrentAnimation;
-
+            
             if (animation == null)
             {
                 if (Animations.Count > 0)
@@ -143,11 +142,13 @@ namespace TileEngine.Sprite.Projectiles
         public SpinningAxe(Texture2D texture, float life, float timetolive, float speed, Vector2 position)
             : base(texture) 
         {
-            this.damageofprojectile = 15;
+            this.damageofprojectile = 5;
             this.life = life;
             this.timetolive = timetolive;
             this.speed = speed;
             this.Position = position;
+            this.continueafterHit = true;
+            this.spinaxe = true;
 
             FrameAnimation up = new FrameAnimation(2, 32, 32, 0, 0);
             up.FramesPerSeconds = 0.5f;

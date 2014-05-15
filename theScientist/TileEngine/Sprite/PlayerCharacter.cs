@@ -30,6 +30,8 @@ namespace TileEngine.Sprite
          public bool meleeAttackFinish { get; set; }
          public bool meleeAttackSpinAxe { get; set; }
 
+         public bool spinAxeAway { get; set; }
+
          public bool MiniGameWait { get; set; }
 
          public float delayAttack = 300f;

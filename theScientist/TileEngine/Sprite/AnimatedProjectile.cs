@@ -8,6 +8,9 @@ namespace TileEngine.Sprite
     {
 
         public float damageofprojectile;
+
+        public bool continueafterHit { get; set; }
+        public bool spinaxe { get; set; }
         
         string currentAnimation = null;
        
@@ -132,14 +135,29 @@ namespace TileEngine.Sprite
         public void updateprojectileposition()
         {
             this.Life -= this.timetolive;
-            if ((this.CurrentAnimationName == "right") || (this.CurrentAnimationName == "right2") || (this.CurrentAnimationName == "right3"))
-                this.Position.X += 1 * this.Speed;
-            if ((this.CurrentAnimationName == "left") || (this.CurrentAnimationName == "left2") || (this.CurrentAnimationName == "left3"))
-                this.Position.X -= 1 * this.Speed;
-            if ((this.CurrentAnimationName == "down") || (this.CurrentAnimationName == "down2") || (this.CurrentAnimationName == "down3"))
-                this.Position.Y += 1 * this.Speed;
-            if ((this.CurrentAnimationName == "up") || (this.CurrentAnimationName == "up2") || (this.CurrentAnimationName == "up3"))
-                this.Position.Y -= 1 * this.Speed;
+            if (this.Life > 0)
+            {
+                if ((this.CurrentAnimationName == "right") || (this.CurrentAnimationName == "right2") || (this.CurrentAnimationName == "right3"))
+                    this.Position.X += 1 * this.Speed;
+                if ((this.CurrentAnimationName == "left") || (this.CurrentAnimationName == "left2") || (this.CurrentAnimationName == "left3"))
+                    this.Position.X -= 1 * this.Speed;
+                if ((this.CurrentAnimationName == "down") || (this.CurrentAnimationName == "down2") || (this.CurrentAnimationName == "down3"))
+                    this.Position.Y += 1 * this.Speed;
+                if ((this.CurrentAnimationName == "up") || (this.CurrentAnimationName == "up2") || (this.CurrentAnimationName == "up3"))
+                    this.Position.Y -= 1 * this.Speed;
+            }
+
+            if (this.continueafterHit && this.Life <= 0)
+            {
+                if ((this.CurrentAnimationName == "right") || (this.CurrentAnimationName == "right2") || (this.CurrentAnimationName == "right3"))
+                    this.Position.X -= 1 * this.Speed;
+                if ((this.CurrentAnimationName == "left") || (this.CurrentAnimationName == "left2") || (this.CurrentAnimationName == "left3"))
+                    this.Position.X += 1 * this.Speed;
+                if ((this.CurrentAnimationName == "down") || (this.CurrentAnimationName == "down2") || (this.CurrentAnimationName == "down3"))
+                    this.Position.Y -= 1 * this.Speed;
+                if ((this.CurrentAnimationName == "up") || (this.CurrentAnimationName == "up2") || (this.CurrentAnimationName == "up3"))
+                    this.Position.Y += 1 * this.Speed;
+            }
         }
 
         public void UpdatecurrentAnimation(Vector2 motion)
