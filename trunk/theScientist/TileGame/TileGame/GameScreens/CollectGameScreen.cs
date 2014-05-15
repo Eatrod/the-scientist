@@ -130,11 +130,12 @@ namespace TileGame.GameScreens
             if (StartFlag)
             {
                 elapsedStart += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                player.Speed = 0.0f;
+                player.SetSpritePositionInGameWorld(new Vector2(32, 28));
                 if (elapsedStart > delayStart)
                 {
                     johnny.StartFlag = false;
                     this.StartFlag = false;
+                    this.elapsedStart = 0.0f;
                 }
             }
             else
@@ -293,7 +294,7 @@ namespace TileGame.GameScreens
             //}
             //UnlockGate(cellIndex);
 
-            CheckGameFinished(gameTime);
+            CheckGameFinished(gameTime, molehandler, fruit);
 
             if (StoryProgress.ProgressLine["CollectMinigame"] == false)
             {
@@ -330,12 +331,14 @@ namespace TileGame.GameScreens
 
         #region Method Region
 
-        private void CheckGameFinished(GameTime gameTime)
-        {        
+        private void CheckGameFinished(GameTime gameTime, MoleHandlerSprite molehandler, FruitForMiniGameSprite fruit)
+        {
             if (FruitForMiniGameSprite.npcPoints >= 1000)
             {
                 johnny.StopFlag = true;
                 elapsedEnd += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                fruit.Finished = true;
+                molehandler.Moles.Clear();
                 if (elapsedEnd > delayEnd)
                 {
                     FruitForMiniGameSprite.npcPoints = 0;
@@ -348,11 +351,16 @@ namespace TileGame.GameScreens
             {
                 johnny.StopFlag = true;
                 elapsedEnd += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                fruit.Finished = true;
+                molehandler.Moles.Clear();
                 if (elapsedEnd > delayEnd)
                 {
                     FruitForMiniGameSprite.npcPoints = 0;
                     FruitForMiniGameSprite.playerPoints = 0;
                     StoryProgress.ProgressLine["CollectMinigame"] = false;
+                    johnny = new LumberJackJohnny(Content.Load<Texture2D>("Sprite/Bjorn_Try_Johnny"), GameRef.random);
+                    this.StartFlag = true;
+                    fruit.Reset();
                 }
             }
         }
