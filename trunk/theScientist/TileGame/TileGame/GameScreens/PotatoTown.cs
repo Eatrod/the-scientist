@@ -279,17 +279,18 @@ namespace TileGame.GameScreens
 
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/Jack"), "Jack");
             npcstory.Origionoffset = new Vector2(25, 65);
+            npcstory.SpeakingRadius = 90;
             npcstory.SetSpritePositionInGameWorld(new Vector2(138, 15));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/HumanNPCDartagnan"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/Anon"), "John");
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/HumanNPCDartagnan"), null, Content.Load<Texture2D>("CharacterPotraits/Anon"), "John");
             npcstory.Origionoffset = new Vector2(25,65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(136, 15));
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/HumanNPCDartagnan"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/Anon"), "Johnny");
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/HumanNPCDartagnan"), null, Content.Load<Texture2D>("CharacterPotraits/Anon"), "Johnny");
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(140, 15));
             AnimatedSpriteObject.Add(npcstory);
@@ -309,8 +310,7 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/GateGuards"), Content.Load<Texture2D>("CharacterPotraits/Anon"), "Guard");
-            npcstory.scriptDict.Add("Permit", Content.Load<Script>("Scripts/GateGuardsHavePermit"));
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), null, Content.Load<Texture2D>("CharacterPotraits/Anon"), "Guard");
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(144, 31));
             AnimatedSpriteObject.Add(npcstory);
@@ -740,7 +740,6 @@ namespace TileGame.GameScreens
                     GameRef.storyProgress.ChangeScriptsForNPCs(npc);
                     if (npc.canTalk == true)
                     {
-
                         if (InputHandler.KeyReleased(Keys.Space))
                         {
                             if (ActiveConversation == false && npc.script != null)
