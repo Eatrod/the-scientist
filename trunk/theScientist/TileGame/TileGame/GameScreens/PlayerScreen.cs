@@ -2216,15 +2216,15 @@ namespace TileGame.GameScreens
                         break;
                     }
 
-                    //else if (s is ImmortuiSprite)
-                    //{
-                    //    SpriteObjectInGameWorld.Remove(s);
-                    //    renderList.Remove(s);
-                    //    StoryProgress.ProgressLine["Immortui"] = true;
+                    else if (s is FishbowlSprite && SpriteObjectInGameWorld.Contains(s))
+                    {
+                        SpriteObjectInGameWorld.Remove(s);
+                        renderList.Remove(s);
+                        StoryProgress.ProgressLine["Fish"] = true;
 
-                    //    Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop
-                    //    break;
-                    //}
+                        
+                        break;
+                    }
                 
                     if (s is MultiIronSprite)
                     {

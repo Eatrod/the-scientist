@@ -73,6 +73,7 @@
     <Compile Include="Sprite\BelladonnaSprite.cs" />
     <Compile Include="Sprite\BombSprite.cs" />
     <Compile Include="Sprite\CharacterSprite.cs" />
+    <Compile Include="Sprite\FishbowlSprite.cs" />
     <Compile Include="Sprite\DirtPileSprite.cs" />
     <Compile Include="Sprite\Explosion.cs" />
     <Compile Include="Sprite\FrameAnimation.cs" />

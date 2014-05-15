@@ -426,8 +426,7 @@ namespace TileGame.GameScreens
 
             createLifePotatoPlant();
 
-            pickupableobjects.Add(new BelladonnaSprite(Content.Load<Texture2D>("Sprite/Belladonna"),
-                new Vector2(7, 33)));
+            pickupableobjects.Add(new BelladonnaSprite(Content.Load<Texture2D>("Sprite/Belladonna"),new Vector2(7, 33)));
             //SpriteObject.Add(new ImmortuiSprite(Content.Load<Texture2D>("Sprite/Immortui"),
             //    new Vector2(87, 45))); //just testing the immortui mushroom
             //SpriteObject.Add(new ImmortuiSprite(Content.Load<Texture2D>("Sprite/Immortui big"),
@@ -436,6 +435,8 @@ namespace TileGame.GameScreens
             //SpriteObject.Add(new LifePotatoSprite(Content.Load<Texture2D>("Sprite/multi_iron_ore"),
             //    new Vector2(92, 43)));
 
+            pickupableobjects.Add(new FishbowlSprite(Content.Load<Texture2D>("Sprite/FishBowl"), new Vector2(131,100)));
+            
             for (int i = 0; i < 30; i++)
             {
                 int x = GameRef.random.Next(102, 137);
