@@ -39,7 +39,7 @@ namespace TileEngine
             AddItemProgressLine("MetalBladeCrossbow", false, "Item");
             AddItemProgressLine("Hookshot", false, "Item");
             AddItemProgressLine("Immortui", false, "Item");
-            AddItemProgressLine("Permit", true, "Item");
+            AddItemProgressLine("Permit", false, "Item");
             AddItemProgressLine("Alcohol", false, "Item");
             AddItemProgressLine("Belladonna", false, "Item");
             //Quests

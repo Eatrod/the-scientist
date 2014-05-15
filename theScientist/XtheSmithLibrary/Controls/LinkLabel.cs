@@ -57,8 +57,9 @@ namespace XtheSmithLibrary.Controls
 
             if (InputHandler.KeyReleased(Keys.Space) || InputHandler.KeyReleased(Keys.Enter))
             {
-                base.OnSelected(null);
                 InputHandler.Flush();
+                base.OnSelected(null);
+                
             }
         }
 
