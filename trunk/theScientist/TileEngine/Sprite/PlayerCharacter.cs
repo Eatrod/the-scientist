@@ -24,7 +24,8 @@ namespace TileEngine.Sprite
          public bool multishotFireArrow { get; set; }
          public bool fireArrow { get; set; }
          public bool normalArrow { get; set; }
-         
+
+         public bool meleeAttackPossible { get; set; }
          public bool meleeAttackStart { get; set; }
          public bool meleeAttackFinish { get; set; }
          public bool meleeAttackSpinAxe { get; set; }
