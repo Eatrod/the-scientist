@@ -1,9 +1,9 @@
 ﻿<Converstaions>
 
   <Conversation Name="Greeting">
-    <Text>Fisherman:Hey you here to sell some pesci?</Text>
+    <Text>Fisherman:Have you saved my poor fishes?</Text>
     <Handlers>
-      <Handler Caption="Sell fishes" Action="StartConversation:Ignazio1" />
+      <Handler Caption="Give fishes" Action="StartConversation:Ignazio1" />
       <Handler Caption="Leave" Action="StartConversation:Ignazio2" />
     </Handlers>
   </Conversation>
@@ -16,7 +16,7 @@
   </Conversation>
 
   <Conversation Name="Fisherman1">
-    <Text>Fisherman:Here's some coins.</Text>
+    <Text>Fisherman:Thanks! Here's some coins.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="AddItemCollectedAmount:Money,5;AddItemCollectedAmount:Fish,-5;EndConversation" />
     </Handlers>
