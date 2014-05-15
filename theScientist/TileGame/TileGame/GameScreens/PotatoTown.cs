@@ -771,7 +771,7 @@ namespace TileGame.GameScreens
             }
             UnlockGate(cellIndex);
 
-            if (StoryProgress.ProgressLine["CollectMinigame"] == true && (!ActiveConversation))
+            if (StoryProgress.ProgressLine["CollectMinigame"] && !ActiveConversation)
                 StateManager.ChangeState(GameRef.CollectGameScreen);
 
             base.Update(gameTime);

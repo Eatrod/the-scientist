@@ -12,6 +12,8 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Media;
 using TileEngine.Sprite;
 using XtheSmithLibrary;
+using XtheSmithLibrary.Controls;
+using TileGame;
 using TileEngine;
 using TileEngine.Tiles;
 
@@ -40,7 +42,7 @@ namespace TileGame.GameScreens
         private float delaySlow;
         private bool SlowFlag;
 
-        private float elapsedStart;
+        static public float elapsedStart;
         private float delayStart;
         private bool StartFlag;
         Sprite sprite;
@@ -78,7 +80,7 @@ namespace TileGame.GameScreens
             elapsedSlow = 0.0f;
             delaySlow = 2000f;
             StartFlag = true;
-            delayStart = 10000f;
+            delayStart = 5000f;
             elapsedStart = 0.0f;
 
             delayEnd = 3000f;
@@ -135,7 +137,7 @@ namespace TileGame.GameScreens
                 {
                     johnny.StartFlag = false;
                     this.StartFlag = false;
-                    this.elapsedStart = 0.0f;
+                    elapsedStart = 0.0f;
                 }
             }
             else
@@ -332,7 +334,7 @@ namespace TileGame.GameScreens
         #region Method Region
 
         private void CheckGameFinished(GameTime gameTime, MoleHandlerSprite molehandler, FruitForMiniGameSprite fruit)
-        {
+        {        
             if (FruitForMiniGameSprite.npcPoints >= 1000)
             {
                 johnny.StopFlag = true;
