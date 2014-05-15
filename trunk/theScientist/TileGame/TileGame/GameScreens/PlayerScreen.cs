@@ -68,8 +68,9 @@ namespace TileGame.GameScreens
         Color Charge_Bar_Color;
         bool charging;
 
-        Label CollectMinigamePlayerScoreLabel, CollectMinigameNpcScoreLabel;
+        Label CollectMinigamePlayerScoreLabel, CollectMinigameNpcScoreLabel, CollectMinigameSuccessLabel, CollectMinigameFailureLabel;
         Texture2D CollectMinigamePlayerPortrait, CollectMinigameNpcPortrait;
+        
         //--
 
         int fire_arrow_counter = 0;
@@ -425,6 +426,18 @@ namespace TileGame.GameScreens
 
             CollectMinigamePlayerPortrait = Content.Load<Texture2D>(@"CharacterPotraits\PortraitIgnazio");
             CollectMinigameNpcPortrait = Content.Load<Texture2D>(@"CharacterPotraits\Anon");
+
+            CollectMinigameSuccessLabel = new Label();
+            CollectMinigameSuccessLabel.Text = "";
+            CollectMinigameSuccessLabel.Color = Color.Red;
+            CollectMinigameSuccessLabel.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 45, GraphicsDevice.Viewport.Height / 2 - 6);
+            ControlManager.Add(CollectMinigameSuccessLabel);
+
+            CollectMinigameFailureLabel = new Label();
+            CollectMinigameFailureLabel.Text = "";
+            CollectMinigameFailureLabel.Color = Color.Red;
+            CollectMinigameFailureLabel.Position = new Vector2(GraphicsDevice.Viewport.Width / 2- 45, GraphicsDevice.Viewport.Height / 2 - 6);
+            ControlManager.Add(CollectMinigameFailureLabel);
             //--
 
             //BF
@@ -1579,20 +1592,34 @@ namespace TileGame.GameScreens
             chargeanimation.Draw_test(spriteBatch, HUD_size_ref / 8, (HUD_size_ref / 2) * 2 + ((HUD_size_ref / 16) * 7), (HUD_size_ref * 4 / 100) * (int)player.Charge, HUD_size_ref / 2, Charge_Bar_Color);
             DrawItemHUD();
 
-            if(StoryProgress.ProgressLine["CollectMinigame"] == true)
+            if (StoryProgress.ProgressLine["CollectMinigame"] == true)
             {
                 CollectMinigamePlayerScoreLabel.Text = FruitForMiniGameSprite.playerPoints.ToString();
                 CollectMinigameNpcScoreLabel.Text = FruitForMiniGameSprite.npcPoints.ToString();
 
                 spriteBatch.Draw(
                 CollectMinigamePlayerPortrait,
-                new Rectangle(HUD_size_ref * 11, 0, HUD_size_ref * 2, HUD_size_ref * 3), 
-                Color.White);
+                new Rectangle(HUD_size_ref * 11, 0, HUD_size_ref * 2, HUD_size_ref * 3),
+                Color.White * 0.65f);
 
                 spriteBatch.Draw(
                 CollectMinigameNpcPortrait,
                 new Rectangle(GraphicsDevice.Viewport.Width - (HUD_size_ref * 11), 0, HUD_size_ref * 2, HUD_size_ref * 3),
-                Color.White);
+                Color.White * 0.65f);
+
+                if (FruitForMiniGameSprite.npcPoints >= 1000)
+                {
+                    CollectMinigameFailureLabel.Text = "FAILURE!";
+                }
+                if (FruitForMiniGameSprite.playerPoints >= 1000)
+                {
+                    CollectMinigameSuccessLabel.Text = "SUCCESS!";
+                }
+            }
+            else
+            {
+                CollectMinigamePlayerScoreLabel.Text = "";
+                CollectMinigameNpcScoreLabel.Text = "";
             }
 
             spriteBatch.Draw(

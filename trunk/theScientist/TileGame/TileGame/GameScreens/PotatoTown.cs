@@ -162,7 +162,7 @@ namespace TileGame.GameScreens
                 this.renderList.Remove(GameRef.PotatoTown.treeStanding);
                 this.renderList.Add(GameRef.PotatoTown.treeBridge);
                 this.renderList.Add(GameRef.PotatoTown.treeStubbe);
-        }
+            }
         }
         protected override void LoadContent()
         {
@@ -771,7 +771,7 @@ namespace TileGame.GameScreens
             }
             UnlockGate(cellIndex);
 
-            if (StoryProgress.ProgressLine["CollectMinigame"] == true)
+            if (StoryProgress.ProgressLine["CollectMinigame"] == true && (!ActiveConversation))
                 StateManager.ChangeState(GameRef.CollectGameScreen);
 
             base.Update(gameTime);

@@ -51,9 +51,7 @@ namespace TileEngine
             AddItemProgressLine("lumberjacksTalkedTo", false, "Quest");
             AddItemProgressLine("leavingTown", false, "Flag");
 
-            //--
             AddItemProgressLine("CollectMinigame", false, "Minigame");
-            //--
 
             AddItemCollectedAmountDict("IronOre", 0);
             AddItemCollectedAmountDict("Money", 0);
