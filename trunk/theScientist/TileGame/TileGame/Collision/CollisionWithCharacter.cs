@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using TileEngine;
 using TileEngine.Sprite;
+using TileEngine.Sprite.Projectiles;
 
 namespace TileGame.Collision
 {
@@ -49,12 +50,11 @@ namespace TileGame.Collision
             {
                 for (int Projectile = 0; Projectile < playerprojectiles.Count(); Projectile++)
                 {
-                    if (BaseSprite.AreColliding(playerprojectiles[Projectile], sprite) && SpriteObjectInGameWorld.Contains(sprite))
+                    if (BaseSprite.AreColliding(playerprojectiles[Projectile], sprite) && SpriteObjectInGameWorld.Contains(sprite) )
                     {
-
-                        playerprojectiles.RemoveAt(Projectile);
-                        //SpriteObjectInGameWorld.Remove(sprite);
-                        //renderList.Remove(sprite);
+                        if(!playerprojectiles[Projectile].continueafterHit)
+                            playerprojectiles.RemoveAt(Projectile);
+                        
                     }
                 }
             }
@@ -68,20 +68,14 @@ namespace TileGame.Collision
                     if (playerprojectiles[Projectile].Bounds.Intersects(new Rectangle((int)sprite.Position.X + 20,
                         (int)sprite.Position.Y + 10, 10, 55)) && sprite.Life > 0)
                     {
-                        sprite.Life -= playerprojectiles[Projectile].damageofprojectile;
-                        //sprite.ArrowDirection = playerprojectiles[Projectile].Origin - sprite.Origin;
+                        sprite.Life -= playerprojectiles[Projectile].damageofprojectile;                        
                         sprite.HitByArrowMethod(playerprojectiles[Projectile]);
                         sprite.AttackersDirection = player.Position - sprite.Position;
-                        playerprojectiles.RemoveAt(Projectile);
-                        //sprite.AggroStartingPosition = sprite.Position;
-                        //sprite.HitByArrow = true;                       
-                        //sprite.Aggro = true;
-                        //if (sprite.Life <= 0)
-                        //{
-                        //    //SpriteObjectInGameWorld.Remove(sprite);
-                        //    //renderList.Remove(sprite);
-                        //    //sprite.Life = sprite.FullHp;                         
-                        //}
+                        
+                        if(!playerprojectiles[Projectile].continueafterHit)
+                            playerprojectiles.RemoveAt(Projectile);
+                        
+                        
                     }
                     //}
                 }

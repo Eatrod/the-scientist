@@ -137,11 +137,13 @@ namespace TileEngine.Sprite.Projectiles
         public NormalArrowProjectile(Texture2D texture, float life, float timetolive, float speed, Vector2 position)
             : base(texture) 
         {
-            this.damageofprojectile = 5;
+            this.damageofprojectile = 20;
             this.life = life;
             this.timetolive = timetolive;
             this.speed = speed;
             this.Position = position;
+            this.continueafterHit = false;
+            this.spinaxe = false;
             FrameAnimation right = new FrameAnimation(1, 25, 25, 0, 0);
             this.Animations.Add("right", right);
             FrameAnimation left = new FrameAnimation(1, 25, 25, 25, 0);

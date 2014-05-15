@@ -552,8 +552,17 @@ namespace TileGame.GameScreens
 
             for (int i = 0; i < playerprojectiles.Count; i++ )
             {
-                if (playerprojectiles[i].Life <= 0)
+                if (playerprojectiles[i].Life <= 0 && !playerprojectiles[i].continueafterHit)
                 {
+                    playerprojectiles.RemoveAt(i);
+                }
+            }
+
+            for (int i = 0; i < playerprojectiles.Count; i++)
+            {
+                if (playerprojectiles[i].Life <= 0 && playerprojectiles[i].spinaxe && playerprojectiles[i].Bounds.Intersects(player.Bounds))
+                {
+                    player.spinAxeAway = false;
                     playerprojectiles.RemoveAt(i);
                 }
             }
@@ -570,13 +579,13 @@ namespace TileGame.GameScreens
 
             if (!ActiveConversation)
             {
-                if (InputHandler.KeyDown(Keys.Up) && !player.MiniGameWait && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
+                if (InputHandler.KeyDown(Keys.Up) && !player.MiniGameWait && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired && !player.spinAxeAway)
                     motion.Y -= 2;
-                if (InputHandler.KeyDown(Keys.Down) && !player.MiniGameWait && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
+                if (InputHandler.KeyDown(Keys.Down) && !player.MiniGameWait && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired && !player.spinAxeAway)
                     motion.Y += 2;
-                if (InputHandler.KeyDown(Keys.Left) && !player.MiniGameWait && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
+                if (InputHandler.KeyDown(Keys.Left) && !player.MiniGameWait && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired && !player.spinAxeAway)
                     motion.X -= 2;
-                if (InputHandler.KeyDown(Keys.Right) && !player.MiniGameWait && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired)
+                if (InputHandler.KeyDown(Keys.Right) && !player.MiniGameWait && !player.meleeAttackFinish && !player.meleeAttackStart && !player.meleeAttackSpinAxe && !player.shotFired && !player.spinAxeAway)
                     motion.X += 2;
 
             }
@@ -697,7 +706,8 @@ namespace TileGame.GameScreens
                 if (activeItemBackgroundColor[key_number - 1] == Color.White)
                 {
 
-                    if (InputHandler.KeyDown(Keys.Q) && !player.meleeAttackStart && (player.Stamina - 20 >= 0) && player.meleeAttackPossible || InputHandler.KeyDown(Keys.W) && !player.meleeAttackStart && (player.Stamina - 50 >= 0) && player.meleeAttackPossible)
+                    if (InputHandler.KeyDown(Keys.Q) && !player.meleeAttackStart && (player.Stamina - 20 >= 0) && player.meleeAttackPossible && !player.spinAxeAway||
+                        InputHandler.KeyDown(Keys.W) && !player.meleeAttackStart && (player.Stamina - 50 >= 0) && player.meleeAttackPossible && !player.spinAxeAway)
                     {
                         player.oldAnimation = player.CurrentAnimationName;
                         player.meleeAttackStart = true;
@@ -895,6 +905,7 @@ namespace TileGame.GameScreens
                     player.meleeAttackFinish = false;
                     player.meleeAttackSpinAxe = false;
                     player.meleeAttackPossible = true;
+                    player.spinAxeAway = true;
 
                     ChainAxe(Content, motion);
                     if (player.CurrentAnimationName == "AxeFinishLeft")
@@ -966,36 +977,41 @@ namespace TileGame.GameScreens
 
         private void ChainAxe(ContentManager Content, Vector2 motion)
         {
-            SpinningAxe tempaxe = new SpinningAxe(Content.Load<Texture2D>("Sprite/AxeSpin"), 10f, 0.1f, 8f, player.Position);
+            SpinningAxe tempaxe = new SpinningAxe(Content.Load<Texture2D>("Sprite/AxeSpin"), 5f, 0.1f, 8f, player.Position);
             tempaxe.CurrentAnimationName = "up";
 
             if (motion == Vector2.Zero)
             {
                 if (player.CurrentAnimationName == "AxeFinishUp")
                 {
+                    tempaxe.CurrentAnimationName = "up";
                     motion = new Vector2(0, -2);
                 }
                 if (player.CurrentAnimationName == "AxeFinishDown")
                 {
+                    tempaxe.CurrentAnimationName = "down";
                     motion = new Vector2(0, 2);
                 }
                 if (player.CurrentAnimationName == "AxeFinishLeft")
                 {
+                    tempaxe.CurrentAnimationName = "left";
                     motion = new Vector2(-2, 0);
                 }
                 if (player.CurrentAnimationName == "AxeFinishRight")
                 {
+                    tempaxe.CurrentAnimationName = "right";
                     motion = new Vector2(2, 0);
                 }
 
-                renderList.Add(tempaxe);           
+                playerprojectiles.Add(tempaxe);
+                          
                 player.Stamina -= 20f;
                 motion = Vector2.Zero;
             }
 
             else
             {
-                renderList.Add(tempaxe);
+                playerprojectiles.Add(tempaxe);
                 player.Stamina -= 20f;
             }
         }
