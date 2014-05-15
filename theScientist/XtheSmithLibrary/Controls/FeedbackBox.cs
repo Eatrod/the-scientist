@@ -63,15 +63,20 @@ namespace XtheSmithLibrary.Controls
                 {
                     if (dictionary[key.Key] == false && StoryProgress.ProgressLine[key.Key] && isShowing == false)
                     {
-                        if (StoryProgress.ProgressType[key.Key] == "Quest")
-                            this.text = "You have completed the task: ";
+                        if (StoryProgress.ProgressType[key.Key].Split(':')[0] == "Quest")
+                        {
+                            this.text = "You have completed the task: " + StoryProgress.ProgressType[key.Key].Split(':')[1];
+                            this.currentKey = key.Key;
+                        }
                         else if (StoryProgress.ProgressType[key.Key] == "Item")
-                            this.text = "You now have the item: ";
+                        {
+                            this.text = "You now have the item: " + key.Key;
+                            this.currentKey = key.Key;
+                        }
                         else
                         {
                             return;
                         }
-                        this.currentKey = key.Key;
                         isShowing = true;
                     }
                 }
@@ -123,7 +128,7 @@ namespace XtheSmithLibrary.Controls
                 }
 
                 spriteBatch.Draw(texture, rectangle, Color.Black);
-                spriteBatch.DrawString(spriteFont, text + currentKey,new Vector2(rectangle.X+20, rectangle.Y+20), Color.LightGreen);
+                spriteBatch.DrawString(spriteFont, text ,new Vector2(rectangle.X+20, rectangle.Y+20), Color.LightGreen);
                 if (elapsedTime > 5)
                 {
                     elapsedTime = 0;

@@ -161,6 +161,11 @@ namespace TileGame.GameScreens
                 taskDict[3].Unlocked = true;
                 completedDict[3].Unlocked = true;
             }
+            if (StoryProgress.ProgressLine["guardsTalkedTo"])
+            {
+                hintDict[3].Unlocked = true;
+                taskDict[5].Unlocked = true;
+            }
             if (StoryProgress.ProgressLine["Belladonna"])
             {
                 taskDict[1].Unlocked = false;
