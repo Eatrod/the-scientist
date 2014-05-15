@@ -103,7 +103,10 @@
     <Compile Include="Sprite\Npc\NPC_Story\NPC_Story.cs" />
     <Compile Include="Sprite\Npc\NPC_Story\NPC_Story_Asterix.cs" />
     <Compile Include="Sprite\Npc\NPC_Story\NPC_Story_DonPotato.cs" />
+    <Compile Include="Sprite\Npc\NPC_Story\NPC_Story_Fisherman.cs" />
+    <Compile Include="Sprite\Npc\NPC_Story\NPC_Story_GateGuards.cs" />
     <Compile Include="Sprite\Npc\NPC_Story\NPC_Story_GuardCaptain.cs" />
+    <Compile Include="Sprite\Npc\NPC_Story\NPC_Story_Innkeeper.cs" />
     <Compile Include="Sprite\Npc\Script.cs" />
     <Compile Include="Sprite\Npc\ScriptReader.cs" />
     <Compile Include="Sprite\LifePotatoSprite.cs" />
