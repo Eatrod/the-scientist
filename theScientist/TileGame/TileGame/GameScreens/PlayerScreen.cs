@@ -1645,7 +1645,9 @@ namespace TileGame.GameScreens
                 {
                     CollectMinigameFinishedLabel.Text = "SUCCESS!";
                     CollectMinigameFinishedLabel.Size = CollectMinigameFinishedLabel.SpriteFont.MeasureString(CollectMinigameFinishedLabel.Text);
-                    CollectMinigameFinishedLabel.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - CollectMinigameFinishedLabel.Size.X / 2, GraphicsDevice.Viewport.Height / 2 - CollectMinigameFinishedLabel.Size.Y / 2);               
+                    CollectMinigameFinishedLabel.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - CollectMinigameFinishedLabel.Size.X / 2, GraphicsDevice.Viewport.Height / 2 - CollectMinigameFinishedLabel.Size.Y / 2);
+
+                    StoryProgress.ProgressLine["contestAgainstJohnnyFinished"] = true;
                 }
                 else
                     CollectMinigameFinishedLabel.Text = "";
