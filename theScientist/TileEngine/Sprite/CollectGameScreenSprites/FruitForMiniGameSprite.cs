@@ -77,6 +77,14 @@ namespace TileEngine.Sprite
                     npcPoints += 50;
             }
         }
+        public void Reset()
+        {
+            this.elapsedLifeTime = 0.0f;
+            this.Finished = false;
+            npcPoints = 0;
+            playerPoints = 0;
+            this.elapsedLifeTime = this.delayLifeTime;
+        }
         public override void Update(GameTime gameTime)
         {
             if (!Finished)
