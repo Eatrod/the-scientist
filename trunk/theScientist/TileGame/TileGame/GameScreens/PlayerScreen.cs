@@ -1929,7 +1929,7 @@ namespace TileGame.GameScreens
                 
                 if (player.Bounds.Intersects(s.Bounds))
                 {                  
-                        s.Life -= 100;              
+                        s.Life -= 20;              
                 }
             }
         }
