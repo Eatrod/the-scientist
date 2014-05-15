@@ -44,7 +44,7 @@ namespace TileEngine
             AddItemProgressLine("Belladonna", false, "Item");
             //Quests
             AddItemProgressLine("treeIsDown", false, "Quest");
-            AddItemProgressLine("contestAgainstJonnyFinished", false, "Quest");
+            AddItemProgressLine("contestAgainstJohnnyFinished", false, "Quest");
             AddItemProgressLine("contestAgainstJackFinished", false, "Quest");
             AddItemProgressLine("contestAgainstJohnFinished", false, "Quest");
             AddItemProgressLine("asterixTalkedTo", false, "Quest");
