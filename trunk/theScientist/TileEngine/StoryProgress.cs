@@ -44,12 +44,14 @@ namespace TileEngine
             AddItemProgressLine("Belladonna", false, "Item");
             AddItemProgressLine("Fish", false, "Item");
             //Quests
-            AddItemProgressLine("treeIsDown", false, "Quest");
-            AddItemProgressLine("contestAgainstJohnnyFinished", false, "Quest");
-            AddItemProgressLine("contestAgainstJackFinished", false, "Quest");
-            AddItemProgressLine("contestAgainstJohnFinished", false, "Quest");
-            AddItemProgressLine("asterixTalkedTo", false, "Quest");
-            AddItemProgressLine("lumberjacksTalkedTo", false, "Quest");
+            AddItemProgressLine("treeIsDown", false, "Quest:Cut down the tree");
+            AddItemProgressLine("contestAgainstJohnnyFinished", false, "Quest:Beat Johnnys challenge");
+            AddItemProgressLine("contestAgainstJackFinished", false, "Quest:Do Jacks errand");
+            AddItemProgressLine("contestAgainstJohnFinished", false, "Quest:Solve Johns riddle");
+            AddItemProgressLine("asterixTalkedTo", false, "Quest:Talk to Asterix");
+            //Flaggor
+            AddItemProgressLine("lumberjacksTalkedTo", false, "Flag");
+            AddItemProgressLine("gateGuardsTalkedTo", false, "Flag");
             AddItemProgressLine("leavingTown", false, "Flag");
 
             AddItemProgressLine("CollectMinigame", false, "Minigame");
