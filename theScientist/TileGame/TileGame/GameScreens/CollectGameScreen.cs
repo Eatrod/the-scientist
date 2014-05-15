@@ -45,6 +45,8 @@ namespace TileGame.GameScreens
         private bool StartFlag;
         Sprite sprite;
 
+        private float elapsedEnd, delayEnd;
+
         List<BaseSprite> SpriteObjects = new List<BaseSprite>();
         List<BaseSprite> SpriteObjectInGameWorld = new List<BaseSprite>();
         List<Sprite> BombSprites = new List<Sprite>();
@@ -78,6 +80,9 @@ namespace TileGame.GameScreens
             StartFlag = true;
             delayStart = 10000f;
             elapsedStart = 0.0f;
+
+            delayEnd = 3000f;
+            elapsedEnd = 0.0f;
 
             SpriteObjectInGameWorld.Clear();
             renderList.Clear();
@@ -288,7 +293,15 @@ namespace TileGame.GameScreens
             //}
             //UnlockGate(cellIndex);
 
-            CheckGameFinished();
+            CheckGameFinished(gameTime);
+
+            if (StoryProgress.ProgressLine["CollectMinigame"] == false)
+            {
+                //player.SetSpritePositionInGameWorld(new Vector2(138, 18));
+                StateManager.ChangeState(GameRef.PotatoTown);
+                player.SetSpritePositionInGameWorld(new Vector2(138, 17));
+                player.CurrentAnimationName = "IdleUp";
+            }
 
             base.Update(gameTime);
         }
@@ -317,18 +330,30 @@ namespace TileGame.GameScreens
 
         #region Method Region
 
-        private void CheckGameFinished()
-        {
+        private void CheckGameFinished(GameTime gameTime)
+        {        
             if (FruitForMiniGameSprite.npcPoints >= 1000)
             {
                 johnny.StopFlag = true;
-                //johnny.Speed = 0f;
-                    
+                elapsedEnd += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (elapsedEnd > delayEnd)
+                {
+                    FruitForMiniGameSprite.npcPoints = 0;
+                    FruitForMiniGameSprite.playerPoints = 0;
+                    StoryProgress.ProgressLine["CollectMinigame"] = false;
+                    StoryProgress.ProgressLine["contestAgainstJonnyFinished"] = true;
+                }
             }
             if (FruitForMiniGameSprite.playerPoints >= 1000)
             {
                 johnny.StopFlag = true;
-                //johnny.Speed = 0f;
+                elapsedEnd += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (elapsedEnd > delayEnd)
+                {
+                    FruitForMiniGameSprite.npcPoints = 0;
+                    FruitForMiniGameSprite.playerPoints = 0;
+                    StoryProgress.ProgressLine["CollectMinigame"] = false;
+                }
             }
         }
 
