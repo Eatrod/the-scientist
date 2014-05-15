@@ -167,7 +167,7 @@ namespace TileGame.GameScreens
             {
                 taskDict[1].Unlocked = false;
                 taskDict[3].Unlocked = true;
-                completedDict[3].Unlocked = true;
+                completedDict[5].Unlocked = true;
             }
             if (StoryProgress.ProgressLine["gateGuardsTalkedTo"])
             {
@@ -180,7 +180,7 @@ namespace TileGame.GameScreens
                 taskDict[1].Unlocked = false;
                 taskDict[2].Unlocked = true;
                 taskDict[3].Unlocked = false;
-                completedDict[4].Unlocked = true;
+                completedDict[6].Unlocked = true;
             }
             if (StoryProgress.ProgressLine["contestAgainstJohnFinished"])
             {
