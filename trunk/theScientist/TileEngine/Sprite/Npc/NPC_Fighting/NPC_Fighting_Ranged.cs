@@ -37,7 +37,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.ElapsedHitByArrow = 0.0f;
             this.DelayHitByArrow = 300f;
             this.ElapsedRespawn = 0.0f;
-            this.DelayRespawn = 25000f;
+            this.DelayRespawn = 120000f;
             this.elapsedThrowBomb = 0.0f;
             this.delayThrowBomb = 2500f;
             this.animationTime = false;

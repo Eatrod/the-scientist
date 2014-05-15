@@ -65,7 +65,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.delayMaxRunning = 6000f;
             this.StartingPosition = StartingPosition;
             this.ElapsedRespawn = 0.0f;
-            this.DelayRespawn = 30000f;
+            this.DelayRespawn = 120000f;
             this.dirtPileCreated = false;
             this.chargeDamage = 10;
             this.elapsedAggro = 0;

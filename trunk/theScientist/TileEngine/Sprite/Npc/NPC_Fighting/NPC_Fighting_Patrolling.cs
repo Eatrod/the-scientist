@@ -34,7 +34,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.PatrollingCircle = 200f;
             this.DelayHitByArrow = 300f;
             this.ElapsedHitByArrow = 0.0f;
-            this.DelayRespawn = 25000f;
+            this.DelayRespawn = 120000f;
             this.ElapsedRespawn = 0.0f;
             this.Dead = false;
             this.OldPosition = Vector2.Zero;
