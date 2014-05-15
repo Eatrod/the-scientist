@@ -17,6 +17,7 @@ namespace TileEngine.Sprite
         private Random random;
         private float delayLifeTime;
         private float elapsedLifeTime;
+        public bool Finished;
         private bool alive;
         static public float playerPoints;
         static public float npcPoints;
@@ -28,6 +29,7 @@ namespace TileEngine.Sprite
         }
         public FruitForMiniGameSprite(Texture2D texture, Random random):base(texture)
         {
+            this.Finished = false;
             npcPoints = 0.0f;
             playerPoints = 0.0f;
             this.alive = true;
@@ -77,35 +79,34 @@ namespace TileEngine.Sprite
         }
         public override void Update(GameTime gameTime)
         {
-            elapsedLifeTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (elapsedLifeTime < delayLifeTime / 2)
+            if (!Finished)
             {
-                this.CurrentAnimationName = "FreshFruit";
-            }
-            else if (elapsedLifeTime < (delayLifeTime / 4) * 3 && elapsedLifeTime > delayLifeTime / 2)
-            {
-                this.CurrentAnimationName = "MiddleFruit";
+                elapsedLifeTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (elapsedLifeTime < delayLifeTime / 2)
+                {
+                    this.CurrentAnimationName = "FreshFruit";
+                }
+                else if (elapsedLifeTime < (delayLifeTime / 4) * 3 && elapsedLifeTime > delayLifeTime / 2)
+                {
+                    this.CurrentAnimationName = "MiddleFruit";
+                }
+                else
+                    this.CurrentAnimationName = "RottenFruit";
+                if (elapsedLifeTime > delayLifeTime)
+                    alive = false;
+                if (!alive)
+                {
+                    this.elapsedLifeTime = 0.0f;
+                    this.Position = new Vector2(random.Next(10, 55) * 32, random.Next(10, 40) * 32);
+                    this.CurrentAnimationName = "FreshFruit";
+                    this.alive = true;
+                }
+
             }
             else
-                this.CurrentAnimationName = "RottenFruit";
-            if(elapsedLifeTime > delayLifeTime)
-                alive = false;  
-            if(!alive)
             {
-                this.elapsedLifeTime = 0.0f;
-                this.Position = new Vector2(random.Next(10, 55) *32, random.Next(10, 40) * 32);
-                this.CurrentAnimationName = "FreshFruit";
-                this.alive = true;
+                this.Position = Vector2.Zero;
             }
-
-            //if (npcPoints > 1000)
-            //{
-
-            //}
-            //if (playerPoints > 1000)
-            //{
-
-            //}
 
  	        base.Update(gameTime);
         }
