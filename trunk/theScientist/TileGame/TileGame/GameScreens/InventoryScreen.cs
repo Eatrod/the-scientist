@@ -27,7 +27,7 @@ namespace TileGame.GameScreens
         int cursor_item_number;
         Label axeLabel, bowLabel;
         Label belladonnaLabel, immortuiLabel, ironOreLabel, permitLabel, goldLabel, alcoholLabel, fishLabel;
-        Label amountOfIronLabel, amountOfGoldLabel, amountOfFishLabel;
+        Label amountOfIronLabel, amountOfGoldLabel; //, amountOfFishLabel;
         Label[] activeWeaponNumbers;
 
         int item_width, item_height, active_item_width, active_item_height;
@@ -117,11 +117,11 @@ namespace TileGame.GameScreens
             amountOfGoldLabel.Position = new Vector2(nonweapon_starting_x + item_width + item_x_distance * 1, item_starting_y + item_y_distance * 3 + item_height / 3); //new Vector2(860, 200 + (140 * 3)); //1110 //860
             ControlManager.Add(amountOfGoldLabel);
 
-            amountOfFishLabel = new Label();
-            amountOfFishLabel.Text = "";
-            amountOfFishLabel.Color = Color.Black;
-            amountOfFishLabel.Position = new Vector2(nonweapon_starting_x + item_width + item_x_distance * 1, item_starting_y + item_y_distance * 2 + item_height / 3);
-            ControlManager.Add(amountOfFishLabel);
+            //amountOfFishLabel = new Label();
+            //amountOfFishLabel.Text = "";
+            //amountOfFishLabel.Color = Color.Black;
+            //amountOfFishLabel.Position = new Vector2(nonweapon_starting_x + item_width + item_x_distance * 1, item_starting_y + item_y_distance * 2 + item_height / 3);
+            //ControlManager.Add(amountOfFishLabel);
 
             belladonnaLabel = new Label();
             belladonnaLabel.Text = "";
@@ -160,7 +160,7 @@ namespace TileGame.GameScreens
             ControlManager.Add(goldLabel);
 
             fishLabel = new Label();
-            fishLabel.Text = "Fish";
+            fishLabel.Text = "";
             fishLabel.Color = Color.Black;
             fishLabel.Position = new Vector2(nonweapon_starting_x + item_x_distance * 1, item_starting_y + item_y_distance * 2 + item_height);
             ControlManager.Add(fishLabel);
@@ -168,13 +168,13 @@ namespace TileGame.GameScreens
             axeLabel = new Label();
             axeLabel.Text = "";
             axeLabel.Color = Color.Black;
-            axeLabel.Position = new Vector2(weapon_starting_x + item_x_distance * 0, item_starting_y + item_y_distance * 0 + item_height);
+            axeLabel.Position = new Vector2(weapon_starting_x + item_x_distance * 1, item_starting_y + item_y_distance * 0 + item_height);
             ControlManager.Add(axeLabel);
 
             bowLabel = new Label();
             bowLabel.Text = "";
             bowLabel.Color = Color.Black;
-            bowLabel.Position = new Vector2(weapon_starting_x + item_x_distance * 0, item_starting_y + item_y_distance * 1 + item_height);
+            bowLabel.Position = new Vector2(weapon_starting_x + item_x_distance * 0, item_starting_y + item_y_distance * 0 + item_height);
             ControlManager.Add(bowLabel);
 
             activeWeaponNumbers = new Label[5];
@@ -260,7 +260,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     axeImage,
-                    new Rectangle(weapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 0), item_width, item_height),
+                    new Rectangle(weapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 0), item_width, item_height),
                     Color.White);
                 axeLabel.Text = "Axe";
             }
@@ -269,7 +269,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     swordImage,
-                    new Rectangle(weapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 0), item_width, item_height), 
+                    new Rectangle(weapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 1), item_width, item_height), 
                     Color.White);
             }
 
@@ -277,7 +277,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle(weapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 1), item_width, item_height),
+                    new Rectangle(weapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 0), item_width, item_height),
                     Color.White);
                 bowLabel.Text = "Bow & Arrows";
             }
@@ -461,10 +461,14 @@ namespace TileGame.GameScreens
                 alcoholLabel.Text = "Alcohol";
             }
 
-            GameRef.spriteBatch.Draw(
-                        fishImage,
-                        new Rectangle(nonweapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 2), item_width, item_height),
-                        Color.White);
+            if (StoryProgress.ProgressLine["Fish"] == true)
+            {
+                GameRef.spriteBatch.Draw(
+                            fishImage,
+                            new Rectangle(nonweapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 2), item_width, item_height),
+                            Color.White);
+                fishLabel.Text = "Fish";
+            }
 
             GameRef.spriteBatch.Draw(
                     ironOreImage,
@@ -528,7 +532,7 @@ namespace TileGame.GameScreens
 
             amountOfIronLabel.Text = "x " + StoryProgress.collectedAmountDict["IronOre"].ToString();
             amountOfGoldLabel.Text = "x " + StoryProgress.collectedAmountDict["Money"].ToString();
-            amountOfFishLabel.Text = "x " + StoryProgress.collectedAmountDict["Fish"].ToString();
+            //amountOfFishLabel.Text = "x " + StoryProgress.collectedAmountDict["Fish"].ToString();
         }
 
         private void ResetKey(Keys Key)
@@ -541,17 +545,17 @@ namespace TileGame.GameScreens
 
         private void AssignKeyToItem(Keys Key)
         {
-            if (cursor_item_number == 0 && StoryProgress.ProgressLine["Axe"] == true)
+            if (cursor_item_number == 0 && StoryProgress.ProgressLine["Crossbow"] == true)
+            {
+                StoryProgress.activeItemsDict["Crossbow"] = Key;
+            }
+            if (cursor_item_number == 1 && StoryProgress.ProgressLine["Axe"] == true)
             {
                 StoryProgress.activeItemsDict["Axe"] = Key;
             }
-            if (cursor_item_number == 1 && StoryProgress.ProgressLine["Sword"] == true)
+            if (cursor_item_number == 2 && StoryProgress.ProgressLine["Sword"] == true)
             {
                 StoryProgress.activeItemsDict["Sword"] = Key;
-            }
-            if (cursor_item_number == 2 && StoryProgress.ProgressLine["Crossbow"] == true)
-            {
-                StoryProgress.activeItemsDict["Crossbow"] = Key;
             }
             if (cursor_item_number == 3 && StoryProgress.ProgressLine["Spear"] == true)
             {

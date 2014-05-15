@@ -42,6 +42,7 @@ namespace TileEngine
             AddItemProgressLine("Permit", false, "Item");
             AddItemProgressLine("Alcohol", false, "Item");
             AddItemProgressLine("Belladonna", false, "Item");
+            AddItemProgressLine("Fish", false, "Item");
             //Quests
             AddItemProgressLine("treeIsDown", false, "Quest");
             AddItemProgressLine("contestAgainstJohnnyFinished", false, "Quest");
@@ -55,7 +56,7 @@ namespace TileEngine
 
             AddItemCollectedAmountDict("IronOre", 0);
             AddItemCollectedAmountDict("Money", 0);
-            AddItemCollectedAmountDict("Fish", 0);
+            //AddItemCollectedAmountDict("Fish", 0);
         }
 
 
@@ -64,6 +65,12 @@ namespace TileEngine
         {
             if(ProgressLine.ContainsKey(key))
             ProgressLine[key] = true;
+        }
+
+        public void SetToFalse(string key)
+        {
+            if (ProgressLine.ContainsKey(key))
+                ProgressLine[key] = false;
         }
 
         private void AddItemProgressLine(string key, bool value, string type)
@@ -107,7 +114,7 @@ namespace TileEngine
                 npc.ChangeScript("Permit");
             if (StoryProgress.ProgressLine["Permit"] && npc.NPCName == "Bibitur")
                 npc.script = null;
-            if (StoryProgress.collectedAmountDict["Fish"] > 0 && npc.NPCName == "Fisherman")
+            if (StoryProgress.ProgressLine["Fish"] && npc.NPCName == "Fisherman") //(StoryProgress.collectedAmountDict["Fish"] > 0 && npc.NPCName == "Fisherman")
             {
                 npc.ChangeScript("fishHave");
             }
