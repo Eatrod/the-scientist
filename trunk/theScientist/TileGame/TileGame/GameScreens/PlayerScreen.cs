@@ -68,9 +68,11 @@ namespace TileGame.GameScreens
         Color Charge_Bar_Color;
         bool charging;
 
-        Label CollectMinigamePlayerScoreLabel, CollectMinigameNpcScoreLabel, CollectMinigameSuccessLabel, CollectMinigameFailureLabel;
+        Label CollectMinigamePlayerScoreLabel, CollectMinigameNpcScoreLabel, CollectMinigameFinishedLabel, CollectMinigameStartSignalLabel;
         Texture2D CollectMinigamePlayerPortrait, CollectMinigameNpcPortrait;
         
+        SpriteFont fontLarge;
+
         //--
 
         int fire_arrow_counter = 0;
@@ -297,6 +299,9 @@ namespace TileGame.GameScreens
             ContentManager Content = Game.Content;
 
             base.LoadContent();
+
+            fontLarge = Content.Load<SpriteFont>(@"Fonts\Large_Venice");
+
             gameOver = new PictureBox(
                 Content.Load<Texture2D>("BackGrounds\\EndingGameOver"),
                    GameRef.ScreenRectangle);
@@ -431,17 +436,17 @@ namespace TileGame.GameScreens
             CollectMinigamePlayerPortrait = Content.Load<Texture2D>(@"CharacterPotraits\PortraitIgnazio");
             CollectMinigameNpcPortrait = Content.Load<Texture2D>(@"CharacterPotraits\Anon");
 
-            CollectMinigameSuccessLabel = new Label();
-            CollectMinigameSuccessLabel.Text = "";
-            CollectMinigameSuccessLabel.Color = Color.Red;
-            CollectMinigameSuccessLabel.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - 45, GraphicsDevice.Viewport.Height / 2 - 6);
-            ControlManager.Add(CollectMinigameSuccessLabel);
+            CollectMinigameFinishedLabel = new Label();
+            CollectMinigameFinishedLabel.Text = "";
+            CollectMinigameFinishedLabel.Color = Color.Red;
+            CollectMinigameFinishedLabel.SpriteFont = fontLarge;
+            ControlManager.Add(CollectMinigameFinishedLabel);
 
-            CollectMinigameFailureLabel = new Label();
-            CollectMinigameFailureLabel.Text = "";
-            CollectMinigameFailureLabel.Color = Color.Red;
-            CollectMinigameFailureLabel.Position = new Vector2(GraphicsDevice.Viewport.Width / 2- 45, GraphicsDevice.Viewport.Height / 2 - 6);
-            ControlManager.Add(CollectMinigameFailureLabel);
+            CollectMinigameStartSignalLabel = new Label();
+            CollectMinigameStartSignalLabel.Text = "";
+            CollectMinigameStartSignalLabel.Color = Color.Red;
+            CollectMinigameStartSignalLabel.SpriteFont = fontLarge;         
+            ControlManager.Add(CollectMinigameStartSignalLabel);
             //--
 
             //BF
@@ -1632,12 +1637,45 @@ namespace TileGame.GameScreens
 
                 if (FruitForMiniGameSprite.npcPoints >= 1000)
                 {
-                    CollectMinigameFailureLabel.Text = "FAILURE!";
+                    CollectMinigameFinishedLabel.Text = "FAILURE!";
+                    CollectMinigameFinishedLabel.Size = CollectMinigameFinishedLabel.SpriteFont.MeasureString(CollectMinigameFinishedLabel.Text);
+                    CollectMinigameFinishedLabel.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - CollectMinigameFinishedLabel.Size.X / 2, GraphicsDevice.Viewport.Height / 2 - CollectMinigameFinishedLabel.Size.Y / 2);                  
                 }
-                if (FruitForMiniGameSprite.playerPoints >= 1000)
+                else if (FruitForMiniGameSprite.playerPoints >= 1000)
                 {
-                    CollectMinigameSuccessLabel.Text = "SUCCESS!";
+                    CollectMinigameFinishedLabel.Text = "SUCCESS!";
+                    CollectMinigameFinishedLabel.Size = CollectMinigameFinishedLabel.SpriteFont.MeasureString(CollectMinigameFinishedLabel.Text);
+                    CollectMinigameFinishedLabel.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - CollectMinigameFinishedLabel.Size.X / 2, GraphicsDevice.Viewport.Height / 2 - CollectMinigameFinishedLabel.Size.Y / 2);               
                 }
+                else
+                    CollectMinigameFinishedLabel.Text = "";
+
+                if(CollectGameScreen.elapsedStart >= 1000f && CollectGameScreen.elapsedStart < 2000f)
+                {
+                    CollectMinigameStartSignalLabel.Text = "3";
+                    CollectMinigameStartSignalLabel.Size = CollectMinigameStartSignalLabel.SpriteFont.MeasureString(CollectMinigameStartSignalLabel.Text);
+                    CollectMinigameStartSignalLabel.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - CollectMinigameStartSignalLabel.Size.X / 2, GraphicsDevice.Viewport.Height / 2 - CollectMinigameStartSignalLabel.Size.Y / 2);
+                }
+                else if(CollectGameScreen.elapsedStart >= 2000f && CollectGameScreen.elapsedStart < 3000f)
+                {
+                    CollectMinigameStartSignalLabel.Text = "2";
+                    CollectMinigameStartSignalLabel.Size = CollectMinigameStartSignalLabel.SpriteFont.MeasureString(CollectMinigameStartSignalLabel.Text);
+                    CollectMinigameStartSignalLabel.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - CollectMinigameStartSignalLabel.Size.X / 2, GraphicsDevice.Viewport.Height / 2 - CollectMinigameStartSignalLabel.Size.Y / 2);
+                }
+                else if(CollectGameScreen.elapsedStart >= 3000f && CollectGameScreen.elapsedStart < 4000f)
+                {
+                    CollectMinigameStartSignalLabel.Text = "1";
+                    CollectMinigameStartSignalLabel.Size = CollectMinigameStartSignalLabel.SpriteFont.MeasureString(CollectMinigameStartSignalLabel.Text);
+                    CollectMinigameStartSignalLabel.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - CollectMinigameStartSignalLabel.Size.X / 2, GraphicsDevice.Viewport.Height / 2 - CollectMinigameStartSignalLabel.Size.Y / 2);
+                }
+                else if(CollectGameScreen.elapsedStart >= 4000f && CollectGameScreen.elapsedStart < 5000f)
+                {
+                    CollectMinigameStartSignalLabel.Text = "GO!";
+                    CollectMinigameStartSignalLabel.Size = CollectMinigameStartSignalLabel.SpriteFont.MeasureString(CollectMinigameStartSignalLabel.Text);
+                    CollectMinigameStartSignalLabel.Position = new Vector2(GraphicsDevice.Viewport.Width / 2 - CollectMinigameStartSignalLabel.Size.X / 2, GraphicsDevice.Viewport.Height / 2 - CollectMinigameStartSignalLabel.Size.Y / 2);
+                }
+                else 
+                    CollectMinigameStartSignalLabel.Text = "";
             }
             else
             {
