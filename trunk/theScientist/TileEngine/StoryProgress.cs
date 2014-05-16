@@ -31,7 +31,7 @@ namespace TileEngine
             collectedAmountDict.Clear();
             //items
             AddItemProgressLine("Axe", false, "Item");
-            AddItemProgressLine("Sword", false, "Item");
+            AddItemProgressLine("Sword", true, "Item");
             AddItemProgressLine("Crossbow", true, "Item");
             AddItemProgressLine("Spear", false, "Item");
             AddItemProgressLine("DOOM-erang", false, "Item");

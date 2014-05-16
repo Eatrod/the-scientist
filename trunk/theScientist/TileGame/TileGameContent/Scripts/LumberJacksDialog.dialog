@@ -1,7 +1,7 @@
 ﻿<Conversations>
 
   <Conversation Name="Greeting">
-    <Text>Jack:What do you think you're doin?</Text>
+    <Text>Jack:What do you think you're doin'?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:John1" />
       <Handler Caption="Skip" Action="StartConversation:Competitions"/>
@@ -9,7 +9,7 @@
   </Conversation>
 
   <Conversation Name="John1">
-    <Text>John:You can axe if you want to borrow it.</Text>
+    <Text>John:You need to ask if you want to borrow the axe.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Johnny1" />
     </Handlers>
@@ -93,7 +93,7 @@
     <Handlers>
       <Handler Caption="Arm wrestling" Action="StartConversation:RiddleWrong" />
       <Handler Caption="Kill the children" Action="StartConversation:RiddleWrong" />
-      <Handler Caption="Mashed Potatoes" Action="StartConversation:RiddleCorrect" />
+      <Handler Caption="Make mashed potatoes" Action="StartConversation:RiddleCorrect" />
       <Handler Caption="Eat one potato" Action="StartConversation:RiddleWrong" />
     </Handlers>
   </Conversation>

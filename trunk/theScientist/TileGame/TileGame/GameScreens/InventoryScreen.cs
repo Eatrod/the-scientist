@@ -25,7 +25,7 @@ namespace TileGame.GameScreens
         Texture2D inventoryCursorImage;
         int cursor_X, cursor_Y;
         int cursor_item_number;
-        Label axeLabel, bowLabel;
+        Label axeLabel, bowLabel, swordLabel;
         Label belladonnaLabel, immortuiLabel, ironOreLabel, permitLabel, goldLabel, alcoholLabel, fishLabel;
         Label amountOfIronLabel, amountOfGoldLabel; //, amountOfFishLabel;
         Label[] activeWeaponNumbers;
@@ -71,7 +71,7 @@ namespace TileGame.GameScreens
             cursor_width = GameRef.ScreenRectangle.Width / 6;
             cursor_height = GameRef.ScreenRectangle.Height / 6;
 
-            item_width = GameRef.ScreenRectangle.Width / 8;
+            item_width = GameRef.ScreenRectangle.Width / 9;
             item_height = GameRef.ScreenRectangle.Height / 6;
 
             active_item_slot_width = GameRef.ScreenRectangle.Width / 15;
@@ -79,7 +79,7 @@ namespace TileGame.GameScreens
             active_item_slot_starting_x = GameRef.ScreenRectangle.Width / 15;
             active_item_slot_bracket_width = GameRef.ScreenRectangle.Width / 90;
 
-            active_item_width = GameRef.ScreenRectangle.Width / 20;
+            active_item_width = GameRef.ScreenRectangle.Width / 22;
             active_item_height = GameRef.ScreenRectangle.Height / 15;
             active_item_y = GameRef.ScreenRectangle.Height / 12;
             active_item_x_distance = GameRef.ScreenRectangle.Width / 15 + GameRef.ScreenRectangle.Width / 15;
@@ -94,7 +94,7 @@ namespace TileGame.GameScreens
 
             inventoryBackground = Content.Load<Texture2D>(@"Backgrounds\Inventory test");
             axeImage = Content.Load<Texture2D>(@"Sprite\Axe");
-            swordImage = Content.Load<Texture2D>(@"Sprite\Inv Sword test");
+            swordImage = Content.Load<Texture2D>(@"Sprite\Sword");
             crossbowImage = Content.Load<Texture2D>(@"Sprite\Bow");
             inventoryCursorImage = Content.Load<Texture2D>(@"Sprite\Inventory Cursor test");
             belladonnaImage = Content.Load<Texture2D>(@"Sprite\Belladonna");
@@ -168,14 +168,20 @@ namespace TileGame.GameScreens
             axeLabel = new Label();
             axeLabel.Text = "";
             axeLabel.Color = Color.Black;
-            axeLabel.Position = new Vector2(weapon_starting_x + item_x_distance * 1, item_starting_y + item_y_distance * 0 + item_height);
+            axeLabel.Position = new Vector2(weapon_starting_x + item_x_distance * 0, item_starting_y + item_y_distance * 1 + item_height);
             ControlManager.Add(axeLabel);
 
             bowLabel = new Label();
             bowLabel.Text = "";
             bowLabel.Color = Color.Black;
-            bowLabel.Position = new Vector2(weapon_starting_x + item_x_distance * 0, item_starting_y + item_y_distance * 0 + item_height);
+            bowLabel.Position = new Vector2(weapon_starting_x + item_x_distance * 1, item_starting_y + item_y_distance * 0 + item_height);
             ControlManager.Add(bowLabel);
+
+            swordLabel = new Label();
+            swordLabel.Text = "";
+            swordLabel.Color = Color.Black;
+            swordLabel.Position = new Vector2(weapon_starting_x + item_x_distance * 0, item_starting_y + item_y_distance * 0 + item_height);
+            ControlManager.Add(swordLabel);
 
             activeWeaponNumbers = new Label[5];
             for (int i = 0; i < 5; i++)
@@ -260,7 +266,7 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     axeImage,
-                    new Rectangle(weapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 0), item_width, item_height),
+                    new Rectangle(weapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 1), item_width, item_height),
                     Color.White);
                 axeLabel.Text = "Axe";
             }
@@ -269,15 +275,16 @@ namespace TileGame.GameScreens
             {
                 GameRef.spriteBatch.Draw(
                     swordImage,
-                    new Rectangle(weapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 1), item_width, item_height), 
+                    new Rectangle(weapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 0), item_width, item_height), 
                     Color.White);
+                swordLabel.Text = "Sword";
             }
 
             if (StoryProgress.ProgressLine["Crossbow"] == true)
             {
                 GameRef.spriteBatch.Draw(
                     crossbowImage,
-                    new Rectangle(weapon_starting_x + item_x_distance * 0, item_starting_y + (item_y_distance * 0), item_width, item_height),
+                    new Rectangle(weapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 0), item_width, item_height),
                     Color.White);
                 bowLabel.Text = "Bow & Arrows";
             }
@@ -545,15 +552,15 @@ namespace TileGame.GameScreens
 
         private void AssignKeyToItem(Keys Key)
         {
-            if (cursor_item_number == 0 && StoryProgress.ProgressLine["Crossbow"] == true)
+            if (cursor_item_number == 1 && StoryProgress.ProgressLine["Crossbow"] == true)
             {
                 StoryProgress.activeItemsDict["Crossbow"] = Key;
             }
-            if (cursor_item_number == 1 && StoryProgress.ProgressLine["Axe"] == true)
+            if (cursor_item_number == 2 && StoryProgress.ProgressLine["Axe"] == true)
             {
                 StoryProgress.activeItemsDict["Axe"] = Key;
             }
-            if (cursor_item_number == 2 && StoryProgress.ProgressLine["Sword"] == true)
+            if (cursor_item_number == 0 && StoryProgress.ProgressLine["Sword"] == true)
             {
                 StoryProgress.activeItemsDict["Sword"] = Key;
             }
