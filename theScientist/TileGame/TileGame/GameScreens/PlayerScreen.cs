@@ -53,7 +53,7 @@ namespace TileGame.GameScreens
 
         //--     
         Texture2D activeItemBackground, abilityBackground, axeImage, swordImage, crossbowImage;
-        Texture2D[] activeItem_textures, axe_ability_textures, crossbow_ability_textures;
+        Texture2D[] activeItem_textures, axe_ability_textures, crossbow_ability_textures, sword_ability_textures;
         Color[] activeItemBackgroundColor;
         Color[] abilityBackgroundColor;
 
@@ -378,7 +378,7 @@ namespace TileGame.GameScreens
             activeItemBackground = Content.Load<Texture2D>(@"Sprite\activeItemBackground test");
             abilityBackground = Content.Load<Texture2D>(@"Sprite\abilityBackground test2");
             axeImage = Content.Load<Texture2D>(@"Sprite\Axe");
-            swordImage = Content.Load<Texture2D>(@"Sprite\Inv Sword test");
+            swordImage = Content.Load<Texture2D>(@"Sprite\Sword");
             crossbowImage = Content.Load<Texture2D>(@"Sprite\Bow");
             activeItem_textures = new Texture2D[5];
 
@@ -392,6 +392,12 @@ namespace TileGame.GameScreens
             for (int i = 0; i < crossbow_ability_textures.Count(); i++)
             {
                 crossbow_ability_textures[i] = Content.Load<Texture2D>(@"Sprite\arrow ability " + (i+1).ToString());
+            }
+
+            sword_ability_textures = new Texture2D[1];
+            for (int i = 0; i < sword_ability_textures.Count(); i++)
+            {
+                sword_ability_textures[i] = Content.Load<Texture2D>(@"Sprite\Sword ability " + (i + 1).ToString());
             }
 
             activeItemBackgroundColor = new Color[5];
@@ -1798,6 +1804,23 @@ namespace TileGame.GameScreens
                     }
                 }
             }
+            if (StoryProgress.activeItemsDict.ContainsKey("Sword"))
+            {
+                key_string = StoryProgress.activeItemsDict["Sword"].ToString();
+                key_string = key_string.Replace('D', ' ');
+                key_number = Convert.ToInt32(key_string);
+                if (activeItemBackgroundColor[key_number - 1] == Color.White)
+                {
+                    for (int i = 0; i < sword_ability_textures.Count(); i++)
+                    {
+                        spriteBatch.Draw(
+                        sword_ability_textures[i],
+                        new Rectangle(GameRef.ScreenRectangle.Width / 2 - (HUD_size_ref * 2 + (HUD_size_ref) / 2) + ((HUD_size_ref + HUD_size_ref / 10) * i) + HUD_size_ref / 8, GameRef.ScreenRectangle.Height - HUD_size_ref + HUD_size_ref / 8, HUD_size_ref - HUD_size_ref / 4, HUD_size_ref - HUD_size_ref / 4), //(GameRef.ScreenRectangle.Width / 2 - (50 * 2 + 16) + (50 * i), GameRef.ScreenRectangle.Height - 45, 32, 32),
+                        Color.White);
+                    }
+                }
+            }
+
 
 
             if (StoryProgress.activeItemsDict.ContainsKey("Axe"))

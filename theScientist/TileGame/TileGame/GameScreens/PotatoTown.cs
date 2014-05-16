@@ -341,7 +341,7 @@ namespace TileGame.GameScreens
 
             npcNeutral = new NPC_Neutral_Townsfolk(Content.Load<Texture2D>("Sprite/NPC1PotatoTown"), Content.Load<Script>("Scripts/PotatotownTownsfolk"));
             npcNeutral.Origionoffset = new Vector2(25, 65);
-            npcNeutral.SetSpritePositionInGameWorld(new Vector2(55, 32));
+            npcNeutral.SetSpritePositionInGameWorld(new Vector2(64, 32));
             AnimatedSpriteObject.Add(npcNeutral);
             NpcNeutralList.Add(npcNeutral);
 
@@ -451,7 +451,7 @@ namespace TileGame.GameScreens
             treeStanding = new TreeStandingBridge(Content.Load<Texture2D>("Sprite/BridgeTreeStanding"));
             treeStanding.SetSpritePositionInGameWorld(new Vector2(35, 15));
             treeStanding.Origionoffset = new Vector2(48, 80);
-            treeStanding.CollisionRadius = 48.0f;
+            treeStanding.CollisionRadius = 55;
             SpriteObject.Add(treeStanding);
 
             treeBridge = new Sprite(Content.Load<Texture2D>("Sprite/BridgeTreeFallen"));
@@ -472,7 +472,7 @@ namespace TileGame.GameScreens
         }
         public override void Update(GameTime gameTime)
         {
-            player.Speed = 10;
+            player.Speed = 2;
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
             //--
             if (InputHandler.KeyReleased(Keys.Space))
