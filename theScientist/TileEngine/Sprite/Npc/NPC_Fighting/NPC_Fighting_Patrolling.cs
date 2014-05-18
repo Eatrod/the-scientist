@@ -14,14 +14,17 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 {
     public class NPC_Fighting_Patrolling: NPC_Fighting_Guard
     {
-
+        private float delayAggro;
+        private float elapsedAggro;
         public SoundEffect swordSound;
         private bool soundPlayed = false;
         
       
         public NPC_Fighting_Patrolling(Texture2D texture, Script script, Random random) :base(texture,script)
         {
-           
+
+            this.delayAggro = 10000f;
+            this.elapsedAggro = 0.0f;
             this.TimeToStrike = false;
             this.DelayTimeToStrike = 250f;
             this.ElapsedTimeToStrike = 0.0f;
@@ -121,13 +124,21 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
 
                 if (Aggro && !StrikeMode)
                 {
+                    this.elapsedAggro += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                     this.speed = AggroSpeed;
                     this.Position += VectorTowardsTarget * speed;
                     UpdateSpriteAnimation(VectorTowardsTarget);
+                    if(elapsedAggro >= delayAggro)
+                    {
+                        Aggro = false;
+                        GoingHome = true;
+                        this.elapsedAggro = 0.0f;
+                    }
                     
                 }
                 else if (StrikeMode && !MeleeHit &&!TimeToStrike)
                 {
+                    this.elapsedAggro = 0.0f;
                     UpdateSpriteStandingStillAnimation(VectorTowardsTarget);
                     soundPlayed = false;
                 }
