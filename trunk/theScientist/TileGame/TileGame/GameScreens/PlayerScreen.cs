@@ -427,7 +427,7 @@ namespace TileGame.GameScreens
                 crossbow_ability_textures[i] = Content.Load<Texture2D>(@"Sprite\arrow ability " + (i+1).ToString());
             }
 
-            sword_ability_textures = new Texture2D[1];
+            sword_ability_textures = new Texture2D[2];
             for (int i = 0; i < sword_ability_textures.Count(); i++)
             {
                 sword_ability_textures[i] = Content.Load<Texture2D>(@"Sprite\Sword ability " + (i + 1).ToString());

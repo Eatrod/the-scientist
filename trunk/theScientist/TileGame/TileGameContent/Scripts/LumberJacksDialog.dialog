@@ -108,7 +108,7 @@
     <Conversation Name="RiddleCorrect">
     <Text>John:How did you figure it out?!</Text>
     <Handlers>
-      <Handler Caption="Leave" Action="SetToTrue:Axe;SetToTrue:contestAgainstJohnFinished;RemoveHandler:Riddle;EndConversation" />
+      <Handler Caption="Leave" Action="SetToTrue:contestAgainstJohnFinished;RemoveHandler:Riddle;EndConversation" />
     </Handlers>
   </Conversation>
 

@@ -270,6 +270,8 @@ namespace TileGame.GameScreens
                     Color.White);
                 axeLabel.Text = "Axe";
             }
+            else
+                axeLabel.Text = "";
 
             if (StoryProgress.ProgressLine["Sword"] == true)
             {
@@ -279,6 +281,8 @@ namespace TileGame.GameScreens
                     Color.White);
                 swordLabel.Text = "Sword";
             }
+            else
+                swordLabel.Text = "";
 
             if (StoryProgress.ProgressLine["Crossbow"] == true)
             {
@@ -288,6 +292,8 @@ namespace TileGame.GameScreens
                     Color.White);
                 bowLabel.Text = "Bow & Arrows";
             }
+            else
+                bowLabel.Text = "";
 
             if (StoryProgress.ProgressLine["Spear"] == true)
             {
@@ -440,6 +446,8 @@ namespace TileGame.GameScreens
 
                 belladonnaLabel.Text = "Belladonna";
             }
+            else
+                belladonnaLabel.Text = "";
 
             if (StoryProgress.ProgressLine["Immortui"] == true)
             {
@@ -449,6 +457,8 @@ namespace TileGame.GameScreens
                             Color.White);
                 immortuiLabel.Text = "Immortui";
             }
+            else
+                immortuiLabel.Text = "";
 
             if (StoryProgress.ProgressLine["Permit"] == true)
             {
@@ -457,7 +467,9 @@ namespace TileGame.GameScreens
                             new Rectangle(nonweapon_starting_x + item_x_distance * 1, item_starting_y + (item_y_distance * 0), item_width, item_height),
                             Color.White);
                 permitLabel.Text = "Permit";
-            }          
+            }
+            else
+                permitLabel.Text = "";
 
             if (StoryProgress.ProgressLine["Alcohol"] == true)
             {
@@ -467,6 +479,8 @@ namespace TileGame.GameScreens
                             Color.White);
                 alcoholLabel.Text = "Alcohol";
             }
+            else
+                alcoholLabel.Text = "";
 
             if (StoryProgress.ProgressLine["Fish"] == true)
             {
@@ -476,6 +490,8 @@ namespace TileGame.GameScreens
                             Color.White);
                 fishLabel.Text = "Fish";
             }
+            else
+                fishLabel.Text = "";
 
             GameRef.spriteBatch.Draw(
                     ironOreImage,

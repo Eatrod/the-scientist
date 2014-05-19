@@ -475,6 +475,11 @@ namespace TileGame.GameScreens
             player.Speed = 2;
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
             //--
+            if (StoryProgress.ProgressLine["contestAgainstJohnFinished"] && StoryProgress.ProgressLine["contestAgainstJohnnyFinished"])
+            {
+                StoryProgress.ProgressLine["Axe"] = true;
+            }
+
             if (InputHandler.KeyReleased(Keys.Space))
             {
                 if (gameOver.Visible)
