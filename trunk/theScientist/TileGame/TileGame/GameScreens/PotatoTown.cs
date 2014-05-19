@@ -550,9 +550,10 @@ namespace TileGame.GameScreens
             }
             foreach(NPC_Fighting_PotatoeGunner npc in NPCPotatoeGunners)
             {
+                npc.UpdateWithPlayer(gameTime, player);
                 if (!npc.Dead)
                 {
-                    npc.UpdateWithPlayer(gameTime, player);
+                    //npc.UpdateWithPlayer(gameTime, player);
                     if (npc.FireTime)
                     {
                         BombSprite bomb;
