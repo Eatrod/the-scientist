@@ -115,6 +115,8 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 if(ElapsedRespawn > DelayRespawn)
                 {
                     Aggro = false;
+                    this.Dead = false;
+                    this.Life = this.FullHp;
                     DirtPileCreated = false;
 
                 }

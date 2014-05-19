@@ -260,6 +260,39 @@ namespace TileGame.GameScreens
             if (!player.Animations.ContainsKey("CaptainMorgan"))
                 player.Animations.Add("CaptainMorgan", captainMorgan);
 
+            FrameAnimation swordstartright = new FrameAnimation(1, 50, 80, 0, 640);
+            if (!player.Animations.ContainsKey("SwordStartRight"))
+                player.Animations.Add("SwordStartRight", swordstartright);
+
+            FrameAnimation swordstartleft = new FrameAnimation(1, 50, 80, 250, 640);
+            if (!player.Animations.ContainsKey("SwordStartLeft"))
+                player.Animations.Add("SwordStartLeft", swordstartleft);
+
+            FrameAnimation swordstartdown = new FrameAnimation(1, 50, 80, 150, 640);
+            if (!player.Animations.ContainsKey("SwordStartDown"))
+                player.Animations.Add("SwordStartDown", swordstartdown);
+
+            FrameAnimation swordstartup = new FrameAnimation(1, 50, 80, 400, 640);
+            if (!player.Animations.ContainsKey("SwordStartUp"))
+                player.Animations.Add("SwordStartUp", swordstartup);
+
+
+            FrameAnimation swordfinishright = new FrameAnimation(1, 100, 80, 50, 640);
+            if (!player.Animations.ContainsKey("SwordFinishRight"))
+                player.Animations.Add("SwordFinishRight", swordfinishright);
+
+            FrameAnimation swordfinishleft = new FrameAnimation(1, 100, 80, 300, 640);
+            if (!player.Animations.ContainsKey("SwordFinishLeft"))
+                player.Animations.Add("SwordFinishLeft", swordfinishleft);
+
+            FrameAnimation swordfinishdown = new FrameAnimation(1, 50, 80, 200, 640);
+            if (!player.Animations.ContainsKey("SwordFinishDown"))
+                player.Animations.Add("SwordFinishDown", swordfinishdown);
+
+            FrameAnimation swordfinishup = new FrameAnimation(1, 50, 80, 450, 640);
+            if (!player.Animations.ContainsKey("SwordFinishUp"))
+                player.Animations.Add("SwordFinishUp", swordfinishup);
+
 
             player.CurrentAnimationName = "Down";
             player.oldAnimation = player.CurrentAnimationName;
