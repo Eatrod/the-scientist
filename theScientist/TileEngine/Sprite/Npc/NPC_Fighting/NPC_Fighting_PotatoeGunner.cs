@@ -114,8 +114,10 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                 this.CurrentAnimationName = "Nothing";
                 if(ElapsedRespawn > DelayRespawn)
                 {
+                    this.CurrentAnimationName = "StandingStill";
                     Aggro = false;
                     this.Dead = false;
+                    this.ElapsedRespawn = 0.0f;
                     this.Life = this.FullHp;
                     DirtPileCreated = false;
 
