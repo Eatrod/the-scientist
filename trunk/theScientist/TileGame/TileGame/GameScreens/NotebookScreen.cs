@@ -39,6 +39,7 @@ namespace TileGame.GameScreens
         Dictionary<int, Message> activeDict = new Dictionary<int, Message>();
 
         List<int> ListOfUnlockedKeys;
+        private Label headline;
         Label leftText;
         Label rightText;
         Label leftText2;
@@ -83,6 +84,13 @@ namespace TileGame.GameScreens
             textRect = new Rectangle(0, 0, (int)(400 * widthOffset), (int)(600 * heightOffset));
             rightArrowRect = new Rectangle((int)middleRightSide + 200 * (int)widthOffset, 900 * (int)heightOffset, 25, 25);
             leftArrowRect = new Rectangle((int)middleLeftSide - 200 * (int)widthOffset, 900 * (int)heightOffset, 25, 25);
+
+            headline = new Label();
+            headline.Position = new Vector2(middleLeftSide - 80 * widthOffset, 150 * heightOffset);
+            headline.Text = "";
+            headline.Color = Color.DarkBlue;
+            headline.SpriteFont.LineSpacing = 1;
+            ControlManager.Add(headline);
 
             leftPagenumberText = new Label();
             leftPagenumberText.Position = new Vector2(middleLeftSide + 40 * widthOffset, GraphicsDevice.Viewport.Height - 170 * widthOffset);
@@ -205,125 +213,14 @@ namespace TileGame.GameScreens
             }
             #endregion
 
-            #region Section updates
-
-            if (InputHandler.KeyReleased(Keys.Up))
-            {
-                pageIndex = 0;
-                sectionHandler--;
-                if (sectionHandler < 0)
-                    sectionHandler = 2;
-            }
-            if (InputHandler.KeyReleased(Keys.Down))
-            {
-                pageIndex = 0;
-                sectionHandler++;
-                if (sectionHandler > 2)
-                    sectionHandler = 0;
-            }
-            if (sectionHandler == 0)
-            {
-                activeDict.Clear();
-                foreach (var key in taskDict)
-                {
-                    if(taskDict[key.Key].Unlocked)
-                        activeDict.Add(key.Key, key.Value);
-                }
-            }
-            else if (sectionHandler == 1)
-            {
-                activeDict.Clear();
-                foreach (var key in hintDict)
-                {
-                    if (hintDict[key.Key].Unlocked)
-                        activeDict.Add(key.Key, key.Value);
-                }
-            }
-            else if (sectionHandler == 2)
-            {
-                activeDict.Clear();
-                foreach (var key in completedDict)
-                {
-                    if (completedDict[key.Key].Unlocked)
-                        activeDict.Add(key.Key, key.Value);
-                }
-            }
-            #endregion
-
+            SectionCheck();     
             GetKeysThatAreNotLocked();
-
-            leftText.Text = "";
-            leftText2.Text = "";
-            rightText.Text = "";
-            rightText2.Text = "";         
-
-            if (pageIndex < (ListOfUnlockedKeys.Count))
-            {
-                if (pageIndex + 1 < ListOfUnlockedKeys.Count)
-                    leftPageIndex = ListOfUnlockedKeys[pageIndex + 1];
-                else
-                    leftPageIndex = 0;
-                if (activeDict.ContainsKey(leftPageIndex))
-                {
-                    leftText.Text = activeDict[leftPageIndex].Text;
-                    leftText.Color = GetTextColor(leftText.Text.Split(':')[0]);
-                    if (activeDict.ContainsKey(leftPageIndex + 1) && leftPageIndex != 0)
-                    {
-                        leftText2.Text = activeDict[leftPageIndex + 1].Text;
-                        leftText2.Color = GetTextColor(leftText2.Text.Split(':')[0]);
-                    }
-                    if (pageIndex == 0)
-                        leftPagenumberText.Text = "1";
-                    else
-                    {
-                        leftPagenumberText.Text = (pageIndex/2+1).ToString();
-                    }
-                }
-
-                if (pageIndex + 3 < ListOfUnlockedKeys.Count)
-                    rightPageIndex = ListOfUnlockedKeys[pageIndex + 3];
-                else
-                    rightPageIndex = 0;
-                if (activeDict.ContainsKey(rightPageIndex))
-                {
-                    rightText.Text = activeDict[rightPageIndex].Text;
-                    rightText.Color = GetTextColor(rightText.Text.Split(':')[0]);
-                    if (activeDict.ContainsKey(rightPageIndex+1) && rightPageIndex != 0)
-                    {
-                        rightText2.Text = activeDict[rightPageIndex+1].Text;
-                        rightText2.Color = GetTextColor(rightText2.Text.Split(':')[0]);
-                    }
-                    if (pageIndex == 0)
-                        rightPagenumberText.Text = "2";
-                    else
-                    {
-                        rightPagenumberText.Text = (pageIndex/2+2).ToString();
-                    }
-                }
-            }
+            SetTexts();
 
             if (InputHandler.KeyReleased(Keys.N))
                 StateManager.PopState();
-            if(InputHandler.KeyReleased(Keys.Left))
-            {
-                changePageSound.Play();
-                pageIndex -= 2;
-                pageIndex -= 4;
-                if (pageIndex < 0)
-                    pageIndex = 0;
-                //else
-                //  changePageSound.Play();
-            }
-            if(InputHandler.KeyReleased(Keys.Right))
-            {
-                changePageSound.Play();
-                lastPageIndex = pageIndex;
-                pageIndex += 4;
-                if (pageIndex > ListOfUnlockedKeys.Count - 2)
-                    pageIndex = lastPageIndex;
-                //else
-                //    changePageSound.Play();
-            }
+
+            PageNumberUpdate();
         }
         public override void Draw(GameTime gameTime)
         {
@@ -351,6 +248,30 @@ namespace TileGame.GameScreens
         #endregion
 
         #region Methods Region
+
+        private void PageNumberUpdate()
+        {
+            if (InputHandler.KeyReleased(Keys.Left))
+            {
+                changePageSound.Play();
+                pageIndex -= 2;
+                pageIndex -= 4;
+                if (pageIndex < 0)
+                    pageIndex = 0;
+                //else
+                //  changePageSound.Play();
+            }
+            if (InputHandler.KeyReleased(Keys.Right))
+            {
+                changePageSound.Play();
+                lastPageIndex = pageIndex;
+                pageIndex += 4;
+                if (pageIndex > ListOfUnlockedKeys.Count - 2)
+                    pageIndex = lastPageIndex;
+                //else
+                //    changePageSound.Play();
+            }
+        }
 
         private void InsertTextToDictionary(Dictionary<int, Message> messageDict,int key, string text)
         {
@@ -387,6 +308,110 @@ namespace TileGame.GameScreens
             else
             {
                 return Color.DarkBlue;
+            }
+        }
+
+        private void SectionCheck()
+        {
+            if (InputHandler.KeyReleased(Keys.Up))
+            {
+                pageIndex = 0;
+                sectionHandler--;
+                if (sectionHandler < 0)
+                    sectionHandler = 2;
+            }
+            if (InputHandler.KeyReleased(Keys.Down))
+            {
+                pageIndex = 0;
+                sectionHandler++;
+                if (sectionHandler > 2)
+                    sectionHandler = 0;
+            }
+            if (sectionHandler == 0)
+            {
+                activeDict.Clear();
+                headline.Text = "Current tasks";
+                headline.color = Color.DarkBlue;
+                foreach (var key in taskDict)
+                {
+                    if (taskDict[key.Key].Unlocked)
+                        activeDict.Add(key.Key, key.Value);
+                }
+            }
+            else if (sectionHandler == 1)
+            {
+                activeDict.Clear();
+                headline.Text = "Hints";
+                headline.color = Color.ForestGreen;
+                foreach (var key in hintDict)
+                {
+                    if (hintDict[key.Key].Unlocked)
+                        activeDict.Add(key.Key, key.Value);
+                }
+            }
+            else if (sectionHandler == 2)
+            {
+                activeDict.Clear();
+                headline.Text = "Completed tasks";
+                headline.color = Color.IndianRed;
+                foreach (var key in completedDict)
+                {
+                    if (completedDict[key.Key].Unlocked)
+                        activeDict.Add(key.Key, key.Value);
+                }
+            }
+        }
+
+        private void SetTexts()
+        {
+            leftText.Text = "";
+            leftText2.Text = "";
+            rightText.Text = "";
+            rightText2.Text = "";
+
+            if (pageIndex < (ListOfUnlockedKeys.Count))
+            {
+                if (pageIndex + 1 < ListOfUnlockedKeys.Count)
+                    leftPageIndex = ListOfUnlockedKeys[pageIndex + 1];
+                else
+                    leftPageIndex = 0;
+                if (activeDict.ContainsKey(leftPageIndex))
+                {
+                    leftText.Text = activeDict[leftPageIndex].Text;
+                    leftText.Color = GetTextColor(leftText.Text.Split(':')[0]);
+                    if (activeDict.ContainsKey(leftPageIndex + 1) && leftPageIndex != 0)
+                    {
+                        leftText2.Text = activeDict[leftPageIndex + 1].Text;
+                        leftText2.Color = GetTextColor(leftText2.Text.Split(':')[0]);
+                    }
+                    if (pageIndex == 0)
+                        leftPagenumberText.Text = "1";
+                    else
+                    {
+                        leftPagenumberText.Text = (pageIndex / 2 + 1).ToString();
+                    }
+                }
+
+                if (pageIndex + 3 < ListOfUnlockedKeys.Count)
+                    rightPageIndex = ListOfUnlockedKeys[pageIndex + 3];
+                else
+                    rightPageIndex = 0;
+                if (activeDict.ContainsKey(rightPageIndex))
+                {
+                    rightText.Text = activeDict[rightPageIndex].Text;
+                    rightText.Color = GetTextColor(rightText.Text.Split(':')[0]);
+                    if (activeDict.ContainsKey(rightPageIndex + 1) && rightPageIndex != 0)
+                    {
+                        rightText2.Text = activeDict[rightPageIndex + 1].Text;
+                        rightText2.Color = GetTextColor(rightText2.Text.Split(':')[0]);
+                    }
+                    if (pageIndex == 0)
+                        rightPagenumberText.Text = "2";
+                    else
+                    {
+                        rightPagenumberText.Text = (pageIndex / 2 + 2).ToString();
+                    }
+                }
             }
         }
 
