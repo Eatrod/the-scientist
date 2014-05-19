@@ -31,6 +31,10 @@ namespace TileGame.GameScreens
         Rectangle rightArrowRect;
         Texture2D leftArrow;
         Rectangle leftArrowRect;
+        Texture2D upArrow;
+        Rectangle upArrowRect;
+        Texture2D downArrow;
+        Rectangle downArrowRect;
         
         Dictionary<int, Message> taskDict = new Dictionary<int, Message>();
         Dictionary<int, Message> completedDict = new Dictionary<int, Message>();
@@ -74,6 +78,8 @@ namespace TileGame.GameScreens
             backgroundImage = Content.Load<Texture2D>(@"Backgrounds\book");
             rightArrow = Content.Load<Texture2D>("GUI/rightarrowUp");
             leftArrow = Content.Load<Texture2D>("GUI/leftarrowUp");
+            upArrow = Content.Load<Texture2D>("GUI/arrowUp");
+            downArrow = Content.Load<Texture2D>("GUI/arrowDown");
             base.LoadContent();
 
             float middle = GraphicsDevice.Viewport.Width / 2;
@@ -84,6 +90,8 @@ namespace TileGame.GameScreens
             textRect = new Rectangle(0, 0, (int)(400 * widthOffset), (int)(600 * heightOffset));
             rightArrowRect = new Rectangle((int)middleRightSide + 200 * (int)widthOffset, 900 * (int)heightOffset, 25, 25);
             leftArrowRect = new Rectangle((int)middleLeftSide - 200 * (int)widthOffset, 900 * (int)heightOffset, 25, 25);
+            upArrowRect = new Rectangle((int)middleRightSide - 350 * (int)widthOffset, 850 * (int)heightOffset, 25, 25);
+            downArrowRect = new Rectangle((int)middleLeftSide + 350 * (int)widthOffset, 850 * (int)heightOffset, 25, 25);
 
             headline = new Label();
             headline.Position = new Vector2(middleLeftSide - 80 * widthOffset, 150 * heightOffset);
@@ -237,6 +245,9 @@ namespace TileGame.GameScreens
 
             if (pageIndex >= 4)
                 GameRef.spriteBatch.Draw(leftArrow, leftArrowRect, Color.White);
+
+            GameRef.spriteBatch.Draw(upArrow, upArrowRect, Color.White);
+            GameRef.spriteBatch.Draw(downArrow, downArrowRect, Color.White);
 
             ControlManager.Draw(GameRef.spriteBatch);
 
