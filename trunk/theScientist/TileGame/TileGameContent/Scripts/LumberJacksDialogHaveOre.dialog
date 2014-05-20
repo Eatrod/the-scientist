@@ -1,0 +1,129 @@
+﻿<Conversations>
+
+  <Conversation Name="Greeting">
+    <Text>Jack:What do you think you're doin'?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:John1" />
+      <Handler Caption="Skip" Action="StartConversation:Competitions"/>
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="John1">
+    <Text>John:You need to ask if you want to borrow the axe.</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Johnny1" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Johnny1">
+    <Text>Johnny:Potato!</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Ignazio1" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Ignazio1">
+    <Text>Ignazio:How about i take your axe?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Jack2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Jack2">
+    <Text>Jack:How about I kick your ass!</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:John2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="John2">
+    <Text>John:How about a competition?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Johnny2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Johnny2">
+    <Text>Johnny:Potato?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Ignazio2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Ignazio2">
+    <Text>Ignazio:Fine. What type of competition?</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Jack3" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Jack3">
+    <Text>Jack:Ore gathering!</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:John3" />
+    </Handlers>
+  </Conversation>
+  
+  <Conversation Name="John3">
+    <Text>John:A riddle!</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Johnny3" />
+    </Handlers>
+  </Conversation>
+  
+  <Conversation Name="Johnny3">
+    <Text>Johnny:Potato...</Text>
+    <Handlers>
+      <Handler Caption="Continue" Action="StartConversation:Competitions" />
+    </Handlers>
+  </Conversation>
+  
+  <Conversation Name="Competitions">
+    <Text>Ignazio:Fine i start with...</Text>
+    <Handlers>
+      <Handler Caption="Ore gathering" Action="StartConversation:Oregathering" />
+      <Handler Caption="Riddle" Action="StartConversation:Riddle" />
+      <Handler Caption="Potato!?" Action="StartConversation:Potato!?" />
+      <Handler Caption="Leave" Action="EndConversation" />
+    </Handlers>
+  </Conversation>
+  
+    <Conversation Name="Riddle">
+    <Text>John:A mother has six children and five potatoes. How can she feed each one equal amount of potatoes?</Text>
+    <Handlers>
+      <Handler Caption="Arm wrestling" Action="StartConversation:RiddleWrong" />
+      <Handler Caption="Kill the children" Action="StartConversation:RiddleWrong" />
+      <Handler Caption="Make mashed potatoes" Action="StartConversation:RiddleCorrect" />
+      <Handler Caption="Eat one potato" Action="StartConversation:RiddleWrong" />
+    </Handlers>
+  </Conversation>
+  
+    <Conversation Name="RiddleWrong">
+    <Text>John:Wrong! Is it too hard for you?</Text>
+    <Handlers>
+      <Handler Caption="Leave" Action="EndConversation" />
+    </Handlers>
+  </Conversation>
+
+    <Conversation Name="RiddleCorrect">
+    <Text>John:How did you figure it out?!</Text>
+    <Handlers>
+      <Handler Caption="Leave" Action="SetToTrue:contestAgainstJohnFinished;RemoveHandler:Riddle;EndConversation" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Potato!?">
+    <Text>John:Then you'll compete against my brother in a collectathon at our fruit field! The first to earn 1000 points is the victor!</Text>
+    <Handlers>
+      <Handler Caption="Leave" Action="SetToTrue:CollectMinigame;EndConversation" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Oregathering">
+    <Text>Jack: Hmpf personally I hoped the bandits would have taken care of you. </Text>
+    <Handlers>
+      <Handler Caption="Leave" Action="SetToTrue:contestAgainstJackFinished;AddItemCollectedAmount:IronOre,-200;RemoveHandler:Ore gathering;EndConversation" />
+    </Handlers>
+  </Conversation>
+  
+</Conversations>

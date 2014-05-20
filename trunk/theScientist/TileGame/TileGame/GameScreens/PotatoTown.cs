@@ -278,6 +278,7 @@ namespace TileGame.GameScreens
             NpcStoryList.Add(npcStoryAsterix);
 
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/NPCJack"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/Jack"), "Jack");
+            npcstory.scriptDict.Add("IronOre", Content.Load<Script>("Scripts/LumberJacksDialogHaveOre"));
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SpeakingRadius = 90;
             npcstory.SetSpritePositionInGameWorld(new Vector2(138, 15));
@@ -475,7 +476,7 @@ namespace TileGame.GameScreens
             player.Speed = 4;
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
             //--
-            if (StoryProgress.ProgressLine["contestAgainstJohnFinished"] && StoryProgress.ProgressLine["contestAgainstJohnnyFinished"])
+            if (StoryProgress.ProgressLine["contestAgainstJohnFinished"] && StoryProgress.ProgressLine["contestAgainstJohnnyFinished"] && StoryProgress.ProgressLine["contestAgainstJackFinished"])
             {
                 StoryProgress.ProgressLine["Axe"] = true;
             }
