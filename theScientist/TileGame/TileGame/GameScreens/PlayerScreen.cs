@@ -2537,7 +2537,7 @@ namespace TileGame.GameScreens
                         SpriteObjectInGameWorld.Remove(s);
                         renderList.Remove(s);
 
-                        player2.Life += 10;
+                        player2.Life += 15;
                         if (player2.Life > 100)
                             player2.Life = 100;
                         //Kanske ska förbättras med att skapa en lista för att ta bort efter denna loop

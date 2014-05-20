@@ -30,6 +30,7 @@ namespace TileGame
         public List<GameState> gamePlayScreens;
         BackgroundMusic titleMusic;
         BackgroundMusic potatotownMusic;
+        BackgroundMusic minigameMusic;
         Dictionary<GameState, BackgroundMusic> musicStates = new Dictionary<GameState,BackgroundMusic>();
         public StoryProgress storyProgress = new StoryProgress();
         
@@ -141,6 +142,7 @@ namespace TileGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             titleMusic =  new BackgroundMusic(Content.Load<Song>("Sounds/Music/Night_vision_gameMusic"));
             potatotownMusic = new BackgroundMusic(Content.Load<Song>("Sounds/Music/Eruption_gameMusic"));
+            minigameMusic = new BackgroundMusic(Content.Load<Song>("Sounds/Music/ending_gameMusic"));
 
             MediaPlayer.IsRepeating = true;
 
@@ -149,6 +151,7 @@ namespace TileGame
             musicStates.Add(ptown, potatotownMusic);
             musicStates.Add((GameState)TitleScreen, titleMusic);
             musicStates.Add((GameState)StartMenuScreen, titleMusic);
+            musicStates.Add((GameState)CollectGameScreen, minigameMusic);
         }
 
         /// <summary>
