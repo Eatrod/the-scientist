@@ -284,7 +284,7 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/NPCJohn"), null, Content.Load<Texture2D>("CharacterPotraits/Anon"), "John");
+            npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/NPCJohn"), null, Content.Load<Texture2D>("CharacterPotraits/John"), "John");
             npcstory.Origionoffset = new Vector2(25,65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(136, 15));
             AnimatedSpriteObject.Add(npcstory);
@@ -472,7 +472,7 @@ namespace TileGame.GameScreens
         }
         public override void Update(GameTime gameTime)
         {
-            player.Speed = 2;
+            player.Speed = 4;
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
             //--
             if (StoryProgress.ProgressLine["contestAgainstJohnFinished"] && StoryProgress.ProgressLine["contestAgainstJohnnyFinished"])
