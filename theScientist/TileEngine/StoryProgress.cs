@@ -21,6 +21,7 @@ namespace TileEngine
 
         public static Dictionary<string, bool> ProgressLine = new Dictionary<string, bool>();
         public static Dictionary<string, string> ProgressType = new Dictionary<string, string>();
+        public static List<string> CurrentTasks = new List<string>();
         static public Dictionary<string, Keys> activeItemsDict = new Dictionary<string, Keys>();
         static public Dictionary<string, int> collectedAmountDict = new Dictionary<string, int>();
 
@@ -85,6 +86,7 @@ namespace TileEngine
 
             AddItemCollectedAmountDict("IronOre", 0);
             AddItemCollectedAmountDict("Money", 0);
+            CurrentTasks.Add("Talk to Asterix");
             //AddItemCollectedAmountDict("Fish", 0);
         }
 
@@ -132,6 +134,11 @@ namespace TileEngine
         public void AddItemCollectedAmount(string key, string value)
         {
             collectedAmountDict[key] += Convert.ToInt32(value);
+        }
+
+        public void AddCurrentTask(string task)
+        {
+            CurrentTasks.Add(task);
         }
 
         public void ChangeScriptsForNPCs(NPC npc)
