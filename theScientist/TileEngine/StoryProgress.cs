@@ -125,9 +125,17 @@ namespace TileEngine
                 if (npc.NPCName == "Fisherman")
                     npc.ChangeScript("default");
             }
-            if (StoryProgress.collectedAmountDict["Money"] >= 5 && npc.NPCName == "Innkeeper")
+            //Lumberjacks
+            if (StoryProgress.ProgressLine["CollectMinigame"] && npc.NPCName == "Jack")
+                npc.RemoveHandler("Potato!?");
+            //Innkeeper
+            if (StoryProgress.collectedAmountDict["Money"] >= 5 && StoryProgress.ProgressLine["Belladonna"] && npc.NPCName == "Innkeeper")
             {
                 npc.ChangeScript("moneyHave");
+            }
+            else if (StoryProgress.collectedAmountDict["Money"] >= 5 && npc.NPCName == "Innkeeper")
+            {
+                npc.ChangeScript("belladonnaHave");
             }
             else
             {

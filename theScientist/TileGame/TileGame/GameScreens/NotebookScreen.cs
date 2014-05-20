@@ -142,7 +142,7 @@ namespace TileGame.GameScreens
             InsertTextToDictionary(hintDict, 3, "Hint: Some guards like alchohol.");
 
             InsertTextToDictionary(taskDict, 0, "");
-            InsertTextToDictionary(taskDict, 1, "Task: Find and talk to Asterix.");
+            InsertTextToDictionary(taskDict, 1, "Task: Find a way out of Potato town.");
             InsertTextToDictionary(taskDict, 2, "Task: You have now the Belladonna potato and should move on to next town.");
             InsertTextToDictionary(taskDict, 3, "Task: Asterix told you to find potato The Belladonna. Check out the abandoned fields in the north west.");
             InsertTextToDictionary(taskDict, 4, "Task: Rescue Ariels fish friends.");
