@@ -376,7 +376,7 @@ namespace TileGame.GameScreens
             if (helpMenuImage.Visible)
             {
                 //InputHandler.Flush();
-                if (InputHandler.KeyReleased(Keys.Space) || InputHandler.KeyReleased(Keys.Enter))
+                if (InputHandler.KeyReleased(Keys.Space) || InputHandler.KeyReleased(Keys.Enter) || InputHandler.KeyReleased(Keys.Escape))
                 {
                     InputHandler.Flush();
                     helpMenuImage.Visible = false;
