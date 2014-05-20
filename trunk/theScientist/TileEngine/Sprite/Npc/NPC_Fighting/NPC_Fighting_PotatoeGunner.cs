@@ -120,7 +120,6 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
                     this.ElapsedRespawn = 0.0f;
                     this.Life = this.FullHp;
                     DirtPileCreated = false;
-
                 }
             }
             base.Update(gameTime);

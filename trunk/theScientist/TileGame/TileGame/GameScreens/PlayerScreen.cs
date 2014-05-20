@@ -259,7 +259,7 @@ namespace TileGame.GameScreens
             FrameAnimation captainMorgan = new FrameAnimation(1, 50, 80, 0, 320);
             if (!player.Animations.ContainsKey("CaptainMorgan"))
                 player.Animations.Add("CaptainMorgan", captainMorgan);
-
+            #region SwordFrameAnimation
             FrameAnimation swordstartright = new FrameAnimation(1, 50, 80, 0, 640);
             if (!player.Animations.ContainsKey("SwordStartRight"))
                 player.Animations.Add("SwordStartRight", swordstartright);
@@ -293,7 +293,61 @@ namespace TileGame.GameScreens
             if (!player.Animations.ContainsKey("SwordFinishUp"))
                 player.Animations.Add("SwordFinishUp", swordfinishup);
 
+            FrameAnimation swordchargeleft = new FrameAnimation(2, 50, 80, 0, 720);
+            if (!player.Animations.ContainsKey("SwordChargeLeft"))
+                player.Animations.Add("SwordChargeLeft", swordchargeleft);
 
+            FrameAnimation swordchargeright = new FrameAnimation(2, 50, 80, 300, 720);
+            if (!player.Animations.ContainsKey("SwordChargeRight"))
+                player.Animations.Add("SwordChargeRight", swordchargeright);
+
+            FrameAnimation swordchargeup = new FrameAnimation(2, 50, 80, 800, 720);
+            if (!player.Animations.ContainsKey("SwordChargeUp"))
+                player.Animations.Add("SwordChargeUp", swordchargeup);
+
+            FrameAnimation swordchargedown = new FrameAnimation(2, 50, 80, 600, 720);
+            if (!player.Animations.ContainsKey("SwordChargeDown"))
+                player.Animations.Add("SwordChargeDown", swordchargedown);
+
+            FrameAnimation swordpowerfinishright = new FrameAnimation(1, 100, 80, 500, 720);
+            if (!player.Animations.ContainsKey("SwordPowerFinishRight"))
+                player.Animations.Add("SwordPowerFinishRight",swordpowerfinishright);
+
+            FrameAnimation swordnopowerfinishright = new FrameAnimation(1, 100, 80, 400, 720);
+            if (!player.Animations.ContainsKey("SwordNoPowerFinishRight"))
+                player.Animations.Add("SwordNoPowerFinishRight", swordnopowerfinishright);
+
+            FrameAnimation swordpowerfinishleft = new FrameAnimation(1, 100, 80, 200, 720);
+            if (!player.Animations.ContainsKey("SwordPowerFinishLeft"))
+                player.Animations.Add("SwordPowerFinishLeft", swordpowerfinishleft);
+
+            FrameAnimation swordnopowerfinishleft = new FrameAnimation(1, 100, 80, 100, 720);
+            if (!player.Animations.ContainsKey("SwordNoPowerFinishLeft"))
+                player.Animations.Add("SwordNoPowerFinishLeft", swordnopowerfinishleft);
+
+            FrameAnimation swordpowerfinishup = new FrameAnimation(1, 50, 80, 950, 720);
+            if (!player.Animations.ContainsKey("SwordPowerFinishUp"))
+                player.Animations.Add("SwordPowerFinishUp", swordpowerfinishup);
+
+            FrameAnimation swordnopowerfinishup = new FrameAnimation(1, 50, 80, 900, 720);
+            if (!player.Animations.ContainsKey("SwordNoPowerFinishUp"))
+                player.Animations.Add("SwordNoPowerFinishUp", swordnopowerfinishup);
+
+            FrameAnimation swordpowerfinishdown = new FrameAnimation(1, 50, 80, 750, 720);
+            if (!player.Animations.ContainsKey("SwordPowerFinishDown"))
+                player.Animations.Add("SwordPowerFinishDown", swordpowerfinishdown);
+
+            FrameAnimation swordnopowerfinishdown = new FrameAnimation(1, 50, 80, 700, 720);
+            if (!player.Animations.ContainsKey("SwordNoPowerFinishDown"))
+                player.Animations.Add("SwordNoPowerFinishDown", swordnopowerfinishdown);
+
+            
+
+            player.Animations["SwordChargeRight"].FramesPerSeconds = 0.08f;
+            player.Animations["SwordChargeLeft"].FramesPerSeconds = 0.08f;
+            player.Animations["SwordChargeUp"].FramesPerSeconds = 0.08f;
+            player.Animations["SwordChargeDown"].FramesPerSeconds = 0.08f;
+            #endregion
             player.CurrentAnimationName = "Down";
             player.oldAnimation = player.CurrentAnimationName;
             renderList.Add(player);
@@ -736,6 +790,62 @@ namespace TileGame.GameScreens
                     }
                 }
             }
+            #region Sword
+            if (StoryProgress.activeItemsDict.ContainsKey("Sword"))
+            {
+                key_string = StoryProgress.activeItemsDict["Sword"].ToString();
+                key_string = key_string.Replace('D', ' ');
+                key_number = Convert.ToInt32(key_string);
+                if (activeItemBackgroundColor[key_number - 1] == Color.White)
+                {
+
+                    if(InputHandler.KeyDown(Keys.W) && !player.meleeAttackStart && (player.Stamina - 50 >= 0) && player.meleeAttackPossible)
+                    {
+                        player.oldAnimation = player.CurrentAnimationName;
+                        player.meleeAttackStart = true;
+                        motion = Vector2.Zero;
+                        UpdateSwordStartChargeAttackAnimaition();
+                    }
+                    if(InputHandler.KeyReleased(Keys.W))
+                    {
+                        player.oldAnimation = player.CurrentAnimationName;
+                        player.meleeAttackStart = false;
+                        motion = Vector2.Zero;
+                        UpdateSwordFinishChargeAttackAnimation();
+                    }
+                    if (InputHandler.KeyDown(Keys.Q) && !player.meleeAttackStart && (player.Stamina - 20 >= 0) && player.meleeAttackPossible && !player.spinAxeAway)
+                    {
+                        player.oldAnimation = player.CurrentAnimationName;
+                        player.meleeAttackStart = true;
+                        motion = Vector2.Zero;
+                        UpdateSwordStartAttackAnimaition();
+
+                    }
+                    if (InputHandler.KeyReleased(Keys.Q) && (player.Stamina - 20 >= 0) && player.meleeAttackStart && player.meleeAttackPossible)
+                    {
+                        player.meleeAttackStart = false;
+                        player.meleeAttackPossible = false;
+                        player.meleeAttackFinish = true;                       
+                        UpdateSwordFinishAttackAnimaition();
+
+                        if (player.CurrentAnimationName == "SwordFinishLeft")
+                        {
+                            player.Position.X -= 27;
+                        }
+
+                        if (player.CurrentAnimationName == "SwordFinishRight")
+                        {
+                            player.Position.X -= 25;
+                        }
+                        player.Stamina -= 20f;
+                        axeSound.Play();
+                    }
+                    
+
+                   
+                }
+            }
+            #endregion 
 
             if (StoryProgress.activeItemsDict.ContainsKey("Axe"))
             {
@@ -924,16 +1034,23 @@ namespace TileGame.GameScreens
                     player.meleeAttackPossible = true;
                     CheckForMeleehit(player, npcs);
 
-                    if (player.CurrentAnimationName == "AxeFinishLeft")
+                    if (player.CurrentAnimationName == "AxeFinishLeft" || player.CurrentAnimationName == "SwordFinishLeft")
                     {
                         player.Position.X += 26;
                     }
 
-                    if (player.CurrentAnimationName == "AxeFinishRight")
+                    if (player.CurrentAnimationName == "AxeFinishRight" || player.CurrentAnimationName == "SwordFinishRight")
                     {
                         player.Position.X += 25;
                     }
-                    UpdateAxeDoneAttackAnimaition();
+                    
+                    if(player.CurrentAnimationName == "AxeFinishLeft" ||
+                       player.CurrentAnimationName == "AxeFinishRight" ||
+                       player.CurrentAnimationName == "AxeFinishDown" ||
+                       player.CurrentAnimationName == "AxeFinishUp")
+                        UpdateAxeDoneAttackAnimaition();
+                    else
+                        UpdateSwordDoneAttackAnimaition();
 
                     player.Speed = 2;
                 }
@@ -957,6 +1074,7 @@ namespace TileGame.GameScreens
                         player.Position.X += 25;
                     }
                     UpdateAxeDoneAttackAnimaition();
+                    
 
                     player.Speed = 2;
                 }
@@ -1957,7 +2075,7 @@ namespace TileGame.GameScreens
                 }
             }
         }
-
+        #region AxeAnimation
         private static void UpdateAxeStartAttackAnimaition()
         {
             if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "Down" || player.CurrentAnimationName == "IdleUp" || player.CurrentAnimationName == "IdleDown")
@@ -2015,7 +2133,6 @@ namespace TileGame.GameScreens
                 }
             }
         }
-
         private static void UpdateAxeDoneAttackAnimaition()
         {
             if (player.CurrentAnimationName == "AxeFinishUp" || player.CurrentAnimationName == "AxeFinishDown")
@@ -2044,7 +2161,151 @@ namespace TileGame.GameScreens
                 }
             }
         }
+        #endregion
+        #region SwordAnimation
+        private static void UpdateSwordStartChargeAttackAnimaition()
+        {
+            if (player.CurrentAnimationName == "Up" ||
+                player.CurrentAnimationName == "Down" ||
+                player.CurrentAnimationName == "IdleUp" ||
+                player.CurrentAnimationName == "IdleDown" ||
+                player.CurrentAnimationName == "SwordChargeDown" ||
+                player.CurrentAnimationName == "SwordChargeUp")
+            {
 
+                if (player.CurrentAnimationName == "Up" ||
+                    player.CurrentAnimationName == "IdleUp" ||
+                    player.CurrentAnimationName == "SwordChargeUp")
+                {
+                    player.CurrentAnimationName = "SwordChargeUp";
+                }
+                else
+                {
+                    player.CurrentAnimationName = "SwordChargeDown";
+                }
+
+            }
+            else
+            {
+                if (player.CurrentAnimationName == "Left" ||
+                    player.CurrentAnimationName == "IdleLeft" ||
+                    player.CurrentAnimationName == "SwordChargeLeft")
+                {
+                    player.CurrentAnimationName = "SwordChargeLeft";
+
+                }
+                else
+                {
+                    player.CurrentAnimationName = "SwordChargeRight";
+                }
+            }
+        }
+        private static void UpdateSwordFinishChargeAttackAnimation()
+        {
+            if(player.CurrentAnimationName == "SwordChargeLeft")
+            {
+                player.CurrentAnimationName = "SwordPowerFinishLeft";
+            }
+            else if (player.CurrentAnimationName == "SwordChargeRight")
+            {
+                player.CurrentAnimationName = "SwordPowerFinishRight";
+            }
+            else if (player.CurrentAnimationName == "SwordChargeDown")
+            {
+                player.CurrentAnimationName = "SwordPowerFinishDown";
+            }
+            else if (player.CurrentAnimationName == "SwordChargeUp")
+            {
+                player.CurrentAnimationName = "SwordPowerFinishUp";
+            }
+
+        }
+        private static void UpdateSwordStartAttackAnimaition()
+        {
+            if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "Down" || player.CurrentAnimationName == "IdleUp" || player.CurrentAnimationName == "IdleDown")
+            {
+
+                if (player.CurrentAnimationName == "Up" || player.CurrentAnimationName == "IdleUp")
+                {
+                    player.CurrentAnimationName = "SwordStartUp";
+                }
+                else
+                {
+                    player.CurrentAnimationName = "SwordStartDown";
+                }
+
+            }
+            else
+            {
+                if (player.CurrentAnimationName == "Left" || player.CurrentAnimationName == "IdleLeft")
+                {
+                    player.CurrentAnimationName = "SwordStartLeft";
+
+                }
+                else
+                {
+                    player.CurrentAnimationName = "SwordStartRight";
+                }
+            }
+        }
+        private static void UpdateSwordFinishAttackAnimaition()
+        {
+            if (player.CurrentAnimationName == "SwordStartUp" || player.CurrentAnimationName == "SwordStartDown")
+            {
+
+                if (player.CurrentAnimationName == "SwordStartUp")
+                {
+                    player.CurrentAnimationName = "SwordFinishUp";
+                }
+                else
+                {
+                    player.CurrentAnimationName = "SwordFinishDown";
+                }
+
+            }
+            else
+            {
+                if (player.CurrentAnimationName == "SwordStartLeft")
+                {
+                    player.CurrentAnimationName = "SwordFinishLeft";
+
+                }
+                else
+                {
+                    player.CurrentAnimationName = "SwordFinishRight";
+                }
+            }
+        }
+        private static void UpdateSwordDoneAttackAnimaition()
+        {
+            if (player.CurrentAnimationName == "SwordFinishUp" || player.CurrentAnimationName == "SwordFinishDown")
+            {
+
+                if (player.CurrentAnimationName == "SwordFinishUp")
+                {
+                    player.CurrentAnimationName = "IdleUp";
+                }
+                else
+                {
+                    player.CurrentAnimationName = "IdleDown";
+                }
+
+            }
+            else
+            {
+                if (player.CurrentAnimationName == "SwordFinishLeft")
+                {
+                    player.CurrentAnimationName = "IdleLeft";
+
+                }
+                else
+                {
+                    player.CurrentAnimationName = "IdleRight";
+                }
+            }
+        }
+        #endregion
+       
         private void UpdateSpriteIdleAnimation(AnimatedSprite sprite)
         {
             if (sprite.CurrentAnimationName == "Up")
