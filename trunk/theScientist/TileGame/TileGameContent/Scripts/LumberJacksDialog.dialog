@@ -58,7 +58,7 @@
   </Conversation>
 
   <Conversation Name="Jack3">
-    <Text>Jack:Arm wrestling!</Text>
+    <Text>Jack:Ore gathering!</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:John3" />
     </Handlers>
@@ -81,7 +81,7 @@
   <Conversation Name="Competitions">
     <Text>Ignazio:Fine i start with...</Text>
     <Handlers>
-      <Handler Caption="Arm wrestling" Action="EndConversation" />
+      <Handler Caption="Ore gathering" Action="StartConversation:Oregathering" />
       <Handler Caption="Riddle" Action="StartConversation:Riddle" />
       <Handler Caption="Potato!?" Action="StartConversation:Potato!?" />
       <Handler Caption="Leave" Action="EndConversation" />
@@ -116,6 +116,13 @@
     <Text>John:Then you'll compete against my brother in a collectathon at our fruit field! The first to earn 1000 points is the victor!</Text>
     <Handlers>
       <Handler Caption="Leave" Action="SetToTrue:CollectMinigame;EndConversation" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Oregathering">
+    <Text>Jack: Bring me 100 ore you can find it south of here!</Text>
+    <Handlers>
+      <Handler Caption="Leave" Action="EndConversation" />
     </Handlers>
   </Conversation>
   
