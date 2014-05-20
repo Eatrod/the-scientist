@@ -23,6 +23,7 @@ namespace TileEngine.Sprite
         private Vector2 fruitPosition;
         public bool HitFlag;
         private bool gotIT;
+        private int gangnamCounter;
         private bool slowWalk;
         public float delayCelebration;
         private float elapsedCelebration;
@@ -51,6 +52,7 @@ namespace TileEngine.Sprite
         }
         public LumberJackJohnny(Texture2D texture, Random random): base(texture)
         {
+            this.gangnamCounter = 0;
             this.AngryFlag = false;
             this.elapsedTripped = 0.0f;
             this.delayTripped = 1000f;
@@ -89,6 +91,12 @@ namespace TileEngine.Sprite
             FrameAnimation trippRight = new FrameAnimation(4, 50, 80, 400, 400);
             FrameAnimation trippLeft = new FrameAnimation(4, 50, 80, 600, 400);
             FrameAnimation trippMud = new FrameAnimation(1, 61, 80, 488, 160);
+            FrameAnimation gangnam = new FrameAnimation(19, 70, 100, 0, 1100);
+            FrameAnimation gangnam2 = new FrameAnimation(13, 70, 100, 0, 1200);
+            this.Animations.Add("Gangnam", gangnam);
+            this.Animations.Add("Gangnam2", gangnam2);
+            this.Animations["Gangnam2"].FramesPerSeconds = 0.08f;
+            this.Animations["Gangnam"].FramesPerSeconds = 0.08f;
 
             this.Animations.Add("Losing", losing);
             this.Animations.Add("Rise", rise);
@@ -123,15 +131,29 @@ namespace TileEngine.Sprite
         {
             if (this.StartFlag)
             {
-                if(this.CurrentAnimationName != "Monkey")
+                if(this.CurrentAnimationName != "Gangnam" && this.CurrentAnimationName != "Gangnam2")
                 {
                     this.CurrentAnimationName = "Rise";
                     this.CurrentAnimation.FramesPerSeconds = 0.03f;
                 }
                 if (this.CurrentAnimationName == "Rise" && this.CurrentAnimation.CurrentFrame >= 38)
                 {
-                    this.CurrentAnimationName = "Monkey";
-                    this.CurrentAnimation.FramesPerSeconds = 0.10f;
+                    this.Position.Y -= 10f;
+                    this.CurrentAnimation.CurrentFrame = 0;
+                    this.CurrentAnimationName = "Gangnam";
+                    this.CurrentAnimation.FramesPerSeconds = 0.08f;
+                }
+                if(this.CurrentAnimationName == "Gangnam" && this.CurrentAnimation.CurrentFrame >= 18)
+                {
+                    this.CurrentAnimation.CurrentFrame = 0;
+                    this.CurrentAnimationName = "Gangnam2";
+                    this.CurrentAnimation.FramesPerSeconds = 0.08f;
+                }
+                if(this.CurrentAnimationName == "Gangnam2" && this.CurrentAnimation.CurrentFrame >= 12)
+                {
+                    this.CurrentAnimation.CurrentFrame = 0;
+                    this.CurrentAnimationName = "Gangnam";
+                    this.CurrentAnimation.FramesPerSeconds = 0.08f;
                 }
             }
             else if (StopFlag)
