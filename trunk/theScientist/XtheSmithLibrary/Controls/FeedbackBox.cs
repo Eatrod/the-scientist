@@ -14,7 +14,9 @@ namespace XtheSmithLibrary.Controls
     public class FeedbackBox : PictureBox
     {
         private Dictionary<string, bool> dictionary;
+        private Dictionary<string, bool> currentDictionary;
         public bool isShowing = false;
+        private bool showCurrent = false;
         public bool soundPlayed = false;
         private float elapsedTime = 0.0f;
         private Texture2D texture;
@@ -29,6 +31,7 @@ namespace XtheSmithLibrary.Controls
             this.rectangle = rectangle;
             this.texture = texture;
             dictionary = new Dictionary<string,bool>();
+            currentDictionary = new Dictionary<string, bool>();
             foreach (var key in StoryProgress.ProgressLine)
             {
                 this.dictionary.Add(key.Key,key.Value);
@@ -46,7 +49,7 @@ namespace XtheSmithLibrary.Controls
 
         public override void Update(GameTime gameTime)
         {
-            if (isShowing)
+            if (isShowing || showCurrent)
                 elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             foreach (var key in dictionary)
@@ -74,6 +77,15 @@ namespace XtheSmithLibrary.Controls
                 }
 
             }
+            foreach (var key in StoryProgress.CurrentTasks)
+            {
+                if (!currentDictionary.ContainsKey(key))
+                {
+                    this.currentDictionary.Add(key, false);
+                    this.text = "You have a new task: " + key;
+                    showCurrent = true;
+                }
+            }
             /*
             if (StoryProgress.ProgressLine["Axe"] && dictionary["Axe"] == false && isShowing == false)
             {
@@ -85,9 +97,29 @@ namespace XtheSmithLibrary.Controls
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (currentKey == null)
-                return;
-            if (dictionary[currentKey] == false)
+            if (currentKey != null)
+            {
+                if (dictionary[currentKey] == false)
+                {
+                    if (soundPlayed == false)
+                    {
+                        questCompleteSound.Play(0.5f, 0.0f, 0.0f);
+                        soundPlayed = true;
+                    }
+
+                    spriteBatch.Draw(texture, rectangle, Color.Black);
+                    spriteBatch.DrawString(spriteFont, text, new Vector2(rectangle.X + 20, rectangle.Y + 20),
+                        Color.LightGreen);
+                    if (elapsedTime > 5)
+                    {
+                        elapsedTime = 0;
+                        dictionary[currentKey] = true;
+                        isShowing = false;
+                        soundPlayed = false;
+                    }
+                }
+            }
+            else if (showCurrent)
             {
                 if (soundPlayed == false)
                 {
@@ -96,12 +128,12 @@ namespace XtheSmithLibrary.Controls
                 }
 
                 spriteBatch.Draw(texture, rectangle, Color.Black);
-                spriteBatch.DrawString(spriteFont, text ,new Vector2(rectangle.X+20, rectangle.Y+20), Color.LightGreen);
+                spriteBatch.DrawString(spriteFont, text, new Vector2(rectangle.X + 20, rectangle.Y + 20),
+                    Color.LightGreen);
                 if (elapsedTime > 5)
                 {
                     elapsedTime = 0;
-                    dictionary[currentKey] = true;
-                    isShowing = false;
+                    showCurrent = false;
                     soundPlayed = false;
                 }
             }
