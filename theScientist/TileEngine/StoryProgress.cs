@@ -24,25 +24,52 @@ namespace TileEngine
         static public Dictionary<string, Keys> activeItemsDict = new Dictionary<string, Keys>();
         static public Dictionary<string, int> collectedAmountDict = new Dictionary<string, int>();
 
+        //Item string names
+        public static string Axe = "Axe";
+        public static string Sword = "Sword";
+        public static string Crossbow = "Crossbow";
+        public static string Spear = "Spear";
+        public static string DOOMerang = "DOOM-erang";
+        public static string Hammer = "Hammer";
+        public static string MetalBladeCrossbow = "MetalBladeCrossbow";
+        public static string Hookshot = "Hookshot";
+        public static string Immortui = "Immortui";
+        public static string Permit = "Permit";
+        public static string Alcohol = "Alcohol";
+        public static string Belladonna = "Belladonna";
+        public static string Fish = "Fish";
+
+        //Quests string names
+        public static string treeIsDown = "treeisDown";
+        public static string contestAgainstJohnnyFinished = "contestAgainstJohnnyFinished";
+        public static string contestAgainstJackFinished = "contestAgainstJackFinished";
+        public static string contestAgainstJohnFinished = "contestAgainstJohnFinished";
+        public static string asterixTalkedTo = "asterixTalkedTo";
+
+        //Flags string names
+        public static string lumberjacksTalkedTo = "lumberjacksTalkedTo";
+
+        //Flags string names
+
         public StoryProgress()
         {
             ProgressLine.Clear();
             activeItemsDict.Clear();
             collectedAmountDict.Clear();
             //items
-            AddItemProgressLine("Axe", false, "Item");
-            AddItemProgressLine("Sword", true, "Item");
-            AddItemProgressLine("Crossbow", true, "Item");
-            AddItemProgressLine("Spear", false, "Item");
-            AddItemProgressLine("DOOM-erang", false, "Item");
-            AddItemProgressLine("Hammer", false, "Item");
-            AddItemProgressLine("MetalBladeCrossbow", false, "Item");
-            AddItemProgressLine("Hookshot", false, "Item");
-            AddItemProgressLine("Immortui", false, "Item");
-            AddItemProgressLine("Permit", false, "Item");
-            AddItemProgressLine("Alcohol", false, "Item");
-            AddItemProgressLine("Belladonna", false, "Item");
-            AddItemProgressLine("Fish", false, "Item");
+            AddItemProgressLine(Axe, false, "Item");
+            AddItemProgressLine(Sword, true, "Item");
+            AddItemProgressLine(Crossbow, true, "Item");
+            AddItemProgressLine(Spear, false, "Item");
+            AddItemProgressLine(DOOMerang, false, "Item");
+            AddItemProgressLine(Hammer, false, "Item");
+            AddItemProgressLine(MetalBladeCrossbow, false, "Item");
+            AddItemProgressLine(Hookshot, false, "Item");
+            AddItemProgressLine(Immortui, false, "Item");
+            AddItemProgressLine(Permit, false, "Item");
+            AddItemProgressLine(Alcohol, false, "Item");
+            AddItemProgressLine(Belladonna, false, "Item");
+            AddItemProgressLine(Fish, false, "Item");
             //Quests
             AddItemProgressLine("treeIsDown", false, "Quest:Cut down the tree");
             AddItemProgressLine("contestAgainstJohnnyFinished", false, "Quest:Beat Johnnys challenge");
@@ -128,6 +155,10 @@ namespace TileEngine
             //Lumberjacks
             if (StoryProgress.ProgressLine["CollectMinigame"] && npc.NPCName == "Jack")
                 npc.RemoveHandler("Potato!?");
+            if (StoryProgress.collectedAmountDict["IronOre"] >= 200 && npc.NPCName == "Jack")
+                npc.ChangeScript("IronOre");
+            if (StoryProgress.ProgressLine["Axe"] && npc.NPCName == "Jack")
+                npc.script = null;
             //Innkeeper
             if (StoryProgress.collectedAmountDict["Money"] >= 5 && StoryProgress.ProgressLine["Belladonna"] && npc.NPCName == "Innkeeper")
             {

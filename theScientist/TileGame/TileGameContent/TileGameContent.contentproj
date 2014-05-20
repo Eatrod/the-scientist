@@ -382,6 +382,12 @@
       <Processor>ScriptProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Scripts\LumberJacksDialogHaveOre.dialog">
+      <SubType>Designer</SubType>
+      <Name>LumberJacksDialogHaveOre</Name>
+      <Importer>ScriptImporter</Importer>
+      <Processor>ScriptProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tiles\Stonewall0000.png">
