@@ -81,9 +81,9 @@
   <Conversation Name="Competitions">
     <Text>Ignazio:Fine i start with...</Text>
     <Handlers>
-      <Handler Caption="Ore gathering" Action="StartConversation:Oregathering" />
+      <Handler Caption="Ore gathering" Action="StartConversation:Oregathering;AddCurrentTask:Do Jacks errand." />
       <Handler Caption="Riddle" Action="StartConversation:Riddle;AddCurrentTask:Solve Johns riddle." />
-      <Handler Caption="Potato!?" Action="StartConversation:Potato!?" />
+      <Handler Caption="Potato!?" Action="StartConversation:Potato!?;AddCurrentTask:Beat Johnnys challenge." />
       <Handler Caption="Leave" Action="EndConversation" />
     </Handlers>
   </Conversation>
