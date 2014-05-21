@@ -18,7 +18,7 @@
   <Conversation Name="Fisherman1">
     <Text>Fisherman:Oh thank you!</Text>
     <Handlers>
-      <Handler Caption="Continue" Action="EndConversation" />
+      <Handler Caption="Continue" Action="AddCurrentTask:Rescue Ariels fish friends.;EndConversation" />
     </Handlers>
   </Conversation>
   
