@@ -97,7 +97,7 @@ namespace XtheSmithLibrary.Controls
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (currentKey != null)
+            if (currentKey != null && !showCurrent)
             {
                 if (dictionary[currentKey] == false)
                 {
