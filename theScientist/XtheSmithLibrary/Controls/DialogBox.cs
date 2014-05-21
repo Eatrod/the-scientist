@@ -169,7 +169,7 @@ namespace XtheSmithLibrary.Controls
                 }
                 target.Append(character);
                 currentTargetSize = font.MeasureString(target);
-                if (currentTargetSize.X > bounds.Width)
+                if (currentTargetSize.X > bounds.Width + 60)
                 {
                     target.Insert(lastWhiteSpace, NewLine);
                     target.Remove(lastWhiteSpace + NewLine.Length, 1);
