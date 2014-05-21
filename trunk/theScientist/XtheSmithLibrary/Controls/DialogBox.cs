@@ -102,6 +102,7 @@ namespace XtheSmithLibrary.Controls
 
         private void BuildText()
         {
+            spriteFont.LineSpacing = 25;
             stringBuilder = new StringBuilder();
             WrapWord(new StringBuilder(text), stringBuilder, SpriteFont, rectangle);
             Text = stringBuilder.ToString();
