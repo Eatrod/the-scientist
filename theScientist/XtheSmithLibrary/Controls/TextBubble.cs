@@ -46,6 +46,7 @@ namespace XtheSmithLibrary.Controls
             this.rectangle = rectangle;
             SpriteFont = font;
             font.LineSpacing = 12;
+            font.Spacing = -0.2f;
             this.texture = texture;
         }
 
