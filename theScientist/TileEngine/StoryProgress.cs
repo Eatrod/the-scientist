@@ -165,7 +165,7 @@ namespace TileEngine
             if (StoryProgress.collectedAmountDict["IronOre"] >= 200 && npc.NPCName == "Jack")
                 npc.ChangeScript("IronOre");
             if (StoryProgress.ProgressLine["Axe"] && npc.NPCName == "Jack")
-                npc.script = null;
+                npc.ChangeScript("Completed");
             //Innkeeper
             if (StoryProgress.collectedAmountDict["Money"] >= 5 && StoryProgress.ProgressLine["Belladonna"] && npc.NPCName == "Innkeeper")
             {

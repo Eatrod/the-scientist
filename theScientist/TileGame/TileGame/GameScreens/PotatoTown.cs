@@ -279,6 +279,7 @@ namespace TileGame.GameScreens
 
             npcstory = new NPC_Story(Content.Load<Texture2D>("Sprite/NPCJack"), Content.Load<Script>("Scripts/LumberJacksDialog"), Content.Load<Texture2D>("CharacterPotraits/Jack"), "Jack");
             npcstory.scriptDict.Add("IronOre", Content.Load<Script>("Scripts/LumberJacksDialogHaveOre"));
+            npcstory.scriptDict.Add("Completed", Content.Load<Script>("Scripts/LumberJacksDialogCompleted"));
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SpeakingRadius = 90;
             npcstory.SetSpritePositionInGameWorld(new Vector2(138, 15));
@@ -320,6 +321,7 @@ namespace TileGame.GameScreens
 
             npcstory = new NPC_Story_Innkeeper(Content.Load<Texture2D>("Sprite/NPCInkeeper2"), Content.Load<Script>("Scripts/InnkeeperNoMoney"), Content.Load<Texture2D>("CharacterPotraits/Innkeeper"), "Innkeeper");
             npcstory.scriptDict.Add("moneyHave", Content.Load<Script>("Scripts/Innkeeper"));
+            npcstory.scriptDict.Add("belladonnaHave", Content.Load<Script>("Scripts/InnkeeperNoBelladonna"));
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(80, 72));
             AnimatedSpriteObject.Add(npcstory);
