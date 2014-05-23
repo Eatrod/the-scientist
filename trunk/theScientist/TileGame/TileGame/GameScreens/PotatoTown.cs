@@ -106,7 +106,7 @@ namespace TileGame.GameScreens
         {
             base.Initialize();
 
-            FrameAnimation down = new FrameAnimation(1, 50, 80, 0, 0);
+            FrameAnimation down = new FrameAnimation(1, 64, 80, 0, 0);
             FrameAnimation right = new FrameAnimation(1, 50, 80, 0, 160);
             FrameAnimation up = new FrameAnimation(1, 50, 80, 0, 240);
             FrameAnimation left = new FrameAnimation(1, 50, 80, 0, 80);
