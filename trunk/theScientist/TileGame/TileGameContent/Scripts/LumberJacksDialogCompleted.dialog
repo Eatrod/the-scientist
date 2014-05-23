@@ -1,0 +1,10 @@
+﻿<Conversations>
+
+  <Conversation Name="Greeting">
+    <Text>Jack:You have the axe now leave us alone!</Text>
+    <Handlers>
+      <Handler Caption="Leave" Action="EndConversation" />
+    </Handlers>
+  </Conversation>
+  
+</Conversations>

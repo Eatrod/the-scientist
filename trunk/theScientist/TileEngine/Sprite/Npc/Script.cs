@@ -9,10 +9,10 @@ namespace TileEngine.Sprite.Npc
 {
     public class Script
     {
-        Dictionary<string, Conversation> conversations =
+        public Dictionary<string, Conversation> conversations =
             new Dictionary<string, Conversation>();
 
-        public void RemoveHandler(string captionName)
+        /*public void RemoveHandler(string captionName)
         {
             foreach (var con in conversations)
             {
@@ -26,7 +26,7 @@ namespace TileEngine.Sprite.Npc
                 }
                     
             }
-        }
+        }*/
 
         public Conversation this[string name]
         {

@@ -59,7 +59,21 @@ namespace TileEngine.Sprite.Npc
 
         public void RemoveHandler(string captionName)
         {
-            script.RemoveHandler(captionName);
+            foreach (var script in scriptDict)
+            {
+                foreach (var con in script.Value.conversations)
+                {
+                restart:
+                    foreach (var handler in con.Value.Handlers)
+                    {
+                        if (handler.Caption == captionName)
+                        {
+                            con.Value.Handlers.Remove(handler);
+                            goto restart;
+                        }
+                    }
+                }
+            }
         }
 
         public void ChangeScript(string scriptName)
@@ -67,15 +81,5 @@ namespace TileEngine.Sprite.Npc
             if (scriptDict.ContainsKey(scriptName))
                 this.script = scriptDict[scriptName];
         }
-
-        /*Flyttad till NPC_Story.cs
-        public void StartConversation(string conversationName)
-        { 
-        }
-
-        public void EndConversation()
-        { 
-        }
-         */
     }
 }
