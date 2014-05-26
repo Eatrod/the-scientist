@@ -404,6 +404,7 @@ namespace TileGame.GameScreens
         {
             Point startCell;
             GameRef.storyProgress = new StoryProgress();
+            GameRef.storyProgress.Reset = true;
             //GameRef.PotatoTown = new PotatoTown(GameRef, GameRef.stateManager, "Screen1");
             StateManager.ChangeState(GameRef.PotatoTown);
             
