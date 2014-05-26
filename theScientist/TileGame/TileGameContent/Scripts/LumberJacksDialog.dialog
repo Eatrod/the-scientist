@@ -106,7 +106,7 @@
   </Conversation>
 
     <Conversation Name="RiddleCorrect">
-    <Text>John:The wildlings will breach The Wall soon!</Text>
+    <Text>John:The wildlings will breach The Wall unless we get more men!</Text>
     <Handlers>
       <Handler Caption="Leave" Action="SetToTrue:contestAgainstJohnFinished;RemoveHandler:Riddle;EndConversation" />
     </Handlers>
