@@ -475,7 +475,7 @@ namespace TileGame.GameScreens
         }
         public override void Update(GameTime gameTime)
         {
-            player.Speed = 4;
+            player.Speed = 3;
             CollisionWithCharacter.UpdateCollisionForCharacters(gameTime, SpriteObjectInGameWorld,  player,  SpriteObject,  playerprojectiles,  renderList,  AnimatedSpriteObject);
             //--
             if (StoryProgress.ProgressLine["contestAgainstJohnFinished"] && StoryProgress.ProgressLine["contestAgainstJohnnyFinished"] && StoryProgress.ProgressLine["contestAgainstJackFinished"])
