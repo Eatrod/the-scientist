@@ -33,7 +33,7 @@ namespace TileEngine.Sprite.Npc.NPC_Fighting
             this.ElapsedHitByMelee = 0.0f;
             this.DelayHitByMelee = 250f;
             this.DirtPileCreated = false;
-            this.AggroSpeed = 1.5f;
+            this.AggroSpeed = 2.5f;
             this.PatrollingCircle = 200f;
             this.DelayHitByArrow = 300f;
             this.ElapsedHitByArrow = 0.0f;

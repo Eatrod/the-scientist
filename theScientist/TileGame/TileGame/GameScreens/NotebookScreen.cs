@@ -152,7 +152,7 @@ namespace TileGame.GameScreens
             InsertTextToDictionary(completedDict, 0, "");
             InsertTextToDictionary(completedDict, 1, "Completed: You managed to solve Johns riddle.");
             InsertTextToDictionary(completedDict, 2, "Completed: You managed to beat Johnnys challenge.");
-            InsertTextToDictionary(completedDict, 3, "Completed: You managed to Defeat Jack.");
+            InsertTextToDictionary(completedDict, 3, "Completed: You completed Jacks errand.");
             InsertTextToDictionary(completedDict, 4, "Completed: You have aquired a valid permit.");
             InsertTextToDictionary(completedDict, 5, "Completed: You talked to Asterix.");
             InsertTextToDictionary(completedDict, 6, "Completed: You collected the Belladona.");
@@ -375,10 +375,10 @@ namespace TileGame.GameScreens
 
         private void SetTexts()
         {
-            leftText.Text = "";
+           /* leftText.Text = "";
             leftText2.Text = "";
             rightText.Text = "";
-            rightText2.Text = "";
+            rightText2.Text = "";*/
 
             if (pageIndex < (ListOfUnlockedKeys.Count))
             {

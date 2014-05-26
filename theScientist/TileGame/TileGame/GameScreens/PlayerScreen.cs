@@ -35,7 +35,7 @@ namespace TileGame.GameScreens
         protected PictureBox gameOver;
         
         Label coordX, coordY;
-        bool coordVisible = true;
+        bool coordVisible = false;
         RenderTarget2D renderTarget;
         //BF
 
@@ -532,7 +532,7 @@ namespace TileGame.GameScreens
             ControlManager.Add(CollectMinigameNpcScoreLabel);
 
             CollectMinigamePlayerPortrait = Content.Load<Texture2D>(@"CharacterPotraits\PortraitIgnazio");
-            CollectMinigameNpcPortrait = Content.Load<Texture2D>(@"CharacterPotraits\Anon");
+            CollectMinigameNpcPortrait = Content.Load<Texture2D>(@"CharacterPotraits\PortraitJonny");
 
             CollectMinigameFinishedLabel = new Label();
             CollectMinigameFinishedLabel.Text = "";
