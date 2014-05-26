@@ -1,7 +1,7 @@
 ﻿<Converstaions>
 
   <Conversation Name="Greeting">
-    <Text>Guard:Halt! None may pass through here without a proper permit!</Text>
+    <Text>Guard:Halt! No one may pass through here without a proper permit!</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Ignazio1" />
     </Handlers>
@@ -43,7 +43,7 @@
   </Conversation>
 
   <Conversation Name="Guard3">
-    <Text>Guard:Yeah I sure hope so.</Text>
+    <Text>Guard:Yeah, you do!</Text>
     <Handlers>
       <Handler Caption="Continue" Action="EndConversation" />
     </Handlers>

@@ -8,7 +8,7 @@
   </Conversation>
 
   <Conversation Name="Ignazio1">
-    <Text>Ignazio:But I do have a permit.</Text>
+    <Text>Ignazio:I have a permit.</Text>
     <Handlers>
       <Handler Caption="Show permit" Action="StartConversation:Guard1"/>
       <Handler Caption="Leave" Action="EndConversation"/>
@@ -16,7 +16,7 @@
   </Conversation>
 
   <Conversation Name="Guard1">
-    <Text>Guard:Ah yes, very well, then you may pass!</Text>
+    <Text>Guard:How did you get this? Only the Captain and the plauge doctors are supposed to have them. Oh well, you may pass.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="EndConversation;SetToTrue:leavingTown" />
     </Handlers>

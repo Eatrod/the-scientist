@@ -30,7 +30,7 @@
   </Conversation>
 
   <Conversation Name="Bibitur2">
-    <Text>Bibitur:Thank you ragazzo, you know this plague rumor is porcheria.</Text>
+    <Text>Bibitur:Thank you ragazzo, you know this plague rumor is just ridiculous.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Ignazio3" />
     </Handlers>
@@ -44,7 +44,7 @@
   </Conversation>
 
   <Conversation Name="Bibitur3">
-    <Text>Bibitur:It happens so often they have started to hand out these permits like potatoes.</Text>
+    <Text>Bibitur:It happens so often they've started handing out these permits like potatoes.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Ignazio4" />
     </Handlers>
