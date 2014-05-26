@@ -24,6 +24,7 @@ namespace TileEngine
         public static List<string> CurrentTasks = new List<string>();
         static public Dictionary<string, Keys> activeItemsDict = new Dictionary<string, Keys>();
         static public Dictionary<string, int> collectedAmountDict = new Dictionary<string, int>();
+        public bool Reset = true;
 
         //Item string names
         public static string Axe = "Axe";
@@ -141,49 +142,60 @@ namespace TileEngine
             CurrentTasks.Add(task);
         }
 
-        public void ChangeScriptsForNPCs(NPC npc)
+        public void ChangeScriptsForNPCs(List<NPC_Story> npcList)
         {
+            if (Reset == true)
+            {
+                foreach (var npc in npcList)
+                {
+                    npc.ChangeScript("Default");
+                }
+                Reset = false;
+            }
             //Story NPCs
-            if (npc.NPCName == "Bibitur" && ProgressLine["Alcohol"])
-                npc.ChangeScript("Alcohol");
-            if (StoryProgress.ProgressLine["Permit"] && npc.NPCName == "Guard")
-                npc.ChangeScript("Permit");
-            if (StoryProgress.ProgressLine["Permit"] && npc.NPCName == "Bibitur")
-                npc.script = null;
-            if (StoryProgress.ProgressLine["Fish"] && npc.NPCName == "Fisherman") //(StoryProgress.collectedAmountDict["Fish"] > 0 && npc.NPCName == "Fisherman")
+            foreach (var npc in npcList)
             {
-                npc.ChangeScript("fishHave");
-            }
-            else 
-            {
-                if (npc.NPCName == "Fisherman")
-                    npc.ChangeScript("default");
-            }
-            //Lumberjacks
-            if (StoryProgress.ProgressLine["CollectMinigame"] && npc.NPCName == "Jack")
-                npc.RemoveHandler("Potato!?");
-            if (StoryProgress.collectedAmountDict["IronOre"] >= 200 && npc.NPCName == "Jack")
-                npc.ChangeScript("IronOre");
-            if (StoryProgress.ProgressLine["Axe"] && npc.NPCName == "Jack")
-                npc.ChangeScript("Completed");
-            //Innkeeper
-            if (StoryProgress.collectedAmountDict["Money"] >= 5 && StoryProgress.ProgressLine["Belladonna"] && npc.NPCName == "Innkeeper")
-            {
-                npc.ChangeScript("moneyHave");
-            }
-            else if (StoryProgress.collectedAmountDict["Money"] >= 5 && npc.NPCName == "Innkeeper")
-            {
-                npc.ChangeScript("belladonnaHave");
-            }
-            else
-            {
-                if (npc.NPCName == "Innkeeper")
-                    npc.ChangeScript("default");
-            }
+                if (npc.NPCName == "Bibitur" && ProgressLine["Alcohol"])
+                    npc.ChangeScript("Alcohol");
+                if (StoryProgress.ProgressLine["Permit"] && npc.NPCName == "Guard")
+                    npc.ChangeScript("Permit");
+                if (StoryProgress.ProgressLine["Permit"] && npc.NPCName == "Bibitur")
+                    npc.script = null;
+                if (StoryProgress.ProgressLine["Fish"] && npc.NPCName == "Fisherman") //(StoryProgress.collectedAmountDict["Fish"] > 0 && npc.NPCName == "Fisherman")
+                {
+                    npc.ChangeScript("fishHave");
+                }
+                else
+                {
+                    if (npc.NPCName == "Fisherman")
+                        npc.ChangeScript("default");
+                }
+                //Lumberjacks
+                if (StoryProgress.ProgressLine["CollectMinigame"] && npc.NPCName == "Jack")
+                    npc.RemoveHandler("Potato!?");
+                if (StoryProgress.collectedAmountDict["IronOre"] >= 200 && npc.NPCName == "Jack")
+                    npc.ChangeScript("IronOre");
+                if (StoryProgress.ProgressLine["Axe"] && npc.NPCName == "Jack")
+                    npc.ChangeScript("Completed");
+                //Innkeeper
+                if (StoryProgress.collectedAmountDict["Money"] >= 5 && StoryProgress.ProgressLine["Belladonna"] && npc.NPCName == "Innkeeper")
+                {
+                    npc.ChangeScript("moneyHave");
+                }
+                else if (StoryProgress.collectedAmountDict["Money"] >= 5 && npc.NPCName == "Innkeeper")
+                {
+                    npc.ChangeScript("belladonnaHave");
+                }
+                else
+                {
+                    if (npc.NPCName == "Innkeeper")
+                        npc.ChangeScript("default");
+                }
 
-            //Neutrala NPCs
-            if (StoryProgress.ProgressLine["asterixTalkedTo"] && npc.GetType() == typeof(NPC_Neutral))
-                npc.ChangeScript("asterixTalkedTo");
+                //Neutrala NPCs
+                if (StoryProgress.ProgressLine["asterixTalkedTo"] && npc.GetType() == typeof(NPC_Neutral))
+                    npc.ChangeScript("asterixTalkedTo");
+            }
         }
 
         #endregion

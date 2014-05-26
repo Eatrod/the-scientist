@@ -79,13 +79,13 @@ namespace TileGame.GameScreens
                 }
                 else
                 {
-
-                    /*endingCredits.Visible = true;
+                    GameRef.Exit();
+                    endingCredits.Visible = true;
                     endingStory.Visible = true;
                     GameRef.firstRun = true;
                     GameRef.StartMenuScreen.SwitchBackToOriginalMenu();
                     InputHandler.Flush();
-                    StateManager.ChangeState(GameRef.TitleScreen);*/
+                    StateManager.ChangeState(GameRef.TitleScreen);
                 }
             }
             //InputHandler.Flush();

@@ -489,9 +489,10 @@ namespace TileGame.GameScreens
                 {
                     GameRef.firstRun = true;
                     gameOver.Visible = false;
-                    //InputHandler.Flush();
+                    InputHandler.Flush();
                     GameRef.StartMenuScreen.SwitchBackToOriginalMenu();
                     StateManager.PushState(GameRef.StartMenuScreen);
+                    //GameRef.Exit();
                     
                     return;
 
@@ -644,7 +645,7 @@ namespace TileGame.GameScreens
                     npc.Motion.Normalize();
                     npc.Collided = CollisionWithTerrain.CheckForCollisionAroundSprite(npc, npc.Motion, this);
                 }
-                GameRef.storyProgress.ChangeScriptsForNPCs(npc);
+                //GameRef.storyProgress.ChangeScriptsForNPCs(npc);
                 if (npc.InHearingRange(player))
                 {
                     if (npc.ShowingBubble == false)
@@ -748,7 +749,7 @@ namespace TileGame.GameScreens
             {
                 if (npc.InSpeakingRange(player))
                 {
-                    GameRef.storyProgress.ChangeScriptsForNPCs(npc);
+                    GameRef.storyProgress.ChangeScriptsForNPCs(NpcStoryList);
                     if (npc.canTalk == true)
                     {
                         if (InputHandler.KeyReleased(Keys.Space))
