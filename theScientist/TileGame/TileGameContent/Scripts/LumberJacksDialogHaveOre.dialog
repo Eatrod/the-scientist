@@ -23,7 +23,7 @@
   </Conversation>
 
   <Conversation Name="Ignazio1">
-    <Text>Ignazio:How about i take your axe?</Text>
+    <Text>Ignazio:How about I take your axe?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Jack2" />
     </Handlers>
@@ -79,7 +79,7 @@
   </Conversation>
   
   <Conversation Name="Competitions">
-    <Text>Ignazio:Fine i start with...</Text>
+    <Text>Ignazio:Fine I start with...</Text>
     <Handlers>
       <Handler Caption="Ore gathering" Action="StartConversation:Oregathering" />
       <Handler Caption="Riddle" Action="StartConversation:Riddle" />
@@ -106,21 +106,21 @@
   </Conversation>
 
     <Conversation Name="RiddleCorrect">
-    <Text>John:How did you figure it out?!</Text>
+    <Text>John:The wildlings will breach The Wall if we don't get reinforcements!</Text>
     <Handlers>
       <Handler Caption="Leave" Action="SetToTrue:contestAgainstJohnFinished;RemoveHandler:Riddle;EndConversation" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Potato!?">
-    <Text>John:Then you'll compete against my brother in a collectathon at our fruit field! The first to earn 1000 points is the victor!</Text>
+    <Text>John:Then you'll compete against my brother in a collectathon at our fruit field! The first to get 1000 gram is the victor!</Text>
     <Handlers>
       <Handler Caption="Leave" Action="SetToTrue:CollectMinigame;EndConversation" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Oregathering">
-    <Text>Jack: Hmpf personally I hoped the bandits would have taken care of you. </Text>
+    <Text>Jack: Hmpf, personally I hoped the bandits would have taken care of you. </Text>
     <Handlers>
       <Handler Caption="Leave" Action="SetToTrue:contestAgainstJackFinished;AddItemCollectedAmount:IronOre,-200;RemoveHandler:Ore gathering;EndConversation" />
     </Handlers>

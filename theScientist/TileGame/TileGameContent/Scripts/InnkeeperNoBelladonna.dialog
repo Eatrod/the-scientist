@@ -1,7 +1,7 @@
 ﻿<Converstaions>
 
   <Conversation Name="Greeting">
-    <Text>Innkeeper:Saluti! What can I do for you?</Text>
+    <Text>Innkeeper:Hi! Do you wanna build a snowman now? Come on lets go and play.</Text>
     <Handlers>
       <Handler Caption="Buy liquor" Action="StartConversation:Ignazio1" />
       <Handler Caption="Leave" Action="StartConversation:Ignazio2" />
@@ -9,23 +9,37 @@
   </Conversation>
 
   <Conversation Name="Ignazio1">
-    <Text>Ignazio:One bottle of alcohol.</Text>
+    <Text>Ignazio:No, I need to buy that alcohol.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Innkeeper1" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Innkeeper1">
-    <Text>Innkeeper:You have money but I also need an ingredient..</Text>
+    <Text>Innkeeper:Well, you have the gold, but I also need an ingredient to make the alcohol.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="EndConversation" />
     </Handlers>
   </Conversation>
-  
+
   <Conversation Name="Ignazio2">
-    <Text>Ignazio:Nothing, thanks.</Text>
+    <Text>Ignazio:No, I need to get that ingredient.</Text>
     <Handlers>
-      <Handler Caption="Continue" Action="EndConversation" />
+      <Handler Caption="Continue" Action="StartConversation:Anna1" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Anna1">
+    <Text>Innkeeper:It doesn't have to be a snowman! We can ride our bikes around the inn.</Text>
+    <Handlers>
+      <Handler Caption="Leave" Action="StartConversation:Anna2" />
+    </Handlers>
+  </Conversation>
+
+  <Conversation Name="Anna2">
+    <Text>Innkeeper:Okay, bye...</Text>
+    <Handlers>
+      <Handler Caption="Leave" Action="EndConversation" />
     </Handlers>
   </Conversation>
   

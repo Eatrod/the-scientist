@@ -8,7 +8,7 @@
   </Conversation>
 
   <Conversation Name="Ignazio1">
-    <Text>Ignazio:No, I do not.</Text>
+    <Text>Ignazio:No, I don't.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Bibitur1"/>
     </Handlers>

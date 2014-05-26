@@ -1,9 +1,9 @@
 ﻿<Converstaions>
 
   <Conversation Name="Greeting">
-    <Text>Fisherman:You can you save my fish friends the bandits kidnapped?</Text>
+    <Text>Fisherman:Hey you, can you save my friend that the bandits kidnapped?</Text>
     <Handlers>
-      <Handler Caption="Countinue" Action="StartConversation:Ignazio1" />
+      <Handler Caption="Continue" Action="StartConversation:Ignazio1" />
       <Handler Caption="Leave" Action="StartConversation:Ignazio2" />
     </Handlers>
   </Conversation>

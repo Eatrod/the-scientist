@@ -1,7 +1,7 @@
 ﻿<Conversations>
 
   <Conversation Name="Greeting">
-    <Text>Asterix:Howdy, what do you want signore?</Text>
+    <Text>Asterix:Howdy, whadda ya' want signore?</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:IgnazioResponse" />
     </Handlers>
@@ -22,7 +22,7 @@
   </Conversation>
 
   <Conversation Name="AsterixAnswer2">
-    <Text>Asterix:We have Le Adora di Ravenna, Rapido di Milano, Silla di Roma and Velox di Valencia, but they be far from this..</Text>
+    <Text>Asterix:We have Le Adora di Ravenna, Rapido di Milano, Silla di Roma and Velox di Valencia, but they ain't got much Alks...</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:IgnazioInterupt" />
     </Handlers>
@@ -36,7 +36,7 @@
   </Conversation>
 
   <Conversation Name="AsterixStory">
-    <Text>Asterix:According to the legend, there once was a potato so rich in Alkaloids it drove some farmers crazy.</Text>
+    <Text>Asterix:According to legend, there once was a potato so rich in Alkaloids it drove some farmers crazy.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:IgnazioSays" />
     </Handlers>

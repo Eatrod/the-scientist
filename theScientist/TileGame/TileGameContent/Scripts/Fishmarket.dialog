@@ -1,29 +1,29 @@
 ﻿<Converstaions>
 
   <Conversation Name="Greeting">
-    <Text>Fisherman:Have you saved my poor fishes?</Text>
+    <Text>Fisherman:Have you saved my poor friend?</Text>
     <Handlers>
-      <Handler Caption="Give fishes" Action="StartConversation:Ignazio1" />
+      <Handler Caption="Give fish" Action="StartConversation:Ignazio1" />
       <Handler Caption="Leave" Action="StartConversation:Ignazio2" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Ignazio1">
-    <Text>Ignazio:Yes, I have them here.</Text>
+    <Text>Ignazio:Yes, I have him here.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Fisherman1" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Fisherman1">
-    <Text>Fisherman:Thanks! Here's some coins.</Text>
+    <Text>Fisherman:Thank you so much! Here's some shiny golden things for you.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="AddItemCollectedAmount:Money,5;SetToFalse:Fish;EndConversation" />
     </Handlers>
   </Conversation>
   
   <Conversation Name="Ignazio2">
-    <Text>Ignazio:Maybe later.</Text>
+    <Text>Ignazio:Not yet.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="EndConversation" />
     </Handlers>

@@ -1,7 +1,7 @@
 ﻿<Converstaions>
 
   <Conversation Name="Greeting">
-    <Text>Innkeeper:Saluti! What can I do for you?</Text>
+    <Text>Innkeeper:Do you finally want to build a snowman?</Text>
     <Handlers>
       <Handler Caption="Buy liquor" Action="StartConversation:Ignazio1" />
       <Handler Caption="Leave" Action="StartConversation:Ignazio2" />
@@ -9,24 +9,31 @@
   </Conversation>
 
   <Conversation Name="Ignazio1">
-    <Text>Ignazio:One bottle of alcohol.</Text>
+    <Text>Ignazio:Sorry, but I really need that alcohol.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Innkeeper1" />
     </Handlers>
   </Conversation>
 
   <Conversation Name="Innkeeper1">
-    <Text>Innkeeper:There you go!</Text>
+    <Text>Innkeeper:Oh, okay...</Text>
     <Handlers>
       <Handler Caption="Continue" Action="EndConversation;SetToTrue:Alcohol;AddItemCollectedAmount:Money,-5" />
     </Handlers>
   </Conversation>
   
   <Conversation Name="Ignazio2">
-    <Text>Ignazio:Nothing, thanks.</Text>
+    <Text>Ignazio:I'm going now...</Text>
     <Handlers>
-      <Handler Caption="Continue" Action="EndConversation" />
+      <Handler Caption="Continue" Action="StartConversation:Anna1" />
     </Handlers>
   </Conversation>
-  
+
+  <Conversation Name="Anna1">
+    <Text> Innkeeper:We used to be best buddies. And now we're not. I wish you'd tell me why!</Text>
+    <Handlers>
+      <Handler Caption="Leave" Action="EndConversation" />
+    </Handlers>
+  </Conversation>
+ 
 </Converstaions>
