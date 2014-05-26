@@ -8,7 +8,7 @@
   </Conversation>
 
   <Conversation Name="John">
-    <Text>John:I need to make preparations to defend against the White Walkers, I don't have time for you.</Text>
+    <Text>John:I need to make preparations to defend against the White Walkers.</Text>
     <Handlers>
       <Handler Caption="Continue" Action="StartConversation:Johnny" />
     </Handlers>
