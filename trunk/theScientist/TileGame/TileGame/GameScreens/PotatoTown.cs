@@ -292,7 +292,7 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory = new NPC_Story_Johnny(Content.Load<Texture2D>("Sprite/Bjorn_Try_Johnny"), null, Content.Load<Texture2D>("CharacterPotraits/Anon"), "Johnny");
+            npcstory = new NPC_Story_Johnny(Content.Load<Texture2D>("Sprite/Bjorn_Try_Johnny"), null, Content.Load<Texture2D>("CharacterPotraits/PortraitJonny"), "Johnny");
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(140, 15));
             AnimatedSpriteObject.Add(npcstory);
@@ -305,7 +305,7 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(guard);
             NpcStoryList.Add(guard);
 
-            npcstory = new NPC_Story_GateGuards(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/GateGuards"), Content.Load<Texture2D>("CharacterPotraits/Anon"), "Guard",true,GameRef.random);
+            npcstory = new NPC_Story_GateGuards(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), Content.Load<Script>("Scripts/GateGuards"), Content.Load<Texture2D>("CharacterPotraits/PortraitGuard"), "Guard",true,GameRef.random);
             npcstory.scriptDict.Add("Permit", Content.Load<Script>("Scripts/GateGuardsHavePermit"));
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(144, 33));
@@ -313,7 +313,7 @@ namespace TileGame.GameScreens
             AnimatedSpriteObject.Add(npcstory);
             NpcStoryList.Add(npcstory);
 
-            npcstory = new NPC_Story_GateGuards(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), null, Content.Load<Texture2D>("CharacterPotraits/Anon"), "Guard",false,GameRef.random);
+            npcstory = new NPC_Story_GateGuards(Content.Load<Texture2D>("Sprite/Bjorn_Try_Soldier"), null, Content.Load<Texture2D>("CharacterPotraits/PortraitGuard"), "Guard", false, GameRef.random);
             npcstory.Origionoffset = new Vector2(25, 65);
             npcstory.SetSpritePositionInGameWorld(new Vector2(144, 30));
             AnimatedSpriteObject.Add(npcstory);
