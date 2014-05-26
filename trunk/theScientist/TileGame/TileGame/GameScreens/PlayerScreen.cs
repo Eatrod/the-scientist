@@ -481,7 +481,7 @@ namespace TileGame.GameScreens
                 crossbow_ability_textures[i] = Content.Load<Texture2D>(@"Sprite\arrow ability " + (i+1).ToString());
             }
 
-            sword_ability_textures = new Texture2D[2];
+            sword_ability_textures = new Texture2D[1];
             for (int i = 0; i < sword_ability_textures.Count(); i++)
             {
                 sword_ability_textures[i] = Content.Load<Texture2D>(@"Sprite\Sword ability " + (i + 1).ToString());
@@ -799,20 +799,20 @@ namespace TileGame.GameScreens
                 if (activeItemBackgroundColor[key_number - 1] == Color.White)
                 {
 
-                    if(InputHandler.KeyDown(Keys.W) && !player.meleeAttackStart && (player.Stamina - 50 >= 0) && player.meleeAttackPossible)
-                    {
-                        player.oldAnimation = player.CurrentAnimationName;
-                        player.meleeAttackStart = true;
-                        motion = Vector2.Zero;
-                        UpdateSwordStartChargeAttackAnimaition();
-                    }
-                    if(InputHandler.KeyReleased(Keys.W))
-                    {
-                        player.oldAnimation = player.CurrentAnimationName;
-                        player.meleeAttackStart = false;
-                        motion = Vector2.Zero;
-                        UpdateSwordFinishChargeAttackAnimation();
-                    }
+                    //if(InputHandler.KeyDown(Keys.W) && !player.meleeAttackStart && (player.Stamina - 50 >= 0) && player.meleeAttackPossible)
+                    //{
+                    //    player.oldAnimation = player.CurrentAnimationName;
+                    //    player.meleeAttackStart = true;
+                    //    motion = Vector2.Zero;
+                    //    UpdateSwordStartChargeAttackAnimaition();
+                    //}
+                    //if(InputHandler.KeyReleased(Keys.W))
+                    //{
+                    //    player.oldAnimation = player.CurrentAnimationName;
+                    //    player.meleeAttackStart = false;
+                    //    motion = Vector2.Zero;
+                    //    UpdateSwordFinishChargeAttackAnimation();
+                    //}
                     if (InputHandler.KeyDown(Keys.Q) && !player.meleeAttackStart && (player.Stamina - 20 >= 0) && player.meleeAttackPossible && !player.spinAxeAway)
                     {
                         player.oldAnimation = player.CurrentAnimationName;
