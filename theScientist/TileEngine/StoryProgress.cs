@@ -171,7 +171,7 @@ namespace TileEngine
                         npc.ChangeScript("default");
                 }
                 //Lumberjacks
-                if (StoryProgress.ProgressLine["CollectMinigame"] && npc.NPCName == "Jack")
+                if (StoryProgress.ProgressLine["contestAgainstJohnnyFinished"] && npc.NPCName == "Jack")
                     npc.RemoveHandler("Potato!?");
                 if (StoryProgress.collectedAmountDict["IronOre"] >= 200 && npc.NPCName == "Jack")
                     npc.ChangeScript("IronOre");

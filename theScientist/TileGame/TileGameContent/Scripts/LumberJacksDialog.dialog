@@ -120,7 +120,7 @@
   </Conversation>
 
   <Conversation Name="Oregathering">
-    <Text>Jack: Bring me 100 ore bits, you can find it south of here!</Text>
+    <Text>Jack: Bring me 200 ore bits, you can find it south of here!</Text>
     <Handlers>
       <Handler Caption="Leave" Action="EndConversation" />
     </Handlers>
