@@ -16,7 +16,7 @@
     <XnaProfile>Reach</XnaProfile>
     <XnaCrossPlatformGroupID>a9b6d155-f4e4-4ddd-88bd-558700d3cc9c</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
-    <ApplicationIcon>PWars.ico</ApplicationIcon>
+    <ApplicationIcon>PW.ico</ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <SccProjectName>Svn</SccProjectName>
@@ -101,7 +101,7 @@
     <Content Include="GameThumbnail.png">
       <XnaPlatformSpecific>true</XnaPlatformSpecific>
     </Content>
-    <Content Include="PWars.ico" />
+    <Content Include="PW.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\theSmithLibrary\theSmithLibrary.csproj">
